@@ -1,6 +1,11 @@
 # Laravel Scaffold
 Scaffold with Laravel 5.7 to using like base for future projects.
 
+![Laravel Scaffold](https://github.com/modulr/laravel-scaffold/blob/master/public/img/laravel-scaffold.jpg)
+
+
+Demo _Comming soon..._
+
 
 ## Requirements
 
@@ -64,7 +69,7 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 ## Modules
 
 - Auth
-- Users & Roles --> Comming soon...
+- Users & Roles --> _Comming soon..._
 
 
 ## Packages
