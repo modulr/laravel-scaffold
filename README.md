@@ -86,3 +86,7 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 
 ## License
 The MIT© License 2018 - Modulr.
+
+---
+
+> Developed with :bulb: :headphones: :beer: by [@alfredobarron](https://github.com/alfredobarron)
