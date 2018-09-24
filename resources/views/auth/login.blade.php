@@ -6,8 +6,8 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card-group">
-                    <div class="card p-4">
-                        <div class="card-body">
+                    <div class="card">
+                        <div class="card-body p-5">
                             <div class="text-center d-lg-none">
                                 <img src="svg/modulr.svg" class="mb-5" width="150" alt="Modulr Logo">
                             </div>
@@ -62,11 +62,13 @@
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     </div>
-                                    <div class="col-12 text-right mt-3 d-lg-none">
-                                        <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </div>
                                 </div>
                             </form>
+                        </div>
+                        <div class="card-footer p-4 d-lg-none">
+                            <div class="col-12 text-right">
+                                <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </div>
                         </div>
                     </div>
                     <div class="card text-white bg-primary py-5 d-md-down-none">

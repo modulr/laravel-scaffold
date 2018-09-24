@@ -11,10 +11,14 @@
     </button>
     <ul class="nav navbar-nav ml-auto mr-2">
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img class="img-avatar" src="img/avatars/1.jpg" alt="{{ Auth::user()->name }}">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <img class="img-avatar" src="img/avatars/1.jpg">
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow mt-2">
+                <a class="dropdown-item">
+                    {{ Auth::user()->name }}<br>
+                    <small class="text-muted">{{ Auth::user()->email }}</small>
+                </a>
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user"></i> Profile
                 </a>

@@ -11270,6 +11270,13 @@ a.text-dark:focus {
   }
 }
 
+@media (min-width: 992px) {
+  .sidebar-minimized .sidebar .sidebar-nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
 .app-header {
   padding: 0;
 }
@@ -11281,5 +11288,13 @@ a.text-dark:focus {
 .app-header .dropdown-menu .dropdown-item {
   padding: 12px 25px;
   border-bottom: 1px solid #e9ecef;
+}
+
+.input-group-text {
+  background-color: transparent;
+}
+
+.card-header {
+  background-color: transparent;
 }
 

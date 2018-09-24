@@ -4,6 +4,13 @@
     }
 }
 
+@media (min-width: 992px) {
+    .sidebar-minimized .sidebar .sidebar-nav {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
+
 .app-header {
     padding: 0;
     .dropdown-menu {
@@ -13,4 +20,12 @@
             border-bottom: 1px solid $gray-200;
         }
     }
+}
+
+.input-group-text {
+    background-color: transparent;
+}
+
+.card-header {
+    background-color: transparent;
 }
