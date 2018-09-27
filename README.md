@@ -45,6 +45,19 @@ DB_USERNAME=user
 DB_PASSWORD=password
 ```
 
+
+#### File System
+```
+// Generate symbolic link to Storage
+php artisan storage:link
+```
+
+```
+// Add params into .env file
+FILESYSTEM_DRIVER=public
+```
+
+
 ## Run
 
 ```
@@ -69,18 +82,33 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 ## Modules
 
 - Auth
+  - Login
+  - register
+  - Remember Password
+
+
+- Profile
+  - Edit Name and email
+  - Change password
+
+
 - Users & Roles --> _Comming soon..._
 
 
 ## Packages
 
+##### Backend
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
+- [Laravolt Avatar](https://github.com/laravolt/avatar)
+
+
+##### Frontend
 - [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
-- [Vuejs](https://vuejs.org/)
 - [Bootstrap 4](https://getbootstrap.com/)
 - [Core UI](https://coreui.io/)
 - [Fontawesome 5](https://fontawesome.com/)
 - [simple-line-icons](http://simplelineicons.com/)
+- [vue-toasted](https://shakee93.github.io/vue-toasted/)
 
 
 

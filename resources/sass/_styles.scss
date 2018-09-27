@@ -1,31 +1,57 @@
+// Body ---------------------------------------
 @media (max-width: 991.98px) {
-    .app-body {
-        margin-top: inherit;
-    }
+  .app-body {
+    margin-top: inherit;
+  }
 }
 
+// Sidebar ---------------------------------------
 @media (min-width: 992px) {
-    .sidebar-minimized .sidebar .sidebar-nav {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+  .sidebar-minimized .sidebar .sidebar-nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
+// Header ---------------------------------------
 .app-header {
+  padding: 0;
+  .dropdown-menu {
     padding: 0;
-    .dropdown-menu {
-        padding: 0;
-        .dropdown-item {
-            padding: 12px 25px;
-            border-bottom: 1px solid $gray-200;
-        }
+    .dropdown-item {
+      padding: 12px 25px;
+      border-bottom: 1px solid $gray-200;
     }
+  }
 }
 
+// Form ---------------------------------------
 .input-group-text {
-    background-color: transparent;
+  background-color: transparent;
+}
+.help-block {
+  color: $gray-500;
 }
 
+// Card ---------------------------------------
+.card-header, .card-footer {
+  background-color: transparent;
+}
 .card-header {
-    background-color: transparent;
+  padding: 1.25rem;
+  color: $blue;
+  font-weight: bold;
+}
+.card-footer {
+  border-top: none;
+}
+
+// Toasted ---------------------------------------
+.toasted-container {
+  &.top-left, &.top-center, &.top-right {
+    top: 3% !important;
+  }
+  &.bottom-left, &.bottom-center, &.bottom-right {
+    bottom: 3% !important;
+  }
 }

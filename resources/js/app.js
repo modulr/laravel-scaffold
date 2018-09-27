@@ -9,13 +9,22 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted)
+Vue.toasted.register('error', message => message, {
+    position : 'bottom-center',
+    duration : 1000
+})
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('profile', require('./components/profile/Profile.vue'));
+Vue.component('profile-password', require('./components/profile/Password.vue'));
 
 const app = new Vue({
     el: '#app'
