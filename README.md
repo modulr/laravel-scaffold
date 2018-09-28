@@ -6,24 +6,35 @@ Scaffold with Laravel 5.7 to using like base for future projects.
 
 Demo _Comming soon..._
 
+Documentation _Comming soon..._
 
 ## Requirements
 
 https://laravel.com/docs/5.7#server-requirements
 
 
+## Tutorial
+
+https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
+
+
 ## Install
+
+#### Clone Repo
 
 ```
 git clone https://github.com/modulr/laravel-scaffold.git
 ```
 
-#### Install Depencencies
+#### Depencencies
 
 ```
 composer install
 npm install
 ```
+
+
+## Configuration
 
 #### Database
 
@@ -73,10 +84,6 @@ npm run dev
 // Run serve
 php artisan serve
 ```
-
-## Tutorial/Documentation
-
-https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 
 
 ## Modules
