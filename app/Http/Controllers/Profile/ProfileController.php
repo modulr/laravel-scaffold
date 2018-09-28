@@ -7,9 +7,10 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
+use App\Http\Helpers\Upload;
 use Avatar;
-use Storage;
 
 use App\User;
 
@@ -39,7 +40,7 @@ class ProfileController extends Controller
         return $user;
     }
 
-    public function updateAuthUserPassword(Request $request)
+    public function updatePasswordAuthUser(Request $request)
     {
         $this->validate($request, [
             'current' => 'required',
@@ -54,6 +55,27 @@ class ProfileController extends Controller
         }
 
         $user->password = Hash::make($request->password);
+        $user->save();
+
+        return $user;
+    }
+
+    public function uploadAvatarAuthUser(Request $request)
+    {
+        $upload = new Upload();
+        $avatar = $upload->upload($request->file, 'avatars/'.Auth::id())->resize(200, 200)->getData();
+
+        $user = User::find(Auth::id());
+        $user->avatar = $avatar['basename'];
+        $user->save();
+
+        return $user;
+    }
+
+    public function removeAvatarAuthUser()
+    {
+        $user = User::find(Auth::id());
+        $user->avatar = 'avatar.png';
         $user->save();
 
         return $user;

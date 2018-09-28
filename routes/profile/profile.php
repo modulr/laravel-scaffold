@@ -9,7 +9,9 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'api/profile'], function() {
             Route::get('/getAuthUser', 'ProfileController@getAuthUser');
             Route::put('/updateAuthUser', 'ProfileController@updateAuthUser');
-            Route::put('/updateAuthUserPassword', 'ProfileController@updateAuthUserPassword');
+            Route::put('/updatePasswordAuthUser', 'ProfileController@updatePasswordAuthUser');
+            Route::post('/uploadAvatarAuthUser', 'ProfileController@uploadAvatarAuthUser');
+            Route::post('/removeAvatarAuthUser', 'ProfileController@removeAvatarAuthUser');
         });
     });
 });

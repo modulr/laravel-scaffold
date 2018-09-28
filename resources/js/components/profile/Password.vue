@@ -9,7 +9,7 @@
             <label class="col-md-3">Current password</label>
             <div class="col-md-9">
               <input class="form-control" :class="{'is-invalid': errors.current}" type="password" v-model="password.current">
-              <span class="help-block">You must provide your current password in order to change it.</span>
+              <small class="form-text text-muted">You must provide your current password in order to change it.</small>
               <div class="invalid-feedback" v-if="errors.current">{{errors.current[0]}}</div>
             </div>
           </div>
@@ -32,8 +32,8 @@
       <div class="card-footer">
         <div class="form-group row">
           <div class="col-md-9 offset-md-3">
-            <button class="btn btn-primary" type="button" :disabled="submiting" @click="updateAuthUserPassword" >
-              <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Save
+            <button class="btn btn-primary" type="button" :disabled="submiting" @click="updatePasswordAuthUser" >
+              <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Change password
             </button>
           </div>
         </div>
@@ -51,9 +51,9 @@ export default {
     }
   },
   methods: {
-    updateAuthUserPassword () {
+    updatePasswordAuthUser () {
       this.submiting = true
-      axios.put(`/api/profile/updateAuthUserPassword`, this.password)
+      axios.put(`/api/profile/updatePasswordAuthUser`, this.password)
       .then(response => {
         this.password = {}
         this.errors = {}

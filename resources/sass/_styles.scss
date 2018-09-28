@@ -1,7 +1,13 @@
-// Body ---------------------------------------
-@media (max-width: 991.98px) {
-  .app-body {
-    margin-top: inherit;
+// Header ---------------------------------------
+.app-header {
+  padding: 0;
+  position: fixed;
+  .dropdown-menu {
+    padding: 0;
+    .dropdown-item {
+      padding: 12px 25px;
+      border-bottom: 1px solid $gray-200;
+    }
   }
 }
 
@@ -13,24 +19,9 @@
   }
 }
 
-// Header ---------------------------------------
-.app-header {
-  padding: 0;
-  .dropdown-menu {
-    padding: 0;
-    .dropdown-item {
-      padding: 12px 25px;
-      border-bottom: 1px solid $gray-200;
-    }
-  }
-}
-
 // Form ---------------------------------------
 .input-group-text {
   background-color: transparent;
-}
-.help-block {
-  color: $gray-500;
 }
 
 // Card ---------------------------------------

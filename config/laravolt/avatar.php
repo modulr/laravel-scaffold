@@ -25,7 +25,7 @@ return [
     'ascii'    => false,
 
     // Image shape: circle or square
-    'shape' => 'circle',
+    'shape' => 'square',
 
     // Image width, in pixel
     'width'    => 200,
@@ -71,7 +71,7 @@ return [
     ],
 
     'border'    => [
-        'size'  => 1,
+        'size'  => 0,
 
         // border color, available value are:
         // 'foreground' (same as foreground color)
