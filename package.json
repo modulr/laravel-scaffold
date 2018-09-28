@@ -26,6 +26,7 @@
         "@fortawesome/fontawesome-free": "^5.3.1",
         "perfect-scrollbar": "^1.4.0",
         "simple-line-icons": "^2.4.1",
+        "vue-clip": "^1.0.0",
         "vue-toasted": "^1.1.24"
     }
 }

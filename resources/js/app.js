@@ -10,12 +10,14 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Toasted from 'vue-toasted';
-
 Vue.use(Toasted)
 Vue.toasted.register('error', message => message, {
     position : 'bottom-center',
     duration : 1000
 })
+
+import VueClip from 'vue-clip'
+Vue.use(VueClip)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -83,13 +83,14 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 
 - Auth
   - Login
-  - register
+  - Register - generate avatar
   - Remember Password
 
 
 - Profile
-  - Edit Name and email
+  - Edit Name, email - regenerate avatar
   - Change password
+  - Upload & Restart Avatar
 
 
 - Users & Roles --> _Comming soon..._
@@ -100,6 +101,7 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 ##### Backend
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
 - [Laravolt Avatar](https://github.com/laravolt/avatar)
+- [Intervention Image](http://image.intervention.io/)
 
 
 ##### Frontend
@@ -107,8 +109,9 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 - [Bootstrap 4](https://getbootstrap.com/)
 - [Core UI](https://coreui.io/)
 - [Fontawesome 5](https://fontawesome.com/)
-- [simple-line-icons](http://simplelineicons.com/)
-- [vue-toasted](https://shakee93.github.io/vue-toasted/)
+- [Simple Line Icons](http://simplelineicons.com/)
+- [Vue Toasted](https://shakee93.github.io/vue-toasted/)
+- [Vue Clip](https://vueclip.adonisjs.com/)
 
 
 
