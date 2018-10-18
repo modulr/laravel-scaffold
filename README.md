@@ -36,18 +36,21 @@ npm install
 
 ## Configuration
 
+#### Generate .env file
+```
+cp .env.example .env
+```
+
 #### Database
 
 ```
-// Create Data Base
+# Create Data Base
 mysql -u{user} -p{password}
 mysql> create database modulr_laravel;
 ```
 
-
 ```
-// Add params into .env file
-
+# Add params into .env file
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -56,32 +59,32 @@ DB_USERNAME=user
 DB_PASSWORD=password
 ```
 
-
 #### File System
 ```
-// Generate symbolic link to Storage
-php artisan storage:link
+# Add params into .env file
+APP_URL=http://laravel-scaffold.test
+FILESYSTEM_DRIVER=public
 ```
 
 ```
-// Add params into .env file
-FILESYSTEM_DRIVER=public
+# Generate symbolic link to Storage
+php artisan storage:link
 ```
 
 
 ## Run
 
 ```
-// Migrations
+# Migrations
 php artisan migrate
 
-// Seeder (optional)
+# Seeder (optional)
 php artisan db:seed
 
-// Compiling assets
+# Compiling assets
 npm run dev
 
-// Run serve
+# Run serve
 php artisan serve
 ```
 
