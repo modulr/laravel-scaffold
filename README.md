@@ -26,8 +26,12 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 git clone https://github.com/modulr/laravel-scaffold.git
 ```
 
-#### Depencencies
+##### Enter folder
+```
+cd laravel-scaffold
+```
 
+#### Install Depencencies
 ```
 composer install
 npm install
@@ -39,6 +43,16 @@ npm install
 #### Generate .env file
 ```
 cp .env.example .env
+```
+
+#### Generate APP_KEY
+```
+php artisan key:generate
+```
+
+#### Generate symbolic link to Storage
+```
+php artisan storage:link
 ```
 
 #### Database
@@ -60,15 +74,11 @@ DB_PASSWORD=password
 ```
 
 #### File System
+
 ```
 # Add params into .env file
 APP_URL=http://laravel-scaffold.test
 FILESYSTEM_DRIVER=public
-```
-
-```
-# Generate symbolic link to Storage
-php artisan storage:link
 ```
 
 
@@ -103,18 +113,20 @@ php artisan serve
   - Upload & Restart Avatar
 
 
-- Users & Roles --> _Comming soon..._
-
+- Users --> _Comming soon..._
+- Roles --> _Comming soon..._
 
 ## Packages
 
 ##### Backend
+
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
 - [Laravolt Avatar](https://github.com/laravolt/avatar)
 - [Intervention Image](http://image.intervention.io/)
 
 
 ##### Frontend
+
 - [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
 - [Bootstrap 4](https://getbootstrap.com/)
 - [Core UI](https://coreui.io/)
@@ -126,6 +138,7 @@ php artisan serve
 
 
 ## License
+
 The MIT© License 2018 - Modulr.
 
 ---
