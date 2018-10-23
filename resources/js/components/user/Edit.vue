@@ -2,9 +2,6 @@
   <div class="card">
     <div class="card-header">
       <i class="fas fa-pencil-alt"></i> Edit User
-      <button class="btn btn-primary float-right" type="button" :disabled="submiting" @click="update" >
-        <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Save
-      </button>
     </div>
     <div class="card-body">
       <form class="form-horizontal">
@@ -50,6 +47,15 @@
           </div>
         </div>
       </form>
+    </div>
+    <div class="card-footer">
+      <div class="form-group row">
+        <div class="col-md-9 offset-md-3">
+          <button class="btn btn-primary float-right" type="button" :disabled="submiting" @click="update" >
+            <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Save
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

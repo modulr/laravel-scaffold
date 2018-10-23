@@ -58,18 +58,24 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$request->id,
-            'password' => 'string'
+            'password' => 'string|nullable'
         ]);
 
         $user = User::find($request->id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        if ($user->name != $request->name) {
+            $avatar = Avatar::create($request->name)->getImageObject()->encode('png');
+            Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+            $user->name = $request->name;
+        }
+        if ($user->email != $request->email) {
+            $user->email = $request->email;
+        }
+        if ($request->password != '') {
+            $user->password = Hash::make($request->password);
+        }
 
-        $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
-        Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+        $user->save();
 
         return $user;
     }
