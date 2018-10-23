@@ -26,8 +26,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-    <div id="app">
+<body class="app header-fixed sidebar-fixed sidebar-lg-show">
+    <div id="app" :class="{'loading': loading}">
         @include('layouts.header')
         <div class="app-body">
             @include('layouts.sidebar')

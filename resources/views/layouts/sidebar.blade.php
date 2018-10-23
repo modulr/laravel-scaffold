@@ -2,14 +2,14 @@
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="/dashboard">
+                <a class="nav-link" href="/dashboard">
                     <i class="nav-icon icon-speedometer"></i> Dashboard
                 </a>
             </li>
             <li class="nav-title">Settings</li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="nav-icon icon-user"></i> Users
+                <a class="nav-link" href="/users">
+                    <i class="nav-icon icon-people"></i> Users
                 </a>
             </li>
             <li class="nav-item">
