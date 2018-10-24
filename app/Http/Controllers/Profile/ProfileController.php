@@ -43,9 +43,9 @@ class ProfileController extends Controller
     public function updatePasswordAuthUser(Request $request)
     {
         $this->validate($request, [
-            'current' => 'required',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required'
+            'current' => 'required|string',
+            'password' => 'required|string|confirmed',
+            'password_confirmation' => 'required|string'
         ]);
 
         $user = User::find(Auth::id());

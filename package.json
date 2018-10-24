@@ -27,6 +27,8 @@
         "perfect-scrollbar": "^1.4.0",
         "simple-line-icons": "^2.4.1",
         "vue-clip": "^1.0.0",
+        "vue-moment": "^4.0.0",
+        "vue-multiselect": "^2.1.0",
         "vue-toasted": "^1.1.24"
     }
 }

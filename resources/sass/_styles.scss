@@ -11,6 +11,10 @@
   }
 }
 
+[v-cloak] {
+  display: none;
+}
+
 // Sidebar ---------------------------------------
 @media (min-width: 992px) {
   .sidebar-minimized .sidebar .sidebar-nav {
@@ -19,12 +23,20 @@
   }
 }
 
-// Form ---------------------------------------
+// Main ------------------------------------------
+@media (max-width: 575.98px) {
+  .aside-menu-show .main::before,
+  .sidebar-show .main::before {
+    background: none;
+  }
+}
+
+// Form ------------------------------------------
 .input-group-text {
   background-color: transparent;
 }
 
-// Card ---------------------------------------
+// Card ------------------------------------------
 .card-header, .card-footer {
   background-color: transparent;
 }
