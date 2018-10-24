@@ -73,14 +73,6 @@ DB_USERNAME=user
 DB_PASSWORD=password
 ```
 
-#### File System
-
-```
-# Add params into .env file
-APP_URL=http://laravel-scaffold.test
-FILESYSTEM_DRIVER=public
-```
-
 
 ## Run
 
@@ -112,9 +104,34 @@ php artisan serve
   - Change password
   - Upload & Restart Avatar
 
-
-- Users --> _Comming soon..._
+- Users
+    - Create users
+    - Read users list into reusable table with paginate, sort, search and loading feature**
+    - Update users
+    - Delete users
+ 
 - Roles --> _Comming soon..._
+
+
+## Features
+
+##### CORE UI Template
+
+##### File uploader
+
+##### Fancy select input
+
+##### Friendly dates format
+
+##### Responsive & Touch Alerts
+
+##### Reusable Table
+- serverside rendering
+- Pagination
+- Sort
+- Search
+- Loading
+
 
 ## Packages
 
@@ -134,6 +151,8 @@ php artisan serve
 - [Simple Line Icons](http://simplelineicons.com/)
 - [Vue Toasted](https://shakee93.github.io/vue-toasted/)
 - [Vue Clip](https://vueclip.adonisjs.com/)
+- [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
+- [Vue-multiselect](https://vue-multiselect.js.org/)
 
 
 
