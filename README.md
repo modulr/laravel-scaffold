@@ -1,12 +1,10 @@
 # Laravel Scaffold
-Scaffold with Laravel 5.7 to using like base for future projects.
+Scaffold made with Laravel 5.7 and VueJS to using like base for future projects.
 
 ![Laravel Scaffold](https://github.com/modulr/laravel-scaffold/blob/master/public/img/laravel-scaffold.jpg)
 
 
-Demo _Comming soon..._
-
-Documentation _Comming soon..._
+Demo & Documentation _coming soon..._
 
 ## Requirements
 
@@ -20,18 +18,18 @@ https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 
 ## Install
 
-#### Clone Repo
+Clone Repo
 
 ```
 git clone https://github.com/modulr/laravel-scaffold.git
 ```
 
-##### Enter folder
+Enter folder
 ```
 cd laravel-scaffold
 ```
 
-#### Install Depencencies
+Install Depencencies
 ```
 composer install
 npm install
@@ -40,22 +38,22 @@ npm install
 
 ## Configuration
 
-#### Generate .env file
+Generate .env file
 ```
 cp .env.example .env
 ```
 
-#### Generate APP_KEY
+Generate APP_KEY
 ```
 php artisan key:generate
 ```
 
-#### Generate symbolic link to Storage
+Generate symbolic link to Storage
 ```
 php artisan storage:link
 ```
 
-#### Database
+Database
 
 ```
 # Create Data Base
@@ -110,27 +108,22 @@ php artisan serve
     - Update users
     - Delete users
  
-- Roles --> _Comming soon..._
+- Roles --> _coming soon..._
 
 
 ## Features
 
-##### CORE UI Template
-
-##### File uploader
-
-##### Fancy select input
-
-##### Friendly dates format
-
-##### Responsive & Touch Alerts
-
-##### Reusable Table
-- serverside rendering
-- Pagination
-- Sort
-- Search
-- Loading
+- CORE UI Template
+- File uploader
+- Fancy select input
+- Friendly dates format
+- Responsive & Touch Alerts
+- Reusable Table
+    - serverside rendering
+    - Pagination
+    - Sort
+    - Search
+    - Loading
 
 
 ## Packages
