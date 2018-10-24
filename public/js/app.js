@@ -61091,6 +61091,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61126,24 +61132,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-plus" }),
-      _vm._v(" New User\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary float-right",
-          attrs: { type: "button", disabled: _vm.submiting },
-          on: { click: _vm.create }
-        },
-        [
-          _vm.submiting
-            ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-            : _vm._e(),
-          _vm._v(" Save\n    ")
-        ]
-      )
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("form", { staticClass: "form-horizontal" }, [
@@ -61252,10 +61241,41 @@ var render = function() {
           ])
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-footer" }, [
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-md-9 offset-md-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-right",
+              attrs: { type: "button", disabled: _vm.submiting },
+              on: { click: _vm.create }
+            },
+            [
+              _vm.submiting
+                ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                : _vm._e(),
+              _vm._v(" Save\n        ")
+            ]
+          )
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-plus" }),
+      _vm._v(" New User\n  ")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -61318,6 +61338,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -61437,24 +61463,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-pencil-alt" }),
-      _vm._v(" Edit User\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary float-right",
-          attrs: { type: "button", disabled: _vm.submiting },
-          on: { click: _vm.update }
-        },
-        [
-          _vm.submiting
-            ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-            : _vm._e(),
-          _vm._v(" Save\n    ")
-        ]
-      )
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("form", { staticClass: "form-horizontal" }, [
@@ -61630,10 +61639,41 @@ var render = function() {
           ])
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-footer" }, [
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-md-9 offset-md-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary float-right",
+              attrs: { type: "button", disabled: _vm.submiting },
+              on: { click: _vm.update }
+            },
+            [
+              _vm.submiting
+                ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                : _vm._e(),
+              _vm._v(" Save\n        ")
+            ]
+          )
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-pencil-alt" }),
+      _vm._v(" Edit User\n  ")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
