@@ -1,10 +1,12 @@
 <?php
 Route::middleware('auth')->group(function () {
     Route::group(['namespace' => 'users'], function() {
-
-        Route::view('/users', 'users.index');
-        Route::view('/users/create', 'users.create');
-        Route::view('/users/{user}/edit', 'users.edit');
+        // views
+        Route::group(['prefix' => 'users'], function() {
+            Route::view('/', 'users.index');
+            Route::view('/create', 'users.create');
+            Route::view('/{user}/edit', 'users.edit');
+        });
 
         // api
         Route::group(['prefix' => 'api/users'], function() {

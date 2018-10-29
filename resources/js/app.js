@@ -36,10 +36,15 @@ Vue.component('multiselect', Multiselect)
 Vue.component('profile', require('./components/profile/Profile.vue'));
 Vue.component('profile-password', require('./components/profile/Password.vue'));
 
-// User
-Vue.component('users-index', require('./components/user/Index.vue'));
-Vue.component('users-create', require('./components/user/Create.vue'));
-Vue.component('users-edit', require('./components/user/Edit.vue'));
+// Users
+Vue.component('users-index', require('./components/users/Index.vue'));
+Vue.component('users-create', require('./components/users/Create.vue'));
+Vue.component('users-edit', require('./components/users/Edit.vue'));
+
+// Roles
+Vue.component('roles-index', require('./components/roles/Index.vue'));
+Vue.component('roles-create', require('./components/roles/Create.vue'));
+Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
 const app = new Vue({
     el: '#app',

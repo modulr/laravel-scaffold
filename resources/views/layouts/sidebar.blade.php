@@ -13,7 +13,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/roles">
                     <i class="nav-icon icon-lock"></i> Roles
                 </a>
             </li>

@@ -24,4 +24,5 @@ Route::get('/home', function () {
 Route::get('/dashboard', 'DashboardController@index')->name('home');
 
 require __DIR__ . '/profile/profile.php';
-require __DIR__ . '/user/user.php';
+require __DIR__ . '/users/users.php';
+require __DIR__ . '/roles/roles.php';

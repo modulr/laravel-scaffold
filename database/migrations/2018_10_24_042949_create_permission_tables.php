@@ -20,6 +20,8 @@ class CreatePermissionTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->integer('module_id')->unsigned()->nullable();
+            $table->foreign('module_id')->references('id')->on('modules');
             $table->timestamps();
         });
 
