@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolesTableSeeder extends Seeder
 {
@@ -12,35 +14,41 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         // Module
-        $rolesId = DB::table('modules')->insertGetId([
+        $moduleId = DB::table('modules')->insertGetId([
             'name' => 'roles',
             'display_name' => 'Roles',
             'icon' => 'mdi-vpn-key'
         ]);
 
         // Permissions
-        Spatie\Permission\Models\Permission::create([
+        DB::table('permissions')->insert([
             [
                 'name' => 'read-roles',
-                'module_id' => $rolesId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ],
             [
                 'name' => 'create-roles',
-                'module_id' => $rolesId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ],
             [
                 'name' => 'update-roles',
-                'module_id' => $rolesId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ],
             [
                 'name' => 'delete-roles',
-                'module_id' => $rolesId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ]
         ]);
 
         // Default Role
-        $role = \App\Role::create([
+        $role = Role::create([
             'name' => 'admin'
         ]);
+
+        $role->givePermissionTo(Permission::all());
     }
 }

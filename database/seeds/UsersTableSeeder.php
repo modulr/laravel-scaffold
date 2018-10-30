@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,31 +14,39 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // Module
-        $usersId = DB::table('modules')->insertGetId([
+        $moduleId = DB::table('modules')->insertGetId([
             'name' => 'users',
             'display_name' => 'Users',
             'icon' => 'mdi-people'
         ]);
 
         // Permissions
-        Spatie\Permission\Models\Permission::insert([
+        DB::table('permissions')->insert([
             [
                 'name' => 'read-users',
-                'module_id' => $usersId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ],
             [
                 'name' => 'create-users',
-                'module_id' => $usersId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ],
             [
                 'name' => 'update-users',
-                'module_id' => $usersId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ],
             [
                 'name' => 'delete-users',
-                'module_id' => $usersId
+                'guard_name' => 'web',
+                'module_id' => $moduleId
             ]
         ]);
+
+        $role = Role::findByName('admin');
+
+        $role->givePermissionTo(Permission::all());
 
         // Default User
         $user = \App\User::create([
