@@ -33,16 +33,21 @@
           <tr>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('id')">
-                <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'id' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'id' && orderBy.direction == 'desc'}"></i>ID</a>
+                <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'id' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'id' && orderBy.direction == 'desc'}"></i>
+                ID
+              </a>
             </th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('name')">
-                <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'name' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'name' && orderBy.direction == 'desc'}"></i>User</a>
+                <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'name' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'name' && orderBy.direction == 'desc'}"></i>
+                User
+              </a>
             </th>
-            <th>Role</th>
+            <th>Roles</th>
             <th class="d-none d-sm-table-cell">
               <a href="#" class="text-dark" @click.prevent="sort('created_at')">
-                <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'created_at' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'created_at' && orderBy.direction == 'desc'}"></i>Registered
+                <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'created_at' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'created_at' && orderBy.direction == 'desc'}"></i>
+                Registered
               </a>
             </th>
             <th></th>
@@ -66,7 +71,9 @@
               </div>
             </td>
             <td>
-              Admin
+              <span v-for="(role, index) in user.roles">
+                {{role.name}}<span v-if="index+1 < user.roles.length">, </span>
+              </span>
             </td>
             <td class="d-none d-sm-table-cell">
               <small>{{user.created_at | moment("LLL")}}</small>
