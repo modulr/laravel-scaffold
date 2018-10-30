@@ -62516,14 +62516,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      role: {},
+      role: {
+        modules: []
+      },
       errors: {},
       submiting: false
     };
+  },
+  mounted: function mounted() {
+    this.getModules();
   },
 
   methods: {
@@ -62538,6 +62550,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.errors = error.response.data.errors;
         _this.submiting = false;
       });
+    },
+    getModules: function getModules() {
+      var _this2 = this;
+
+      axios.get('/api/modules/getModules').then(function (response) {
+        _this2.role.modules = response.data;
+        console.log(_this2.role.modules);
+      });
     }
   }
 });
@@ -62550,8 +62570,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _vm._m(0),
+  return _c("div", [
+    _c("div", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-plus" }),
+      _vm._v(" New Role\n    "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary float-right",
+          attrs: { type: "button", disabled: _vm.submiting },
+          on: { click: _vm.create }
+        },
+        [
+          _vm.submiting
+            ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+            : _vm._e(),
+          _vm._v(" Save\n    ")
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c(
@@ -62598,30 +62635,81 @@ var render = function() {
                   ])
                 : _vm._e()
             ])
-          ])
-        ]
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _vm._l(_vm.role.modules, function(role) {
+            return _c("div", { staticClass: "form-group row" }, [
+              _c("label", { staticClass: "col-md-3" }, [
+                _vm._v(_vm._s(role.display_name))
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-9" },
+                _vm._l(role.permissions, function(permission) {
+                  return _c("div", { staticClass: "form-check checkbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: permission.allow,
+                          expression: "permission.allow"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: { id: "check" + permission.id, type: "checkbox" },
+                      domProps: {
+                        checked: Array.isArray(permission.allow)
+                          ? _vm._i(permission.allow, null) > -1
+                          : permission.allow
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = permission.allow,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(permission, "allow", $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  permission,
+                                  "allow",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(permission, "allow", $$c)
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "check" + permission.id }
+                      },
+                      [_vm._v(_vm._s(permission.name))]
+                    )
+                  ])
+                })
+              )
+            ])
+          })
+        ],
+        2
       )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-footer" }, [
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-md-9 offset-md-3" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary float-right",
-              attrs: { type: "button", disabled: _vm.submiting },
-              on: { click: _vm.create }
-            },
-            [
-              _vm.submiting
-                ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                : _vm._e(),
-              _vm._v(" Save\n        ")
-            ]
-          )
-        ])
-      ])
     ])
   ])
 }
@@ -62630,9 +62718,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-plus" }),
-      _vm._v(" New Role\n  ")
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("div", { staticClass: "col-md-12 text-info mt-3" }, [
+        _vm._v("Permissions")
+      ])
     ])
   }
 ]
