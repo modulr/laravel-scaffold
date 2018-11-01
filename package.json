@@ -28,6 +28,7 @@
         "simple-line-icons": "^2.4.1",
         "sweetalert": "^2.1.2",
         "vue-clip": "^1.0.0",
+        "vue-content-placeholders": "^0.2.1",
         "vue-moment": "^4.0.0",
         "vue-multiselect": "^2.1.0",
         "vue-toasted": "^1.1.24"

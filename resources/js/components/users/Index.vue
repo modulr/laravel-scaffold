@@ -89,18 +89,8 @@
             </tr>
           </tbody>
         </table>
-        <div class="no-items-found text-center mt-5" v-if="!loadingCollection && !collection.length > 0">
-          <i class="icon-magnifier fa-3x text-muted"></i>
-          <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
-          <p class="text-muted">Try changing the filters or add a new one</p>
-          <a class="btn btn-success" href="/users/create" role="button">
-            <i class="fa fa-plus"></i>&nbsp; New User
-          </a>
-        </div>
-      </div>
-      <div class="card-footer bg-transparent">
-        <div class="row">
-          <div class="col" v-if="pagination.total>0">
+        <div class="row" v-if='!loadingCollection && pagination.total > 0'>
+          <div class="col">
             {{pagination.from}}-{{pagination.to}} of {{pagination.total}}
           </div>
           <div class="col" v-if="pagination.lastPage>1">
@@ -120,6 +110,20 @@
             </nav>
           </div>
         </div>
+        <div class="no-items-found text-center mt-5" v-if="!loadingCollection && !collection.length > 0">
+          <i class="icon-magnifier fa-3x text-muted"></i>
+          <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
+          <p class="text-muted">Try changing the filters or add a new one</p>
+          <a class="btn btn-success" href="/users/create" role="button">
+            <i class="fa fa-plus"></i>&nbsp; New User
+          </a>
+        </div>
+        <content-placeholders v-if="loadingCollection">
+          <content-placeholders-text/>
+        </content-placeholders>
+      </div>
+      <div class="card-footer bg-transparent">
+
       </div>
     </div>
   </div>
@@ -177,10 +181,12 @@ export default {
       })
     },
     filter() {
+      this.pagination.currentPage = 1
       this.getUsers()
     },
     changeSize (perPage) {
       this.pagination.perPage = perPage
+      this.pagination.currentPage = 1
       this.getUsers()
     },
     sort (column) {

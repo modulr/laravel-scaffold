@@ -36,11 +36,11 @@
       </div>
       <div class="card-body">
         <form class="form-horizontal">
-          <div class="form-group row" v-for="role in role.modules">
-            <label class="col-md-3">{{role.display_name}}</label>
+          <div class="form-group row" v-for="module in modules">
+            <label class="col-md-3">{{module.display_name}}</label>
             <div class="col-md-9">
-              <div class="clearfix" v-for="permission in role.permissions">
-                <span>{{permission.name}}</span>
+              <div class="clearfix" v-for="permission in module.permissions">
+                <span>{{permission.display_name}}</span>
                 <label class="switch switch-pill switch-outline-success-alt float-right">
                   <input class="switch-input" type="checkbox" v-model="permission.allow">
                   <span class="switch-slider"></span>
@@ -50,6 +50,10 @@
             </div>
           </div>
         </form>
+        <content-placeholders v-if="loadingModules">
+          <content-placeholders-heading :img="true"/>
+          <content-placeholders-heading :img="true"/>
+        </content-placeholders>
       </div>
     </div>
   </div>
@@ -59,15 +63,15 @@
 export default {
   data () {
     return {
-      role: {
-        modules: []
-      },
+      role: {},
+      modules: [],
+      loadingModules: true,
       errors: {},
       submiting: false
     }
   },
   mounted() {
-    this.getModules()
+    this.getModulesPermissions()
   },
   methods: {
     create () {
@@ -84,11 +88,25 @@ export default {
         })
       }
     },
-    getModules () {
-      axios.get('/api/modules/getModules')
+    getModulesPermissions () {
+      this.loadingModules = true
+      axios.get('/api/modules/getModulesPermissions')
       .then(response => {
-        this.role.modules = response.data
+        this.modules = response.data
+        this.loadingModules = false
+        //this.$set(this.role, 'modules', response.data)
+        //console.log(this.role);
       })
+    }
+  },
+  watch: {
+    'role.display_name': function (val) {
+      this.role.name = val.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');
     }
   }
 }

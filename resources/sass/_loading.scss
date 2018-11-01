@@ -1,9 +1,9 @@
-.loading .card table {
+.loading .loader {
     position: relative;
     pointer-events: none;
 }
 
-.loading .card table:before {
+.loading .loader:before {
     content: $loader;
     position: absolute;
     left: 0;

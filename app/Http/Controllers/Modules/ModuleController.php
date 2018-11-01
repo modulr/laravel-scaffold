@@ -8,7 +8,7 @@ use App\Models\Modules\Module;
 
 class ModuleController extends Controller
 {
-    public function getModules()
+    public function getModulesPermissions()
     {
         return Module::with('permissions')
           ->orderBy('name')

@@ -19,7 +19,7 @@
     <div class="container">
       <div class="card-header bg-transparent">
         <strong>General</strong>
-        <small class="text-muted float-right">{{role.created_at | moment("LLL")}}</small>
+        <small class="text-muted float-right" v-if="role.created_at">{{role.created_at | moment("LLL")}}</small>
       </div>
       <div class="card-body">
         <div class="row">
@@ -45,11 +45,11 @@
       </div>
       <div class="card-body">
         <form class="form-horizontal">
-          <div class="form-group row" v-for="role in role.modules">
-            <label class="col-md-3">{{role.display_name}}</label>
+          <div class="form-group row" v-for="module in role.modules">
+            <label class="col-md-3">{{module.display_name}}</label>
             <div class="col-md-9">
-              <div class="clearfix" v-for="permission in role.permissions">
-                <span>{{permission.name}}</span>
+              <div class="clearfix" v-for="permission in module.permissions">
+                <span>{{permission.display_name}}</span>
                 <label class="switch switch-pill switch-outline-success-alt float-right">
                   <input class="switch-input" type="checkbox" v-model="permission.allow">
                   <span class="switch-slider"></span>
@@ -68,9 +68,7 @@
 export default {
   data () {
     return {
-      role: {
-        modules: []
-      },
+      role: {},
       errors: {},
       submiting: false,
       submitingDestroy: false
@@ -86,11 +84,18 @@ export default {
       axios.get(`/api/roles/${res[2]}`)
       .then(response => {
         this.role = response.data
-        this.getModules()
+        this.getModulesPermissions()
       })
       .catch(error => {
         this.$toasted.global.error('Role does not exist!')
         location.href = '/roles'
+      })
+    },
+    getModulesPermissions () {
+      axios.get('/api/modules/getModulesPermissions')
+      .then(response => {
+        this.$set(this.role, 'modules', response.data)
+        console.log(this.role);
       })
     },
     update () {
@@ -131,12 +136,16 @@ export default {
           this.submitingDestroy = false
         })
       }
-    },
-    getModules () {
-      axios.get('/api/modules/getModules')
-      .then(response => {
-        this.$set(this.role, 'modules', response.data)
-      })
+    }
+  },
+  watch: {
+    'role.display_name': function (val) {
+      this.role.name = val.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');
     }
   }
 }
