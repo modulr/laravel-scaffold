@@ -1,46 +1,64 @@
 <template>
-  <div class="card">
-    <div class="card-header">
-      <i class="fas fa-pencil-alt"></i> Edit Role
-    </div>
-    <div class="card-body">
-      <form class="form-horizontal">
-        <div class="form-group row">
-          <label class="col-md-3">ID</label>
-          <div class="col-md-9">
+  <div>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/roles">Roles</a>
+      </li>
+      <li class="breadcrumb-item active">Edit Role</li>
+      <li class="breadcrumb-menu">
+        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="update">
+          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Save changes
+        </a>
+        <a class="btn" href="#" :disabled="submitingDestroy" @click="destroy">
+          <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
+          <i class="far fa-trash-alt" v-if="!submitingDestroy"></i>
+          <span class="d-md-down-none ml-1">Delete</span>
+        </a>
+      </li>
+    </ol>
+    <div class="container">
+      <div class="card-header bg-transparent">
+        <strong>General</strong>
+        <small class="text-muted float-right">{{role.created_at | moment("LLL")}}</small>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-sm-8">
+            <label>Role name</label>
+            <input class="form-control" :class="{'is-invalid': errors.display_name}" type="text" v-model="role.display_name" placeholder="Admin" autofocus>
+            <div class="invalid-feedback" v-if="errors.display_name">{{errors.display_name[0]}}</div>
+          </div>
+          <div class="form-group col-sm-4">
+            <label>Role ID</label>
             <input class="form-control" type="text" v-model="role.id" readonly>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3">Name</label>
-          <div class="col-md-9">
-            <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="Admin" autofocus>
+          <div class="form-group col-sm-8">
+            <label>Role slug</label>
+            <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="admin" readonly>
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
         </div>
-        <div class="form-group row">
-          <label for="staticEmail" class="col-md-3">Created</label>
-          <div class="col-md-9">
-            <p class="form-control-plaintext text-muted">{{role.created_at | moment("LLL")}}</p>
+      </div>
+      <div class="card-header bg-transparent">
+        <strong>Permissions</strong><br>
+        <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row" v-for="role in role.modules">
+            <label class="col-md-3">{{role.display_name}}</label>
+            <div class="col-md-9">
+              <div class="clearfix" v-for="permission in role.permissions">
+                <span>{{permission.name}}</span>
+                <label class="switch switch-pill switch-outline-success-alt float-right">
+                  <input class="switch-input" type="checkbox" v-model="permission.allow">
+                  <span class="switch-slider"></span>
+                </label>
+                <hr>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="form-group row mt-4">
-          <div class="col-md-9 offset-md-3">
-            <small class="form-text text-muted mb-2">Removing the role will delete all related resources. Removed role cannot be restored!</small>
-            <button class="btn btn-danger" type="button" :disabled="submitingDestroy" @click="destroy">
-              <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i> Remove role
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="card-footer">
-      <div class="form-group row">
-        <div class="col-md-9 offset-md-3">
-          <button class="btn btn-primary float-right" type="button" :disabled="submiting" @click="update" >
-            <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Save
-          </button>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -50,7 +68,9 @@
 export default {
   data () {
     return {
-      role: {},
+      role: {
+        modules: []
+      },
       errors: {},
       submiting: false,
       submitingDestroy: false
@@ -66,6 +86,7 @@ export default {
       axios.get(`/api/roles/${res[2]}`)
       .then(response => {
         this.role = response.data
+        this.getModules()
       })
       .catch(error => {
         this.$toasted.global.error('Role does not exist!')
@@ -73,27 +94,48 @@ export default {
       })
     },
     update () {
-      this.submiting = true
-      axios.put(`/api/roles/update/${this.role.id}`, this.role)
-      .then(response => {
-        this.$toasted.global.error('Updated role!')
-        location.href = '/roles'
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-        this.submiting = false
-      })
+      if (!this.submiting) {
+        this.submiting = true
+        axios.put(`/api/roles/update/${this.role.id}`, this.role)
+        .then(response => {
+          this.$toasted.global.error('Updated role!')
+          location.href = '/roles'
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submiting = false
+        })
+      }
     },
     destroy () {
-      this.submitingDestroy = true
-      axios.delete(`/api/roles/${this.role.id}`)
+      if (!this.submitingDestroy) {
+        this.submitingDestroy = true
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this role!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            axios.delete(`/api/roles/${this.role.id}`)
+            .then(response => {
+              this.$toasted.global.error('Deleted role!')
+              location.href = '/roles'
+            })
+            .catch(error => {
+              this.errors = error.response.data.errors
+            })
+          }
+          this.submitingDestroy = false
+        })
+      }
+    },
+    getModules () {
+      axios.get('/api/modules/getModules')
       .then(response => {
-        this.$toasted.global.error('Deleted role!')
-        location.href = '/roles'
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-        this.submitingDestroy = false
+        this.$set(this.role, 'modules', response.data)
       })
     }
   }

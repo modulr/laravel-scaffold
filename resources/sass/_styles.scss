@@ -37,20 +37,32 @@
   }
 }
 
+
+// Breadcrumb ------------------------------------
+.breadcrumb {
+  background-color: $white;
+}
+.breadcrumb-menu {
+  & .btn-outline-success, .btn-outline-primary {
+    border: 1px solid transparent;
+    border-color: inherit;
+  }
+}
+
 // Form ------------------------------------------
 .input-group-text {
   background-color: transparent;
 }
 
 // Card ------------------------------------------
-.card-header, .card-footer {
-  background-color: transparent;
-}
-.card-header {
-  padding: 1.25rem;
-  color: $blue;
-  font-weight: bold;
-}
+// .card-header, .card-footer {
+//   background-color: transparent;
+// }
+// .card-header {
+//   padding: 1.25rem;
+//   color: $blue;
+//   font-weight: bold;
+// }
 .card-footer {
   border-top: none;
 }

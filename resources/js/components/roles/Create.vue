@@ -1,34 +1,56 @@
 <template>
   <div>
-    <div class="card-header">
-      <i class="fas fa-plus"></i> New Role
-      <button class="btn btn-primary float-right" type="button" :disabled="submiting" @click="create" >
-        <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Save
-      </button>
-    </div>
-    <div class="card-body">
-      <form class="form-horizontal" @submit.prevent>
-        <div class="form-group row">
-          <label class="col-md-3">Name</label>
-          <div class="col-md-9">
-            <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="Admin" autofocus>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/roles">Roles</a>
+      </li>
+      <li class="breadcrumb-item active">New Role</li>
+      <li class="breadcrumb-menu">
+        <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="create">
+          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>
+          <span>Create role</span>
+        </a>
+      </li>
+    </ol>
+    <div class="container">
+      <div class="card-header bg-transparent">
+        <strong>General</strong>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="name">Role name</label>
+            <input class="form-control" :class="{'is-invalid': errors.display_name}" type="text" v-model="role.display_name" placeholder="Admin" autofocus>
+            <div class="invalid-feedback" v-if="errors.display_name">{{errors.display_name[0]}}</div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="name">Role slug</label>
+            <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="admin" readonly>
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col-md-12 text-info mt-3">Permissions</div>
-        </div>
-        <hr>
-        <div class="form-group row" v-for="role in role.modules">
-          <label class="col-md-3">{{role.display_name}}</label>
-          <div class="col-md-9">
-            <div class="form-check checkbox" v-for="permission in role.permissions">
-              <input class="form-check-input" :id="`check${permission.id}`" type="checkbox" v-model="permission.allow">
-              <label class="form-check-label" :for="`check${permission.id}`">{{permission.name}}</label>
+      </div>
+      <div class="card-header bg-transparent">
+        <strong>Permissions</strong><br>
+        <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row" v-for="role in role.modules">
+            <label class="col-md-3">{{role.display_name}}</label>
+            <div class="col-md-9">
+              <div class="clearfix" v-for="permission in role.permissions">
+                <span>{{permission.name}}</span>
+                <label class="switch switch-pill switch-outline-success-alt float-right">
+                  <input class="switch-input" type="checkbox" v-model="permission.allow">
+                  <span class="switch-slider"></span>
+                </label>
+                <hr>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -49,23 +71,24 @@ export default {
   },
   methods: {
     create () {
-      this.submiting = true
-      axios.post('/api/roles/store', this.role)
-      .then(response => {
-        this.$toasted.global.error('Created role!')
-        location.href = '/roles'
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-        this.submiting = false
-      })
+      if (!this.submiting) {
+        this.submiting = true
+        axios.post('/api/roles/store', this.role)
+        .then(response => {
+          this.$toasted.global.error('Created role!')
+          location.href = '/roles'
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submiting = false
+        })
+      }
     },
     getModules () {
       axios.get('/api/modules/getModules')
       .then(response => {
         this.role.modules = response.data
-        console.log(this.role.modules);
-      });
+      })
     }
   }
 }

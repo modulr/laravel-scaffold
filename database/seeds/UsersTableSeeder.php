@@ -24,21 +24,25 @@ class UsersTableSeeder extends Seeder
         DB::table('permissions')->insert([
             [
                 'name' => 'read-users',
+                'display_name' => 'Read',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'create-users',
+                'display_name' => 'Create',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'update-users',
+                'display_name' => 'Update',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'delete-users',
+                'display_name' => 'Delete',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]
@@ -62,10 +66,5 @@ class UsersTableSeeder extends Seeder
         // Generate avatar
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
         Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
-
-        // factory(App\User::class, 50)->create()->each(function ($user) {
-        //     $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
-        //     Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
-        // });
     }
 }

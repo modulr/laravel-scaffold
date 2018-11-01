@@ -23,11 +23,13 @@ class ProfileTableSeeder extends Seeder
         DB::table('permissions')->insert([
             [
                 'name' => 'update-own-profile',
+                'display_name' => 'Update Own',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'update-all-profiles',
+                'display_name' => 'Update All',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]

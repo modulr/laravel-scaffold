@@ -24,21 +24,25 @@ class RolesTableSeeder extends Seeder
         DB::table('permissions')->insert([
             [
                 'name' => 'read-roles',
+                'display_name' => 'Read',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'create-roles',
+                'display_name' => 'Create',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'update-roles',
+                'display_name' => 'Update',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'delete-roles',
+                'display_name' => 'Delete',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]
@@ -46,7 +50,8 @@ class RolesTableSeeder extends Seeder
 
         // Default Role
         $role = Role::create([
-            'name' => 'admin'
+            'name' => 'admin',
+            'display_name' => 'Admin'
         ]);
 
         $role->givePermissionTo(Permission::all());

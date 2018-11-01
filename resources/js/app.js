@@ -15,6 +15,7 @@ window.Vue = require('vue');
 import Toasted from 'vue-toasted';
 import VueClip from 'vue-clip'
 import Multiselect from 'vue-multiselect'
+import swal from 'sweetalert';
 
 Vue.use(require('vue-moment'));
 Vue.use(Toasted)

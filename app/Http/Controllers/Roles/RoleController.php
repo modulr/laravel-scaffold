@@ -31,11 +31,12 @@ class RoleController extends Controller
     public function store (Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|unique:roles'
+            'display_name' => 'required|string|unique:roles'
         ]);
 
         $role = Role::create([
-            'name' => $request->name
+            'display_name' => $request->display_name,
+            'name' => strtolower(str_replace(' ', '-', $request->display_name)),
         ]);
 
         return $role;
