@@ -48,12 +48,17 @@ class RolesTableSeeder extends Seeder
             ]
         ]);
 
-        // Default Role
-        $role = Role::create([
+        // Create default roles
+        $admin = Role::create([
             'name' => 'admin',
             'display_name' => 'Admin'
         ]);
+        $user = Role::create([
+            'name' => 'user',
+            'display_name' => 'User'
+        ]);
 
-        $role->givePermissionTo(Permission::all());
+        // Assign permissions to admin role
+        $admin->givePermissionTo(Permission::all());
     }
 }

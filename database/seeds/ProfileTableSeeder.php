@@ -35,9 +35,13 @@ class ProfileTableSeeder extends Seeder
             ]
         ]);
 
-        $role = Role::findByName('admin');
+        // Assign permissions to admin role
+        $admin = Role::findByName('admin');
+        $admin->givePermissionTo(Permission::all());
 
-        $role->givePermissionTo(Permission::all());
+        // Assign permissions to user role
+        $user = Role::findByName('user');
+        $user->givePermissionTo('update-own-profile');
 
     }
 }

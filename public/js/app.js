@@ -63191,8 +63191,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       role: {},
-      modules: [],
-      loadingModules: true,
+      loading: true,
       errors: {},
       submiting: false
     };
@@ -63219,12 +63218,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getModulesPermissions: function getModulesPermissions() {
       var _this2 = this;
 
-      this.loadingModules = true;
+      this.loading = true;
       axios.get('/api/modules/getModulesPermissions').then(function (response) {
-        _this2.modules = response.data;
-        _this2.loadingModules = false;
+        _this2.role.modulesPermissions = response.data;
+        _this2.loading = false;
         //this.$set(this.role, 'modules', response.data)
-        //console.log(this.role);
       });
     }
   },
@@ -63354,7 +63352,7 @@ var render = function() {
           _c(
             "form",
             { staticClass: "form-horizontal" },
-            _vm._l(_vm.modules, function(module) {
+            _vm._l(_vm.role.modulesPermissions, function(module) {
               return _c("div", { staticClass: "form-group row" }, [
                 _c("label", { staticClass: "col-md-3" }, [
                   _vm._v(_vm._s(module.display_name))
@@ -63434,7 +63432,7 @@ var render = function() {
             })
           ),
           _vm._v(" "),
-          _vm.loadingModules
+          _vm.loading
             ? _c(
                 "content-placeholders",
                 [
@@ -63612,58 +63610,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       role: {},
+      loading: true,
       errors: {},
       submiting: false,
       submitingDestroy: false
     };
   },
   mounted: function mounted() {
-    this.getRole();
+    this.getRoleModulesPermissions();
   },
 
   methods: {
-    getRole: function getRole() {
+    getRoleModulesPermissions: function getRoleModulesPermissions() {
       var _this = this;
 
+      this.loading = true;
       var str = window.location.pathname;
       var res = str.split("/");
-      axios.get('/api/roles/' + res[2]).then(function (response) {
+      return axios.get('/api/roles/getRoleModulesPermissions/' + res[2]).then(function (response) {
         _this.role = response.data;
-        _this.getModulesPermissions();
+        _this.loading = false;
       }).catch(function (error) {
         _this.$toasted.global.error('Role does not exist!');
         location.href = '/roles';
-      });
-    },
-    getModulesPermissions: function getModulesPermissions() {
-      var _this2 = this;
-
-      axios.get('/api/modules/getModulesPermissions').then(function (response) {
-        _this2.$set(_this2.role, 'modules', response.data);
-        console.log(_this2.role);
+        _this.loading = false;
       });
     },
     update: function update() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         axios.put('/api/roles/update/' + this.role.id, this.role).then(function (response) {
-          _this3.$toasted.global.error('Updated role!');
+          _this2.$toasted.global.error('Updated role!');
           location.href = '/roles';
         }).catch(function (error) {
-          _this3.errors = error.response.data.errors;
-          _this3.submiting = false;
+          _this2.errors = error.response.data.errors;
+          _this2.submiting = false;
         });
       }
     },
     destroy: function destroy() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (!this.submitingDestroy) {
         this.submitingDestroy = true;
@@ -63675,14 +63675,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           dangerMode: true
         }).then(function (willDelete) {
           if (willDelete) {
-            axios.delete('/api/roles/' + _this4.role.id).then(function (response) {
-              _this4.$toasted.global.error('Deleted role!');
+            axios.delete('/api/roles/' + _this3.role.id).then(function (response) {
+              _this3.$toasted.global.error('Deleted role!');
               location.href = '/roles';
             }).catch(function (error) {
-              _this4.errors = error.response.data.errors;
+              _this3.errors = error.response.data.errors;
             });
           }
-          _this4.submitingDestroy = false;
+          _this3.submitingDestroy = false;
         });
       }
     }
@@ -63765,188 +63765,218 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "form-group col-sm-8" }, [
-            _c("label", [_vm._v("Role name")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.role.display_name,
-                  expression: "role.display_name"
-                }
-              ],
-              staticClass: "form-control",
-              class: { "is-invalid": _vm.errors.display_name },
-              attrs: { type: "text", placeholder: "Admin", autofocus: "" },
-              domProps: { value: _vm.role.display_name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.role, "display_name", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.errors.display_name
-              ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.errors.display_name[0]))
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          !_vm.loading
+            ? _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "form-group col-sm-8" }, [
+                  _c("label", [_vm._v("Role name")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.role.display_name,
+                        expression: "role.display_name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.display_name },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Admin",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.role.display_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.role, "display_name", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.display_name
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.display_name[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-sm-4" }, [
+                  _c("label", [_vm._v("Role ID")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.role.id,
+                        expression: "role.id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", readonly: "" },
+                    domProps: { value: _vm.role.id },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.role, "id", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-sm-8" }, [
+                  _c("label", [_vm._v("Role slug")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.role.name,
+                        expression: "role.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.name },
+                    attrs: { type: "text", placeholder: "admin", readonly: "" },
+                    domProps: { value: _vm.role.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.role, "name", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.name
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.name[0]))
+                      ])
+                    : _vm._e()
                 ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-sm-4" }, [
-            _c("label", [_vm._v("Role ID")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.role.id,
-                  expression: "role.id"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", readonly: "" },
-              domProps: { value: _vm.role.id },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.role, "id", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-sm-8" }, [
-            _c("label", [_vm._v("Role slug")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.role.name,
-                  expression: "role.name"
-                }
-              ],
-              staticClass: "form-control",
-              class: { "is-invalid": _vm.errors.name },
-              attrs: { type: "text", placeholder: "admin", readonly: "" },
-              domProps: { value: _vm.role.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.role, "name", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.errors.name
-              ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.errors.name[0]))
-                ])
-              : _vm._e()
-          ])
-        ])
-      ]),
+              ])
+            : _c(
+                "content-placeholders",
+                [_c("content-placeholders-heading")],
+                1
+              )
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c(
-          "form",
-          { staticClass: "form-horizontal" },
-          _vm._l(_vm.role.modules, function(module) {
-            return _c("div", { staticClass: "form-group row" }, [
-              _c("label", { staticClass: "col-md-3" }, [
-                _vm._v(_vm._s(module.display_name))
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-9" },
-                _vm._l(module.permissions, function(permission) {
-                  return _c("div", { staticClass: "clearfix" }, [
-                    _c("span", [_vm._v(_vm._s(permission.display_name))]),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          !_vm.loading
+            ? _c(
+                "form",
+                { staticClass: "form-horizontal" },
+                _vm._l(_vm.role.modulesPermissions, function(module) {
+                  return _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "col-md-3" }, [
+                      _vm._v(_vm._s(module.display_name))
+                    ]),
                     _vm._v(" "),
                     _c(
-                      "label",
-                      {
-                        staticClass:
-                          "switch switch-pill switch-outline-success-alt float-right"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
+                      "div",
+                      { staticClass: "col-md-9" },
+                      _vm._l(module.permissions, function(permission) {
+                        return _c("div", { staticClass: "clearfix" }, [
+                          _c("span", [_vm._v(_vm._s(permission.display_name))]),
+                          _vm._v(" "),
+                          _c(
+                            "label",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: permission.allow,
-                              expression: "permission.allow"
-                            }
-                          ],
-                          staticClass: "switch-input",
-                          attrs: { type: "checkbox" },
-                          domProps: {
-                            checked: Array.isArray(permission.allow)
-                              ? _vm._i(permission.allow, null) > -1
-                              : permission.allow
-                          },
-                          on: {
-                            change: function($event) {
-                              var $$a = permission.allow,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = null,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      permission,
-                                      "allow",
-                                      $$a.concat([$$v])
-                                    )
-                                } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      permission,
-                                      "allow",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
+                              staticClass:
+                                "switch switch-pill switch-outline-success-alt float-right"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: permission.allow,
+                                    expression: "permission.allow"
+                                  }
+                                ],
+                                staticClass: "switch-input",
+                                attrs: { type: "checkbox" },
+                                domProps: {
+                                  checked: Array.isArray(permission.allow)
+                                    ? _vm._i(permission.allow, null) > -1
+                                    : permission.allow
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = permission.allow,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            permission,
+                                            "allow",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            permission,
+                                            "allow",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(permission, "allow", $$c)
+                                    }
+                                  }
                                 }
-                              } else {
-                                _vm.$set(permission, "allow", $$c)
-                              }
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "switch-slider" })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("hr")
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "switch-slider" })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("hr")
+                        ])
+                      })
+                    )
                   ])
                 })
               )
-            ])
-          })
-        )
-      ])
+            : _c(
+                "content-placeholders",
+                [
+                  _c("content-placeholders-heading", { attrs: { img: true } }),
+                  _vm._v(" "),
+                  _c("content-placeholders-heading", { attrs: { img: true } })
+                ],
+                1
+              )
+        ],
+        1
+      )
     ])
   ])
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Spatie\Permission\Models\Role;
+use App\Models\Modules\Module;
 
 class RoleController extends Controller
 {
@@ -28,6 +29,23 @@ class RoleController extends Controller
         return Role::with('permissions')->findOrFail($role);
     }
 
+    public function getRoleModulesPermissions($role)
+    {
+        $role = Role::with('permissions')->findOrFail($role);
+        $modules = Module::has('permissions')->orderBy('name')->get();
+        foreach ($modules as $key => $value) {
+            foreach ($value->permissions as $ke => $val) {
+                foreach ($role->permissions as $k => $v) {
+                    if ($v->name == $val->name) {
+                        $val->allow = true;
+                    }
+                }
+            }
+        }
+        $role->modulesPermissions = $modules;
+        return $role;
+    }
+
     public function store (Request $request)
     {
         $this->validate($request, [
@@ -41,7 +59,7 @@ class RoleController extends Controller
         ]);
 
         $permissions = [];
-        foreach ($request->modules as $key => $value) {
+        foreach ($request->modulesPermissions as $key => $value) {
             foreach ($value['permissions'] as $ke => $val) {
                 if (isset($val['allow']) && $val['allow']) {
                     array_push($permissions, ['name' => $val['name']]);
@@ -58,7 +76,8 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|unique:roles,name,'.$request->id,
-            'display_name' => 'required|string|unique:roles,display_name,'.$request->id
+            'display_name' => 'required|string|unique:roles,display_name,'.$request->id,
+            'modulesPermissions' => 'array'
         ]);
 
         $role = Role::find($request->id);
@@ -72,7 +91,7 @@ class RoleController extends Controller
         }
 
         $permissions = [];
-        foreach ($request->modules as $key => $value) {
+        foreach ($request->modulesPermissions as $key => $value) {
             foreach ($value['permissions'] as $ke => $val) {
                 if (isset($val['allow']) && $val['allow']) {
                     array_push($permissions, ['name' => $val['name']]);

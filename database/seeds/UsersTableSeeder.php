@@ -48,22 +48,20 @@ class UsersTableSeeder extends Seeder
             ]
         ]);
 
-        $role = Role::findByName('admin');
+        // Assign permissions to admin role
+        $admin = Role::findByName('admin');
+        $admin->givePermissionTo(Permission::all());
 
-        $role->givePermissionTo(Permission::all());
-
-        // Default User
+        // Create default user
         $user = \App\User::create([
             'name' => 'admin',
             'email' => 'admin@modulr.io',
             'password' => bcrypt('admin'),
             'avatar' => 'avatar.png'
         ]);
-
-        // Assign Admin Role
+        // Assign admin role to default user
         $user->assignRole('admin');
-
-        // Generate avatar
+        // Generate avatar to defautl user
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
         Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
     }

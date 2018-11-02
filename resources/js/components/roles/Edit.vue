@@ -22,7 +22,7 @@
         <small class="text-muted float-right" v-if="role.created_at">{{role.created_at | moment("LLL")}}</small>
       </div>
       <div class="card-body">
-        <div class="row">
+        <div class="row" v-if="!loading">
           <div class="form-group col-sm-8">
             <label>Role name</label>
             <input class="form-control" :class="{'is-invalid': errors.display_name}" type="text" v-model="role.display_name" placeholder="Admin" autofocus>
@@ -38,14 +38,17 @@
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
         </div>
+        <content-placeholders v-else>
+          <content-placeholders-heading/>
+        </content-placeholders>
       </div>
       <div class="card-header bg-transparent">
         <strong>Permissions</strong><br>
         <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
       </div>
       <div class="card-body">
-        <form class="form-horizontal">
-          <div class="form-group row" v-for="module in role.modules">
+        <form class="form-horizontal" v-if="!loading">
+          <div class="form-group row" v-for="module in role.modulesPermissions">
             <label class="col-md-3">{{module.display_name}}</label>
             <div class="col-md-9">
               <div class="clearfix" v-for="permission in module.permissions">
@@ -59,6 +62,10 @@
             </div>
           </div>
         </form>
+        <content-placeholders v-else>
+          <content-placeholders-heading :img="true"/>
+          <content-placeholders-heading :img="true"/>
+        </content-placeholders>
       </div>
     </div>
   </div>
@@ -69,33 +76,29 @@ export default {
   data () {
     return {
       role: {},
+      loading: true,
       errors: {},
       submiting: false,
       submitingDestroy: false
     }
   },
   mounted () {
-    this.getRole()
+    this.getRoleModulesPermissions()
   },
   methods: {
-    getRole() {
+    getRoleModulesPermissions() {
+      this.loading = true
       let str = window.location.pathname
       let res = str.split("/")
-      axios.get(`/api/roles/${res[2]}`)
+      return axios.get(`/api/roles/getRoleModulesPermissions/${res[2]}`)
       .then(response => {
         this.role = response.data
-        this.getModulesPermissions()
+        this.loading = false
       })
       .catch(error => {
         this.$toasted.global.error('Role does not exist!')
         location.href = '/roles'
-      })
-    },
-    getModulesPermissions () {
-      axios.get('/api/modules/getModulesPermissions')
-      .then(response => {
-        this.$set(this.role, 'modules', response.data)
-        console.log(this.role);
+        this.loading = false
       })
     },
     update () {

@@ -11,6 +11,7 @@ class ModuleController extends Controller
     public function getModulesPermissions()
     {
         return Module::with('permissions')
+          ->has('permissions')
           ->orderBy('name')
           ->get();
     }

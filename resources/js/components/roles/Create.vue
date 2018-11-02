@@ -36,7 +36,7 @@
       </div>
       <div class="card-body">
         <form class="form-horizontal">
-          <div class="form-group row" v-for="module in modules">
+          <div class="form-group row" v-for="module in role.modulesPermissions">
             <label class="col-md-3">{{module.display_name}}</label>
             <div class="col-md-9">
               <div class="clearfix" v-for="permission in module.permissions">
@@ -50,7 +50,7 @@
             </div>
           </div>
         </form>
-        <content-placeholders v-if="loadingModules">
+        <content-placeholders v-if="loading">
           <content-placeholders-heading :img="true"/>
           <content-placeholders-heading :img="true"/>
         </content-placeholders>
@@ -64,8 +64,7 @@ export default {
   data () {
     return {
       role: {},
-      modules: [],
-      loadingModules: true,
+      loading: true,
       errors: {},
       submiting: false
     }
@@ -89,13 +88,12 @@ export default {
       }
     },
     getModulesPermissions () {
-      this.loadingModules = true
+      this.loading = true
       axios.get('/api/modules/getModulesPermissions')
       .then(response => {
-        this.modules = response.data
-        this.loadingModules = false
+        this.role.modulesPermissions = response.data
+        this.loading = false
         //this.$set(this.role, 'modules', response.data)
-        //console.log(this.role);
       })
     }
   },
