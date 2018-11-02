@@ -18,21 +18,21 @@
     </ol>
     <div class="container">
       <div class="card-header bg-transparent">
-        <strong>General</strong>
-        <small class="text-muted float-right" v-if="role.created_at">{{role.created_at | moment("LLL")}}</small>
+        <strong>General</strong><br>
+        <small class="text-muted">Update name and permissions of role.</small>
       </div>
       <div class="card-body">
         <div class="row" v-if="!loading">
-          <div class="form-group col-sm-8">
+          <div class="form-group col-sm-9">
             <label>Role name</label>
             <input class="form-control" :class="{'is-invalid': errors.display_name}" type="text" v-model="role.display_name" placeholder="Admin" autofocus>
             <div class="invalid-feedback" v-if="errors.display_name">{{errors.display_name[0]}}</div>
           </div>
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-3">
             <label>Role ID</label>
             <input class="form-control" type="text" v-model="role.id" readonly>
           </div>
-          <div class="form-group col-sm-8">
+          <div class="form-group col-sm-12">
             <label>Role slug</label>
             <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="admin" readonly>
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
@@ -45,9 +45,14 @@
       <div class="card-header bg-transparent">
         <strong>Permissions</strong><br>
         <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
+        <div class="card-header-actions">
+          <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapsePermissions" aria-expanded="true">
+            <i class="icon-arrow-up"></i>
+          </a>
+        </div>
       </div>
-      <div class="card-body">
-        <form class="form-horizontal" v-if="!loading">
+      <div class="card-body collapse" id="collapsePermissions">
+        <form class="form-horizontal">
           <div class="form-group row" v-for="module in role.modulesPermissions">
             <label class="col-md-3">{{module.display_name}}</label>
             <div class="col-md-9">
@@ -62,11 +67,39 @@
             </div>
           </div>
         </form>
-        <content-placeholders v-else>
-          <content-placeholders-heading :img="true"/>
-          <content-placeholders-heading :img="true"/>
-        </content-placeholders>
       </div>
+      <content-placeholders class="card-body" v-if="loading">
+        <content-placeholders-heading :img="true"/>
+      </content-placeholders>
+      <div class="card-header bg-transparent">
+        <strong>Users</strong><br>
+        <small class="text-muted">This is the list of users who use this role.</small>
+        <div class="card-header-actions">
+          <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true">
+            <i class="icon-arrow-up"></i>
+          </a>
+        </div>
+      </div>
+      <div class="card-body collapse" id="collapseUsers">
+        <ul class="list-unstyled">
+          <a :href="`/users/${user.id}/edit`" v-for="user in role.users">
+          <li class="media border-bottom border-light pb-2 mb-2">
+            <div class="avatar float-left mr-3">
+              <img class="img-avatar" :src="user.avatar_url">
+            </div>
+            <div class="media-body">
+              <div>{{user.name}}</div>
+              <div class="small text-muted">
+                {{user.email}}
+              </div>
+            </div>
+          </li>
+          </a>
+        </ul>
+      </div>
+      <content-placeholders class="card-body" v-if="loading">
+        <content-placeholders-heading :img="true"/>
+      </content-placeholders>
     </div>
   </div>
 </template>
@@ -76,28 +109,29 @@ export default {
   data () {
     return {
       role: {},
-      loading: true,
       errors: {},
+      loading: true,
       submiting: false,
       submitingDestroy: false
     }
   },
   mounted () {
-    this.getRoleModulesPermissions()
+    this.getRole()
   },
   methods: {
-    getRoleModulesPermissions() {
+    getRole() {
       this.loading = true
       let str = window.location.pathname
       let res = str.split("/")
-      return axios.get(`/api/roles/getRoleModulesPermissions/${res[2]}`)
+      axios.get(`/api/roles/getRoleModulesPermissions/${res[2]}`)
       .then(response => {
         this.role = response.data
-        this.loading = false
       })
       .catch(error => {
         this.$toasted.global.error('Role does not exist!')
         location.href = '/roles'
+      })
+      .then(() => {
         this.loading = false
       })
     },

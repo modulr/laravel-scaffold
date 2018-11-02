@@ -14,7 +14,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/roles">
-                    <i class="nav-icon icon-lock"></i> Roles
+                    <i class="nav-icon icon-key"></i> Roles
                 </a>
             </li>
         </ul>

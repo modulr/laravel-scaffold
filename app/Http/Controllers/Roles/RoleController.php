@@ -21,17 +21,19 @@ class RoleController extends Controller
         $roles = $query->orderBy($request->column, $request->direction)
         ->paginate($request->perPage);
 
+        $roles->load('users');
+
         return $roles;
     }
 
     public function show ($role)
     {
-        return Role::with('permissions')->findOrFail($role);
+        return Role::findOrFail($role);
     }
 
     public function getRoleModulesPermissions($role)
     {
-        $role = Role::with('permissions')->findOrFail($role);
+        $role = Role::with('permissions', 'users')->findOrFail($role);
         $modules = Module::has('permissions')->orderBy('name')->get();
         foreach ($modules as $key => $value) {
             foreach ($value->permissions as $ke => $val) {

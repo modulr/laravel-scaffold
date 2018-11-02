@@ -7,8 +7,7 @@
       <li class="breadcrumb-item active">New User</li>
       <li class="breadcrumb-menu">
         <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="create">
-          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>
-          <span>Create user</span>
+          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Create user
         </a>
       </li>
     </ol>
@@ -17,21 +16,21 @@
         <form class="form-horizontal">
           <div class="form-group row">
             <label class="col-md-3 text-md-right">Full Name</label>
-            <div class="col-md-9 col-xl-7">
+            <div class="col-md-7">
               <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="user.name" placeholder="John Doe">
               <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 text-md-right">Email</label>
-            <div class="col-md-9 col-xl-7">
+            <div class="col-md-7">
               <input class="form-control" :class="{'is-invalid': errors.email}" type="email" v-model="user.email" placeholder="john@modulr.io">
               <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 text-md-right">Password</label>
-            <div class="col-md-9 col-xl-7">
+            <div class="col-md-7">
               <input class="form-control" :class="{'is-invalid': errors.password}" type="password" v-model="user.password">
               <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
             </div>

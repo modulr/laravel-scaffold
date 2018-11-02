@@ -7,27 +7,25 @@
       <li class="breadcrumb-item active">New Role</li>
       <li class="breadcrumb-menu">
         <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="create">
-          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>
-          <span>Create role</span>
+          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Create role
         </a>
       </li>
     </ol>
     <div class="container">
       <div class="card-header bg-transparent">
-        <strong>General</strong>
+        <strong>General</strong><br>
+        <small class="text-muted">Create a new role and choose the permissions so you can assign it to users.</small>
       </div>
       <div class="card-body">
-        <div class="row">
-          <div class="form-group col-sm-6">
-            <label for="name">Role name</label>
-            <input class="form-control" :class="{'is-invalid': errors.display_name}" type="text" v-model="role.display_name" placeholder="Admin" autofocus>
-            <div class="invalid-feedback" v-if="errors.display_name">{{errors.display_name[0]}}</div>
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="name">Role slug</label>
-            <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="admin" readonly>
-            <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
-          </div>
+        <div class="form-group">
+          <label for="name">Role name</label>
+          <input class="form-control" :class="{'is-invalid': errors.display_name}" type="text" v-model="role.display_name" placeholder="Admin" autofocus>
+          <div class="invalid-feedback" v-if="errors.display_name">{{errors.display_name[0]}}</div>
+        </div>
+        <div class="form-group">
+          <label for="name">Role slug</label>
+          <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="admin" readonly>
+          <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
         </div>
       </div>
       <div class="card-header bg-transparent">
@@ -35,7 +33,7 @@
         <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
       </div>
       <div class="card-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" v-if="!loading">
           <div class="form-group row" v-for="module in role.modulesPermissions">
             <label class="col-md-3">{{module.display_name}}</label>
             <div class="col-md-9">
@@ -50,7 +48,7 @@
             </div>
           </div>
         </form>
-        <content-placeholders v-if="loading">
+        <content-placeholders v-else>
           <content-placeholders-heading :img="true"/>
           <content-placeholders-heading :img="true"/>
         </content-placeholders>
@@ -64,8 +62,8 @@ export default {
   data () {
     return {
       role: {},
-      loading: true,
       errors: {},
+      loading: true,
       submiting: false
     }
   },

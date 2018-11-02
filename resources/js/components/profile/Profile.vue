@@ -1,10 +1,15 @@
 <template>
-  <div class="card">
-    <div class="card-header">
-      <i class="fas fa-pencil-alt"></i> Edit Profile
-    </div>
+  <div>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">Edit Profile</li>
+      <li class="breadcrumb-menu">
+        <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="updateAuthUser">
+          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i> Save profile
+        </a>
+      </li>
+    </ol>
     <div class="card-body">
-      <form class="form-horizontal">
+      <form class="form-horizontal" v-if="!loading">
         <div class="form-group row mb-4">
           <div class="col-md-3">Avatar</div>
           <div class="col-md-9">
@@ -30,15 +35,10 @@
           </div>
         </div>
       </form>
-    </div>
-    <div class="card-footer">
-      <div class="form-group row">
-        <div class="col-md-9 offset-md-3">
-          <button class="btn btn-primary" type="button" :disabled="submiting" @click="updateAuthUser" >
-            <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Save profile
-          </button>
-        </div>
-      </div>
+      <content-placeholders v-else>
+        <content-placeholders-heading :img="true"/>
+        <content-placeholders-text/>
+      </content-placeholders>
     </div>
   </div>
 </template>
@@ -51,6 +51,7 @@ export default {
     return {
       user: {},
       errors: {},
+      loading: true,
       submiting: false
     }
   },
@@ -62,23 +63,27 @@ export default {
   },
   methods: {
     getAuthUser () {
+      this.loading = true
       axios.get(`/api/profile/getAuthUser`)
       .then(response => {
         this.user = response.data
+        this.loading = false
       })
     },
     updateAuthUser () {
-      this.submiting = true
-      axios.put(`/api/profile/updateAuthUser`, this.user)
-      .then(response => {
-        this.errors = {}
-        this.submiting = false
-        this.$toasted.global.error('Profile updated!');
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-        this.submiting = false
-      })
+      if (!this.submiting) {
+        this.submiting = true
+        axios.put(`/api/profile/updateAuthUser`, this.user)
+        .then(response => {
+          this.errors = {}
+          this.submiting = false
+          this.$toasted.global.error('Profile updated!');
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submiting = false
+        })
+      }
     }
   }
 }

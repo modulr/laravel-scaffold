@@ -14,6 +14,8 @@ class FakerTableSeeder extends Seeder
         factory(App\User::class, 50)->create()->each(function ($user) {
             $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
             Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+
+            $user->assignRole('user');
         });
     }
 }

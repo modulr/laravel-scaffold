@@ -89,7 +89,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="row" v-if='!loadingCollection && pagination.total > 0'>
+        <div class="row" v-if='!loading && pagination.total > 0'>
           <div class="col">
             {{pagination.from}}-{{pagination.to}} of {{pagination.total}}
           </div>
@@ -110,7 +110,7 @@
             </nav>
           </div>
         </div>
-        <div class="no-items-found text-center mt-5" v-if="!loadingCollection && !collection.length > 0">
+        <div class="no-items-found text-center mt-5" v-if="!loading && !collection.length > 0">
           <i class="icon-magnifier fa-3x text-muted"></i>
           <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
           <p class="text-muted">Try changing the filters or add a new one</p>
@@ -118,7 +118,7 @@
             <i class="fa fa-plus"></i>&nbsp; New User
           </a>
         </div>
-        <content-placeholders v-if="loadingCollection">
+        <content-placeholders v-if="loading">
           <content-placeholders-text/>
         </content-placeholders>
       </div>
@@ -147,7 +147,7 @@ export default {
         direction: 'asc'
       },
       search: '',
-      loadingCollection: true
+      loading: true
     }
   },
   mounted () {
@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     getUsers () {
-      this.loadingCollection = true
+      this.loading = true
       this.collection = []
 
       let filters = {
@@ -177,7 +177,7 @@ export default {
           currentPage: response.data.current_page,
           lastPage: response.data.last_page
         }
-        this.loadingCollection = false
+        this.loading = false
       })
     },
     filter() {

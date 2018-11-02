@@ -1,8 +1,13 @@
 <template>
-  <div class="card">
-    <div class="card-header">
-      <i class="fas fa-pencil-alt"></i> Edit Password
-    </div>
+  <div>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">Change Password</li>
+      <li class="breadcrumb-menu">
+        <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="updatePasswordAuthUser">
+          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Change password
+        </a>
+      </li>
+    </ol>
     <div class="card-body">
       <form class="form-horizontal">
         <div class="form-group row">
@@ -29,15 +34,6 @@
         </div>
       </form>
     </div>
-    <div class="card-footer">
-      <div class="form-group row">
-        <div class="col-md-9 offset-md-3">
-          <button class="btn btn-primary" type="button" :disabled="submiting" @click="updatePasswordAuthUser" >
-            <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Change password
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -52,18 +48,20 @@ export default {
   },
   methods: {
     updatePasswordAuthUser () {
-      this.submiting = true
-      axios.put(`/api/profile/updatePasswordAuthUser`, this.password)
-      .then(response => {
-        this.password = {}
-        this.errors = {}
-        this.submiting = false
-        this.$toasted.global.error('Password changed!');
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-        this.submiting = false
-      })
+      if (!this.submiting) {
+        this.submiting = true
+        axios.put(`/api/profile/updatePasswordAuthUser`, this.password)
+        .then(response => {
+          this.password = {}
+          this.errors = {}
+          this.submiting = false
+          this.$toasted.global.error('Password changed!');
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submiting = false
+        })
+      }
     }
   }
 }

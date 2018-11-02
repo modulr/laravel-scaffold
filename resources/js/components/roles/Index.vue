@@ -52,7 +52,8 @@
                   Slug
                 </a>
               </th>
-              <th>
+              <th>Users</th>
+              <th class="d-none d-sm-table-cell">
                 <a href="#" class="text-dark" @click.prevent="sort('created_at')">
                   <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'created_at' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'created_at' && orderBy.direction == 'desc'}"></i>
                   Created
@@ -67,6 +68,14 @@
               <td>{{role.display_name}}</td>
               <td>{{role.name}}</td>
               <td>
+                <div class="avatars-stack">
+                  <div class="avatar-sm" v-for="(user, index) in role.users.slice(0,4)">
+                    <img class="img-avatar" :src="user.avatar_url">
+                  </div>
+                  <div class="avatar-sm ml-3" v-if="role.users.length > 4"> +{{role.users.length - 4}}</div>
+                </div>
+              </td>
+              <td class="d-none d-sm-table-cell">
                 <small>{{role.created_at | moment("LLL")}}</small>
               </td>
               <td>
@@ -77,7 +86,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="row" v-if='!loadingCollection && pagination.total > 0'>
+        <div class="row" v-if='!loading && pagination.total > 0'>
           <div class="col">
             {{pagination.from}}-{{pagination.to}} of {{pagination.total}}
           </div>
@@ -98,7 +107,7 @@
             </nav>
           </div>
         </div>
-        <div class="no-items-found text-center mt-5" v-if="!loadingCollection && !collection.length > 0">
+        <div class="no-items-found text-center mt-5" v-if="!loading && !collection.length > 0">
           <i class="icon-magnifier fa-3x text-muted"></i>
           <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
           <p class="text-muted">Try changing the filters or add a new one</p>
@@ -106,7 +115,7 @@
             <i class="fa fa-plus"></i>&nbsp; New Role
           </a>
         </div>
-        <content-placeholders v-if="loadingCollection">
+        <content-placeholders v-if="loading">
           <content-placeholders-text/>
         </content-placeholders>
       </div>
@@ -135,7 +144,7 @@ export default {
         direction: 'asc'
       },
       search: '',
-      loadingCollection: true
+      loading: true
     }
   },
   mounted () {
@@ -143,7 +152,7 @@ export default {
   },
   methods: {
     getRoles () {
-      this.loadingCollection = true
+      this.loading = true
       this.collection = []
 
       let filters = {
@@ -167,7 +176,7 @@ export default {
             lastPage: response.data.last_page
           }
         }
-        this.loadingCollection = false
+        this.loading = false
       })
     },
     filter() {

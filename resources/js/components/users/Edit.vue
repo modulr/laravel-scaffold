@@ -7,18 +7,18 @@
       <li class="breadcrumb-item active">Edit User</li>
       <li class="breadcrumb-menu">
         <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="update" >
-          <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Save changes
+          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Save changes
         </a>
         <a class="btn" href="#" :disabled="submitingDestroy" @click="destroy">
           <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
           <i class="far fa-trash-alt" v-if="!submitingDestroy"></i>
-          <span class="d-md-down-none ml-1">Delete</span>
+          <span class="d-md-down-none ml-1"> Delete</span>
         </a>
       </li>
     </ol>
     <div class="container">
       <div class="card-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" v-if="!loading">
           <div class="form-group row">
             <label class="col-md-3 text-md-right">ID</label>
             <div class="col-md-9 col-xl-7">
@@ -53,6 +53,9 @@
             </div>
           </div>
         </form>
+        <content-placeholders v-else>
+          <content-placeholders-text/>
+        </content-placeholders>
       </div>
     </div>
   </div>
@@ -64,6 +67,7 @@ export default {
     return {
       user: {},
       errors: {},
+      loading: true,
       submiting: false,
       submitingDestroy: false
     }
@@ -73,6 +77,7 @@ export default {
   },
   methods: {
     getUser() {
+      this.loading = true
       let str = window.location.pathname
       let res = str.split("/")
       axios.get(`/api/users/${res[2]}`)
@@ -82,6 +87,9 @@ export default {
       .catch(error => {
         this.$toasted.global.error('User does not exist!')
         location.href = '/users'
+      })
+      .then(() => {
+        this.loading = false
       })
     },
     update () {
