@@ -11,7 +11,19 @@ Demo & Documentation _coming soon..._
 https://laravel.com/docs/5.7#server-requirements
 
 
-## Tutorial
+## Tutorial 
+
+### How to Create
+
+
+[Authentication](Create Scaffold with Laravel 5.7 — Authentication (Part 1) by Alfredo Barron https://link.medium.com/YsYZ4TJ1wR)
+[Add CoreUI Template](Create Scaffold with Laravel 5.7 — Add Core UI Template (Part 2) by Alfredo Barron https://link.medium.com/mlq1D5N1wR)
+[Create Profile module](Create Scaffold with Laravel 5.7 — Profile (Part 3.1) Edit profile by Alfredo Barron https://link.medium.com/e8EbuVR1wR)
+Create Users management module __comig soon__
+Create Roles managment module __coming soon__
+
+
+
 
 https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 
@@ -97,28 +109,28 @@ php artisan serve
   - Remember Password
 
 
-- Profile
+- Profile 
   - Edit Name, email - regenerate avatar
   - Change password
   - Upload & Restart Avatar
 
-- Users
+- Users management
     - Create users
     - Read users list into reusable table with paginate, sort, search and loading feature**
     - Update users
     - Delete users
  
-- Roles --> _coming soon..._
+- Roles management
+    - List roles
+    - Create roles and assign permissions
+    - List of users than used role
+    - Update role
+    - Delete role
 
 
 ## Features
 
-- CORE UI Template
-- File uploader
-- Fancy select input
-- Friendly dates format
-- Responsive & Touch Alerts
-- Reusable Table
+- Table
     - serverside rendering
     - Pagination
     - Sort
@@ -131,21 +143,22 @@ php artisan serve
 ##### Backend
 
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
-- [Laravolt Avatar](https://github.com/laravolt/avatar)
-- [Intervention Image](http://image.intervention.io/)
+- [Laravolt Avatar](https://github.com/laravolt/avatar) Create default Avatar
+- [Intervention Image](http://image.intervention.io/) Crop and resize images
 
 
 ##### Frontend
 
 - [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
 - [Bootstrap 4](https://getbootstrap.com/)
-- [Core UI](https://coreui.io/)
+- [Core UI](https://coreui.io/) Template
+Icons
 - [Fontawesome 5](https://fontawesome.com/)
 - [Simple Line Icons](http://simplelineicons.com/)
-- [Vue Toasted](https://shakee93.github.io/vue-toasted/)
-- [Vue Clip](https://vueclip.adonisjs.com/)
-- [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
-- [Vue-multiselect](https://vue-multiselect.js.org/)
+- [Vue Toasted](https://shakee93.github.io/vue-toasted/) Notifications
+- [Vue Clip](https://vueclip.adonisjs.com/) Upload files
+- [vue-moment](https://github.com/brockpetrie/vue-moment#readme) Friendly Format Dates
+- [Vue-multiselect](https://vue-multiselect.js.org/) Fancy MultiSelect 
 
 
 
