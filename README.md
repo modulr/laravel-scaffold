@@ -16,15 +16,11 @@ https://laravel.com/docs/5.7#server-requirements
 ### How to Create
 
 
-[Authentication](https://link.medium.com/YsYZ4TJ1wR)
-
-[Add CoreUI Template](https://link.medium.com/mlq1D5N1wR)
-
-[Create Profile module](https://link.medium.com/e8EbuVR1wR)
-
-Create Users management module __comig soon__
-
-Create Roles managment module __coming soon__
+- [Authentication](https://link.medium.com/YsYZ4TJ1wR)
+- [Add CoreUI Template](https://link.medium.com/mlq1D5N1wR)
+- [Create Profile module](https://link.medium.com/e8EbuVR1wR)
+- Create Users management module __comig soon__
+- Create Roles managment module __coming soon__
 
 
 
