@@ -11,9 +11,7 @@ Demo & Documentation _coming soon..._
 https://laravel.com/docs/5.7#server-requirements
 
 
-## Tutorial 
-
-### How to Create
+## How to Created Laravel Scaffold (Tutorials)
 
 
 - [Authentication](https://link.medium.com/YsYZ4TJ1wR)
@@ -21,11 +19,6 @@ https://laravel.com/docs/5.7#server-requirements
 - [Create Profile module](https://link.medium.com/e8EbuVR1wR)
 - Create Users management module __comig soon__
 - Create Roles managment module __coming soon__
-
-
-
-
-https://medium.com/modulr/create-scaffold-with-laravel-5-7-f5ab353dff1c
 
 
 ## Install
@@ -129,6 +122,16 @@ php artisan serve
 
 ## Features
 
+- Upload files [Vue Clip](https://vueclip.adonisjs.com/)
+- Crop and resize images [Intervention Image](http://image.intervention.io/) 
+- Create default Avatar [Laravolt Avatar](https://github.com/laravolt/avatar) 
+- Notifications [Vue Toasted](https://shakee93.github.io/vue-toasted/)
+- Friendly Format [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
+- Fancy MultiSelect [Vue-multiselect](https://vue-multiselect.js.org/)
+- Template [Core UI](https://coreui.io/)
+-Icons
+    - [Fontawesome 5](https://fontawesome.com/)
+    - [Simple Line Icons](http://simplelineicons.com/)
 - Table
     - serverside rendering
     - Pagination
@@ -142,22 +145,8 @@ php artisan serve
 ##### Backend
 
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
-- [Laravolt Avatar](https://github.com/laravolt/avatar) Create default Avatar
-- [Intervention Image](http://image.intervention.io/) Crop and resize images
-
-
-##### Frontend
-
 - [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
 - [Bootstrap 4](https://getbootstrap.com/)
-- [Core UI](https://coreui.io/) Template
-Icons
-- [Fontawesome 5](https://fontawesome.com/)
-- [Simple Line Icons](http://simplelineicons.com/)
-- [Vue Toasted](https://shakee93.github.io/vue-toasted/) Notifications
-- [Vue Clip](https://vueclip.adonisjs.com/) Upload files
-- [vue-moment](https://github.com/brockpetrie/vue-moment#readme) Friendly Format Dates
-- [Vue-multiselect](https://vue-multiselect.js.org/) Fancy MultiSelect 
 
 
 
