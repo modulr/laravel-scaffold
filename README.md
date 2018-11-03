@@ -16,10 +16,14 @@ https://laravel.com/docs/5.7#server-requirements
 ### How to Create
 
 
-[Authentication](Create Scaffold with Laravel 5.7 — Authentication (Part 1) by Alfredo Barron https://link.medium.com/YsYZ4TJ1wR)
-[Add CoreUI Template](Create Scaffold with Laravel 5.7 — Add Core UI Template (Part 2) by Alfredo Barron https://link.medium.com/mlq1D5N1wR)
-[Create Profile module](Create Scaffold with Laravel 5.7 — Profile (Part 3.1) Edit profile by Alfredo Barron https://link.medium.com/e8EbuVR1wR)
+[Authentication](https://link.medium.com/YsYZ4TJ1wR)
+
+[Add CoreUI Template](https://link.medium.com/mlq1D5N1wR)
+
+[Create Profile module](https://link.medium.com/e8EbuVR1wR)
+
 Create Users management module __comig soon__
+
 Create Roles managment module __coming soon__
 
 
@@ -115,8 +119,7 @@ php artisan serve
   - Upload & Restart Avatar
 
 - Users management
-    - Create users
-    - Read users list into reusable table with paginate, sort, search and loading feature**
+    - List users
     - Update users
     - Delete users
  
