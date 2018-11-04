@@ -4,7 +4,7 @@ Scaffold made with Laravel 5.7 and VueJS to using like base for future projects.
 ![Laravel Scaffold](https://github.com/modulr/laravel-scaffold/blob/master/public/img/laravel-scaffold.jpg)
 
 
-Demo & Documentation _coming soon..._
+Demo & Documentation -> _coming soon..._
 
 ## Requirements
 
@@ -17,8 +17,8 @@ https://laravel.com/docs/5.7#server-requirements
 - [Authentication](https://link.medium.com/YsYZ4TJ1wR)
 - [Add CoreUI Template](https://link.medium.com/mlq1D5N1wR)
 - [Create Profile module](https://link.medium.com/e8EbuVR1wR)
-- Create Users management module __comig soon__
-- Create Roles managment module __coming soon__
+- Create Users management module -> _comig soon..._
+- Create Roles managment module -> _coming soon..._
 
 
 ## Install
@@ -109,6 +109,7 @@ php artisan serve
 
 - Users management
     - List users
+    - Create user
     - Update users
     - Delete users
  
@@ -129,7 +130,7 @@ php artisan serve
 - Friendly Format [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
 - Fancy MultiSelect [Vue-multiselect](https://vue-multiselect.js.org/)
 - Template [Core UI](https://coreui.io/)
--Icons
+- Icons
     - [Fontawesome 5](https://fontawesome.com/)
     - [Simple Line Icons](http://simplelineicons.com/)
 - Table
@@ -141,8 +142,6 @@ php artisan serve
 
 
 ## Packages
-
-##### Backend
 
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
 - [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
