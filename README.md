@@ -128,13 +128,15 @@ php artisan serve
 - Template [Core UI](https://coreui.io/)
 - Icons
     - [Fontawesome 5](https://fontawesome.com/)
-    - [Simple Line Icons](http://simplelineicons.com/)
+    - [Simple Line Icons](https://github.com/thesabbir/simple-line-icons)
 - Upload files [Vue Clip](https://vueclip.adonisjs.com/)
 - Crop and resize images [Intervention Image](http://image.intervention.io/) 
 - Create default avatar [Laravolt Avatar](https://github.com/laravolt/avatar) 
 - Fancy multiselect [Vue-multiselect](https://vue-multiselect.js.org/)
+- Alerts [Sweat Alert](https://sweetalert.js.org/)
 - Notifications [Vue Toasted](https://shakee93.github.io/vue-toasted/)
 - Friendly date format [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
+- Rendering fake progressive content [vue-content-placeholders](https://github.com/michalsnik/vue-content-placeholders)
 - Table
     - Serverside rendering
     - Pagination
