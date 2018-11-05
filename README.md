@@ -11,7 +11,7 @@ Demo & Documentation -> _coming soon..._
 https://laravel.com/docs/5.7#server-requirements
 
 
-## How to Created Laravel Scaffold (Tutorials)
+## How to created Laravel Scaffold (Tutorials)
 
 
 - [Authentication](https://link.medium.com/YsYZ4TJ1wR)
@@ -101,7 +101,6 @@ php artisan serve
   - Register - generate avatar
   - Remember Password
 
-
 - Profile 
   - Edit Name, email - regenerate avatar
   - Change password
@@ -116,37 +115,31 @@ php artisan serve
 - Roles management
     - List roles
     - Create roles and assign permissions
-    - List of users than used role
-    - Update role
+    - Update role and permissions
+    - Users list who use the role
     - Delete role
-
+    
 
 ## Features
-
-- Upload files [Vue Clip](https://vueclip.adonisjs.com/)
-- Crop and resize images [Intervention Image](http://image.intervention.io/) 
-- Create default Avatar [Laravolt Avatar](https://github.com/laravolt/avatar) 
-- Notifications [Vue Toasted](https://shakee93.github.io/vue-toasted/)
-- Friendly Format [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
-- Fancy MultiSelect [Vue-multiselect](https://vue-multiselect.js.org/)
-- Template [Core UI](https://coreui.io/)
-- Icons
-    - [Fontawesome 5](https://fontawesome.com/)
-    - [Simple Line Icons](http://simplelineicons.com/)
-- Table
-    - serverside rendering
-    - Pagination
-    - Sort
-    - Search
-    - Loading
-
-
-## Packages
 
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
 - [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
 - [Bootstrap 4](https://getbootstrap.com/)
-
+- Template [Core UI](https://coreui.io/)
+- Icons
+    - [Fontawesome 5](https://fontawesome.com/)
+    - [Simple Line Icons](http://simplelineicons.com/)
+- Upload files [Vue Clip](https://vueclip.adonisjs.com/)
+- Crop and resize images [Intervention Image](http://image.intervention.io/) 
+- Create default avatar [Laravolt Avatar](https://github.com/laravolt/avatar) 
+- Fancy multiselect [Vue-multiselect](https://vue-multiselect.js.org/)
+- Notifications [Vue Toasted](https://shakee93.github.io/vue-toasted/)
+- Friendly date format [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
+- Table
+    - Serverside rendering
+    - Pagination
+    - Sort
+    - Search
 
 
 ## License
