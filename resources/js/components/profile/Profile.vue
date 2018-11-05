@@ -1,10 +1,13 @@
 <template>
   <div>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active">Edit Profile</li>
+      <li class="breadcrumb-item">Profile</li>
+      <li class="breadcrumb-item active">Edit</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="updateAuthUser">
-          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i> Save profile
+        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="updateAuthUser">
+          <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+          <i class="far fa-save d-lg-none"></i>
+          <span class="d-md-down-none ml-1">Save profile</span>
         </a>
       </li>
     </ol>

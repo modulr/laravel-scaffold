@@ -1,10 +1,13 @@
 <template>
   <div>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active">Change Password</li>
+      <li class="breadcrumb-item">Profile</li>
+      <li class="breadcrumb-item active">Edit Password</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="updatePasswordAuthUser">
-          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Change password
+        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="updatePasswordAuthUser">
+          <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+          <i class="far fa-save d-lg-none"></i>
+          <span class="d-md-down-none ml-1">Change password</span>
         </a>
       </li>
     </ol>

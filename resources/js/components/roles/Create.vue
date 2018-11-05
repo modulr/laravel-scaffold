@@ -2,12 +2,17 @@
   <div>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="/roles">Roles</a>
+        <a href="/roles">
+          <i class="fa fa-chevron-left mr-1"></i>
+          Roles
+        </a>
       </li>
-      <li class="breadcrumb-item active">New Role</li>
+      <li class="breadcrumb-item active">New</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-success text-success" href="#" :disabled="submiting" @click="create">
-          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Create role
+        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="create">
+          <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+          <i class="far fa-save d-lg-none"></i>
+          <span class="d-md-down-none ml-1">Create user</span>
         </a>
       </li>
     </ol>

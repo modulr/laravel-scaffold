@@ -122,9 +122,6 @@
           <content-placeholders-text/>
         </content-placeholders>
       </div>
-      <div class="card-footer bg-transparent">
-
-      </div>
     </div>
   </div>
 </template>

@@ -11265,6 +11265,7 @@ a.text-dark:focus {
 }
 
 .app-header {
+  background-color: transparent;
   padding: 0;
   position: fixed;
 }
@@ -11304,13 +11305,15 @@ a.text-dark:focus {
 }
 
 .breadcrumb {
-  background-color: #fff;
+  background-color: transparent;
+  border-radius: 0;
 }
 
 .breadcrumb-menu .btn-outline-success,
 .breadcrumb-menu .btn-outline-primary {
   border: 1px solid transparent;
   border-color: inherit;
+  padding: 0 0.55rem;
 }
 
 .input-group-text {

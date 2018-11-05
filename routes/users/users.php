@@ -10,6 +10,7 @@ Route::middleware('auth')->group(function () {
 
         // api
         Route::group(['prefix' => 'api/users'], function() {
+            Route::get('/count', 'UserController@count');
             Route::post('/filter', 'UserController@filter');
             Route::get('/{user}', 'UserController@show');
             Route::post('/store', 'UserController@store');

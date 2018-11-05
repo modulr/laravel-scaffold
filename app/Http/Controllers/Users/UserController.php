@@ -86,4 +86,9 @@ class UserController extends Controller
     {
         return User::destroy($user);
     }
+
+    public function count ()
+    {
+        return User::count();
+    }
 }

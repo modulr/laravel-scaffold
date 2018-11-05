@@ -2,12 +2,17 @@
   <div>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="/users">Users</a>
+        <a href="/users">
+          <i class="fa fa-chevron-left mr-1"></i>
+          Users
+        </a>
       </li>
-      <li class="breadcrumb-item active">Edit User</li>
+      <li class="breadcrumb-item active">Edit</li>
       <li class="breadcrumb-menu">
         <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="update" >
-          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Save changes
+          <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+          <i class="far fa-save d-lg-none"></i>
+          <span class="d-md-down-none ml-1">Save changes</span>
         </a>
         <a class="btn" href="#" :disabled="submitingDestroy" @click="destroy">
           <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>

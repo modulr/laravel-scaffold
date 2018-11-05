@@ -14120,6 +14120,10 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_4_vue_content_placeholders__["default"]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// Dashboard
+Vue.component('users-count', __webpack_require__(108));
+Vue.component('roles-count', __webpack_require__(111));
+
 // Profile
 Vue.component('profile', __webpack_require__(54));
 Vue.component('profile-password', __webpack_require__(60));
@@ -60196,6 +60200,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -60489,23 +60496,28 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Edit Profile")
-      ]),
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Profile")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Edit")]),
       _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-menu" }, [
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-success text-success",
+            staticClass: "btn btn-outline-primary text-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: { click: _vm.updateAuthUser }
           },
           [
             _vm.submiting
-              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-1" })
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
               : _vm._e(),
-            _vm._v(" Save profile\n      ")
+            _vm._v(" "),
+            _c("i", { staticClass: "far fa-save d-lg-none" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-md-down-none ml-1" }, [
+              _vm._v("Save profile")
+            ])
           ]
         )
       ])
@@ -60736,6 +60748,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60776,23 +60791,30 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Profile")]),
+      _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Change Password")
+        _vm._v("Edit Password")
       ]),
       _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-menu" }, [
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-success text-success",
+            staticClass: "btn btn-outline-primary text-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: { click: _vm.updatePasswordAuthUser }
           },
           [
             _vm.submiting
-              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-1" })
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
               : _vm._e(),
-            _vm._v("Change password\n      ")
+            _vm._v(" "),
+            _c("i", { staticClass: "far fa-save d-lg-none" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-md-down-none ml-1" }, [
+              _vm._v("Change password")
+            ])
           ]
         )
       ])
@@ -60985,9 +61007,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -61598,9 +61617,7 @@ var render = function() {
             : _vm._e()
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-footer bg-transparent" })
+      )
     ])
   ])
 }
@@ -61751,6 +61768,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61791,21 +61813,26 @@ var render = function() {
     _c("ol", { staticClass: "breadcrumb" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("New User")]),
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("New")]),
       _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-menu" }, [
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-success text-success",
+            staticClass: "btn btn-outline-primary text-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: { click: _vm.create }
           },
           [
             _vm.submiting
-              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-1" })
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
               : _vm._e(),
-            _vm._v("Create user\n      ")
+            _vm._v(" "),
+            _c("i", { staticClass: "far fa-save d-lg-none" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-md-down-none ml-1" }, [
+              _vm._v("Create user")
+            ])
           ]
         )
       ])
@@ -61935,7 +61962,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "breadcrumb-item" }, [
-      _c("a", { attrs: { href: "/users" } }, [_vm._v("Users")])
+      _c("a", { attrs: { href: "/users" } }, [
+        _c("i", { staticClass: "fa fa-chevron-left mr-1" }),
+        _vm._v("\n        Users\n      ")
+      ])
     ])
   }
 ]
@@ -62001,6 +62031,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -62148,9 +62183,7 @@ var render = function() {
     _c("ol", { staticClass: "breadcrumb" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Edit User")
-      ]),
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Edit")]),
       _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-menu" }, [
         _c(
@@ -62162,9 +62195,14 @@ var render = function() {
           },
           [
             _vm.submiting
-              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-1" })
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
               : _vm._e(),
-            _vm._v("Save changes\n      ")
+            _vm._v(" "),
+            _c("i", { staticClass: "far fa-save d-lg-none" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-md-down-none ml-1" }, [
+              _vm._v("Save changes")
+            ])
           ]
         ),
         _vm._v(" "),
@@ -62373,7 +62411,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "breadcrumb-item" }, [
-      _c("a", { attrs: { href: "/users" } }, [_vm._v("Users")])
+      _c("a", { attrs: { href: "/users" } }, [
+        _c("i", { staticClass: "fa fa-chevron-left mr-1" }),
+        _vm._v("\n        Users\n      ")
+      ])
     ])
   }
 ]
@@ -62567,6 +62608,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -62585,10 +62630,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         direction: 'asc'
       },
       search: '',
+      permissionsCount: 0,
       loading: true
     };
   },
   mounted: function mounted() {
+    this.getPermissionsCount();
     this.getRoles();
   },
 
@@ -62610,6 +62657,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post('/api/roles/filter', filters).then(function (response) {
         if (response.data) {
           _this.collection = response.data.data;
+          console.log(_this.collection);
           _this.pagination = {
             from: response.data.from,
             to: response.data.to,
@@ -62644,6 +62692,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     changePage: function changePage(page) {
       this.pagination.currentPage = page;
       this.getRoles();
+    },
+    getPermissionsCount: function getPermissionsCount() {
+      var _this2 = this;
+
+      axios.get('/api/permissions/count').then(function (response) {
+        _this2.permissionsCount = response.data;
+        console.log(_this2.permissionsCount);
+      });
     }
   }
 });
@@ -62837,7 +62893,9 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Users")]),
+                  _c("th", [_vm._v("Permissions")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Users             ")]),
                   _vm._v(" "),
                   _c("th", { staticClass: "d-none d-sm-table-cell" }, [
                     _c(
@@ -62882,6 +62940,42 @@ var render = function() {
                     _c("td", [_vm._v(_vm._s(role.display_name))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(role.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("small", { staticClass: "text-muted" }, [
+                        _vm._v(
+                          _vm._s(role.permissions.length) +
+                            " of " +
+                            _vm._s(_vm.permissionsCount)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "progress",
+                          staticStyle: { height: "4px" }
+                        },
+                        [
+                          _c("div", {
+                            staticClass: "progress-bar bg-info",
+                            style:
+                              "width: " +
+                              (role.permissions.length * 100) /
+                                _vm.permissionsCount +
+                              "%",
+                            attrs: {
+                              role: "progressbar",
+                              "aria-valuenow":
+                                (role.permissions.length * 100) /
+                                _vm.permissionsCount,
+                              "aria-valuemin": "0",
+                              "aria-valuemax": this.permissionsCount
+                            }
+                          })
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("td", [
                       _c(
@@ -63070,9 +63164,7 @@ var render = function() {
             : _vm._e()
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-footer bg-transparent" })
+      )
     ])
   ])
 }
@@ -63239,6 +63331,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -63302,21 +63399,26 @@ var render = function() {
     _c("ol", { staticClass: "breadcrumb" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("New Role")]),
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("New")]),
       _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-menu" }, [
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-success text-success",
+            staticClass: "btn btn-outline-primary text-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: { click: _vm.create }
           },
           [
             _vm.submiting
-              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-1" })
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
               : _vm._e(),
-            _vm._v("Create role\n      ")
+            _vm._v(" "),
+            _c("i", { staticClass: "far fa-save d-lg-none" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-md-down-none ml-1" }, [
+              _vm._v("Create user")
+            ])
           ]
         )
       ])
@@ -63503,7 +63605,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "breadcrumb-item" }, [
-      _c("a", { attrs: { href: "/roles" } }, [_vm._v("Roles")])
+      _c("a", { attrs: { href: "/roles" } }, [
+        _c("i", { staticClass: "fa fa-chevron-left mr-1" }),
+        _vm._v("\n        Roles\n      ")
+      ])
     ])
   },
   function() {
@@ -63705,11 +63810,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      role: {},
+      role: {
+        permissions: [],
+        users: []
+      },
+      permissionsCount: 0,
       errors: {},
       loading: true,
       submiting: false,
@@ -63717,6 +63838,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
+    this.getPermissionsCount();
     this.getRole();
   },
 
@@ -63773,6 +63895,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this3.submitingDestroy = false;
         });
       }
+    },
+    getPermissionsCount: function getPermissionsCount() {
+      var _this4 = this;
+
+      axios.get('/api/permissions/count').then(function (response) {
+        _this4.permissionsCount = response.data;
+      });
     }
   },
   watch: {
@@ -63798,9 +63927,7 @@ var render = function() {
     _c("ol", { staticClass: "breadcrumb" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Edit Role")
-      ]),
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Edit")]),
       _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-menu" }, [
         _c(
@@ -63812,9 +63939,14 @@ var render = function() {
           },
           [
             _vm.submiting
-              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-1" })
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
               : _vm._e(),
-            _vm._v("Save changes\n      ")
+            _vm._v(" "),
+            _c("i", { staticClass: "far fa-save d-lg-none" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-md-down-none ml-1" }, [
+              _vm._v("Save changes")
+            ])
           ]
         ),
         _vm._v(" "),
@@ -63967,7 +64099,53 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(2),
+        _c("div", { staticClass: "card-header bg-transparent" }, [
+          _c("strong", [_vm._v("Permissions")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("small", { staticClass: "text-muted" }, [
+            _vm._v(
+              "Enable or disable certain permissions and choose access to modules."
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-header-actions" }, [
+            _c("div", { staticClass: "float-left mr-2 d-sm-down-none" }, [
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v(
+                  _vm._s(_vm.role.permissions.length) +
+                    " of " +
+                    _vm._s(_vm.permissionsCount)
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "progress", staticStyle: { height: "4px" } },
+                [
+                  _c("div", {
+                    staticClass: "progress-bar bg-info",
+                    style:
+                      "width: " +
+                      (_vm.role.permissions.length * 100) /
+                        _vm.permissionsCount +
+                      "%",
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow":
+                        (_vm.role.permissions.length * 100) /
+                        _vm.permissionsCount,
+                      "aria-valuemin": "0",
+                      "aria-valuemax": this.permissionsCount
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -64070,7 +64248,22 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _vm._m(3),
+        _c("div", { staticClass: "card-header bg-transparent" }, [
+          _c("strong", [_vm._v("Users")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("small", { staticClass: "text-muted" }, [
+            _vm._v("This is the list of users who use this role.")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-header-actions" }, [
+            _c("span", { staticClass: "mr-1 d-sm-down-none" }, [
+              _vm._v(_vm._s(_vm.role.users.length))
+            ]),
+            _vm._v(" "),
+            _vm._m(3)
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -64137,7 +64330,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "breadcrumb-item" }, [
-      _c("a", { attrs: { href: "/roles" } }, [_vm._v("Roles")])
+      _c("a", { attrs: { href: "/roles" } }, [
+        _c("i", { staticClass: "fa fa-chevron-left mr-1" }),
+        _vm._v("\n        Roles\n      ")
+      ])
     ])
   },
   function() {
@@ -64157,61 +64353,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-transparent" }, [
-      _c("strong", [_vm._v("Permissions")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v(
-          "Enable or disable certain permissions and choose access to modules."
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-header-actions" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-header-action btn-minimize",
-            attrs: {
-              href: "#",
-              "data-toggle": "collapse",
-              "data-target": "#collapsePermissions",
-              "aria-expanded": "true"
-            }
-          },
-          [_c("i", { staticClass: "icon-arrow-up" })]
-        )
-      ])
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "card-header-action btn-minimize",
+        attrs: {
+          href: "#",
+          "data-toggle": "collapse",
+          "data-target": "#collapsePermissions",
+          "aria-expanded": "true"
+        }
+      },
+      [_c("i", { staticClass: "icon-arrow-up" })]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-transparent" }, [
-      _c("strong", [_vm._v("Users")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("This is the list of users who use this role.")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-header-actions" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-header-action btn-minimize",
-            attrs: {
-              href: "#",
-              "data-toggle": "collapse",
-              "data-target": "#collapseUsers",
-              "aria-expanded": "true"
-            }
-          },
-          [_c("i", { staticClass: "icon-arrow-up" })]
-        )
-      ])
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "card-header-action btn-minimize",
+        attrs: {
+          href: "#",
+          "data-toggle": "collapse",
+          "data-target": "#collapseUsers",
+          "aria-expanded": "true"
+        }
+      },
+      [_c("i", { staticClass: "icon-arrow-up" })]
+    )
   }
 ]
 render._withStripped = true
@@ -64228,6 +64400,288 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(109)
+/* template */
+var __vue_template__ = __webpack_require__(110)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/dashboard/UsersCount.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-24267ba6", Component.options)
+  } else {
+    hotAPI.reload("data-v-24267ba6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 109 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      users: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getUsersCount();
+  },
+
+  methods: {
+    getUsersCount: function getUsersCount() {
+      var _this = this;
+
+      axios.get("/api/users/count").then(function (response) {
+        _this.users = response.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card text-white bg-info" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-value" }, [_vm._v(_vm._s(_vm.users))]),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "text-muted text-uppercase font-weight-bold" },
+        [_vm._v("Users")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "h1 text-muted text-right mb-4" }, [
+      _c("i", { staticClass: "icon-people" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-24267ba6", module.exports)
+  }
+}
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(112)
+/* template */
+var __vue_template__ = __webpack_require__(113)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/dashboard/RolesCount.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3485bd18", Component.options)
+  } else {
+    hotAPI.reload("data-v-3485bd18", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 112 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      roles: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getRolesCount();
+  },
+
+  methods: {
+    getRolesCount: function getRolesCount() {
+      var _this = this;
+
+      axios.get("/api/roles/count").then(function (response) {
+        _this.roles = response.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card text-white bg-success" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-value" }, [_vm._v(_vm._s(_vm.roles))]),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "text-muted text-uppercase font-weight-bold" },
+        [_vm._v("Roles")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "h1 text-muted text-right mb-4" }, [
+      _c("i", { staticClass: "icon-key" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3485bd18", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

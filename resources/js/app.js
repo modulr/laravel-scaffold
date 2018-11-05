@@ -35,6 +35,10 @@ Vue.use(VueContentPlaceholders)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// Dashboard
+Vue.component('users-count', require('./components/dashboard/UsersCount.vue'));
+Vue.component('roles-count', require('./components/dashboard/RolesCount.vue'));
+
 // Profile
 Vue.component('profile', require('./components/profile/Profile.vue'));
 Vue.component('profile-password', require('./components/profile/Password.vue'));

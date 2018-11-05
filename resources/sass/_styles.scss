@@ -1,5 +1,6 @@
 // Header ---------------------------------------
 .app-header {
+  background-color: transparent;
   padding: 0;
   position: fixed;
   .dropdown-menu {
@@ -40,12 +41,15 @@
 
 // Breadcrumb ------------------------------------
 .breadcrumb {
-  background-color: $white;
+  background-color: transparent;
+  border-radius: 0;
+
 }
 .breadcrumb-menu {
   & .btn-outline-success, .btn-outline-primary {
     border: 1px solid transparent;
     border-color: inherit;
+    padding: 0 0.55rem;
   }
 }
 

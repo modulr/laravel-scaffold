@@ -11,8 +11,14 @@
               {{ session('status') }}
           </div>
       @endif
-
-      You are logged in!
+      <div class="row">
+        <div class="col-md-6">
+          <users-count></users-count>
+        </div>
+        <div class="col-md-6">
+          <roles-count></roles-count>
+        </div>
+      </div>
   </div>
 </div>
 @endsection

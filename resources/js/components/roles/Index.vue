@@ -52,7 +52,8 @@
                   Slug
                 </a>
               </th>
-              <th>Users</th>
+              <th>Permissions</th>
+              <th>Users&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
               <th class="d-none d-sm-table-cell">
                 <a href="#" class="text-dark" @click.prevent="sort('created_at')">
                   <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'created_at' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'created_at' && orderBy.direction == 'desc'}"></i>
@@ -67,6 +68,12 @@
               <td>{{role.id}}</td>
               <td>{{role.display_name}}</td>
               <td>{{role.name}}</td>
+              <td>
+                <small class="text-muted">{{role.permissions.length}} of {{permissionsCount}}</small>
+                <div class="progress" style="height: 4px;">
+                  <div class="progress-bar bg-info" role="progressbar" :style="`width: ${role.permissions.length*100/permissionsCount}%`" :aria-valuenow="role.permissions.length*100/permissionsCount" aria-valuemin="0" :aria-valuemax="this.permissionsCount"></div>
+                </div>
+              </td>
               <td>
                 <div class="avatars-stack">
                   <div class="avatar-sm" v-for="(user, index) in role.users.slice(0,4)">
@@ -119,9 +126,6 @@
           <content-placeholders-text/>
         </content-placeholders>
       </div>
-      <div class="card-footer bg-transparent">
-
-      </div>
     </div>
   </div>
 </template>
@@ -144,10 +148,12 @@ export default {
         direction: 'asc'
       },
       search: '',
+      permissionsCount: 0,
       loading: true
     }
   },
   mounted () {
+    this.getPermissionsCount()
     this.getRoles()
   },
   methods: {
@@ -167,6 +173,7 @@ export default {
       .then(response => {
         if (response.data) {
           this.collection = response.data.data
+          console.log(this.collection);
           this.pagination = {
             from: response.data.from,
             to: response.data.to,
@@ -201,6 +208,13 @@ export default {
     changePage (page) {
       this.pagination.currentPage = page
       this.getRoles()
+    },
+    getPermissionsCount() {
+      axios.get(`/api/permissions/count`)
+      .then(response => {
+        this.permissionsCount = response.data
+        console.log(this.permissionsCount);
+      })
     }
   }
 }

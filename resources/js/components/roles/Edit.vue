@@ -2,12 +2,17 @@
   <div>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="/roles">Roles</a>
+        <a href="/roles">
+          <i class="fa fa-chevron-left mr-1"></i>
+          Roles
+        </a>
       </li>
-      <li class="breadcrumb-item active">Edit Role</li>
+      <li class="breadcrumb-item active">Edit</li>
       <li class="breadcrumb-menu">
         <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="update">
-          <i class="fas fa-spinner fa-spin mr-1" v-if="submiting"></i>Save changes
+          <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+          <i class="far fa-save d-lg-none"></i>
+          <span class="d-md-down-none ml-1">Save changes</span>
         </a>
         <a class="btn" href="#" :disabled="submitingDestroy" @click="destroy">
           <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
@@ -46,6 +51,12 @@
         <strong>Permissions</strong><br>
         <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
         <div class="card-header-actions">
+          <div class="float-left mr-2 d-sm-down-none">
+            <small class="text-muted">{{role.permissions.length}} of {{permissionsCount}}</small>
+            <div class="progress" style="height: 4px;">
+              <div class="progress-bar bg-info" role="progressbar" :style="`width: ${role.permissions.length*100/permissionsCount}%`" :aria-valuenow="role.permissions.length*100/permissionsCount" aria-valuemin="0" :aria-valuemax="this.permissionsCount"></div>
+            </div>
+          </div>
           <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapsePermissions" aria-expanded="true">
             <i class="icon-arrow-up"></i>
           </a>
@@ -75,6 +86,7 @@
         <strong>Users</strong><br>
         <small class="text-muted">This is the list of users who use this role.</small>
         <div class="card-header-actions">
+          <span class="mr-1 d-sm-down-none">{{role.users.length}}</span>
           <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true">
             <i class="icon-arrow-up"></i>
           </a>
@@ -108,7 +120,11 @@
 export default {
   data () {
     return {
-      role: {},
+      role: {
+        permissions: [],
+        users: []
+      },
+      permissionsCount: 0,
       errors: {},
       loading: true,
       submiting: false,
@@ -116,6 +132,7 @@ export default {
     }
   },
   mounted () {
+    this.getPermissionsCount()
     this.getRole()
   },
   methods: {
@@ -173,6 +190,12 @@ export default {
           this.submitingDestroy = false
         })
       }
+    },
+    getPermissionsCount() {
+      axios.get(`/api/permissions/count`)
+      .then(response => {
+        this.permissionsCount = response.data
+      })
     }
   },
   watch: {

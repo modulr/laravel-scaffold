@@ -10,10 +10,10 @@ Route::middleware('auth')->group(function () {
 
         // api
         Route::group(['prefix' => 'api/roles'], function() {
+            Route::get('/count', 'RoleController@count');
+            Route::get('/getRoleModulesPermissions/{role}','RoleController@getRoleModulesPermissions');
             Route::post('/filter', 'RoleController@filter');
             Route::get('/{role}', 'RoleController@show');
-            Route::get('/getRoleModulesPermissions/{role}', 'RoleController@getRoleModulesPermissions');
-
             Route::post('/store', 'RoleController@store');
             Route::put('/update/{role}', 'RoleController@update');
             Route::delete('/{user}', 'RoleController@destroy');
