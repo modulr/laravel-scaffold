@@ -123,6 +123,7 @@ php artisan serve
 ## Features
 
 - [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
+- Roles & Permissions [laravel-permission](https://github.com/spatie/laravel-permission)
 - [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
 - [Bootstrap 4](https://getbootstrap.com/)
 - Template [Core UI](https://coreui.io/)
