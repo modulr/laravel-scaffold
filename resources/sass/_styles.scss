@@ -1,5 +1,6 @@
 // Header ---------------------------------------
 .app-header {
+  background-color: transparent;
   padding: 0;
   position: fixed;
   .dropdown-menu {
@@ -24,10 +25,31 @@
 }
 
 // Main ------------------------------------------
+.main .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
 @media (max-width: 575.98px) {
   .aside-menu-show .main::before,
   .sidebar-show .main::before {
     background: none;
+  }
+}
+
+
+// Breadcrumb ------------------------------------
+.breadcrumb {
+  background-color: transparent;
+  border-radius: 0;
+
+}
+.breadcrumb-menu {
+  & .btn-outline-success, .btn-outline-primary {
+    border: 1px solid transparent;
+    border-color: inherit;
+    padding: 0 0.55rem;
   }
 }
 
@@ -37,14 +59,14 @@
 }
 
 // Card ------------------------------------------
-.card-header, .card-footer {
-  background-color: transparent;
-}
-.card-header {
-  padding: 1.25rem;
-  color: $blue;
-  font-weight: bold;
-}
+// .card-header, .card-footer {
+//   background-color: transparent;
+// }
+// .card-header {
+//   padding: 1.25rem;
+//   color: $blue;
+//   font-weight: bold;
+// }
 .card-footer {
   border-top: none;
 }

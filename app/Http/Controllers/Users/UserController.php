@@ -25,6 +25,8 @@ class UserController extends Controller
         $users = $query->orderBy($request->column, $request->direction)
                     ->paginate($request->perPage);
 
+        $users->load('roles');
+
         return $users;
     }
 
@@ -83,5 +85,10 @@ class UserController extends Controller
     public function destroy ($user)
     {
         return User::destroy($user);
+    }
+
+    public function count ()
+    {
+        return User::count();
     }
 }

@@ -27,16 +27,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="app header-fixed sidebar-fixed sidebar-lg-show">
-    <div id="app" :class="{'loading': loading}">
+    <div id="app">
         @include('layouts.header')
         <div class="app-body">
             @include('layouts.sidebar')
-            <main class="main">
-                <div class="container-fluid">
-                    <div class="animated fadeIn">
-                        @yield('content')
-                    </div>
-                </div>
+            <main class="main animated fadeIn">
+              @yield('content')
             </main>
         </div>
     </div>

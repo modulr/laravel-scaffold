@@ -3,6 +3,8 @@
 
 // Variables
 @import 'variables';
+// Dark mode ********* implement
+//@import "~bootswatch/dist/darkly/variables";
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -18,7 +20,7 @@
 @import "~vue-multiselect/dist/vue-multiselect.min.css";
 
 // Loading
-@import 'loading';
+// @import 'loading';
 
 // styles
 @import 'styles.scss'

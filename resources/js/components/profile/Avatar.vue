@@ -1,8 +1,8 @@
 <template>
   <div class="media">
-    <img class="rounded-circle w-25 mr-4" :src="user.avatar_url">
+    <img class="rounded-circle mr-4" style="width: 120px; height: 120px" :src="user.avatar_url">
     <div class="media-body pt-1">
-      <vue-clip class="vue-clip-avatar"
+      <vue-clip
         :options="optionsAvatar"
         :on-sending="sendingAvatar"
         :on-complete="completeAvatar">
