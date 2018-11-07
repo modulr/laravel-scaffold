@@ -9,7 +9,7 @@
       </li>
       <li class="breadcrumb-item active">New</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="create">
+        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click.prevent="create">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
           <i class="far fa-save d-lg-none"></i>
           <span class="d-md-down-none ml-1">Create user</span>
@@ -18,29 +18,38 @@
     </ol>
     <div class="container">
       <div class="card-body">
-        <form class="form-horizontal">
-          <div class="form-group row">
-            <label class="col-md-3 text-md-right">Full Name</label>
-            <div class="col-md-7">
-              <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="user.name" placeholder="John Doe">
+        <div class="row justify-content-md-center">
+          <div class="col-md-12 col-xl-7">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="John Doe">
               <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 text-md-right">Email</label>
-            <div class="col-md-7">
-              <input class="form-control" :class="{'is-invalid': errors.email}" type="email" v-model="user.email" placeholder="john@modulr.io">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="user.email" placeholder="john@modulr.io">
               <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 text-md-right">Password</label>
-            <div class="col-md-7">
-              <input class="form-control" :class="{'is-invalid': errors.password}" type="password" v-model="user.password">
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
               <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
             </div>
+            <div class="form-group">
+              <label>Roles</label>
+              <multiselect
+                v-model="user.roles"
+                :options="roles"
+                :multiple="true"
+                openDirection="bottom"
+                track-by="id"
+                label="display_name"
+                :class="{'border border-danger rounded': errors.roles}">
+              </multiselect>
+              <small class="form-text text-danger" v-if="errors.roles">{{errors.roles[0]}}</small>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -50,10 +59,16 @@
 export default {
   data () {
     return {
-      user: {},
+      user: {
+        roles: []
+      },
+      roles: [],
       errors: {},
       submiting: false
     }
+  },
+  mounted () {
+    this.getRoles()
   },
   methods: {
     create () {
@@ -69,6 +84,15 @@ export default {
           this.submiting = false
         })
       }
+    },
+    getRoles () {
+      axios.get(`/api/roles/all`)
+      .then(response => {
+        this.roles = response.data
+      })
+      .catch(error => {
+        this.errors = error.response.data.errors
+      })
     }
   }
 }

@@ -17,7 +17,7 @@ class RolesTableSeeder extends Seeder
         $moduleId = DB::table('modules')->insertGetId([
             'name' => 'roles',
             'display_name' => 'Roles',
-            'icon' => 'mdi-vpn-key'
+            'icon' => 'icon-key'
         ]);
 
         // Permissions

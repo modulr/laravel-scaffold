@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         $moduleId = DB::table('modules')->insertGetId([
             'name' => 'users',
             'display_name' => 'Users',
-            'icon' => 'mdi-people'
+            'icon' => 'icon-people'
         ]);
 
         // Permissions

@@ -11264,8 +11264,20 @@ a.text-dark:focus {
   }
 }
 
+#app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -ms-flex-positive: 1;
+  -webkit-box-flex: 1;
+          flex-grow: 1;
+}
+
 .app-header {
-  background-color: transparent;
   padding: 0;
   position: fixed;
 }

@@ -9,10 +9,10 @@
       </li>
       <li class="breadcrumb-item active">New</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click="create">
+        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click.prevent="create">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
           <i class="far fa-save d-lg-none"></i>
-          <span class="d-md-down-none ml-1">Create user</span>
+          <span class="d-md-down-none ml-1">Create role</span>
         </a>
       </li>
     </ol>
@@ -23,13 +23,13 @@
       </div>
       <div class="card-body">
         <div class="form-group">
-          <label for="name">Role name</label>
-          <input class="form-control" :class="{'is-invalid': errors.display_name}" type="text" v-model="role.display_name" placeholder="Admin" autofocus>
+          <label>Role name</label>
+          <input type="text" class="form-control" :class="{'is-invalid': errors.display_name}" v-model="role.display_name" placeholder="Admin" autofocus>
           <div class="invalid-feedback" v-if="errors.display_name">{{errors.display_name[0]}}</div>
         </div>
         <div class="form-group">
-          <label for="name">Role slug</label>
-          <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="role.name" placeholder="admin" readonly>
+          <label>Role slug</label>
+          <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="role.name" placeholder="admin" readonly>
           <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
         </div>
       </div>

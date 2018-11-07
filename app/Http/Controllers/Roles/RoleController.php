@@ -26,27 +26,14 @@ class RoleController extends Controller
         return $roles;
     }
 
+    public function all()
+    {
+        return Role::all();
+    }
+
     public function show ($role)
     {
         return Role::findOrFail($role);
-    }
-
-    public function getRoleModulesPermissions($role)
-    {
-        $role = Role::with('permissions', 'users')->findOrFail($role);
-        $modules = Module::has('permissions')->orderBy('name')->get();
-
-        foreach ($modules as $key => $value) {
-            foreach ($value->permissions as $ke => $val) {
-                foreach ($role->permissions as $k => $v) {
-                    if ($v->name == $val->name) {
-                        $val->allow = true;
-                    }
-                }
-            }
-        }
-        $role->modulesPermissions = $modules;
-        return $role;
     }
 
     public function store (Request $request)
@@ -115,5 +102,23 @@ class RoleController extends Controller
     public function count ()
     {
         return Role::count();
+    }
+
+    public function getRoleModulesPermissions($role)
+    {
+        $role = Role::with('permissions', 'users')->findOrFail($role);
+        $modules = Module::has('permissions')->orderBy('name')->get();
+
+        foreach ($modules as $key => $value) {
+            foreach ($value->permissions as $ke => $val) {
+                foreach ($role->permissions as $k => $v) {
+                    if ($v->name == $val->name) {
+                        $val->allow = true;
+                    }
+                }
+            }
+        }
+        $role->modulesPermissions = $modules;
+        return $role;
     }
 }

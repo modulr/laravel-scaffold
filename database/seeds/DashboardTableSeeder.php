@@ -15,7 +15,7 @@ class DashboardTableSeeder extends Seeder
         $moduleId = DB::table('modules')->insertGetId([
             'name' => 'dashboard',
             'display_name' => 'Dashboard',
-            'icon' => 'mdi-vpn-key'
+            'icon' => 'icon-speedometer'
         ]);
     }
 }

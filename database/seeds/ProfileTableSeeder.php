@@ -16,20 +16,34 @@ class ProfileTableSeeder extends Seeder
         // Module
         $moduleId = DB::table('modules')->insertGetId([
             'name' => 'profile',
-            'display_name' => 'Profile'
+            'display_name' => 'Profile',
+            'icon' => 'icon-user',
+            'active' => false
         ]);
 
         // Permissions
         DB::table('permissions')->insert([
             [
-                'name' => 'update-own-profile',
-                'display_name' => 'Update Own',
+                'name' => 'read-profile',
+                'display_name' => 'Read Profile',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'update-all-profiles',
-                'display_name' => 'Update All',
+                'name' => 'update-profile',
+                'display_name' => 'Update Profile',
+                'guard_name' => 'web',
+                'module_id' => $moduleId
+            ],
+            [
+                'name' => 'read-profile-password',
+                'display_name' => 'Read Password',
+                'guard_name' => 'web',
+                'module_id' => $moduleId
+            ],
+            [
+                'name' => 'update-profile-password',
+                'display_name' => 'Update Password',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]
@@ -41,7 +55,7 @@ class ProfileTableSeeder extends Seeder
 
         // Assign permissions to user role
         $user = Role::findByName('user');
-        $user->givePermissionTo('update-own-profile');
+        $user->givePermissionTo('read-profile', 'update-profile', 'read-profile-password', 'update-profile-password');
 
     }
 }

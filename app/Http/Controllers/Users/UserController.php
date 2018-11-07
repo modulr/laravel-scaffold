@@ -40,7 +40,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string'
+            'password' => 'required|string',
+            'roles' => 'required|array'
         ]);
 
         $user = User::create([
@@ -48,6 +49,9 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        $rolesNames = array_pluck($request->roles, ['name']);
+        $user->assignRole($rolesNames);
 
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
         Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
@@ -60,7 +64,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$request->id,
-            'password' => 'string|nullable'
+            'password' => 'string|nullable',
+            'roles' => 'required|array'
         ]);
 
         $user = User::find($request->id);
@@ -79,6 +84,9 @@ class UserController extends Controller
 
         $user->save();
 
+        $rolesNames = array_pluck($request->roles, ['name']);
+        $user->syncRoles($rolesNames);
+
         return $user;
     }
 
@@ -91,4 +99,14 @@ class UserController extends Controller
     {
         return User::count();
     }
+
+    public function getUserRoles ($user)
+    {
+        $user = User::findOrFail($user);
+        $user->getRoleNames();
+
+        return $user;
+    }
+
+
 }

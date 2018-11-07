@@ -1,6 +1,13 @@
+// app ---------------------------------------
+#app {
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
 // Header ---------------------------------------
 .app-header {
-  background-color: transparent;
   padding: 0;
   position: fixed;
   .dropdown-menu {
