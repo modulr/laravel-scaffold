@@ -22,8 +22,11 @@ class UserController extends Controller
             $query->where('name', 'LIKE', '%'.$request->search.'%');
         }
 
-        $users = $query->orderBy($request->column, $request->direction)
-                    ->paginate($request->perPage);
+        $users = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
+                    ->paginate($request->input('pagination.per_page'));
+
+        // $users = $query->orderBy($request->column, $request->direction)
+        //     ->paginate($request->perPage);
 
         $users->load('roles');
 

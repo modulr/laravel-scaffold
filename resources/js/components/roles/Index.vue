@@ -173,7 +173,6 @@ export default {
       .then(response => {
         if (response.data) {
           this.collection = response.data.data
-          console.log(this.collection);
           this.pagination = {
             from: response.data.from,
             to: response.data.to,
@@ -213,7 +212,6 @@ export default {
       axios.get(`/api/permissions/count`)
       .then(response => {
         this.permissionsCount = response.data
-        console.log(this.permissionsCount);
       })
     }
   }

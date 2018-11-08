@@ -14065,7 +14065,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(87);
+module.exports = __webpack_require__(90);
 
 
 /***/ }),
@@ -14120,23 +14120,26 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_4_vue_content_placeholders__["default"]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// Layout
+Vue.component('sidebar', __webpack_require__(54));
+
 // Dashboard
-Vue.component('users-count', __webpack_require__(54));
-Vue.component('roles-count', __webpack_require__(57));
+Vue.component('users-count', __webpack_require__(57));
+Vue.component('roles-count', __webpack_require__(60));
 
 // Profile
-Vue.component('profile', __webpack_require__(60));
-Vue.component('profile-password', __webpack_require__(66));
+Vue.component('profile', __webpack_require__(63));
+Vue.component('profile-password', __webpack_require__(69));
 
 // Users
-Vue.component('users-index', __webpack_require__(69));
-Vue.component('users-create', __webpack_require__(72));
-Vue.component('users-edit', __webpack_require__(75));
+Vue.component('users-index', __webpack_require__(72));
+Vue.component('users-create', __webpack_require__(75));
+Vue.component('users-edit', __webpack_require__(78));
 
 // Roles
-Vue.component('roles-index', __webpack_require__(78));
-Vue.component('roles-create', __webpack_require__(81));
-Vue.component('roles-edit', __webpack_require__(84));
+Vue.component('roles-index', __webpack_require__(81));
+Vue.component('roles-create', __webpack_require__(84));
+Vue.component('roles-edit', __webpack_require__(87));
 
 var app = new Vue({
   el: '#app'
@@ -60126,6 +60129,109 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources/js/components/layout/Sidebar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65bb863c", Component.options)
+  } else {
+    hotAPI.reload("data-v-65bb863c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.addMinimizedClass();
+  },
+
+  methods: {
+    toogleStorage: function toogleStorage() {
+      if (localStorage.getItem("sidebarMinimized")) {
+        localStorage.removeItem("sidebarMinimized");
+      } else {
+        localStorage.setItem("sidebarMinimized", true);
+      }
+    },
+    addMinimizedClass: function addMinimizedClass() {
+      if (localStorage.getItem("sidebarMinimized")) {
+        document.body.classList.add("brand-minimized", "sidebar-minimized");
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("button", {
+    staticClass: "sidebar-minimizer brand-minimizer",
+    attrs: { type: "button" },
+    on: { click: _vm.toogleStorage }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-65bb863c", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(58)
+/* template */
+var __vue_template__ = __webpack_require__(59)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources/js/components/dashboard/UsersCount.vue"
 
 /* hot reload */
@@ -60148,7 +60254,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60188,7 +60294,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -60229,15 +60335,15 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(58)
+var __vue_script__ = __webpack_require__(61)
 /* template */
-var __vue_template__ = __webpack_require__(59)
+var __vue_template__ = __webpack_require__(62)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60276,7 +60382,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60316,7 +60422,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -60357,15 +60463,15 @@ if (false) {
 }
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(61)
+var __vue_script__ = __webpack_require__(64)
 /* template */
-var __vue_template__ = __webpack_require__(65)
+var __vue_template__ = __webpack_require__(68)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60404,12 +60510,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Avatar_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Avatar_vue__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Avatar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Avatar_vue__);
 //
 //
@@ -60514,15 +60620,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(63)
+var __vue_script__ = __webpack_require__(66)
 /* template */
-var __vue_template__ = __webpack_require__(64)
+var __vue_template__ = __webpack_require__(67)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -60561,7 +60667,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60652,7 +60758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -60749,7 +60855,7 @@ if (false) {
 }
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -60954,15 +61060,15 @@ if (false) {
 }
 
 /***/ }),
-/* 66 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(67)
+var __vue_script__ = __webpack_require__(70)
 /* template */
-var __vue_template__ = __webpack_require__(68)
+var __vue_template__ = __webpack_require__(71)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -61001,7 +61107,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61081,7 +61187,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -61275,15 +61381,15 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(70)
+var __vue_script__ = __webpack_require__(73)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -61322,11 +61428,32 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -61460,23 +61587,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       collection: [],
-      pagination: {
-        from: 0,
-        to: 0,
-        total: 0,
-        perPage: 50,
-        currentPage: 1,
-        lastPage: 0
+      filters: {
+        pagination: {
+          from: 0,
+          to: 0,
+          total: 0,
+          per_page: 50,
+          current_page: 1,
+          last_page: 0
+        },
+        orderBy: {
+          column: 'id',
+          direction: 'asc'
+        },
+        search: ''
       },
-      orderBy: {
-        column: 'id',
-        direction: 'asc'
-      },
-      search: '',
       loading: true
     };
   },
   mounted: function mounted() {
+    if (localStorage.getItem("filtersTableUsers")) {
+      this.filters = JSON.parse(localStorage.getItem("filtersTableUsers"));
+    } else {
+      localStorage.setItem("filtersTableUsers", this.filters);
+    }
     this.getUsers();
   },
 
@@ -61487,55 +61621,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.loading = true;
       this.collection = [];
 
-      var filters = {
-        perPage: this.pagination.perPage,
-        page: this.pagination.currentPage,
-        search: this.search,
-        column: this.orderBy.column,
-        direction: this.orderBy.direction
-      };
+      localStorage.setItem("filtersTableUsers", JSON.stringify(this.filters));
 
-      axios.post('/api/users/filter', filters).then(function (response) {
+      axios.post('/api/users/filter?page=' + this.filters.pagination.current_page, this.filters).then(function (response) {
         _this.collection = response.data.data;
-        _this.pagination = {
-          from: response.data.from,
-          to: response.data.to,
-          total: response.data.total,
-          perPage: response.data.per_page,
-          currentPage: response.data.current_page,
-          lastPage: response.data.last_page
-        };
+        delete response.data.data;
+        _this.filters.pagination = response.data;
         _this.loading = false;
       });
     },
     filter: function filter() {
-      this.pagination.currentPage = 1;
+      this.filters.pagination.current_page = 1;
       this.getUsers();
     },
     changeSize: function changeSize(perPage) {
-      this.pagination.perPage = perPage;
-      this.pagination.currentPage = 1;
+      this.filters.pagination.current_page = 1;
+      this.filters.pagination.per_page = perPage;
       this.getUsers();
     },
     sort: function sort(column) {
-      if (column == this.orderBy.column) {
-        this.orderBy.direction = this.orderBy.direction == 'asc' ? 'desc' : 'asc';
+      if (column == this.filters.orderBy.column) {
+        this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc';
       } else {
-        this.orderBy.column = column;
-        this.orderBy.direction = 'asc';
+        this.filters.orderBy.column = column;
+        this.filters.orderBy.direction = 'asc';
       }
 
       this.getUsers();
     },
     changePage: function changePage(page) {
-      this.pagination.currentPage = page;
+      this.filters.pagination.current_page = page;
       this.getUsers();
     }
   }
 });
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -61569,14 +61691,14 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model.trim",
-                      value: _vm.search,
-                      expression: "search",
+                      value: _vm.filters.search,
+                      expression: "filters.search",
                       modifiers: { trim: true }
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", placeholder: "Seach" },
-                  domProps: { value: _vm.search },
+                  domProps: { value: _vm.filters.search },
                   on: {
                     keyup: function($event) {
                       if (
@@ -61591,7 +61713,11 @@ var render = function() {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.search = $event.target.value.trim()
+                      _vm.$set(
+                        _vm.filters,
+                        "search",
+                        $event.target.value.trim()
+                      )
                     },
                     blur: function($event) {
                       _vm.$forceUpdate()
@@ -61600,6 +61726,142 @@ var render = function() {
                 })
               ])
             ]),
+            _vm._v(" "),
+            !_vm.loading && _vm.filters.pagination.total > 0
+              ? _c("div", { staticClass: "col-sm-auto" }, [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(_vm.filters.pagination.from) +
+                      "-" +
+                      _vm._s(_vm.filters.pagination.to) +
+                      " of " +
+                      _vm._s(_vm.filters.pagination.total) +
+                      "\n        "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.loading && _vm.filters.pagination.total > 0
+              ? _c("div", { staticClass: "col-sm-auto" }, [
+                  _vm.filters.pagination.last_page > 1
+                    ? _c("div", [
+                        _c(
+                          "nav",
+                          { attrs: { "aria-label": "Page navigation" } },
+                          [
+                            _c(
+                              "ul",
+                              { staticClass: "pagination justify-content-end" },
+                              [
+                                _c(
+                                  "li",
+                                  {
+                                    staticClass: "page-item",
+                                    class: {
+                                      disabled:
+                                        _vm.filters.pagination.current_page <= 1
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "page-link",
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.changePage(
+                                              _vm.filters.pagination
+                                                .current_page - 1
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("«")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.filters.pagination.last_page,
+                                  function(page) {
+                                    return _c(
+                                      "li",
+                                      {
+                                        staticClass: "page-item",
+                                        class: {
+                                          active:
+                                            _vm.filters.pagination
+                                              .current_page == page
+                                        }
+                                      },
+                                      [
+                                        _vm.filters.pagination.current_page ==
+                                        page
+                                          ? _c(
+                                              "span",
+                                              { staticClass: "page-link" },
+                                              [_vm._v(_vm._s(page))]
+                                            )
+                                          : _c(
+                                              "a",
+                                              {
+                                                staticClass: "page-link",
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.preventDefault()
+                                                    _vm.changePage(page)
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v(_vm._s(page))]
+                                            )
+                                      ]
+                                    )
+                                  }
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  {
+                                    staticClass: "page-item",
+                                    class: {
+                                      disabled:
+                                        _vm.filters.pagination.current_page >=
+                                        _vm.filters.pagination.last_page
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "page-link",
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.changePage(
+                                              _vm.filters.pagination
+                                                .current_page + 1
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("»")]
+                                    )
+                                  ]
+                                )
+                              ],
+                              2
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "div",
@@ -61615,11 +61877,11 @@ var render = function() {
                   },
                   on: { select: _vm.changeSize },
                   model: {
-                    value: _vm.pagination.perPage,
+                    value: _vm.filters.pagination.per_page,
                     callback: function($$v) {
-                      _vm.$set(_vm.pagination, "perPage", $$v)
+                      _vm.$set(_vm.filters.pagination, "per_page", $$v)
                     },
-                    expression: "pagination.perPage"
+                    expression: "filters.pagination.per_page"
                   }
                 })
               ],
@@ -61650,12 +61912,12 @@ var render = function() {
                         _c("i", {
                           staticClass: "mr-1 fas",
                           class: {
-                            "fa-sort-amount-down":
-                              _vm.orderBy.column == "id" &&
-                              _vm.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.orderBy.column == "id" &&
-                              _vm.orderBy.direction == "desc"
+                            "fa-long-arrow-alt-down":
+                              _vm.filters.orderBy.column == "id" &&
+                              _vm.filters.orderBy.direction == "asc",
+                            "fa-long-arrow-alt-up":
+                              _vm.filters.orderBy.column == "id" &&
+                              _vm.filters.orderBy.direction == "desc"
                           }
                         }),
                         _vm._v("\n                ID\n              ")
@@ -61680,12 +61942,12 @@ var render = function() {
                         _c("i", {
                           staticClass: "mr-1 fas",
                           class: {
-                            "fa-sort-amount-down":
-                              _vm.orderBy.column == "name" &&
-                              _vm.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.orderBy.column == "name" &&
-                              _vm.orderBy.direction == "desc"
+                            "fa-long-arrow-alt-down":
+                              _vm.filters.orderBy.column == "name" &&
+                              _vm.filters.orderBy.direction == "asc",
+                            "fa-long-arrow-alt-up":
+                              _vm.filters.orderBy.column == "name" &&
+                              _vm.filters.orderBy.direction == "desc"
                           }
                         }),
                         _vm._v("\n                User\n              ")
@@ -61713,11 +61975,11 @@ var render = function() {
                           staticClass: "mr-1 fas",
                           class: {
                             "fa-sort-amount-down":
-                              _vm.orderBy.column == "created_at" &&
-                              _vm.orderBy.direction == "asc",
+                              _vm.filters.orderBy.column == "created_at" &&
+                              _vm.filters.orderBy.direction == "asc",
                             "fa-sort-amount-up":
-                              _vm.orderBy.column == "created_at" &&
-                              _vm.orderBy.direction == "desc"
+                              _vm.filters.orderBy.column == "created_at" &&
+                              _vm.filters.orderBy.direction == "desc"
                           }
                         }),
                         _vm._v("\n                Registered\n              ")
@@ -61792,131 +62054,6 @@ var render = function() {
               )
             ]
           ),
-          _vm._v(" "),
-          !_vm.loading && _vm.pagination.total > 0
-            ? _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col" }, [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm.pagination.from) +
-                      "-" +
-                      _vm._s(_vm.pagination.to) +
-                      " of " +
-                      _vm._s(_vm.pagination.total) +
-                      "\n        "
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.pagination.lastPage > 1
-                  ? _c("div", { staticClass: "col" }, [
-                      _c(
-                        "nav",
-                        { attrs: { "aria-label": "Page navigation" } },
-                        [
-                          _c(
-                            "ul",
-                            { staticClass: "pagination justify-content-end" },
-                            [
-                              _c(
-                                "li",
-                                {
-                                  staticClass: "page-item",
-                                  class: {
-                                    disabled: _vm.pagination.currentPage <= 1
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "page-link",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.changePage(
-                                            _vm.pagination.currentPage - 1
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("«")]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.pagination.lastPage, function(page) {
-                                return _c(
-                                  "li",
-                                  {
-                                    staticClass: "page-item",
-                                    class: {
-                                      active: _vm.pagination.currentPage == page
-                                    }
-                                  },
-                                  [
-                                    _vm.pagination.currentPage == page
-                                      ? _c(
-                                          "span",
-                                          { staticClass: "page-link" },
-                                          [_vm._v(_vm._s(page))]
-                                        )
-                                      : _c(
-                                          "a",
-                                          {
-                                            staticClass: "page-link",
-                                            attrs: { href: "#" },
-                                            on: {
-                                              click: function($event) {
-                                                $event.preventDefault()
-                                                _vm.changePage(page)
-                                              }
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(page))]
-                                        )
-                                  ]
-                                )
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "li",
-                                {
-                                  staticClass: "page-item",
-                                  class: {
-                                    disabled:
-                                      _vm.pagination.currentPage >=
-                                      _vm.pagination.lastPage
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "page-link",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.changePage(
-                                            _vm.pagination.currentPage + 1
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("»")]
-                                  )
-                                ]
-                              )
-                            ],
-                            2
-                          )
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            : _vm._e(),
           _vm._v(" "),
           !_vm.loading && !_vm.collection.length > 0
             ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
@@ -61993,15 +62130,15 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(73)
+var __vue_script__ = __webpack_require__(76)
 /* template */
-var __vue_template__ = __webpack_require__(74)
+var __vue_template__ = __webpack_require__(77)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -62040,7 +62177,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62146,7 +62283,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -62351,15 +62488,15 @@ if (false) {
 }
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(76)
+var __vue_script__ = __webpack_require__(79)
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(80)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -62398,7 +62535,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62564,7 +62701,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -62855,15 +62992,15 @@ if (false) {
 }
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(79)
+var __vue_script__ = __webpack_require__(82)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(83)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -62902,7 +63039,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63084,7 +63221,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post('/api/roles/filter', filters).then(function (response) {
         if (response.data) {
           _this.collection = response.data.data;
-          console.log(_this.collection);
           _this.pagination = {
             from: response.data.from,
             to: response.data.to,
@@ -63125,14 +63261,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/api/permissions/count').then(function (response) {
         _this2.permissionsCount = response.data;
-        console.log(_this2.permissionsCount);
       });
     }
   }
 });
 
 /***/ }),
-/* 80 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -63647,15 +63782,15 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(82)
+var __vue_script__ = __webpack_require__(85)
 /* template */
-var __vue_template__ = __webpack_require__(83)
+var __vue_template__ = __webpack_require__(86)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -63694,7 +63829,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 82 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63815,7 +63950,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 83 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -64084,15 +64219,15 @@ if (false) {
 }
 
 /***/ }),
-/* 84 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(85)
+var __vue_script__ = __webpack_require__(88)
 /* template */
-var __vue_template__ = __webpack_require__(86)
+var __vue_template__ = __webpack_require__(89)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64131,7 +64266,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 85 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64348,7 +64483,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 86 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -64838,7 +64973,7 @@ if (false) {
 }
 
 /***/ }),
-/* 87 */
+/* 90 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
