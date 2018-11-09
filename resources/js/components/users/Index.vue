@@ -19,31 +19,10 @@
               <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter">
             </div>
           </div>
-          <div class="col-sm-auto" v-if='!loading && filters.pagination.total > 0'>
-            {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
-          </div>
-          <div class="col-sm-auto" v-if='!loading && filters.pagination.total > 0'>
-            <div v-if="filters.pagination.last_page > 1">
-              <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-end">
-                  <li class="page-item" :class="{'disabled': filters.pagination.current_page <= 1}">
-                    <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page -  1)">«</a>
-                  </li>
-                  <li class="page-item" v-for="page in filters.pagination.last_page" :class="{'active': filters.pagination.current_page == page}">
-                    <span class="page-link" v-if="filters.pagination.current_page == page">{{page}}</span>
-                    <a class="page-link" href="#" v-else @click.prevent="changePage(page)">{{page}}</a>
-                  </li>
-                  <li class="page-item" :class="{'disabled': filters.pagination.current_page >= filters.pagination.last_page}">
-                    <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page +  1)">»</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
           <div class="col-sm-auto">
             <multiselect
               v-model="filters.pagination.per_page"
-              :options="[50,100,200]"
+              :options="[25,50,100,200]"
               :searchable="false"
               :show-labels="false"
               :allow-empty="false"
@@ -57,13 +36,13 @@
             <tr>
               <th>
                 <a href="#" class="text-dark" @click.prevent="sort('id')">
-                  <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
+                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
                   ID
                 </a>
               </th>
               <th>
                 <a href="#" class="text-dark" @click.prevent="sort('name')">
-                  <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
+                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
                   User
                 </a>
               </th>
@@ -78,7 +57,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="user in collection">
+            <tr v-for="user in users">
               <td>{{user.id}}</td>
               <td>
                 <div class="media">
@@ -110,28 +89,28 @@
             </tr>
           </tbody>
         </table>
-        <!-- <div class="row" v-if='!loading && filters.pagination.total > 0'>
-          <div class="col">
+        <div class="row" v-if='!loading && filters.pagination.total > 0'>
+          <div class="col pt-2">
             {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
           </div>
           <div class="col" v-if="filters.pagination.last_page>1">
             <nav aria-label="Page navigation">
               <ul class="pagination justify-content-end">
                 <li class="page-item" :class="{'disabled': filters.pagination.current_page <= 1}">
-                  <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page -  1)">«</a>
+                  <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page -  1)"><i class="fas fa-angle-left"></i></a>
                 </li>
                 <li class="page-item" v-for="page in filters.pagination.last_page" :class="{'active': filters.pagination.current_page == page}">
                   <span class="page-link" v-if="filters.pagination.current_page == page">{{page}}</span>
                   <a class="page-link" href="#" v-else @click.prevent="changePage(page)">{{page}}</a>
                 </li>
                 <li class="page-item" :class="{'disabled': filters.pagination.current_page >= filters.pagination.last_page}">
-                  <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page +  1)">»</a>
+                  <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page +  1)"><i class="fas fa-angle-right"></i></a>
                 </li>
               </ul>
             </nav>
           </div>
-        </div> -->
-        <div class="no-items-found text-center mt-5" v-if="!loading && !collection.length > 0">
+        </div>
+        <div class="no-items-found text-center mt-5" v-if="!loading && !users.length > 0">
           <i class="icon-magnifier fa-3x text-muted"></i>
           <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
           <p class="text-muted">Try changing the filters or add a new one</p>
@@ -151,13 +130,13 @@
 export default {
   data () {
     return {
-      collection: [],
+      users: [],
       filters: {
         pagination: {
           from: 0,
           to: 0,
           total: 0,
-          per_page: 50,
+          per_page: 25,
           current_page: 1,
           last_page: 0
         },
@@ -165,7 +144,7 @@ export default {
           column: 'id',
           direction: 'asc'
         },
-        search: '',
+        search: ''
       },
       loading: true
     }
@@ -181,13 +160,13 @@ export default {
   methods: {
     getUsers () {
       this.loading = true
-      this.collection = []
+      this.users = []
 
       localStorage.setItem("filtersTableUsers", JSON.stringify(this.filters));
 
       axios.post(`/api/users/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
-        this.collection = response.data.data
+        this.users = response.data.data
         delete response.data.data
         this.filters.pagination = response.data
         this.loading = false

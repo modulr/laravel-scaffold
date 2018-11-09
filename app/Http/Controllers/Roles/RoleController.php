@@ -18,8 +18,8 @@ class RoleController extends Controller
             $query->where('name', 'LIKE', '%'.$request->search.'%');
         }
 
-        $roles = $query->orderBy($request->column, $request->direction)
-        ->paginate($request->perPage);
+        $roles = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
+                    ->paginate($request->input('pagination.per_page'));
 
         $roles->load('permissions', 'users');
 

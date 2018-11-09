@@ -25,9 +25,6 @@ class UserController extends Controller
         $users = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
                     ->paginate($request->input('pagination.per_page'));
 
-        // $users = $query->orderBy($request->column, $request->direction)
-        //     ->paginate($request->perPage);
-
         $users->load('roles');
 
         return $users;

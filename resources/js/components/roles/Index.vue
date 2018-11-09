@@ -16,13 +16,13 @@
                   <i class="fas fa-search"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="Seach" v-model.trim="search" @keyup.enter="filter">
+              <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter">
             </div>
           </div>
           <div class="col-sm-auto">
             <multiselect
-              v-model="pagination.perPage"
-              :options="[50,100,200]"
+              v-model="filters.pagination.per_page"
+              :options="[25,50,100,200]"
               :searchable="false"
               :show-labels="false"
               :allow-empty="false"
@@ -36,19 +36,19 @@
             <tr>
               <th>
                 <a href="#" class="text-dark" @click.prevent="sort('id')">
-                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'id' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'id' && orderBy.direction == 'desc'}"></i>
+                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
                   ID
                 </a>
               </th>
               <th>
                 <a href="#" class="text-dark" @click.prevent="sort('display_name')">
-                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'name' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'display_name' && orderBy.direction == 'desc'}"></i>
+                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'display_name' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'display_name' && filters.orderBy.direction == 'desc'}"></i>
                   Role
                 </a>
               </th>
               <th>
                 <a href="#" class="text-dark" @click.prevent="sort('name')">
-                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'name' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'name' && orderBy.direction == 'desc'}"></i>
+                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
                   Slug
                 </a>
               </th>
@@ -56,7 +56,7 @@
               <th>Users&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
               <th class="d-none d-sm-table-cell">
                 <a href="#" class="text-dark" @click.prevent="sort('created_at')">
-                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': orderBy.column == 'created_at' && orderBy.direction == 'asc', 'fa-sort-amount-up': orderBy.column == 'created_at' && orderBy.direction == 'desc'}"></i>
+                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
                   Created
                 </a>
               </th>
@@ -64,7 +64,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="role in collection">
+            <tr v-for="role in roles">
               <td>{{role.id}}</td>
               <td>{{role.display_name}}</td>
               <td>{{role.name}}</td>
@@ -93,28 +93,28 @@
             </tr>
           </tbody>
         </table>
-        <div class="row" v-if='!loading && pagination.total > 0'>
-          <div class="col">
-            {{pagination.from}}-{{pagination.to}} of {{pagination.total}}
+        <div class="row" v-if='!loading && filters.pagination.total > 0'>
+          <div class="col pt-2">
+            {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
           </div>
-          <div class="col" v-if="pagination.lastPage>1">
+          <div class="col" v-if="filters.pagination.last_page>1">
             <nav aria-label="Page navigation">
               <ul class="pagination justify-content-end">
-                <li class="page-item" :class="{'disabled': pagination.currentPage <= 1}">
-                  <a class="page-link" href="#" @click.prevent="changePage(pagination.currentPage -  1)">«</a>
+                <li class="page-item" :class="{'disabled': filters.pagination.current_page <= 1}">
+                  <a class="page-link" href="#" @click.prevent="changePage(pagination.current_page -  1)"><i class="fas fa-angle-left"></i></a>
                 </li>
-                <li class="page-item" v-for="page in pagination.lastPage" :class="{'active': pagination.currentPage == page}">
-                  <span class="page-link" v-if="pagination.currentPage == page">{{page}}</span>
+                <li class="page-item" v-for="page in filters.pagination.last_page" :class="{'active': filters.pagination.current_page == page}">
+                  <span class="page-link" v-if="filters.pagination.current_page == page">{{page}}</span>
                   <a class="page-link" href="#" v-else @click.prevent="changePage(page)">{{page}}</a>
                 </li>
-                <li class="page-item" :class="{'disabled': pagination.currentPage >= pagination.lastPage}">
-                  <a class="page-link" href="#" @click.prevent="changePage(pagination.currentPage +  1)">»</a>
+                <li class="page-item" :class="{'disabled': filters.pagination.current_page >= filters.pagination.last_page}">
+                  <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page +  1)"><i class="fas fa-angle-right"></i></a>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
-        <div class="no-items-found text-center mt-5" v-if="!loading && !collection.length > 0">
+        <div class="no-items-found text-center mt-5" v-if="!loading && !roles.length > 0">
           <i class="icon-magnifier fa-3x text-muted"></i>
           <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
           <p class="text-muted">Try changing the filters or add a new one</p>
@@ -134,78 +134,71 @@
 export default {
   data () {
     return {
-      collection: [],
-      pagination: {
-        from: 0,
-        to: 0,
-        total: 0,
-        perPage: 50,
-        currentPage: 1,
-        lastPage: 0
+      roles: [],
+      filters: {
+        pagination: {
+          from: 0,
+          to: 0,
+          total: 0,
+          per_page: 25,
+          current_page: 1,
+          last_page: 0
+        },
+        orderBy: {
+          column: 'id',
+          direction: 'asc'
+        },
+        search: ''
       },
-      orderBy: {
-        column: 'id',
-        direction: 'asc'
-      },
-      search: '',
       permissionsCount: 0,
       loading: true
     }
   },
   mounted () {
+    if (localStorage.getItem("filtersTableRoles")) {
+      this.filters = JSON.parse(localStorage.getItem("filtersTableRoles"))
+    } else {
+      localStorage.setItem("filtersTableRoles", this.filters);
+    }
     this.getPermissionsCount()
     this.getRoles()
   },
   methods: {
     getRoles () {
       this.loading = true
-      this.collection = []
+      this.roles = []
 
-      let filters = {
-        perPage: this.pagination.perPage,
-        page: this.pagination.currentPage,
-        search: this.search,
-        column: this.orderBy.column,
-        direction: this.orderBy.direction
-      }
+      localStorage.setItem("filtersTableRoles", JSON.stringify(this.filters));
 
-      axios.post(`/api/roles/filter`, filters)
+      axios.post(`/api/roles/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
-        if (response.data) {
-          this.collection = response.data.data
-          this.pagination = {
-            from: response.data.from,
-            to: response.data.to,
-            total: response.data.total,
-            perPage: response.data.per_page,
-            currentPage: response.data.current_page,
-            lastPage: response.data.last_page
-          }
-        }
+        this.roles = response.data.data
+        delete response.data.data
+        this.filters.pagination = response.data
         this.loading = false
       })
     },
     filter() {
-      this.pagination.currentPage = 1
+      this.filters.pagination.current_page = 1
       this.getRoles()
     },
     changeSize (perPage) {
-      this.pagination.perPage = perPage
-      this.pagination.currentPage = 1
+      this.filters.pagination.current_page = 1
+      this.filters.pagination.per_page = perPage
       this.getRoles()
     },
     sort (column) {
-      if(column == this.orderBy.column) {
-        this.orderBy.direction = this.orderBy.direction == 'asc' ? 'desc' : 'asc'
+      if(column == this.filters.orderBy.column) {
+        this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc'
       } else {
-        this.orderBy.column = column
-        this.orderBy.direction = 'asc'
+        this.filters.orderBy.column = column
+        this.filters.orderBy.direction = 'asc'
       }
 
       this.getRoles()
     },
     changePage (page) {
-      this.pagination.currentPage = page
+      this.filters.pagination.current_page = page
       this.getRoles()
     },
     getPermissionsCount() {
