@@ -3,12 +3,12 @@ Created with Laravel 5.7 and VueJS. Code free.
 
 ### Table of Contents
 
-- [Demo](demo)
-- [Features](features)
-- [Tutorials](tutorials)
-- [Installation](installation)
-- [Documentation](documentation)
-- [Modules](modules)
+- [Demo](#demo)
+- [Features](#features)
+- [Tutorials](#tutorials)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Modules](#modules)
   - Auth
   - Users
   - Roles&Permissions 
