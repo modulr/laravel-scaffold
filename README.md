@@ -1,17 +1,52 @@
 # Laravel Scaffold
-Scaffold made with Laravel 5.7 and VueJS to using like base for future projects.
+Created with Laravel 5.7 and VueJS. Code free.
+
+Demo
+Features
+Tutorials
+Installation 
+Documentation 
+Modules
+  - Auth
+  - Users
+  - Roles&Permissions 
+  - Profile
+
 
 ![Laravel Scaffold](https://github.com/modulr/laravel-scaffold/blob/master/public/img/laravel-scaffold.jpg)
 
 
-Demo & Documentation -> _coming soon..._
+## Demo
+**coming soon**
 
-## Requirements
+## Features
 
-https://laravel.com/docs/5.7#server-requirements
+- [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
+- Roles & Permissions [laravel-permission](https://github.com/spatie/laravel-permission)
+- [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
+- [Bootstrap 4](https://getbootstrap.com/)
+- Template [Core UI](https://coreui.io/)
+- Icons
+    - [Fontawesome 5](https://fontawesome.com/)
+    - [Simple Line Icons](https://github.com/thesabbir/simple-line-icons)
+- Upload files [Vue Clip](https://vueclip.adonisjs.com/)
+- Crop and resize images [Intervention Image](http://image.intervention.io/) 
+- Create default avatar [Laravolt Avatar](https://github.com/laravolt/avatar) 
+- Fancy multiselect [Vue-multiselect](https://vue-multiselect.js.org/)
+- Alerts [Sweat Alert](https://sweetalert.js.org/)
+- Notifications [Vue Toasted](https://shakee93.github.io/vue-toasted/)
+- Friendly date format [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
+- Rendering fake progressive content [vue-content-placeholders](https://github.com/michalsnik/vue-content-placeholders)
+- Table
+    - Serverside rendering
+    - Pagination
+    - Sort
+    - Search
+    
+    
+## Tutorials
 
-
-## How to created Laravel Scaffold (Tutorials)
+### How to created Laravel Scaffold
 
 
 - [Authentication](https://link.medium.com/YsYZ4TJ1wR)
@@ -19,6 +54,21 @@ https://laravel.com/docs/5.7#server-requirements
 - [Create Profile module](https://link.medium.com/e8EbuVR1wR)
 - Create Users management module -> _comig soon..._
 - Create Roles managment module -> _coming soon..._
+
+
+## Installation 
+
+
+
+
+
+Demo& Documentation -> _coming soon..._
+
+## Requirements
+
+https://laravel.com/docs/5.7#server-requirements
+
+
 
 
 ## Install
@@ -92,14 +142,18 @@ npm run dev
 # Run serve
 php artisan serve
 ```
-
+Documentation 
+Modules
+  - Auth
+  - Users
+  - Roles&Permissions 
+  - Profile
 
 ## Modules
 
 - Auth
   - Login
-  - Register - generate avatar
-  - Remember Password
+  - Register - generate a
 
 - Profile 
   - Edit Name, email - regenerate avatar
@@ -112,7 +166,7 @@ php artisan serve
     - Update users
     - Delete users
  
-- Roles management
+- Roles & Permission management
     - List roles
     - Create roles and assign permissions
     - Update role and permissions
@@ -120,29 +174,6 @@ php artisan serve
     - Delete role
     
 
-## Features
-
-- [Laravel Authentication](https://laravel.com/docs/5.7/authentication)
-- Roles & Permissions [laravel-permission](https://github.com/spatie/laravel-permission)
-- [Laravel Frontend](https://laravel.com/docs/5.7/frontend)
-- [Bootstrap 4](https://getbootstrap.com/)
-- Template [Core UI](https://coreui.io/)
-- Icons
-    - [Fontawesome 5](https://fontawesome.com/)
-    - [Simple Line Icons](https://github.com/thesabbir/simple-line-icons)
-- Upload files [Vue Clip](https://vueclip.adonisjs.com/)
-- Crop and resize images [Intervention Image](http://image.intervention.io/) 
-- Create default avatar [Laravolt Avatar](https://github.com/laravolt/avatar) 
-- Fancy multiselect [Vue-multiselect](https://vue-multiselect.js.org/)
-- Alerts [Sweat Alert](https://sweetalert.js.org/)
-- Notifications [Vue Toasted](https://shakee93.github.io/vue-toasted/)
-- Friendly date format [vue-moment](https://github.com/brockpetrie/vue-moment#readme)
-- Rendering fake progressive content [vue-content-placeholders](https://github.com/michalsnik/vue-content-placeholders)
-- Table
-    - Serverside rendering
-    - Pagination
-    - Sort
-    - Search
 
 
 ## License
