@@ -11,7 +11,7 @@ Created with Laravel 5.7 and VueJS. Code free.
 - [Modules](#modules)
   - Auth
   - Users
-  - Roles&Permissions 
+  - Roles & Permissions 
   - Profile
 
 
@@ -51,17 +51,17 @@ Created with Laravel 5.7 and VueJS. Code free.
 #### How to created Laravel Scaffold
 
 
-- [Authentication](https://link.medium.com/YsYZ4TJ1wR)
-- [Add CoreUI Template](https://link.medium.com/mlq1D5N1wR)
-- [Create Profile module](https://link.medium.com/e8EbuVR1wR)
-- Create Users management module -> _comig soon..._
-- Create Roles managment module -> _coming soon..._
+- Authentication [link](https://link.medium.com/YsYZ4TJ1wR)
+- Add CoreUI Template [link](https://link.medium.com/mlq1D5N1wR)
+- Create Profile module [link](https://link.medium.com/e8EbuVR1wR)
+- Create Users module -> _comig soon..._
+- Create Roles module -> _coming soon..._
 
 
 ## Installation 
 
 
-### Requirements
+#### Requirements
 
 https://laravel.com/docs/5.7#server-requirements
 
@@ -149,13 +149,13 @@ php artisan serve
   - Change password
   - Upload & Restart Avatar
 
-- Users management
+- Users
     - List users
     - Create user
     - Update users
     - Delete users
  
-- Roles & Permission management
+- Roles & Permission
     - List roles
     - Create roles and assign permissions
     - Update role and permissions
