@@ -1,5 +1,5 @@
 # Laravel Scaffold
-Created with Laravel 5.7 and VueJS. Code free.
+Open Source project created with Laravel 5.7 and VueJS.
 
 ### Table of Contents
 
@@ -20,6 +20,7 @@ Created with Laravel 5.7 and VueJS. Code free.
 
 ## Demo
 **coming soon**
+
 
 ## Features
 
@@ -58,6 +59,7 @@ Created with Laravel 5.7 and VueJS. Code free.
 - Create Roles module -> _coming soon..._
 
 
+
 ## Installation 
 
 
@@ -82,7 +84,6 @@ Install Depencencies
 composer install
 npm install
 ```
-
 
 #### Configuration
 
@@ -134,8 +135,10 @@ npm run dev
 # Run serve
 php artisan serve
 ```
+
 ## Documentation 
 **coming soon**
+
 
 ## Modules
 
