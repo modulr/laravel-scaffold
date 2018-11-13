@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{role}', 'RoleController@show')->middleware('permission:read-roles');
             Route::post('/store', 'RoleController@store')->middleware('permission:create-roles');
             Route::put('/update/{role}', 'RoleController@update')->middleware('permission:update-roles');
-            Route::delete('/{user}', 'RoleController@destroy')->middleware('permission:delet-roles');
+            Route::delete('/{user}', 'RoleController@destroy')->middleware('permission:delete-roles');
         });
     });
 });
