@@ -21,7 +21,7 @@
         <strong>General</strong><br>
         <small class="text-muted">Create a new role and choose the permissions so you can assign it to users.</small>
       </div>
-      <div class="card-body px-0">
+      <div class="card-body">
         <div class="form-group">
           <label>Role name</label>
           <input type="text" class="form-control" :class="{'is-invalid': errors.display_name}" v-model="role.display_name" placeholder="Admin" autofocus>
@@ -33,7 +33,7 @@
           <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
         </div>
       </div>
-      <div class="card-header bg-transparent">
+      <div class="card-header px-0 bg-transparent">
         <strong>Permissions</strong><br>
         <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
       </div>

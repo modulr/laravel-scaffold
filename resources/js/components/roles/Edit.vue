@@ -47,7 +47,7 @@
           <content-placeholders-heading/>
         </content-placeholders>
       </div>
-      <div class="card-header bg-transparent">
+      <div class="card-header px-0 bg-transparent">
         <strong>Permissions</strong><br>
         <small class="text-muted">Enable or disable certain permissions and choose access to modules.</small>
         <div class="card-header-actions">
@@ -82,7 +82,7 @@
       <content-placeholders class="card-body" v-if="loading">
         <content-placeholders-heading :img="true"/>
       </content-placeholders>
-      <div class="card-header bg-transparent">
+      <div class="card-header px-0 bg-transparent">
         <strong>Users</strong><br>
         <small class="text-muted">This is the list of users who use this role.</small>
         <div class="card-header-actions">

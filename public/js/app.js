@@ -63995,7 +63995,7 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body px-0" }, [
+      _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Role name")]),
           _vm._v(" "),
@@ -64198,7 +64198,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-transparent" }, [
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
       _c("strong", [_vm._v("Permissions")]),
       _c("br"),
       _vm._v(" "),
@@ -64671,7 +64671,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "card-header bg-transparent" }, [
+        _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
           _c("strong", [_vm._v("Permissions")]),
           _c("br"),
           _vm._v(" "),
@@ -64820,7 +64820,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "card-header bg-transparent" }, [
+        _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
           _c("strong", [_vm._v("Users")]),
           _c("br"),
           _vm._v(" "),
