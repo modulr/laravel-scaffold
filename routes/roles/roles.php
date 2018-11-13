@@ -1,6 +1,6 @@
 <?php
 Route::middleware('auth')->group(function () {
-    Route::group(['namespace' => 'roles'], function() {
+    Route::group(['namespace' => 'Roles'], function() {
         // views
         Route::group(['prefix' => 'roles'], function() {
             Route::view('/', 'roles.index')->middleware('permission:read-roles');
