@@ -63995,7 +63995,7 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "card-body px-0" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Role name")]),
           _vm._v(" "),

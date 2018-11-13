@@ -21,7 +21,7 @@
         <strong>General</strong><br>
         <small class="text-muted">Create a new role and choose the permissions so you can assign it to users.</small>
       </div>
-      <div class="card-body">
+      <div class="card-body px-0">
         <div class="form-group">
           <label>Role name</label>
           <input type="text" class="form-control" :class="{'is-invalid': errors.display_name}" v-model="role.display_name" placeholder="Admin" autofocus>
