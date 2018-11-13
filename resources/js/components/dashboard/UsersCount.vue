@@ -5,7 +5,7 @@
         <i class="icon-people"></i>
       </div>
       <div class="text-value">{{users}}</div>
-      <small class="text-muted text-uppercase font-weight-bold">Users</small>
+      <small class="text-muted text-uppercase font-weight-bold">Users registered</small>
     </div>
   </div>
 </template>

@@ -60310,7 +60310,7 @@ var render = function() {
       _c(
         "small",
         { staticClass: "text-muted text-uppercase font-weight-bold" },
-        [_vm._v("Users")]
+        [_vm._v("Users registered")]
       )
     ])
   ])
@@ -60438,7 +60438,7 @@ var render = function() {
       _c(
         "small",
         { staticClass: "text-muted text-uppercase font-weight-bold" },
-        [_vm._v("Roles")]
+        [_vm._v("Roles created")]
       )
     ])
   ])
@@ -60872,7 +60872,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-primary text-primary",
+            staticClass: "btn btn-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: {
               click: function($event) {
@@ -60884,9 +60884,7 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("i", { staticClass: "far fa-save d-lg-none" }),
+              : _c("i", { staticClass: "far fa-save" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v("Save profile")
@@ -60897,7 +60895,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "card-body px-0" }, [
         !_vm.loading
           ? _c("form", { staticClass: "form-horizontal" }, [
               _c(
@@ -61206,7 +61204,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-primary text-primary",
+            staticClass: "btn btn-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: {
               click: function($event) {
@@ -61218,9 +61216,7 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("i", { staticClass: "far fa-save d-lg-none" }),
+              : _c("i", { staticClass: "far fa-save" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v("Change password")
@@ -61231,7 +61227,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "card-body px-0" }, [
         _c("form", { staticClass: "form-horizontal" }, [
           _c(
             "div",
@@ -61553,14 +61549,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61609,6 +61597,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
       });
     },
+    editUser: function editUser(userId) {
+      location.href = '/users/' + userId + '/edit';
+    },
+
+    // filters
     filter: function filter() {
       this.filters.pagination.current_page = 1;
       this.getUsers();
@@ -61649,10 +61642,10 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _c(
         "div",
-        { staticClass: "card-body" },
+        { staticClass: "card-body px-0" },
         [
           _c("div", { staticClass: "row justify-content-between" }, [
-            _c("div", { staticClass: "col-sm-7 col-md-5" }, [
+            _c("div", { staticClass: "col-7 col-md-5" }, [
               _c("div", { staticClass: "input-group mb-3" }, [
                 _c("div", { staticClass: "input-group-prepend" }, [
                   _c(
@@ -61708,7 +61701,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-sm-auto" },
+              { staticClass: "col-auto" },
               [
                 _c("multiselect", {
                   attrs: {
@@ -61732,113 +61725,118 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c(
-            "table",
-            { staticClass: "table table-hover table-responsive-sm" },
-            [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.sort("id")
-                          }
+          _c("table", { staticClass: "table table-hover" }, [
+            _c("thead", [
+              _c("tr", [
+                _c("th", { staticClass: "d-none d-sm-table-cell" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("id")
                         }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "mr-1 fas",
-                          class: {
-                            "fa-sort-amount-down":
-                              _vm.filters.orderBy.column == "id" &&
-                              _vm.filters.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.filters.orderBy.column == "id" &&
-                              _vm.filters.orderBy.direction == "desc"
-                          }
-                        }),
-                        _vm._v("\n                ID\n              ")
-                      ]
-                    )
-                  ]),
+                      }
+                    },
+                    [_vm._v("ID")]
+                  ),
                   _vm._v(" "),
-                  _c("th", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.sort("name")
-                          }
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "id" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "id" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("name")
                         }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "mr-1 fas",
-                          class: {
-                            "fa-sort-amount-down":
-                              _vm.filters.orderBy.column == "name" &&
-                              _vm.filters.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.filters.orderBy.column == "name" &&
-                              _vm.filters.orderBy.direction == "desc"
-                          }
-                        }),
-                        _vm._v("\n                User\n              ")
-                      ]
-                    )
-                  ]),
+                      }
+                    },
+                    [_vm._v("User")]
+                  ),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Roles")]),
-                  _vm._v(" "),
-                  _c("th", { staticClass: "d-none d-sm-table-cell" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.sort("created_at")
-                          }
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "name" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "name" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Roles")]),
+                _vm._v(" "),
+                _c("th", { staticClass: "d-none d-sm-table-cell" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("created_at")
                         }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "mr-1 fas",
-                          class: {
-                            "fa-sort-amount-down":
-                              _vm.filters.orderBy.column == "created_at" &&
-                              _vm.filters.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.filters.orderBy.column == "created_at" &&
-                              _vm.filters.orderBy.direction == "desc"
-                          }
-                        }),
-                        _vm._v("\n                Registered\n              ")
-                      ]
-                    )
-                  ]),
+                      }
+                    },
+                    [_vm._v("Registered")]
+                  ),
                   _vm._v(" "),
-                  _c("th")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.users, function(user) {
-                  return _c("tr", [
-                    _c("td", [_vm._v(_vm._s(user.id))]),
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "created_at" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "created_at" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "d-none d-sm-table-cell" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.users, function(user) {
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.editUser(user.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                      _vm._v(_vm._s(user.id))
+                    ]),
                     _vm._v(" "),
                     _c("td", [
                       _c("div", { staticClass: "media" }, [
@@ -61881,22 +61879,20 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                       _c("small", [
-                        _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LLL")))
+                        _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LL")))
+                      ]),
+                      _vm._v(" - "),
+                      _c("small", { staticClass: "text-muted" }, [
+                        _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LT")))
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        { attrs: { href: "/users/" + user.id + "/edit" } },
-                        [_c("i", { staticClass: "fas fa-pencil-alt" })]
-                      )
-                    ])
-                  ])
-                })
-              )
-            ]
-          ),
+                    _vm._m(1, true)
+                  ]
+                )
+              })
+            )
+          ]),
           _vm._v(" "),
           !_vm.loading && _vm.filters.pagination.total > 0
             ? _c("div", { staticClass: "row" }, [
@@ -62042,13 +62038,13 @@ var render = function() {
             ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
                 _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
                 _vm._v(" "),
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("p", { staticClass: "text-muted" }, [
                   _vm._v("Try changing the filters or add a new one")
                 ]),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(3)
               ])
             : _vm._e(),
           _vm._v(" "),
@@ -62078,6 +62074,16 @@ var staticRenderFns = [
           },
           [_vm._v("New user")]
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+      _c("a", { staticClass: "text-muted", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fas fa-pencil-alt" })
       ])
     ])
   },
@@ -62283,7 +62289,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-primary text-primary",
+            staticClass: "btn btn-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: {
               click: function($event) {
@@ -62295,9 +62301,7 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("i", { staticClass: "far fa-save d-lg-none" }),
+              : _c("i", { staticClass: "far fa-save" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v("Create user")
@@ -62308,7 +62312,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "card-body px-0" }, [
         _c("div", { staticClass: "row justify-content-md-center" }, [
           _c("div", { staticClass: "col-md-12 col-xl-7" }, [
             _c("div", { staticClass: "form-group" }, [
@@ -62701,7 +62705,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-primary text-primary",
+            staticClass: "btn btn-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: {
               click: function($event) {
@@ -62713,9 +62717,7 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("i", { staticClass: "far fa-save d-lg-none" }),
+              : _c("i", { staticClass: "far fa-save" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v("Save changes")
@@ -62726,7 +62728,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn",
+            staticClass: "btn btn-link",
             attrs: { href: "#", disabled: _vm.submitingDestroy },
             on: {
               click: function($event) {
@@ -62738,11 +62740,7 @@ var render = function() {
           [
             _vm.submitingDestroy
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.submitingDestroy
-              ? _c("i", { staticClass: "far fa-trash-alt" })
-              : _vm._e(),
+              : _c("i", { staticClass: "far fa-trash-alt" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v(" Delete")
@@ -62753,7 +62751,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "card-body px-0" }, [
         !_vm.loading
           ? _c("div", { staticClass: "row justify-content-md-center" }, [
               _c("div", { staticClass: "form-group col-md-9 col-xl-5" }, [
@@ -63150,15 +63148,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -63209,6 +63198,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
       });
     },
+    editRole: function editRole(roleId) {
+      location.href = '/roles/' + roleId + '/edit';
+    },
+    getPermissionsCount: function getPermissionsCount() {
+      var _this2 = this;
+
+      axios.get('/api/permissions/count').then(function (response) {
+        _this2.permissionsCount = response.data;
+      });
+    },
+
+    // Filters
     filter: function filter() {
       this.filters.pagination.current_page = 1;
       this.getRoles();
@@ -63231,13 +63232,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     changePage: function changePage(page) {
       this.filters.pagination.current_page = page;
       this.getRoles();
-    },
-    getPermissionsCount: function getPermissionsCount() {
-      var _this2 = this;
-
-      axios.get('/api/permissions/count').then(function (response) {
-        _this2.permissionsCount = response.data;
-      });
     }
   }
 });
@@ -63256,10 +63250,10 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _c(
         "div",
-        { staticClass: "card-body" },
+        { staticClass: "card-body px-0" },
         [
           _c("div", { staticClass: "row justify-content-between" }, [
-            _c("div", { staticClass: "col-sm-7 col-md-5" }, [
+            _c("div", { staticClass: "col-7 col-md-5" }, [
               _c("div", { staticClass: "input-group mb-3" }, [
                 _c("div", { staticClass: "input-group-prepend" }, [
                   _c(
@@ -63315,7 +63309,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-sm-auto" },
+              { staticClass: "col-auto" },
               [
                 _c("multiselect", {
                   attrs: {
@@ -63339,152 +63333,183 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c(
-            "table",
-            { staticClass: "table table-hover table-responsive-sm" },
-            [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.sort("id")
-                          }
+          _c("table", { staticClass: "table table-hover" }, [
+            _c("thead", [
+              _c("tr", [
+                _c("th", { staticClass: "d-none d-sm-table-cell" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("id")
                         }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "mr-1 fas",
-                          class: {
-                            "fa-sort-amount-down":
-                              _vm.filters.orderBy.column == "id" &&
-                              _vm.filters.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.filters.orderBy.column == "id" &&
-                              _vm.filters.orderBy.direction == "desc"
-                          }
-                        }),
-                        _vm._v("\n                ID\n              ")
-                      ]
-                    )
-                  ]),
+                      }
+                    },
+                    [_vm._v("ID")]
+                  ),
                   _vm._v(" "),
-                  _c("th", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.sort("display_name")
-                          }
+                  _c("i", {
+                    staticClass: "ml-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "id" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "id" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("display_name")
                         }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "mr-1 fas",
-                          class: {
-                            "fa-sort-amount-down":
-                              _vm.filters.orderBy.column == "display_name" &&
-                              _vm.filters.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.filters.orderBy.column == "display_name" &&
-                              _vm.filters.orderBy.direction == "desc"
-                          }
-                        }),
-                        _vm._v("\n                Role\n              ")
-                      ]
-                    )
-                  ]),
+                      }
+                    },
+                    [_vm._v("Role")]
+                  ),
                   _vm._v(" "),
-                  _c("th", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.sort("name")
-                          }
+                  _c("i", {
+                    staticClass: "ml-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "display_name" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "display_name" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "d-none d-sm-table-cell" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("name")
                         }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "mr-1 fas",
-                          class: {
-                            "fa-sort-amount-down":
-                              _vm.filters.orderBy.column == "name" &&
-                              _vm.filters.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.filters.orderBy.column == "name" &&
-                              _vm.filters.orderBy.direction == "desc"
-                          }
-                        }),
-                        _vm._v("\n                Slug\n              ")
-                      ]
-                    )
-                  ]),
+                      }
+                    },
+                    [_vm._v("Slug")]
+                  ),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Permissions")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Users             ")]),
-                  _vm._v(" "),
-                  _c("th", { staticClass: "d-none d-sm-table-cell" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.sort("created_at")
-                          }
+                  _c("i", {
+                    staticClass: "ml-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "name" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "name" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Users using")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Permissions")]),
+                _vm._v(" "),
+                _c("th", { staticClass: "d-none d-sm-table-cell" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("created_at")
                         }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "mr-1 fas",
-                          class: {
-                            "fa-sort-amount-down":
-                              _vm.filters.orderBy.column == "created_at" &&
-                              _vm.filters.orderBy.direction == "asc",
-                            "fa-sort-amount-up":
-                              _vm.filters.orderBy.column == "created_at" &&
-                              _vm.filters.orderBy.direction == "desc"
-                          }
-                        }),
-                        _vm._v("\n                Created\n              ")
-                      ]
-                    )
-                  ]),
+                      }
+                    },
+                    [_vm._v("Created")]
+                  ),
                   _vm._v(" "),
-                  _c("th")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.roles, function(role) {
-                  return _c("tr", [
-                    _c("td", [_vm._v(_vm._s(role.id))]),
+                  _c("i", {
+                    staticClass: "ml-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "created_at" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "created_at" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "d-none d-sm-table-cell" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.roles, function(role) {
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.editRole(role.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                      _vm._v(_vm._s(role.id))
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(role.display_name))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(role.name))]),
+                    _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                      _vm._v(_vm._s(role.name))
+                    ]),
                     _vm._v(" "),
                     _c("td", [
-                      _c("small", { staticClass: "text-muted" }, [
+                      _c(
+                        "div",
+                        { staticClass: "avatars-stack" },
+                        [
+                          _vm._l(role.users.slice(0, 4), function(user, index) {
+                            return _c("div", { staticClass: "avatar-sm" }, [
+                              _c("img", {
+                                staticClass: "img-avatar",
+                                attrs: { src: user.avatar_url }
+                              })
+                            ])
+                          }),
+                          _vm._v(" "),
+                          role.users.length > 4
+                            ? _c("div", { staticClass: "avatar-sm ml-3" }, [
+                                _vm._v(" +" + _vm._s(role.users.length - 4))
+                              ])
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("\n              Level\n              "),
+                      _c("small", { staticClass: "text-muted float-right" }, [
                         _vm._v(
                           _vm._s(role.permissions.length) +
                             " of " +
@@ -63519,48 +63544,22 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "div",
-                        { staticClass: "avatars-stack" },
-                        [
-                          _vm._l(role.users.slice(0, 4), function(user, index) {
-                            return _c("div", { staticClass: "avatar-sm" }, [
-                              _c("img", {
-                                staticClass: "img-avatar",
-                                attrs: { src: user.avatar_url }
-                              })
-                            ])
-                          }),
-                          _vm._v(" "),
-                          role.users.length > 4
-                            ? _c("div", { staticClass: "avatar-sm ml-3" }, [
-                                _vm._v(" +" + _vm._s(role.users.length - 4))
-                              ])
-                            : _vm._e()
-                        ],
-                        2
-                      )
-                    ]),
-                    _vm._v(" "),
                     _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                       _c("small", [
-                        _vm._v(_vm._s(_vm._f("moment")(role.created_at, "LLL")))
+                        _vm._v(_vm._s(_vm._f("moment")(role.created_at, "LL")))
+                      ]),
+                      _vm._v(" - "),
+                      _c("small", { staticClass: "text-muted" }, [
+                        _vm._v(_vm._s(_vm._f("moment")(role.created_at, "LT")))
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        { attrs: { href: "/roles/" + role.id + "/edit" } },
-                        [_c("i", { staticClass: "fas fa-pencil-alt" })]
-                      )
-                    ])
-                  ])
-                })
-              )
-            ]
-          ),
+                    _vm._m(1, true)
+                  ]
+                )
+              })
+            )
+          ]),
           _vm._v(" "),
           !_vm.loading && _vm.filters.pagination.total > 0
             ? _c("div", { staticClass: "row" }, [
@@ -63705,13 +63704,13 @@ var render = function() {
             ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
                 _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
                 _vm._v(" "),
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("p", { staticClass: "text-muted" }, [
                   _vm._v("Try changing the filters or add a new one")
                 ]),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(3)
               ])
             : _vm._e(),
           _vm._v(" "),
@@ -63741,6 +63740,16 @@ var staticRenderFns = [
           },
           [_vm._v("New role")]
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+      _c("a", { staticClass: "text-muted", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fas fa-pencil-alt" })
       ])
     ])
   },
@@ -63961,7 +63970,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-primary text-primary",
+            staticClass: "btn btn-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: {
               click: function($event) {
@@ -63973,9 +63982,7 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("i", { staticClass: "far fa-save d-lg-none" }),
+              : _c("i", { staticClass: "far fa-save" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v("Create role")
@@ -63988,7 +63995,7 @@ var render = function() {
     _c("div", { staticClass: "container" }, [
       _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "card-body px-0" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Role name")]),
           _vm._v(" "),
@@ -64176,7 +64183,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-transparent" }, [
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
       _c("strong", [_vm._v("General")]),
       _c("br"),
       _vm._v(" "),
@@ -64494,7 +64501,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn btn-outline-primary text-primary",
+            staticClass: "btn btn-primary",
             attrs: { href: "#", disabled: _vm.submiting },
             on: {
               click: function($event) {
@@ -64506,9 +64513,7 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("i", { staticClass: "far fa-save d-lg-none" }),
+              : _c("i", { staticClass: "far fa-save" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v("Save changes")
@@ -64519,7 +64524,7 @@ var render = function() {
         _c(
           "a",
           {
-            staticClass: "btn",
+            staticClass: "btn btn-link",
             attrs: { href: "#", disabled: _vm.submitingDestroy },
             on: {
               click: function($event) {
@@ -64531,11 +64536,7 @@ var render = function() {
           [
             _vm.submitingDestroy
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.submitingDestroy
-              ? _c("i", { staticClass: "far fa-trash-alt" })
-              : _vm._e(),
+              : _c("i", { staticClass: "far fa-trash-alt" }),
             _vm._v(" "),
             _c("span", { staticClass: "d-md-down-none ml-1" }, [
               _vm._v("Delete")
@@ -64553,7 +64554,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card-body" },
+          { staticClass: "card-body px-0" },
           [
             !_vm.loading
               ? _c("div", { staticClass: "row" }, [
@@ -64911,7 +64912,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-transparent" }, [
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
       _c("strong", [_vm._v("General")]),
       _c("br"),
       _vm._v(" "),

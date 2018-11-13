@@ -58,6 +58,17 @@
     border-color: inherit;
     padding: 0 0.55rem;
   }
+
+  .btn-primary {
+    padding: 0 0.55rem;
+  }
+
+  .btn {
+    color: $white;
+  }
+  .btn-link {
+    color: $gray-600;
+  }
 }
 
 // Form ------------------------------------------

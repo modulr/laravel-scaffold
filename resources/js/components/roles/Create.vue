@@ -9,19 +9,19 @@
       </li>
       <li class="breadcrumb-item active">New</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click.prevent="create">
+        <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="create">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-          <i class="far fa-save d-lg-none"></i>
+          <i class="far fa-save" v-else></i>
           <span class="d-md-down-none ml-1">Create role</span>
         </a>
       </li>
     </ol>
     <div class="container">
-      <div class="card-header bg-transparent">
+      <div class="card-header px-0 bg-transparent">
         <strong>General</strong><br>
         <small class="text-muted">Create a new role and choose the permissions so you can assign it to users.</small>
       </div>
-      <div class="card-body">
+      <div class="card-body px-0">
         <div class="form-group">
           <label>Role name</label>
           <input type="text" class="form-control" :class="{'is-invalid': errors.display_name}" v-model="role.display_name" placeholder="Admin" autofocus>

@@ -9,24 +9,24 @@
       </li>
       <li class="breadcrumb-item active">Edit</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click.prevent="update">
+        <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-          <i class="far fa-save d-lg-none"></i>
+          <i class="far fa-save" v-else></i>
           <span class="d-md-down-none ml-1">Save changes</span>
         </a>
-        <a class="btn" href="#" :disabled="submitingDestroy" @click.prevent="destroy">
+        <a class="btn btn-link" href="#" :disabled="submitingDestroy" @click.prevent="destroy">
           <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
-          <i class="far fa-trash-alt" v-if="!submitingDestroy"></i>
+          <i class="far fa-trash-alt" v-else></i>
           <span class="d-md-down-none ml-1">Delete</span>
         </a>
       </li>
     </ol>
     <div class="container">
-      <div class="card-header bg-transparent">
+      <div class="card-header px-0 bg-transparent">
         <strong>General</strong><br>
         <small class="text-muted">Update name and permissions of role.</small>
       </div>
-      <div class="card-body">
+      <div class="card-body px-0">
         <div class="row" v-if="!loading">
           <div class="form-group col-sm-9">
             <label>Role name</label>

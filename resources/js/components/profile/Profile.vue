@@ -4,15 +4,15 @@
       <li class="breadcrumb-item">Profile</li>
       <li class="breadcrumb-item active">Edit</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click.prevent="updateAuthUser">
+        <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="updateAuthUser">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-          <i class="far fa-save d-lg-none"></i>
+          <i class="far fa-save" v-else></i>
           <span class="d-md-down-none ml-1">Save profile</span>
         </a>
       </li>
     </ol>
     <div class="container">
-      <div class="card-body">
+      <div class="card-body px-0">
         <form class="form-horizontal" v-if="!loading">
           <div class="form-group row justify-content-md-center">
             <div class="col-md-3 col-xl-2">Avatar</div>

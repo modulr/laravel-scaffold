@@ -7,9 +7,9 @@
       </li>
     </ol>
     <div class="container">
-      <div class="card-body">
+      <div class="card-body px-0">
         <div class="row justify-content-between">
-          <div class="col-sm-7 col-md-5">
+          <div class="col-7 col-md-5">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" @click="filter">
@@ -19,7 +19,7 @@
               <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter">
             </div>
           </div>
-          <div class="col-sm-auto">
+          <div class="col-auto">
             <multiselect
               v-model="filters.pagination.per_page"
               :options="[25,50,100,200]"
@@ -31,34 +31,28 @@
             </multiselect>
           </div>
         </div>
-        <table class="table table-hover table-responsive-sm">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th>
-                <a href="#" class="text-dark" @click.prevent="sort('id')">
-                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
-                  ID
-                </a>
+              <th class="d-none d-sm-table-cell">
+                <a href="#" class="text-dark" @click.prevent="sort('id')">ID</a>
+                <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
               </th>
               <th>
-                <a href="#" class="text-dark" @click.prevent="sort('name')">
-                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
-                  User
-                </a>
+                <a href="#" class="text-dark" @click.prevent="sort('name')">User</a>
+                <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
               </th>
               <th>Roles</th>
               <th class="d-none d-sm-table-cell">
-                <a href="#" class="text-dark" @click.prevent="sort('created_at')">
-                  <i class="mr-1 fas" :class="{'fa-sort-amount-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-sort-amount-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
-                  Registered
-                </a>
+                <a href="#" class="text-dark" @click.prevent="sort('created_at')">Registered</a>
+                <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
               </th>
-              <th></th>
+              <th class="d-none d-sm-table-cell"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="user in users">
-              <td>{{user.id}}</td>
+            <tr v-for="user in users" @click="editUser(user.id)">
+              <td class="d-none d-sm-table-cell">{{user.id}}</td>
               <td>
                 <div class="media">
                   <div class="avatar float-left mr-3">
@@ -79,12 +73,10 @@
                 </span>
               </td>
               <td class="d-none d-sm-table-cell">
-                <small>{{user.created_at | moment("LLL")}}</small>
+                <small>{{user.created_at | moment("LL")}}</small> - <small class="text-muted">{{user.created_at | moment("LT")}}</small>
               </td>
-              <td>
-                <a :href="`/users/${user.id}/edit`">
-                  <i class="fas fa-pencil-alt"></i>
-                </a>
+              <td class="d-none d-sm-table-cell">
+                <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
               </td>
             </tr>
           </tbody>
@@ -172,6 +164,10 @@ export default {
         this.loading = false
       })
     },
+    editUser (userId) {
+      location.href = `/users/${userId}/edit`
+    },
+    // filters
     filter() {
       this.filters.pagination.current_page = 1
       this.getUsers()

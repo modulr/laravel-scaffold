@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Laravel Scaffold</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -61,6 +61,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .m-b-xl {
+                margin-bottom: 60px;
+            }
         </style>
     </head>
     <body>
@@ -78,16 +82,20 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel Scaffold
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="links m-b-xl">
+                    <a href="https://laravel-scaffold-docs.modulr.io">Documentation</a>
+                    <a href="https://medium.com/modulr">Tutorials</a>
+                    <a href="https://github.com/modulr/laravel-scaffold">GitHub</a>
+                </div>
+
+                <div>
+                    <p class="lead">Demo Credentials</p>
+
+                    email: <strong>admin@modulr.io</strong><br>
+                    password: <strong>admin</strong>
                 </div>
             </div>
         </div>

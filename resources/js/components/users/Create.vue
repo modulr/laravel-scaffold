@@ -9,15 +9,15 @@
       </li>
       <li class="breadcrumb-item active">New</li>
       <li class="breadcrumb-menu">
-        <a class="btn btn-outline-primary text-primary" href="#" :disabled="submiting" @click.prevent="create">
+        <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="create">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-          <i class="far fa-save d-lg-none"></i>
+          <i class="far fa-save" v-else></i>
           <span class="d-md-down-none ml-1">Create user</span>
         </a>
       </li>
     </ol>
     <div class="container">
-      <div class="card-body">
+      <div class="card-body px-0">
         <div class="row justify-content-md-center">
           <div class="col-md-12 col-xl-7">
             <div class="form-group">
