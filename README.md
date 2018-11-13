@@ -3,14 +3,16 @@
 ### The base for developing awesome projects
 
 Laravel Scaffold is a free, Open Source Starter kit/Scaffold/Boilerplate a fasted way of building your custom and modular Laravel application that grows with you.
-Created with Laravel 5.7 and VueJS. [Demo](http://laravel-scaffold.modulr.io)
+Created with Laravel 5.7 and VueJS.
+
+See the [documentation](http://laravel-scaffold-docs.modulr.io) for more details or you can also try our live [demo](http://laravel-scaffold.modulr.io).
+
 
 ### Table of Contents
 
 - [Features](#features)
 - [Tutorials](#tutorials)
 - [Installation](#installation)
-- [Documentation](#documentation)
 - [Modules](#modules)
   - Auth
   - Users
@@ -134,10 +136,6 @@ npm run dev
 # Run serve
 php artisan serve
 ```
-
-## Documentation
-
-[Documentation](http://laravel-scaffold-docs.modulr.io)
 
 
 ## Modules
