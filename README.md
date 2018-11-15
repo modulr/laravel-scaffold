@@ -20,7 +20,7 @@ See the [documentation](http://laravel-scaffold-docs.modulr.io) for more details
   - Profile
 
 
-![Laravel Scaffold](https://github.com/modulr/laravel-scaffold/blob/master/public/img/laravel-scaffold.jpg)
+![Laravel Scaffold](https://laravel-scaffold-docs.modulr.io/_media/laravel-scaffold.jpg)
 
 
 ## Features
