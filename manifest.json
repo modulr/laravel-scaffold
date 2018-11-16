@@ -1,0 +1,61 @@
+{
+  "short_name": "your app",
+  "name": "your app",
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icons/icon_48_48_dpi.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+     {
+      "src": "icons/icon_72_48_dpi.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "icons/icon_96_48_dpi.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+     {
+      "src": "icons/icon_144_48_dpi.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+     {
+      "src": "icons/icon_168_48_dpi.png",
+      "type": "image/png",
+      "sizes": "168x168"
+    },
+    {
+      "src": "icons/icon_192_48_dpi.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/icon_128_128_dpi.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "icons/icon_256_128_dpi.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "icons/icon_384_128_dpi.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "icons/icon_512_128_dpi.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "http://127.0.0.1:8000/",
+  "orientation": "portrait"
+}

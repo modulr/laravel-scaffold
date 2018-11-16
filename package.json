@@ -27,6 +27,7 @@
         "bootswatch": "^4.1.3",
         "perfect-scrollbar": "^1.4.0",
         "simple-line-icons": "^2.4.1",
+        "sw-precache-webpack-plugin": "^0.11.5",
         "sweetalert": "^2.1.2",
         "vue-clip": "^1.0.0",
         "vue-content-placeholders": "^0.2.1",
