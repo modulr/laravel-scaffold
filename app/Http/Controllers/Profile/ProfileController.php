@@ -23,6 +23,10 @@ class ProfileController extends Controller
 
     public function updateAuthUser (Request $request)
     {
+        if (Auth::id() == 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.Auth::id()
@@ -42,6 +46,10 @@ class ProfileController extends Controller
 
     public function updatePasswordAuthUser(Request $request)
     {
+        if (Auth::id() == 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->validate($request, [
             'current' => 'required|string',
             'password' => 'required|string|confirmed',

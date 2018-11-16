@@ -61,6 +61,10 @@ class UserController extends Controller
 
     public function update (Request $request)
     {
+        if ($request->id == 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$request->id,
@@ -92,6 +96,10 @@ class UserController extends Controller
 
     public function destroy ($user)
     {
+        if ($user == 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return User::destroy($user);
     }
 

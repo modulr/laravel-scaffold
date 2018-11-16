@@ -126,6 +126,11 @@ export default {
           location.href = '/users'
         })
         .catch(error => {
+          if (error.response.status == 403) {
+            swal("It's a Demo", "You don't have permission for this action in demo.")
+            this.submiting = false
+            return false
+          }
           this.errors = error.response.data.errors
           this.submiting = false
         })
@@ -149,10 +154,16 @@ export default {
               location.href = '/users'
             })
             .catch(error => {
+              if (error.response.status == 403) {
+                swal("It's a Demo", "You don't have permission for this action in demo.")
+                this.submitingDestroy = false
+                return false
+              }
               this.errors = error.response.data.errors
               this.submitingDestroy = false
             })
           }
+          this.submitingDestroy = false
         })
       }
     }

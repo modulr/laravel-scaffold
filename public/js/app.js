@@ -60611,6 +60611,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this2.submiting = false;
           _this2.$toasted.global.error('Profile updated!');
         }).catch(function (error) {
+          if (error.response.status == 403) {
+            swal("It's a Demo", "You don't have permission for this action in demo.");
+            _this2.submiting = false;
+            return false;
+          }
           _this2.errors = error.response.data.errors;
           _this2.submiting = false;
         });
@@ -61170,12 +61175,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (!this.submiting) {
         this.submiting = true;
-        axios.put('/api/profile/updatePasswordAuthUser', this.password).then(function (response) {
+        axios.put("/api/profile/updatePasswordAuthUser", this.password).then(function (response) {
           _this.password = {};
           _this.errors = {};
           _this.submiting = false;
           _this.$toasted.global.error('Password changed!');
         }).catch(function (error) {
+          if (error.response.status == 403) {
+            swal("It's a Demo", "You don't have permission for this action in demo.");
+            _this.submiting = false;
+            return false;
+          }
           _this.errors = error.response.data.errors;
           _this.submiting = false;
         });
@@ -62655,6 +62665,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this3.$toasted.global.error('Updated user!');
           location.href = '/users';
         }).catch(function (error) {
+          if (error.response.status == 403) {
+            swal("It's a Demo", "You don't have permission for this action in demo.");
+            _this3.submiting = false;
+            return false;
+          }
           _this3.errors = error.response.data.errors;
           _this3.submiting = false;
         });
@@ -62677,10 +62692,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               _this4.$toasted.global.error('Deleted user!');
               location.href = '/users';
             }).catch(function (error) {
+              if (error.response.status == 403) {
+                swal("It's a Demo", "You don't have permission for this action in demo.");
+                _this4.submitingDestroy = false;
+                return false;
+              }
               _this4.errors = error.response.data.errors;
               _this4.submitingDestroy = false;
             });
           }
+          _this4.submitingDestroy = false;
         });
       }
     }
@@ -64435,6 +64456,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this2.$toasted.global.error('Updated role!');
           location.href = '/roles';
         }).catch(function (error) {
+          if (error.response.status == 403) {
+            swal("It's a Demo", "You don't have permission for this action in demo.");
+            _this2.submiting = false;
+            return false;
+          }
           _this2.errors = error.response.data.errors;
           _this2.submiting = false;
         });
@@ -64457,10 +64483,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               _this3.$toasted.global.error('Deleted role!');
               location.href = '/roles';
             }).catch(function (error) {
+              if (error.response.status == 403) {
+                swal("It's a Demo", "You don't have permission for this action in demo.");
+                _this3.submitingDestroy = false;
+                return false;
+              }
               _this3.errors = error.response.data.errors;
               _this3.submitingDestroy = false;
             });
           }
+          _this3.submitingDestroy = false;
         });
       }
     },

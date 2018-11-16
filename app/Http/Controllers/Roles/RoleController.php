@@ -64,6 +64,10 @@ class RoleController extends Controller
 
     public function update (Request $request)
     {
+        if ($request->id == 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->validate($request, [
             'name' => 'required|string|unique:roles,name,'.$request->id,
             'display_name' => 'required|string|unique:roles,display_name,'.$request->id,
@@ -96,6 +100,9 @@ class RoleController extends Controller
 
     public function destroy ($role)
     {
+        if ($role == 1) {
+            abort(403, 'Unauthorized action.');
+        }
         return Role::destroy($role);
     }
 
