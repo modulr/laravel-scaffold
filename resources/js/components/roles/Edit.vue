@@ -11,8 +11,7 @@
       <li class="breadcrumb-menu">
         <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-          <i class="far fa-save" v-else></i>
-          <span class="d-md-down-none ml-1">Save changes</span>
+          <i class="fas fa-check mr-1" v-else></i>Save
         </a>
         <a class="btn btn-link" href="#" :disabled="submitingDestroy" @click.prevent="destroy">
           <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
