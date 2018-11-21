@@ -60570,7 +60570,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -60884,11 +60883,8 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _c("i", { staticClass: "far fa-save" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-              _vm._v("Save profile")
-            ])
+              : _c("i", { staticClass: "fas fa-check mr-1" }),
+            _vm._v("Save\n      ")
           ]
         )
       ])
@@ -61153,7 +61149,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61216,11 +61211,8 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _c("i", { staticClass: "far fa-save" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-              _vm._v("Change password")
-            ])
+              : _c("i", { staticClass: "fas fa-check mr-1" }),
+            _vm._v("Save\n      ")
           ]
         )
       ])
@@ -62227,7 +62219,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -62301,11 +62292,8 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _c("i", { staticClass: "far fa-save" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-              _vm._v("Create user")
-            ])
+              : _c("i", { staticClass: "fas fa-check mr-1" }),
+            _vm._v("Save\n      ")
           ]
         )
       ])
@@ -62603,7 +62591,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -62717,11 +62704,8 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _c("i", { staticClass: "far fa-save" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-              _vm._v("Save changes")
-            ])
+              : _c("i", { staticClass: "fas fa-check mr-1" }),
+            _vm._v("Save\n      ")
           ]
         ),
         _vm._v(" "),
@@ -63900,7 +63884,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -63982,11 +63965,8 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _c("i", { staticClass: "far fa-save" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-              _vm._v("Create role")
-            ])
+              : _c("i", { staticClass: "fas fa-check mr-1" }),
+            _vm._v("Save\n      ")
           ]
         )
       ])
@@ -64389,7 +64369,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -64513,11 +64492,8 @@ var render = function() {
           [
             _vm.submiting
               ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-              : _c("i", { staticClass: "far fa-save" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-              _vm._v("Save changes")
-            ])
+              : _c("i", { staticClass: "fas fa-check mr-1" }),
+            _vm._v("Save\n      ")
           ]
         ),
         _vm._v(" "),
