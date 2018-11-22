@@ -1,0 +1,46 @@
+{
+  "short_name": "Laravel Scaffold",
+  "name": "Laravel Scaffold",
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon/android-icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+     {
+      "src": "icon/android-icon-72x72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "icon/android-icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+     {
+      "src": "icon/android-icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "icon/android-icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon/apple-icon-120x120.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "icon/ms-icon-310x310.png",
+      "type": "image/png",
+      "sizes": "310x310"
+    }
+  ],
+  "start_url": "/",
+  "orientation": "portrait"
+}
