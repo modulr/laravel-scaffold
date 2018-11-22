@@ -41,6 +41,6 @@
       "sizes": "310x310"
     }
   ],
-  "start_url": "/?launcher=true",
+  "start_url": "/",
   "orientation": "portrait"
 }
