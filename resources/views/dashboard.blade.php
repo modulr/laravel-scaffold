@@ -43,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+                @can('read-users')
                 <div class="col-sm-3">
                     <div class="card">
                         <div class="card-body p-0 d-flex align-items-center">
@@ -53,6 +54,7 @@
                         </div>
                     </div>
                 </div>
+                @endcan
             </div>
         </div>
     </div>
