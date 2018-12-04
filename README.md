@@ -33,6 +33,7 @@ See the [documentation](http://laravel-scaffold-docs.modulr.io) for more details
 - Icons
     - [Fontawesome 5](https://fontawesome.com/)
     - [Simple Line Icons](https://github.com/thesabbir/simple-line-icons)
+- [SW Precache Webpack Plugin](https://github.com/goldhand/sw-precache-webpack-plugin) Progressive Web App (PWA)
 - [Vue Clip](https://vueclip.adonisjs.com/) Upload files
 - [Intervention Image](http://image.intervention.io/)  Crop and resize images
 - [Laravolt Avatar](https://github.com/laravolt/avatar) Create default avatar
