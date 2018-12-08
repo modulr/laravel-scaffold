@@ -2,9 +2,6 @@
 
 @section('content')
 <div>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
     <div class="container">
         <div class="card-body">
             @if (session('status'))
