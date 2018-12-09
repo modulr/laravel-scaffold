@@ -22,7 +22,7 @@
         <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
-        <title>Laravel Scaffold</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
