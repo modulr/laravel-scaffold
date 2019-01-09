@@ -56,6 +56,11 @@ Vue.component('roles-index', require('./components/roles/Index.vue'));
 Vue.component('roles-create', require('./components/roles/Create.vue'));
 Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
+// Companies
+Vue.component('companies-index', require('./components/companies/Index.vue'));
+Vue.component('companies-create', require('./components/companies/Create.vue'));
+Vue.component('companies-edit', require('./components/companies/Edit.vue'));
+
 const app = new Vue({
     el: '#app'
 });

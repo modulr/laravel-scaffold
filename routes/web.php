@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect('login');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', function () {
     return redirect('dashboard');
@@ -28,3 +29,4 @@ require __DIR__ . '/users/users.php';
 require __DIR__ . '/roles/roles.php';
 require __DIR__ . '/roles/permissions.php';
 require __DIR__ . '/modules/modules.php';
+require __DIR__ . '/companies/companies.php';

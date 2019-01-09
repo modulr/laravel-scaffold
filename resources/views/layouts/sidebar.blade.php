@@ -6,6 +6,13 @@
                     <i class="nav-icon icon-speedometer"></i> Dashboard
                 </a>
             </li>
+            @can('read-companies')
+            <li class="nav-item">
+                <a class="nav-link" href="/companies">
+                    <i class="nav-icon icon-briefcase"></i> Companies
+                </a>
+            </li>
+            @endcan
             @can('read-users','read-roles')
             <li class="nav-title">Settings</li>
             @endcan
