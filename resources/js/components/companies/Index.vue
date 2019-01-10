@@ -41,6 +41,7 @@
               <a href="#" class="text-dark" @click.prevent="sort('name')">Nombre</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
+            <th>Transacciones</th>
             <th>Usuarios</th>
             <th class="d-none d-sm-table-cell">
               <a href="#" class="text-dark" @click.prevent="sort('created_at')">Creada</a>
@@ -53,7 +54,18 @@
           <tr v-for="company in companies" @click="edit(company.id)">
             <td class="d-none d-sm-table-cell">{{company.id}}</td>
             <td>{{company.name}}</td>
-            <td>{{company.users.length}}</td>
+            <td>
+              <small class="text-muted">0 de 10</small>
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar bg-info" role="progressbar" :style="`width: ${0*100/10}%`" :aria-valuenow="0*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
+              </div>
+            </td>
+            <td class="text-center">
+              <small class="text-muted">{{company.users.length}} de 10</small>
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar bg-info" role="progressbar" :style="`width: ${company.users.length*100/10}%`" :aria-valuenow="company.users.length*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
+              </div>
+            </td>
             <td class="d-none d-sm-table-cell">
               <small>{{company.created_at | moment("LL")}}</small> - <small class="text-muted">{{company.created_at | moment("LT")}}</small>
             </td>

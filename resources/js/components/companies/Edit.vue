@@ -4,7 +4,7 @@
       <div class="col-md-12 col-xl-9" v-if="!loading">
         <!--button actions-->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2">Editar Empresa</h4>
+          <h4 class="float-left pt-2"><a href="/companies"><i class="fas fa-angle-left fa-lg"></i></a>&nbsp; Editar Empresa</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
@@ -28,10 +28,44 @@
         </div>
         <div class="card-header px-0 bg-transparent">
           <strong>Usuarios</strong><br>
-          <small class="text-muted">Contactos de la empresa.</small>
+          <small class="text-muted">Contactos de la empresa con acceso al sistema.</small>
+          <div class="card-header-actions">
+            <div class="float-left mr-2">
+              <small class="text-muted">{{company.users.length}} de 10</small>
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar bg-info" role="progressbar" :style="`width: ${company.users.length*100/10}%`" :aria-valuenow="company.users.length*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
+              </div>
+            </div>
+            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true">
+              <i class="icon-arrow-up"></i>
+            </a>
+          </div>
         </div>
-        <div class="card-body px-0">
+        <div class="card-body px-0 collapse" id="collapseUsers">
           <companies-users :company="company"></companies-users>
+        </div>
+        <div class="card-header px-0 bg-transparent">
+          <strong>Transactions</strong><br>
+          <small class="text-muted">Transacciones con otras empresas.</small>
+          <div class="card-header-actions">
+            <div class="card-header-actions">
+              <div class="float-left mr-2">
+                <small class="text-muted">0 de 10</small>
+                <div class="progress" style="height: 4px;">
+                  <div class="progress-bar bg-info" role="progressbar" :style="`width: ${0*100/10}%`" :aria-valuenow="0*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
+                </div>
+              </div>
+              <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseTransactions" aria-expanded="true">
+                <i class="icon-arrow-up"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center px-0 collapse" id="collapseTransactions">
+          <a class="btn btn-success mb-2" href="/transaction/create" role="button">
+            <i class="fa fa-plus"></i>&nbsp; Crear transaccion
+          </a>
+          <p><small class="text-muted">Crea transacciones, para llebar el control de tus documentos y conversaciones.</small></p>
         </div>
         <div class="card-body text-right px-0">
           <small class="text-muted">Creada <i>{{company.created_at | moment("LLL")}}</i></small>

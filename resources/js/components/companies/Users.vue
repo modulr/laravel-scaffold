@@ -20,7 +20,7 @@
       <a class="btn btn-success mb-2" href="#" role="button" @click="newUser">
         <i class="fa fa-plus"></i>&nbsp; Crear usuario
       </a>
-      <p class="text-muted">Agrega contactos a la empresa para que entren al sistema e interactues con ellos.</p>
+      <p class="text-muted"><small>Agrega usuarios para interactuar con ellos en las transacciones.</small></p>
     </div>
     <!-- User Create -->
     <div class="modal fade" id="userCreateModal" tabindex="-1" role="dialog" aria-hidden="true">

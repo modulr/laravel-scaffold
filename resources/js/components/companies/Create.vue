@@ -3,7 +3,7 @@
     <div class="row justify-content-md-center">
       <div class="col-md-12 col-xl-9">
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2">Crear empresa</h4>
+          <h4 class="float-left pt-2"><a href="/companies"><i class="fas fa-angle-left fa-lg"></i></a>&nbsp; Crear empresa</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="create">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
@@ -21,13 +21,38 @@
         </div>
         <div class="card-header px-0 bg-transparent">
           <strong>Usuarios</strong><br>
-          <small class="text-muted">Contactos de la empresa.</small>
+          <small class="text-muted">Contactos de la empresa con acceso al sistema.</small>
+          <div class="card-header-actions">
+            <div class="float-left mr-2 d-sm-down-none">
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar bg-info" role="progressbar" :style="`width: ${8*100/100}%`" :aria-valuenow="8*100/100" aria-valuemin="0" :aria-valuemax="100"></div>
+              </div>
+            </div>
+            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true">
+              <i class="icon-arrow-up"></i>
+            </a>
+          </div>
         </div>
-        <div class="card-body text-center px-0">
+        <div class="card-body text-center px-0" id="collapseUsers">
+          <p class="text-muted">Podras crear usuarios para comunicarte con ellos, una vez creada la empresa.</p>
           <a class="btn btn-success disabled mb-2" href="#" role="button">
             <i class="fa fa-plus"></i>&nbsp; Crear usuario
           </a>
-          <p class="text-muted">Podras agregar contactos a la empresa para que entren al sistema e interactues con ellos, una vez creada la empresa.</p>
+        </div>
+        <div class="card-header px-0 bg-transparent">
+          <strong>Transactions</strong><br>
+          <small class="text-muted">Transacciones con otras empresas.</small>
+          <div class="card-header-actions">
+            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseTransactions" aria-expanded="true">
+              <i class="icon-arrow-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body text-center px-0 collapse" id="collapseTransactions">
+          <p class="text-muted">Podras crear transacciones y llebar el control de la documentacion, una vez creada la empresa.</p>
+          <a class="btn btn-success disabled mb-2" href="#" role="button">
+            <i class="fa fa-plus"></i>&nbsp; Crear transaccion
+          </a>
         </div>
       </div>
     </div>

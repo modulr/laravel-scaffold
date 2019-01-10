@@ -67078,6 +67078,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67310,6 +67322,8 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
+              _c("th", [_vm._v("Transacciones")]),
+              _vm._v(" "),
               _c("th", [_vm._v("Usuarios")]),
               _vm._v(" "),
               _c("th", { staticClass: "d-none d-sm-table-cell" }, [
@@ -67364,7 +67378,58 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(company.name))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(company.users.length))]),
+                  _c("td", [
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v("0 de 10")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "progress",
+                        staticStyle: { height: "4px" }
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "progress-bar bg-info",
+                          style: "width: " + (0 * 100) / 10 + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": (0 * 100) / 10,
+                            "aria-valuemin": "0",
+                            "aria-valuemax": 10
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v(_vm._s(company.users.length) + " de 10")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "progress",
+                        staticStyle: { height: "4px" }
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "progress-bar bg-info",
+                          style:
+                            "width: " + (company.users.length * 100) / 10 + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": (company.users.length * 100) / 10,
+                            "aria-valuemin": "0",
+                            "aria-valuemax": 10
+                          }
+                        })
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                     _c("small", [
@@ -67686,6 +67751,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67730,9 +67820,7 @@ var render = function() {
           "div",
           { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
           [
-            _c("h4", { staticClass: "float-left pt-2" }, [
-              _vm._v("Crear empresa")
-            ]),
+            _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "card-header-actions mr-1" }, [
               _c(
@@ -67794,9 +67882,43 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+          _c("strong", [_vm._v("Usuarios")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("small", { staticClass: "text-muted" }, [
+            _vm._v("Contactos de la empresa con acceso al sistema.")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-header-actions" }, [
+            _c("div", { staticClass: "float-left mr-2 d-sm-down-none" }, [
+              _c(
+                "div",
+                { staticClass: "progress", staticStyle: { height: "4px" } },
+                [
+                  _c("div", {
+                    staticClass: "progress-bar bg-info",
+                    style: "width: " + (8 * 100) / 100 + "%",
+                    attrs: {
+                      role: "progressbar",
+                      "aria-valuenow": (8 * 100) / 100,
+                      "aria-valuemin": "0",
+                      "aria-valuemax": 100
+                    }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _vm._m(4)
       ])
     ])
   ])
@@ -67806,12 +67928,88 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "float-left pt-2" }, [
+      _c("a", { attrs: { href: "/companies" } }, [
+        _c("i", { staticClass: "fas fa-angle-left fa-lg" })
+      ]),
+      _vm._v("  Crear empresa")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "card-header-action btn-minimize",
+        attrs: {
+          href: "#",
+          "data-toggle": "collapse",
+          "data-target": "#collapseUsers",
+          "aria-expanded": "true"
+        }
+      },
+      [_c("i", { staticClass: "icon-arrow-up" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "card-body text-center px-0",
+        attrs: { id: "collapseUsers" }
+      },
+      [
+        _c("p", { staticClass: "text-muted" }, [
+          _vm._v(
+            "Podras crear usuarios para comunicarte con ellos, una vez creada la empresa."
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-success disabled mb-2",
+            attrs: { href: "#", role: "button" }
+          },
+          [
+            _c("i", { staticClass: "fa fa-plus" }),
+            _vm._v("  Crear usuario\n        ")
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-      _c("strong", [_vm._v("Usuarios")]),
+      _c("strong", [_vm._v("Transactions")]),
       _c("br"),
       _vm._v(" "),
       _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Contactos de la empresa.")
+        _vm._v("Transacciones con otras empresas.")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header-actions" }, [
+        _c(
+          "a",
+          {
+            staticClass: "card-header-action btn-minimize",
+            attrs: {
+              href: "#",
+              "data-toggle": "collapse",
+              "data-target": "#collapseTransactions",
+              "aria-expanded": "true"
+            }
+          },
+          [_c("i", { staticClass: "icon-arrow-up" })]
+        )
       ])
     ])
   },
@@ -67819,25 +68017,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body text-center px-0" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success disabled mb-2",
-          attrs: { href: "#", role: "button" }
-        },
-        [
-          _c("i", { staticClass: "fa fa-plus" }),
-          _vm._v("  Crear usuario\n        ")
-        ]
-      ),
-      _vm._v(" "),
-      _c("p", { staticClass: "text-muted" }, [
-        _vm._v(
-          "Podras agregar contactos a la empresa para que entren al sistema e interactues con ellos, una vez creada la empresa."
+    return _c(
+      "div",
+      {
+        staticClass: "card-body text-center px-0 collapse",
+        attrs: { id: "collapseTransactions" }
+      },
+      [
+        _c("p", { staticClass: "text-muted" }, [
+          _vm._v(
+            "Podras crear transacciones y llebar el control de la documentacion, una vez creada la empresa."
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-success disabled mb-2",
+            attrs: { href: "#", role: "button" }
+          },
+          [
+            _c("i", { staticClass: "fa fa-plus" }),
+            _vm._v("  Crear transaccion\n        ")
+          ]
         )
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -67902,6 +68107,40 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -68038,9 +68277,7 @@ var render = function() {
               "div",
               { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
               [
-                _c("h4", { staticClass: "float-left pt-2" }, [
-                  _vm._v("Editar Empresa")
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-header-actions mr-1" }, [
                   _c(
@@ -68125,14 +68362,98 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+              _c("strong", [_vm._v("Usuarios")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("Contactos de la empresa con acceso al sistema.")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-header-actions" }, [
+                _c("div", { staticClass: "float-left mr-2" }, [
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm.company.users.length) + " de 10")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "progress", staticStyle: { height: "4px" } },
+                    [
+                      _c("div", {
+                        staticClass: "progress-bar bg-info",
+                        style:
+                          "width: " +
+                          (_vm.company.users.length * 100) / 10 +
+                          "%",
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow":
+                            (_vm.company.users.length * 100) / 10,
+                          "aria-valuemin": "0",
+                          "aria-valuemax": 10
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "card-body px-0" },
+              {
+                staticClass: "card-body px-0 collapse",
+                attrs: { id: "collapseUsers" }
+              },
               [_c("companies-users", { attrs: { company: _vm.company } })],
               1
             ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+              _c("strong", [_vm._v("Transactions")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("Transacciones con otras empresas.")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-header-actions" }, [
+                _c("div", { staticClass: "card-header-actions" }, [
+                  _c("div", { staticClass: "float-left mr-2" }, [
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v("0 de 10")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "progress",
+                        staticStyle: { height: "4px" }
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "progress-bar bg-info",
+                          style: "width: " + (0 * 100) / 10 + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": (0 * 100) / 10,
+                            "aria-valuemin": "0",
+                            "aria-valuemax": 10
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "card-body text-right px-0" }, [
               _c("small", { staticClass: "text-muted" }, [
@@ -68159,14 +68480,81 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-      _c("strong", [_vm._v("Usuarios")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Contactos de la empresa.")
-      ])
+    return _c("h4", { staticClass: "float-left pt-2" }, [
+      _c("a", { attrs: { href: "/companies" } }, [
+        _c("i", { staticClass: "fas fa-angle-left fa-lg" })
+      ]),
+      _vm._v("  Editar Empresa")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "card-header-action btn-minimize",
+        attrs: {
+          href: "#",
+          "data-toggle": "collapse",
+          "data-target": "#collapseUsers",
+          "aria-expanded": "true"
+        }
+      },
+      [_c("i", { staticClass: "icon-arrow-up" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "card-header-action btn-minimize",
+        attrs: {
+          href: "#",
+          "data-toggle": "collapse",
+          "data-target": "#collapseTransactions",
+          "aria-expanded": "true"
+        }
+      },
+      [_c("i", { staticClass: "icon-arrow-up" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "card-body text-center px-0 collapse",
+        attrs: { id: "collapseTransactions" }
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-success mb-2",
+            attrs: { href: "/transaction/create", role: "button" }
+          },
+          [
+            _c("i", { staticClass: "fa fa-plus" }),
+            _vm._v("  Crear transaccion\n        ")
+          ]
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _c("small", { staticClass: "text-muted" }, [
+            _vm._v(
+              "Crea transacciones, para llebar el control de tus documentos y conversaciones."
+            )
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -68518,11 +68906,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("p", { staticClass: "text-muted" }, [
-        _vm._v(
-          "Agrega contactos a la empresa para que entren al sistema e interactues con ellos."
-        )
-      ])
+      _vm._m(0)
     ]),
     _vm._v(" "),
     _c(
@@ -68542,7 +68926,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -68690,7 +69074,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 !_vm.loadingEdit
@@ -68885,6 +69269,18 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-muted" }, [
+      _c("small", [
+        _vm._v(
+          "Agrega usuarios para interactuar con ellos en las transacciones."
+        )
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
