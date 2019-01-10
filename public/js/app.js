@@ -68354,25 +68354,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68481,70 +68462,46 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.company.users.length > 0
-      ? _c("table", { staticClass: "table table-hover" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.company.users, function(user, index) {
-              return _c(
-                "tr",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.editUser(user.id, index)
-                    }
+      ? _c(
+          "ul",
+          { staticClass: "list-group list-group-flush" },
+          _vm._l(_vm.company.users, function(user, index) {
+            return _c(
+              "a",
+              {
+                staticClass:
+                  "list-group-item list-group-item-action media border-light",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.editUser(user.id, index)
                   }
-                },
-                [
-                  _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-                    _vm._v(_vm._s(user.id))
+                }
+              },
+              [
+                _c("div", { staticClass: "avatar float-left mr-3" }, [
+                  _c("img", {
+                    staticClass: "img-avatar",
+                    attrs: { src: user.avatar_url }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "media-body" }, [
+                  _c("div", { staticClass: "d-flex justify-content-between" }, [
+                    _vm._v("\n          " + _vm._s(user.name) + "\n          "),
+                    _c("i", { staticClass: "fas fa-pencil-alt float-right" })
                   ]),
                   _vm._v(" "),
-                  _c("td", [
-                    _c("div", { staticClass: "media" }, [
-                      _c("div", { staticClass: "avatar float-left mr-3" }, [
-                        _c("img", {
-                          staticClass: "img-avatar",
-                          attrs: { src: user.avatar_url }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "avatar-status badge-success"
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "media-body" }, [
-                        _c("div", [_vm._v(_vm._s(user.name))]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "small text-muted" }, [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(user.email) +
-                              "\n              "
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-                    _c("small", [
-                      _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LL")))
-                    ]),
-                    _vm._v(" - "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LT")))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1, true)
-                ]
-              )
-            }),
-            0
-          )
-        ])
+                  _c("div", { staticClass: "small text-muted" }, [
+                    _vm._v("\n          " + _vm._s(user.email) + "\n        ")
+                  ])
+                ])
+              ]
+            )
+          }),
+          0
+        )
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "card-body text-center px-0" }, [
@@ -68585,7 +68542,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -68733,7 +68690,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 !_vm.loadingEdit
@@ -68928,36 +68885,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "border-top-0 d-none d-sm-table-cell" }, [
-          _vm._v("ID")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("User")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-top-0 d-none d-sm-table-cell" }, [
-          _vm._v("Registered")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-top-0 d-none d-sm-table-cell" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-      _c("a", { staticClass: "text-muted", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-pencil-alt" })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -1,40 +1,21 @@
 <template>
   <div>
-    <table class="table table-hover" v-if="company.users.length > 0">
-      <thead>
-        <tr>
-          <th class="border-top-0 d-none d-sm-table-cell">ID</th>
-          <th class="border-top-0">User</th>
-          <th class="border-top-0 d-none d-sm-table-cell">Registered</th>
-          <th class="border-top-0 d-none d-sm-table-cell"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(user, index) in company.users" @click="editUser(user.id, index)">
-          <td class="d-none d-sm-table-cell">{{user.id}}</td>
-          <td>
-            <div class="media">
-              <div class="avatar float-left mr-3">
-                <img class="img-avatar" :src="user.avatar_url">
-                <span class="avatar-status badge-success"></span>
-              </div>
-              <div class="media-body">
-                <div>{{user.name}}</div>
-                <div class="small text-muted">
-                  {{user.email}}
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="d-none d-sm-table-cell">
-            <small>{{user.created_at | moment("LL")}}</small> - <small class="text-muted">{{user.created_at | moment("LT")}}</small>
-          </td>
-          <td class="d-none d-sm-table-cell">
-            <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <ul class="list-group list-group-flush" v-if="company.users.length > 0">
+      <a href="#" v-for="(user, index) in company.users" @click.prevent="editUser(user.id, index)" class="list-group-item list-group-item-action media border-light">
+        <div class="avatar float-left mr-3">
+          <img class="img-avatar" :src="user.avatar_url">
+        </div>
+        <div class="media-body">
+          <div class="d-flex justify-content-between">
+            {{user.name}}
+            <i class="fas fa-pencil-alt float-right"></i>
+          </div>
+          <div class="small text-muted">
+            {{user.email}}
+          </div>
+        </div>
+      </a>
+    </ul>
     <div class="card-body text-center px-0">
       <a class="btn btn-success mb-2" href="#" role="button" @click="newUser">
         <i class="fa fa-plus"></i>&nbsp; Crear usuario
