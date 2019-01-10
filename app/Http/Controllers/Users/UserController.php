@@ -41,13 +41,15 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string',
-            'roles' => 'required|array'
+            'roles' => 'required|array',
+            'companyId' => 'integer'
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'company_id' => $request->companyId
         ]);
 
         $rolesNames = array_pluck($request->roles, ['name']);
@@ -56,7 +58,7 @@ class UserController extends Controller
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
         Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
 
-        return $user;
+        return User::find($user->id);
     }
 
     public function update (Request $request)

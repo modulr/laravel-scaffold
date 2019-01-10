@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
-      <h4 class="float-left pt-2">Companies</h4>
+      <h4 class="float-left pt-2">Empresas</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-success" href="/companies/create">New company</a>
+        <a class="btn btn-success" href="/companies/create">Crear empresa</a>
       </div>
     </div>
     <div class="card-body px-0">
@@ -38,11 +38,12 @@
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
-              <a href="#" class="text-dark" @click.prevent="sort('name')">Name</a>
+              <a href="#" class="text-dark" @click.prevent="sort('name')">Nombre</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
+            <th>Usuarios</th>
             <th class="d-none d-sm-table-cell">
-              <a href="#" class="text-dark" @click.prevent="sort('created_at')">Created</a>
+              <a href="#" class="text-dark" @click.prevent="sort('created_at')">Creada</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th class="d-none d-sm-table-cell"></th>
@@ -52,6 +53,7 @@
           <tr v-for="company in companies" @click="edit(company.id)">
             <td class="d-none d-sm-table-cell">{{company.id}}</td>
             <td>{{company.name}}</td>
+            <td>{{company.users.length}}</td>
             <td class="d-none d-sm-table-cell">
               <small>{{company.created_at | moment("LL")}}</small> - <small class="text-muted">{{company.created_at | moment("LT")}}</small>
             </td>
@@ -87,7 +89,7 @@
         <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
         <p class="text-muted">Try changing the filters or add a new one</p>
         <a class="btn btn-success" href="/companies/create" role="button">
-          <i class="fa fa-plus"></i>&nbsp; New Company
+          <i class="fa fa-plus"></i>&nbsp; Crear Empresa
         </a>
       </div>
       <content-placeholders v-if="loading">
@@ -113,7 +115,7 @@ export default {
         },
         orderBy: {
           column: 'id',
-          direction: 'asc'
+          direction: 'desc'
         },
         search: ''
       },

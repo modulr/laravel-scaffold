@@ -19,14 +19,16 @@ class CompanyController extends Controller
         $companies = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
                     ->paginate($request->input('pagination.per_page'));
 
-        //$users->load('users');
+        $companies->load('users');
 
         return $companies;
     }
 
     public function show ($company)
     {
-        return Company::findOrFail($company);
+        return Company::with(['users'=> function($query){
+            $query->orderBy('id', 'desc');
+        }])->findOrFail($company);
     }
 
     public function store (Request $request)

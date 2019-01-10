@@ -1,44 +1,46 @@
 <template>
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col-md-9 col-xl-7">
+      <div class="col-md-12 col-xl-9" v-if="!loading">
+        <!--button actions-->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2">Edit Company</h4>
+          <h4 class="float-left pt-2">Editar Empresa</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
               <i class="fas fa-check" v-else></i>
-              <span class="ml-1">Save</span>
+              <span class="ml-1">Guardar</span>
             </a>
             <a class="card-header-action ml-1" href="#" :disabled="submitingDestroy" @click.prevent="destroy">
               <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
               <i class="far fa-trash-alt" v-else></i>
-              <span class="d-md-down-none ml-1">Delete</span>
+              <span class="d-md-down-none ml-1">Borrar</span>
             </a>
           </div>
         </div>
+        <!--forms-->
         <div class="card-body px-0">
-          <div class="row" v-if="!loading">
-            <div class="form-group col-md-9">
-              <label>Name</label>
-              <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="company.name" placeholder="Modulr Co.">
-              <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label class="col-form-label">Created</label>
-                <p class="form-control-plaintext text-muted">{{company.created_at | moment("LLL")}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="row" v-else>
-            <div class="col-md-12">
-              <content-placeholders>
-                <content-placeholders-text/>
-              </content-placeholders>
-            </div>
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="company.name" placeholder="Modulr Co.">
+            <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
         </div>
+        <div class="card-header px-0 bg-transparent">
+          <strong>Usuarios</strong><br>
+          <small class="text-muted">Contactos de la empresa.</small>
+        </div>
+        <div class="card-body px-0">
+          <companies-users :company="company"></companies-users>
+        </div>
+        <div class="card-body text-right px-0">
+          <small class="text-muted">Creada <i>{{company.created_at | moment("LLL")}}</i></small>
+        </div>
+      </div>
+      <div class="col-md-12 col-xl-9 mt-5" v-else>
+          <content-placeholders>
+            <content-placeholders-text/>
+          </content-placeholders>
       </div>
     </div>
   </div>
