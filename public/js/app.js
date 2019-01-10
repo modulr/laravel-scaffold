@@ -68547,7 +68547,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body text-center px-0 pt-0" }, [
+    _c("div", { staticClass: "card-body text-center px-0" }, [
       _c(
         "a",
         {
@@ -68934,15 +68934,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "d-none d-sm-table-cell" }, [_vm._v("ID")]),
+        _c("th", { staticClass: "border-top-0 d-none d-sm-table-cell" }, [
+          _vm._v("ID")
+        ]),
         _vm._v(" "),
-        _c("th", [_vm._v("User")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("User")]),
         _vm._v(" "),
-        _c("th", { staticClass: "d-none d-sm-table-cell" }, [
+        _c("th", { staticClass: "border-top-0 d-none d-sm-table-cell" }, [
           _vm._v("Registered")
         ]),
         _vm._v(" "),
-        _c("th", { staticClass: "d-none d-sm-table-cell" })
+        _c("th", { staticClass: "border-top-0 d-none d-sm-table-cell" })
       ])
     ])
   },

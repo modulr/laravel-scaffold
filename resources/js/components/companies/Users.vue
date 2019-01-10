@@ -3,10 +3,10 @@
     <table class="table table-hover" v-if="company.users.length > 0">
       <thead>
         <tr>
-          <th class="d-none d-sm-table-cell">ID</th>
-          <th>User</th>
-          <th class="d-none d-sm-table-cell">Registered</th>
-          <th class="d-none d-sm-table-cell"></th>
+          <th class="border-top-0 d-none d-sm-table-cell">ID</th>
+          <th class="border-top-0">User</th>
+          <th class="border-top-0 d-none d-sm-table-cell">Registered</th>
+          <th class="border-top-0 d-none d-sm-table-cell"></th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +35,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="card-body text-center px-0 pt-0">
+    <div class="card-body text-center px-0">
       <a class="btn btn-success mb-2" href="#" role="button" @click="newUser">
         <i class="fa fa-plus"></i>&nbsp; Crear usuario
       </a>
