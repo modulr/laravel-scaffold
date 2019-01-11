@@ -68724,7 +68724,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     newUser: function newUser() {
       this.user = {};
-      this.user.roles = [{ id: 3 }];
+      this.user.roles = [{ id: 3, name: 'guest' }];
       this.user.companyId = this.company.id;
       this.errors = {};
       $('#userCreateModal').modal('show');
