@@ -6,10 +6,15 @@
                     <i class="nav-icon icon-speedometer"></i> Dashboard
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/transactions">
+                    <i class="nav-icon icon-shuffle"></i> Transacciones
+                </a>
+            </li>
             @can('read-companies')
             <li class="nav-item">
                 <a class="nav-link" href="/companies">
-                    <i class="nav-icon icon-briefcase"></i> Companies
+                    <i class="nav-icon icon-briefcase"></i> Empresas
                 </a>
             </li>
             @endcan
