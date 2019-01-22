@@ -136,6 +136,9 @@ npm run dev
 
 # Run serve
 php artisan serve
+
+or to developer mode
+npm run dev || npm run watch
 ```
 
 
@@ -147,9 +150,9 @@ php artisan serve
   - Remember Password
 
 - Profile
-  - Edit Name, email - regenerate avatar
+  - Edit Name, email - generate and reset avatar
   - Change password
-  - Upload & Restart Avatar
+  - Edit Avatar upload jpg/png images
 
 - Users
     - List users
