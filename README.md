@@ -104,6 +104,11 @@ Generate symbolic link to Storage
 php artisan storage:link
 ```
 
+If you are in production
+```
+sudo chown -R www-data:www-data storage
+```
+
 Database
 
 ```
