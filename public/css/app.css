@@ -11269,8 +11269,7 @@ body {
 }
 
 p,
-h1,
-a {
+h1 {
   color: #fff;
   font-weight: lighter;
 }
@@ -11283,6 +11282,22 @@ a:hover {
 .logo {
   max-width: 200px;
   margin-top: 20px;
+}
+
+.btn-white {
+  color: #fff;
+}
+
+a.btn-white:hover {
+  color: #e2e6ea !important;
+}
+
+.btn-white .fa-phone {
+  color: #E42C54 !important;
+}
+
+.wp-color {
+  color: #01E677;
 }
 
 #app {
