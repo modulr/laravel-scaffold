@@ -13,7 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-   .browserSync('laravel-scaffold.test');
+   .browserSync('sisi.test');
 
 
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');

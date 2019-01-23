@@ -22,98 +22,53 @@
         <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
-        <title>Laravel Scaffold</title>
+        <title>Sisi App</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+            body {
+                background-color: #E42C54;
             }
-
-            .full-height {
-                height: 100vh;
+            p, h1, a{
+                color: #fff;
+                font-weight: lighter;
             }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
+            a:hover {
                 text-decoration: none;
-                text-transform: uppercase;
+                color: inherit;
             }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-
-            .m-b-xl {
-                margin-bottom: 60px;
+            .logo {
+                max-width: 200px;
+                margin-top: 100px;
             }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel Scaffold
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <img class="img-fluid logo" src="/img/sisi_slogan.png" alt="">
+                    <br><br><br>
+                    <br><br><br>
                 </div>
 
-                <div class="links m-b-xl">
-                    <a href="https://laravel-scaffold-docs.modulr.io">Documentation</a>
-                    <a href="https://medium.com/modulr">Tutorials</a>
-                    <a href="https://github.com/modulr/laravel-scaffold">GitHub</a>
+                <div class="col-sm-12 text-center">
+                    <a href="tel:627-142-0604"><h1><i class="fas fa-phone"></i> 627 142 0604</h1></a>
+                    <br>
                 </div>
 
-                <div>
-                    <p class="lead">Demo Credentials</p>
+                <div class="col-sm-12 text-center">
+                    <a href="https://api.whatsapp.com/send?phone=526271420604&text=Me%20puedes%20traer%20&source=&data="><h3><i class="fab fa-whatsapp wp-color"></i> WhatsApp</h3></a>
+                    <br><br><br>
+                </div>
 
-                    email: <strong>admin@modulr.io</strong><br>
-                    password: <strong>admin</strong>
+                <div class="col-sm-12 text-center">
+                    <p><a href="mailto:megusta@sisiapp.mx">megusta@sisiapp.mx</a></p>
                 </div>
             </div>
         </div>
