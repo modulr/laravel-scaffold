@@ -11264,6 +11264,27 @@ a.text-dark:focus {
   }
 }
 
+body {
+  background-color: #E42C54;
+}
+
+p,
+h1,
+a {
+  color: #fff;
+  font-weight: lighter;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo {
+  max-width: 200px;
+  margin-top: 100px;
+}
+
 #app {
   display: -webkit-box;
   display: -ms-flexbox;
