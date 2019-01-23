@@ -31,7 +31,7 @@
 
     <div class="col-sm-12 text-center">
         <p>
-            <a href="fb://sisiapp/" target="_blank" rel="alternate">
+            <a href="fb://page/sisiapp" target="_blank" rel="alternate">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a>
 
