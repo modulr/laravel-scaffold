@@ -31,12 +31,15 @@
 
     <div class="col-sm-12 text-center">
         <p>
-            <a class="btn-white d-inline d-sm-none" href="fb://page/sisiapp">
+            <a class="btn-white" href="fb://sisiapp/f?href=https://www.facebook.com/sisiapp">
+                <i class="fab fa-lg fa-facebook-square"></i>
+            </a>
+            <!-- <a class="btn-white d-inline d-sm-none" href="fb://page/sisiapp">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a>
             <a class="btn-white d-none d-sm-inline" href="https://www.facebook.com/sisiapp" target="_blank">
                 <i class="fab fa-lg fa-facebook-square"></i>
-            </a>
+            </a> -->
 
             &nbsp;&nbsp;
             <a class="btn-white" href="https://m.me/sisiapp" target="_blank">
