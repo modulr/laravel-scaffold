@@ -1,7 +1,6 @@
 @extends('layouts.auth')
 
 @section('auth')
-<div class="row">
     <div class="col-sm-12 text-center">
         <img class="img-fluid logo" src="/img/sisi_slogan.png" alt="">
         <br><br><br><br>
@@ -37,5 +36,4 @@
         </a>
         </p>
     </div>
-</div>
 @endsection
