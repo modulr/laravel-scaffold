@@ -34,7 +34,7 @@
             <!-- <a class="btn-white" href="fb://page/sisiapp/f?href=https://www.facebook.com/sisiapp">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a> -->
-            <a class="btn-white d-inline d-sm-none" href="fb://page/sisiapp">
+            <a class="btn-white d-inline d-sm-none" href="fb://page/296760280983048">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a>
             <a class="btn-white d-none d-sm-inline" href="https://www.facebook.com/sisiapp" target="_blank">
