@@ -26,14 +26,26 @@
         <a class="btn btn-lg btn-light" href="https://api.whatsapp.com/send?phone=526271420604&text=Me%20puedes%20traer%20&source=&data=">
             <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
-        <br><br><br><br><br>
+        <br><br><br><br>
+    </div>
+
+    <div class="col-sm-12 text-center">
+        <p>
+            <a class="btn-white" href="https://www.facebook.com/sisiapp" target="_blank">
+                <i class="fab fa-lg fa-facebook-square"></i>
+            </a>
+            &nbsp;&nbsp;
+            <a class="btn-white" href="http://m.me/sisiapp" target="_blank">
+                <i class="fab fa-lg fa-facebook-messenger"></i>
+            </a>
+        </p>
     </div>
 
     <div class="col-sm-12 text-center">
         <p>
             <a class="btn-white" href="mailto:megusta@sisiapp.mx">
-            megusta@sisiapp.mx
-        </a>
+                megusta@sisiapp.mx
+            </a>
         </p>
     </div>
 @endsection
