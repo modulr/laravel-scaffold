@@ -1,8 +1,8 @@
 {
-  "short_name": "LS",
-  "name": "LS",
-  "theme_color": "#fff",
-  "background_color": "#fff",
+  "short_name": "Sisi",
+  "name": "Sisi App",
+  "theme_color": "#E42C54",
+  "background_color": "#E42C54",
   "display": "standalone",
   "icons": [
     {
