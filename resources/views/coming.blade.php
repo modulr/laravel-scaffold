@@ -31,13 +31,9 @@
 
     <div class="col-sm-12 text-center">
         <p>
-            <a href="fb://page/sisiapp" target="_blank" rel="alternate">
+            <a class="btn-white" href="fb://page/sisiapp/f?href=https://www.facebook.com/sisiapp">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a>
-
-            <!-- <a class="btn-white" href="fb://sisiapp/f?href=https://www.facebook.com/sisiapp">
-                <i class="fab fa-lg fa-facebook-square"></i>
-            </a> -->
             <!-- <a class="btn-white d-inline d-sm-none" href="fb://page/sisiapp">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a>
