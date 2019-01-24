@@ -26,33 +26,58 @@
         <a class="btn btn-lg btn-light" href="https://api.whatsapp.com/send?phone=526271420604&text=Me%20puedes%20traer%20&source=&data=">
             <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
-        <br><br><br><br>
+        <a class="btn btn-lg btn-light" href="https://m.me/sisiapp">
+            <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
+        </a>
+        <br><br><br>
+        <p class="lead"><i>Ahorra tiempo y dinero</i></p>
+        <br><br>
     </div>
 
+    <!-- <div class="col-sm-12">
+        <h5>Ultimos Pedidos</h5>
+        <ul>
+            <li>Pagar el Gas</li>
+            <li>Pagar el Cable</li>
+            <li>Despensa</li>
+            <li>Medicamento</li>
+        </ul>
+        <h5>Lo más Pedido</h5>
+        <ul>
+            <li>Pagar Servicios</li>
+            <li>Super</li>
+            <li>Farmacia</li>
+        </ul>
+        <h5>Categorias</h5>
+        <ul>
+            <li>Mandados</li>
+            <li>Super</li>
+            <li>Tiendita</li>
+            <li>Farmacia</li>
+            <li>Restaurant</li>
+        </ul>
+    </div> -->
+
     <div class="col-sm-12 text-center">
-        <p>
-            <!-- <a class="btn-white" href="fb://page/sisiapp/f?href=https://www.facebook.com/sisiapp">
-                <i class="fab fa-lg fa-facebook-square"></i>
-            </a> -->
+        <p>Síguenos en
             <a class="btn-white d-inline d-sm-none" href="fb://page/296760280983048">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a>
             <a class="btn-white d-none d-sm-inline" href="https://www.facebook.com/sisiapp" target="_blank">
                 <i class="fab fa-lg fa-facebook-square"></i>
             </a>
-
-            &nbsp;&nbsp;
-            <a class="btn-white" href="https://m.me/sisiapp" target="_blank">
-                <i class="fab fa-lg fa-facebook-messenger"></i>
-            </a>
+             Facebook
+             <br>
+             <small class="hover-color">© 2019 Sisi, all rights reserved</small>
         </p>
+
     </div>
 
-    <div class="col-sm-12 text-center">
+    <!-- <div class="col-sm-12 text-center">
         <p>
             <a class="btn-white" href="mailto:megusta@sisiapp.mx">
                 megusta@sisiapp.mx
             </a>
         </p>
-    </div>
+    </div> -->
 @endsection
