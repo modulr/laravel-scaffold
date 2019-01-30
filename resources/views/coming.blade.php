@@ -2,20 +2,22 @@
 
 @section('auth')
     <div class="col-sm-12 text-center">
-        <img class="img-fluid logo" src="/img/sisi_slogan.png" alt="">
-        <br><br><br><br>
+        <a class="btn-white btn-phone" href="tel:627-142-0604">
+            <img class="img-fluid logo" src="/img/sisi_slogan.png" alt="">
+        </a>
+        <br><br><br>
     </div>
 
     <div class="col-sm-12 text-center">
-        <p>Llámanos</p>
         <a class="btn-white btn-phone" href="tel:627-142-0604">
+            <p>Llámanos</p>
             <h3>
                 <!-- <i class="fas fa-phone"></i> -->
                 <small class="fa-stack">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
-              </small>
-                 627 142 0604
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
+                </small>
+                627 142 0604
             </h3>
         </a>
         <br>
@@ -59,18 +61,20 @@
     </div> -->
 
     <div class="col-sm-12 text-center">
-        <p>Síguenos en
+        <p>
             <a class="btn-white d-inline d-sm-none" href="fb://page/296760280983048">
+                Síguenos en
                 <i class="fab fa-lg fa-facebook-square"></i>
+                Facebook
             </a>
             <a class="btn-white d-none d-sm-inline" href="https://www.facebook.com/sisiapp" target="_blank">
+                Síguenos en
                 <i class="fab fa-lg fa-facebook-square"></i>
+                Facebook
             </a>
-             Facebook
-             <br>
-             <small class="hover-color">© 2019 Sisi, all rights reserved</small>
+            <br>
+            <small class="hover-color">© 2019 Sisi, all rights reserved.</small>
         </p>
-
     </div>
 
     <!-- <div class="col-sm-12 text-center">
