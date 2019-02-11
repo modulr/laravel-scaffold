@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Models\Companies;
+namespace App\Models\Files;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wildside\Userstamps\Userstamps;
-use App\User;
+use Storage;
 
-class Company extends Model
+class File extends Model
 {
     use Userstamps;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
-    public function users()
+    protected $appends = ['url'];
+
+    public function getUrlAttribute()
     {
-        return $this->hasMany(User::class);
+        return Storage::url('files/'.$this->id.'/'.$this->basename);
     }
 }

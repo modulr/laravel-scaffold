@@ -3,7 +3,7 @@
     <div class="row justify-content-md-center">
       <div class="col-md-12 col-xl-9">
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2"><a href="/companies" class="text-dark"><i class="fas fa-angle-left fa-lg"></i></a>&nbsp; Crear empresa</h4>
+          <h4 class="float-left pt-2"><a href="/transactions" class="text-dark"><i class="fas fa-angle-left fa-lg"></i></a>&nbsp; Crear transaccion</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="create">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
@@ -15,13 +15,13 @@
         <div class="card-body px-0">
           <div class="form-group">
             <label>Nombre</label>
-            <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="company.name" placeholder="Modulr Co.">
+            <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="transaction.name" placeholder="Enero 2019">
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
         </div>
         <div class="card-header px-0 bg-transparent">
-          <strong>Usuarios</strong><br>
-          <small class="text-muted">Contactos de la empresa con acceso al sistema.</small>
+          <strong>Etapas</strong><br>
+          <small class="text-muted">Etapas de la transaccion.</small>
           <div class="card-header-actions">
             <div class="float-left mr-2 d-sm-down-none">
               <div class="progress" style="height: 4px;">
@@ -34,24 +34,9 @@
           </div>
         </div>
         <div class="card-body text-center px-0 collapse show" id="collapseUsers">
-          <p class="text-muted">Podras crear usuarios para comunicarte con ellos, una vez creada la empresa.</p>
+          <p class="text-muted">Podras crear etapas, una vez creada la transaccion.</p>
           <a class="btn btn-success disabled mb-2" href="#" role="button">
-            <i class="fa fa-plus"></i>&nbsp; Crear usuario
-          </a>
-        </div>
-        <div class="card-header px-0 bg-transparent">
-          <strong>Transacciones</strong><br>
-          <small class="text-muted">Transacciones con otras empresas.</small>
-          <div class="card-header-actions">
-            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseTransactions" aria-expanded="false">
-              <i class="icon-arrow-up"></i>
-            </a>
-          </div>
-        </div>
-        <div class="card-body text-center px-0 collapse" id="collapseTransactions">
-          <p class="text-muted">Podras crear transacciones y llebar el control de la documentacion, una vez creada la empresa.</p>
-          <a class="btn btn-success disabled mb-2" href="#" role="button">
-            <i class="fa fa-plus"></i>&nbsp; Crear transaccion
+            <i class="fa fa-plus"></i>&nbsp; Crear etapa
           </a>
         </div>
       </div>
@@ -63,7 +48,7 @@
 export default {
   data () {
     return {
-      company: {},
+      transaction: {},
       errors: {},
       submiting: false
     }
@@ -72,10 +57,10 @@ export default {
     create () {
       if (!this.submiting) {
         this.submiting = true
-        axios.post(`/api/companies/store`, this.company)
+        axios.post(`/api/transactions/store`, this.transaction)
         .then(response => {
-          this.$toasted.global.error('Empresa creada!')
-          location.href = `/companies/${response.data.id}/edit`
+          this.$toasted.global.error('Transaccion creada!')
+          location.href = `/transactions/${response.data.id}/edit`
         })
         .catch(error => {
           this.errors = error.response.data.errors

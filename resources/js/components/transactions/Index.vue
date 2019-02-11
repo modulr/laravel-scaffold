@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
-      <h4 class="float-left pt-2">Empresas</h4>
+      <h4 class="float-left pt-2">Transacciones</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-success" href="/companies/create">Crear empresa</a>
+        <a class="btn btn-success" href="/transactions/create">Crear transaccion</a>
       </div>
     </div>
     <div class="card-body px-0">
@@ -41,8 +41,10 @@
               <a href="#" class="text-dark" @click.prevent="sort('name')">Nombre</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
-            <th>Usuarios</th>
-            <th>Transacciones</th>
+            <th>
+              <a href="#" class="text-dark" @click.prevent="sort('finished')">Finalizada</a>
+              <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'desc'}"></i>
+            </th>
             <th class="d-none d-sm-table-cell">
               <a href="#" class="text-dark" @click.prevent="sort('created_at')">Creada</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
@@ -51,23 +53,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="company in companies" @click="edit(company.id)">
-            <td class="d-none d-sm-table-cell">{{company.id}}</td>
-            <td>{{company.name}}</td>
-            <td class="text-center">
-              <small class="text-muted">{{company.users.length}} de 10</small>
-              <div class="progress" style="height: 4px;">
-                <div class="progress-bar bg-info" role="progressbar" :style="`width: ${company.users.length*100/10}%`" :aria-valuenow="company.users.length*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
-              </div>
-            </td>
+          <tr v-for="transaction in transactions" @click="edit(transaction.id)">
+            <td class="d-none d-sm-table-cell">{{transaction.id}}</td>
+            <td>{{transaction.name}}</td>
             <td>
-              <small class="text-muted">0 de 10</small>
-              <div class="progress" style="height: 4px;">
-                <div class="progress-bar bg-info" role="progressbar" :style="`width: ${0*100/10}%`" :aria-valuenow="0*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
-              </div>
+              <span v-if="transaction.finished">Finalizada</span>
+              <span v-else>Abierta</span>
             </td>
             <td class="d-none d-sm-table-cell">
-              <small>{{company.created_at | moment("LL")}}</small> - <small class="text-muted">{{company.created_at | moment("LT")}}</small>
+              <small>{{transaction.created_at | moment("LL")}}</small> - <small class="text-muted">{{transaction.created_at | moment("LT")}}</small>
             </td>
             <td class="d-none d-sm-table-cell">
               <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
@@ -96,12 +90,12 @@
           </nav>
         </div>
       </div>
-      <div class="no-items-found text-center mt-5" v-if="!loading && !companies.length > 0">
+      <div class="no-items-found text-center mt-5" v-if="!loading && !transactions.length > 0">
         <i class="icon-magnifier fa-3x text-muted"></i>
         <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
         <p class="text-muted">Try changing the filters or add a new one</p>
-        <a class="btn btn-success" href="/companies/create" role="button">
-          <i class="fa fa-plus"></i>&nbsp; Crear Empresa
+        <a class="btn btn-success" href="/transactions/create" role="button">
+          <i class="fa fa-plus"></i>&nbsp; Crear Transaccion
         </a>
       </div>
       <content-placeholders v-if="loading">
@@ -115,7 +109,7 @@
 export default {
   data () {
     return {
-      companies: [],
+      transactions: [],
       filters: {
         pagination: {
           from: 0,
@@ -135,40 +129,40 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem("filtersTableCompanies")) {
-      this.filters = JSON.parse(localStorage.getItem("filtersTableCompanies"))
+    if (localStorage.getItem("filtersTableTransactions")) {
+      this.filters = JSON.parse(localStorage.getItem("filtersTableTransactions"))
     } else {
-      localStorage.setItem("filtersTableCompanies", this.filters);
+      localStorage.setItem("filtersTableTransactions", this.filters);
     }
-    this.getCompanies()
+    this.getTransactions()
   },
   methods: {
-    getCompanies () {
+    getTransactions () {
       this.loading = true
-      this.companies = []
+      this.transactions = []
 
-      localStorage.setItem("filtersTableCompanies", JSON.stringify(this.filters));
+      localStorage.setItem("filtersTableTransactions", JSON.stringify(this.filters));
 
-      axios.post(`/api/companies/filter?page=${this.filters.pagination.current_page}`, this.filters)
+      axios.post(`/api/transactions/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
-        this.companies = response.data.data
+        this.transactions = response.data.data
         delete response.data.data
         this.filters.pagination = response.data
         this.loading = false
       })
     },
-    edit (companyId) {
-      location.href = `/companies/${companyId}/edit`
+    edit (transactionId) {
+      location.href = `/transactions/${transactionId}/edit`
     },
     // filters
     filter() {
       this.filters.pagination.current_page = 1
-      this.getCompanies()
+      this.getTransactions()
     },
     changeSize (perPage) {
       this.filters.pagination.current_page = 1
       this.filters.pagination.per_page = perPage
-      this.getCompanies()
+      this.getTransactions()
     },
     sort (column) {
       if(column == this.filters.orderBy.column) {
@@ -178,11 +172,11 @@ export default {
         this.filters.orderBy.direction = 'asc'
       }
 
-      this.getCompanies()
+      this.getTransactions()
     },
     changePage (page) {
       this.filters.pagination.current_page = page
-      this.getCompanies()
+      this.getTransactions()
     }
   }
 }

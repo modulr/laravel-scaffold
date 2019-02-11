@@ -62,6 +62,13 @@ Vue.component('companies-create', require('./components/companies/Create.vue'));
 Vue.component('companies-edit', require('./components/companies/Edit.vue'));
 Vue.component('companies-users', require('./components/companies/Users.vue'));
 
+// Transactions
+Vue.component('transactions-index', require('./components/transactions/Index.vue'));
+Vue.component('transactions-create', require('./components/transactions/Create.vue'));
+Vue.component('transactions-edit', require('./components/transactions/Edit.vue'));
+Vue.component('transactions-stages', require('./components/transactions/Stages.vue'));
+Vue.component('transactions-file', require('./components/transactions/File.vue'));
+
 const app = new Vue({
     el: '#app'
 });

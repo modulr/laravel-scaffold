@@ -30,3 +30,6 @@ require __DIR__ . '/roles/roles.php';
 require __DIR__ . '/roles/permissions.php';
 require __DIR__ . '/modules/modules.php';
 require __DIR__ . '/companies/companies.php';
+require __DIR__ . '/transactions/transactions.php';
+require __DIR__ . '/stages/stages.php';
+require __DIR__ . '/files/files.php';

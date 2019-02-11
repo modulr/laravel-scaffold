@@ -71,12 +71,12 @@
           </div>
           <div class="modal-body">
             <div class="row" v-if="!loadingEdit">
-              <div class="form-group col-md-9">
-                <label>Nombre</label>
-                <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="John Doe">
-                <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
-              </div>
               <div class="col-md-12">
+                <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="John Doe">
+                  <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
+                </div>
                 <div class="form-group">
                   <label>Email</label>
                   <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="user.email" placeholder="john@modulr.io">

@@ -4,7 +4,7 @@
       <div class="col-md-12 col-xl-9" v-if="!loading">
         <!--button actions-->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2"><a href="/companies"><i class="fas fa-angle-left fa-lg"></i></a>&nbsp; Editar Empresa</h4>
+          <h4 class="float-left pt-2"><a href="/companies" class="text-dark"><i class="fas fa-angle-left fa-lg"></i></a>&nbsp; Editar Empresa</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
@@ -41,11 +41,11 @@
             </a>
           </div>
         </div>
-        <div class="card-body px-0 collapse" id="collapseUsers">
+        <div class="card-body px-0 collapse show" id="collapseUsers">
           <companies-users :company="company"></companies-users>
         </div>
         <div class="card-header px-0 bg-transparent">
-          <strong>Transactions</strong><br>
+          <strong>Transacciones</strong><br>
           <small class="text-muted">Transacciones con otras empresas.</small>
           <div class="card-header-actions">
             <div class="card-header-actions">
@@ -55,7 +55,7 @@
                   <div class="progress-bar bg-info" role="progressbar" :style="`width: ${0*100/10}%`" :aria-valuenow="0*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
                 </div>
               </div>
-              <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseTransactions" aria-expanded="true">
+              <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseTransactions" aria-expanded="false">
                 <i class="icon-arrow-up"></i>
               </a>
             </div>
