@@ -83,7 +83,6 @@ export default {
       axios.get(`/api/transactions/${res[2]}`)
       .then(response => {
         this.transaction = response.data
-        console.log(this.transaction);
       })
       .catch(error => {
         this.$toasted.global.error('Transaction does not exist!')

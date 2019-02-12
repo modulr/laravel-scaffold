@@ -22,4 +22,9 @@ class Stage extends Model
     {
         return $this->hasMany('App\Models\Files\File');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comments\Comment'::class);
+    }
 }

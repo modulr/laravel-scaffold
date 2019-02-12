@@ -33,3 +33,4 @@ require __DIR__ . '/companies/companies.php';
 require __DIR__ . '/transactions/transactions.php';
 require __DIR__ . '/stages/stages.php';
 require __DIR__ . '/files/files.php';
+require __DIR__ . '/comments/comments.php';

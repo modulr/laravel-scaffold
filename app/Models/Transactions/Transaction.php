@@ -13,13 +13,13 @@ class Transaction extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
-    public function stages()
-    {
-        return $this->hasMany('App\Models\Stages\Stage'::class);
-    }
-
     public function finishedByUser()
     {
         return $this->belongsTo('App\User', 'finished_by');
+    }
+
+    public function stages()
+    {
+        return $this->hasMany('App\Models\Stages\Stage'::class);
     }
 }

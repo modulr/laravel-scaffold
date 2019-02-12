@@ -70,6 +70,7 @@ Vue.component('transactions-create', require('./components/transactions/Create.v
 Vue.component('transactions-edit', require('./components/transactions/Edit.vue'));
 Vue.component('transactions-stages', require('./components/transactions/Stages.vue'));
 Vue.component('transactions-file', require('./components/transactions/File.vue'));
+Vue.component('transactions-comments', require('./components/transactions/Comments.vue'));
 
 const app = new Vue({
     el: '#app'

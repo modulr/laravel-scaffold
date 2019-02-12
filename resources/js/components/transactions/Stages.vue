@@ -14,7 +14,7 @@
             <div>
               <a href="#" class="text-secondary" @click.prevent="editStage(stage.id, index)"><i class="fas fa-pencil-alt"></i></a>
               <a href="#" class="ml-2 text-secondary" @click.prevent="uploadFile(stage, index)"><i class="fas fa-cloud-upload-alt"></i></a>
-              <a href="#" class="ml-2 text-secondary"><i class="fas fa-comment"></i></a>
+              <a href="#" class="ml-2 text-secondary" @click.prevent="comments(stage, index)"><i class="fas fa-comment"></i></a>
             </div>
           </div>
           <div class="media">
@@ -42,7 +42,7 @@
       </a>
       <p class="text-muted"><small>Agrega etapas en las transaccion.</small></p>
     </div>
-    <!-- stage Create -->
+    <!-- Stage Create -->
     <div class="modal fade" id="stageCreateModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-    <!-- stage Edit -->
+    <!-- Stage Edit -->
     <div class="modal fade" id="stageEditModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -110,7 +110,7 @@
         </div>
       </div>
     </div>
-    <!-- stage Upload File -->
+    <!-- Stage Upload File -->
     <div class="modal fade" id="stageUploadFileModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -122,6 +122,22 @@
           </div>
           <div class="modal-body">
             <transactions-file :stage="stage"></transactions-file>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Stage Comments -->
+    <div class="modal fade" id="stageCommentsModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Comentarios</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <transactions-comments :stage="stage"></transactions-comments>
           </div>
         </div>
       </div>
@@ -270,7 +286,12 @@ export default {
           })
         }
       })
-    }
+    },
+    comments (stage, index) {
+      this.stage = stage
+      this.stage.index = index
+      $('#stageCommentsModal').modal('show')
+    },
   }
 }
 </script>
