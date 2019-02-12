@@ -50,7 +50,7 @@ class StageController extends Controller
         return Stage::destroy($stage);
     }
 
-    public function toogleAuthorized (Request $request)
+    public function toggleAuthorized (Request $request)
     {
         $this->validate($request, [
             'authorized' => 'required|boolean'

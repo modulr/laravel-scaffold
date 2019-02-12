@@ -63,4 +63,9 @@ class CompanyController extends Controller
     {
         return Company::destroy($company);
     }
+
+    public function count ()
+    {
+        return Company::count();
+    }    
 }

@@ -41,6 +41,8 @@ Vue.use(VueContentPlaceholders)
 // Dashboard
 Vue.component('users-count', require('./components/dashboard/UsersCount.vue'));
 Vue.component('roles-count', require('./components/dashboard/RolesCount.vue'));
+Vue.component('transactions-count', require('./components/dashboard/TransactionsCount.vue'));
+Vue.component('companies-count', require('./components/dashboard/CompaniesCount.vue'));
 
 // Profile
 Vue.component('profile', require('./components/profile/Profile.vue'));

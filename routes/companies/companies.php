@@ -15,6 +15,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'CompanyController@store')->middleware('permission:create-companies');
             Route::put('/update/{company}', 'CompanyController@update')->middleware('permission:update-companies');
             Route::delete('/{company}', 'CompanyController@destroy')->middleware('permission:delete-companies');
+            Route::post('/count', 'CompanyController@count')->middleware('permission:read-companies');
         });
     });
 });

@@ -28,7 +28,7 @@
           <div class="form-group">
             <div class="float-left mr-3">
               <label class="switch switch-label switch-pill switch-success">
-                <input class="switch-input form-check-input" type="checkbox" v-model="transaction.finished" @change="toogleFinished">
+                <input class="switch-input form-check-input" type="checkbox" v-model="transaction.finished" @change="toggleFinished">
                 <span class="switch-slider" data-checked="✓" data-unchecked="✕"></span>
               </label>
             </div>
@@ -132,8 +132,8 @@ export default {
         })
       }
     },
-    toogleFinished () {
-      axios.put(`/api/transactions/toogleFinished/${this.transaction.id}`, this.transaction)
+    toggleFinished () {
+      axios.put(`/api/transactions/toggleFinished/${this.transaction.id}`, this.transaction)
       .then(response => {
         this.transaction.finished_by = response.data.finished_by
         this.transaction.finished_by_user = response.data.finished_by_user

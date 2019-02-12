@@ -14166,6 +14166,8 @@ Vue.component('sidebar', __webpack_require__(54));
 // Dashboard
 Vue.component('users-count', __webpack_require__(57));
 Vue.component('roles-count', __webpack_require__(60));
+Vue.component('transactions-count', __webpack_require__(150));
+Vue.component('companies-count', __webpack_require__(147));
 
 // Profile
 Vue.component('profile', __webpack_require__(63));
@@ -70556,10 +70558,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    toogleFinished: function toogleFinished() {
+    toggleFinished: function toggleFinished() {
       var _this4 = this;
 
-      axios.put('/api/transactions/toogleFinished/' + this.transaction.id, this.transaction).then(function (response) {
+      axios.put('/api/transactions/toggleFinished/' + this.transaction.id, this.transaction).then(function (response) {
         _this4.transaction.finished_by = response.data.finished_by;
         _this4.transaction.finished_by_user = response.data.finished_by_user;
         if (response.data.finished) {
@@ -70731,7 +70733,7 @@ var render = function() {
                                 _vm.$set(_vm.transaction, "finished", $$c)
                               }
                             },
-                            _vm.toogleFinished
+                            _vm.toggleFinished
                           ]
                         }
                       }),
@@ -71124,10 +71126,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    toogleAuthorized: function toogleAuthorized(stage, index) {
+    toggleAuthorized: function toggleAuthorized(stage, index) {
       var _this5 = this;
 
-      axios.put('/api/stages/toogleAuthorized/' + stage.id, stage).then(function (response) {
+      axios.put('/api/stages/toggleAuthorized/' + stage.id, stage).then(function (response) {
         _this5.transaction.stages[index].authorized = response.data.authorized;
         _this5.transaction.stages[index].authorized_by = response.data.authorized_by;
         _this5.transaction.stages[index].authorized_by_user = response.data.authorized_by_user;
@@ -71245,7 +71247,7 @@ var render = function() {
                               }
                             },
                             function($event) {
-                              _vm.toogleAuthorized(stage, index)
+                              _vm.toggleAuthorized(stage, index)
                             }
                           ]
                         }
@@ -71942,6 +71944,352 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-74ca405b", module.exports)
+  }
+}
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(148)
+/* template */
+var __vue_template__ = __webpack_require__(149)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/dashboard/CompaniesCount.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-42adc4ba", Component.options)
+  } else {
+    hotAPI.reload("data-v-42adc4ba", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 148 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      count: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getCount();
+  },
+
+  methods: {
+    getCount: function getCount() {
+      var _this = this;
+
+      axios.post("/api/companies/count").then(function (response) {
+        _this.count = response.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body p-3 d-flex align-items-center" }, [
+      _c("i", { staticClass: "fas fa-building bg-primary p-3 font-2xl mr-3" }),
+      _vm._v(" "),
+      _c("div", [
+        _c("div", { staticClass: "text-value-sm text-dark" }, [
+          _vm._v("Empresas")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-muted font-weight-bold small" }, [
+          _vm._v(_vm._s(_vm.count) + " de 10")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "progress my-2", staticStyle: { height: "4px" } },
+          [
+            _c("div", {
+              staticClass: "progress-bar bg-info",
+              style: "width: " + (_vm.count * 100) / 10 + "%",
+              attrs: {
+                role: "progressbar",
+                "aria-valuenow": (_vm.count * 100) / 10,
+                "aria-valuemin": "0",
+                "aria-valuemax": "10"
+              }
+            })
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer px-3 py-2" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn-block text-muted d-flex justify-content-between align-items-center",
+          attrs: { href: "/companies" }
+        },
+        [
+          _c("span", { staticClass: "small font-weight-bold" }, [
+            _vm._v("Crear empresa")
+          ]),
+          _vm._v(" "),
+          _c("i", { staticClass: "fa fa-plus" })
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-42adc4ba", module.exports)
+  }
+}
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(151)
+/* template */
+var __vue_template__ = __webpack_require__(152)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/dashboard/TransactionsCount.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-670dd764", Component.options)
+  } else {
+    hotAPI.reload("data-v-670dd764", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 151 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      count: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getCount();
+  },
+
+  methods: {
+    getCount: function getCount() {
+      var _this = this;
+
+      axios.post("/api/transactions/count").then(function (response) {
+        _this.count = response.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body p-3 d-flex align-items-center" }, [
+      _c("i", {
+        staticClass: "fas fa-exchange-alt bg-success p-3 font-2xl mr-3"
+      }),
+      _vm._v(" "),
+      _c("div", [
+        _c("div", { staticClass: "text-value-sm text-dark" }, [
+          _vm._v("Transacciones")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-muted font-weight-bold small" }, [
+          _vm._v(_vm._s(_vm.count) + " de 10")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "progress my-2", staticStyle: { height: "4px" } },
+          [
+            _c("div", {
+              staticClass: "progress-bar bg-success",
+              style: "width: " + (_vm.count * 100) / 10 + "%",
+              attrs: {
+                role: "progressbar",
+                "aria-valuenow": (_vm.count * 100) / 10,
+                "aria-valuemin": "0",
+                "aria-valuemax": "10"
+              }
+            })
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer px-3 py-2" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn-block text-muted d-flex justify-content-between align-items-center",
+          attrs: { href: "/transactions" }
+        },
+        [
+          _c("span", { staticClass: "small font-weight-bold" }, [
+            _vm._v("Crear transaccion")
+          ]),
+          _vm._v(" "),
+          _c("i", { staticClass: "fa fa-plus" })
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-670dd764", module.exports)
   }
 }
 

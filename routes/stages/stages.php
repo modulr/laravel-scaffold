@@ -8,7 +8,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'StageController@store')->middleware('permission:create-stages');
             Route::put('/update/{stage}', 'StageController@update')->middleware('permission:update-stages');
             Route::delete('/{stage}', 'StageController@destroy')->middleware('permission:delete-stages');
-            Route::put('/toogleAuthorized/{stage}', 'StageController@toogleAuthorized')->middleware('permission:update-stages');
+            Route::put('/toggleAuthorized/{stage}', 'StageController@toggleAuthorized')->middleware('permission:update-stages');
         });
     });
 });

@@ -15,7 +15,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'TransactionController@store')->middleware('permission:create-transactions');
             Route::put('/update/{transaction}', 'TransactionController@update')->middleware('permission:update-transactions');
             Route::delete('/{transaction}', 'TransactionController@destroy')->middleware('permission:delete-transactions');
-            Route::put('/toogleFinished/{transaction}', 'TransactionController@toogleFinished')->middleware('permission:update-transactions');
+            Route::post('/count', 'TransactionController@count')->middleware('permission:read-transactions');
+            Route::put('/toggleFinished/{transaction}', 'TransactionController@toggleFinished')->middleware('permission:update-transactions');
         });
     });
 });

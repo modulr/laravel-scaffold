@@ -4,7 +4,7 @@
       <li v-for="(stage, index) in transaction.stages" track-by="id" class="list-group-item media border-light">
         <div class="float-left mr-3">
           <label class="switch switch-label switch-success">
-            <input class="switch-input" type="checkbox" v-model="stage.authorized" @change="toogleAuthorized(stage, index)">
+            <input class="switch-input" type="checkbox" v-model="stage.authorized" @change="toggleAuthorized(stage, index)">
             <span class="switch-slider" data-checked="✓" data-unchecked="✕"></span>
           </label>
         </div>
@@ -225,8 +225,8 @@ export default {
         })
       }
     },
-    toogleAuthorized (stage, index) {
-      axios.put(`/api/stages/toogleAuthorized/${stage.id}`, stage)
+    toggleAuthorized (stage, index) {
+      axios.put(`/api/stages/toggleAuthorized/${stage.id}`, stage)
       .then(response => {
         this.transaction.stages[index].authorized = response.data.authorized
         this.transaction.stages[index].authorized_by = response.data.authorized_by

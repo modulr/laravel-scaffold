@@ -62,7 +62,12 @@ class TransactionController extends Controller
         return Transaction::destroy($transaction);
     }
 
-    public function toogleFinished (Request $request)
+    public function count ()
+    {
+        return Transaction::count();
+    }
+
+    public function toggleFinished (Request $request)
     {
         $this->validate($request, [
             'finished' => 'required|boolean'
