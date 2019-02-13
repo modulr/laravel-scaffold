@@ -67407,13 +67407,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67648,8 +67641,6 @@ var render = function() {
               _vm._v(" "),
               _c("th", [_vm._v("Usuarios")]),
               _vm._v(" "),
-              _c("th", [_vm._v("Transacciones")]),
-              _vm._v(" "),
               _c("th", { staticClass: "d-none d-sm-table-cell" }, [
                 _c(
                   "a",
@@ -67721,32 +67712,6 @@ var render = function() {
                           attrs: {
                             role: "progressbar",
                             "aria-valuenow": (company.users.length * 100) / 10,
-                            "aria-valuemin": "0",
-                            "aria-valuemax": 10
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v("0 de 10")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "progress",
-                        staticStyle: { height: "4px" }
-                      },
-                      [
-                        _c("div", {
-                          staticClass: "progress-bar bg-info",
-                          style: "width: " + (0 * 100) / 10 + "%",
-                          attrs: {
-                            role: "progressbar",
-                            "aria-valuenow": (0 * 100) / 10,
                             "aria-valuemin": "0",
                             "aria-valuemax": 10
                           }
@@ -68085,21 +68050,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68238,11 +68188,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4)
+        _vm._m(2)
       ])
     ])
   ])
@@ -68303,66 +68249,6 @@ var staticRenderFns = [
           [
             _c("i", { staticClass: "fa fa-plus" }),
             _vm._v("  Crear usuario\n        ")
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-      _c("strong", [_vm._v("Transacciones")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Transacciones con otras empresas.")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-header-actions" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-header-action btn-minimize",
-            attrs: {
-              href: "#",
-              "data-toggle": "collapse",
-              "data-target": "#collapseTransactions",
-              "aria-expanded": "false"
-            }
-          },
-          [_c("i", { staticClass: "icon-arrow-up" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "card-body text-center px-0 collapse",
-        attrs: { id: "collapseTransactions" }
-      },
-      [
-        _c("p", { staticClass: "text-muted" }, [
-          _vm._v(
-            "Podras crear transacciones y llebar el control de la documentacion, una vez creada la empresa."
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-success disabled mb-2",
-            attrs: { href: "#", role: "button" }
-          },
-          [
-            _c("i", { staticClass: "fa fa-plus" }),
-            _vm._v("  Crear transaccion\n        ")
           ]
         )
       ]
@@ -68431,29 +68317,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -68736,49 +68599,6 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-              _c("strong", [_vm._v("Transacciones")]),
-              _c("br"),
-              _vm._v(" "),
-              _c("small", { staticClass: "text-muted" }, [
-                _vm._v("Transacciones con otras empresas.")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-header-actions" }, [
-                _c("div", { staticClass: "card-header-actions" }, [
-                  _c("div", { staticClass: "float-left mr-2" }, [
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v("0 de 10")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "progress",
-                        staticStyle: { height: "4px" }
-                      },
-                      [
-                        _c("div", {
-                          staticClass: "progress-bar bg-info",
-                          style: "width: " + (0 * 100) / 10 + "%",
-                          attrs: {
-                            role: "progressbar",
-                            "aria-valuenow": (0 * 100) / 10,
-                            "aria-valuemin": "0",
-                            "aria-valuemax": 10
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
             _c("div", { staticClass: "card-body text-right px-0" }, [
               _c("small", { staticClass: "text-muted" }, [
                 _vm._v("Creada "),
@@ -68827,57 +68647,6 @@ var staticRenderFns = [
         }
       },
       [_c("i", { staticClass: "icon-arrow-up" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "card-header-action btn-minimize",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapseTransactions",
-          "aria-expanded": "false"
-        }
-      },
-      [_c("i", { staticClass: "icon-arrow-up" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "card-body text-center px-0 collapse",
-        attrs: { id: "collapseTransactions" }
-      },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-success mb-2",
-            attrs: { href: "/transaction/create", role: "button" }
-          },
-          [
-            _c("i", { staticClass: "fa fa-plus" }),
-            _vm._v("  Crear transaccion\n        ")
-          ]
-        ),
-        _vm._v(" "),
-        _c("p", [
-          _c("small", { staticClass: "text-muted" }, [
-            _vm._v(
-              "Crea transacciones, para llebar el control de tus documentos y conversaciones."
-            )
-          ])
-        ])
-      ]
     )
   }
 ]
@@ -69822,6 +69591,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70063,6 +69842,64 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
+                        _vm.sort("company_export_id")
+                      }
+                    }
+                  },
+                  [_vm._v("Import")]
+                ),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "mr-1 fas",
+                  class: {
+                    "fa-long-arrow-alt-down":
+                      _vm.filters.orderBy.column == "company_import_id" &&
+                      _vm.filters.orderBy.direction == "asc",
+                    "fa-long-arrow-alt-up":
+                      _vm.filters.orderBy.column == "company_import_id" &&
+                      _vm.filters.orderBy.direction == "desc"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-dark",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.sort("company_export_id")
+                      }
+                    }
+                  },
+                  [_vm._v("Export")]
+                ),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "mr-1 fas",
+                  class: {
+                    "fa-long-arrow-alt-down":
+                      _vm.filters.orderBy.column == "company_export_id" &&
+                      _vm.filters.orderBy.direction == "asc",
+                    "fa-long-arrow-alt-up":
+                      _vm.filters.orderBy.column == "company_export_id" &&
+                      _vm.filters.orderBy.direction == "desc"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("th", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-dark",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
                         _vm.sort("finished")
                       }
                     }
@@ -70135,10 +69972,18 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(transaction.name))]),
                   _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(transaction.company_import.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(transaction.company_export.name))]),
+                  _vm._v(" "),
                   _c("td", [
                     transaction.finished
-                      ? _c("span", [_vm._v("Finalizada")])
-                      : _c("span", [_vm._v("Abierta")])
+                      ? _c("span", { staticClass: "badge badge-success" }, [
+                          _vm._v("Finalizada")
+                        ])
+                      : _c("span", { staticClass: "badge badge-primary" }, [
+                          _vm._v("Abierta")
+                        ])
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "d-none d-sm-table-cell" }, [
@@ -70475,29 +70320,127 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      companies: [],
       transaction: {},
       errors: {},
       submiting: false
     };
   },
+  mounted: function mounted() {
+    this.getCompanies();
+  },
 
   methods: {
-    create: function create() {
+    getCompanies: function getCompanies() {
       var _this = this;
+
+      axios.get('/api/companies/all').then(function (response) {
+        _this.companies = response.data;
+      }).catch(function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    },
+    create: function create() {
+      var _this2 = this;
 
       if (!this.submiting) {
         this.submiting = true;
+        this.transaction.company_import_id = this.transaction.company_import ? this.transaction.company_import.id : null;
+        this.transaction.company_export_id = this.transaction.company_export ? this.transaction.company_export.id : null;
+        this.transaction.customs_import_id = this.transaction.customs_import ? this.transaction.customs_import.id : null;
+        this.transaction.customs_export_id = this.transaction.customs_export ? this.transaction.customs_export.id : null;
         axios.post('/api/transactions/store', this.transaction).then(function (response) {
-          _this.$toasted.global.error('Transaccion creada!');
+          _this2.$toasted.global.error('Transaccion creada!');
           location.href = '/transactions/' + response.data.id + '/edit';
         }).catch(function (error) {
-          _this.errors = error.response.data.errors;
+          _this2.errors = error.response.data.errors;
         }).then(function () {
-          _this.submiting = false;
+          _this2.submiting = false;
         });
       }
     }
@@ -70559,7 +70502,7 @@ var render = function() {
                   expression: "transaction.name"
                 }
               ],
-              staticClass: "form-control",
+              staticClass: "form-control form-control-lg",
               class: { "is-invalid": _vm.errors.name },
               attrs: { type: "text", placeholder: "Enero 2019" },
               domProps: { value: _vm.transaction.name },
@@ -70580,6 +70523,171 @@ var render = function() {
               : _vm._e()
           ])
         ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "card-body px-0 collapse show",
+            attrs: { id: "collapseCompanies" }
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Empresa Importadora")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      class: {
+                        "border border-danger rounded":
+                          _vm.errors.company_import_id
+                      },
+                      attrs: {
+                        options: _vm.companies,
+                        openDirection: "bottom",
+                        "track-by": "id",
+                        label: "name"
+                      },
+                      model: {
+                        value: _vm.transaction.company_import,
+                        callback: function($$v) {
+                          _vm.$set(_vm.transaction, "company_import", $$v)
+                        },
+                        expression: "transaction.company_import"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.company_import_id
+                      ? _c("small", { staticClass: "form-text text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.company_import_id[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Aduana Importadora")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      class: {
+                        "border border-danger rounded":
+                          _vm.errors.customs_import_id
+                      },
+                      attrs: {
+                        options: _vm.companies,
+                        openDirection: "bottom",
+                        "track-by": "id",
+                        label: "name"
+                      },
+                      model: {
+                        value: _vm.transaction.customs_import,
+                        callback: function($$v) {
+                          _vm.$set(_vm.transaction, "customs_import", $$v)
+                        },
+                        expression: "transaction.customs_import"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.customs_import_id
+                      ? _c("small", { staticClass: "form-text text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.customs_import_id[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Empresa Exportadora")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      class: {
+                        "border border-danger rounded":
+                          _vm.errors.company_export_id
+                      },
+                      attrs: {
+                        options: _vm.companies,
+                        openDirection: "bottom",
+                        "track-by": "id",
+                        label: "name"
+                      },
+                      model: {
+                        value: _vm.transaction.company_export,
+                        callback: function($$v) {
+                          _vm.$set(_vm.transaction, "company_export", $$v)
+                        },
+                        expression: "transaction.company_export"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.company_export_id
+                      ? _c("small", { staticClass: "form-text text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.company_export_id[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Aduana Exportadora")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      class: {
+                        "border border-danger rounded":
+                          _vm.errors.customs_export_id
+                      },
+                      attrs: {
+                        options: _vm.companies,
+                        openDirection: "bottom",
+                        "track-by": "id",
+                        label: "name"
+                      },
+                      model: {
+                        value: _vm.transaction.customs_export,
+                        callback: function($$v) {
+                          _vm.$set(_vm.transaction, "customs_export", $$v)
+                        },
+                        expression: "transaction.customs_export"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.customs_export_id
+                      ? _c("small", { staticClass: "form-text text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.customs_export_id[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
           _c("strong", [_vm._v("Etapas")]),
@@ -70609,11 +70717,11 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _vm._m(4)
           ])
         ]),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(5)
       ])
     ])
   ])
@@ -70634,6 +70742,83 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+      _c("strong", [_vm._v("Empresas")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v("Empresas involucradas en la transaccion.")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header-actions" }, [
+        _c(
+          "a",
+          {
+            staticClass: "card-header-action btn-minimize",
+            attrs: {
+              href: "#",
+              "data-toggle": "collapse",
+              "data-target": "#collapseCompanies",
+              "aria-expanded": "true"
+            }
+          },
+          [_c("i", { staticClass: "icon-arrow-up" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+      _c("strong", [_vm._v("Usuarios")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v("Usuarios participantes en la transaccion.")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header-actions" }, [
+        _c(
+          "a",
+          {
+            staticClass: "card-header-action btn-minimize",
+            attrs: {
+              href: "#",
+              "data-toggle": "collapse",
+              "data-target": "#collapseUsers",
+              "aria-expanded": "false"
+            }
+          },
+          [_c("i", { staticClass: "icon-arrow-up" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "card-body text-center px-0 collapse",
+        attrs: { id: "collapseUsers" }
+      },
+      [
+        _c("p", { staticClass: "text-muted" }, [
+          _vm._v(
+            "Podras visualizar los usuarios participantes, una vez creada la transaccion."
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "a",
       {
@@ -70641,8 +70826,8 @@ var staticRenderFns = [
         attrs: {
           href: "#",
           "data-toggle": "collapse",
-          "data-target": "#collapseUsers",
-          "aria-expanded": "true"
+          "data-target": "#collapseSteps",
+          "aria-expanded": "false"
         }
       },
       [_c("i", { staticClass: "icon-arrow-up" })]
@@ -70655,8 +70840,8 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "card-body text-center px-0 collapse show",
-        attrs: { id: "collapseUsers" }
+        staticClass: "card-body text-center px-0 collapse",
+        attrs: { id: "collapseSteps" }
       },
       [
         _c("p", { staticClass: "text-muted" }, [
@@ -70803,6 +70988,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70815,41 +71096,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    this.getTransaction();
+    this.getCompanies();
   },
 
   methods: {
-    getTransaction: function getTransaction() {
+    getCompanies: function getCompanies() {
       var _this = this;
 
       this.loading = true;
+      axios.get('/api/companies/all').then(function (response) {
+        _this.companies = response.data;
+        _this.getTransaction();
+      }).catch(function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    },
+    getTransaction: function getTransaction() {
+      var _this2 = this;
+
       var str = window.location.pathname;
       var res = str.split("/");
       axios.get('/api/transactions/' + res[2]).then(function (response) {
-        _this.transaction = response.data;
+        _this2.transaction = response.data;
+        console.log(_this2.transaction);
       }).catch(function (error) {
-        _this.$toasted.global.error('Transaction does not exist!');
+        _this2.$toasted.global.error('Transaction does not exist!');
         location.href = '/transactions';
       }).then(function () {
-        _this.loading = false;
+        _this2.loading = false;
       });
     },
     update: function update() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.submiting) {
         this.submiting = true;
+        this.transaction.company_import_id = this.transaction.company_import ? this.transaction.company_import.id : null;
+        this.transaction.company_export_id = this.transaction.company_export ? this.transaction.company_export.id : null;
+        this.transaction.customs_import_id = this.transaction.customs_import ? this.transaction.customs_import.id : null;
+        this.transaction.customs_export_id = this.transaction.customs_export ? this.transaction.customs_export.id : null;
         axios.put('/api/transactions/update/' + this.transaction.id, this.transaction).then(function (response) {
-          _this2.$toasted.global.error('Updated transaction!');
+          _this3.$toasted.global.error('Updated transaction!');
           location.href = '/transactions';
         }).catch(function (error) {
-          _this2.errors = error.response.data.errors;
-          _this2.submiting = false;
+          _this3.errors = error.response.data.errors;
+          _this3.submiting = false;
         });
       }
     },
     destroy: function destroy() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (!this.submitingDestroy) {
         this.submitingDestroy = true;
@@ -70861,31 +71157,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           dangerMode: true
         }).then(function (willDelete) {
           if (willDelete) {
-            axios.delete('/api/transactions/' + _this3.transaction.id).then(function (response) {
-              _this3.$toasted.global.error('Deleted transaction!');
+            axios.delete('/api/transactions/' + _this4.transaction.id).then(function (response) {
+              _this4.$toasted.global.error('Deleted transaction!');
               location.href = '/transactions';
             }).catch(function (error) {
-              _this3.errors = error.response.data.errors;
+              _this4.errors = error.response.data.errors;
             });
           }
-          _this3.submitingDestroy = false;
+          _this4.submitingDestroy = false;
         });
       }
     },
     toggleFinished: function toggleFinished() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.put('/api/transactions/toggleFinished/' + this.transaction.id, this.transaction).then(function (response) {
-        _this4.transaction.finished_by = response.data.finished_by;
-        _this4.transaction.finished_by_user = response.data.finished_by_user;
+        _this5.transaction.finished_by = response.data.finished_by;
+        _this5.transaction.finished_by_user = response.data.finished_by_user;
         if (response.data.finished) {
-          _this4.$toasted.global.error('Transaccion Finalizada!');
+          _this5.$toasted.global.error('Transaccion Finalizada!');
         } else {
-          _this4.$toasted.global.error('Transaccion Abierta!');
+          _this5.$toasted.global.error('Transaccion Abierta!');
         }
       }).catch(function (error) {
         if (error.response) {
-          _this4.errors = error.response.data.errors;
+          _this5.errors = error.response.data.errors;
         }
       });
     }
@@ -70960,39 +71256,6 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body px-0" }, [
               _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Nombre")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.transaction.name,
-                      expression: "transaction.name"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  class: { "is-invalid": _vm.errors.name },
-                  attrs: { type: "text", placeholder: "Enero 2019" },
-                  domProps: { value: _vm.transaction.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.transaction, "name", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.name
-                  ? _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.errors.name[0]))
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
                 _c("div", { staticClass: "float-left mr-3" }, [
                   _c(
                     "label",
@@ -71060,20 +71323,295 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("label", [_vm._v("Finalizar")])
+                _c("label", [_vm._v("Finalizar")]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _vm.transaction.finished && _vm.transaction.finished_by_user
+                  ? _c("small", { staticClass: "text-muted" }, [
+                      _vm._v("Finalizada por "),
+                      _c("i", [
+                        _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
+                      ])
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
-              _vm.transaction.finished && _vm.transaction.finished_by_user
-                ? _c("small", { staticClass: "text-muted" }, [
-                    _vm._v("Finalizada por "),
-                    _c("i", [
-                      _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Nombre")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.transaction.name,
+                      expression: "transaction.name"
+                    }
+                  ],
+                  staticClass: "form-control form-control-lg",
+                  class: { "is-invalid": _vm.errors.name },
+                  attrs: { type: "text", placeholder: "Enero 2019" },
+                  domProps: { value: _vm.transaction.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.transaction, "name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.name
+                  ? _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.name[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "card-body px-0 collapse",
+                  attrs: { id: "collapseCompanies" }
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("Empresa Importadora")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            class: {
+                              "border border-danger rounded":
+                                _vm.errors.company_import_id
+                            },
+                            attrs: {
+                              options: _vm.companies,
+                              openDirection: "bottom",
+                              "track-by": "id",
+                              label: "name"
+                            },
+                            model: {
+                              value: _vm.transaction.company_import,
+                              callback: function($$v) {
+                                _vm.$set(_vm.transaction, "company_import", $$v)
+                              },
+                              expression: "transaction.company_import"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.company_import_id
+                            ? _c(
+                                "small",
+                                { staticClass: "form-text text-danger" },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.errors.company_import_id[0])
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("Aduana Importadora")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            class: {
+                              "border border-danger rounded":
+                                _vm.errors.customs_import_id
+                            },
+                            attrs: {
+                              options: _vm.companies,
+                              openDirection: "bottom",
+                              "track-by": "id",
+                              label: "name"
+                            },
+                            model: {
+                              value: _vm.transaction.customs_import,
+                              callback: function($$v) {
+                                _vm.$set(_vm.transaction, "customs_import", $$v)
+                              },
+                              expression: "transaction.customs_import"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.customs_import_id
+                            ? _c(
+                                "small",
+                                { staticClass: "form-text text-danger" },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.errors.customs_import_id[0])
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("Empresa Exportadora")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            class: {
+                              "border border-danger rounded":
+                                _vm.errors.company_export_id
+                            },
+                            attrs: {
+                              options: _vm.companies,
+                              openDirection: "bottom",
+                              "track-by": "id",
+                              label: "name"
+                            },
+                            model: {
+                              value: _vm.transaction.company_export,
+                              callback: function($$v) {
+                                _vm.$set(_vm.transaction, "company_export", $$v)
+                              },
+                              expression: "transaction.company_export"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.company_export_id
+                            ? _c(
+                                "small",
+                                { staticClass: "form-text text-danger" },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.errors.company_export_id[0])
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("Aduana Exportadora")]),
+                          _vm._v(" "),
+                          _c("multiselect", {
+                            class: {
+                              "border border-danger rounded":
+                                _vm.errors.customs_export_id
+                            },
+                            attrs: {
+                              options: _vm.companies,
+                              openDirection: "bottom",
+                              "track-by": "id",
+                              label: "name"
+                            },
+                            model: {
+                              value: _vm.transaction.customs_export,
+                              callback: function($$v) {
+                                _vm.$set(_vm.transaction, "customs_export", $$v)
+                              },
+                              expression: "transaction.customs_export"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.customs_export_id
+                            ? _c(
+                                "small",
+                                { staticClass: "form-text text-danger" },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.errors.customs_export_id[0])
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
                     ])
                   ])
-                : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "card-body px-0 collapse",
+                  attrs: { id: "collapseUsers" }
+                },
+                [
+                  _c(
+                    "ul",
+                    { staticClass: "list-group list-group-flush" },
+                    _vm._l(_vm.transaction.users, function(user, index) {
+                      return _c(
+                        "li",
+                        { staticClass: "list-group-item media border-light" },
+                        [
+                          _c("div", { staticClass: "avatar float-left mr-3" }, [
+                            _c("img", {
+                              staticClass: "img-avatar",
+                              attrs: { src: user.avatar_url }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "media-body" }, [
+                            _c(
+                              "div",
+                              { staticClass: "d-flex justify-content-between" },
+                              [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(user.name) +
+                                    " - " +
+                                    _vm._s(user.company.name) +
+                                    "\n                "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "small text-muted" }, [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(user.email) +
+                                  "\n                "
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]
+              )
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(3),
             _vm._v(" "),
             _c(
               "div",
@@ -71119,6 +71657,64 @@ var staticRenderFns = [
         _c("i", { staticClass: "fas fa-angle-left fa-lg" })
       ]),
       _vm._v("  Editar Transaccion")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+      _c("strong", [_vm._v("Empresas")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v("Empresas involucradas en la transaccion.")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header-actions" }, [
+        _c(
+          "a",
+          {
+            staticClass: "card-header-action btn-minimize",
+            attrs: {
+              href: "#",
+              "data-toggle": "collapse",
+              "data-target": "#collapseCompanies",
+              "aria-expanded": "false"
+            }
+          },
+          [_c("i", { staticClass: "icon-arrow-up" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+      _c("strong", [_vm._v("Usuarios")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v("Usuarios participantes en la transaccion.")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header-actions" }, [
+        _c(
+          "a",
+          {
+            staticClass: "card-header-action btn-minimize",
+            attrs: {
+              href: "#",
+              "data-toggle": "collapse",
+              "data-target": "#collapseUsers",
+              "aria-expanded": "false"
+            }
+          },
+          [_c("i", { staticClass: "icon-arrow-up" })]
+        )
+      ])
     ])
   },
   function() {
@@ -71610,13 +72206,13 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "fas fa-pencil-alt" })]
+                        [_c("i", { staticClass: "fas fa-pen" })]
                       ),
                       _vm._v(" "),
                       _c(
                         "a",
                         {
-                          staticClass: "ml-2 text-secondary",
+                          staticClass: "ml-3 text-secondary",
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
@@ -71625,13 +72221,13 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "fas fa-cloud-upload-alt" })]
+                        [_c("i", { staticClass: "fas fa-file-upload" })]
                       ),
                       _vm._v(" "),
                       _c(
                         "a",
                         {
-                          staticClass: "ml-2 text-secondary",
+                          staticClass: "ml-3 text-secondary",
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
@@ -71788,7 +72384,7 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     class: { "is-invalid": _vm.errors.name },
-                    attrs: { type: "text", placeholder: "Proforma Expo" },
+                    attrs: { type: "text", placeholder: "Proforma Import" },
                     domProps: { value: _vm.stage.name },
                     on: {
                       input: function($event) {
@@ -71872,7 +72468,10 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: { "is-invalid": _vm.errors.name },
-                          attrs: { type: "text", placeholder: "Proforma Expo" },
+                          attrs: {
+                            type: "text",
+                            placeholder: "Proforma Export"
+                          },
                           domProps: { value: _vm.stage.name },
                           on: {
                             input: function($event) {

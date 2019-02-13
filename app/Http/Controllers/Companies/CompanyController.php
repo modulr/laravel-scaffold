@@ -8,20 +8,9 @@ use App\Models\Companies\Company;
 
 class CompanyController extends Controller
 {
-    public function filter (Request $request)
+    public function all()
     {
-        $query = Company::query();
-
-        if($request->search) {
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
-        }
-
-        $companies = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
-                    ->paginate($request->input('pagination.per_page'));
-
-        $companies->load('users');
-
-        return $companies;
+        return Company::all();
     }
 
     public function show ($company)
@@ -64,8 +53,24 @@ class CompanyController extends Controller
         return Company::destroy($company);
     }
 
+    public function filter (Request $request)
+    {
+        $query = Company::query();
+
+        if($request->search) {
+            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        }
+
+        $companies = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
+                    ->paginate($request->input('pagination.per_page'));
+
+        $companies->load('users');
+
+        return $companies;
+    }
+
     public function count ()
     {
         return Company::count();
-    }    
+    }
 }

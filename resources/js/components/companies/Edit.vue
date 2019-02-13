@@ -44,29 +44,6 @@
         <div class="card-body px-0 collapse show" id="collapseUsers">
           <companies-users :company="company"></companies-users>
         </div>
-        <div class="card-header px-0 bg-transparent">
-          <strong>Transacciones</strong><br>
-          <small class="text-muted">Transacciones con otras empresas.</small>
-          <div class="card-header-actions">
-            <div class="card-header-actions">
-              <div class="float-left mr-2">
-                <small class="text-muted">0 de 10</small>
-                <div class="progress" style="height: 4px;">
-                  <div class="progress-bar bg-info" role="progressbar" :style="`width: ${0*100/10}%`" :aria-valuenow="0*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
-                </div>
-              </div>
-              <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseTransactions" aria-expanded="false">
-                <i class="icon-arrow-up"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="card-body text-center px-0 collapse" id="collapseTransactions">
-          <a class="btn btn-success mb-2" href="/transaction/create" role="button">
-            <i class="fa fa-plus"></i>&nbsp; Crear transaccion
-          </a>
-          <p><small class="text-muted">Crea transacciones, para llebar el control de tus documentos y conversaciones.</small></p>
-        </div>
         <div class="card-body text-right px-0">
           <small class="text-muted">Creada <i>{{company.created_at | moment("LLL")}}</i></small>
         </div>

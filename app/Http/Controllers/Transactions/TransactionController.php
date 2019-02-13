@@ -6,9 +6,68 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Transaction;
+use App\User;
 
 class TransactionController extends Controller
 {
+    public function show ($transaction)
+    {
+        return Transaction::with('companyImport', 'companyExport', 'customsImport', 'customsExport', 'finishedByUser', 'stages.authorizedByUser', 'stages.files', 'users.company')->findOrFail($transaction);
+    }
+
+    public function store (Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string',
+            'company_import_id' => 'required|integer',
+            'company_export_id' => 'required|integer',
+            'customs_import_id' => 'required|integer',
+            'customs_export_id' => 'required|integer'
+        ]);
+
+        $transaction = Transaction::create([
+            'name' => $request->name,
+            'company_import_id' => $request->company_import_id,
+            'company_export_id' => $request->company_export_id,
+            'customs_import_id' => $request->customs_import_id,
+            'customs_export_id' => $request->customs_export_id
+        ]);
+
+        $users = User::whereIn('company_id', [$request->company_import_id, $request->company_export_id, $request->customs_import_id, $request->customs_export_id])->get();
+
+        foreach ($users as $key => $value) {
+            $value->transactions()->attach($transaction->id);
+        }
+
+        return $transaction;
+    }
+
+    public function update (Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string',
+            'company_import_id' => 'required|integer',
+            'company_export_id' => 'required|integer',
+            'customs_import_id' => 'required|integer',
+            'customs_export_id' => 'required|integer'
+        ]);
+
+        $transaction = Transaction::find($request->id);
+        $transaction->name = $request->name;
+        $transaction->company_import_id = $request->company_import_id;
+        $transaction->company_export_id = $request->company_export_id;
+        $transaction->customs_import_id = $request->customs_import_id;
+        $transaction->customs_export_id = $request->customs_export_id;
+        $transaction->save();
+
+        return $transaction;
+    }
+
+    public function destroy ($transaction)
+    {
+        return Transaction::destroy($transaction);
+    }
+
     public function filter (Request $request)
     {
         $query = Transaction::query();
@@ -20,46 +79,9 @@ class TransactionController extends Controller
         $transactions = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
                     ->paginate($request->input('pagination.per_page'));
 
-        $transactions->load('stages');
+        $transactions->load('companyImport', 'companyExport', 'stages');
 
         return $transactions;
-    }
-
-    public function show ($transaction)
-    {
-        return Transaction::with('finishedByUser', 'stages.authorizedByUser', 'stages.files')->findOrFail($transaction);
-    }
-
-    public function store (Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|string',
-        ]);
-
-        return Transaction::create([
-            'name' => $request->name
-        ]);
-    }
-
-    public function update (Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|string'
-        ]);
-
-        $transaction = Transaction::find($request->id);
-
-        if ($transaction->name != $request->name) {
-            $transaction->name = $request->name;
-            $transaction->save();
-        }
-
-        return $transaction;
-    }
-
-    public function destroy ($transaction)
-    {
-        return Transaction::destroy($transaction);
     }
 
     public function count ()

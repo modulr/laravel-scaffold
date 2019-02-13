@@ -12,9 +12,9 @@
           <div class="d-flex justify-content-between">
             <strong>{{stage.name}}</strong>
             <div>
-              <a href="#" class="text-secondary" @click.prevent="editStage(stage.id, index)"><i class="fas fa-pencil-alt"></i></a>
-              <a href="#" class="ml-2 text-secondary" @click.prevent="uploadFile(stage, index)"><i class="fas fa-cloud-upload-alt"></i></a>
-              <a href="#" class="ml-2 text-secondary" @click.prevent="comments(stage, index)"><i class="fas fa-comment"></i></a>
+              <a href="#" class="text-secondary" @click.prevent="editStage(stage.id, index)"><i class="fas fa-pen"></i></a>
+              <a href="#" class="ml-3 text-secondary" @click.prevent="uploadFile(stage, index)"><i class="fas fa-file-upload"></i></a>
+              <a href="#" class="ml-3 text-secondary" @click.prevent="comments(stage, index)"><i class="fas fa-comment"></i></a>
             </div>
           </div>
           <div class="media">
@@ -55,7 +55,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label>Nombre</label>
-              <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="stage.name" placeholder="Proforma Expo">
+              <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="stage.name" placeholder="Proforma Import">
               <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
             </div>
           </div>
@@ -83,7 +83,7 @@
             <div class="row" v-if="!loadingEdit">
               <div class="form-group col-md-12">
                 <label>Nombre</label>
-                <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="stage.name" placeholder="Proforma Expo">
+                <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="stage.name" placeholder="Proforma Export">
                 <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
               </div>
             </div>

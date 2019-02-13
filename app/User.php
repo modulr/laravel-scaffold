@@ -42,4 +42,15 @@ class User extends Authenticatable
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
     }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Companies\Company');
+    }
+
+    public function transactions()
+    {
+        return $this->belongsToMany('App\Models\Transactions\Transaction');
+    }
+
 }

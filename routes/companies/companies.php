@@ -11,11 +11,13 @@ Route::middleware('auth')->group(function () {
         // api
         Route::group(['prefix' => 'api/companies'], function() {
             Route::post('/filter', 'CompanyController@filter')->middleware('permission:read-companies');
+            Route::post('/count', 'CompanyController@count')->middleware('permission:read-companies');
+            
+            Route::get('/all', 'CompanyController@all')->middleware('permission:read-companies');
             Route::get('/{company}', 'CompanyController@show')->middleware('permission:read-companies');
             Route::post('/store', 'CompanyController@store')->middleware('permission:create-companies');
             Route::put('/update/{company}', 'CompanyController@update')->middleware('permission:update-companies');
             Route::delete('/{company}', 'CompanyController@destroy')->middleware('permission:delete-companies');
-            Route::post('/count', 'CompanyController@count')->middleware('permission:read-companies');
         });
     });
 });

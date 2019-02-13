@@ -39,21 +39,6 @@
             <i class="fa fa-plus"></i>&nbsp; Crear usuario
           </a>
         </div>
-        <div class="card-header px-0 bg-transparent">
-          <strong>Transacciones</strong><br>
-          <small class="text-muted">Transacciones con otras empresas.</small>
-          <div class="card-header-actions">
-            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseTransactions" aria-expanded="false">
-              <i class="icon-arrow-up"></i>
-            </a>
-          </div>
-        </div>
-        <div class="card-body text-center px-0 collapse" id="collapseTransactions">
-          <p class="text-muted">Podras crear transacciones y llebar el control de la documentacion, una vez creada la empresa.</p>
-          <a class="btn btn-success disabled mb-2" href="#" role="button">
-            <i class="fa fa-plus"></i>&nbsp; Crear transaccion
-          </a>
-        </div>
       </div>
     </div>
   </div>

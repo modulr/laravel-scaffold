@@ -13,6 +13,26 @@ class Transaction extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
+    public function companyImport()
+    {
+        return $this->belongsTo('App\Models\Companies\Company', 'company_import_id');
+    }
+
+    public function companyExport()
+    {
+        return $this->belongsTo('App\Models\Companies\Company', 'company_export_id');
+    }
+
+    public function customsImport()
+    {
+        return $this->belongsTo('App\Models\Companies\Company', 'customs_import_id');
+    }
+
+    public function customsExport()
+    {
+        return $this->belongsTo('App\Models\Companies\Company', 'customs_export_id');
+    }
+
     public function finishedByUser()
     {
         return $this->belongsTo('App\User', 'finished_by');
@@ -21,5 +41,10 @@ class Transaction extends Model
     public function stages()
     {
         return $this->hasMany('App\Models\Stages\Stage'::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
     }
 }
