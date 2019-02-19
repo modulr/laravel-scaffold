@@ -4,7 +4,7 @@
       <div class="col-md-12 col-xl-9" v-if="!loading">
         <!--button actions-->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2"><a href="/transactions" class="text-dark"><i class="fas fa-angle-left fa-lg"></i></a>&nbsp; Editar Transaccion</h4>
+          <h4 class="float-left pt-2"><a href="/transactions" class="text-dark"><i class="fas fa-angle-left fa-lg px-2"></i></a> Editar Transaccion</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
@@ -20,16 +20,15 @@
         </div>
         <!--forms-->
         <div class="card-body px-0">
-          <div class="form-group">
-            <div class="float-left mr-3">
+          <div class="form-group text-right">
+            <small class="text-muted mr-4" v-if="transaction.finished && transaction.finished_by_user">Finalizada por <i>{{transaction.finished_by_user.name}}</i></small>
+            <label>Finalizar</label>
+            <div class="float-right ml-2">
               <label class="switch switch-label switch-pill switch-success">
                 <input class="switch-input form-check-input" type="checkbox" v-model="transaction.finished" @change="toggleFinished">
                 <span class="switch-slider" data-checked="✓" data-unchecked="✕"></span>
               </label>
             </div>
-            <label>Finalizar</label>
-            <br>
-            <small class="text-muted" v-if="transaction.finished && transaction.finished_by_user">Finalizada por <i>{{transaction.finished_by_user.name}}</i></small>
           </div>
           <div class="form-group">
             <label>Nombre</label>
@@ -189,7 +188,6 @@ export default {
       axios.get(`/api/transactions/${res[2]}`)
       .then(response => {
         this.transaction = response.data
-        console.log(this.transaction);
       })
       .catch(error => {
         this.$toasted.global.error('Transaction does not exist!')

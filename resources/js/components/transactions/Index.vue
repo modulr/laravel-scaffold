@@ -3,7 +3,7 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Transacciones</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-success" href="/transactions/create">Crear transaccion</a>
+        <a class="btn btn-success" href="/transactions/create"><i class="fas fa-plus"></i> Crear transaccion</a>
       </div>
     </div>
     <div class="card-body px-0">
@@ -42,7 +42,7 @@
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
-              <a href="#" class="text-dark" @click.prevent="sort('company_export_id')">Import</a>
+              <a href="#" class="text-dark" @click.prevent="sort('company_import_id')">Import</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
@@ -71,7 +71,7 @@
               <span class="badge badge-primary" v-else>Abierta</span>
             </td>
             <td class="d-none d-sm-table-cell">
-              <small>{{transaction.created_at | moment("LL")}}</small> - <small class="text-muted">{{transaction.created_at | moment("LT")}}</small>
+              <small>{{transaction.created_at | moment("LLL")}}</small></small>
             </td>
             <td class="d-none d-sm-table-cell">
               <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>

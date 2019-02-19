@@ -67722,11 +67722,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                     _c("small", [
-                      _vm._v(_vm._s(_vm._f("moment")(company.created_at, "LL")))
-                    ]),
-                    _vm._v(" - "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(_vm._s(_vm._f("moment")(company.created_at, "LT")))
+                      _vm._v(
+                        _vm._s(_vm._f("moment")(company.created_at, "LLL"))
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -67901,7 +67899,7 @@ var staticRenderFns = [
               staticClass: "btn btn-success",
               attrs: { href: "/companies/create" }
             },
-            [_vm._v("Crear empresa")]
+            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Crear empresa")]
           )
         ])
       ]
@@ -68134,7 +68132,7 @@ var render = function() {
                   expression: "company.name"
                 }
               ],
-              staticClass: "form-control",
+              staticClass: "form-control form-control-lg",
               class: { "is-invalid": _vm.errors.name },
               attrs: { type: "text", placeholder: "Modulr Co." },
               domProps: { value: _vm.company.name },
@@ -68200,9 +68198,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "float-left pt-2" }, [
       _c("a", { staticClass: "text-dark", attrs: { href: "/companies" } }, [
-        _c("i", { staticClass: "fas fa-angle-left fa-lg" })
+        _c("i", { staticClass: "fas fa-angle-left fa-lg px-2" })
       ]),
-      _vm._v("  Crear empresa")
+      _vm._v(" Crear empresa")
     ])
   },
   function() {
@@ -68527,7 +68525,7 @@ var render = function() {
                       expression: "company.name"
                     }
                   ],
-                  staticClass: "form-control",
+                  staticClass: "form-control form-control-lg",
                   class: { "is-invalid": _vm.errors.name },
                   attrs: { type: "text", placeholder: "Modulr Co." },
                   domProps: { value: _vm.company.name },
@@ -68626,9 +68624,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "float-left pt-2" }, [
       _c("a", { staticClass: "text-dark", attrs: { href: "/companies" } }, [
-        _c("i", { staticClass: "fas fa-angle-left fa-lg" })
+        _c("i", { staticClass: "fas fa-angle-left fa-lg px-2" })
       ]),
-      _vm._v("  Editar Empresa")
+      _vm._v(" Editar Empresa")
     ])
   },
   function() {
@@ -69842,7 +69840,7 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        _vm.sort("company_export_id")
+                        _vm.sort("company_import_id")
                       }
                     }
                   },
@@ -69989,13 +69987,7 @@ var render = function() {
                   _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                     _c("small", [
                       _vm._v(
-                        _vm._s(_vm._f("moment")(transaction.created_at, "LL"))
-                      )
-                    ]),
-                    _vm._v(" - "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(
-                        _vm._s(_vm._f("moment")(transaction.created_at, "LT"))
+                        _vm._s(_vm._f("moment")(transaction.created_at, "LLL"))
                       )
                     ])
                   ]),
@@ -70171,7 +70163,10 @@ var staticRenderFns = [
               staticClass: "btn btn-success",
               attrs: { href: "/transactions/create" }
             },
-            [_vm._v("Crear transaccion")]
+            [
+              _c("i", { staticClass: "fas fa-plus" }),
+              _vm._v(" Crear transaccion")
+            ]
           )
         ])
       ]
@@ -70733,9 +70728,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "float-left pt-2" }, [
       _c("a", { staticClass: "text-dark", attrs: { href: "/transactions" } }, [
-        _c("i", { staticClass: "fas fa-angle-left fa-lg" })
+        _c("i", { staticClass: "fas fa-angle-left fa-lg px-2" })
       ]),
-      _vm._v("  Crear transaccion")
+      _vm._v(" Crear transaccion")
     ])
   },
   function() {
@@ -71083,7 +71078,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71118,7 +71112,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var res = str.split("/");
       axios.get('/api/transactions/' + res[2]).then(function (response) {
         _this2.transaction = response.data;
-        console.log(_this2.transaction);
       }).catch(function (error) {
         _this2.$toasted.global.error('Transaction does not exist!');
         location.href = '/transactions';
@@ -71255,8 +71248,19 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "card-body px-0" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("div", { staticClass: "float-left mr-3" }, [
+              _c("div", { staticClass: "form-group text-right" }, [
+                _vm.transaction.finished && _vm.transaction.finished_by_user
+                  ? _c("small", { staticClass: "text-muted mr-4" }, [
+                      _vm._v("Finalizada por "),
+                      _c("i", [
+                        _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("label", [_vm._v("Finalizar")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "float-right ml-2" }, [
                   _c(
                     "label",
                     {
@@ -71321,20 +71325,7 @@ var render = function() {
                       })
                     ]
                   )
-                ]),
-                _vm._v(" "),
-                _c("label", [_vm._v("Finalizar")]),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _vm.transaction.finished && _vm.transaction.finished_by_user
-                  ? _c("small", { staticClass: "text-muted" }, [
-                      _vm._v("Finalizada por "),
-                      _c("i", [
-                        _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
-                      ])
-                    ])
-                  : _vm._e()
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
@@ -71654,9 +71645,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "float-left pt-2" }, [
       _c("a", { staticClass: "text-dark", attrs: { href: "/transactions" } }, [
-        _c("i", { staticClass: "fas fa-angle-left fa-lg" })
+        _c("i", { staticClass: "fas fa-angle-left fa-lg px-2" })
       ]),
-      _vm._v("  Editar Transaccion")
+      _vm._v(" Editar Transaccion")
     ])
   },
   function() {
@@ -72212,7 +72203,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "ml-3 text-secondary",
+                          staticClass: "ml-2 text-secondary",
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
@@ -72227,7 +72218,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass: "ml-3 text-secondary",
+                          staticClass: "ml-2 text-secondary",
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {

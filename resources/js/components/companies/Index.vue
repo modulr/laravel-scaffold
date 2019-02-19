@@ -3,7 +3,7 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Empresas</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-success" href="/companies/create">Crear empresa</a>
+        <a class="btn btn-success" href="/companies/create"><i class="fas fa-plus"></i> Crear empresa</a>
       </div>
     </div>
     <div class="card-body px-0">
@@ -60,7 +60,7 @@
               </div>
             </td>
             <td class="d-none d-sm-table-cell">
-              <small>{{company.created_at | moment("LL")}}</small> - <small class="text-muted">{{company.created_at | moment("LT")}}</small>
+              <small>{{company.created_at | moment("LLL")}}</small>
             </td>
             <td class="d-none d-sm-table-cell">
               <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>

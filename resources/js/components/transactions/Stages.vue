@@ -13,8 +13,8 @@
             <strong>{{stage.name}}</strong>
             <div>
               <a href="#" class="text-secondary" @click.prevent="editStage(stage.id, index)"><i class="fas fa-pen"></i></a>
-              <a href="#" class="ml-3 text-secondary" @click.prevent="uploadFile(stage, index)"><i class="fas fa-file-upload"></i></a>
-              <a href="#" class="ml-3 text-secondary" @click.prevent="comments(stage, index)"><i class="fas fa-comment"></i></a>
+              <a href="#" class="ml-2 text-secondary" @click.prevent="uploadFile(stage, index)"><i class="fas fa-file-upload"></i></a>
+              <a href="#" class="ml-2 text-secondary" @click.prevent="comments(stage, index)"><i class="fas fa-comment"></i></a>
             </div>
           </div>
           <div class="media">
