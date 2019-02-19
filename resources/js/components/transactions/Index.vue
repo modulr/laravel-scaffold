@@ -3,7 +3,7 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Transacciones</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-success" href="/transactions/create"><i class="fas fa-plus"></i> Crear transaccion</a>
+        <a class="btn btn-success" href="/transactions/create"><i class="fas fa-plus mr-1"></i> Crear transaccion</a>
       </div>
     </div>
     <div class="card-body px-0">

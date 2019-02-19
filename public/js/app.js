@@ -67899,7 +67899,10 @@ var staticRenderFns = [
               staticClass: "btn btn-success",
               attrs: { href: "/companies/create" }
             },
-            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Crear empresa")]
+            [
+              _c("i", { staticClass: "fas fa-plus mr-1" }),
+              _vm._v("Crear empresa")
+            ]
           )
         ])
       ]
@@ -70164,7 +70167,7 @@ var staticRenderFns = [
               attrs: { href: "/transactions/create" }
             },
             [
-              _c("i", { staticClass: "fas fa-plus" }),
+              _c("i", { staticClass: "fas fa-plus mr-1" }),
               _vm._v(" Crear transaccion")
             ]
           )
