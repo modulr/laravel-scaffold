@@ -30,33 +30,34 @@
           </multiselect>
         </div>
       </div>
-      <div class="table-responsive">
       <table class="table table-hover">
         <thead>
           <tr>
             <th class="d-none d-sm-table-cell">
-              <a href="#" class="text-dark" @click.prevent="sort('id')">ID</a>
-              <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
+              <a href="#" class="text-dark" @click.prevent="sort('id')">
+                ID
+                <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
+              </a>
             </th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('name')">Nombre</a>
-              <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
+              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('company_import_id')">Import</a>
-              <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'desc'}"></i>
+              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('company_export_id')">Export</a>
-              <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'company_export_id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'company_export_id' && filters.orderBy.direction == 'desc'}"></i>
+              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'company_export_id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'company_export_id' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('finished')">Finalizada</a>
-              <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'desc'}"></i>
+              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'desc'}"></i>
             </th>
-            <th>
+            <th class="d-none d-sm-table-cell">
               <a href="#" class="text-dark" @click.prevent="sort('created_at')">Creada</a>
-              <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
+              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th class="d-none d-sm-table-cell"></th>
           </tr>
@@ -71,7 +72,7 @@
               <span class="badge badge-success" v-if="transaction.finished">Finalizada</span>
               <span class="badge badge-primary" v-else>Abierta</span>
             </td>
-            <td>
+            <td class="d-none d-sm-table-cell">
               <small>{{transaction.created_at | moment("LLL")}}</small></small>
             </td>
             <td class="d-none d-sm-table-cell">
@@ -80,7 +81,6 @@
           </tr>
         </tbody>
       </table>
-      </div>
       <div class="row" v-if='!loading && filters.pagination.total > 0'>
         <div class="col pt-2">
           {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
