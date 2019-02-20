@@ -69602,6 +69602,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69773,234 +69775,238 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("table", { staticClass: "table table-hover" }, [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { staticClass: "d-none d-sm-table-cell" }, [
-                _c(
-                  "a",
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table table-hover" }, [
+            _c("thead", [
+              _c("tr", [
+                _c("th", { staticClass: "d-none d-sm-table-cell" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("id")
+                        }
+                      }
+                    },
+                    [_vm._v("ID")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "id" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "id" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("name")
+                        }
+                      }
+                    },
+                    [_vm._v("Nombre")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "name" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "name" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("company_import_id")
+                        }
+                      }
+                    },
+                    [_vm._v("Import")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "company_import_id" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "company_import_id" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("company_export_id")
+                        }
+                      }
+                    },
+                    [_vm._v("Export")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "company_export_id" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "company_export_id" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("finished")
+                        }
+                      }
+                    },
+                    [_vm._v("Finalizada")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "finished" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "finished" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.sort("created_at")
+                        }
+                      }
+                    },
+                    [_vm._v("Creada")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "mr-1 fas",
+                    class: {
+                      "fa-long-arrow-alt-down":
+                        _vm.filters.orderBy.column == "created_at" &&
+                        _vm.filters.orderBy.direction == "asc",
+                      "fa-long-arrow-alt-up":
+                        _vm.filters.orderBy.column == "created_at" &&
+                        _vm.filters.orderBy.direction == "desc"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", { staticClass: "d-none d-sm-table-cell" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.transactions, function(transaction) {
+                return _c(
+                  "tr",
                   {
-                    staticClass: "text-dark",
-                    attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        $event.preventDefault()
-                        _vm.sort("id")
+                        _vm.edit(transaction.id)
                       }
                     }
                   },
-                  [_vm._v("ID")]
-                ),
-                _vm._v(" "),
-                _c("i", {
-                  staticClass: "mr-1 fas",
-                  class: {
-                    "fa-long-arrow-alt-down":
-                      _vm.filters.orderBy.column == "id" &&
-                      _vm.filters.orderBy.direction == "asc",
-                    "fa-long-arrow-alt-up":
-                      _vm.filters.orderBy.column == "id" &&
-                      _vm.filters.orderBy.direction == "desc"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("th", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-dark",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.sort("name")
-                      }
-                    }
-                  },
-                  [_vm._v("Nombre")]
-                ),
-                _vm._v(" "),
-                _c("i", {
-                  staticClass: "mr-1 fas",
-                  class: {
-                    "fa-long-arrow-alt-down":
-                      _vm.filters.orderBy.column == "name" &&
-                      _vm.filters.orderBy.direction == "asc",
-                    "fa-long-arrow-alt-up":
-                      _vm.filters.orderBy.column == "name" &&
-                      _vm.filters.orderBy.direction == "desc"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("th", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-dark",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.sort("company_import_id")
-                      }
-                    }
-                  },
-                  [_vm._v("Import")]
-                ),
-                _vm._v(" "),
-                _c("i", {
-                  staticClass: "mr-1 fas",
-                  class: {
-                    "fa-long-arrow-alt-down":
-                      _vm.filters.orderBy.column == "company_import_id" &&
-                      _vm.filters.orderBy.direction == "asc",
-                    "fa-long-arrow-alt-up":
-                      _vm.filters.orderBy.column == "company_import_id" &&
-                      _vm.filters.orderBy.direction == "desc"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("th", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-dark",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.sort("company_export_id")
-                      }
-                    }
-                  },
-                  [_vm._v("Export")]
-                ),
-                _vm._v(" "),
-                _c("i", {
-                  staticClass: "mr-1 fas",
-                  class: {
-                    "fa-long-arrow-alt-down":
-                      _vm.filters.orderBy.column == "company_export_id" &&
-                      _vm.filters.orderBy.direction == "asc",
-                    "fa-long-arrow-alt-up":
-                      _vm.filters.orderBy.column == "company_export_id" &&
-                      _vm.filters.orderBy.direction == "desc"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("th", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-dark",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.sort("finished")
-                      }
-                    }
-                  },
-                  [_vm._v("Finalizada")]
-                ),
-                _vm._v(" "),
-                _c("i", {
-                  staticClass: "mr-1 fas",
-                  class: {
-                    "fa-long-arrow-alt-down":
-                      _vm.filters.orderBy.column == "finished" &&
-                      _vm.filters.orderBy.direction == "asc",
-                    "fa-long-arrow-alt-up":
-                      _vm.filters.orderBy.column == "finished" &&
-                      _vm.filters.orderBy.direction == "desc"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("th", { staticClass: "d-none d-sm-table-cell" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "text-dark",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.sort("created_at")
-                      }
-                    }
-                  },
-                  [_vm._v("Creada")]
-                ),
-                _vm._v(" "),
-                _c("i", {
-                  staticClass: "mr-1 fas",
-                  class: {
-                    "fa-long-arrow-alt-down":
-                      _vm.filters.orderBy.column == "created_at" &&
-                      _vm.filters.orderBy.direction == "asc",
-                    "fa-long-arrow-alt-up":
-                      _vm.filters.orderBy.column == "created_at" &&
-                      _vm.filters.orderBy.direction == "desc"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("th", { staticClass: "d-none d-sm-table-cell" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.transactions, function(transaction) {
-              return _c(
-                "tr",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.edit(transaction.id)
-                    }
-                  }
-                },
-                [
-                  _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-                    _vm._v(_vm._s(transaction.id))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(transaction.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(transaction.company_import.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(transaction.company_export.name))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    transaction.finished
-                      ? _c("span", { staticClass: "badge badge-success" }, [
-                          _vm._v("Finalizada")
-                        ])
-                      : _c("span", { staticClass: "badge badge-primary" }, [
-                          _vm._v("Abierta")
-                        ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-                    _c("small", [
-                      _vm._v(
-                        _vm._s(_vm._f("moment")(transaction.created_at, "LLL"))
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1, true)
-                ]
-              )
-            }),
-            0
-          )
+                  [
+                    _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                      _vm._v(_vm._s(transaction.id))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(transaction.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(transaction.company_import.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(transaction.company_export.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      transaction.finished
+                        ? _c("span", { staticClass: "badge badge-success" }, [
+                            _vm._v("Finalizada")
+                          ])
+                        : _c("span", { staticClass: "badge badge-primary" }, [
+                            _vm._v("Abierta")
+                          ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("small", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("moment")(transaction.created_at, "LLL")
+                          )
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1, true)
+                  ]
+                )
+              }),
+              0
+            )
+          ])
         ]),
         _vm._v(" "),
         !_vm.loading && _vm.filters.pagination.total > 0
