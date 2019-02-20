@@ -71457,16 +71457,14 @@ var render = function() {
             _c("div", { staticClass: "card-body px-0" }, [
               _c("div", { staticClass: "form-group text-right" }, [
                 _vm.transaction.finished && _vm.transaction.finished_by_user
-                  ? _c("small", { staticClass: " text-success mr-3" }, [
-                      _vm._v("-- Finalizada por "),
+                  ? _c("small", { staticClass: "text-success" }, [
+                      _vm._v(" -- Finalizada por "),
                       _c("i", [
                         _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
                       ]),
                       _vm._v(" -- ")
                     ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("label", [_vm._v("Finalizar transaccion")]),
+                  : _c("small", [_vm._v("Finalizar transaccion")]),
                 _vm._v(" "),
                 _c("div", { staticClass: "float-right ml-2" }, [
                   _c(

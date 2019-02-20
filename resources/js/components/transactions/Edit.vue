@@ -21,8 +21,8 @@
         <!-- form -->
         <div class="card-body px-0">
           <div class="form-group text-right">
-            <small class=" text-success mr-3" v-if="transaction.finished && transaction.finished_by_user">-- Finalizada por <i>{{transaction.finished_by_user.name}}</i> -- </small>
-            <label>Finalizar transaccion</label>
+            <small class="text-success" v-if="transaction.finished && transaction.finished_by_user"> -- Finalizada por <i>{{transaction.finished_by_user.name}}</i> -- </small>
+            <small v-else>Finalizar transaccion</small>
             <div class="float-right ml-2">
               <label class="switch switch-label switch-pill switch-success">
                 <input class="switch-input form-check-input" type="checkbox" v-model="transaction.finished" @change="toggleFinished">
