@@ -34,10 +34,8 @@
         <thead>
           <tr>
             <th class="d-none d-sm-table-cell">
-              <a href="#" class="text-dark" @click.prevent="sort('id')">
-                ID
-                <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
-              </a>
+              <a href="#" class="text-dark" @click.prevent="sort('id')">ID</a>
+              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('name')">Nombre</a>

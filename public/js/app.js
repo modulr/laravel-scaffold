@@ -69602,8 +69602,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69791,21 +69789,20 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _vm._v("\n              ID\n              "),
-                    _c("i", {
-                      staticClass: "fas",
-                      class: {
-                        "fa-long-arrow-alt-down":
-                          _vm.filters.orderBy.column == "id" &&
-                          _vm.filters.orderBy.direction == "asc",
-                        "fa-long-arrow-alt-up":
-                          _vm.filters.orderBy.column == "id" &&
-                          _vm.filters.orderBy.direction == "desc"
-                      }
-                    })
-                  ]
-                )
+                  [_vm._v("ID")]
+                ),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "fas",
+                  class: {
+                    "fa-long-arrow-alt-down":
+                      _vm.filters.orderBy.column == "id" &&
+                      _vm.filters.orderBy.direction == "asc",
+                    "fa-long-arrow-alt-up":
+                      _vm.filters.orderBy.column == "id" &&
+                      _vm.filters.orderBy.direction == "desc"
+                  }
+                })
               ]),
               _vm._v(" "),
               _c("th", [
