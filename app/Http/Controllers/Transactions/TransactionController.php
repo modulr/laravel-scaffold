@@ -12,7 +12,7 @@ class TransactionController extends Controller
 {
     public function show ($transaction)
     {
-        return Transaction::with('companyImport', 'companyExport', 'customsImport', 'customsExport', 'finishedByUser', 'stages.authorizedByUser', 'stages.files', 'users.company')->findOrFail($transaction);
+        return Transaction::with('finishedByUser', 'companyImport.users', 'companyExport.users', 'customsImport.users', 'customsExport.users', 'stages.authorizedByUser', 'stages.files.creator', 'stages.comments.creator')->findOrFail($transaction);
     }
 
     public function store (Request $request)
@@ -38,6 +38,25 @@ class TransactionController extends Controller
         foreach ($users as $key => $value) {
             $value->transactions()->attach($transaction->id);
         }
+
+        $transaction->stages()->createMany([
+            [
+                'name' => 'Proforma Impo',
+                'transaction_id' => $transaction->id
+            ],
+            [
+                'name' => 'Proforma Expo',
+                'transaction_id' => $transaction->id
+            ],
+            [
+                'name' => 'Pedimento Impo',
+                'transaction_id' => $transaction->id
+            ],
+            [
+                'name' => 'Pedimento Expo',
+                'transaction_id' => $transaction->id
+            ]
+        ]);
 
         return $transaction;
     }

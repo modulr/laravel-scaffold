@@ -7,20 +7,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Helpers\Upload;
 use App\Models\Files\File;
 
-class StageController extends Controller
+class FileController extends Controller
 {
     public function upload (Request $request)
     {
         $upload = new Upload();
         $file = $upload->upload($request->file, 'files/'.$request->stageId)->getData();
 
-        return File::create([
+        $file =  File::create([
             'name' => $file['name'],
             'basename' => $file['basename'],
             'type' => $file['type'],
             'size' => $file['size'],
             'stage_id' => $request->stageId
         ]);
+
+        return File::with('creator')->find($file->id);
     }
 
     public function destroy ($file)

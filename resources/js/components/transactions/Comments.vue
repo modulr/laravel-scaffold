@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="form-group mb-4">
+    <div class="input-group mb-2">
       <input type="text" class="form-control" :class="{'is-invalid': errors.comment}" placeholder="Escribe un comentario..." v-model="comment" @keyup.enter="storeComment">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" @keyup.enter="storeComment"><i class="fas fa-paper-plane"></i></button>
+      </div>
       <div class="invalid-feedback" v-if="errors.comment">{{errors.comment[0]}}</div>
     </div>
-    <div class="px-2" v-if="!loading">
+    <div class="p-4 rounded border overflow-auto" style="max-height: 300px;">
       <div class="media mb-2" v-for="comment in this.comments">
         <div class="media-left">
           <img class="avatar-sm img-avatar mr-2" :src="comment.creator.avatar_url">
@@ -19,11 +22,6 @@
         </div>
       </div>
     </div>
-    <div class="px-2" v-else>
-        <content-placeholders>
-          <content-placeholders-text/>
-        </content-placeholders>
-    </div>
   </div>
 </template>
 
@@ -33,32 +31,14 @@ export default {
     return {
       comment: '',
       comments: [],
-      errors: {},
-      loading: true
+      errors: {}
     }
   },
   props: ['stage'],
-  watch: {
-    stage: function (newValue, oldValue) {
-      if (newValue.id) {
-        this.getComments(newValue.id)
-      }
-    }
+  mounted () {
+    this.comments = this.stage.comments
   },
   methods: {
-    getComments(stageId) {
-      this.loading = true
-      axios.get(`/api/comments/byStage/${stageId}`)
-      .then(response => {
-        this.comments = response.data
-      })
-      .catch(error => {
-        this.$toasted.global.error('Comments does not exist!')
-      })
-      .then(() => {
-        this.loading = false
-      })
-    },
     storeComment () {
       var comment = {
         comment: this.comment,
@@ -71,7 +51,9 @@ export default {
         this.errors = {}
       })
       .catch(error => {
-        this.errors = error.response.data.errors
+        if (error.response) {
+          this.errors = error.response.data.errors
+        }
       })
     }
   }

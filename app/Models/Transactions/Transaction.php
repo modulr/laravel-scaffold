@@ -13,6 +13,11 @@ class Transaction extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
+    public function finishedByUser()
+    {
+        return $this->belongsTo('App\User', 'finished_by');
+    }
+
     public function companyImport()
     {
         return $this->belongsTo('App\Models\Companies\Company', 'company_import_id');
@@ -33,18 +38,13 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\Companies\Company', 'customs_export_id');
     }
 
-    public function finishedByUser()
+    public function users()
     {
-        return $this->belongsTo('App\User', 'finished_by');
+        return $this->belongsToMany('App\User');
     }
 
     public function stages()
     {
         return $this->hasMany('App\Models\Stages\Stage'::class);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany('App\User');
     }
 }

@@ -70399,6 +70399,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70527,7 +70546,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "card-body px-0 collapse show",
+            staticClass: "card-body collapse show",
             attrs: { id: "collapseCompanies" }
           },
           [
@@ -70566,44 +70585,22 @@ var render = function() {
                       : _vm._e()
                   ],
                   1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c("label", [_vm._v("Aduana Importadora")]),
-                    _vm._v(" "),
-                    _c("multiselect", {
-                      class: {
-                        "border border-danger rounded":
-                          _vm.errors.customs_import_id
-                      },
-                      attrs: {
-                        options: _vm.companies,
-                        openDirection: "bottom",
-                        "track-by": "id",
-                        label: "name"
-                      },
-                      model: {
-                        value: _vm.transaction.customs_import,
-                        callback: function($$v) {
-                          _vm.$set(_vm.transaction, "customs_import", $$v)
-                        },
-                        expression: "transaction.customs_import"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.customs_import_id
-                      ? _c("small", { staticClass: "form-text text-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.customs_import_id[0]))
-                        ])
-                      : _vm._e()
-                  ],
-                  1
-                )
+                ),
+                _vm._v(" "),
+                _vm.transaction.company_import
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.transaction.company_import.users, function(
+                        user
+                      ) {
+                        return _vm.transaction.company_import.users &&
+                          _vm.transaction.company_import.users.length > 0
+                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          : _vm._e()
+                      }),
+                      0
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
@@ -70640,7 +70637,74 @@ var render = function() {
                       : _vm._e()
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _vm.transaction.company_export
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.transaction.company_export.users, function(
+                        user
+                      ) {
+                        return _vm.transaction.company_export.users &&
+                          _vm.transaction.company_export.users.length > 0
+                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          : _vm._e()
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Aduana Importadora")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      class: {
+                        "border border-danger rounded":
+                          _vm.errors.customs_import_id
+                      },
+                      attrs: {
+                        options: _vm.companies,
+                        openDirection: "bottom",
+                        "track-by": "id",
+                        label: "name"
+                      },
+                      model: {
+                        value: _vm.transaction.customs_import,
+                        callback: function($$v) {
+                          _vm.$set(_vm.transaction, "customs_import", $$v)
+                        },
+                        expression: "transaction.customs_import"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.customs_import_id
+                      ? _c("small", { staticClass: "form-text text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.customs_import_id[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.transaction.customs_import
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.transaction.customs_import.users, function(
+                        user
+                      ) {
+                        return _vm.transaction.customs_import.users &&
+                          _vm.transaction.customs_import.users.length > 0
+                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          : _vm._e()
+                      }),
+                      0
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
@@ -70677,15 +70741,26 @@ var render = function() {
                       : _vm._e()
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _vm.transaction.customs_export
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.transaction.customs_export.users, function(
+                        user
+                      ) {
+                        return _vm.transaction.customs_export.users &&
+                          _vm.transaction.customs_export.users.length > 0
+                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          : _vm._e()
+                      }),
+                      0
+                    )
+                  : _vm._e()
               ])
             ])
           ]
         ),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
           _c("strong", [_vm._v("Etapas")]),
@@ -70715,11 +70790,15 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(4)
+            _vm._m(2)
           ])
         ]),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(3),
+        _vm._v(" "),
+        _c("br"),
+        _c("br"),
+        _c("br")
       ])
     ])
   ])
@@ -70745,7 +70824,7 @@ var staticRenderFns = [
       _c("br"),
       _vm._v(" "),
       _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Empresas involucradas en la transaccion.")
+        _vm._v("Empresas invitadas a la transaccion.")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-header-actions" }, [
@@ -70764,54 +70843,6 @@ var staticRenderFns = [
         )
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-      _c("strong", [_vm._v("Usuarios")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Usuarios participantes en la transaccion.")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-header-actions" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-header-action btn-minimize",
-            attrs: {
-              href: "#",
-              "data-toggle": "collapse",
-              "data-target": "#collapseUsers",
-              "aria-expanded": "false"
-            }
-          },
-          [_c("i", { staticClass: "icon-arrow-up" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "card-body text-center px-0 collapse",
-        attrs: { id: "collapseUsers" }
-      },
-      [
-        _c("p", { staticClass: "text-muted" }, [
-          _vm._v(
-            "Podras visualizar los usuarios participantes, una vez creada la transaccion."
-          )
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -70838,25 +70869,41 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "card-body text-center px-0 collapse",
+        staticClass: "card-body collapse show",
         attrs: { id: "collapseSteps" }
       },
       [
-        _c("p", { staticClass: "text-muted" }, [
+        _c("p", { staticClass: "alert alert-primary" }, [
           _vm._v("Podras crear etapas, una vez creada la transaccion.")
         ]),
         _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-success disabled mb-2",
-            attrs: { href: "#", role: "button" }
-          },
-          [
-            _c("i", { staticClass: "fa fa-plus" }),
-            _vm._v("  Crear etapa\n        ")
-          ]
-        )
+        _c("div", { staticClass: "card-body bg-light" }, [
+          _c("div", { staticClass: "form-inline" }, [
+            _c("label", { staticClass: "sr-only" }, [_vm._v("Nombre etapa")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control  mb-2 mr-sm-2",
+              attrs: {
+                type: "text",
+                placeholder: "Nombre de la etapa",
+                disabled: "true"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary mb-2 disabled",
+                attrs: { href: "#" }
+              },
+              [
+                _c("i", { staticClass: "fas fa-plus" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "ml-1" }, [_vm._v("Crear etapa")])
+              ]
+            )
+          ])
+        ])
       ]
     )
   }
@@ -70923,6 +70970,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -71253,15 +71301,16 @@ var render = function() {
             _c("div", { staticClass: "card-body px-0" }, [
               _c("div", { staticClass: "form-group text-right" }, [
                 _vm.transaction.finished && _vm.transaction.finished_by_user
-                  ? _c("small", { staticClass: "text-muted mr-4" }, [
-                      _vm._v("Finalizada por "),
+                  ? _c("small", { staticClass: " text-success mr-4" }, [
+                      _vm._v("-- Finalizada por "),
                       _c("i", [
                         _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
-                      ])
+                      ]),
+                      _vm._v(" -- ")
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c("label", [_vm._v("Finalizar")]),
+                _c("label", [_vm._v("Finalizar transaccion")]),
                 _vm._v(" "),
                 _c("div", { staticClass: "float-right ml-2" }, [
                   _c(
@@ -71362,255 +71411,290 @@ var render = function() {
                       _vm._v(_vm._s(_vm.errors.name[0]))
                     ])
                   : _vm._e()
-              ]),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "card-body px-0 collapse",
-                  attrs: { id: "collapseCompanies" }
-                },
-                [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", [_vm._v("Empresa Importadora")]),
-                          _vm._v(" "),
-                          _c("multiselect", {
-                            class: {
-                              "border border-danger rounded":
-                                _vm.errors.company_import_id
-                            },
-                            attrs: {
-                              options: _vm.companies,
-                              openDirection: "bottom",
-                              "track-by": "id",
-                              label: "name"
-                            },
-                            model: {
-                              value: _vm.transaction.company_import,
-                              callback: function($$v) {
-                                _vm.$set(_vm.transaction, "company_import", $$v)
-                              },
-                              expression: "transaction.company_import"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm.errors.company_import_id
-                            ? _c(
-                                "small",
-                                { staticClass: "form-text text-danger" },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.errors.company_import_id[0])
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", [_vm._v("Aduana Importadora")]),
-                          _vm._v(" "),
-                          _c("multiselect", {
-                            class: {
-                              "border border-danger rounded":
-                                _vm.errors.customs_import_id
-                            },
-                            attrs: {
-                              options: _vm.companies,
-                              openDirection: "bottom",
-                              "track-by": "id",
-                              label: "name"
-                            },
-                            model: {
-                              value: _vm.transaction.customs_import,
-                              callback: function($$v) {
-                                _vm.$set(_vm.transaction, "customs_import", $$v)
-                              },
-                              expression: "transaction.customs_import"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm.errors.customs_import_id
-                            ? _c(
-                                "small",
-                                { staticClass: "form-text text-danger" },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.errors.customs_import_id[0])
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", [_vm._v("Empresa Exportadora")]),
-                          _vm._v(" "),
-                          _c("multiselect", {
-                            class: {
-                              "border border-danger rounded":
-                                _vm.errors.company_export_id
-                            },
-                            attrs: {
-                              options: _vm.companies,
-                              openDirection: "bottom",
-                              "track-by": "id",
-                              label: "name"
-                            },
-                            model: {
-                              value: _vm.transaction.company_export,
-                              callback: function($$v) {
-                                _vm.$set(_vm.transaction, "company_export", $$v)
-                              },
-                              expression: "transaction.company_export"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm.errors.company_export_id
-                            ? _c(
-                                "small",
-                                { staticClass: "form-text text-danger" },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.errors.company_export_id[0])
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", [_vm._v("Aduana Exportadora")]),
-                          _vm._v(" "),
-                          _c("multiselect", {
-                            class: {
-                              "border border-danger rounded":
-                                _vm.errors.customs_export_id
-                            },
-                            attrs: {
-                              options: _vm.companies,
-                              openDirection: "bottom",
-                              "track-by": "id",
-                              label: "name"
-                            },
-                            model: {
-                              value: _vm.transaction.customs_export,
-                              callback: function($$v) {
-                                _vm.$set(_vm.transaction, "customs_export", $$v)
-                              },
-                              expression: "transaction.customs_export"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm.errors.customs_export_id
-                            ? _c(
-                                "small",
-                                { staticClass: "form-text text-danger" },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.errors.customs_export_id[0])
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "card-body px-0 collapse",
-                  attrs: { id: "collapseUsers" }
-                },
-                [
-                  _c(
-                    "ul",
-                    { staticClass: "list-group list-group-flush" },
-                    _vm._l(_vm.transaction.users, function(user, index) {
-                      return _c(
-                        "li",
-                        { staticClass: "list-group-item media border-light" },
-                        [
-                          _c("div", { staticClass: "avatar float-left mr-3" }, [
-                            _c("img", {
-                              staticClass: "img-avatar",
-                              attrs: { src: user.avatar_url }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c(
-                              "div",
-                              { staticClass: "d-flex justify-content-between" },
-                              [
-                                _vm._v(
-                                  "\n                  " +
-                                    _vm._s(user.name) +
-                                    " - " +
-                                    _vm._s(user.company.name) +
-                                    "\n                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "small text-muted" }, [
-                              _vm._v(
-                                "\n                  " +
-                                  _vm._s(user.email) +
-                                  "\n                "
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    }),
-                    0
-                  )
-                ]
-              )
+              ])
             ]),
             _vm._v(" "),
-            _vm._m(3),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "div",
               {
-                staticClass: "card-body px-0 collapse show",
+                staticClass: "card-body collapse show",
+                attrs: { id: "collapseCompanies" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Empresa Importadora")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          class: {
+                            "border border-danger rounded":
+                              _vm.errors.company_import_id
+                          },
+                          attrs: {
+                            options: _vm.companies,
+                            openDirection: "bottom",
+                            "track-by": "id",
+                            label: "name"
+                          },
+                          model: {
+                            value: _vm.transaction.company_import,
+                            callback: function($$v) {
+                              _vm.$set(_vm.transaction, "company_import", $$v)
+                            },
+                            expression: "transaction.company_import"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.company_import_id
+                          ? _c(
+                              "small",
+                              { staticClass: "form-text text-danger" },
+                              [_vm._v(_vm._s(_vm.errors.company_import_id[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.transaction.company_import
+                      ? _c(
+                          "div",
+                          _vm._l(_vm.transaction.company_import.users, function(
+                            user
+                          ) {
+                            return _vm.transaction.company_import.users &&
+                              _vm.transaction.company_import.users.length > 0
+                              ? _c("ul", [
+                                  _c("li", [_vm._v(_vm._s(user.name))])
+                                ])
+                              : _vm._e()
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Empresa Exportadora")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          class: {
+                            "border border-danger rounded":
+                              _vm.errors.company_export_id
+                          },
+                          attrs: {
+                            options: _vm.companies,
+                            openDirection: "bottom",
+                            "track-by": "id",
+                            label: "name"
+                          },
+                          model: {
+                            value: _vm.transaction.company_export,
+                            callback: function($$v) {
+                              _vm.$set(_vm.transaction, "company_export", $$v)
+                            },
+                            expression: "transaction.company_export"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.company_export_id
+                          ? _c(
+                              "small",
+                              { staticClass: "form-text text-danger" },
+                              [_vm._v(_vm._s(_vm.errors.company_export_id[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.transaction.company_export
+                      ? _c(
+                          "div",
+                          _vm._l(_vm.transaction.company_export.users, function(
+                            user
+                          ) {
+                            return _vm.transaction.company_export.users &&
+                              _vm.transaction.company_export.users.length > 0
+                              ? _c("ul", [
+                                  _c("li", [_vm._v(_vm._s(user.name))])
+                                ])
+                              : _vm._e()
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Aduana Importadora")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          class: {
+                            "border border-danger rounded":
+                              _vm.errors.customs_import_id
+                          },
+                          attrs: {
+                            options: _vm.companies,
+                            openDirection: "bottom",
+                            "track-by": "id",
+                            label: "name"
+                          },
+                          model: {
+                            value: _vm.transaction.customs_import,
+                            callback: function($$v) {
+                              _vm.$set(_vm.transaction, "customs_import", $$v)
+                            },
+                            expression: "transaction.customs_import"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.customs_import_id
+                          ? _c(
+                              "small",
+                              { staticClass: "form-text text-danger" },
+                              [_vm._v(_vm._s(_vm.errors.customs_import_id[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.transaction.customs_import
+                      ? _c(
+                          "div",
+                          _vm._l(_vm.transaction.customs_import.users, function(
+                            user
+                          ) {
+                            return _vm.transaction.customs_import.users &&
+                              _vm.transaction.customs_import.users.length > 0
+                              ? _c("ul", [
+                                  _c("li", [_vm._v(_vm._s(user.name))])
+                                ])
+                              : _vm._e()
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Aduana Exportadora")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          class: {
+                            "border border-danger rounded":
+                              _vm.errors.customs_export_id
+                          },
+                          attrs: {
+                            options: _vm.companies,
+                            openDirection: "bottom",
+                            "track-by": "id",
+                            label: "name"
+                          },
+                          model: {
+                            value: _vm.transaction.customs_export,
+                            callback: function($$v) {
+                              _vm.$set(_vm.transaction, "customs_export", $$v)
+                            },
+                            expression: "transaction.customs_export"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.customs_export_id
+                          ? _c(
+                              "small",
+                              { staticClass: "form-text text-danger" },
+                              [_vm._v(_vm._s(_vm.errors.customs_export_id[0]))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.transaction.customs_export
+                      ? _c(
+                          "div",
+                          _vm._l(_vm.transaction.customs_export.users, function(
+                            user
+                          ) {
+                            return _vm.transaction.customs_export.users &&
+                              _vm.transaction.customs_export.users.length > 0
+                              ? _c("ul", [
+                                  _c("li", [_vm._v(_vm._s(user.name))])
+                                ])
+                              : _vm._e()
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+              _c("strong", [_vm._v("Etapas")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("Etapas de la transaccion.")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-header-actions" }, [
+                _c("div", { staticClass: "float-left mr-2" }, [
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm.transaction.stages.length) + " de 10")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "progress", staticStyle: { height: "4px" } },
+                    [
+                      _c("div", {
+                        staticClass: "progress-bar bg-info",
+                        style:
+                          "width: " +
+                          (_vm.transaction.stages.length * 100) / 10 +
+                          "%",
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow":
+                            (_vm.transaction.stages.length * 100) / 10,
+                          "aria-valuemin": "0",
+                          "aria-valuemax": 10
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "card-body collapse show",
                 attrs: { id: "collapseStages" }
               },
               [
@@ -71662,7 +71746,7 @@ var staticRenderFns = [
       _c("br"),
       _vm._v(" "),
       _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Empresas involucradas en la transaccion.")
+        _vm._v("Empresas invitadas a la transaccion.")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-header-actions" }, [
@@ -71686,59 +71770,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-      _c("strong", [_vm._v("Usuarios")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Usuarios participantes en la transaccion.")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-header-actions" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-header-action btn-minimize",
-            attrs: {
-              href: "#",
-              "data-toggle": "collapse",
-              "data-target": "#collapseUsers",
-              "aria-expanded": "false"
-            }
-          },
-          [_c("i", { staticClass: "icon-arrow-up" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-      _c("strong", [_vm._v("Etapas")]),
-      _c("br"),
-      _vm._v(" "),
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Etapas de la transaccion.")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-header-actions" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-header-action btn-minimize",
-            attrs: {
-              href: "#",
-              "data-toggle": "collapse",
-              "data-target": "#collapseStages",
-              "aria-expanded": "true"
-            }
-          },
-          [_c("i", { staticClass: "icon-arrow-up" })]
-        )
-      ])
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "card-header-action btn-minimize",
+        attrs: {
+          href: "#",
+          "data-toggle": "collapse",
+          "data-target": "#collapseStages",
+          "aria-expanded": "true"
+        }
+      },
+      [_c("i", { staticClass: "icon-arrow-up" })]
+    )
   }
 ]
 render._withStripped = true
@@ -71865,98 +71909,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       stage: {},
+      stageEdit: {},
       errors: {},
-      loadingEdit: true,
+      errorsEdit: {},
+      stageEditActive: false,
       submitingCreate: false,
       submitingEdit: false,
       submitingDestroy: false
@@ -71964,6 +71925,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   props: ['transaction'],
+  mounted: function mounted() {
+    this.stage.transactionId = this.transaction.id;
+  },
+
   methods: {
     newStage: function newStage() {
       this.stage = {};
@@ -71977,6 +71942,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.submitingCreate) {
         this.submitingCreate = true;
         axios.post('/api/stages/store', this.stage).then(function (response) {
+          _this.stage.name = '';
+          _this.errors = {};
           _this.transaction.stages.push(response.data);
           _this.$toasted.global.error('Etapa creada!');
           $('#stageCreateModal').modal('hide');
@@ -71987,39 +71954,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    editStage: function editStage(stageId, index) {
-      var _this2 = this;
-
-      this.errors = {};
-      this.loadingEdit = true;
-      axios.get('/api/stages/' + stageId).then(function (response) {
-        _this2.stage = response.data;
-        _this2.stage.index = index;
-      }).catch(function (error) {
-        _this2.$toasted.global.error('Stage does not exist!');
-      }).then(function () {
-        _this2.loadingEdit = false;
-      });
-      $('#stageEditModal').modal('show');
+    editStage: function editStage(stage, index) {
+      this.stageEdit = stage;
+      this.stageEdit.index = index;
     },
-    update: function update() {
-      var _this3 = this;
+    update: function update(stage, index) {
+      var _this2 = this;
 
       if (!this.submitingEdit) {
         this.submitingEdit = true;
-        axios.put('/api/stages/update/' + this.stage.id, this.stage).then(function (response) {
-          _this3.transaction.stages[_this3.stage.index].name = response.data.name;
-          _this3.$toasted.global.error('Updated stage!');
-          $('#stageEditModal').modal('hide');
+        axios.put('/api/stages/update/' + stage.id, stage).then(function (response) {
+          _this2.transaction.stages[index].name = response.data.name;
+          _this2.stageEdit = {};
+          _this2.errorsEdit = {};
+          _this2.$toasted.global.error('Updated stage!');
         }).catch(function (error) {
-          _this3.errors = error.response.data.errors;
+          _this2.errorsEdit = error.response.data.errors;
         }).then(function () {
-          _this3.submitingEdit = false;
+          _this2.submitingEdit = false;
         });
       }
     },
-    destroy: function destroy() {
-      var _this4 = this;
+    destroy: function destroy(stageId, index) {
+      var _this3 = this;
 
       if (!this.submitingDestroy) {
         this.submitingDestroy = true;
@@ -72031,67 +71988,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           dangerMode: true
         }).then(function (willDelete) {
           if (willDelete) {
-            axios.delete('/api/stages/' + _this4.stage.id).then(function (response) {
-              _this4.transaction.stages.splice(_this4.stage.index, 1);
-              _this4.$toasted.global.error('Etapa borrada!');
-              $('#stageEditModal').modal('hide');
+            axios.delete('/api/stages/' + stageId).then(function (response) {
+              _this3.transaction.stages.splice(index, 1);
+              _this3.$toasted.global.error('Etapa borrada!');
             }).catch(function (error) {
-              _this4.errors = error.response.data.errors;
+              _this3.errors = error.response.data.errors;
             });
           }
-          _this4.submitingDestroy = false;
+          _this3.submitingDestroy = false;
         });
       }
     },
     toggleAuthorized: function toggleAuthorized(stage, index) {
-      var _this5 = this;
+      var _this4 = this;
 
       axios.put('/api/stages/toggleAuthorized/' + stage.id, stage).then(function (response) {
-        _this5.transaction.stages[index].authorized = response.data.authorized;
-        _this5.transaction.stages[index].authorized_by = response.data.authorized_by;
-        _this5.transaction.stages[index].authorized_by_user = response.data.authorized_by_user;
+        _this4.transaction.stages[index].authorized = response.data.authorized;
+        _this4.transaction.stages[index].authorized_by = response.data.authorized_by;
+        _this4.transaction.stages[index].authorized_by_user = response.data.authorized_by_user;
         if (response.data.authorized) {
-          _this5.$toasted.global.error('Etapa Autorizada!');
+          _this4.$toasted.global.error('Etapa Autorizada!');
         } else {
-          _this5.$toasted.global.error('Etapa Desautorizada!');
+          _this4.$toasted.global.error('Etapa Desautorizada!');
         }
       }).catch(function (error) {
         if (error.response) {
-          _this5.errors = error.response.data.errors;
+          _this4.errors = error.response.data.errors;
         }
       });
-    },
-    uploadFile: function uploadFile(stage, index) {
-      this.stage = stage;
-      this.stage.index = index;
-      $('#stageUploadFileModal').modal('show');
-    },
-    destroyFile: function destroyFile(stage, file, index) {
-      var _this6 = this;
-
-      swal({
-        title: "Estas seguro?",
-        text: "Una vez borrado, no podras recuperar el documento!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-      }).then(function (willDelete) {
-        if (willDelete) {
-          axios.delete('/api/files/destroy/' + file.id).then(function (response) {
-            stage.files.splice(index, 1);
-            _this6.$toasted.global.error('Documento borrado!');
-          }).catch(function (error) {
-            if (error.response) {
-              _this6.errors = error.response.data.errors;
-            }
-          });
-        }
-      });
-    },
-    comments: function comments(stage, index) {
-      this.stage = stage;
-      this.stage.index = index;
-      $('#stageCommentsModal').modal('show');
     }
   }
 });
@@ -72113,211 +72037,296 @@ var render = function() {
             return _c(
               "li",
               {
-                staticClass: "list-group-item media border-light",
+                staticClass:
+                  "list-group-item p-0 pt-4 border-light bg-transparent",
                 attrs: { "track-by": "id" }
               },
               [
-                _c("div", { staticClass: "float-left mr-3" }, [
-                  _c(
-                    "label",
-                    { staticClass: "switch switch-label switch-success" },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: stage.authorized,
-                            expression: "stage.authorized"
-                          }
-                        ],
-                        staticClass: "switch-input",
-                        attrs: { type: "checkbox" },
-                        domProps: {
-                          checked: Array.isArray(stage.authorized)
-                            ? _vm._i(stage.authorized, null) > -1
-                            : stage.authorized
-                        },
-                        on: {
-                          change: [
-                            function($event) {
-                              var $$a = stage.authorized,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = null,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      stage,
-                                      "authorized",
-                                      $$a.concat([$$v])
-                                    )
+                _c("div", [
+                  _c("div", { staticClass: "float-left mr-3" }, [
+                    _c(
+                      "label",
+                      { staticClass: "switch switch-label switch-success" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stage.authorized,
+                              expression: "stage.authorized"
+                            }
+                          ],
+                          staticClass: "switch-input",
+                          attrs: { type: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(stage.authorized)
+                              ? _vm._i(stage.authorized, null) > -1
+                              : stage.authorized
+                          },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$a = stage.authorized,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        stage,
+                                        "authorized",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        stage,
+                                        "authorized",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
                                 } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      stage,
-                                      "authorized",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
+                                  _vm.$set(stage, "authorized", $$c)
                                 }
-                              } else {
-                                _vm.$set(stage, "authorized", $$c)
+                              },
+                              function($event) {
+                                _vm.toggleAuthorized(stage, index)
                               }
-                            },
-                            function($event) {
-                              _vm.toggleAuthorized(stage, index)
-                            }
-                          ]
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "switch-slider",
-                        attrs: { "data-checked": "✓", "data-unchecked": "✕" }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-body" }, [
-                  _c("div", { staticClass: "d-flex justify-content-between" }, [
-                    _c("strong", [_vm._v(_vm._s(stage.name))]),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-secondary",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.editStage(stage.id, index)
-                            }
+                            ]
                           }
-                        },
-                        [_c("i", { staticClass: "fas fa-pen" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "ml-2 text-secondary",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.uploadFile(stage, index)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-file-upload" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "ml-2 text-secondary",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.comments(stage, index)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-comment" })]
-                      )
-                    ])
+                        }),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "switch-slider",
+                          attrs: { "data-checked": "✓", "data-unchecked": "✕" }
+                        })
+                      ]
+                    )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "d-flex justify-content-between" }, [
+                    _vm.stageEdit.id == stage.id
+                      ? _c("div", { staticClass: "form-inline" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.stageEdit.name,
+                                expression: "stageEdit.name"
+                              }
+                            ],
+                            staticClass: "form-control mb-2 mr-sm-2",
+                            class: { "is-invalid": _vm.errorsEdit.name },
+                            attrs: {
+                              type: "text",
+                              placeholder: "Nombre de la etapa",
+                              autofocus: ""
+                            },
+                            domProps: { value: _vm.stageEdit.name },
+                            on: {
+                              keyup: [
+                                function($event) {
+                                  if (
+                                    !("button" in $event) &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key,
+                                      "Enter"
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  _vm.update(_vm.stageEdit, index)
+                                },
+                                function($event) {
+                                  if (
+                                    !("button" in $event) &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "esc",
+                                      27,
+                                      $event.key,
+                                      ["Esc", "Escape"]
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  _vm.update(_vm.stageEdit, index)
+                                }
+                              ],
+                              blur: function($event) {
+                                _vm.update(_vm.stageEdit, index)
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.stageEdit,
+                                  "name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errorsEdit.name
+                            ? _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v(_vm._s(_vm.errorsEdit.name[0]))
+                              ])
+                            : _vm._e()
+                        ])
+                      : _c(
+                          "a",
+                          {
+                            staticClass: "text-secondary",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.editStage(stage, index)
+                              }
+                            }
+                          },
+                          [_c("strong", [_vm._v(_vm._s(stage.name))]), _c("br")]
+                        ),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "media-body" },
+                      {
+                        staticClass: "nav nav-pills",
+                        attrs: { id: "pills-tab", role: "tablist" }
+                      },
                       [
-                        stage.authorized && stage.authorized_by_user
-                          ? _c("div", { staticClass: "text-muted small" }, [
-                              _vm._v("Autorizada por "),
-                              _c("i", [
-                                _vm._v(_vm._s(stage.authorized_by_user.name))
-                              ])
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-item text-secondary active",
+                            attrs: {
+                              id: "pills-files-tab-" + stage.id,
+                              "data-toggle": "pill",
+                              href: "#pills-files-" + stage.id,
+                              role: "tab",
+                              "aria-controls": "pills-files-" + stage.id,
+                              "aria-selected": "true"
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-file-upload mr-2" }),
+                            _c("span", { staticClass: "d-md-down-none mr-3" }, [
+                              _vm._v("Archivos")
                             ])
-                          : _vm._e(),
+                          ]
+                        ),
                         _vm._v(" "),
-                        _vm._l(stage.files, function(file, index) {
-                          return _c("div", { staticClass: "card my-3" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "card-body p-0 d-flex align-items-center"
-                              },
-                              [
-                                _c("i", {
-                                  staticClass:
-                                    "fas fa-file-alt bg-warning p-2 font-2xl mr-3"
-                                }),
-                                _vm._v(" "),
-                                _c("div", [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "text-muted font-weight-bold small"
-                                    },
-                                    [
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "text-secondary",
-                                          attrs: {
-                                            href: file.url,
-                                            target: "_blank"
-                                          }
-                                        },
-                                        [_vm._v(_vm._s(file.name))]
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "close ml-auto mb-auto mt-1 mr-1",
-                                    attrs: {
-                                      type: "button",
-                                      "aria-label": "Close"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.destroyFile(stage, file, index)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "span",
-                                      { attrs: { "aria-hidden": "true" } },
-                                      [_vm._v("×")]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        })
-                      ],
-                      2
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-item text-secondary",
+                            attrs: {
+                              id: "pills-comments-tab-" + stage.id,
+                              "data-toggle": "pill",
+                              href: "#pills-comments-" + stage.id,
+                              role: "tab",
+                              "aria-controls": "pills-comments-" + stage.id,
+                              "aria-selected": "false"
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-comment mr-2" }),
+                            _c("span", { staticClass: "d-md-down-none mr-3" }, [
+                              _vm._v(
+                                _vm._s(stage.comments.length) + " Comentarios"
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-secondary",
+                            attrs: {
+                              href: "#",
+                              disabled: _vm.submitingDestroy
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.destroy(stage.id, index)
+                              }
+                            }
+                          },
+                          [
+                            _vm.submitingDestroy
+                              ? _c("i", {
+                                  staticClass: "fas fa-spinner fa-spin"
+                                })
+                              : _c("i", { staticClass: "far fa-trash-alt" })
+                          ]
+                        )
+                      ]
                     )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-muted small mb-1" }, [
+                    stage.authorized && stage.authorized_by_user
+                      ? _c("span", [
+                          _vm._v("Autorizada por "),
+                          _c("i", [
+                            _vm._v(_vm._s(stage.authorized_by_user.name))
+                          ])
+                        ])
+                      : _vm._e()
                   ])
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-content bg-transparent border-0",
+                    attrs: { id: "pills-tabContent" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane px-2 fade show active",
+                        attrs: {
+                          id: "pills-files-" + stage.id,
+                          role: "tabpanel",
+                          "aria-labelledby": "pills-files-tab-" + stage.id
+                        }
+                      },
+                      [_c("transactions-file", { attrs: { stage: stage } })],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane px-3 fade",
+                        attrs: {
+                          id: "pills-comments-" + stage.id,
+                          role: "tabpanel",
+                          "aria-labelledby": "pills-comments-tab-" + stage.id
+                        }
+                      },
+                      [
+                        _c("transactions-comments", { attrs: { stage: stage } })
+                      ],
+                      1
+                    )
+                  ]
+                )
               ]
             )
           }),
@@ -72325,405 +72334,75 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body text-center px-0" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success mb-2",
-          attrs: { href: "#", role: "button" },
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body bg-light" }, [
+      _c("div", { staticClass: "form-inline" }, [
+        _c("label", { staticClass: "sr-only" }, [_vm._v("Nombre de la etapa")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.stage.name,
+              expression: "stage.name"
+            }
+          ],
+          staticClass: "form-control  mb-2 mr-sm-2",
+          class: { "is-invalid": _vm.errors.name },
+          attrs: { type: "text", placeholder: "Nombre etapa" },
+          domProps: { value: _vm.stage.name },
           on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.newStage($event)
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.create($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.stage, "name", $event.target.value)
             }
           }
-        },
-        [_c("i", { staticClass: "fa fa-plus" }), _vm._v("  Crear etapa\n    ")]
-      ),
-      _vm._v(" "),
-      _vm._m(0)
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "stageCreateModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
+        }),
+        _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          "a",
+          {
+            staticClass: "btn btn-primary mb-2",
+            attrs: { href: "#", disabled: _vm.submitingCreate },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.create($event)
+              }
+            }
+          },
           [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.stage.name,
-                        expression: "stage.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: { "is-invalid": _vm.errors.name },
-                    attrs: { type: "text", placeholder: "Proforma Import" },
-                    domProps: { value: _vm.stage.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.stage, "name", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.name
-                    ? _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errors.name[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { href: "#", disabled: _vm.submitingCreate },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.create($event)
-                      }
-                    }
-                  },
-                  [
-                    _vm.submitingCreate
-                      ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                      : _c("i", { staticClass: "fas fa-check" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
-                  ]
-                )
-              ])
-            ])
+            _vm.submitingCreate
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+              : _c("i", { staticClass: "fas fa-plus" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-1" }, [_vm._v("Crear etapa")])
           ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "stageEditModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                !_vm.loadingEdit
-                  ? _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "form-group col-md-12" }, [
-                        _c("label", [_vm._v("Nombre")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.stage.name,
-                              expression: "stage.name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.errors.name },
-                          attrs: {
-                            type: "text",
-                            placeholder: "Proforma Export"
-                          },
-                          domProps: { value: _vm.stage.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.stage, "name", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.name
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.name[0]))
-                            ])
-                          : _vm._e()
-                      ])
-                    ])
-                  : _c("div", { staticClass: "row" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col-md-12" },
-                        [
-                          _c(
-                            "content-placeholders",
-                            [_c("content-placeholders-text")],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { href: "#", disabled: _vm.submitingEdit },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.update($event)
-                      }
-                    }
-                  },
-                  [
-                    _vm.submitingEdit
-                      ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                      : _c("i", { staticClass: "fas fa-check" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "card-header-action ml-1",
-                    attrs: { href: "#", disabled: _vm.submitingDestroy },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.destroy($event)
-                      }
-                    }
-                  },
-                  [
-                    _vm.submitingDestroy
-                      ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                      : _c("i", { staticClass: "far fa-trash-alt" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "d-md-down-none ml-1" }, [
-                      _vm._v("Borrar")
-                    ])
-                  ]
-                )
-              ])
+        ),
+        _vm._v(" "),
+        _vm.errors.name
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.errors.name[0]))
             ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "stageUploadFileModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-body" },
-                [_c("transactions-file", { attrs: { stage: _vm.stage } })],
-                1
-              )
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "stageCommentsModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-body" },
-                [_c("transactions-comments", { attrs: { stage: _vm.stage } })],
-                1
-              )
-            ])
-          ]
-        )
-      ]
-    )
+          : _vm._e()
+      ])
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-muted" }, [
-      _c("small", [_vm._v("Agrega etapas en las transaccion.")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Crear etapa")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Editar etapa")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Subir Documento")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Comentarios")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -72810,6 +72489,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72843,14 +72534,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     complete: function complete(file, status, xhr) {
       if (status == 'success') {
+        this.preview.progress = 0;
         this.stage.files.push(JSON.parse(xhr.response));
-        $('#stageUploadFileModal').modal('hide');
       } else {
         this.errors = {
           status: status,
           message: file.errorMessage
         };
       }
+    },
+    destroyFile: function destroyFile(stage, file, index) {
+      var _this = this;
+
+      swal({
+        title: "Estas seguro?",
+        text: "Una vez borrado, no podras recuperar el documento!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          axios.delete('/api/files/destroy/' + file.id).then(function (response) {
+            stage.files.splice(index, 1);
+            _this.$toasted.global.error('Documento borrado!');
+          }).catch(function (error) {
+            if (error.response) {
+              _this.errors = error.response.data.errors;
+            }
+          });
+        }
+      });
     }
   }
 });
@@ -72863,63 +72576,100 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "media" }, [
-    _c(
-      "div",
-      { staticClass: "media-body pt-1" },
-      [
-        _c(
-          "vue-clip",
-          {
-            attrs: {
-              options: _vm.options,
-              "on-sending": _vm.sending,
-              "on-complete": _vm.complete
-            }
-          },
-          [
-            _c("template", { slot: "clip-uploader-action" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "dz-message btn btn-outline-secondary btn-sm",
-                  attrs: { type: "button" }
-                },
-                [_vm._v("Seleccione un archivo")]
-              )
-            ])
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("small", { staticClass: "form-text text-muted" }, [
-          _vm._v("El tamaño máximo permitido del archivo es de 10MB.")
-        ]),
-        _vm._v(" "),
-        _vm.errors.status
-          ? _c("small", { staticClass: "form-text text-danger" }, [
-              _vm._v(_vm._s(_vm.errors.message))
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "progress mt-2 mb-3", staticStyle: { height: "1px" } },
-          [
-            _c("div", {
-              staticClass: "progress-bar",
-              class: {
-                "bg-success": _vm.preview.status == "success",
-                "bg-danger": _vm.preview.status == "error"
+  return _c(
+    "div",
+    [
+      _vm._l(_vm.stage.files, function(file, index) {
+        return _c("div", { staticClass: "card mb-3" }, [
+          _c("div", { staticClass: "card-body p-0 d-flex" }, [
+            _c("i", {
+              staticClass: "fas fa-file-alt bg-warning p-3 font-2xl mr-3"
+            }),
+            _vm._v(" "),
+            _c("div", [
+              _c("div", { staticClass: "font-weight-bold mt-1" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-secondary",
+                    attrs: { href: file.url, target: "_blank" }
+                  },
+                  [_vm._v(_vm._s(file.name))]
+                )
+              ]),
+              _vm._v(" "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("Subido por "),
+                _c("i", [_vm._v(_vm._s(file.creator.name))]),
+                _vm._v(" el dia "),
+                _c("i", [
+                  _vm._v(_vm._s(_vm._f("moment")(file.created_at, "LLL")))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "close ml-auto mb-auto mt-1 mr-1",
+                attrs: { type: "button", "aria-label": "Close" },
+                on: {
+                  click: function($event) {
+                    _vm.destroyFile(_vm.stage, file, index)
+                  }
+                }
               },
-              style: { width: _vm.preview.progress + "%" }
-            })
-          ]
-        )
-      ],
-      1
-    )
-  ])
+              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+            )
+          ])
+        ])
+      }),
+      _vm._v(" "),
+      _vm.preview.progress > 0
+        ? _c(
+            "content-placeholders",
+            { staticClass: "mb-3" },
+            [_c("content-placeholders-heading", { attrs: { img: true } })],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "vue-clip",
+        {
+          attrs: {
+            options: _vm.options,
+            "on-sending": _vm.sending,
+            "on-complete": _vm.complete
+          }
+        },
+        [
+          _c("template", { slot: "clip-uploader-action" }, [
+            _c(
+              "button",
+              {
+                staticClass: "dz-message btn btn-outline-secondary btn-sm",
+                attrs: { type: "button" }
+              },
+              [_vm._v("Subir un archivo")]
+            )
+          ])
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("small", { staticClass: "form-text text-muted" }, [
+        _vm._v("El tamaño máximo permitido del archivo es de 10MB.")
+      ]),
+      _vm._v(" "),
+      _vm.errors.status
+        ? _c("small", { staticClass: "form-text text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.message))
+          ])
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -73011,53 +72761,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       comment: '',
       comments: [],
-      errors: {},
-      loading: true
+      errors: {}
     };
   },
 
   props: ['stage'],
-  watch: {
-    stage: function stage(newValue, oldValue) {
-      if (newValue.id) {
-        this.getComments(newValue.id);
-      }
-    }
+  mounted: function mounted() {
+    this.comments = this.stage.comments;
   },
-  methods: {
-    getComments: function getComments(stageId) {
-      var _this = this;
 
-      this.loading = true;
-      axios.get('/api/comments/byStage/' + stageId).then(function (response) {
-        _this.comments = response.data;
-      }).catch(function (error) {
-        _this.$toasted.global.error('Comments does not exist!');
-      }).then(function () {
-        _this.loading = false;
-      });
-    },
+  methods: {
     storeComment: function storeComment() {
-      var _this2 = this;
+      var _this = this;
 
       var comment = {
         comment: this.comment,
         stage_id: this.stage.id
       };
       axios.post('/api/comments/store', comment).then(function (response) {
-        _this2.comments.unshift(response.data);
-        _this2.comment = '';
-        _this2.errors = {};
+        _this.comments.unshift(response.data);
+        _this.comment = '';
+        _this.errors = {};
       }).catch(function (error) {
-        _this2.errors = error.response.data.errors;
+        if (error.response) {
+          _this.errors = error.response.data.errors;
+        }
       });
     }
   }
@@ -73072,7 +72806,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-group mb-4" }, [
+    _c("div", { staticClass: "input-group mb-2" }, [
       _c("input", {
         directives: [
           {
@@ -73105,6 +72839,27 @@ var render = function() {
         }
       }),
       _vm._v(" "),
+      _c("div", { staticClass: "input-group-append" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary",
+            on: {
+              keyup: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.storeComment($event)
+              }
+            }
+          },
+          [_c("i", { staticClass: "fas fa-paper-plane" })]
+        )
+      ]),
+      _vm._v(" "),
       _vm.errors.comment
         ? _c("div", { staticClass: "invalid-feedback" }, [
             _vm._v(_vm._s(_vm.errors.comment[0]))
@@ -73112,46 +72867,42 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    !_vm.loading
-      ? _c(
-          "div",
-          { staticClass: "px-2" },
-          _vm._l(this.comments, function(comment) {
-            return _c("div", { staticClass: "media mb-2" }, [
-              _c("div", { staticClass: "media-left" }, [
-                _c("img", {
-                  staticClass: "avatar-sm img-avatar mr-2",
-                  attrs: { src: comment.creator.avatar_url }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "media-body" }, [
-                _c("span", { staticClass: "text-primary" }, [
-                  _vm._v(_vm._s(comment.creator.name))
-                ]),
-                _vm._v(" "),
-                _c("small", { staticClass: "text-muted pull-right" }, [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm._f("moment")(comment.created_at, "from")) +
-                      "\n        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(comment.comment))])
-              ])
-            ])
-          }),
-          0
-        )
-      : _c(
-          "div",
-          { staticClass: "px-2" },
-          [_c("content-placeholders", [_c("content-placeholders-text")], 1)],
-          1
-        )
+    _c(
+      "div",
+      {
+        staticClass: "p-4 rounded border overflow-auto",
+        staticStyle: { "max-height": "300px" }
+      },
+      _vm._l(this.comments, function(comment) {
+        return _c("div", { staticClass: "media mb-2" }, [
+          _c("div", { staticClass: "media-left" }, [
+            _c("img", {
+              staticClass: "avatar-sm img-avatar mr-2",
+              attrs: { src: comment.creator.avatar_url }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-body" }, [
+            _c("span", { staticClass: "text-primary" }, [
+              _vm._v(_vm._s(comment.creator.name))
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted pull-right" }, [
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm._f("moment")(comment.created_at, "from")) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(comment.comment))])
+          ])
+        ])
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = []

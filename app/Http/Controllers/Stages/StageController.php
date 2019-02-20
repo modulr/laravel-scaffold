@@ -11,7 +11,7 @@ class StageController extends Controller
 {
     public function show ($stage)
     {
-        return Stage::with('authorizedByUser', 'files')->findOrFail($stage);
+        return Stage::findOrFail($stage);
     }
 
     public function store (Request $request)

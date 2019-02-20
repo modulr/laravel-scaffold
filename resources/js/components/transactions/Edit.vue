@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-12 col-xl-9" v-if="!loading">
-        <!--button actions-->
+        <!-- button actions -->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
           <h4 class="float-left pt-2"><a href="/transactions" class="text-dark"><i class="fas fa-angle-left fa-lg px-2"></i></a> Editar Transaccion</h4>
           <div class="card-header-actions mr-1">
@@ -18,11 +18,11 @@
             </a>
           </div>
         </div>
-        <!--forms-->
+        <!-- form -->
         <div class="card-body px-0">
           <div class="form-group text-right">
-            <small class="text-muted mr-4" v-if="transaction.finished && transaction.finished_by_user">Finalizada por <i>{{transaction.finished_by_user.name}}</i></small>
-            <label>Finalizar</label>
+            <small class=" text-success mr-4" v-if="transaction.finished && transaction.finished_by_user">-- Finalizada por <i>{{transaction.finished_by_user.name}}</i> -- </small>
+            <label>Finalizar transaccion</label>
             <div class="float-right ml-2">
               <label class="switch switch-label switch-pill switch-success">
                 <input class="switch-input form-check-input" type="checkbox" v-model="transaction.finished" @change="toggleFinished">
@@ -35,112 +35,113 @@
             <input type="text" class="form-control form-control-lg" :class="{'is-invalid': errors.name}" v-model="transaction.name" placeholder="Enero 2019">
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
-          <div class="card-header px-0 bg-transparent">
-            <strong>Empresas</strong><br>
-            <small class="text-muted">Empresas involucradas en la transaccion.</small>
-            <div class="card-header-actions">
-              <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseCompanies" aria-expanded="false">
-                <i class="icon-arrow-up"></i>
-              </a>
-            </div>
+        </div>
+        <!-- sections -->
+        <div class="card-header px-0 bg-transparent">
+          <strong>Empresas</strong><br>
+          <small class="text-muted">Empresas invitadas a la transaccion.</small>
+          <div class="card-header-actions">
+            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseCompanies" aria-expanded="false">
+              <i class="icon-arrow-up"></i>
+            </a>
           </div>
-          <div class="card-body px-0 collapse" id="collapseCompanies">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Empresa Importadora</label>
-                  <multiselect
-                    v-model="transaction.company_import"
-                    :options="companies"
-                    openDirection="bottom"
-                    track-by="id"
-                    label="name"
-                    :class="{'border border-danger rounded': errors.company_import_id}">
-                  </multiselect>
-                  <small class="form-text text-danger" v-if="errors.company_import_id">{{errors.company_import_id[0]}}</small>
-                </div>
+        </div>
+        <div class="card-body collapse show" id="collapseCompanies">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Empresa Importadora</label>
+                <multiselect
+                  v-model="transaction.company_import"
+                  :options="companies"
+                  openDirection="bottom"
+                  track-by="id"
+                  label="name"
+                  :class="{'border border-danger rounded': errors.company_import_id}">
+                </multiselect>
+                <small class="form-text text-danger" v-if="errors.company_import_id">{{errors.company_import_id[0]}}</small>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Aduana Importadora</label>
-                  <multiselect
-                    v-model="transaction.customs_import"
-                    :options="companies"
-                    openDirection="bottom"
-                    track-by="id"
-                    label="name"
-                    :class="{'border border-danger rounded': errors.customs_import_id}">
-                  </multiselect>
-                  <small class="form-text text-danger" v-if="errors.customs_import_id">{{errors.customs_import_id[0]}}</small>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Empresa Exportadora</label>
-                  <multiselect
-                    v-model="transaction.company_export"
-                    :options="companies"
-                    openDirection="bottom"
-                    track-by="id"
-                    label="name"
-                    :class="{'border border-danger rounded': errors.company_export_id}">
-                  </multiselect>
-                  <small class="form-text text-danger" v-if="errors.company_export_id">{{errors.company_export_id[0]}}</small>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Aduana Exportadora</label>
-                  <multiselect
-                    v-model="transaction.customs_export"
-                    :options="companies"
-                    openDirection="bottom"
-                    track-by="id"
-                    label="name"
-                    :class="{'border border-danger rounded': errors.customs_export_id}">
-                  </multiselect>
-                  <small class="form-text text-danger" v-if="errors.customs_export_id">{{errors.customs_export_id[0]}}</small>
-                </div>
+              <div v-if="transaction.company_import">
+                <ul v-if="transaction.company_import.users && transaction.company_import.users.length > 0" v-for="user in transaction.company_import.users">
+                  <li>{{user.name}}</li>
+                </ul>
               </div>
             </div>
-          </div>
-          <div class="card-header px-0 bg-transparent">
-            <strong>Usuarios</strong><br>
-            <small class="text-muted">Usuarios participantes en la transaccion.</small>
-            <div class="card-header-actions">
-              <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="false">
-                <i class="icon-arrow-up"></i>
-              </a>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Empresa Exportadora</label>
+                <multiselect
+                  v-model="transaction.company_export"
+                  :options="companies"
+                  openDirection="bottom"
+                  track-by="id"
+                  label="name"
+                  :class="{'border border-danger rounded': errors.company_export_id}">
+                </multiselect>
+                <small class="form-text text-danger" v-if="errors.company_export_id">{{errors.company_export_id[0]}}</small>
+              </div>
+              <div v-if="transaction.company_export">
+                <ul v-if="transaction.company_export.users && transaction.company_export.users.length > 0" v-for="user in transaction.company_export.users">
+                  <li>{{user.name}}</li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="card-body px-0 collapse" id="collapseUsers">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item media border-light" v-for="(user, index) in transaction.users">
-                <div class="avatar float-left mr-3">
-                  <img class="img-avatar" :src="user.avatar_url">
-                </div>
-                <div class="media-body">
-                  <div class="d-flex justify-content-between">
-                    {{user.name}} - {{user.company.name}}
-                  </div>
-                  <div class="small text-muted">
-                    {{user.email}}
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Aduana Importadora</label>
+                <multiselect
+                  v-model="transaction.customs_import"
+                  :options="companies"
+                  openDirection="bottom"
+                  track-by="id"
+                  label="name"
+                  :class="{'border border-danger rounded': errors.customs_import_id}">
+                </multiselect>
+                <small class="form-text text-danger" v-if="errors.customs_import_id">{{errors.customs_import_id[0]}}</small>
+              </div>
+              <div v-if="transaction.customs_import">
+                <ul v-if="transaction.customs_import.users && transaction.customs_import.users.length > 0" v-for="user in transaction.customs_import.users">
+                  <li>{{user.name}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Aduana Exportadora</label>
+                <multiselect
+                  v-model="transaction.customs_export"
+                  :options="companies"
+                  openDirection="bottom"
+                  track-by="id"
+                  label="name"
+                  :class="{'border border-danger rounded': errors.customs_export_id}">
+                </multiselect>
+                <small class="form-text text-danger" v-if="errors.customs_export_id">{{errors.customs_export_id[0]}}</small>
+              </div>
+              <div v-if="transaction.customs_export">
+                <ul v-if="transaction.customs_export.users && transaction.customs_export.users.length > 0" v-for="user in transaction.customs_export.users">
+                  <li>{{user.name}}</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         <div class="card-header px-0 bg-transparent">
           <strong>Etapas</strong><br>
           <small class="text-muted">Etapas de la transaccion.</small>
           <div class="card-header-actions">
+            <div class="float-left mr-2">
+              <small class="text-muted">{{transaction.stages.length}} de 10</small>
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar bg-info" role="progressbar" :style="`width: ${transaction.stages.length*100/10}%`" :aria-valuenow="transaction.stages.length*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
+              </div>
+            </div>
             <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseStages" aria-expanded="true">
               <i class="icon-arrow-up"></i>
             </a>
           </div>
         </div>
-        <div class="card-body px-0 collapse show" id="collapseStages">
+        <div class="card-body collapse show" id="collapseStages">
           <transactions-stages :transaction="transaction"></transactions-stages>
         </div>
         <div class="card-body text-right px-0">

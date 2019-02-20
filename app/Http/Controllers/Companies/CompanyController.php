@@ -10,7 +10,7 @@ class CompanyController extends Controller
 {
     public function all()
     {
-        return Company::all();
+        return Company::with('users')->get();
     }
 
     public function show ($company)

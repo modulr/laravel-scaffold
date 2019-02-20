@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-12 col-xl-9">
+        <!-- button actions -->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
           <h4 class="float-left pt-2"><a href="/transactions" class="text-dark"><i class="fas fa-angle-left fa-lg px-2"></i></a> Crear transaccion</h4>
           <div class="card-header-actions mr-1">
@@ -12,6 +13,7 @@
             </a>
           </div>
         </div>
+        <!-- form -->
         <div class="card-body px-0">
           <div class="form-group">
             <label>Nombre</label>
@@ -19,16 +21,17 @@
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
         </div>
+        <!-- sections -->
         <div class="card-header px-0 bg-transparent">
           <strong>Empresas</strong><br>
-          <small class="text-muted">Empresas involucradas en la transaccion.</small>
+          <small class="text-muted">Empresas invitadas a la transaccion.</small>
           <div class="card-header-actions">
             <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseCompanies" aria-expanded="true">
               <i class="icon-arrow-up"></i>
             </a>
           </div>
         </div>
-        <div class="card-body px-0 collapse show" id="collapseCompanies">
+        <div class="card-body collapse show" id="collapseCompanies">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -43,19 +46,10 @@
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.company_import_id">{{errors.company_import_id[0]}}</small>
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Aduana Importadora</label>
-                <multiselect
-                  v-model="transaction.customs_import"
-                  :options="companies"
-                  openDirection="bottom"
-                  track-by="id"
-                  label="name"
-                  :class="{'border border-danger rounded': errors.customs_import_id}">
-                </multiselect>
-                <small class="form-text text-danger" v-if="errors.customs_import_id">{{errors.customs_import_id[0]}}</small>
+              <div v-if="transaction.company_import">
+                <ul v-if="transaction.company_import.users && transaction.company_import.users.length > 0" v-for="user in transaction.company_import.users">
+                  <li>{{user.name}}</li>
+                </ul>
               </div>
             </div>
             <div class="col-md-6">
@@ -71,6 +65,30 @@
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.company_export_id">{{errors.company_export_id[0]}}</small>
               </div>
+              <div v-if="transaction.company_export">
+                <ul v-if="transaction.company_export.users && transaction.company_export.users.length > 0" v-for="user in transaction.company_export.users">
+                  <li>{{user.name}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Aduana Importadora</label>
+                <multiselect
+                  v-model="transaction.customs_import"
+                  :options="companies"
+                  openDirection="bottom"
+                  track-by="id"
+                  label="name"
+                  :class="{'border border-danger rounded': errors.customs_import_id}">
+                </multiselect>
+                <small class="form-text text-danger" v-if="errors.customs_import_id">{{errors.customs_import_id[0]}}</small>
+              </div>
+              <div v-if="transaction.customs_import">
+                <ul v-if="transaction.customs_import.users && transaction.customs_import.users.length > 0" v-for="user in transaction.customs_import.users">
+                  <li>{{user.name}}</li>
+                </ul>
+              </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
@@ -85,20 +103,13 @@
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.customs_export_id">{{errors.customs_export_id[0]}}</small>
               </div>
+              <div v-if="transaction.customs_export">
+                <ul v-if="transaction.customs_export.users && transaction.customs_export.users.length > 0" v-for="user in transaction.customs_export.users">
+                  <li>{{user.name}}</li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="card-header px-0 bg-transparent">
-          <strong>Usuarios</strong><br>
-          <small class="text-muted">Usuarios participantes en la transaccion.</small>
-          <div class="card-header-actions">
-            <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="false">
-              <i class="icon-arrow-up"></i>
-            </a>
-          </div>
-        </div>
-        <div class="card-body text-center px-0 collapse" id="collapseUsers">
-          <p class="text-muted">Podras visualizar los usuarios participantes, una vez creada la transaccion.</p>
         </div>
         <div class="card-header px-0 bg-transparent">
           <strong>Etapas</strong><br>
@@ -114,12 +125,20 @@
             </a>
           </div>
         </div>
-        <div class="card-body text-center px-0 collapse" id="collapseSteps">
-          <p class="text-muted">Podras crear etapas, una vez creada la transaccion.</p>
-          <a class="btn btn-success disabled mb-2" href="#" role="button">
-            <i class="fa fa-plus"></i>&nbsp; Crear etapa
-          </a>
+        <div class="card-body collapse show" id="collapseSteps">
+          <p class="alert alert-primary">Podras crear etapas, una vez creada la transaccion.</p>
+          <div class="card-body bg-light">
+            <div class="form-inline">
+              <label class="sr-only">Nombre etapa</label>
+              <input type="text" class="form-control  mb-2 mr-sm-2" placeholder="Nombre de la etapa" disabled="true">
+              <a class="btn btn-primary mb-2 disabled" href="#">
+                <i class="fas fa-plus"></i>
+                <span class="ml-1">Crear etapa</span>
+              </a>
+            </div>
+          </div>
         </div>
+        <br><br><br>
       </div>
     </div>
   </div>
