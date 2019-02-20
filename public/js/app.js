@@ -71283,8 +71283,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71455,23 +71453,24 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "card-body px-0" }, [
-              _c("div", { staticClass: "form-group text-right" }, [
-                _vm.transaction.finished && _vm.transaction.finished_by_user
-                  ? _c("small", { staticClass: "text-success" }, [
-                      _vm._v(" -- Finalizada por "),
-                      _c("i", [
-                        _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
-                      ]),
-                      _vm._v(" -- ")
-                    ])
-                  : _c("small", [_vm._v("Finalizar transaccion")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "float-right ml-2" }, [
+              _c(
+                "div",
+                { staticClass: "form-group text-right clearfix mb-0" },
+                [
+                  _vm.transaction.finished && _vm.transaction.finished_by_user
+                    ? _c("small", { staticClass: "text-success" }, [
+                        _vm._v("Finalizada por "),
+                        _c("i", [
+                          _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
+                        ])
+                      ])
+                    : _c("small", [_vm._v("Finalizar transaccion")]),
+                  _vm._v(" "),
                   _c(
                     "label",
                     {
                       staticClass:
-                        "switch switch-label switch-pill switch-success"
+                        "switch switch-label switch-pill switch-success float-right mb-0 ml-3"
                     },
                     [
                       _c("input", {
@@ -71531,8 +71530,8 @@ var render = function() {
                       })
                     ]
                   )
-                ])
-              ]),
+                ]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", [_vm._v("Nombre")]),
