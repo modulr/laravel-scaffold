@@ -70418,6 +70418,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70590,12 +70622,35 @@ var render = function() {
                 _vm.transaction.company_import
                   ? _c(
                       "div",
+                      { staticClass: "mb-4" },
                       _vm._l(_vm.transaction.company_import.users, function(
                         user
                       ) {
                         return _vm.transaction.company_import.users &&
                           _vm.transaction.company_import.users.length > 0
-                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          ? _c("div", { staticClass: "media mb-2" }, [
+                              _c("div", { staticClass: "float-left" }, [
+                                _c("img", {
+                                  staticClass: "img-avatar avatar-sm mr-2",
+                                  attrs: { src: user.avatar_url }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "media-body" }, [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(user.name) +
+                                    "\n                  "
+                                ),
+                                _c("div", { staticClass: "small text-muted" }, [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(user.email) +
+                                      "\n                  "
+                                  )
+                                ])
+                              ])
+                            ])
                           : _vm._e()
                       }),
                       0
@@ -70642,12 +70697,35 @@ var render = function() {
                 _vm.transaction.company_export
                   ? _c(
                       "div",
+                      { staticClass: "mb-4" },
                       _vm._l(_vm.transaction.company_export.users, function(
                         user
                       ) {
                         return _vm.transaction.company_export.users &&
                           _vm.transaction.company_export.users.length > 0
-                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          ? _c("div", { staticClass: "media mb-2" }, [
+                              _c("div", { staticClass: "float-left" }, [
+                                _c("img", {
+                                  staticClass: "img-avatar avatar-sm mr-2",
+                                  attrs: { src: user.avatar_url }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "media-body" }, [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(user.name) +
+                                    "\n                  "
+                                ),
+                                _c("div", { staticClass: "small text-muted" }, [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(user.email) +
+                                      "\n                  "
+                                  )
+                                ])
+                              ])
+                            ])
                           : _vm._e()
                       }),
                       0
@@ -70694,12 +70772,35 @@ var render = function() {
                 _vm.transaction.customs_import
                   ? _c(
                       "div",
+                      { staticClass: "mb-4" },
                       _vm._l(_vm.transaction.customs_import.users, function(
                         user
                       ) {
                         return _vm.transaction.customs_import.users &&
                           _vm.transaction.customs_import.users.length > 0
-                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          ? _c("div", { staticClass: "media mb-2" }, [
+                              _c("div", { staticClass: "float-left" }, [
+                                _c("img", {
+                                  staticClass: "img-avatar avatar-sm mr-2",
+                                  attrs: { src: user.avatar_url }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "media-body" }, [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(user.name) +
+                                    "\n                  "
+                                ),
+                                _c("div", { staticClass: "small text-muted" }, [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(user.email) +
+                                      "\n                  "
+                                  )
+                                ])
+                              ])
+                            ])
                           : _vm._e()
                       }),
                       0
@@ -70746,12 +70847,35 @@ var render = function() {
                 _vm.transaction.customs_export
                   ? _c(
                       "div",
+                      { staticClass: "mb-4" },
                       _vm._l(_vm.transaction.customs_export.users, function(
                         user
                       ) {
                         return _vm.transaction.customs_export.users &&
                           _vm.transaction.customs_export.users.length > 0
-                          ? _c("ul", [_c("li", [_vm._v(_vm._s(user.name))])])
+                          ? _c("div", { staticClass: "media mb-2" }, [
+                              _c("div", { staticClass: "float-left" }, [
+                                _c("img", {
+                                  staticClass: "img-avatar avatar-sm mr-2",
+                                  attrs: { src: user.avatar_url }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "media-body" }, [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(user.name) +
+                                    "\n                  "
+                                ),
+                                _c("div", { staticClass: "small text-muted" }, [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(user.email) +
+                                      "\n                  "
+                                  )
+                                ])
+                              ])
+                            ])
                           : _vm._e()
                       }),
                       0
@@ -71129,6 +71253,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71301,7 +71457,7 @@ var render = function() {
             _c("div", { staticClass: "card-body px-0" }, [
               _c("div", { staticClass: "form-group text-right" }, [
                 _vm.transaction.finished && _vm.transaction.finished_by_user
-                  ? _c("small", { staticClass: " text-success mr-4" }, [
+                  ? _c("small", { staticClass: " text-success mr-3" }, [
                       _vm._v("-- Finalizada por "),
                       _c("i", [
                         _vm._v(_vm._s(_vm.transaction.finished_by_user.name))
@@ -71465,13 +71621,38 @@ var render = function() {
                     _vm.transaction.company_import
                       ? _c(
                           "div",
+                          { staticClass: "mb-4" },
                           _vm._l(_vm.transaction.company_import.users, function(
                             user
                           ) {
                             return _vm.transaction.company_import.users &&
                               _vm.transaction.company_import.users.length > 0
-                              ? _c("ul", [
-                                  _c("li", [_vm._v(_vm._s(user.name))])
+                              ? _c("div", { staticClass: "media mb-2" }, [
+                                  _c("div", { staticClass: "float-left" }, [
+                                    _c("img", {
+                                      staticClass: "img-avatar avatar-sm mr-2",
+                                      attrs: { src: user.avatar_url }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "media-body" }, [
+                                    _vm._v(
+                                      "\n                  " +
+                                        _vm._s(user.name) +
+                                        "\n                  "
+                                    ),
+                                    _c(
+                                      "div",
+                                      { staticClass: "small text-muted" },
+                                      [
+                                        _vm._v(
+                                          "\n                    " +
+                                            _vm._s(user.email) +
+                                            "\n                  "
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ])
                               : _vm._e()
                           }),
@@ -71521,13 +71702,38 @@ var render = function() {
                     _vm.transaction.company_export
                       ? _c(
                           "div",
+                          { staticClass: "mb-4" },
                           _vm._l(_vm.transaction.company_export.users, function(
                             user
                           ) {
                             return _vm.transaction.company_export.users &&
                               _vm.transaction.company_export.users.length > 0
-                              ? _c("ul", [
-                                  _c("li", [_vm._v(_vm._s(user.name))])
+                              ? _c("div", { staticClass: "media mb-2" }, [
+                                  _c("div", { staticClass: "float-left" }, [
+                                    _c("img", {
+                                      staticClass: "img-avatar avatar-sm mr-2",
+                                      attrs: { src: user.avatar_url }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "media-body" }, [
+                                    _vm._v(
+                                      "\n                  " +
+                                        _vm._s(user.name) +
+                                        "\n                  "
+                                    ),
+                                    _c(
+                                      "div",
+                                      { staticClass: "small text-muted" },
+                                      [
+                                        _vm._v(
+                                          "\n                    " +
+                                            _vm._s(user.email) +
+                                            "\n                  "
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ])
                               : _vm._e()
                           }),
@@ -71577,13 +71783,38 @@ var render = function() {
                     _vm.transaction.customs_import
                       ? _c(
                           "div",
+                          { staticClass: "mb-4" },
                           _vm._l(_vm.transaction.customs_import.users, function(
                             user
                           ) {
                             return _vm.transaction.customs_import.users &&
                               _vm.transaction.customs_import.users.length > 0
-                              ? _c("ul", [
-                                  _c("li", [_vm._v(_vm._s(user.name))])
+                              ? _c("div", { staticClass: "media mb-2" }, [
+                                  _c("div", { staticClass: "float-left" }, [
+                                    _c("img", {
+                                      staticClass: "img-avatar avatar-sm mr-2",
+                                      attrs: { src: user.avatar_url }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "media-body" }, [
+                                    _vm._v(
+                                      "\n                  " +
+                                        _vm._s(user.name) +
+                                        "\n                  "
+                                    ),
+                                    _c(
+                                      "div",
+                                      { staticClass: "small text-muted" },
+                                      [
+                                        _vm._v(
+                                          "\n                    " +
+                                            _vm._s(user.email) +
+                                            "\n                  "
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ])
                               : _vm._e()
                           }),
@@ -71633,13 +71864,38 @@ var render = function() {
                     _vm.transaction.customs_export
                       ? _c(
                           "div",
+                          { staticClass: "mb-4" },
                           _vm._l(_vm.transaction.customs_export.users, function(
                             user
                           ) {
                             return _vm.transaction.customs_export.users &&
                               _vm.transaction.customs_export.users.length > 0
-                              ? _c("ul", [
-                                  _c("li", [_vm._v(_vm._s(user.name))])
+                              ? _c("div", { staticClass: "media mb-2" }, [
+                                  _c("div", { staticClass: "float-left" }, [
+                                    _c("img", {
+                                      staticClass: "img-avatar avatar-sm mr-2",
+                                      attrs: { src: user.avatar_url }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "media-body" }, [
+                                    _vm._v(
+                                      "\n                  " +
+                                        _vm._s(user.name) +
+                                        "\n                  "
+                                    ),
+                                    _c(
+                                      "div",
+                                      { staticClass: "small text-muted" },
+                                      [
+                                        _vm._v(
+                                          "\n                    " +
+                                            _vm._s(user.email) +
+                                            "\n                  "
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ])
                               : _vm._e()
                           }),
@@ -71930,12 +72186,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    newStage: function newStage() {
-      this.stage = {};
-      this.stage.transactionId = this.transaction.id;
-      this.errors = {};
-      $('#stageCreateModal').modal('show');
-    },
     create: function create() {
       var _this = this;
 
@@ -71946,7 +72196,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this.errors = {};
           _this.transaction.stages.push(response.data);
           _this.$toasted.global.error('Etapa creada!');
-          $('#stageCreateModal').modal('hide');
         }).catch(function (error) {
           _this.errors = error.response.data.errors;
         }).then(function () {
@@ -72220,8 +72469,8 @@ var render = function() {
                             }
                           },
                           [
-                            _c("i", { staticClass: "fas fa-file-upload mr-2" }),
-                            _c("span", { staticClass: "d-md-down-none mr-3" }, [
+                            _c("i", { staticClass: "fas fa-file-upload" }),
+                            _c("span", { staticClass: "d-md-down-none ml-1" }, [
                               _vm._v("Archivos")
                             ])
                           ]
@@ -72230,7 +72479,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            staticClass: "nav-item text-secondary",
+                            staticClass: "nav-item text-secondary ml-3",
                             attrs: {
                               id: "pills-comments-tab-" + stage.id,
                               "data-toggle": "pill",
@@ -72241,8 +72490,8 @@ var render = function() {
                             }
                           },
                           [
-                            _c("i", { staticClass: "fas fa-comment mr-2" }),
-                            _c("span", { staticClass: "d-md-down-none mr-3" }, [
+                            _c("i", { staticClass: "fas fa-comment" }),
+                            _c("span", { staticClass: "d-md-down-none ml-1" }, [
                               _vm._v(
                                 _vm._s(stage.comments.length) + " Comentarios"
                               )
@@ -72253,7 +72502,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            staticClass: "text-secondary",
+                            staticClass: "text-secondary ml-3",
                             attrs: {
                               href: "#",
                               disabled: _vm.submitingDestroy
@@ -72844,17 +73093,7 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-outline-secondary",
-            on: {
-              keyup: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.storeComment($event)
-              }
-            }
+            on: { click: _vm.storeComment }
           },
           [_c("i", { staticClass: "fas fa-paper-plane" })]
         )

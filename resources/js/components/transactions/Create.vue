@@ -46,10 +46,18 @@
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.company_import_id">{{errors.company_import_id[0]}}</small>
               </div>
-              <div v-if="transaction.company_import">
-                <ul v-if="transaction.company_import.users && transaction.company_import.users.length > 0" v-for="user in transaction.company_import.users">
-                  <li>{{user.name}}</li>
-                </ul>
+              <div class="mb-4" v-if="transaction.company_import">
+                <div class="media mb-2" v-if="transaction.company_import.users && transaction.company_import.users.length > 0" v-for="user in transaction.company_import.users">
+                  <div class="float-left">
+                    <img class="img-avatar avatar-sm mr-2" :src="user.avatar_url">
+                  </div>
+                  <div class="media-body">
+                    {{user.name}}
+                    <div class="small text-muted">
+                      {{user.email}}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
@@ -65,10 +73,18 @@
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.company_export_id">{{errors.company_export_id[0]}}</small>
               </div>
-              <div v-if="transaction.company_export">
-                <ul v-if="transaction.company_export.users && transaction.company_export.users.length > 0" v-for="user in transaction.company_export.users">
-                  <li>{{user.name}}</li>
-                </ul>
+              <div class="mb-4" v-if="transaction.company_export">
+                <div class="media mb-2" v-if="transaction.company_export.users && transaction.company_export.users.length > 0" v-for="user in transaction.company_export.users">
+                  <div class="float-left">
+                    <img class="img-avatar avatar-sm mr-2" :src="user.avatar_url">
+                  </div>
+                  <div class="media-body">
+                    {{user.name}}
+                    <div class="small text-muted">
+                      {{user.email}}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
@@ -84,10 +100,18 @@
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.customs_import_id">{{errors.customs_import_id[0]}}</small>
               </div>
-              <div v-if="transaction.customs_import">
-                <ul v-if="transaction.customs_import.users && transaction.customs_import.users.length > 0" v-for="user in transaction.customs_import.users">
-                  <li>{{user.name}}</li>
-                </ul>
+              <div class="mb-4" v-if="transaction.customs_import">
+                <div class="media mb-2" v-if="transaction.customs_import.users && transaction.customs_import.users.length > 0" v-for="user in transaction.customs_import.users">
+                  <div class="float-left">
+                    <img class="img-avatar avatar-sm mr-2" :src="user.avatar_url">
+                  </div>
+                  <div class="media-body">
+                    {{user.name}}
+                    <div class="small text-muted">
+                      {{user.email}}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
@@ -103,10 +127,18 @@
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.customs_export_id">{{errors.customs_export_id[0]}}</small>
               </div>
-              <div v-if="transaction.customs_export">
-                <ul v-if="transaction.customs_export.users && transaction.customs_export.users.length > 0" v-for="user in transaction.customs_export.users">
-                  <li>{{user.name}}</li>
-                </ul>
+              <div class="mb-4" v-if="transaction.customs_export">
+                <div class="media mb-2" v-if="transaction.customs_export.users && transaction.customs_export.users.length > 0" v-for="user in transaction.customs_export.users">
+                  <div class="float-left">
+                    <img class="img-avatar avatar-sm mr-2" :src="user.avatar_url">
+                  </div>
+                  <div class="media-body">
+                    {{user.name}}
+                    <div class="small text-muted">
+                      {{user.email}}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

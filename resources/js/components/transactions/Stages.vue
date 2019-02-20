@@ -19,12 +19,12 @@
             </a>
             <div class="nav nav-pills" id="pills-tab" role="tablist">
               <a class="nav-item text-secondary active" :id="`pills-files-tab-${stage.id}`" data-toggle="pill" :href="`#pills-files-${stage.id}`" role="tab" :aria-controls="`pills-files-${stage.id}`" aria-selected="true">
-                <i class="fas fa-file-upload mr-2"></i><span class="d-md-down-none mr-3">Archivos</span>
+                <i class="fas fa-file-upload"></i><span class="d-md-down-none ml-1">Archivos</span>
               </a>
-              <a class="nav-item text-secondary" :id="`pills-comments-tab-${stage.id}`" data-toggle="pill" :href="`#pills-comments-${stage.id}`" role="tab" :aria-controls="`pills-comments-${stage.id}`" aria-selected="false">
-                <i class="fas fa-comment mr-2"></i><span class="d-md-down-none mr-3">{{stage.comments.length}} Comentarios</span>
+              <a class="nav-item text-secondary ml-3" :id="`pills-comments-tab-${stage.id}`" data-toggle="pill" :href="`#pills-comments-${stage.id}`" role="tab" :aria-controls="`pills-comments-${stage.id}`" aria-selected="false">
+                <i class="fas fa-comment"></i><span class="d-md-down-none ml-1">{{stage.comments.length}} Comentarios</span>
               </a>
-              <a href="#" class="text-secondary":disabled="submitingDestroy" @click.prevent="destroy(stage.id, index)">
+              <a href="#" class="text-secondary ml-3":disabled="submitingDestroy" @click.prevent="destroy(stage.id, index)">
                 <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
                 <i class="far fa-trash-alt" v-else></i>
               </a>
@@ -79,12 +79,6 @@ export default {
     this.stage.transactionId = this.transaction.id
   },
   methods: {
-    newStage () {
-      this.stage = {}
-      this.stage.transactionId = this.transaction.id
-      this.errors = {}
-      $('#stageCreateModal').modal('show')
-    },
     create () {
       if (!this.submitingCreate) {
         this.submitingCreate = true
@@ -94,7 +88,6 @@ export default {
           this.errors = {}
           this.transaction.stages.push(response.data)
           this.$toasted.global.error('Etapa creada!')
-          $('#stageCreateModal').modal('hide')
         })
         .catch(error => {
           this.errors = error.response.data.errors

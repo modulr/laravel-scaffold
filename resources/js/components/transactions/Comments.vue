@@ -3,7 +3,7 @@
     <div class="input-group mb-2">
       <input type="text" class="form-control" :class="{'is-invalid': errors.comment}" placeholder="Escribe un comentario..." v-model="comment" @keyup.enter="storeComment">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" @keyup.enter="storeComment"><i class="fas fa-paper-plane"></i></button>
+        <button class="btn btn-outline-secondary" @click="storeComment"><i class="fas fa-paper-plane"></i></button>
       </div>
       <div class="invalid-feedback" v-if="errors.comment">{{errors.comment[0]}}</div>
     </div>
