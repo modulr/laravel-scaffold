@@ -161,6 +161,7 @@ export default {
     toggleFinished () {
       axios.put(`/api/transactions/toggleFinished/${this.transaction.id}`, this.transaction)
       .then(response => {
+        this.transaction.finished_at = response.data.finished_at
         this.transaction.finished_by = response.data.finished_by
         this.transaction.finished_by_user = response.data.finished_by_user
         if (response.data.finished) {

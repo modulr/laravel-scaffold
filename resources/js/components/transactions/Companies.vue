@@ -74,16 +74,13 @@
             </div>
             <p v-if="company.company && company.company.users.length > 0">Estos usuarios pertenecen a la empresa seleccionada y tambien seran invitados a la transaccion</p>
             <ul class="list-group list-group-flush" v-if="company.company && company.company.users.length > 0">
-              <li v-for="(user, index) in company.company.users" track-by="id" class="list-group-item list-group-item-action media border-light">
+              <li v-for="(user, index) in company.company.users" track-by="id" class="list-group-item media border-light">
                 <div class="avatar-sm float-left mr-3">
                   <img class="img-avatar" :src="user.avatar_url">
                 </div>
                 <div class="media-body">
                   <div class="d-flex justify-content-between">
                     {{user.name}}
-                    <button type="button" class="close" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
                   </div>
                   <div class="small text-muted">
                     {{user.email}}

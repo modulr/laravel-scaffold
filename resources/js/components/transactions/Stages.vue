@@ -169,6 +169,7 @@ export default {
       axios.put(`/api/stages/toggleAuthorized/${stage.id}`, stage)
       .then(response => {
         this.transaction.stages[index].authorized = response.data.authorized
+        this.transaction.stages[index].authorized_at = response.data.authorized_at
         this.transaction.stages[index].authorized_by = response.data.authorized_by
         this.transaction.stages[index].authorized_by_user = response.data.authorized_by_user
         if (response.data.authorized) {

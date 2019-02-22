@@ -70792,6 +70792,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this5 = this;
 
       axios.put('/api/transactions/toggleFinished/' + this.transaction.id, this.transaction).then(function (response) {
+        _this5.transaction.finished_at = response.data.finished_at;
         _this5.transaction.finished_by = response.data.finished_by;
         _this5.transaction.finished_by_user = response.data.finished_by_user;
         if (response.data.finished) {
@@ -71381,6 +71382,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.put('/api/stages/toggleAuthorized/' + stage.id, stage).then(function (response) {
         _this4.transaction.stages[index].authorized = response.data.authorized;
+        _this4.transaction.stages[index].authorized_at = response.data.authorized_at;
         _this4.transaction.stages[index].authorized_by = response.data.authorized_by;
         _this4.transaction.stages[index].authorized_by_user = response.data.authorized_by_user;
         if (response.data.authorized) {
@@ -72574,9 +72576,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72898,8 +72897,7 @@ var render = function() {
                         return _c(
                           "li",
                           {
-                            staticClass:
-                              "list-group-item list-group-item-action media border-light",
+                            staticClass: "list-group-item media border-light",
                             attrs: { "track-by": "id" }
                           },
                           [
@@ -72924,9 +72922,8 @@ var render = function() {
                                   _vm._v(
                                     "\n                  " +
                                       _vm._s(user.name) +
-                                      "\n                  "
-                                  ),
-                                  _vm._m(2, true)
+                                      "\n                "
+                                  )
                                 ]
                               ),
                               _vm._v(" "),
@@ -73010,19 +73007,6 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: { type: "button", "aria-label": "Close" }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
   }
 ]
 render._withStripped = true
