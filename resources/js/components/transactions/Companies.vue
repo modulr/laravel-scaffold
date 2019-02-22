@@ -143,6 +143,11 @@ export default {
       })
     },
     addCompany () {
+      this.company = {
+        company: null,
+        type: null
+      }
+      this.errors = {}
       $('#addCompanyModal').modal('show')
     },
     attachCompany() {

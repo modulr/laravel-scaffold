@@ -68412,7 +68412,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/api/companies/' + res[2]).then(function (response) {
         _this.company = response.data;
       }).catch(function (error) {
-        _this.$toasted.global.error('Company does not exist!');
+        _this.$toasted.global.error('La empresa no existe!');
         location.href = '/companies';
       }).then(function () {
         _this.loading = false;
@@ -68424,7 +68424,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.submiting) {
         this.submiting = true;
         axios.put('/api/companies/update/' + this.company.id, this.company).then(function (response) {
-          _this2.$toasted.global.error('Updated company!');
+          _this2.$toasted.global.error('Empresa actualizada!');
           location.href = '/companies';
         }).catch(function (error) {
           _this2.errors = error.response.data.errors;
@@ -68438,15 +68438,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.submitingDestroy) {
         this.submitingDestroy = true;
         swal({
-          title: "Are you sure?",
-          text: "Once deleted, you will not be able to recover this company!",
+          title: "¿Estas seguro?",
+          text: "Una vez borrada, no podras recuperar la empresa!",
           icon: "warning",
           buttons: true,
           dangerMode: true
         }).then(function (willDelete) {
           if (willDelete) {
             axios.delete('/api/companies/' + _this3.company.id).then(function (response) {
-              _this3.$toasted.global.error('Deleted company!');
+              _this3.$toasted.global.error('Empresa borrada!');
               location.href = '/companies';
             }).catch(function (error) {
               _this3.errors = error.response.data.errors;
@@ -68890,7 +68890,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.user = response.data;
         _this2.user.index = index;
       }).catch(function (error) {
-        _this2.$toasted.global.error('User does not exist!');
+        _this2.$toasted.global.error('El usuario no existe!');
       }).then(function () {
         _this2.loadingEdit = false;
       });
@@ -68904,7 +68904,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.user.roles = [{ id: 3 }];
         axios.put('/api/users/update/' + this.user.id, this.user).then(function (response) {
           _this3.company.users[_this3.user.index] = response.data;
-          _this3.$toasted.global.error('Updated user!');
+          _this3.$toasted.global.error('Usuario actualizado!');
           $('#userEditModal').modal('hide');
         }).catch(function (error) {
           _this3.errors = error.response.data.errors;
@@ -68919,7 +68919,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.submitingDestroy) {
         this.submitingDestroy = true;
         swal({
-          title: "Estas seguro?",
+          title: "¿Estas seguro?",
           text: "Una vez borrado, no podras recuperar el usuario!",
           icon: "warning",
           buttons: true,
@@ -70770,7 +70770,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.submitingDestroy) {
         this.submitingDestroy = true;
         swal({
-          title: "Estas seguro?",
+          title: "¿Estas seguro?",
           text: "Una vez borrada, ya no podras recuperar la transaccion!",
           icon: "warning",
           buttons: true,
@@ -71309,11 +71309,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   props: ['transaction'],
-  mounted: function mounted() {
-    this.stage.transactionId = this.transaction.id;
-  },
-
   methods: {
+    newStage: function newStage() {
+      this.stage = {
+        transactionId: this.transaction.id
+      };
+      this.errors = {};
+      $('#createStageModal').modal('show');
+    },
     create: function create() {
       var _this = this;
 
@@ -71324,11 +71327,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this.errors = {};
           _this.transaction.stages.push(response.data);
           _this.$toasted.global.error('Etapa creada!');
+          $('#createStageModal').modal('hide');
         }).catch(function (error) {
           _this.errors = error.response.data.errors;
         }).then(function () {
           _this.submitingCreate = false;
-          $('#createStageModal').modal('hide');
         });
       }
     },
@@ -71359,7 +71362,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.submitingDestroy) {
         this.submitingDestroy = true;
         swal({
-          title: "Estas seguro?",
+          title: "¿Estas seguro?",
           text: "Una vez borrada, no podras recuperar la etapa!",
           icon: "warning",
           buttons: true,
@@ -71725,7 +71728,27 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "card-body text-center px-0" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success mb-2",
+          attrs: { href: "#", role: "button" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.newStage($event)
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "fa fa-plus mr-2" }),
+          _vm._v("Crear etapa\n    ")
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -71830,28 +71853,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body text-center px-0" }, [
-      _c("p", { staticClass: "text-muted" }, [
-        _c("small", [
-          _vm._v("Agrega etapas para cargar archivos validarlos y comentarlos.")
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success mb-2",
-          attrs: {
-            href: "#createStageModal",
-            "data-toggle": "modal",
-            role: "button"
-          }
-        },
-        [
-          _c("i", { staticClass: "fa fa-plus mr-2" }),
-          _vm._v("Crear etapa\n    ")
-        ]
-      )
+    return _c("p", { staticClass: "text-muted" }, [
+      _c("small", [
+        _vm._v("Agrega etapas para cargar archivos validarlos y comentarlos.")
+      ])
     ])
   },
   function() {
@@ -72283,7 +72288,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       swal({
-        title: "Estas seguro?",
+        title: "¿Estas seguro?",
         text: "Una vez borrado, no podras recuperar el documento!",
         icon: "warning",
         buttons: true,
@@ -72619,6 +72624,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     addCompany: function addCompany() {
+      this.company = {
+        company: null,
+        type: null
+      };
+      this.errors = {};
       $('#addCompanyModal').modal('show');
     },
     attachCompany: function attachCompany() {

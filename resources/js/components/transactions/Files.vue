@@ -77,7 +77,7 @@ export default {
     },
     destroyFile (stage, file, index) {
       swal({
-        title: "Estas seguro?",
+        title: "¿Estas seguro?",
         text: "Una vez borrado, no podras recuperar el documento!",
         icon: "warning",
         buttons: true,

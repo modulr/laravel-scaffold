@@ -137,7 +137,7 @@ export default {
       if (!this.submitingDestroy) {
         this.submitingDestroy = true
         swal({
-          title: "Estas seguro?",
+          title: "¿Estas seguro?",
           text: "Una vez borrada, ya no podras recuperar la transaccion!",
           icon: "warning",
           buttons: true,

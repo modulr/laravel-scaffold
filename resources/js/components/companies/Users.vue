@@ -165,7 +165,7 @@ export default {
         this.user.index = index
       })
       .catch(error => {
-        this.$toasted.global.error('User does not exist!')
+        this.$toasted.global.error('El usuario no existe!')
       })
       .then(() => {
         this.loadingEdit = false
@@ -179,7 +179,7 @@ export default {
         axios.put(`/api/users/update/${this.user.id}`, this.user)
         .then(response => {
           this.company.users[this.user.index] = response.data
-          this.$toasted.global.error('Updated user!')
+          this.$toasted.global.error('Usuario actualizado!')
           $('#userEditModal').modal('hide')
         })
         .catch(error => {
@@ -194,7 +194,7 @@ export default {
       if (!this.submitingDestroy) {
         this.submitingDestroy = true
         swal({
-          title: "Estas seguro?",
+          title: "¿Estas seguro?",
           text: "Una vez borrado, no podras recuperar el usuario!",
           icon: "warning",
           buttons: true,

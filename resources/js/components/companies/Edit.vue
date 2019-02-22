@@ -81,7 +81,7 @@ export default {
         this.company = response.data
       })
       .catch(error => {
-        this.$toasted.global.error('Company does not exist!')
+        this.$toasted.global.error('La empresa no existe!')
         location.href = '/companies'
       })
       .then(() => {
@@ -93,7 +93,7 @@ export default {
         this.submiting = true
         axios.put(`/api/companies/update/${this.company.id}`, this.company)
         .then(response => {
-          this.$toasted.global.error('Updated company!')
+          this.$toasted.global.error('Empresa actualizada!')
           location.href = '/companies'
         })
         .catch(error => {
@@ -106,8 +106,8 @@ export default {
       if (!this.submitingDestroy) {
         this.submitingDestroy = true
         swal({
-          title: "Are you sure?",
-          text: "Once deleted, you will not be able to recover this company!",
+          title: "¿Estas seguro?",
+          text: "Una vez borrada, no podras recuperar la empresa!",
           icon: "warning",
           buttons: true,
           dangerMode: true,
@@ -116,7 +116,7 @@ export default {
           if (willDelete) {
             axios.delete(`/api/companies/${this.company.id}`)
             .then(response => {
-              this.$toasted.global.error('Deleted company!')
+              this.$toasted.global.error('Empresa borrada!')
               location.href = '/companies'
             })
             .catch(error => {

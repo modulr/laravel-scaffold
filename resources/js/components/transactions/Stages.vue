@@ -46,7 +46,7 @@
     <!-- Create stage -->
     <div class="card-body text-center px-0">
       <p class="text-muted"><small>Agrega etapas para cargar archivos validarlos y comentarlos.</small></p>
-      <a class="btn btn-success mb-2" href="#createStageModal" data-toggle="modal" role="button">
+      <a class="btn btn-success mb-2" href="#" role="button" @click.prevent="newStage">
         <i class="fa fa-plus mr-2"></i>Crear etapa
       </a>
     </div>
@@ -95,10 +95,14 @@ export default {
     }
   },
   props: ['transaction'],
-  mounted () {
-    this.stage.transactionId = this.transaction.id
-  },
   methods: {
+    newStage () {
+      this.stage = {
+        transactionId: this.transaction.id
+      }
+      this.errors = {}
+      $('#createStageModal').modal('show')
+    },
     create () {
       if (!this.submitingCreate) {
         this.submitingCreate = true
@@ -108,13 +112,13 @@ export default {
           this.errors = {}
           this.transaction.stages.push(response.data)
           this.$toasted.global.error('Etapa creada!')
+          $('#createStageModal').modal('hide')
         })
         .catch(error => {
           this.errors = error.response.data.errors
         })
         .then(() => {
           this.submitingCreate = false
-          $('#createStageModal').modal('hide')
         })
       }
     },
@@ -144,7 +148,7 @@ export default {
       if (!this.submitingDestroy) {
         this.submitingDestroy = true
         swal({
-          title: "Estas seguro?",
+          title: "¿Estas seguro?",
           text: "Una vez borrada, no podras recuperar la etapa!",
           icon: "warning",
           buttons: true,
