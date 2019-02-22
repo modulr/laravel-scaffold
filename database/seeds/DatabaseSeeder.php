@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StagesTableSeeder::class);
         $this->call(FilesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+        $this->call(CompanyTypesTableSeeder::class);
     }
 }

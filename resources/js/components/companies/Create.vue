@@ -34,9 +34,10 @@
           </div>
         </div>
         <div class="card-body text-center px-0 collapse show" id="collapseUsers">
-          <p class="text-muted">Podras crear usuarios para comunicarte con ellos, una vez creada la empresa.</p>
-          <a class="btn btn-success disabled mb-2" href="#" role="button">
-            <i class="fa fa-plus"></i>&nbsp; Crear usuario
+          <p class="alert alert-info">Podras crear usuarios para comunicarte con ellos, una vez creada la empresa.</p>
+          <p class="text-muted"><small>Agrega usuarios para interactuar con ellos en las transacciones.</small></p>
+          <a class="btn btn-success disabled" href="#" role="button">
+            <i class="fa fa-plus mr-2"></i>Crear usuario
           </a>
         </div>
       </div>

@@ -17,10 +17,10 @@
       </a>
     </ul>
     <div class="card-body text-center px-0">
-      <a class="btn btn-success mb-2" href="#" role="button" @click="newUser">
-        <i class="fa fa-plus"></i>&nbsp; Crear usuario
-      </a>
       <p class="text-muted"><small>Agrega usuarios para interactuar con ellos en las transacciones.</small></p>
+      <a class="btn btn-success" href="#" role="button" @click.prevent="newUser">
+        <i class="fa fa-plus mr-2"></i>Crear usuario
+      </a>
     </div>
     <!-- User Create -->
     <div class="modal fade" id="userCreateModal" tabindex="-1" role="dialog" aria-hidden="true">

@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/getUserRoles/{user}', 'UserController@getUserRoles');
             Route::get('/count', 'UserController@count');
             Route::post('/filter', 'UserController@filter')->middleware('permission:read-users');
+            Route::get('/userType/all', 'UserTypeController@all')->middleware('permission:read-transactions');
 
             Route::get('/{user}', 'UserController@show')->middleware('permission:read-users');
             Route::post('/store', 'UserController@store')->middleware('permission:create-users');

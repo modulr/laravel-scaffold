@@ -18,24 +18,9 @@ class Transaction extends Model
         return $this->belongsTo('App\User', 'finished_by');
     }
 
-    public function companyImport()
+    public function companies()
     {
-        return $this->belongsTo('App\Models\Companies\Company', 'company_import_id');
-    }
-
-    public function companyExport()
-    {
-        return $this->belongsTo('App\Models\Companies\Company', 'company_export_id');
-    }
-
-    public function customsImport()
-    {
-        return $this->belongsTo('App\Models\Companies\Company', 'customs_import_id');
-    }
-
-    public function customsExport()
-    {
-        return $this->belongsTo('App\Models\Companies\Company', 'customs_export_id');
+        return $this->belongsToMany('App\Models\Companies\Company', 'transaction_company')->withPivot('company_type');
     }
 
     public function users()
@@ -45,6 +30,6 @@ class Transaction extends Model
 
     public function stages()
     {
-        return $this->hasMany('App\Models\Stages\Stage'::class);
+        return $this->hasMany('App\Models\Stages\Stage');
     }
 }

@@ -22,7 +22,7 @@
                 <i class="fas fa-file-upload"></i><span class="d-md-down-none ml-1">Archivos</span>
               </a>
               <a class="nav-item text-secondary ml-3" :id="`pills-comments-tab-${stage.id}`" data-toggle="pill" :href="`#pills-comments-${stage.id}`" role="tab" :aria-controls="`pills-comments-${stage.id}`" aria-selected="false">
-                <i class="fas fa-comment"></i><span class="d-md-down-none ml-1">{{stage.comments.length}} Comentarios</span>
+                <i :class="[stage.comments.length > 0 ? 'fas' : 'far', 'fa-comment']"></i><span class="d-md-down-none ml-1">{{stage.comments.length}} Comentarios</span>
               </a>
               <a href="#" class="text-secondary ml-3":disabled="submitingDestroy" @click.prevent="destroy(stage.id, index)">
                 <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
@@ -30,12 +30,12 @@
               </a>
             </div>
           </div>
-          <p class="text-muted small mb-1"><span v-if="stage.authorized && stage.authorized_by_user">Autorizada por <i>{{stage.authorized_by_user.name}}</i></span></p>
+          <p class="text-muted small mb-1"><span v-if="stage.authorized && stage.authorized_by_user">Autorizada por <i>{{stage.authorized_by_user.name}}. {{stage.authorized_at | moment('LL')}}</i></span></p>
         </div>
         <!-- Files & Comments-->
-        <div class="tab-content bg-transparent border-0" id="pills-tabContent">
+        <div class="tab-content bg-transparent border-0 pt-2 pb-3" id="pills-tabContent">
           <div class="tab-pane px-2 fade show active" :id="`pills-files-${stage.id}`" role="tabpanel" :aria-labelledby="`pills-files-tab-${stage.id}`">
-            <transactions-file :stage="stage"></transactions-file>
+            <transactions-files :stage="stage"></transactions-files>
           </div>
           <div class="tab-pane px-3 fade" :id="`pills-comments-${stage.id}`" role="tabpanel" :aria-labelledby="`pills-comments-tab-${stage.id}`">
             <transactions-comments :stage="stage"></transactions-comments>
@@ -44,17 +44,37 @@
       </li>
     </ul>
     <!-- Create stage -->
-    <br>
-    <div class="card-body bg-light">
-      <div class="form-inline">
-        <label class="sr-only">Nombre de la etapa</label>
-        <input type="text" class="form-control  mb-2 mr-sm-2" :class="{'is-invalid': errors.name}" v-model="stage.name" placeholder="Nombre etapa" @keyup.enter="create">
-        <a class="btn btn-primary mb-2" href="#" :disabled="submitingCreate" @click.prevent="create">
-          <i class="fas fa-spinner fa-spin" v-if="submitingCreate"></i>
-          <i class="fas fa-plus" v-else></i>
-          <span class="ml-1">Crear etapa</span>
-        </a>
-        <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
+    <div class="card-body text-center px-0">
+      <p class="text-muted"><small>Agrega etapas para cargar archivos validarlos y comentarlos.</small></p>
+      <a class="btn btn-success mb-2" href="#createStageModal" data-toggle="modal" role="button">
+        <i class="fa fa-plus mr-2"></i>Crear etapa
+      </a>
+    </div>
+    <!-- Create Stage Company -->
+    <div class="modal fade" id="createStageModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear etapa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Nombre etapa</label>
+              <input type="text" class="form-control  mb-2 mr-sm-2" :class="{'is-invalid': errors.name}" v-model="stage.name" placeholder="Nombre etapa" @keyup.enter="create">
+              <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary" href="#" :disabled="submitingCreate" @click.prevent="create">
+              <i class="fas fa-spinner fa-spin" v-if="submitingCreate"></i>
+              <i class="fas fa-check" v-else></i>
+              <span class="ml-1">Guardar</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -94,6 +114,7 @@ export default {
         })
         .then(() => {
           this.submitingCreate = false
+          $('#createStageModal').modal('hide')
         })
       }
     },

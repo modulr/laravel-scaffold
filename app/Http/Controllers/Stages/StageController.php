@@ -11,7 +11,7 @@ class StageController extends Controller
 {
     public function show ($stage)
     {
-        return Stage::with('authorizedByUser')->findOrFail($stage);
+        return Stage::with('authorizedByUser', 'comments')->findOrFail($stage);
     }
 
     public function store (Request $request)
@@ -62,8 +62,10 @@ class StageController extends Controller
             $stage->authorized = $request->authorized;
             if ($request->authorized) {
                 $stage->authorized_by = Auth::id();
+                $stage->authorized_at = now();
             } else {
                 $stage->authorized_by = null;
+                $stage->authorized_at = null;
             }
             $stage->save();
         }

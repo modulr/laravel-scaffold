@@ -5,7 +5,7 @@
         <i class="fas fa-file-alt bg-warning p-3 font-2xl mr-3"></i>
         <div>
           <div class="font-weight-bold mt-1"><a :href="file.url" target="_blank" class="text-secondary">{{file.name}}</a></div>
-          <small class="text-muted">Subido por <i>{{file.creator.name}}</i> el dia <i>{{file.created_at | moment("LLL")}}</i></small>
+          <small class="text-muted">Subido por <i>{{file.creator.name}}. {{file.created_at | moment("LL")}}</i></small>
         </div>
         <button type="button" class="close ml-auto mb-auto mt-1 mr-1" aria-label="Close" @click="destroyFile(stage, file, index)">
           <span aria-hidden="true">&times;</span>
@@ -29,7 +29,7 @@
         :style="{width: preview.progress+'%'}">
       </div>
     </div> -->
-    <small class="form-text text-muted">El tamaño máximo permitido del archivo es de 10MB.</small>
+    <small class="form-text text-muted">Tamaño máximo 10MB.</small>
     <small class="form-text text-danger" v-if="errors.status">{{errors.message}}</small>
   </div>
 </template>

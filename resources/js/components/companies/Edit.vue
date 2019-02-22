@@ -4,7 +4,7 @@
       <div class="col-md-12 col-xl-9" v-if="!loading">
         <!--button actions-->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2"><a href="/companies" class="text-dark"><i class="fas fa-angle-left fa-lg px-2"></i></a> Editar Empresa</h4>
+          <h4 class="float-left pt-2"><a href="/companies" class="text-dark"><i class="fas fa-angle-left fa-lg px-2"></i></a> Empresa</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>

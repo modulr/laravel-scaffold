@@ -17,4 +17,9 @@ class Company extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    public function transactions()
+    {
+        return $this->belongsToMany('App\Models\Transactions\Transaction', 'transaction_company');
+    }
 }

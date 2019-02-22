@@ -42,14 +42,6 @@
               <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
-              <a href="#" class="text-dark" @click.prevent="sort('company_import_id')">Import</a>
-              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'company_import_id' && filters.orderBy.direction == 'desc'}"></i>
-            </th>
-            <th>
-              <a href="#" class="text-dark" @click.prevent="sort('company_export_id')">Export</a>
-              <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'company_export_id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'company_export_id' && filters.orderBy.direction == 'desc'}"></i>
-            </th>
-            <th>
               <a href="#" class="text-dark" @click.prevent="sort('finished')">Finalizada</a>
               <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'desc'}"></i>
             </th>
@@ -64,8 +56,6 @@
           <tr v-for="transaction in transactions" @click="edit(transaction.id)">
             <td class="d-none d-sm-table-cell">{{transaction.id}}</td>
             <td>{{transaction.name}}</td>
-            <td>{{transaction.company_import.name}}</td>
-            <td>{{transaction.company_export.name}}</td>
             <td>
               <span class="badge badge-success" v-if="transaction.finished">Finalizada</span>
               <span class="badge badge-primary" v-else>Abierta</span>

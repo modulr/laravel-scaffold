@@ -12,7 +12,8 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'api/companies'], function() {
             Route::post('/filter', 'CompanyController@filter')->middleware('permission:read-companies');
             Route::post('/count', 'CompanyController@count')->middleware('permission:read-companies');
-            
+            Route::get('/companyType/all', 'CompanyTypeController@all')->middleware('permission:read-transactions');
+
             Route::get('/all', 'CompanyController@all')->middleware('permission:read-companies');
             Route::get('/{company}', 'CompanyController@show')->middleware('permission:read-companies');
             Route::post('/store', 'CompanyController@store')->middleware('permission:create-companies');
