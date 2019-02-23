@@ -2,9 +2,9 @@
 
 @section('content')
 <div>
-    <ol class="breadcrumb">
+    <!-- <ol class="breadcrumb">
         <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
+    </ol> -->
     <div class="container">
         <div class="card-body">
             @if (session('status'))
@@ -19,7 +19,7 @@
                     @endcan
                 </div>
                 <div class="col-sm-6 col-xl-4">
-                    @can('read-companies')
+                    @can('create-companies')
                         <companies-count></companies-count>
                     @endcan
                 </div>

@@ -8,7 +8,7 @@
             <strong>{{company.name}}</strong><br>
             <small class="text-muted">{{company.pivot.company_type}}</small>
           </div>
-          <a href="#" class="text-secondary ml-3":disabled="submiting" @click.prevent="detachCompany(company)">
+          <a href="#" class="text-secondary ml-3":disabled="submiting" @click.prevent="detachCompany(company)" v-if="user.hasPermission['update-transactions']">
             <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
             <i class="far fa-trash-alt" v-else></i>
           </a>
@@ -30,7 +30,7 @@
         </ul>
       </li>
     </div>
-    <div class="card-body text-center px-0">
+    <div class="card-body text-center px-0" v-if="user.hasPermission['update-transactions']">
       <p class="text-muted"><small>Agrega empresas y usuarios para interactuar con ellos.</small></p>
       <a class="btn btn-success" href="#" role="button" @click.prevent="addCompany">
         <i class="fa fa-plus mr-2"></i>Agregar empresa
@@ -107,6 +107,7 @@
 export default {
   data () {
     return {
+      user: Laravel.user,
       company: {
         company: null,
         type: null

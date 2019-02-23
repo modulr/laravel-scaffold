@@ -159,7 +159,7 @@ export default {
     editUser (userId, index) {
       this.errors = {}
       this.loadingEdit = true
-      axios.get(`/api/users/getUserRoles/${userId}`)
+      axios.get(`/api/users/${userId}`)
       .then(response => {
         this.user = response.data
         this.user.index = index

@@ -62636,10 +62636,10 @@ var staticRenderFns = [
         },
         [
           _c("span", { staticClass: "small font-weight-bold" }, [
-            _vm._v("Crear transaccion")
+            _vm._v("Ver transacciones")
           ]),
           _vm._v(" "),
-          _c("i", { staticClass: "fa fa-plus" })
+          _c("i", { staticClass: "fa fa-angle-right" })
         ]
       )
     ])
@@ -62808,10 +62808,10 @@ var staticRenderFns = [
         },
         [
           _c("span", { staticClass: "small font-weight-bold" }, [
-            _vm._v("Crear empresa")
+            _vm._v("Ver empresas")
           ]),
           _vm._v(" "),
-          _c("i", { staticClass: "fa fa-plus" })
+          _c("i", { staticClass: "fa fa-angle-right" })
         ]
       )
     ])
@@ -67412,6 +67412,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      user: Laravel.user,
       companies: [],
       filters: {
         pagination: {
@@ -67496,7 +67497,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c(
+      "div",
+      { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
+      [
+        _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Empresas")]),
+        _vm._v(" "),
+        _vm.user.hasPermission["create-companies"]
+          ? _c("div", { staticClass: "card-header-actions mr-1" }, [_vm._m(0)])
+          : _vm._e()
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -67671,7 +67682,9 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("th", { staticClass: "d-none d-sm-table-cell" })
+              _vm.user.hasPermission["update-companies"]
+                ? _c("th", { staticClass: "d-none d-sm-table-cell" })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -67729,7 +67742,11 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(1, true)
+                  _vm.user.hasPermission["update-companies"]
+                    ? _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                        _vm._m(1, true)
+                      ])
+                    : _vm._e()
                 ]
               )
             }),
@@ -67888,35 +67905,17 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
-      [
-        _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Empresas")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-header-actions mr-1" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-success",
-              attrs: { href: "/companies/create" }
-            },
-            [
-              _c("i", { staticClass: "fas fa-plus mr-1" }),
-              _vm._v("Crear empresa")
-            ]
-          )
-        ])
-      ]
+      "a",
+      { staticClass: "btn btn-success", attrs: { href: "/companies/create" } },
+      [_c("i", { staticClass: "fas fa-plus mr-1" }), _vm._v("Crear empresa")]
     )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-      _c("a", { staticClass: "text-muted", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-pencil-alt" })
-      ])
+    return _c("a", { staticClass: "text-muted", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fas fa-pencil-alt" })
     ])
   },
   function() {
@@ -68886,7 +68885,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.errors = {};
       this.loadingEdit = true;
-      axios.get('/api/users/getUserRoles/' + userId).then(function (response) {
+      axios.get('/api/users/' + userId).then(function (response) {
         _this2.user = response.data;
         _this2.user.index = index;
       }).catch(function (error) {
@@ -69611,6 +69610,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      user: Laravel.user,
       transactions: [],
       filters: {
         pagination: {
@@ -69695,7 +69695,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c(
+      "div",
+      { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
+      [
+        _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Transacciones")]),
+        _vm._v(" "),
+        _vm.user.hasPermission["create-transactions"]
+          ? _c("div", { staticClass: "card-header-actions mr-1" }, [_vm._m(0)])
+          : _vm._e()
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -69897,7 +69907,9 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("th", { staticClass: "d-none d-sm-table-cell" })
+              _vm.user.hasPermission["create-transactions"]
+                ? _c("th", { staticClass: "d-none d-sm-table-cell" })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -69938,7 +69950,11 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(1, true)
+                  _vm.user.hasPermission["create-transactions"]
+                    ? _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                        _vm._m(1, true)
+                      ])
+                    : _vm._e()
                 ]
               )
             }),
@@ -70097,24 +70113,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
+      "a",
+      {
+        staticClass: "btn btn-success",
+        attrs: { href: "/transactions/create" }
+      },
       [
-        _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Transacciones")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-header-actions mr-1" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-success",
-              attrs: { href: "/transactions/create" }
-            },
-            [
-              _c("i", { staticClass: "fas fa-plus mr-1" }),
-              _vm._v(" Crear transaccion")
-            ]
-          )
-        ])
+        _c("i", { staticClass: "fas fa-plus mr-1" }),
+        _vm._v(" Crear transaccion")
       ]
     )
   },
@@ -70122,10 +70128,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-      _c("a", { staticClass: "text-muted", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-pencil-alt" })
-      ])
+    return _c("a", { staticClass: "text-muted", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fas fa-pencil-alt" })
     ])
   },
   function() {
@@ -70713,6 +70717,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      user: Laravel.user,
       transaction: {},
       errors: {},
       loading: true,
@@ -70827,51 +70832,64 @@ var render = function() {
               [
                 _vm._m(0),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-header-actions mr-1" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { href: "#", disabled: _vm.submiting },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.update($event)
-                        }
-                      }
-                    },
-                    [
-                      _vm.submiting
-                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                        : _c("i", { staticClass: "fas fa-check" }),
+                _vm.user.hasPermission["create-transactions"]
+                  ? _c("div", { staticClass: "card-header-actions mr-1" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { href: "#", disabled: _vm.submiting },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.update($event)
+                            }
+                          }
+                        },
+                        [
+                          _vm.submiting
+                            ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                            : _c("i", { staticClass: "fas fa-check" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "ml-1" }, [
+                            _vm._v("Guardar")
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "card-header-action ml-1",
-                      attrs: { href: "#", disabled: _vm.submitingDestroy },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.destroy($event)
-                        }
-                      }
-                    },
-                    [
-                      _vm.submitingDestroy
-                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                        : _c("i", { staticClass: "far fa-trash-alt" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "d-md-down-none ml-1" }, [
-                        _vm._v("Borrar")
-                      ])
-                    ]
-                  )
-                ])
+                      _vm.user.hasPermission["delete-transactions"]
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "card-header-action ml-1",
+                              attrs: {
+                                href: "#",
+                                disabled: _vm.submitingDestroy
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.destroy($event)
+                                }
+                              }
+                            },
+                            [
+                              _vm.submitingDestroy
+                                ? _c("i", {
+                                    staticClass: "fas fa-spinner fa-spin"
+                                  })
+                                : _c("i", { staticClass: "far fa-trash-alt" }),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "d-md-down-none ml-1" },
+                                [_vm._v("Borrar")]
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e()
               ]
             ),
             _vm._v(" "),
@@ -70896,72 +70914,83 @@ var render = function() {
                           )
                         ])
                       ])
-                    : _c("small", [_vm._v("Finalizar transaccion")]),
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass:
-                        "switch switch-label switch-pill switch-success float-right mb-0 ml-3"
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.transaction.finished,
-                            expression: "transaction.finished"
-                          }
-                        ],
-                        staticClass: "switch-input form-check-input",
-                        attrs: { type: "checkbox" },
-                        domProps: {
-                          checked: Array.isArray(_vm.transaction.finished)
-                            ? _vm._i(_vm.transaction.finished, null) > -1
-                            : _vm.transaction.finished
+                  !_vm.transaction.finished &&
+                  !_vm.transaction.finished_by_user &&
+                  _vm.user.hasPermission["update-transactions"]
+                    ? _c("small", [_vm._v("Finalizar transaccion")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.user.hasPermission["update-transactions"]
+                    ? _c(
+                        "label",
+                        {
+                          staticClass:
+                            "switch switch-label switch-pill switch-success float-right mb-0 ml-3"
                         },
-                        on: {
-                          change: [
-                            function($event) {
-                              var $$a = _vm.transaction.finished,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = null,
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      _vm.transaction,
-                                      "finished",
-                                      $$a.concat([$$v])
-                                    )
-                                } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      _vm.transaction,
-                                      "finished",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
-                                }
-                              } else {
-                                _vm.$set(_vm.transaction, "finished", $$c)
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.transaction.finished,
+                                expression: "transaction.finished"
                               }
+                            ],
+                            staticClass: "switch-input form-check-input",
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              checked: Array.isArray(_vm.transaction.finished)
+                                ? _vm._i(_vm.transaction.finished, null) > -1
+                                : _vm.transaction.finished
                             },
-                            _vm.toggleFinished
-                          ]
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "switch-slider",
-                        attrs: { "data-checked": "✓", "data-unchecked": "✕" }
-                      })
-                    ]
-                  )
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$a = _vm.transaction.finished,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.transaction,
+                                          "finished",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.transaction,
+                                          "finished",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.transaction, "finished", $$c)
+                                  }
+                                },
+                                _vm.toggleFinished
+                              ]
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", {
+                            staticClass: "switch-slider",
+                            attrs: {
+                              "data-checked": "✓",
+                              "data-unchecked": "✕"
+                            }
+                          })
+                        ]
+                      )
+                    : _vm._e()
                 ]
               ),
               _vm._v(" "),
@@ -72586,6 +72615,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      user: Laravel.user,
       company: {
         company: null,
         type: null
@@ -72713,24 +72743,26 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "text-secondary ml-3",
-                  attrs: { href: "#", disabled: _vm.submiting },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.detachCompany(company)
-                    }
-                  }
-                },
-                [
-                  _vm.submiting
-                    ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                    : _c("i", { staticClass: "far fa-trash-alt" })
-                ]
-              )
+              _vm.user.hasPermission["update-transactions"]
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "text-secondary ml-3",
+                      attrs: { href: "#", disabled: _vm.submiting },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.detachCompany(company)
+                        }
+                      }
+                    },
+                    [
+                      _vm.submiting
+                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                        : _c("i", { staticClass: "far fa-trash-alt" })
+                    ]
+                  )
+                : _vm._e()
             ]),
             _vm._v(" "),
             company.users
@@ -72789,27 +72821,29 @@ var render = function() {
       0
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body text-center px-0" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-success",
-          attrs: { href: "#", role: "button" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.addCompany($event)
-            }
-          }
-        },
-        [
-          _c("i", { staticClass: "fa fa-plus mr-2" }),
-          _vm._v("Agregar empresa\n    ")
-        ]
-      )
-    ]),
+    _vm.user.hasPermission["update-transactions"]
+      ? _c("div", { staticClass: "card-body text-center px-0" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success",
+              attrs: { href: "#", role: "button" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addCompany($event)
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-plus mr-2" }),
+              _vm._v("Agregar empresa\n    ")
+            ]
+          )
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",

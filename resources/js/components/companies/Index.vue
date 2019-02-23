@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Empresas</h4>
-      <div class="card-header-actions mr-1">
+      <div class="card-header-actions mr-1" v-if="user.hasPermission['create-companies']">
         <a class="btn btn-success" href="/companies/create"><i class="fas fa-plus mr-1"></i>Crear empresa</a>
       </div>
     </div>
@@ -46,7 +46,7 @@
               <a href="#" class="text-dark" @click.prevent="sort('created_at')">Creada</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
             </th>
-            <th class="d-none d-sm-table-cell"></th>
+            <th class="d-none d-sm-table-cell" v-if="user.hasPermission['update-companies']"></th>
           </tr>
         </thead>
         <tbody>
@@ -62,7 +62,7 @@
             <td class="d-none d-sm-table-cell">
               <small>{{company.created_at | moment("LLL")}}</small>
             </td>
-            <td class="d-none d-sm-table-cell">
+            <td class="d-none d-sm-table-cell" v-if="user.hasPermission['update-companies']">
               <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
             </td>
           </tr>
@@ -108,6 +108,7 @@
 export default {
   data () {
     return {
+      user: Laravel.user,
       companies: [],
       filters: {
         pagination: {

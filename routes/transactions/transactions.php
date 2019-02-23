@@ -5,7 +5,7 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'transactions'], function() {
             Route::view('/', 'transactions.index')->middleware('permission:read-transactions');
             Route::view('/create', 'transactions.create')->middleware('permission:create-transactions');
-            Route::view('/{transaction}/edit', 'transactions.edit')->middleware('permission:update-transactions');
+            Route::view('/{transaction}/edit', 'transactions.edit')->middleware('permission:read-transactions');
         });
 
         // api

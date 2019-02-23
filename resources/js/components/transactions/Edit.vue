@@ -5,13 +5,13 @@
         <!-- button actions -->
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
           <h4 class="float-left pt-2"><a href="/transactions" class="text-dark"><i class="fas fa-angle-left fa-lg px-2"></i></a> Transaccion</h4>
-          <div class="card-header-actions mr-1">
+          <div class="card-header-actions mr-1" v-if="user.hasPermission['create-transactions']">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="update">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
               <i class="fas fa-check" v-else></i>
               <span class="ml-1">Guardar</span>
             </a>
-            <a class="card-header-action ml-1" href="#" :disabled="submitingDestroy" @click.prevent="destroy">
+            <a class="card-header-action ml-1" href="#" :disabled="submitingDestroy" @click.prevent="destroy" v-if="user.hasPermission['delete-transactions']">
               <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
               <i class="far fa-trash-alt" v-else></i>
               <span class="d-md-down-none ml-1">Borrar</span>
@@ -22,8 +22,8 @@
         <div class="card-body px-0">
           <div class="form-group text-right clearfix mb-0">
             <small class="text-success" v-if="transaction.finished && transaction.finished_by_user">Finalizada por <i>{{transaction.finished_by_user.name}}. {{transaction.finished_at | moment('LL')}}</i></small>
-            <small v-else>Finalizar transaccion</small>
-            <label class="switch switch-label switch-pill switch-success float-right mb-0 ml-3">
+            <small v-if="!transaction.finished && !transaction.finished_by_user && user.hasPermission['update-transactions']">Finalizar transaccion</small>
+            <label class="switch switch-label switch-pill switch-success float-right mb-0 ml-3" v-if="user.hasPermission['update-transactions']">
               <input class="switch-input form-check-input" type="checkbox" v-model="transaction.finished" @change="toggleFinished">
               <span class="switch-slider" data-checked="✓" data-unchecked="✕"></span>
             </label>
@@ -82,6 +82,7 @@
 export default {
   data () {
     return {
+      user: Laravel.user,
       transaction: {},
       errors: {},
       loading: true,
