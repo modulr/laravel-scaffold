@@ -125,6 +125,7 @@ export default {
         this.submiting = true
         axios.put(`/api/transactions/update/${this.transaction.id}`, this.transaction)
         .then(response => {
+          this.submiting = false
           this.$toasted.global.error('Transaccion actualizada!')
         })
         .catch(error => {

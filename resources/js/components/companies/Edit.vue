@@ -93,6 +93,7 @@ export default {
         this.submiting = true
         axios.put(`/api/companies/update/${this.company.id}`, this.company)
         .then(response => {
+          this.submiting = false
           this.$toasted.global.error('Empresa actualizada!')
         })
         .catch(error => {
