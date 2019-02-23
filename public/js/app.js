@@ -72581,6 +72581,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72658,14 +72659,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (!this.submiting) {
         this.submiting = true;
-        axios.put('/api/transactions/detachCompany/' + this.transaction.id + '/' + company.id).then(function (response) {
-          _this4.transaction.companies = response.data.companies;
-          _this4.$toasted.global.error('Empresa eliminada!');
-          _this4.submiting = false;
-          $('#addCompanyModal').modal('hide');
-        }).catch(function (error) {
-          if (error.response) {
-            _this4.errors = error.response.data.errors;
+        swal({
+          title: "¿Estas seguro?",
+          text: "¿En verdad deseas eliminar la empresa de la transaccion?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        }).then(function (willDelete) {
+          if (willDelete) {
+            axios.put('/api/transactions/detachCompany/' + _this4.transaction.id + '/' + company.id).then(function (response) {
+              _this4.transaction.companies = response.data.companies;
+              _this4.$toasted.global.error('Empresa eliminada!');
+            }).catch(function (error) {
+              if (error.response) {
+                _this4.errors = error.response.data.errors;
+              }
+            });
           }
           _this4.submiting = false;
         });
@@ -72705,20 +72714,21 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c(
-                "button",
+                "a",
                 {
-                  staticClass: "close",
-                  attrs: { type: "button", "aria-label": "Close" },
+                  staticClass: "text-secondary ml-3",
+                  attrs: { href: "#", disabled: _vm.submiting },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.detachCompany(company)
                     }
                   }
                 },
                 [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("×")
-                  ])
+                  _vm.submiting
+                    ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                    : _c("i", { staticClass: "far fa-trash-alt" })
                 ]
               )
             ]),

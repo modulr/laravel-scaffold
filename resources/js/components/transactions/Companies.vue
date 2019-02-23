@@ -8,9 +8,10 @@
             <strong>{{company.name}}</strong><br>
             <small class="text-muted">{{company.pivot.company_type}}</small>
           </div>
-          <button type="button" class="close" aria-label="Close" @click="detachCompany(company)">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <a href="#" class="text-secondary ml-3":disabled="submiting" @click.prevent="detachCompany(company)">
+            <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+            <i class="far fa-trash-alt" v-else></i>
+          </a>
         </div>
         <ul class="list-group list-group-flush" v-if="company.users">
           <li v-for="(user, index) in company.users" track-by="id" class="list-group-item media border-light">
@@ -176,16 +177,25 @@ export default {
     detachCompany(company) {
       if (!this.submiting) {
         this.submiting = true
-        axios.put(`/api/transactions/detachCompany/${this.transaction.id}/${company.id}`)
-        .then(response => {
-          this.transaction.companies = response.data.companies;
-          this.$toasted.global.error('Empresa eliminada!')
-          this.submiting = false
-          $('#addCompanyModal').modal('hide')
+        swal({
+          title: "¿Estas seguro?",
+          text: "¿En verdad deseas eliminar la empresa de la transaccion?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
         })
-        .catch(error => {
-          if (error.response) {
-            this.errors = error.response.data.errors
+        .then((willDelete) => {
+          if (willDelete) {
+            axios.put(`/api/transactions/detachCompany/${this.transaction.id}/${company.id}`)
+            .then(response => {
+              this.transaction.companies = response.data.companies;
+              this.$toasted.global.error('Empresa eliminada!')
+            })
+            .catch(error => {
+              if (error.response) {
+                this.errors = error.response.data.errors
+              }
+            })
           }
           this.submiting = false
         })
