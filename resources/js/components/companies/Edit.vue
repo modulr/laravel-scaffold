@@ -94,7 +94,6 @@ export default {
         axios.put(`/api/companies/update/${this.company.id}`, this.company)
         .then(response => {
           this.$toasted.global.error('Empresa actualizada!')
-          location.href = '/companies'
         })
         .catch(error => {
           this.errors = error.response.data.errors

@@ -68424,7 +68424,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submiting = true;
         axios.put('/api/companies/update/' + this.company.id, this.company).then(function (response) {
           _this2.$toasted.global.error('Empresa actualizada!');
-          location.href = '/companies';
         }).catch(function (error) {
           _this2.errors = error.response.data.errors;
           _this2.submiting = false;
@@ -70762,7 +70761,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submiting = true;
         axios.put('/api/transactions/update/' + this.transaction.id, this.transaction).then(function (response) {
           _this3.$toasted.global.error('Transaccion actualizada!');
-          location.href = '/transactions';
         }).catch(function (error) {
           _this3.errors = error.response.data.errors;
           _this3.submiting = false;

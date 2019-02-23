@@ -126,7 +126,6 @@ export default {
         axios.put(`/api/transactions/update/${this.transaction.id}`, this.transaction)
         .then(response => {
           this.$toasted.global.error('Transaccion actualizada!')
-          location.href = '/transactions'
         })
         .catch(error => {
           this.errors = error.response.data.errors
