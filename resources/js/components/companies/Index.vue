@@ -10,12 +10,12 @@
       <div class="row justify-content-between">
         <div class="col-7 col-md-5">
           <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter" @keyup.delete="filter">
             <div class="input-group-prepend">
               <span class="input-group-text" @click="filter">
                 <i class="fas fa-search"></i>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter">
           </div>
         </div>
         <div class="col-auto">

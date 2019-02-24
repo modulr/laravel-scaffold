@@ -67516,17 +67516,6 @@ var render = function() {
         _c("div", { staticClass: "row justify-content-between" }, [
           _c("div", { staticClass: "col-7 col-md-5" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c(
-                  "span",
-                  {
-                    staticClass: "input-group-text",
-                    on: { click: _vm.filter }
-                  },
-                  [_c("i", { staticClass: "fas fa-search" })]
-                )
-              ]),
-              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -67541,15 +67530,30 @@ var render = function() {
                 attrs: { type: "text", placeholder: "Seach" },
                 domProps: { value: _vm.filters.search },
                 on: {
-                  keyup: function($event) {
-                    if (
-                      !("button" in $event) &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
+                  keyup: [
+                    function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.filter($event)
+                    },
+                    function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "delete", [8, 46], $event.key, [
+                          "Backspace",
+                          "Delete",
+                          "Del"
+                        ])
+                      ) {
+                        return null
+                      }
+                      return _vm.filter($event)
                     }
-                    return _vm.filter($event)
-                  },
+                  ],
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -67560,7 +67564,18 @@ var render = function() {
                     _vm.$forceUpdate()
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-prepend" }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "input-group-text",
+                    on: { click: _vm.filter }
+                  },
+                  [_c("i", { staticClass: "fas fa-search" })]
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
