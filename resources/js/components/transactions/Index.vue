@@ -8,7 +8,7 @@
     </div>
     <div class="card-body px-0">
       <div class="row justify-content-between">
-        <div class="col-7 col-md-5">
+        <!-- <div class="col-7 col-md-5">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" @click="filter">
@@ -17,20 +17,35 @@
             </div>
             <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter">
           </div>
+        </div> -->
+        <div class="col-auto">
+          <multiselect
+            v-model="filters.wich"
+            track-by="id" label="name"
+            :options="options.wich"
+            :searchable="false"
+            :allow-empty="false"
+            select-label=""
+            deselect-label=""
+            selected-label=""
+            @select="changeWich">
+          </multiselect>
         </div>
         <div class="col-auto">
           <multiselect
-            v-model="filters.pagination.per_page"
-            :options="[25,50,100,200]"
+            v-model="filters.finished"
+            track-by="id" label="name"
+            :options="options.finished"
             :searchable="false"
-            :show-labels="false"
             :allow-empty="false"
-            @select="changeSize"
-            placeholder="Search">
+            select-label=""
+            deselect-label=""
+            selected-label=""
+            @select="changeFinished">
           </multiselect>
         </div>
       </div>
-      <table class="table table-hover">
+      <table class="table table-hover mt-3">
         <thead>
           <tr>
             <th class="d-none d-sm-table-cell">
@@ -61,7 +76,7 @@
               <span class="badge badge-primary" v-else>Abierta</span>
             </td>
             <td class="d-none d-sm-table-cell">
-              <small>{{transaction.created_at | moment("LLL")}}</small></small>
+              <small>{{transaction.created_at | moment("LL")}}</small></small>
             </td>
             <td class="d-none d-sm-table-cell" v-if="user.hasPermission['create-transactions']">
               <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
@@ -89,6 +104,17 @@
             </ul>
           </nav>
         </div>
+        <div class="col-auto">
+          <multiselect
+            v-model="filters.pagination.per_page"
+            :options="[25,50,100,200]"
+            :searchable="false"
+            :show-labels="false"
+            :allow-empty="false"
+            @select="changeSize"
+            placeholder="Search">
+          </multiselect>
+        </div>
       </div>
       <div class="no-items-found text-center mt-5" v-if="!loading && !transactions.length > 0">
         <i class="icon-magnifier fa-3x text-muted"></i>
@@ -111,7 +137,27 @@ export default {
     return {
       user: Laravel.user,
       transactions: [],
+      options: {
+        wich: [
+          {id: 1, name: 'Todas'},
+          {id: 2, name: 'Tuyas'},
+          {id: 3, name: 'Invitado'}
+        ],
+        finished: [
+          {id: 0, name: "Abiertas"},
+          {id: 1, name: "Finalizadas"},
+          {id: 2, name: 'Todas'}
+        ]
+      },
       filters: {
+        wich: {
+          id: 1,
+          name: 'Todas'
+        },
+        finished: {
+          id:1,
+          name: "Finalizadas"
+        },
         pagination: {
           from: 0,
           to: 0,
@@ -136,6 +182,8 @@ export default {
       localStorage.setItem("filtersTableTransactions", this.filters);
     }
     this.getTransactions()
+
+
   },
   methods: {
     getTransactions () {
@@ -147,8 +195,9 @@ export default {
       axios.post(`/api/transactions/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
         this.transactions = response.data.data
-        delete response.data.data
-        this.filters.pagination = response.data
+        // this.transactions = response.data.data
+        // delete response.data.data
+        // this.filters.pagination = response.data
         this.loading = false
       })
     },
@@ -158,6 +207,14 @@ export default {
     // filters
     filter() {
       this.filters.pagination.current_page = 1
+      this.getTransactions()
+    },
+    changeWich (wich) {
+      this.filters.wich = wich
+      this.getTransactions()
+    },
+    changeFinished (finished) {
+      this.filters.finished = finished
       this.getTransactions()
     },
     changeSize (perPage) {

@@ -8,9 +8,49 @@ use App\Http\Controllers\Controller;
 use App\Models\Transactions\Transaction;
 use App\Models\Companies\Company;
 use App\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TransactionController extends Controller
 {
+    public function filter (Request $request)
+    {
+        $query = DB::table('transactions')
+        ->select('transactions.*')
+        ->whereNull('transactions.deleted_at');
+
+        // *$request->finished = [0: Abierta, 1: Finalizada, 2:todas];
+        if ($request->input('finished.id') != 2) {
+            $query->where('finished', $request->input('finished.id'));
+        }
+
+        // *$request->wich = [1:Todas, 2:Tuyas, 3:Invitado];
+        if ($request->input('wich.id') == 1) {
+            $guestTransactions = DB::table('transaction_user')->where('user_id', Auth::id())->get();
+            $transactionsIds = $guestTransactions->implode('transaction_id', ', ');
+
+            $query->where(function ($q) use ($transactionsIds) {
+                $q->whereIn('id', explode(',', $transactionsIds));
+                $q->orWhere('created_by', Auth::id());
+            });
+        } else if ($request->input('wich.id') == 2) {
+                $query->where('created_by', Auth::id());
+        } else {
+            $guestTransactions = DB::table('transaction_user')->where('user_id', Auth::id())->get();
+            $transactionsIds = $guestTransactions->implode('transaction_id', ', ');
+            $query->whereIn('id', explode(',', $transactionsIds));
+        }
+
+        // if($request->search) {
+        //     $query->where('name', 'LIKE', '%'.$request->search.'%');
+        // }
+
+        $transactions = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
+                    ->get();
+
+        return ['data' => $transactions, 'sql' => $query->toSql()];
+    }
+
     public function show ($transactionId)
     {
         $transaction = Transaction::with('finishedByUser', 'companies', 'users', 'stages.authorizedByUser', 'stages.files.creator', 'stages.comments.creator')->findOrFail($transactionId);
@@ -77,22 +117,6 @@ class TransactionController extends Controller
     public function destroy ($transactionId)
     {
         return Transaction::destroy($transactionId);
-    }
-
-    public function filter (Request $request)
-    {
-        $query = Transaction::query();
-
-        if($request->search) {
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
-        }
-
-        $transactions = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
-                    ->paginate($request->input('pagination.per_page'));
-
-        $transactions->load('companies', 'stages');
-
-        return $transactions;
     }
 
     public function count ()

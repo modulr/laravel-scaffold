@@ -14105,7 +14105,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(126);
+module.exports = __webpack_require__(129);
 
 
 /***/ }),
@@ -14193,10 +14193,10 @@ Vue.component('companies-users', __webpack_require__(105));
 Vue.component('transactions-index', __webpack_require__(108));
 Vue.component('transactions-create', __webpack_require__(111));
 Vue.component('transactions-edit', __webpack_require__(114));
-Vue.component('transactions-companies', __webpack_require__(156));
-Vue.component('transactions-stages', __webpack_require__(117));
-Vue.component('transactions-files', __webpack_require__(153));
-Vue.component('transactions-comments', __webpack_require__(123));
+Vue.component('transactions-companies', __webpack_require__(117));
+Vue.component('transactions-stages', __webpack_require__(120));
+Vue.component('transactions-files', __webpack_require__(123));
+Vue.component('transactions-comments', __webpack_require__(126));
 
 var app = new Vue({
   el: '#app'
@@ -67736,9 +67736,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                     _c("small", [
-                      _vm._v(
-                        _vm._s(_vm._f("moment")(company.created_at, "LLL"))
-                      )
+                      _vm._v(_vm._s(_vm._f("moment")(company.created_at, "LL")))
                     ])
                   ]),
                   _vm._v(" "),
@@ -69606,13 +69604,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
       transactions: [],
+      options: {
+        wich: [{ id: 1, name: 'Todas' }, { id: 2, name: 'Tuyas' }, { id: 3, name: 'Invitado' }],
+        finished: [{ id: 0, name: "Abiertas" }, { id: 1, name: "Finalizadas" }, { id: 2, name: 'Todas' }]
+      },
       filters: {
+        wich: {
+          id: 1,
+          name: 'Todas'
+        },
+        finished: {
+          id: 1,
+          name: "Finalizadas"
+        },
         pagination: {
           from: 0,
           to: 0,
@@ -69650,8 +69686,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.post('/api/transactions/filter?page=' + this.filters.pagination.current_page, this.filters).then(function (response) {
         _this.transactions = response.data.data;
-        delete response.data.data;
-        _this.filters.pagination = response.data;
+        // this.transactions = response.data.data
+        // delete response.data.data
+        // this.filters.pagination = response.data
         _this.loading = false;
       });
     },
@@ -69662,6 +69699,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // filters
     filter: function filter() {
       this.filters.pagination.current_page = 1;
+      this.getTransactions();
+    },
+    changeWich: function changeWich(wich) {
+      this.filters.wich = wich;
+      this.getTransactions();
+    },
+    changeFinished: function changeFinished(finished) {
+      this.filters.finished = finished;
       this.getTransactions();
     },
     changeSize: function changeSize(perPage) {
@@ -69712,55 +69757,33 @@ var render = function() {
       { staticClass: "card-body px-0" },
       [
         _c("div", { staticClass: "row justify-content-between" }, [
-          _c("div", { staticClass: "col-7 col-md-5" }, [
-            _c("div", { staticClass: "input-group mb-3" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c(
-                  "span",
-                  {
-                    staticClass: "input-group-text",
-                    on: { click: _vm.filter }
+          _c(
+            "div",
+            { staticClass: "col-auto" },
+            [
+              _c("multiselect", {
+                attrs: {
+                  "track-by": "id",
+                  label: "name",
+                  options: _vm.options.wich,
+                  searchable: false,
+                  "allow-empty": false,
+                  "select-label": "",
+                  "deselect-label": "",
+                  "selected-label": ""
+                },
+                on: { select: _vm.changeWich },
+                model: {
+                  value: _vm.filters.wich,
+                  callback: function($$v) {
+                    _vm.$set(_vm.filters, "wich", $$v)
                   },
-                  [_c("i", { staticClass: "fas fa-search" })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.filters.search,
-                    expression: "filters.search",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Seach" },
-                domProps: { value: _vm.filters.search },
-                on: {
-                  keyup: function($event) {
-                    if (
-                      !("button" in $event) &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
-                    }
-                    return _vm.filter($event)
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.filters, "search", $event.target.value.trim())
-                  },
-                  blur: function($event) {
-                    _vm.$forceUpdate()
-                  }
+                  expression: "filters.wich"
                 }
               })
-            ])
-          ]),
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -69768,19 +69791,22 @@ var render = function() {
             [
               _c("multiselect", {
                 attrs: {
-                  options: [25, 50, 100, 200],
+                  "track-by": "id",
+                  label: "name",
+                  options: _vm.options.finished,
                   searchable: false,
-                  "show-labels": false,
                   "allow-empty": false,
-                  placeholder: "Search"
+                  "select-label": "",
+                  "deselect-label": "",
+                  "selected-label": ""
                 },
-                on: { select: _vm.changeSize },
+                on: { select: _vm.changeFinished },
                 model: {
-                  value: _vm.filters.pagination.per_page,
+                  value: _vm.filters.finished,
                   callback: function($$v) {
-                    _vm.$set(_vm.filters.pagination, "per_page", $$v)
+                    _vm.$set(_vm.filters, "finished", $$v)
                   },
-                  expression: "filters.pagination.per_page"
+                  expression: "filters.finished"
                 }
               })
             ],
@@ -69788,7 +69814,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("table", { staticClass: "table table-hover" }, [
+        _c("table", { staticClass: "table table-hover mt-3" }, [
           _c("thead", [
             _c("tr", [
               _c("th", { staticClass: "d-none d-sm-table-cell" }, [
@@ -69945,7 +69971,7 @@ var render = function() {
                   _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                     _c("small", [
                       _vm._v(
-                        _vm._s(_vm._f("moment")(transaction.created_at, "LLL"))
+                        _vm._s(_vm._f("moment")(transaction.created_at, "LL"))
                       )
                     ])
                   ]),
@@ -70081,7 +70107,32 @@ var render = function() {
                       )
                     ])
                   ])
-                : _vm._e()
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-auto" },
+                [
+                  _c("multiselect", {
+                    attrs: {
+                      options: [25, 50, 100, 200],
+                      searchable: false,
+                      "show-labels": false,
+                      "allow-empty": false,
+                      placeholder: "Search"
+                    },
+                    on: { select: _vm.changeSize },
+                    model: {
+                      value: _vm.filters.pagination.per_page,
+                      callback: function($$v) {
+                        _vm.$set(_vm.filters.pagination, "per_page", $$v)
+                      },
+                      expression: "filters.pagination.per_page"
+                    }
+                  })
+                ],
+                1
+              )
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -71213,6 +71264,625 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources/js/components/transactions/Companies.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-17cd4d0c", Component.options)
+  } else {
+    hotAPI.reload("data-v-17cd4d0c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      user: Laravel.user,
+      company: {
+        company: null,
+        type: null
+      },
+      lists: {
+        companies: [],
+        companyTypes: []
+      },
+      errors: {},
+      submiting: false
+    };
+  },
+
+  props: ['transaction'],
+  mounted: function mounted() {
+    this.getCompanies();
+    this.getCompanyTypes();
+  },
+
+  methods: {
+    getCompanies: function getCompanies() {
+      var _this = this;
+
+      axios.get('/api/companies/all').then(function (response) {
+        _this.lists.companies = response.data;
+      }).catch(function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    },
+    getCompanyTypes: function getCompanyTypes() {
+      var _this2 = this;
+
+      axios.get('/api/companies/companyType/all').then(function (response) {
+        _this2.lists.companyTypes = response.data;
+      }).catch(function (error) {
+        _this2.errors = error.response.data.errors;
+      });
+    },
+    addCompany: function addCompany() {
+      this.company = {
+        company: null,
+        type: null
+      };
+      this.errors = {};
+      $('#addCompanyModal').modal('show');
+    },
+    attachCompany: function attachCompany() {
+      var _this3 = this;
+
+      if (!this.submiting) {
+        this.submiting = true;
+        axios.put('/api/transactions/attachCompany/' + this.transaction.id, { company: this.company.company ? this.company.company.id : null, type: this.company.type ? this.company.type.type : null }).then(function (response) {
+          _this3.transaction.companies = response.data.companies;
+          _this3.$toasted.global.error('Empresa agregada!');
+          _this3.company = {
+            company: null,
+            type: null
+          }, _this3.errors = {};
+          _this3.submiting = false;
+          $('#addCompanyModal').modal('hide');
+        }).catch(function (error) {
+          if (error.response) {
+            _this3.errors = error.response.data.errors;
+          }
+          _this3.submiting = false;
+        });
+      }
+    },
+    detachCompany: function detachCompany(company) {
+      var _this4 = this;
+
+      if (!this.submiting) {
+        this.submiting = true;
+        swal({
+          title: "¿Estas seguro?",
+          text: "¿En verdad deseas eliminar la empresa de la transaccion?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        }).then(function (willDelete) {
+          if (willDelete) {
+            axios.put('/api/transactions/detachCompany/' + _this4.transaction.id + '/' + company.id).then(function (response) {
+              _this4.transaction.companies = response.data.companies;
+              _this4.$toasted.global.error('Empresa eliminada!');
+            }).catch(function (error) {
+              if (error.response) {
+                _this4.errors = error.response.data.errors;
+              }
+            });
+          }
+          _this4.submiting = false;
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "list-group list-group-flush" },
+      _vm._l(_vm.transaction.companies, function(company) {
+        return _c(
+          "li",
+          {
+            staticClass:
+              "list-group-item list-group-item-action border-light py-3"
+          },
+          [
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c("div", [
+                _c("strong", [_vm._v(_vm._s(company.name))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("small", { staticClass: "text-muted" }, [
+                  _vm._v(_vm._s(company.pivot.company_type))
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.user.hasPermission["update-transactions"]
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "text-secondary ml-3",
+                      attrs: { href: "#", disabled: _vm.submiting },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.detachCompany(company)
+                        }
+                      }
+                    },
+                    [
+                      _vm.submiting
+                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                        : _c("i", { staticClass: "far fa-trash-alt" })
+                    ]
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            company.users
+              ? _c(
+                  "ul",
+                  { staticClass: "list-group list-group-flush" },
+                  _vm._l(company.users, function(user, index) {
+                    return _c(
+                      "li",
+                      {
+                        staticClass: "list-group-item media border-light",
+                        attrs: { "track-by": "id" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "avatar-sm float-left mr-3" },
+                          [
+                            _c("img", {
+                              staticClass: "img-avatar",
+                              attrs: { src: user.avatar_url }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "media-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "d-flex justify-content-between" },
+                            [
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(user.name) +
+                                  "\n            "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "small text-muted" }, [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(user.email) +
+                                "\n            "
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e()
+          ]
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _vm.user.hasPermission["update-transactions"]
+      ? _c("div", { staticClass: "card-body text-center px-0" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success",
+              attrs: { href: "#", role: "button" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addCompany($event)
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-plus mr-2" }),
+              _vm._v("Agregar empresa\n    ")
+            ]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addCompanyModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Empresa")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      class: {
+                        "border border-danger rounded": _vm.errors.company
+                      },
+                      attrs: {
+                        options: _vm.lists.companies,
+                        openDirection: "bottom",
+                        "track-by": "id",
+                        label: "name",
+                        placeholder: "Seleccionar"
+                      },
+                      model: {
+                        value: _vm.company.company,
+                        callback: function($$v) {
+                          _vm.$set(_vm.company, "company", $$v)
+                        },
+                        expression: "company.company"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.company
+                      ? _c("small", { staticClass: "form-text text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.company[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Rol de la empresa")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      class: {
+                        "border border-danger rounded": _vm.errors.type
+                      },
+                      attrs: {
+                        options: _vm.lists.companyTypes,
+                        openDirection: "bottom",
+                        "track-by": "id",
+                        label: "type",
+                        placeholder: "Seleccionar"
+                      },
+                      model: {
+                        value: _vm.company.type,
+                        callback: function($$v) {
+                          _vm.$set(_vm.company, "type", $$v)
+                        },
+                        expression: "company.type"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.type
+                      ? _c("small", { staticClass: "form-text text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.type[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.company.company && _vm.company.company.users.length > 0
+                  ? _c("p", [
+                      _vm._v(
+                        "Estos usuarios pertenecen a la empresa seleccionada y tambien seran invitados a la transaccion"
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.company.company && _vm.company.company.users.length > 0
+                  ? _c(
+                      "ul",
+                      { staticClass: "list-group list-group-flush" },
+                      _vm._l(_vm.company.company.users, function(user, index) {
+                        return _c(
+                          "li",
+                          {
+                            staticClass: "list-group-item media border-light",
+                            attrs: { "track-by": "id" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "avatar-sm float-left mr-3" },
+                              [
+                                _c("img", {
+                                  staticClass: "img-avatar",
+                                  attrs: { src: user.avatar_url }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "media-body" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "d-flex justify-content-between"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                  " +
+                                      _vm._s(user.name) +
+                                      "\n                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "small text-muted" }, [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(user.email) +
+                                    "\n                "
+                                )
+                              ])
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "#", disabled: _vm.submiting },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.attachCompany($event)
+                      }
+                    }
+                  },
+                  [
+                    _vm.submiting
+                      ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                      : _c("i", { staticClass: "fas fa-check" }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-muted" }, [
+      _c("small", [
+        _vm._v("Agrega empresas y usuarios para interactuar con ellos.")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Agregar empresa")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-17cd4d0c", module.exports)
+  }
+}
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(121)
+/* template */
+var __vue_template__ = __webpack_require__(122)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources/js/components/transactions/Stages.vue"
 
 /* hot reload */
@@ -71235,7 +71905,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 118 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71432,7 +72102,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 119 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -71924,9 +72594,6 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */,
-/* 121 */,
-/* 122 */,
 /* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71936,262 +72603,6 @@ var normalizeComponent = __webpack_require__(0)
 var __vue_script__ = __webpack_require__(124)
 /* template */
 var __vue_template__ = __webpack_require__(125)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/transactions/Comments.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-30b6b153", Component.options)
-  } else {
-    hotAPI.reload("data-v-30b6b153", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 124 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      comment: '',
-      comments: [],
-      errors: {}
-    };
-  },
-
-  props: ['stage'],
-  mounted: function mounted() {
-    this.comments = this.stage.comments;
-  },
-
-  methods: {
-    storeComment: function storeComment() {
-      var _this = this;
-
-      var comment = {
-        comment: this.comment,
-        stage_id: this.stage.id
-      };
-      axios.post('/api/comments/store', comment).then(function (response) {
-        _this.comments.unshift(response.data);
-        _this.comment = '';
-        _this.errors = {};
-      }).catch(function (error) {
-        if (error.response) {
-          _this.errors = error.response.data.errors;
-        }
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 125 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "input-group mb-2" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.comment,
-            expression: "comment"
-          }
-        ],
-        staticClass: "form-control",
-        class: { "is-invalid": _vm.errors.comment },
-        attrs: { type: "text", placeholder: "Escribe un comentario..." },
-        domProps: { value: _vm.comment },
-        on: {
-          keyup: function($event) {
-            if (
-              !("button" in $event) &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
-            }
-            return _vm.storeComment($event)
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.comment = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-secondary",
-            on: { click: _vm.storeComment }
-          },
-          [_c("i", { staticClass: "fas fa-paper-plane" })]
-        )
-      ]),
-      _vm._v(" "),
-      _vm.errors.comment
-        ? _c("div", { staticClass: "invalid-feedback" }, [
-            _vm._v(_vm._s(_vm.errors.comment[0]))
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "p-4 rounded border overflow-auto",
-        staticStyle: { "max-height": "300px" }
-      },
-      _vm._l(this.comments, function(comment) {
-        return _c("div", { staticClass: "media mb-2" }, [
-          _c("div", { staticClass: "media-left" }, [
-            _c("img", {
-              staticClass: "avatar-sm img-avatar mr-2",
-              attrs: { src: comment.creator.avatar_url }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "media-body" }, [
-            _c("span", { staticClass: "text-primary" }, [
-              _vm._v(_vm._s(comment.creator.name))
-            ]),
-            _vm._v(" "),
-            _c("small", { staticClass: "text-muted pull-right" }, [
-              _vm._v(
-                "\n          " +
-                  _vm._s(_vm._f("moment")(comment.created_at, "from")) +
-                  "\n        "
-              )
-            ]),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(comment.comment))])
-          ])
-        ])
-      }),
-      0
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-30b6b153", module.exports)
-  }
-}
-
-/***/ }),
-/* 126 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 127 */,
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(154)
-/* template */
-var __vue_template__ = __webpack_require__(155)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -72230,7 +72641,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 154 */
+/* 124 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72339,7 +72750,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 155 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72454,15 +72865,15 @@ if (false) {
 }
 
 /***/ }),
-/* 156 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(157)
+var __vue_script__ = __webpack_require__(127)
 /* template */
-var __vue_template__ = __webpack_require__(158)
+var __vue_template__ = __webpack_require__(128)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -72479,7 +72890,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/transactions/Companies.vue"
+Component.options.__file = "resources/js/components/transactions/Comments.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -72488,9 +72899,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-17cd4d0c", Component.options)
+    hotAPI.createRecord("data-v-30b6b153", Component.options)
   } else {
-    hotAPI.reload("data-v-17cd4d0c", Component.options)
+    hotAPI.reload("data-v-30b6b153", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -72501,7 +72912,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 157 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72533,188 +72944,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      user: Laravel.user,
-      company: {
-        company: null,
-        type: null
-      },
-      lists: {
-        companies: [],
-        companyTypes: []
-      },
-      errors: {},
-      submiting: false
+      comment: '',
+      comments: [],
+      errors: {}
     };
   },
 
-  props: ['transaction'],
+  props: ['stage'],
   mounted: function mounted() {
-    this.getCompanies();
-    this.getCompanyTypes();
+    this.comments = this.stage.comments;
   },
 
   methods: {
-    getCompanies: function getCompanies() {
+    storeComment: function storeComment() {
       var _this = this;
 
-      axios.get('/api/companies/all').then(function (response) {
-        _this.lists.companies = response.data;
-      }).catch(function (error) {
-        _this.errors = error.response.data.errors;
-      });
-    },
-    getCompanyTypes: function getCompanyTypes() {
-      var _this2 = this;
-
-      axios.get('/api/companies/companyType/all').then(function (response) {
-        _this2.lists.companyTypes = response.data;
-      }).catch(function (error) {
-        _this2.errors = error.response.data.errors;
-      });
-    },
-    addCompany: function addCompany() {
-      this.company = {
-        company: null,
-        type: null
+      var comment = {
+        comment: this.comment,
+        stage_id: this.stage.id
       };
-      this.errors = {};
-      $('#addCompanyModal').modal('show');
-    },
-    attachCompany: function attachCompany() {
-      var _this3 = this;
-
-      if (!this.submiting) {
-        this.submiting = true;
-        axios.put('/api/transactions/attachCompany/' + this.transaction.id, { company: this.company.company ? this.company.company.id : null, type: this.company.type ? this.company.type.type : null }).then(function (response) {
-          _this3.transaction.companies = response.data.companies;
-          _this3.$toasted.global.error('Empresa agregada!');
-          _this3.company = {
-            company: null,
-            type: null
-          }, _this3.errors = {};
-          _this3.submiting = false;
-          $('#addCompanyModal').modal('hide');
-        }).catch(function (error) {
-          if (error.response) {
-            _this3.errors = error.response.data.errors;
-          }
-          _this3.submiting = false;
-        });
-      }
-    },
-    detachCompany: function detachCompany(company) {
-      var _this4 = this;
-
-      if (!this.submiting) {
-        this.submiting = true;
-        swal({
-          title: "¿Estas seguro?",
-          text: "¿En verdad deseas eliminar la empresa de la transaccion?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true
-        }).then(function (willDelete) {
-          if (willDelete) {
-            axios.put('/api/transactions/detachCompany/' + _this4.transaction.id + '/' + company.id).then(function (response) {
-              _this4.transaction.companies = response.data.companies;
-              _this4.$toasted.global.error('Empresa eliminada!');
-            }).catch(function (error) {
-              if (error.response) {
-                _this4.errors = error.response.data.errors;
-              }
-            });
-          }
-          _this4.submiting = false;
-        });
-      }
+      axios.post('/api/comments/store', comment).then(function (response) {
+        _this.comments.unshift(response.data);
+        _this.comment = '';
+        _this.errors = {};
+      }).catch(function (error) {
+        if (error.response) {
+          _this.errors = error.response.data.errors;
+        }
+      });
     }
   }
 });
 
 /***/ }),
-/* 158 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72722,355 +72989,110 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "list-group list-group-flush" },
-      _vm._l(_vm.transaction.companies, function(company) {
-        return _c(
-          "li",
+    _c("div", { staticClass: "input-group mb-2" }, [
+      _c("input", {
+        directives: [
           {
-            staticClass:
-              "list-group-item list-group-item-action border-light py-3"
+            name: "model",
+            rawName: "v-model",
+            value: _vm.comment,
+            expression: "comment"
+          }
+        ],
+        staticClass: "form-control",
+        class: { "is-invalid": _vm.errors.comment },
+        attrs: { type: "text", placeholder: "Escribe un comentario..." },
+        domProps: { value: _vm.comment },
+        on: {
+          keyup: function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.storeComment($event)
           },
-          [
-            _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _c("div", [
-                _c("strong", [_vm._v(_vm._s(company.name))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("small", { staticClass: "text-muted" }, [
-                  _vm._v(_vm._s(company.pivot.company_type))
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.user.hasPermission["update-transactions"]
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "text-secondary ml-3",
-                      attrs: { href: "#", disabled: _vm.submiting },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          _vm.detachCompany(company)
-                        }
-                      }
-                    },
-                    [
-                      _vm.submiting
-                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                        : _c("i", { staticClass: "far fa-trash-alt" })
-                    ]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            company.users
-              ? _c(
-                  "ul",
-                  { staticClass: "list-group list-group-flush" },
-                  _vm._l(company.users, function(user, index) {
-                    return _c(
-                      "li",
-                      {
-                        staticClass: "list-group-item media border-light",
-                        attrs: { "track-by": "id" }
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "avatar-sm float-left mr-3" },
-                          [
-                            _c("img", {
-                              staticClass: "img-avatar",
-                              attrs: { src: user.avatar_url }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "media-body" }, [
-                          _c(
-                            "div",
-                            { staticClass: "d-flex justify-content-between" },
-                            [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(user.name) +
-                                  "\n            "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "small text-muted" }, [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(user.email) +
-                                "\n            "
-                            )
-                          ])
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                )
-              : _vm._e()
-          ]
-        )
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.comment = $event.target.value
+          }
+        }
       }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.user.hasPermission["update-transactions"]
-      ? _c("div", { staticClass: "card-body text-center px-0" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-success",
-              attrs: { href: "#", role: "button" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.addCompany($event)
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "fa fa-plus mr-2" }),
-              _vm._v("Agregar empresa\n    ")
-            ]
-          )
-        ])
-      : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group-append" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary",
+            on: { click: _vm.storeComment }
+          },
+          [_c("i", { staticClass: "fas fa-paper-plane" })]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.errors.comment
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errors.comment[0]))
+          ])
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _c(
       "div",
       {
-        staticClass: "modal fade",
-        attrs: {
-          id: "addCompanyModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
+        staticClass: "p-4 rounded border overflow-auto",
+        staticStyle: { "max-height": "300px" }
       },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c("label", [_vm._v("Empresa")]),
-                    _vm._v(" "),
-                    _c("multiselect", {
-                      class: {
-                        "border border-danger rounded": _vm.errors.company
-                      },
-                      attrs: {
-                        options: _vm.lists.companies,
-                        openDirection: "bottom",
-                        "track-by": "id",
-                        label: "name",
-                        placeholder: "Seleccionar"
-                      },
-                      model: {
-                        value: _vm.company.company,
-                        callback: function($$v) {
-                          _vm.$set(_vm.company, "company", $$v)
-                        },
-                        expression: "company.company"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.company
-                      ? _c("small", { staticClass: "form-text text-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.company[0]))
-                        ])
-                      : _vm._e()
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c("label", [_vm._v("Rol de la empresa")]),
-                    _vm._v(" "),
-                    _c("multiselect", {
-                      class: {
-                        "border border-danger rounded": _vm.errors.type
-                      },
-                      attrs: {
-                        options: _vm.lists.companyTypes,
-                        openDirection: "bottom",
-                        "track-by": "id",
-                        label: "type",
-                        placeholder: "Seleccionar"
-                      },
-                      model: {
-                        value: _vm.company.type,
-                        callback: function($$v) {
-                          _vm.$set(_vm.company, "type", $$v)
-                        },
-                        expression: "company.type"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.type
-                      ? _c("small", { staticClass: "form-text text-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.type[0]))
-                        ])
-                      : _vm._e()
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _vm.company.company && _vm.company.company.users.length > 0
-                  ? _c("p", [
-                      _vm._v(
-                        "Estos usuarios pertenecen a la empresa seleccionada y tambien seran invitados a la transaccion"
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.company.company && _vm.company.company.users.length > 0
-                  ? _c(
-                      "ul",
-                      { staticClass: "list-group list-group-flush" },
-                      _vm._l(_vm.company.company.users, function(user, index) {
-                        return _c(
-                          "li",
-                          {
-                            staticClass: "list-group-item media border-light",
-                            attrs: { "track-by": "id" }
-                          },
-                          [
-                            _c(
-                              "div",
-                              { staticClass: "avatar-sm float-left mr-3" },
-                              [
-                                _c("img", {
-                                  staticClass: "img-avatar",
-                                  attrs: { src: user.avatar_url }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "d-flex justify-content-between"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                  " +
-                                      _vm._s(user.name) +
-                                      "\n                "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "small text-muted" }, [
-                                _vm._v(
-                                  "\n                  " +
-                                    _vm._s(user.email) +
-                                    "\n                "
-                                )
-                              ])
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { href: "#", disabled: _vm.submiting },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.attachCompany($event)
-                      }
-                    }
-                  },
-                  [
-                    _vm.submiting
-                      ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                      : _c("i", { staticClass: "fas fa-check" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
-                  ]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
+      _vm._l(this.comments, function(comment) {
+        return _c("div", { staticClass: "media mb-2" }, [
+          _c("div", { staticClass: "media-left" }, [
+            _c("img", {
+              staticClass: "avatar-sm img-avatar mr-2",
+              attrs: { src: comment.creator.avatar_url }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-body" }, [
+            _c("span", { staticClass: "text-primary" }, [
+              _vm._v(_vm._s(comment.creator.name))
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "text-muted pull-right" }, [
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm._f("moment")(comment.created_at, "from")) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(comment.comment))])
+          ])
+        ])
+      }),
+      0
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-muted" }, [
-      _c("small", [
-        _vm._v("Agrega empresas y usuarios para interactuar con ellos.")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Agregar empresa")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-17cd4d0c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-30b6b153", module.exports)
   }
 }
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

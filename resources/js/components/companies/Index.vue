@@ -60,7 +60,7 @@
               </div>
             </td>
             <td class="d-none d-sm-table-cell">
-              <small>{{company.created_at | moment("LLL")}}</small>
+              <small>{{company.created_at | moment("LL")}}</small>
             </td>
             <td class="d-none d-sm-table-cell" v-if="user.hasPermission['update-companies']">
               <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
