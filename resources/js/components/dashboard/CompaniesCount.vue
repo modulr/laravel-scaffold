@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-body p-3 d-flex align-items-center">
-      <i class="fas fa-building bg-primary p-3 font-2xl mr-3"></i>
+      <i class="fas fa-building bg-info p-3 font-2xl mr-3"></i>
       <div>
         <div class="text-value-sm text-dark">Empresas</div>
         <div class="text-muted font-weight-bold small">{{count}} de 10</div>
@@ -35,7 +35,7 @@ export default {
       .then(response => {
         this.count = response.data
       })
-    },
+    }
   }
 }
 </script>

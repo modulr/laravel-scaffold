@@ -13,22 +13,28 @@ class CompanyTypesTableSeeder extends Seeder
     {
         DB::table('company_types')->insert([
             [
-                'type' => 'Empresa Importadora'
+                'type' => 'Empresa Importadora',
+                'acronym' => 'EI'
             ],
             [
-                'type' => 'Empresa Exportadora'
+                'type' => 'Empresa Exportadora',
+                'acronym' => 'EE'
             ],
             [
-                'type' => 'Ag. Aduanal Importadora'
+                'type' => 'Ag. Aduanal Importadora',
+                'acronym' => 'AI'
             ],
             [
-                'type' => 'Ag. Aduanal Exportadora'
+                'type' => 'Ag. Aduanal Exportadora',
+                'acronym' => 'AE'
             ],
             [
-                'type' => 'Coordinadora Importadora'
+                'type' => 'Coordinadora Importadora',
+                'acronym' => 'CI'
             ],
             [
-                'type' => 'Coordinadora Exportadora'
+                'type' => 'Coordinadora Exportadora',
+                'acronym' => 'CE'
             ]
         ]);
     }

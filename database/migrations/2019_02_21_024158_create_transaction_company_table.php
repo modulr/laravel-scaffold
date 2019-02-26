@@ -15,10 +15,11 @@ class CreateTransactionCompanyTable extends Migration
     {
         Schema::create('transaction_company', function (Blueprint $table) {
           $table->integer('transaction_id')->unsigned();
-          $table->foreign('transaction_id')->references('id')->on('transactions');
+          $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');;
           $table->integer('company_id')->unsigned();
           $table->foreign('company_id')->references('id')->on('companies');
           $table->string('company_type');
+          $table->string('company_type_acronym');
         });
     }
 

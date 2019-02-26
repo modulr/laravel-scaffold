@@ -99,6 +99,7 @@
       </div>
       <content-placeholders v-if="loading">
         <content-placeholders-text/>
+        <content-placeholders-text/>
       </content-placeholders>
     </div>
   </div>

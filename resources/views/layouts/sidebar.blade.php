@@ -37,6 +37,9 @@
                 </a>
             </li>
             @endcan
+            @hasanyrole('admin|user')
+              <sidebar-utilization></sidebar-utilization>
+            @endhasrole
         </ul>
     </nav>
     <sidebar></sidebar>

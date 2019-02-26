@@ -110,7 +110,8 @@ export default {
       user: Laravel.user,
       company: {
         company: null,
-        type: null
+        type: null,
+        acronym: null
       },
       lists: {
         companies: [],
@@ -139,6 +140,7 @@ export default {
       axios.get(`/api/companies/companyType/all`)
       .then(response => {
         this.lists.companyTypes = response.data
+        console.log(this.lists.companyTypes);
       })
       .catch(error => {
         this.errors = error.response.data.errors
@@ -147,7 +149,8 @@ export default {
     addCompany () {
       this.company = {
         company: null,
-        type: null
+        type: null,
+        acronym: null
       }
       this.errors = {}
       $('#addCompanyModal').modal('show')
@@ -155,13 +158,18 @@ export default {
     attachCompany() {
       if (!this.submiting) {
         this.submiting = true
-        axios.put(`/api/transactions/attachCompany/${this.transaction.id}`, {company: this.company.company ? this.company.company.id : null, type: this.company.type ? this.company.type.type : null})
+        axios.put(`/api/transactions/attachCompany/${this.transaction.id}`, {
+          company: this.company.company ? this.company.company.id : null,
+          type: this.company.type ? this.company.type.type : null,
+          acronym: this.company.type.acronym ? this.company.type.acronym : null
+        })
         .then(response => {
           this.transaction.companies = response.data.companies;
           this.$toasted.global.error('Empresa agregada!')
           this.company = {
             company: null,
-            type: null
+            type: null,
+            acronym: null
           },
           this.errors = {}
           this.submiting = false

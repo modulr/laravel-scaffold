@@ -1,5 +1,5 @@
 <template>
-  <div class="card text-white bg-info">
+  <div class="card text-white bg-warning">
     <div class="card-body">
       <div class="h1 text-muted text-right mb-4">
         <i class="icon-people"></i>

@@ -37,11 +37,13 @@ Vue.use(VueContentPlaceholders)
 
  // Layout
  Vue.component('sidebar', require('./components/layout/Sidebar.vue'));
+ Vue.component('sidebar-utilization', require('./components/layout/SidebarUtilization.vue'));
 
 // Dashboard
 Vue.component('users-count', require('./components/dashboard/UsersCount.vue'));
 Vue.component('roles-count', require('./components/dashboard/RolesCount.vue'));
 Vue.component('transactions-count', require('./components/dashboard/TransactionsCount.vue'));
+Vue.component('transactions-stats', require('./components/dashboard/TransactionsStats.vue'));
 Vue.component('companies-count', require('./components/dashboard/CompaniesCount.vue'));
 
 // Profile

@@ -13,6 +13,11 @@
             </div>
             @endif
             <div class="row justify-content-md-center">
+                <div class="col-sm-12 col-xl-4">
+                    <transactions-stats></transactions-stats>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
                 <div class="col-sm-6 col-xl-4">
                     @can('read-transactions')
                         <transactions-count></transactions-count>

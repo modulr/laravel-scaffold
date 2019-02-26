@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'api/transactions'], function() {
             Route::post('/filter', 'TransactionController@filter')->middleware('permission:read-transactions');
             Route::post('/count', 'TransactionController@count')->middleware('permission:read-transactions');
+            Route::get('/stats', 'TransactionController@stats')->middleware('permission:read-transactions');
             Route::put('/toggleFinished/{transaction}', 'TransactionController@toggleFinished')->middleware('permission:update-transactions');
             Route::put('/attachCompany/{transaction}', 'TransactionController@attachCompany')->middleware('permission:update-transactions');
             Route::put('/detachCompany/{transaction}/{company}', 'TransactionController@detachCompany')->middleware('permission:update-transactions');

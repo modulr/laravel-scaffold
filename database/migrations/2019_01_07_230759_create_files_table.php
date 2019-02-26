@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->string('type')->nullable()->comment = "The type of file";
             $table->string('size')->nullable()->comment = "The size of file";
             $table->integer('stage_id')->unsigned();
-            $table->foreign('stage_id')->references('id')->on('stages');
+            $table->foreign('stage_id')->references('id')->on('stages')->onDelete('cascade');
             $table->unsignedInteger('created_by')->nullable()->default(null);
             $table->unsignedInteger('updated_by')->nullable()->default(null);
             $table->unsignedInteger('deleted_by')->nullable()->default(null);

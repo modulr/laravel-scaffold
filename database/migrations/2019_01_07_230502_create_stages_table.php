@@ -17,7 +17,7 @@ class CreateStagesTable extends Migration
             $table->increments('id');
             $table->text('name');
             $table->integer('transaction_id')->unsigned();
-            $table->foreign('transaction_id')->references('id')->on('transactions');
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->integer('authorized')->boolean()->default(false);
             $table->datetime('authorized_at')->nullable()->default(null);
             $table->integer('authorized_by')->unsigned()->nullable();

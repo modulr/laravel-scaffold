@@ -56,6 +56,7 @@
               <a href="#" class="text-dark" @click.prevent="sort('name')">Nombre</a>
               <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
+            <th>Empresas</th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('finished')">Finalizada</a>
               <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'desc'}"></i>
@@ -72,8 +73,14 @@
             <td class="d-none d-sm-table-cell">{{transaction.id}}</td>
             <td>{{transaction.name}}</td>
             <td>
-              <span class="badge badge-success" v-if="transaction.finished">Finalizada</span>
-              <span class="badge badge-primary" v-else>Abierta</span>
+              <div v-for="company in transaction.companies">
+                <small class="badge badge-secondary mr-1">{{company.company_type_acronym}}</small>
+                <small class="text-muted">{{company.name}}</small>
+              </div>
+            </td>
+            <td>
+              <span class="badge badge-pill badge-success" v-if="transaction.finished">Finalizada</span>
+              <span class="badge badge-pill badge-primary" v-else>Abierta</span>
             </td>
             <td class="d-none d-sm-table-cell">
               <small>{{transaction.created_at | moment("LL")}}</small></small>
@@ -126,6 +133,7 @@
       </div>
       <content-placeholders v-if="loading">
         <content-placeholders-text/>
+        <content-placeholders-text/>
       </content-placeholders>
     </div>
   </div>
@@ -146,7 +154,7 @@ export default {
         finished: [
           {id: 0, name: "Abiertas"},
           {id: 1, name: "Finalizadas"},
-          {id: 2, name: 'Todas'}
+          {id: 2, name: "Ambas"},
         ]
       },
       filters: {
@@ -154,10 +162,10 @@ export default {
           id: 1,
           name: 'Todas'
         },
-        finished: {
-          id:1,
-          name: "Finalizadas"
-        },
+        finished: [{
+          id: 2,
+          name: "Ambas"
+        }],
         pagination: {
           from: 0,
           to: 0,
@@ -182,8 +190,6 @@ export default {
       localStorage.setItem("filtersTableTransactions", this.filters);
     }
     this.getTransactions()
-
-
   },
   methods: {
     getTransactions () {
@@ -194,8 +200,7 @@ export default {
 
       axios.post(`/api/transactions/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
-        this.transactions = response.data.data
-        // this.transactions = response.data.data
+        this.transactions = response.data
         // delete response.data.data
         // this.filters.pagination = response.data
         this.loading = false
@@ -205,10 +210,10 @@ export default {
       location.href = `/transactions/${transactionId}/edit`
     },
     // filters
-    filter() {
-      this.filters.pagination.current_page = 1
-      this.getTransactions()
-    },
+    // filter() {
+    //   this.filters.pagination.current_page = 1
+    //   this.getTransactions()
+    // },
     changeWich (wich) {
       this.filters.wich = wich
       this.getTransactions()
@@ -231,11 +236,11 @@ export default {
       }
 
       this.getTransactions()
-    },
-    changePage (page) {
-      this.filters.pagination.current_page = page
-      this.getTransactions()
     }
+    // changePage (page) {
+    //   this.filters.pagination.current_page = page
+    //   this.getTransactions()
+    // }
   }
 }
 </script>
