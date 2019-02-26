@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class CommentsTableSeeder extends Seeder
 {
@@ -48,8 +47,14 @@ class CommentsTableSeeder extends Seeder
             ]
         ]);
 
-        // Assign permissions to admin role
+        // Assign permissions
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('read-comments', 'create-comments', 'update-comments', 'delete-comments');
+
+        $user = Role::findByName('user');
+        $user->givePermissionTo('read-comments', 'create-comments');
+
+        $guest = Role::findByName('guest');
+        $guest->givePermissionTo('read-comments', 'create-comments');
     }
 }

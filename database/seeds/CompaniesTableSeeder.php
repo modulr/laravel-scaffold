@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class CompaniesTableSeeder extends Seeder
 {
@@ -48,8 +47,14 @@ class CompaniesTableSeeder extends Seeder
             ]
         ]);
 
-        // Assign permissions to admin role
+        // Assign permissions
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('read-companies', 'create-companies', 'update-companies', 'delete-companies');
+
+        $user = Role::findByName('user');
+        $user->givePermissionTo('read-companies', 'create-companies', 'update-companies', 'delete-companies');
+
+        $guest = Role::findByName('guest');
+        $guest->givePermissionTo('read-companies');
     }
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class RolesTableSeeder extends Seeder
 {
@@ -57,8 +56,12 @@ class RolesTableSeeder extends Seeder
             'name' => 'user',
             'display_name' => 'User'
         ]);
+        $user = Role::create([
+            'name' => 'guest',
+            'display_name' => 'Guest'
+        ]);
 
-        // Assign permissions to admin role
-        $admin->givePermissionTo(Permission::all());
+        // Assign permissions
+        $admin->givePermissionTo('read-roles', 'create-roles', 'update-roles', 'delete-roles');
     }
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class TransactionsTableSeeder extends Seeder
 {
@@ -48,8 +47,14 @@ class TransactionsTableSeeder extends Seeder
             ]
         ]);
 
-        // Assign permissions to admin role
+        // Assign permissions
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('read-transactions', 'create-transactions', 'update-transactions', 'delete-transactions');
+
+        $user = Role::findByName('user');
+        $user->givePermissionTo('read-transactions', 'create-transactions', 'update-transactions', 'delete-transactions');
+
+        $guest = Role::findByName('guest');
+        $guest->givePermissionTo('read-transactions');
     }
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class FilesTableSeeder extends Seeder
 {
@@ -48,8 +47,14 @@ class FilesTableSeeder extends Seeder
             ]
         ]);
 
-        // Assign permissions to admin role
+        // Assign permissions
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('read-files', 'create-files', 'update-files', 'delete-files');
+
+        $user = Role::findByName('user');
+        $user->givePermissionTo('read-files', 'create-files', 'delete-files');
+
+        $guest = Role::findByName('guest');
+        $guest->givePermissionTo('read-files', 'create-files', 'delete-files');
     }
 }

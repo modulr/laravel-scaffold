@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class StagesTableSeeder extends Seeder
 {
@@ -50,6 +49,12 @@ class StagesTableSeeder extends Seeder
 
         // Assign permissions to admin role
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('read-stages', 'create-stages', 'update-stages', 'delete-stages');
+
+        $user = Role::findByName('user');
+        $user->givePermissionTo('read-stages', 'create-stages', 'update-stages', 'delete-stages');
+
+        $guest = Role::findByName('guest');
+        $guest->givePermissionTo('read-stages', 'update-stages');
     }
 }
