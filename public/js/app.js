@@ -70865,6 +70865,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var res = str.split("/");
       axios.get('/api/transactions/' + res[2]).then(function (response) {
         _this2.transaction = response.data;
+        console.log(_this2.transaction);
       }).catch(function (error) {
         _this2.$toasted.global.error('La transaccion no existe');
         location.href = '/transactions';
@@ -71217,10 +71218,12 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body text-right px-0" }, [
               _c("small", { staticClass: "text-muted" }, [
-                _vm._v("Creada "),
+                _vm._v("Creada por "),
                 _c("i", [
                   _vm._v(
-                    _vm._s(_vm._f("moment")(_vm.transaction.created_at, "LLL"))
+                    _vm._s(_vm.transaction.creator.name) +
+                      ". " +
+                      _vm._s(_vm._f("moment")(_vm.transaction.created_at, "LL"))
                   )
                 ])
               ])
@@ -71502,7 +71505,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/api/companies/companyType/all').then(function (response) {
         _this2.lists.companyTypes = response.data;
-        console.log(_this2.lists.companyTypes);
       }).catch(function (error) {
         _this2.errors = error.response.data.errors;
       });

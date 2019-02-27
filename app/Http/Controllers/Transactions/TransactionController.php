@@ -65,7 +65,7 @@ class TransactionController extends Controller
 
     public function show ($transactionId)
     {
-        $transaction = Transaction::with('finishedByUser', 'companies', 'users', 'stages.authorizedByUser', 'stages.files.creator', 'stages.comments.creator')->findOrFail($transactionId);
+        $transaction = Transaction::with('finishedByUser', 'companies', 'users', 'creator', 'stages.authorizedByUser', 'stages.files.creator', 'stages.comments.creator')->findOrFail($transactionId);
 
         $usersGroupByCompany = $transaction->users->groupBy('company_id');
 

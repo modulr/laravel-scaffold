@@ -66,7 +66,7 @@
           <transactions-stages :transaction="transaction"></transactions-stages>
         </div>
         <div class="card-body text-right px-0">
-          <small class="text-muted">Creada <i>{{transaction.created_at | moment("LLL")}}</i></small>
+          <small class="text-muted">Creada por <i>{{transaction.creator.name}}. {{transaction.created_at | moment("LL")}}</i></small>
         </div>
       </div>
       <div class="col-md-12 col-xl-9 mt-5" v-else>
@@ -111,6 +111,7 @@ export default {
       axios.get(`/api/transactions/${res[2]}`)
       .then(response => {
         this.transaction = response.data
+        console.log(this.transaction);
       })
       .catch(error => {
         this.$toasted.global.error('La transaccion no existe')

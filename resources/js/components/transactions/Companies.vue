@@ -140,7 +140,6 @@ export default {
       axios.get(`/api/companies/companyType/all`)
       .then(response => {
         this.lists.companyTypes = response.data
-        console.log(this.lists.companyTypes);
       })
       .catch(error => {
         this.errors = error.response.data.errors
