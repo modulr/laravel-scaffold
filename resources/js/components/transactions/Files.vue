@@ -47,7 +47,7 @@ export default {
         paramName: 'file',
         parallelUploads: 1,
         acceptedFiles: {
-          extensions: ['application/pdf'],
+          extensions: ['application/pdf', '.xls', '.xlsx'],
           message: 'You are uploading an invalid file'
         },
         maxFilesize: {
