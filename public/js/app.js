@@ -73134,7 +73134,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         paramName: 'file',
         parallelUploads: 1,
         acceptedFiles: {
-          extensions: ['application/pdf', '.xls', '.xlsx'],
+          extensions: ['image/*', 'application/pdf', '.xls', '.xlsx', 'doc', 'docx', '.zip', '.rar'],
           message: 'You are uploading an invalid file'
         },
         maxFilesize: {

@@ -18,6 +18,6 @@ class File extends Model
 
     public function getUrlAttribute()
     {
-        return Storage::url('files/'.$this->id.'/'.$this->basename);
+        return Storage::url('files/'.$this->stage_id.'/'.$this->basename);
     }
 }
