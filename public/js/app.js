@@ -71514,7 +71514,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "card-body collapse show",
+                staticClass: "card-body collapse",
                 attrs: { id: "collapseCompanies" }
               },
               [

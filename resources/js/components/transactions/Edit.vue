@@ -44,7 +44,7 @@
             </a>
           </div>
         </div>
-        <div class="card-body collapse show" id="collapseCompanies">
+        <div class="card-body collapse" id="collapseCompanies">
           <transactions-companies :transaction="transaction"></transactions-companies>
         </div>
         <div class="card-header px-0 bg-transparent">
