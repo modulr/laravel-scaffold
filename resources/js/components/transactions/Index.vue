@@ -3,7 +3,7 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Transacciones</h4>
       <div class="card-header-actions mr-1" v-if="user.hasPermission['create-transactions']">
-        <a class="btn btn-success" href="/transactions/create"><i class="fas fa-plus mr-1"></i> Crear transaccion</a>
+        <a class="btn btn-success" href="/transactions/create"><i class="fas fa-plus mr-1"></i>Crear</a>
       </div>
     </div>
     <div class="card-body px-0">
@@ -56,7 +56,8 @@
               <a href="#" class="text-dark" @click.prevent="sort('name')">Nombre</a>
               <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
-            <th>Empresas</th>
+            <th>Import</th>
+            <th>Export</th>
             <th>
               <a href="#" class="text-dark" @click.prevent="sort('finished')">Finalizada</a>
               <i class="fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'finished' && filters.orderBy.direction == 'desc'}"></i>
@@ -73,7 +74,13 @@
             <td class="d-none d-sm-table-cell">{{transaction.id}}</td>
             <td>{{transaction.name}}</td>
             <td>
-              <div v-for="company in transaction.companies">
+              <div v-for="company in companyImport(transaction.companies)">
+                <small class="badge badge-secondary mr-1">{{company.company_type_acronym}}</small>
+                <small class="text-muted">{{company.name}}</small>
+              </div>
+            </td>
+            <td>
+              <div v-for="company in companyExport(transaction.companies)">
                 <small class="badge badge-secondary mr-1">{{company.company_type_acronym}}</small>
                 <small class="text-muted">{{company.name}}</small>
               </div>
@@ -236,11 +243,25 @@ export default {
       }
 
       this.getTransactions()
-    }
+    },
     // changePage (page) {
     //   this.filters.pagination.current_page = page
     //   this.getTransactions()
     // }
+    companyImport (companies) {
+      return companies.filter(function(company){
+        if (company.company_type_acronym == 'EI' || company.company_type_acronym == 'AI' || company.company_type_acronym == 'CI') {
+          return company
+        }
+      })
+    },
+    companyExport (companies) {
+      return companies.filter(function(company){
+        if (company.company_type_acronym == 'EE' || company.company_type_acronym == 'AE' || company.company_type_acronym == 'CE') {
+          return company
+        }
+      })
+    }
   }
 }
 </script>

@@ -68294,7 +68294,7 @@ var staticRenderFns = [
     return _c(
       "a",
       { staticClass: "btn btn-success", attrs: { href: "/companies/create" } },
-      [_c("i", { staticClass: "fas fa-plus mr-1" }), _vm._v("Crear empresa")]
+      [_c("i", { staticClass: "fas fa-plus mr-1" }), _vm._v("Crear")]
     )
   },
   function() {
@@ -70027,6 +70027,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70119,12 +70126,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
 
       this.getTransactions();
-    }
+    },
+
     // changePage (page) {
     //   this.filters.pagination.current_page = page
     //   this.getTransactions()
     // }
-
+    companyImport: function companyImport(companies) {
+      return companies.filter(function (company) {
+        if (company.company_type_acronym == 'EI' || company.company_type_acronym == 'AI' || company.company_type_acronym == 'CI') {
+          return company;
+        }
+      });
+    },
+    companyExport: function companyExport(companies) {
+      return companies.filter(function (company) {
+        if (company.company_type_acronym == 'EE' || company.company_type_acronym == 'AE' || company.company_type_acronym == 'CE') {
+          return company;
+        }
+      });
+    }
   }
 });
 
@@ -70272,7 +70293,9 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("th", [_vm._v("Empresas")]),
+              _c("th", [_vm._v("Import")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Export")]),
               _vm._v(" "),
               _c("th", [
                 _c(
@@ -70359,7 +70382,29 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "td",
-                    _vm._l(transaction.companies, function(company) {
+                    _vm._l(_vm.companyImport(transaction.companies), function(
+                      company
+                    ) {
+                      return _c("div", [
+                        _c(
+                          "small",
+                          { staticClass: "badge badge-secondary mr-1" },
+                          [_vm._v(_vm._s(company.company_type_acronym))]
+                        ),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v(_vm._s(company.name))
+                        ])
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    _vm._l(_vm.companyExport(transaction.companies), function(
+                      company
+                    ) {
                       return _c("div", [
                         _c(
                           "small",
@@ -70598,10 +70643,7 @@ var staticRenderFns = [
         staticClass: "btn btn-success",
         attrs: { href: "/transactions/create" }
       },
-      [
-        _c("i", { staticClass: "fas fa-plus mr-1" }),
-        _vm._v(" Crear transaccion")
-      ]
+      [_c("i", { staticClass: "fas fa-plus mr-1" }), _vm._v("Crear")]
     )
   },
   function() {

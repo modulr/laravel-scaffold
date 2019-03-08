@@ -19,12 +19,12 @@ class TransactionController extends Controller
         ->select('transactions.*')
         ->whereNull('transactions.deleted_at');
 
-        // *$request->finished = [0: Abiertas, 1: Finalizadas, 2:Ambas];
+        // ** $request->finished = [0: Abiertas, 1: Finalizadas, 2:Ambas];
         if ($request->input('finished.id') != 2) {
             $query->where('finished', $request->input('finished.id'));
         }
 
-        // ** var $request->wich = [
+        // ** $request->wich = [
         //// 1:Todas
         if ($request->input('wich.id') == 1) {
             $guest = DB::table('transaction_user')->where('user_id', Auth::id())->get();
@@ -35,10 +35,10 @@ class TransactionController extends Controller
                 $q->orWhere('created_by', Auth::id());
             });
         } else if ($request->input('wich.id') == 2) {
-        ////2:Tuyas
+        //// 2:Tuyas
                 $query->where('created_by', Auth::id());
         } else {
-        ////3:Invitado
+        //// 3:Invitado
             $guest = DB::table('transaction_user')->where('user_id', Auth::id())->get();
             $ids = $guest->implode('transaction_id', ', ');
             $query->whereIn('id', explode(',', $ids));

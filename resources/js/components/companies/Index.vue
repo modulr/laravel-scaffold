@@ -3,7 +3,7 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Empresas</h4>
       <div class="card-header-actions mr-1" v-if="user.hasPermission['create-companies']">
-        <a class="btn btn-success" href="/companies/create"><i class="fas fa-plus mr-1"></i>Crear empresa</a>
+        <a class="btn btn-success" href="/companies/create"><i class="fas fa-plus mr-1"></i>Crear</a>
       </div>
     </div>
     <div class="card-body px-0">
