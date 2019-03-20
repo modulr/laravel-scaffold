@@ -1,6 +1,6 @@
-
 body {
-  background-color: #E42C54;
+  background: -prefix-linear-gradient(left, #EF374B, #6C2D78);
+  background: linear-gradient(to right, #EF374B, #6C2D78);
 }
 p, h1{
   color: #fff;
@@ -20,8 +20,11 @@ a:hover {
 a.btn-white:hover {
   color: #e2e6ea !important;
 }
+.btn-white .fa-stack {
+  margin-right: 5px;
+}
 .btn-white .fa-phone {
-  color: #E42C54 !important;
+  color: #EF374B !important;
 }
 
 .wp-color {

@@ -1,8 +1,8 @@
 {
-  "short_name": "Sisi",
-  "name": "Sisi App",
-  "theme_color": "#E42C54",
-  "background_color": "#E42C54",
+  "short_name": "Traeme",
+  "name": "Traeme App",
+  "theme_color": "#EF374B",
+  "background_color": "#EF374B",
   "display": "standalone",
   "icons": [
     {
