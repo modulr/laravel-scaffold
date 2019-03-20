@@ -71270,7 +71270,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var res = str.split("/");
       axios.get('/api/transactions/' + res[2]).then(function (response) {
         _this2.transaction = response.data;
-        console.log(_this2.transaction);
       }).catch(function (error) {
         _this2.$toasted.global.error('La transaccion no existe');
         location.href = '/transactions';
@@ -71567,45 +71566,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-              _c("strong", [_vm._v("Etapas")]),
-              _c("br"),
-              _vm._v(" "),
-              _c("small", { staticClass: "text-muted" }, [
-                _vm._v("Etapas de la transaccion.")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-header-actions" }, [
-                _c("div", { staticClass: "float-left mr-2" }, [
-                  _c("small", { staticClass: "text-muted" }, [
-                    _vm._v(_vm._s(_vm.transaction.stages.length) + " de 10")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "progress", staticStyle: { height: "4px" } },
-                    [
-                      _c("div", {
-                        staticClass: "progress-bar bg-info",
-                        style:
-                          "width: " +
-                          (_vm.transaction.stages.length * 100) / 10 +
-                          "%",
-                        attrs: {
-                          role: "progressbar",
-                          "aria-valuenow":
-                            (_vm.transaction.stages.length * 100) / 10,
-                          "aria-valuemin": "0",
-                          "aria-valuemax": 10
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(2)
-              ])
-            ]),
+            _vm._m(2),
             _vm._v(" "),
             _c(
               "div",
@@ -71688,19 +71649,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "card-header-action btn-minimize",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapseStages",
-          "aria-expanded": "true"
-        }
-      },
-      [_c("i", { staticClass: "icon-arrow-up" })]
-    )
+    return _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
+      _c("strong", [_vm._v("Etapas")]),
+      _c("br"),
+      _vm._v(" "),
+      _c("small", { staticClass: "text-muted" }, [
+        _vm._v("Etapas de la transaccion.")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header-actions" }, [
+        _c(
+          "a",
+          {
+            staticClass: "card-header-action btn-minimize",
+            attrs: {
+              href: "#",
+              "data-toggle": "collapse",
+              "data-target": "#collapseStages",
+              "aria-expanded": "true"
+            }
+          },
+          [_c("i", { staticClass: "icon-arrow-up" })]
+        )
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -72473,6 +72445,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72758,88 +72739,25 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("strong", [_vm._v(_vm._s(stage.name))]), _c("br")]
+                          [_c("strong", [_vm._v(_vm._s(stage.name))])]
                         ),
                     _vm._v(" "),
                     _c(
-                      "div",
+                      "a",
                       {
-                        staticClass: "nav nav-pills",
-                        attrs: { id: "pills-tab", role: "tablist" }
+                        staticClass: "text-secondary ml-3",
+                        attrs: { href: "#", disabled: _vm.submitingDestroy },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.destroy(stage.id, index)
+                          }
+                        }
                       },
                       [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "nav-item text-secondary active",
-                            attrs: {
-                              id: "pills-files-tab-" + stage.id,
-                              "data-toggle": "pill",
-                              href: "#pills-files-" + stage.id,
-                              role: "tab",
-                              "aria-controls": "pills-files-" + stage.id,
-                              "aria-selected": "true"
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-file-upload" }),
-                            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-                              _vm._v("Archivos")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "nav-item text-secondary ml-3",
-                            attrs: {
-                              id: "pills-comments-tab-" + stage.id,
-                              "data-toggle": "pill",
-                              href: "#pills-comments-" + stage.id,
-                              role: "tab",
-                              "aria-controls": "pills-comments-" + stage.id,
-                              "aria-selected": "false"
-                            }
-                          },
-                          [
-                            _c("i", {
-                              class: [
-                                stage.comments.length > 0 ? "fas" : "far",
-                                "fa-comment"
-                              ]
-                            }),
-                            _c("span", { staticClass: "d-md-down-none ml-1" }, [
-                              _vm._v(
-                                _vm._s(stage.comments.length) + " Comentarios"
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-secondary ml-3",
-                            attrs: {
-                              href: "#",
-                              disabled: _vm.submitingDestroy
-                            },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.destroy(stage.id, index)
-                              }
-                            }
-                          },
-                          [
-                            _vm.submitingDestroy
-                              ? _c("i", {
-                                  staticClass: "fas fa-spinner fa-spin"
-                                })
-                              : _c("i", { staticClass: "far fa-trash-alt" })
-                          ]
-                        )
+                        _vm.submitingDestroy
+                          ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                          : _c("i", { staticClass: "far fa-trash-alt" })
                       ]
                     )
                   ]),
@@ -72862,45 +72780,128 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
                 _c(
-                  "div",
+                  "ul",
                   {
-                    staticClass:
-                      "tab-content bg-transparent border-0 pt-2 pb-3",
-                    attrs: { id: "pills-tabContent" }
+                    staticClass: "nav nav-tabs",
+                    attrs: { id: "myTab-" + stage.id, role: "tablist" }
                   },
                   [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane px-2 fade show active",
-                        attrs: {
-                          id: "pills-files-" + stage.id,
-                          role: "tabpanel",
-                          "aria-labelledby": "pills-files-tab-" + stage.id
-                        }
-                      },
-                      [_c("transactions-files", { attrs: { stage: stage } })],
-                      1
-                    ),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link active",
+                          attrs: {
+                            id: "pills-files-tab-" + stage.id,
+                            "data-toggle": "pill",
+                            href: "#pills-files-" + stage.id,
+                            role: "tab",
+                            "aria-controls": "pills-files-" + stage.id,
+                            "aria-selected": "true"
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "far fa-file" }),
+                          _c("span", { staticClass: "ml-1" }, [
+                            _vm._v("Documentos")
+                          ]),
+                          _vm._v(" "),
+                          stage.files.length > 0
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "badge badge-pill badge-secondary"
+                                },
+                                [_vm._v(_vm._s(stage.files.length))]
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane px-3 fade",
-                        attrs: {
-                          id: "pills-comments-" + stage.id,
-                          role: "tabpanel",
-                          "aria-labelledby": "pills-comments-tab-" + stage.id
-                        }
-                      },
-                      [
-                        _c("transactions-comments", { attrs: { stage: stage } })
-                      ],
-                      1
-                    )
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link",
+                          attrs: {
+                            id: "pills-comments-tab-" + stage.id,
+                            "data-toggle": "pill",
+                            href: "#pills-comments-" + stage.id,
+                            role: "tab",
+                            "aria-controls": "pills-comments-" + stage.id,
+                            "aria-selected": "false"
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "far fa-comment" }),
+                          _c("span", { staticClass: "ml-1" }, [
+                            _vm._v("Comentarios")
+                          ]),
+                          _vm._v(" "),
+                          stage.comments.length > 0
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "badge badge-pill badge-secondary"
+                                },
+                                [_vm._v(_vm._s(stage.comments.length))]
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    ])
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { attrs: { id: "myTabContent-" + stage.id } }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "tab-content bg-transparent border-0 pt-2 pb-3",
+                      attrs: { id: "pills-tabContent" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane px-2 fade show active",
+                          attrs: {
+                            id: "pills-files-" + stage.id,
+                            role: "tabpanel",
+                            "aria-labelledby": "pills-files-tab-" + stage.id
+                          }
+                        },
+                        [_c("transactions-files", { attrs: { stage: stage } })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane px-2 fade",
+                          attrs: {
+                            id: "pills-comments-" + stage.id,
+                            role: "tabpanel",
+                            "aria-labelledby": "pills-comments-tab-" + stage.id
+                          }
+                        },
+                        [
+                          _c("transactions-comments", {
+                            attrs: { stage: stage }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ])
               ]
             )
           }),
@@ -73197,7 +73198,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     complete: function complete(file, status, xhr) {
       if (status == 'success') {
         this.preview.progress = 0;
-        this.stage.files.push(JSON.parse(xhr.response));
+        this.stage.files.unshift(JSON.parse(xhr.response));
       } else {
         this.errors = {
           status: status,
@@ -73241,8 +73242,42 @@ var render = function() {
   return _c(
     "div",
     [
+      _c(
+        "vue-clip",
+        {
+          attrs: {
+            options: _vm.options,
+            "on-sending": _vm.sending,
+            "on-complete": _vm.complete
+          }
+        },
+        [
+          _c("template", { slot: "clip-uploader-action" }, [
+            _c(
+              "button",
+              {
+                staticClass: "dz-message btn btn-outline-secondary btn-sm",
+                attrs: { type: "button" }
+              },
+              [_vm._v("Subir un archivo")]
+            )
+          ])
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("small", { staticClass: "form-text text-muted" }, [
+        _vm._v("Tamaño máximo 10MB.")
+      ]),
+      _vm._v(" "),
+      _vm.errors.status
+        ? _c("small", { staticClass: "form-text text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.message))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _vm._l(_vm.stage.files, function(file, index) {
-        return _c("div", { staticClass: "card mb-3" }, [
+        return _c("div", { staticClass: "card mt-3 mb-3" }, [
           _c("div", { staticClass: "card-body p-0 d-flex" }, [
             _c("i", {
               staticClass: "fas fa-file-alt bg-warning p-3 font-2xl mr-3"
@@ -73292,44 +73327,9 @@ var render = function() {
       _vm.preview.progress > 0
         ? _c(
             "content-placeholders",
-            { staticClass: "mb-3" },
             [_c("content-placeholders-heading", { attrs: { img: true } })],
             1
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "vue-clip",
-        {
-          attrs: {
-            options: _vm.options,
-            "on-sending": _vm.sending,
-            "on-complete": _vm.complete
-          }
-        },
-        [
-          _c("template", { slot: "clip-uploader-action" }, [
-            _c(
-              "button",
-              {
-                staticClass: "dz-message btn btn-outline-secondary btn-sm",
-                attrs: { type: "button" }
-              },
-              [_vm._v("Subir un archivo")]
-            )
-          ])
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("small", { staticClass: "form-text text-muted" }, [
-        _vm._v("Tamaño máximo 10MB.")
-      ]),
-      _vm._v(" "),
-      _vm.errors.status
-        ? _c("small", { staticClass: "form-text text-danger" }, [
-            _vm._v(_vm._s(_vm.errors.message))
-          ])
         : _vm._e()
     ],
     2

@@ -5,8 +5,9 @@
     <div class="card-group">
         <div class="card">
             <div class="card-body p-5">
-                <div class="text-center d-lg-none">
-                    <img src="svg/modulr.svg" class="mb-5" width="150" alt="Modulr Logo">
+                <div class="text-center">
+                    <img src="svg/vuno_v.svg" class="mb-5 d-lg-none" width="150" alt="Modulr Logo">
+                    <img src="svg/vuno.svg" class="mb-5 d-none d-lg-inline" width="150" alt="Modulr Logo">
                 </div>
                 <h1>{{ __('Login') }}</h1>
                 <p class="text-muted">Sign In to your account</p>

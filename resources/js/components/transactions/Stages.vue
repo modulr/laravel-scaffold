@@ -15,30 +15,39 @@
               <div class="invalid-feedback" v-if="errorsEdit.name">{{errorsEdit.name[0]}}</div>
             </div>
             <a href="#" class="text-secondary" @click.prevent="editStage(stage, index)" v-else>
-              <strong>{{stage.name}}</strong><br>
+              <strong>{{stage.name}}</strong>
             </a>
-            <div class="nav nav-pills" id="pills-tab" role="tablist">
-              <a class="nav-item text-secondary active" :id="`pills-files-tab-${stage.id}`" data-toggle="pill" :href="`#pills-files-${stage.id}`" role="tab" :aria-controls="`pills-files-${stage.id}`" aria-selected="true">
-                <i class="fas fa-file-upload"></i><span class="d-md-down-none ml-1">Archivos</span>
-              </a>
-              <a class="nav-item text-secondary ml-3" :id="`pills-comments-tab-${stage.id}`" data-toggle="pill" :href="`#pills-comments-${stage.id}`" role="tab" :aria-controls="`pills-comments-${stage.id}`" aria-selected="false">
-                <i :class="[stage.comments.length > 0 ? 'fas' : 'far', 'fa-comment']"></i><span class="d-md-down-none ml-1">{{stage.comments.length}} Comentarios</span>
-              </a>
-              <a href="#" class="text-secondary ml-3":disabled="submitingDestroy" @click.prevent="destroy(stage.id, index)">
-                <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
-                <i class="far fa-trash-alt" v-else></i>
-              </a>
-            </div>
+            <a href="#" class="text-secondary ml-3":disabled="submitingDestroy" @click.prevent="destroy(stage.id, index)">
+              <i class="fas fa-spinner fa-spin" v-if="submitingDestroy"></i>
+              <i class="far fa-trash-alt" v-else></i>
+            </a>
           </div>
           <p class="text-muted small mb-1"><span v-if="stage.authorized && stage.authorized_by_user">Autorizada por <i>{{stage.authorized_by_user.name}}. {{stage.authorized_at | moment('LL')}}</i></span></p>
         </div>
+        <br>
         <!-- Files & Comments-->
-        <div class="tab-content bg-transparent border-0 pt-2 pb-3" id="pills-tabContent">
-          <div class="tab-pane px-2 fade show active" :id="`pills-files-${stage.id}`" role="tabpanel" :aria-labelledby="`pills-files-tab-${stage.id}`">
-            <transactions-files :stage="stage"></transactions-files>
-          </div>
-          <div class="tab-pane px-3 fade" :id="`pills-comments-${stage.id}`" role="tabpanel" :aria-labelledby="`pills-comments-tab-${stage.id}`">
-            <transactions-comments :stage="stage"></transactions-comments>
+        <ul class="nav nav-tabs" :id="`myTab-${stage.id}`" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" :id="`pills-files-tab-${stage.id}`" data-toggle="pill" :href="`#pills-files-${stage.id}`" role="tab" :aria-controls="`pills-files-${stage.id}`" aria-selected="true">
+              <i class="far fa-file"></i><span class="ml-1">Documentos</span>
+              <span class="badge badge-pill badge-secondary" v-if="stage.files.length > 0">{{stage.files.length}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" :id="`pills-comments-tab-${stage.id}`" data-toggle="pill" :href="`#pills-comments-${stage.id}`" role="tab" :aria-controls="`pills-comments-${stage.id}`" aria-selected="false">
+              <i class="far fa-comment"></i><span class="ml-1">Comentarios</span>
+              <span class="badge badge-pill badge-secondary" v-if="stage.comments.length > 0">{{stage.comments.length}}</span>
+            </a>
+          </li>
+        </ul>
+        <div :id="`myTabContent-${stage.id}`">
+          <div class="tab-content bg-transparent border-0 pt-2 pb-3" id="pills-tabContent">
+            <div class="tab-pane px-2 fade show active" :id="`pills-files-${stage.id}`" role="tabpanel" :aria-labelledby="`pills-files-tab-${stage.id}`">
+              <transactions-files :stage="stage"></transactions-files>
+            </div>
+            <div class="tab-pane px-2 fade" :id="`pills-comments-${stage.id}`" role="tabpanel" :aria-labelledby="`pills-comments-tab-${stage.id}`">
+              <transactions-comments :stage="stage"></transactions-comments>
+            </div>
           </div>
         </div>
       </li>

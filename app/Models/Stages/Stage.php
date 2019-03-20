@@ -20,11 +20,11 @@ class Stage extends Model
 
     public function files()
     {
-        return $this->hasMany('App\Models\Files\File');
+        return $this->hasMany('App\Models\Files\File')->latest();
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comments\Comment'::class);
+        return $this->hasMany('App\Models\Comments\Comment')->latest();
     }
 }

@@ -1,20 +1,5 @@
 <template>
   <div>
-    <div class="card mb-3" v-for="(file, index) in stage.files">
-      <div class="card-body p-0 d-flex">
-        <i class="fas fa-file-alt bg-warning p-3 font-2xl mr-3"></i>
-        <div>
-          <div class="font-weight-bold mt-1"><a :href="file.url" target="_blank" class="text-secondary">{{file.name}}</a></div>
-          <small class="text-muted">Subido por <i>{{file.creator.name}}. {{file.created_at | moment("LL")}}</i></small>
-        </div>
-        <button type="button" class="close ml-auto mb-auto mt-1 mr-1" aria-label="Close" @click="destroyFile(stage, file, index)">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
-    <content-placeholders class="mb-3" v-if="preview.progress > 0">
-      <content-placeholders-heading :img="true"/>
-    </content-placeholders>
     <vue-clip
       :options="options"
       :on-sending="sending"
@@ -31,6 +16,21 @@
     </div> -->
     <small class="form-text text-muted">Tamaño máximo 10MB.</small>
     <small class="form-text text-danger" v-if="errors.status">{{errors.message}}</small>
+    <div class="card mt-3 mb-3" v-for="(file, index) in stage.files">
+      <div class="card-body p-0 d-flex">
+        <i class="fas fa-file-alt bg-warning p-3 font-2xl mr-3"></i>
+        <div>
+          <div class="font-weight-bold mt-1"><a :href="file.url" target="_blank" class="text-secondary">{{file.name}}</a></div>
+          <small class="text-muted">Subido por <i>{{file.creator.name}}. {{file.created_at | moment("LL")}}</i></small>
+        </div>
+        <button type="button" class="close ml-auto mb-auto mt-1 mr-1" aria-label="Close" @click="destroyFile(stage, file, index)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <content-placeholders v-if="preview.progress > 0">
+      <content-placeholders-heading :img="true"/>
+    </content-placeholders>
   </div>
 </template>
 
@@ -67,7 +67,7 @@ export default {
     complete (file, status, xhr) {
       if (status == 'success') {
         this.preview.progress = 0
-        this.stage.files.push(JSON.parse(xhr.response))
+        this.stage.files.unshift(JSON.parse(xhr.response))
       } else {
         this.errors = {
           status: status,

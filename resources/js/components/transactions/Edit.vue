@@ -51,12 +51,12 @@
           <strong>Etapas</strong><br>
           <small class="text-muted">Etapas de la transaccion.</small>
           <div class="card-header-actions">
-            <div class="float-left mr-2">
+            <!-- <div class="float-left mr-2">
               <small class="text-muted">{{transaction.stages.length}} de 10</small>
               <div class="progress" style="height: 4px;">
                 <div class="progress-bar bg-info" role="progressbar" :style="`width: ${transaction.stages.length*100/10}%`" :aria-valuenow="transaction.stages.length*100/10" aria-valuemin="0" :aria-valuemax="10"></div>
               </div>
-            </div>
+            </div> -->
             <a class="card-header-action btn-minimize" href="#" data-toggle="collapse" data-target="#collapseStages" aria-expanded="true">
               <i class="icon-arrow-up"></i>
             </a>
@@ -111,7 +111,6 @@ export default {
       axios.get(`/api/transactions/${res[2]}`)
       .then(response => {
         this.transaction = response.data
-        console.log(this.transaction);
       })
       .catch(error => {
         this.$toasted.global.error('La transaccion no existe')
