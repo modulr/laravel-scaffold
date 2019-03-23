@@ -1,11 +1,11 @@
 <div class="sidebar">
     <nav class="sidebar-nav">
         <ul class="nav">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="/dashboard">
                     <i class="nav-icon icon-speedometer"></i> Dashboard
                 </a>
-            </li>
+            </li> -->
             @can('read-users','read-roles')
             <li class="nav-title">Settings</li>
             @endcan
