@@ -64994,7 +64994,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     send: function send() {
-      location.href = "https://api.whatsapp.com/send?phone=528130898642&text=Orden:%20" + this.order.order + ",%20%20Destino:%20%20" + this.order.destination;
+      if (this.order.order && this.order.destination) {
+        location.href = "https://api.whatsapp.com/send?phone=528130898642&text=Orden:%20" + this.order.order + ",%20%20Destino:%20%20" + this.order.destination;
+      }
       // if (!this.submiting) {
       //   this.submiting = true
       //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.destination}`)
