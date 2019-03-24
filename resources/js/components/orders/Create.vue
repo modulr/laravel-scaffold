@@ -35,7 +35,7 @@ export default {
   methods: {
     send () {
       if (this.order.order && this.order.destination) {
-        location.href = `https://api.whatsapp.com/send?phone=528130898642&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.destination}`
+        location.href = `https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.destination}`
         localStorage.setItem("destination", this.order.destination)
       }
       // if (!this.submiting) {

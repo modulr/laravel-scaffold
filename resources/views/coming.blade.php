@@ -8,7 +8,7 @@
                 <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
             </a> -->
             <p class="lead mt-4 mb-0">Mandados a domicilio</p>
-            <p><small>La tarifa del dia de hoy es <b>$15.00</b> pesos por vuelta</small></p>
+            <p><small>Tarifa del dia <b>$15.00</b> pesos</small></p>
         </div>
 
         <div class="col-9 col-sm-6 col-md-4 text-center mb-5">
@@ -45,7 +45,7 @@
                 <li class="mb-2 lead">¿Necesitas enviar un paquete?</li>
             </ul>
             <p><small>Pidelo por teléfono</small></p>
-            <a class="btn-phone" href="tel:813-089-8642">
+            <a class="btn-phone" href="tel:811-897-7886">
                 <h5>
                     <!-- <i class="fas fa-phone"></i> -->
                     <small class="fa-stack">
