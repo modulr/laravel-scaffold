@@ -13,11 +13,14 @@
 
         <div class="col-9 col-sm-6 col-md-4 text-center mb-5">
             <p>¿Que te llevamos?</p>
-            <orders-create></orders-create>
+            <orders-create class="mb-5"></orders-create>
         </div>
 
         <div class="col-sm-12 bg-white curve-content">
-            <svg version="1.1" id="curve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1400 281.582" enable-background="new 0 0 1400 281.582" xml:space="preserve">
+            <svg version="1.1" class="curve curve_white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1400 166.917" enable-background="new 0 0 1400 166.917" xml:space="preserve">
+                <path fill="#FFFFFF" d="M0.07,21.479v108.105c693.173-104.33,1142.589,122.361,1400,0.01V6.756 C639.79,296.66,228.101-92.226,0.07,21.479z"/>
+            </svg>
+            <svg version="1.1" class="curve curve_gradient" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1400 281.582" enable-background="new 0 0 1400 281.582" xml:space="preserve">
                 <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="17.0752" y1="25.6475" x2="1428.4752" y2="292.9289">
                     <stop  offset="0" style="stop-color:#EF374B"/>
                     <stop  offset="0.3814" style="stop-color:#EC374C"/>
@@ -54,7 +57,7 @@
             </a>
         </div>
         <div class="col-sm-12 text-center bg-white">
-            <h5 class="mt-5">Ultimos Pedidos</h5>
+            <!-- <h5 class="mt-5">Ultimos Pedidos</h5>
             <ul class="list-unstyled">
                 <li>Pagar el Gas</li>
                 <li>Pagar el Cable</li>
@@ -74,7 +77,7 @@
                 <li>Tiendita</li>
                 <li>Farmacia</li>
                 <li>Restaurant</li>
-            </ul>
+            </ul> -->
             <a href="https://api.whatsapp.com/send?phone=528130898642&text=Me%20puedes%20traer%20&source=&data=" class="btn-white btn-phone">
                 <img class="img-fluid logo" src="/svg/traeme.svg" alt="">
             </a>

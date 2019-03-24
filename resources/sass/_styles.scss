@@ -39,10 +39,22 @@ a.btn-white:hover {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-#curve {
+.curve {
   width: 100%;
 }
+.curve_white {
+  margin-top: -85px;
+}
+.curve_gradient {
+  margin-top: -50px;
+}
 
+.wave {
+  height: 10px;
+  background-color: white;
+  border-top-left-radius:50%;
+  border-top-right-radius:50%;
+}
 .bg-white p {
   color: inherit;
 }
