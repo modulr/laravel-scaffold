@@ -1,11 +1,28 @@
 <div class="sidebar">
     <nav class="sidebar-nav">
         <ul class="nav">
-            <!-- <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-comment-alt mr-3"></i> Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/orders">
+                    <i class="fas fa-list-ul mr-3"></i> Pedidos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/direcciones">
+                    <i class="fas fa-map-marker-alt mr-3"></i> Direcciones
+                </a>
+            </li>
+            @can('read-users','read-dashboard')
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard">
                     <i class="nav-icon icon-speedometer"></i> Dashboard
                 </a>
-            </li> -->
+            </li>
+            @endcan
             @can('read-users','read-roles')
             <li class="nav-title">Settings</li>
             @endcan

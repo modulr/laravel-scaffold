@@ -4,8 +4,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="{{ url('/') }}">
-        <img class="navbar-brand-full" src="/svg/modulr.svg" width="89" height="25" alt="Modulr Logo">
-        <img class="navbar-brand-minimized" src="/svg/modulr-icon.svg" width="30" height="30" alt="Modulr Logo">
+        <img class="navbar-brand-full" src="/svg/traeme.svg" width="89" height="25" alt="Modulr Logo">
+        <img class="navbar-brand-minimized" src="/svg/traeme.svg" width="30" height="30" alt="Modulr Logo">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
@@ -21,15 +21,15 @@
                     <small class="text-muted">{{ Auth::user()->email }}</small>
                 </a>
                 <a class="dropdown-item" href="/profile">
-                    <i class="fas fa-user"></i> Profile
+                    <i class="fas fa-user"></i> Perfil
                 </a>
                 <div class="divider"></div>
                 <a class="dropdown-item" href="/password">
-                    <i class="fas fa-key"></i> Password
+                    <i class="fas fa-key"></i> Cambiar contraseña
                 </a>
                 <div class="divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
+                    <i class="fas fa-sign-out-alt"></i> Salir
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf

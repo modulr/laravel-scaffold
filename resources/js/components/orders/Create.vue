@@ -1,16 +1,19 @@
 <template>
   <div>
     <div class="form-group">
-      <textarea class="form-control" rows="3" placeholder="¡Traeme unos tacos!" v-model="order.order"></textarea>
+      <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order.order"></textarea>
     </div>
-    <div class="input-group mb-3 border-right-0">
-      <div class="input-group-prepend">
-        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+    <div class="form-group">
+      <div class="input-group border-right-0">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.destination">
       </div>
-      <input type="text" class="form-control" placeholder="Calle #numero, colonia" v-model="order.destination">
     </div>
-    <a class="btn btn-lg btn-light" href="#" @click.prevent="send">
-      <i class="fab fa-whatsapp"></i> Ordenar
+    <div class="bg-danger mt-3 mb-3"><small>{{error}}</small></div>
+    <a class="btn btn-spotify btn-lg" href="#" @click.prevent="send">
+      <i class="fab fa-whatsapp mr-1"></i> Ordenar por WhatsApp
     </a>
   </div>
 </template>
@@ -23,20 +26,30 @@ export default {
         order: '',
         destination: ''
       },
-      errors: {},
-      submiting: false
+      error: '',
+      placeholders: [
+        '¿Necesitas algo de la tienda?',
+        'Traeme unos tacos',
+        'Pagame la luz',
+        '¿Necesitas enviar un paquete?'
+      ],
+      placeholder: ''
     }
   },
   mounted () {
     if (localStorage.getItem("destination")) {
       this.order.destination = localStorage.getItem("destination")
     }
+    this.randomPlaceholder()
   },
   methods: {
     send () {
+      this.error = ''
       if (this.order.order && this.order.destination) {
         location.href = `https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.destination}`
         localStorage.setItem("destination", this.order.destination)
+      } else {
+        this.error = 'Dinos que te llevamos y a donde'
       }
       // if (!this.submiting) {
       //   this.submiting = true
@@ -49,6 +62,9 @@ export default {
       //     this.submiting = false
       //   })
       // }
+    },
+    randomPlaceholder () {
+      this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)]
     }
   }
 }

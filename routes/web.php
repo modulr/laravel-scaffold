@@ -12,16 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('coming');
+    return view('home');
 });
 
 Auth::routes();
+Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/home', function () {
-    return redirect('dashboard');
+    return redirect('/');
 });
 
-Route::get('/dashboard', 'DashboardController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index');
+Route::get('/direcciones', 'DashboardController@address');
 
 require __DIR__ . '/profile/profile.php';
 require __DIR__ . '/users/users.php';

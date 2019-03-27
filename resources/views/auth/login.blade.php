@@ -64,6 +64,7 @@
             </div>
             <div class="card-footer p-4 d-lg-none">
                 <div class="col-12 text-right">
+                    <a class="btn btn-brand btn-facebook btn-block" href="/auth/facebook">Registrate con Facebook</a>
                     <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </div>
             </div>

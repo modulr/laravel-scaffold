@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
+use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -35,5 +38,52 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $socialUser = Socialite::driver('facebook')->user();
+
+        if ($user = User::where('email', $socialUser->email)->first()) {
+            return $this->authAndRedirect($user); // Login y redirección
+        } else {
+            // En caso de que no exista creamos un nuevo usuario con sus datos.
+            $user = User::create([
+                'name' => $socialUser->name,
+                'email' => $socialUser->email,
+                'avatar' => $socialUser->avatar,
+                'password' => $socialUser->token
+            ]);
+
+            $user->assignRole('user');
+
+            return $this->authAndRedirect($user); // Login y redirección
+        }
+
+        dd($user);
+
+        // $user->token;
+    }
+
+    public function authAndRedirect($user)
+    {
+        Auth::login($user);
+
+        return redirect()->to('/');
     }
 }

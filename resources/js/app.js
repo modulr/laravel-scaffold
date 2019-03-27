@@ -58,6 +58,7 @@ Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
 // Orders
 Vue.component('orders-create', require('./components/orders/Create.vue'));
+Vue.component('address-index', require('./components/address/Index.vue'));
 
 const app = new Vue({
     el: '#app'

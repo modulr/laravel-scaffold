@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 
 use Storage;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -40,6 +41,11 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute()
     {
-        return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+        //return $this->avatar;
+        if (Str::startsWith($this->avatar, 'http')) {
+            return $this->avatar;
+        } else {
+            return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+        }
     }
 }

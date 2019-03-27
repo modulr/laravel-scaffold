@@ -3050,22 +3050,22 @@ pre code {
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #ced4da;
+  color: #adb5bd;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #ced4da;
+  color: #adb5bd;
   opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-  color: #ced4da;
+  color: #adb5bd;
   opacity: 1;
 }
 
 .form-control::placeholder {
-  color: #ced4da;
+  color: #adb5bd;
   opacity: 1;
 }
 
@@ -11276,38 +11276,34 @@ h1 {
   font-weight: lighter;
 }
 
+.bg-white p {
+  color: inherit;
+}
+
+.text-muted {
+  color: #ced4da !important;
+}
+
 a:hover {
   text-decoration: none;
   color: inherit;
 }
 
 .logo {
-  max-width: 200px;
-  margin-top: 20px;
+  max-width: 150px;
 }
 
-.btn-white {
+.btn-phone {
   color: #fff;
+  text-decoration: none !important;
 }
 
-a.btn-white:hover {
-  color: #e2e6ea !important;
-}
-
-.btn-white .fa-stack {
-  margin-right: 5px;
-}
-
-.btn-white .fa-phone {
+.btn-phone .fa-phone {
   color: #EF374B !important;
 }
 
-.wp-color {
-  color: #01E677;
-}
-
-.hover-color {
-  color: #e2e6ea !important;
+.btn-phone:hover {
+  color: #ced4da;
 }
 
 .curve-content {
@@ -11325,17 +11321,6 @@ a.btn-white:hover {
 
 .curve_gradient {
   margin-top: -50px;
-}
-
-.wave {
-  height: 10px;
-  background-color: white;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-}
-
-.bg-white p {
-  color: inherit;
 }
 
 #app {

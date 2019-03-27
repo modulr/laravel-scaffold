@@ -1,16 +1,17 @@
 <template>
-  <div class="media">
-    <img class="rounded-circle mr-4" style="width: 120px; height: 120px" :src="user.avatar_url">
-    <div class="media-body pt-1">
+  <div class="row justify-content-sm-center">
+    <div class="col-sm-12">
+      <img class="rounded-circle mb-3" style="width: 120px; height: 120px" :src="user.avatar_url">
+    </div>
+    <div class="col-sm-6 text-center">
       <vue-clip
         :options="optionsAvatar"
         :on-sending="sendingAvatar"
         :on-complete="completeAvatar">
         <template slot="clip-uploader-action">
-            <button class="dz-message btn btn-outline-secondary btn-sm" type="button">Choose file</button>
+            <button class="dz-message btn btn-sm" type="button">Cambiar Avatar</button>
         </template>
       </vue-clip>
-      <small class="form-text text-muted">The maximum file size allowed is 10MB.</small>
       <small class="form-text text-danger" v-if="errors.status">{{errors.message}}</small>
       <div class="progress mt-2 mb-3" style="height: 1px;">
         <div class="progress-bar"
@@ -18,9 +19,9 @@
           :style="{width: preview.progress+'%'}">
         </div>
       </div>
-      <button class="btn btn-ghost-info btn-sm" type="button" @click="removeAvatarAuthUser" :disabled="submiting">
+      <!-- <button class="btn btn-ghost-info btn-sm" type="button" @click="removeAvatarAuthUser" :disabled="submiting">
         <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Restart avatar
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
