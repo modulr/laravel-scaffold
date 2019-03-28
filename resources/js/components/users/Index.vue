@@ -68,7 +68,7 @@
             </td>
             <td>
               <span v-for="(role, index) in user.roles">
-                {{role.name}}<span v-if="index+1 < user.roles.length">, </span>
+                {{role.display_name}}<span v-if="index+1 < user.roles.length">, </span>
               </span>
             </td>
             <td class="d-none d-sm-table-cell">

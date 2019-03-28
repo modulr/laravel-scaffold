@@ -25,6 +25,7 @@
                     </small>
                     813 089 8642
                 </a>
+                <br>
                 <a class="btn btn-brand btn-facebook mt-3" href="/auth/facebook">
                   <i class="fab fa-facebook-f"></i>
                   <span>Registrate con Facebook</span>

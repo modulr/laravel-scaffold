@@ -61874,7 +61874,7 @@ var render = function() {
                     "td",
                     _vm._l(user.roles, function(role, index) {
                       return _c("span", [
-                        _vm._v("\n              " + _vm._s(role.name)),
+                        _vm._v("\n              " + _vm._s(role.display_name)),
                         index + 1 < user.roles.length
                           ? _c("span", [_vm._v(", ")])
                           : _vm._e()
