@@ -9,11 +9,11 @@
         :on-sending="sendingAvatar"
         :on-complete="completeAvatar">
         <template slot="clip-uploader-action">
-            <button class="dz-message btn btn-sm" type="button">Cambiar Avatar</button>
+            <button class="dz-message btn btn-secondary btn-sm" type="button">Cambiar Avatar</button>
         </template>
       </vue-clip>
       <small class="form-text text-danger" v-if="errors.status">{{errors.message}}</small>
-      <div class="progress mt-2 mb-3" style="height: 1px;">
+      <div class="progress mt-2 mb-3" style="height: 2px;" v-if="preview.progress">
         <div class="progress-bar"
           :class="{'bg-success': preview.status == 'success', 'bg-danger': preview.status == 'error', }"
           :style="{width: preview.progress+'%'}">

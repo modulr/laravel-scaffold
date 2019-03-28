@@ -1,20 +1,23 @@
-body {
-  background: -prefix-linear-gradient(left, #EF374B, #6C2D78);
-  background: linear-gradient(to right, #EF374B, #6C2D78);
-}
-p, h1{
-  color: $white;
-  font-weight: lighter;
-}
-.bg-white p {
-  color: inherit;
-}
-.text-muted {
-  color: $gray-400 !important;
-}
 a:hover {
   text-decoration: none;
   color: inherit;
+}
+.bg-gradient {
+  background: -prefix-linear-gradient(left, #EF374B, #6C2D78);
+  background: linear-gradient(to right, #EF374B, #6C2D78);
+  p, h1 {
+    color: $white;
+  }
+}
+
+.curve {
+  width: 100%;
+}
+.curve_white {
+  margin-bottom: -40px;
+}
+.curve_gradient {
+  margin-bottom: -85px;
 }
 .logo {
   max-width: 150px;
@@ -30,19 +33,7 @@ a:hover {
   color: $gray-400;
 }
 
-.curve-content {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-.curve {
-  width: 100%;
-}
-.curve_white {
-  margin-top: -85px;
-}
-.curve_gradient {
-  margin-top: -50px;
-}
+
 
 
 

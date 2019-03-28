@@ -7,7 +7,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/orders">
+                <a class="nav-link" href="/pedidos">
                     <i class="fas fa-list-ul mr-3"></i> Pedidos
                 </a>
             </li>

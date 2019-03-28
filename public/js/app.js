@@ -14143,6 +14143,7 @@ Vue.component('roles-edit', __webpack_require__(87));
 
 // Orders
 Vue.component('orders-create', __webpack_require__(90));
+Vue.component('orders-create-auth', __webpack_require__(123));
 Vue.component('address-index', __webpack_require__(93));
 
 var app = new Vue({
@@ -60794,7 +60795,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "dz-message btn btn-sm",
+                  staticClass: "dz-message btn btn-secondary btn-sm",
                   attrs: { type: "button" }
                 },
                 [_vm._v("Cambiar Avatar")]
@@ -60810,20 +60811,25 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "progress mt-2 mb-3", staticStyle: { height: "1px" } },
-          [
-            _c("div", {
-              staticClass: "progress-bar",
-              class: {
-                "bg-success": _vm.preview.status == "success",
-                "bg-danger": _vm.preview.status == "error"
+        _vm.preview.progress
+          ? _c(
+              "div",
+              {
+                staticClass: "progress mt-2 mb-3",
+                staticStyle: { height: "2px" }
               },
-              style: { width: _vm.preview.progress + "%" }
-            })
-          ]
-        )
+              [
+                _c("div", {
+                  staticClass: "progress-bar",
+                  class: {
+                    "bg-success": _vm.preview.status == "success",
+                    "bg-danger": _vm.preview.status == "error"
+                  },
+                  style: { width: _vm.preview.progress + "%" }
+                })
+              ]
+            )
+          : _vm._e()
       ],
       1
     )
@@ -65353,6 +65359,257 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(124)
+/* template */
+var __vue_template__ = __webpack_require__(125)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/orders/CreateAuth.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-073ab493", Component.options)
+  } else {
+    hotAPI.reload("data-v-073ab493", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 124 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      order: {
+        order: '',
+        destination: ''
+      },
+      error: '',
+      placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', '¿Necesitas enviar un paquete?'],
+      placeholder: ''
+    };
+  },
+  mounted: function mounted() {
+    if (localStorage.getItem("destination")) {
+      this.order.destination = localStorage.getItem("destination");
+    }
+    this.randomPlaceholder();
+  },
+
+  methods: {
+    save: function save() {
+      this.error = '';
+      if (this.order.order && this.order.destination) {
+        location.href = 'https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.destination;
+        localStorage.setItem("destination", this.order.destination);
+      } else {
+        this.error = 'Dinos que te llevamos y a donde';
+      }
+      // if (!this.submiting) {
+      //   this.submiting = true
+      //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.destination}`)
+      //   .then(response => {
+      //     this.$toasted.global.error('¡Orden enviada!')
+      //   })
+      //   .catch(error => {
+      //     this.errors = error.response.data.errors
+      //     this.submiting = false
+      //   })
+      // }
+    },
+    randomPlaceholder: function randomPlaceholder() {
+      this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)];
+    }
+  }
+});
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group" }, [
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.order.order,
+            expression: "order.order"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { rows: "3", placeholder: _vm.placeholder },
+        domProps: { value: _vm.order.order },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.order, "order", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "input-group border-right-0" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.order.destination,
+              expression: "order.destination"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            placeholder: "¿A donde? Calle, numero y colonia"
+          },
+          domProps: { value: _vm.order.destination },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.order, "destination", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "bg-danger mt-3 mb-3" }, [
+      _c("small", [_vm._v(_vm._s(_vm.error))])
+    ]),
+    _vm._v(" "),
+    _c(
+      "a",
+      {
+        staticClass: "btn btn-spotify btn-lg",
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.save($event)
+          }
+        }
+      },
+      [_vm._v("\n    Ordenar\n  ")]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "fas fa-map-marker-alt" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-073ab493", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -24,7 +24,12 @@ Route::get('/home', function () {
 });
 
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/direcciones', 'DashboardController@address');
+Route::get('/direcciones', function () {
+    return view('address');
+});
+Route::get('/pedidos', function () {
+    return view('orders');
+});
 
 require __DIR__ . '/profile/profile.php';
 require __DIR__ . '/users/users.php';
