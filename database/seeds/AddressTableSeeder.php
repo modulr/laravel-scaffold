@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RolesTableSeeder extends Seeder
+class AddressTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,54 +15,47 @@ class RolesTableSeeder extends Seeder
     {
         // Module
         $moduleId = DB::table('modules')->insertGetId([
-            'name' => 'roles',
-            'display_name' => 'Roles',
-            'icon' => 'icon-key'
+            'name' => 'address',
+            'display_name' => 'Direcciones',
+            'icon' => 'icon-user',
+            'active' => false
         ]);
 
         // Permissions
         DB::table('permissions')->insert([
             [
-                'name' => 'read-roles',
+                'name' => 'read-address',
                 'display_name' => 'Read',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'create-roles',
+                'name' => 'create-address',
                 'display_name' => 'Create',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'update-roles',
+                'name' => 'update-address',
                 'display_name' => 'Update',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'delete-roles',
+                'name' => 'delete-address',
                 'display_name' => 'Delete',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]
         ]);
 
-        // Create default roles
-        $admin = Role::create([
-            'name' => 'admin',
-            'display_name' => 'Admin'
-        ]);
-        $user = Role::create([
-            'name' => 'user',
-            'display_name' => 'Cliente'
-        ]);
-        $user = Role::create([
-            'name' => 'dealer',
-            'display_name' => 'Repartidor'
-        ]);
-
         // Assign permissions to admin role
+        $admin = Role::findByName('admin');
         $admin->givePermissionTo(Permission::all());
+
+        // Assign permissions to user role
+        $user = Role::findByName('user');
+        $user->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
+
     }
 }

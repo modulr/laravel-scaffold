@@ -57,6 +57,7 @@ Vue.component('roles-create', require('./components/roles/Create.vue'));
 Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
 // Orders
+Vue.component('orders-index', require('./components/orders/Index.vue'));
 Vue.component('orders-create', require('./components/orders/Create.vue'));
 Vue.component('orders-create-auth', require('./components/orders/CreateAuth.vue'));
 Vue.component('address-index', require('./components/address/Index.vue'));

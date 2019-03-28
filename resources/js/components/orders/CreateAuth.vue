@@ -78,23 +78,20 @@ export default {
   },
   methods: {
     save () {
-      this.error = ''
-      if (this.order.order && this.order.address) {
-        localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
-      } else {
-        this.error = 'Dinos que te llevamos y a donde'
+      if (!this.submiting) {
+        this.submiting = true
+        axios.post(`/api/orders/store`, this.order)
+        .then(response => {
+          localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
+          this.$toasted.global.error('¡Mandado enviado!')
+          location.href = `/orders`
+          //location.href = `/orders/${response.data.id}`
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submiting = false
+        })
       }
-      // if (!this.submiting) {
-      //   this.submiting = true
-      //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.destination}`)
-      //   .then(response => {
-      //     this.$toasted.global.error('¡Orden enviada!')
-      //   })
-      //   .catch(error => {
-      //     this.errors = error.response.data.errors
-      //     this.submiting = false
-      //   })
-      // }
     },
     addTag (newTag) {
       const tag = {

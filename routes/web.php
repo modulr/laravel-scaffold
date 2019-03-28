@@ -24,11 +24,8 @@ Route::get('/home', function () {
 });
 
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/direcciones', function () {
+Route::get('/address', function () {
     return view('address');
-});
-Route::get('/pedidos', function () {
-    return view('orders');
 });
 
 require __DIR__ . '/profile/profile.php';
@@ -36,3 +33,4 @@ require __DIR__ . '/users/users.php';
 require __DIR__ . '/roles/roles.php';
 require __DIR__ . '/roles/permissions.php';
 require __DIR__ . '/modules/modules.php';
+require __DIR__ . '/orders/orders.php';

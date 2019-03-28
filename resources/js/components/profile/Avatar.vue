@@ -9,7 +9,7 @@
         :on-sending="sendingAvatar"
         :on-complete="completeAvatar">
         <template slot="clip-uploader-action">
-            <button class="dz-message btn btn-secondary btn-sm" type="button">Cambiar Avatar</button>
+            <button class="dz-message btn btn-outline-warning btn-sm" type="button">Cambiar Avatar</button>
         </template>
       </vue-clip>
       <small class="form-text text-danger" v-if="errors.status">{{errors.message}}</small>

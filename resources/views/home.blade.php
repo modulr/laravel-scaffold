@@ -30,11 +30,11 @@
                   <span>Registrate con Facebook</span>
                 </a>
                 <p class="mb-4">y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
-                <a class="btn btn-secondary btn-block" href="/register">
+                <a class="btn btn-primary btn-block" href="/register">
                   <span>Registrate</span>
                 </a>
-                <a class="btn btn-light btn-block" href="/login">
-                  <span>Inicia sesión</span>
+                <a class="btn btn-link btn-phone btn-block" href="/login">
+                  Ya tengo una cuenta
                 </a>
             @endauth
         </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RolesTableSeeder extends Seeder
+class OrdersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,54 +15,66 @@ class RolesTableSeeder extends Seeder
     {
         // Module
         $moduleId = DB::table('modules')->insertGetId([
-            'name' => 'roles',
-            'display_name' => 'Roles',
-            'icon' => 'icon-key'
+            'name' => 'orders',
+            'display_name' => 'Mandados',
+            'icon' => 'icon-user',
+            'active' => false
         ]);
 
         // Permissions
         DB::table('permissions')->insert([
             [
-                'name' => 'read-roles',
+                'name' => 'read-orders',
                 'display_name' => 'Read',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'create-roles',
+                'name' => 'create-orders',
                 'display_name' => 'Create',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'update-roles',
+                'name' => 'update-orders',
                 'display_name' => 'Update',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'delete-roles',
+                'name' => 'delete-orders',
                 'display_name' => 'Delete',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]
         ]);
 
-        // Create default roles
-        $admin = Role::create([
-            'name' => 'admin',
-            'display_name' => 'Admin'
-        ]);
-        $user = Role::create([
-            'name' => 'user',
-            'display_name' => 'Cliente'
-        ]);
-        $user = Role::create([
-            'name' => 'dealer',
-            'display_name' => 'Repartidor'
-        ]);
-
         // Assign permissions to admin role
+        $admin = Role::findByName('admin');
         $admin->givePermissionTo(Permission::all());
+
+        // Assign permissions to user role
+        $user = Role::findByName('user');
+        $user->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+
+        // Assign permissions to user role
+        $user = Role::findByName('dealer');
+        $user->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+
+
+        DB::table('order_status')->insert([
+            [
+                'status' => 'Pendiente'
+            ],
+            [
+                'status' => 'Asignado'
+            ],
+            [
+                'status' => 'Finalizado'
+            ],
+            [
+                'status' => 'Cancelado'
+            ]
+        ]);
     }
 }

@@ -13,7 +13,7 @@
     </div>
     <div class="bg-danger mt-3 mb-3"><small>{{error}}</small></div>
     <a class="btn btn-spotify btn-lg" href="#" @click.prevent="send">
-      <i class="fab fa-whatsapp mr-1"></i> Ordenar por WhatsApp
+      <i class="fab fa-success mr-1"></i> Ordenar por WhatsApp
     </a>
   </div>
 </template>

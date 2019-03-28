@@ -12,7 +12,8 @@
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
         "laravolt/avatar": "^2.0",
-        "spatie/laravel-permission": "^2.23"
+        "spatie/laravel-permission": "^2.23",
+        "wildside/userstamps": "^0.5.5"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

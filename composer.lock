@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eaacd48496717540a9151f73f1986ab4",
+    "content-hash": "52f9f7cf237e789a7fab21c9920d74d7",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -2910,6 +2910,52 @@
                 "environment"
             ],
             "time": "2018-07-29T20:33:41+00:00"
+        },
+        {
+            "name": "wildside/userstamps",
+            "version": "0.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WildSideUK/Laravel-Userstamps.git",
+                "reference": "55af0f44cb0591057609905bf0295c07a7045f60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WildSideUK/Laravel-Userstamps/zipball/55af0f44cb0591057609905bf0295c07a7045f60",
+                "reference": "55af0f44cb0591057609905bf0295c07a7045f60",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wildside\\Userstamps\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WildSide",
+                    "email": "hello@wildside.uk",
+                    "homepage": "https://wildside.uk"
+                }
+            ],
+            "description": "Eloquent trait to automatically maintain created_by and updated_by (and deleted_by when using SoftDeletes) on your models",
+            "keywords": [
+                "created_by",
+                "deleted_by",
+                "eloquent",
+                "laravel",
+                "updated_by",
+                "userstamps"
+            ],
+            "time": "2019-02-28T13:47:25+00:00"
         }
     ],
     "packages-dev": [
