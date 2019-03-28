@@ -12,12 +12,12 @@ class OrderController extends Controller
     public function byUser ($userId)
     {
         $user = User::find($userId);
-        $ifClient = $user->hasAnyRole('admin', 'user');
+        $ifDealer = $user->hasRole('dealer');
 
-        if ($ifClient) {
-            return Order::with('status', 'code', 'dealer')->where('created_by', $userId)->latest()->get();
-        } else {
+        if ($ifDealer) {
             return Order::with('status', 'code', 'creator')->where('dealer_id', $userId)->latest()->get();
+        } else {
+            return Order::with('status', 'code', 'dealer')->where('created_by', $userId)->latest()->get();
         }
     }
 
