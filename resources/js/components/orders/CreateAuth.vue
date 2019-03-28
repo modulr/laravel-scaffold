@@ -4,12 +4,42 @@
       <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order.order"></textarea>
     </div>
     <div class="form-group">
-      <div class="input-group border-right-0">
+      <multiselect
+        v-model="order.address"
+        :options="address"
+        openDirection="bottom"
+        label="title"
+        track-by="title"
+        :custom-label="customLabel"
+        selectLabel="Seleccionar"
+        selectedLabel="Seleccionado"
+        deselectLabel="deseleccionar"
+        placeholder="Selecciona o agrega una dirección"
+        tag-placeholder="Agregar esta dirección"
+        :taggable="true"
+        @tag="addTag">
+        <template slot="singleLabel" slot-scope="props">
+          <span>
+            <strong class="mr-2">{{ props.option.alias }}</strong>
+            <span>{{ props.option.title }}</span>
+          </span>
+        </template>
+        <template slot="option" slot-scope="props">
+          <div v-if="props.option.isTag">
+            {{ props.search }}
+          </div>
+          <div v-else>
+            <strong class="mr-2">{{ props.option.alias }}</strong>
+            <span>{{ props.option.title }}</span>
+          </div>
+        </template>
+      </multiselect>
+      <!-- <div class="input-group border-right-0">
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
         </div>
         <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.destination">
-      </div>
+      </div> -->
     </div>
     <div class="bg-danger mt-3 mb-3"><small>{{error}}</small></div>
     <a class="btn btn-spotify btn-lg" href="#" @click.prevent="save">
@@ -22,9 +52,10 @@
 export default {
   data () {
     return {
+      address: [],
       order: {
         order: '',
-        destination: ''
+        address: ''
       },
       error: '',
       placeholders: [
@@ -37,17 +68,19 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem("destination")) {
-      this.order.destination = localStorage.getItem("destination")
+    if (localStorage.getItem("address")) {
+      this.address = JSON.parse(localStorage.getItem("address"))
+    }
+    if (localStorage.getItem("currentAddress")) {
+      this.order.address = JSON.parse(localStorage.getItem("currentAddress"))
     }
     this.randomPlaceholder()
   },
   methods: {
     save () {
       this.error = ''
-      if (this.order.order && this.order.destination) {
-        location.href = `https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.destination}`
-        localStorage.setItem("destination", this.order.destination)
+      if (this.order.order && this.order.address) {
+        localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
       } else {
         this.error = 'Dinos que te llevamos y a donde'
       }
@@ -62,6 +95,18 @@ export default {
       //     this.submiting = false
       //   })
       // }
+    },
+    addTag (newTag) {
+      const tag = {
+        title: newTag,
+        alias: ''
+      }
+      this.address.unshift(tag)
+      localStorage.setItem("address", JSON.stringify(this.address))
+      this.order.address = tag
+    },
+    customLabel ({ title, alias }) {
+      return `${alias} ${title}`
     },
     randomPlaceholder () {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)]

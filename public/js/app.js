@@ -64918,9 +64918,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      address: [],
       order: {
         order: '',
-        destination: ''
+        address: {
+          title: '',
+          alias: ''
+        }
       },
       error: '',
       placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', '¿Necesitas enviar un paquete?'],
@@ -64928,8 +64932,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    if (localStorage.getItem("destination")) {
-      this.order.destination = localStorage.getItem("destination");
+    if (localStorage.getItem("address")) {
+      this.address = JSON.parse(localStorage.getItem("address"));
+    }
+    if (localStorage.getItem("currentAddress")) {
+      this.order.address = JSON.parse(localStorage.getItem("currentAddress"));
     }
     this.randomPlaceholder();
   },
@@ -64937,15 +64944,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     send: function send() {
       this.error = '';
-      if (this.order.order && this.order.destination) {
-        location.href = 'https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.destination;
-        localStorage.setItem("destination", this.order.destination);
+      if (this.order.order && this.order.address) {
+        location.href = 'https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.address.title;
+        this.address.unshift(this.order.address);
+        localStorage.setItem("address", JSON.stringify(this.address));
+        localStorage.setItem("currentAddress", JSON.stringify(this.order.address));
       } else {
         this.error = 'Dinos que te llevamos y a donde';
       }
       // if (!this.submiting) {
       //   this.submiting = true
-      //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.destination}`)
+      //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.address}`)
       //   .then(response => {
       //     this.$toasted.global.error('¡Orden enviada!')
       //   })
@@ -65003,8 +65012,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.order.destination,
-              expression: "order.destination"
+              value: _vm.order.address.title,
+              expression: "order.address.title"
             }
           ],
           staticClass: "form-control",
@@ -65012,13 +65021,13 @@ var render = function() {
             type: "text",
             placeholder: "¿A donde? Calle, numero y colonia"
           },
-          domProps: { value: _vm.order.destination },
+          domProps: { value: _vm.order.address.title },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.order, "destination", $event.target.value)
+              _vm.$set(_vm.order.address, "title", $event.target.value)
             }
           }
         })
@@ -65316,8 +65325,9 @@ var render = function() {
                   _c("div", [
                     _c("i", { staticClass: "fas fa-map-marker-alt mr-3" }),
                     _vm._v(" "),
-                    _c("strong", [_vm._v(_vm._s(item.alias))]),
-                    _vm._v(" "),
+                    _c("strong", { staticClass: "mr-2" }, [
+                      _vm._v(_vm._s(item.alias))
+                    ]),
                     _c("span", [_vm._v(_vm._s(item.title))])
                   ]),
                   _vm._v(" "),
@@ -65459,13 +65469,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      address: [],
       order: {
         order: '',
-        destination: ''
+        address: ''
       },
       error: '',
       placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', '¿Necesitas enviar un paquete?'],
@@ -65473,8 +65514,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    if (localStorage.getItem("destination")) {
-      this.order.destination = localStorage.getItem("destination");
+    if (localStorage.getItem("address")) {
+      this.address = JSON.parse(localStorage.getItem("address"));
+    }
+    if (localStorage.getItem("currentAddress")) {
+      this.order.address = JSON.parse(localStorage.getItem("currentAddress"));
     }
     this.randomPlaceholder();
   },
@@ -65482,9 +65526,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     save: function save() {
       this.error = '';
-      if (this.order.order && this.order.destination) {
-        location.href = 'https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.destination;
-        localStorage.setItem("destination", this.order.destination);
+      if (this.order.order && this.order.address) {
+        localStorage.setItem("currentAddress", JSON.stringify(this.order.address));
       } else {
         this.error = 'Dinos que te llevamos y a donde';
       }
@@ -65499,6 +65542,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //     this.submiting = false
       //   })
       // }
+    },
+    addTag: function addTag(newTag) {
+      var tag = {
+        title: newTag,
+        alias: ''
+      };
+      this.address.unshift(tag);
+      localStorage.setItem("address", JSON.stringify(this.address));
+      this.order.address = tag;
+    },
+    customLabel: function customLabel(_ref) {
+      var title = _ref.title,
+          alias = _ref.alias;
+
+      return alias + ' ' + title;
     },
     randomPlaceholder: function randomPlaceholder() {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)];
@@ -65539,36 +65597,72 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "input-group border-right-0" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.order.destination,
-              expression: "order.destination"
-            }
-          ],
-          staticClass: "form-control",
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("multiselect", {
           attrs: {
-            type: "text",
-            placeholder: "¿A donde? Calle, numero y colonia"
+            options: _vm.address,
+            openDirection: "bottom",
+            label: "title",
+            "track-by": "title",
+            "custom-label": _vm.customLabel,
+            selectLabel: "Seleccionar",
+            selectedLabel: "Seleccionado",
+            deselectLabel: "deseleccionar",
+            placeholder: "Selecciona o agrega una dirección",
+            "tag-placeholder": "Agregar esta dirección",
+            taggable: true
           },
-          domProps: { value: _vm.order.destination },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+          on: { tag: _vm.addTag },
+          scopedSlots: _vm._u([
+            {
+              key: "singleLabel",
+              fn: function(props) {
+                return [
+                  _c("span", [
+                    _c("strong", { staticClass: "mr-2" }, [
+                      _vm._v(_vm._s(props.option.alias))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(props.option.title))])
+                  ])
+                ]
               }
-              _vm.$set(_vm.order, "destination", $event.target.value)
+            },
+            {
+              key: "option",
+              fn: function(props) {
+                return [
+                  props.option.isTag
+                    ? _c("div", [
+                        _vm._v(
+                          "\n          " + _vm._s(props.search) + "\n        "
+                        )
+                      ])
+                    : _c("div", [
+                        _c("strong", { staticClass: "mr-2" }, [
+                          _vm._v(_vm._s(props.option.alias))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v(_vm._s(props.option.title))])
+                      ])
+                ]
+              }
             }
+          ]),
+          model: {
+            value: _vm.order.address,
+            callback: function($$v) {
+              _vm.$set(_vm.order, "address", $$v)
+            },
+            expression: "order.address"
           }
         })
-      ])
-    ]),
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "bg-danger mt-3 mb-3" }, [
       _c("small", [_vm._v(_vm._s(_vm.error))])
@@ -65590,18 +65684,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("span", { staticClass: "input-group-text" }, [
-        _c("i", { staticClass: "fas fa-map-marker-alt" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

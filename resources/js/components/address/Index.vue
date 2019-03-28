@@ -25,7 +25,7 @@
           <div class="d-flex w-100 justify-content-between">
             <div>
               <i class="fas fa-map-marker-alt mr-3"></i>
-              <strong>{{item.alias}}</strong> <span>{{item.title}}</span>
+              <strong class="mr-2">{{item.alias}}</strong><span>{{item.title}}</span>
             </div>
             <a href="#" @click.prevent="deleteAddress(index)"><i class="far fa-trash-alt"></i></a>
           </div>

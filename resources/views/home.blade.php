@@ -11,7 +11,7 @@
             <p><small>Tarifa del dia <b>$15.00</b> pesos</small></p>
         </div>
 
-        <div class="col-9 col-sm-6 col-md-4 text-center mb-5">
+        <div class="col-9 col-sm-6 text-center mb-5">
             <p>¿Que te llevamos?</p>
             @auth
                 <orders-create-auth class="mb-4"></orders-create-auth>

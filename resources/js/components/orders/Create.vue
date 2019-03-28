@@ -8,7 +8,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
         </div>
-        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.destination">
+        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address.title">
       </div>
     </div>
     <div class="bg-danger mt-3 mb-3"><small>{{error}}</small></div>
@@ -22,9 +22,13 @@
 export default {
   data () {
     return {
+      address: [],
       order: {
         order: '',
-        destination: ''
+        address: {
+          title: '',
+          alias: ''
+        }
       },
       error: '',
       placeholders: [
@@ -37,23 +41,28 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem("destination")) {
-      this.order.destination = localStorage.getItem("destination")
+    if (localStorage.getItem("address")) {
+      this.address = JSON.parse(localStorage.getItem("address"))
+    }
+    if (localStorage.getItem("currentAddress")) {
+      this.order.address = JSON.parse(localStorage.getItem("currentAddress"))
     }
     this.randomPlaceholder()
   },
   methods: {
     send () {
       this.error = ''
-      if (this.order.order && this.order.destination) {
-        location.href = `https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.destination}`
-        localStorage.setItem("destination", this.order.destination)
+      if (this.order.order && this.order.address) {
+        location.href = `https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.address.title}`
+        this.address.unshift(this.order.address)
+        localStorage.setItem("address", JSON.stringify(this.address))
+        localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
       } else {
         this.error = 'Dinos que te llevamos y a donde'
       }
       // if (!this.submiting) {
       //   this.submiting = true
-      //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.destination}`)
+      //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.address}`)
       //   .then(response => {
       //     this.$toasted.global.error('¡Orden enviada!')
       //   })
