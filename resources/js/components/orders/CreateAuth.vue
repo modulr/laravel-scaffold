@@ -42,7 +42,7 @@
       </div> -->
     </div>
     <div class="bg-danger mt-3 mb-3"><small>{{error}}</small></div>
-    <a class="btn btn-spotify btn-lg" href="#" @click.prevent="save">
+    <a class="btn btn-light btn-lg" href="#" @click.prevent="save">
       Ordenar
     </a>
   </div>

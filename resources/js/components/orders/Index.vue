@@ -26,7 +26,7 @@
               <i class="icon-calendar"></i>&nbsp; {{item.created_at | moment('LLL')}}
             </small>
             <div v-if="item.status_id == 2">
-              <!-- <div v-if="user.hasRole['user']">
+              <div v-if="user.hasRole['admin'] || user.hasRole['user']">
                 <div class="media mt-3" v-if="item.status_id == 2">
                   <div class="avatar avatar-xs float-left mr-2">
                     <img class="img-avatar" :src="item.dealer.avatar_url">
@@ -34,7 +34,7 @@
                   <div class="media-body">
                     <div>
                       {{item.dealer.name}}
-                      <small class="text-muted"> - mandadero</small>
+                      <small class="text-muted"> - repartidor</small>
                     </div>
                   </div>
                 </div>
@@ -51,7 +51,7 @@
                     </div>
                   </div>
                 </div>
-              </div> -->
+              </div>
             </div>
           </li>
         </ul>
@@ -71,6 +71,7 @@ export default {
   },
   mounted () {
     this.getOrders()
+    console.log(this.user);
   },
   methods: {
     getOrders () {

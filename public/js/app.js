@@ -65085,7 +65085,7 @@ var render = function() {
     _c(
       "a",
       {
-        staticClass: "btn btn-spotify btn-lg",
+        staticClass: "btn btn-light btn-lg",
         attrs: { href: "#" },
         on: {
           click: function($event) {
@@ -65095,7 +65095,7 @@ var render = function() {
         }
       },
       [
-        _c("i", { staticClass: "fab fa-success mr-1" }),
+        _c("i", { staticClass: "fab fa-whatsapp mr-1" }),
         _vm._v(" Ordenar por WhatsApp\n  ")
       ]
     )
@@ -65394,7 +65394,7 @@ var render = function() {
     _c(
       "a",
       {
-        staticClass: "btn btn-spotify btn-lg",
+        staticClass: "btn btn-light btn-lg",
         attrs: { href: "#" },
         on: {
           click: function($event) {
@@ -65861,6 +65861,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.getOrders();
+    console.log(this.user);
   },
 
   methods: {
@@ -65956,7 +65957,83 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    item.status_id == 2 ? _c("div") : _vm._e()
+                    item.status_id == 2
+                      ? _c("div", [
+                          _vm.user.hasRole["admin"] || _vm.user.hasRole["user"]
+                            ? _c("div", [
+                                item.status_id == 2
+                                  ? _c("div", { staticClass: "media mt-3" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "avatar avatar-xs float-left mr-2"
+                                        },
+                                        [
+                                          _c("img", {
+                                            staticClass: "img-avatar",
+                                            attrs: {
+                                              src: item.dealer.avatar_url
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "media-body" }, [
+                                        _c("div", [
+                                          _vm._v(
+                                            "\n                    " +
+                                              _vm._s(item.dealer.name) +
+                                              "\n                    "
+                                          ),
+                                          _c(
+                                            "small",
+                                            { staticClass: "text-muted" },
+                                            [_vm._v(" - repartidor")]
+                                          )
+                                        ])
+                                      ])
+                                    ])
+                                  : _vm._e()
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.user.hasRole["dealer"]
+                            ? _c("div", [
+                                _c("div", { staticClass: "media mt-3" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "avatar avatar-xs float-left mr-2"
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass: "img-avatar",
+                                        attrs: { src: item.creator.avatar_url }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "media-body" }, [
+                                    _c("div", [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(item.creator.name) +
+                                          "\n                    "
+                                      ),
+                                      _c(
+                                        "small",
+                                        { staticClass: "text-muted" },
+                                        [_vm._v(" - cliente")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e()
                   ])
                 ])
               })
