@@ -53,7 +53,7 @@ export default {
     send () {
       this.errors = ''
       if (this.order.order && this.order.address.title) {
-        location.href = `https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.address.title}`
+        location.href = `https://api.whatsapp.com/send?phone=528130898642&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.address.title}`
         this.address.unshift(this.order.address)
         localStorage.setItem("address", JSON.stringify(this.address))
         localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
