@@ -6,14 +6,7 @@
           <form class="form-horizontal" v-if="!loading">
             <div class="form-group row justify-content-md-center">
               <div class="col-md-9 text-center">
-                <avatar :user="user"></avatar>
-                <ul class="list-inline text-success mt-3">
-                  <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                  <li class="list-inline-item"><i class="fas fa-star"></i></li>
-                </ul>
+                <profile-avatar :user="user"></profile-avatar>
               </div>
             </div>
             <div class="form-group row justify-content-md-center">
@@ -30,9 +23,11 @@
                 <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
               </div>
             </div>
-            <div class="form-group">
-              <label>Descripción</label>
-              <textarea class="form-control" rows="3" placeholder="¡Cuentanos algo!"></textarea>
+            <div class="form-group row justify-content-md-center">
+              <label class="col-md-3">Descripción</label>
+              <div class="col-md-9">
+                <textarea class="form-control" rows="3" placeholder="¡Cuentanos algo!" v-model="user.description"></textarea>
+              </div>
             </div>
             <div class="text-center">
               <a class="btn btn-primary mt-2" href="#" :disabled="submiting" @click.prevent="updateAuthUser">

@@ -3,7 +3,7 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Roles</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-success" href="/roles/create">New role</a>
+        <a class="btn btn-primary" href="/roles/create">New role</a>
       </div>
     </div>
     <div class="card-body px-0">

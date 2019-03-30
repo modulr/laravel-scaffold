@@ -21,7 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar')->default('avatar.png');
             $table->text('description')->nullable();
-            $table->integer('score')->nullable();
+            $table->integer('orders_total')->default(0);
+            $table->integer('score_sum')->default(0);
+            $table->integer('score')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

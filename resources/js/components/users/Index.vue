@@ -3,7 +3,7 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Users</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-success" href="/users/create">New user</a>
+        <a class="btn btn-primary" href="/users/create">New user</a>
       </div>
     </div>
     <div class="card-body px-0">

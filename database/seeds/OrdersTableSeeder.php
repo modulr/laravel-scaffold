@@ -49,25 +49,23 @@ class OrdersTableSeeder extends Seeder
             ]
         ]);
 
-        // Assign permissions to admin role
+        // Assign permissions
         $admin = Role::findByName('admin');
         $admin->givePermissionTo(Permission::all());
 
-        // Assign permissions to user role
         $user = Role::findByName('user');
         $user->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
 
-        // Assign permissions to user role
         $user = Role::findByName('dealer');
         $user->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
 
 
         DB::table('order_status')->insert([
             [
-                'status' => 'Pendiente'
+                'status' => 'Abierto'
             ],
             [
-                'status' => 'Asignado'
+                'status' => 'En curso'
             ],
             [
                 'status' => 'Finalizado'

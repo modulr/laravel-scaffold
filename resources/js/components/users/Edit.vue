@@ -18,26 +18,26 @@
           </div>
         </div>
         <div class="card-body px-0">
+          <div class="form-group row justify-content-md-center">
+            <div class="col-md-9 text-center">
+              <users-avatar :user="user"></users-avatar>
+            </div>
+          </div>
           <div class="row" v-if="!loading">
+            <div class="form-group col-md-3">
+              <label>ID</label>
+              <input class="form-control" type="text" v-model="user.id" readonly>
+            </div>
             <div class="form-group col-md-9">
               <label>Full Name</label>
               <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="John Doe">
               <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
-            </div>
-            <div class="form-group col-md-3">
-              <label>ID</label>
-              <input class="form-control" type="text" v-model="user.id" readonly>
             </div>
             <div class="col-md-12">
               <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="user.email" placeholder="john@modulr.io">
                 <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
-              </div>
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
-                <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
               </div>
               <div class="form-group">
                 <label>Roles</label>
@@ -51,6 +51,11 @@
                   :class="{'border border-danger rounded': errors.roles}">
                 </multiselect>
                 <small class="form-text text-danger" v-if="errors.roles">{{errors.roles[0]}}</small>
+              </div>
+              <div class="form-group">
+                <label>Change password</label>
+                <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
+                <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
               </div>
               <div class="form-group">
                 <label class="col-form-label">Registered</label>

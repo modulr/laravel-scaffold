@@ -25,13 +25,15 @@ class ProfileController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,'.Auth::id()
+            'email' => 'required|email|unique:users,email,'.Auth::id(),
+            'description' => 'string',
         ]);
 
         $user = User::find(Auth::id());
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->description = $request->description;
         $user->save();
 
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');

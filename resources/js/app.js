@@ -17,6 +17,7 @@ import VueClip from 'vue-clip'
 import Multiselect from 'vue-multiselect'
 import swal from 'sweetalert';
 import VueContentPlaceholders from 'vue-content-placeholders'
+import rate from 'vue-rate';
 
 Vue.use(require('vue-moment'));
 Vue.use(Toasted)
@@ -27,6 +28,7 @@ Vue.toasted.register('error', message => message, {
 Vue.use(VueClip)
 Vue.component('multiselect', Multiselect)
 Vue.use(VueContentPlaceholders)
+Vue.use(rate)
 
 
 /**
@@ -45,11 +47,13 @@ Vue.component('roles-count', require('./components/dashboard/RolesCount.vue'));
 // Profile
 Vue.component('profile', require('./components/profile/Profile.vue'));
 Vue.component('profile-password', require('./components/profile/Password.vue'));
+Vue.component('profile-avatar', require('./components/profile/Avatar.vue'));
 
 // Users
 Vue.component('users-index', require('./components/users/Index.vue'));
 Vue.component('users-create', require('./components/users/Create.vue'));
 Vue.component('users-edit', require('./components/users/Edit.vue'));
+Vue.component('users-avatar', require('./components/users/Avatar.vue'));
 
 // Roles
 Vue.component('roles-index', require('./components/roles/Index.vue'));
@@ -58,8 +62,12 @@ Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
 // Orders
 Vue.component('orders-index', require('./components/orders/Index.vue'));
+Vue.component('orders-availables', require('./components/orders/Availables.vue'));
+Vue.component('orders-dealer', require('./components/orders/Dealer.vue'));
 Vue.component('orders-create', require('./components/orders/Create.vue'));
 Vue.component('orders-create-auth', require('./components/orders/CreateAuth.vue'));
+
+// Address
 Vue.component('address-index', require('./components/address/Index.vue'));
 
 const app = new Vue({

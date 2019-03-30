@@ -41,10 +41,8 @@
         <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.destination">
       </div> -->
     </div>
-    <div class="bg-danger mt-3 mb-3"><small>{{error}}</small></div>
-    <a class="btn btn-light btn-lg" href="#" @click.prevent="save">
-      Ordenar
-    </a>
+    <div class="bg-info mt-3 mb-3"><small>{{errors}}</small></div>
+    <a class="btn btn-light btn-lg" href="#" @click.prevent="save">Pedir</a>
   </div>
 </template>
 
@@ -52,12 +50,14 @@
 export default {
   data () {
     return {
+      user: Laravel.user,
       address: [],
       order: {
         order: '',
-        address: ''
+        address: '',
+        clientId: null
       },
-      error: '',
+      errors: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
         'Traeme unos tacos',
@@ -80,6 +80,7 @@ export default {
     save () {
       if (!this.submiting) {
         this.submiting = true
+        this.order.clientId = this.user.id
         axios.post(`/api/orders/store`, this.order)
         .then(response => {
           localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
@@ -88,7 +89,7 @@ export default {
           //location.href = `/orders/${response.data.id}`
         })
         .catch(error => {
-          this.errors = error.response.data.errors
+          this.errors = 'Dinos que te llevamos y a donde'
           this.submiting = false
         })
       }

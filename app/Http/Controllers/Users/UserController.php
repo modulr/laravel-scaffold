@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+use App\Http\Helpers\Upload;
 use Avatar;
 
 use App\User;
@@ -108,5 +109,24 @@ class UserController extends Controller
         return $user;
     }
 
+    public function uploadAvatar(Request $request)
+    {
+        $upload = new Upload();
+        $avatar = $upload->upload($request->file, 'avatars/'.$request->userId)->resize(200, 200)->getData();
 
+        $user = User::find($request->userId);
+        $user->avatar = $avatar['basename'];
+        $user->save();
+
+        return $user;
+    }
+
+    // public function removeAvatar()
+    // {
+    //     $user = User::find($request->userId);
+    //     $user->avatar = 'avatar.png';
+    //     $user->save();
+    //
+    //     return $user;
+    // }
 }

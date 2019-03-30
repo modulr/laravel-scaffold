@@ -11,9 +11,9 @@
         <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address.title">
       </div>
     </div>
-    <div class="bg-danger mt-3 mb-3"><small>{{error}}</small></div>
+    <div class="bg-info mt-3 mb-3"><small>{{errors}}</small></div>
     <a class="btn btn-light btn-lg" href="#" @click.prevent="send">
-      <i class="fab fa-whatsapp mr-1"></i> Ordenar por WhatsApp
+      <i class="fab fa-whatsapp mr-1"></i> Pedir por WhatsApp
     </a>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
           alias: ''
         }
       },
-      error: '',
+      errors: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
         'Traeme unos tacos',
@@ -51,14 +51,14 @@ export default {
   },
   methods: {
     send () {
-      this.error = ''
-      if (this.order.order && this.order.address) {
+      this.errors = ''
+      if (this.order.order && this.order.address.title) {
         location.href = `https://api.whatsapp.com/send?phone=528118977886&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.address.title}`
         this.address.unshift(this.order.address)
         localStorage.setItem("address", JSON.stringify(this.address))
         localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
       } else {
-        this.error = 'Dinos que te llevamos y a donde'
+        this.errors = 'Dinos que te llevamos y a donde'
       }
       // if (!this.submiting) {
       //   this.submiting = true

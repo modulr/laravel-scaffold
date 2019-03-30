@@ -36,7 +36,7 @@ export default {
       preview: {},
       optionsAvatar: {
         headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
-        url: '/api/profile/uploadAvatarAuthUser',
+        url: '/api/users/uploadAvatar',
         paramName: 'file',
         parallelUploads: 1,
         maxFilesize: {
@@ -55,15 +55,12 @@ export default {
     sendingAvatar (file, xhr, formData) {
       this.errors = {}
       this.preview = file
+      formData.append('userId', this.user.id)
     },
     completeAvatar (file, status, xhr) {
       if (status == 'success') {
         this.user.avatar_url = JSON.parse(xhr.response).avatar_url
         this.preview = {}
-        // if (Laravel.user.id == this.user.id) {
-        //   Laravel.user.avatar_url = JSON.parse(xhr.response).avatar_url
-        //   console.log(Laravel.user.avatar_url);
-        // }
       } else {
         this.errors = {
           status: status,
@@ -71,19 +68,19 @@ export default {
         }
       }
     },
-    removeAvatarAuthUser () {
-      this.submiting = true
-      axios.post(`/api/profile/removeAvatarAuthUser`)
-      .then(response => {
-        this.errors = {}
-        this.submiting = false
-        this.user.avatar_url = response.data.avatar_url
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-        this.submiting = false
-      })
-    }
+    // removeAvatarAuthUser () {
+    //   this.submiting = true
+    //   axios.post(`/api/users/removeAvatar`)
+    //   .then(response => {
+    //     this.errors = {}
+    //     this.submiting = false
+    //     this.user.avatar_url = response.data.avatar_url
+    //   })
+    //   .catch(error => {
+    //     this.errors = error.response.data.errors
+    //     this.submiting = false
+    //   })
+    // }
   }
 }
 </script>

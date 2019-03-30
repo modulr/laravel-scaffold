@@ -5,12 +5,7 @@
     </content-placeholders>
     <div v-else>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mandados</h4>
-        <div class="card-header-actions mr-1">
-          <a class="btn btn-primary btn-block mb-2" href="/">
-            <span class="ml-1">Pedir</span>
-          </a>
-        </div>
+        <h4 class="float-left pt-2">Pedidos</h4>
       </div>
       <div class="card-body px-0">
         <ul class="list-group mb-1" v-for="(item, index) in orders">
@@ -40,21 +35,29 @@
                 <hr>
               </div>
               <div class="col-6">
-                <div class="media" v-if="item.dealer_id">
+                <div class="media">
                   <div class="avatar float-left mr-2">
-                    <img class="img-avatar" :src="item.dealer.avatar_url">
+                    <img class="img-avatar" :src="item.creator.avatar_url">
                   </div>
                   <div class="media-body">
-                    <div>{{item.dealer.name}}</div>
-                    <small class="text-muted">repartidor</small>
+                    <div>{{item.creator.name}}</div>
+                    <small class="text-muted">cliente</small>
                   </div>
                 </div>
               </div>
               <div class="col-6 text-right">
                 <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3" :disabled="item.score_client > 0"/>
-                <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)" v-if="item.status_id == 1">
-                  Cancelar
+                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="takeOrder(item, index)" v-if="item.status_id == 1">
+                  Tomar pedido
                 </a>
+                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)" v-if="item.status_id == 2">
+                  Finalizar
+                </a>
+              </div>
+              <div class="col-12">
+                <p class="text-primary text-center mt-5" v-if="item.status_id == 2">
+                  Finaliza este mandado para poder tomar mas pedidos
+                </p>
               </div>
             </div>
           </li>
@@ -79,36 +82,26 @@ export default {
   methods: {
     getOrders () {
       this.loading = true
-      axios.get(`/api/orders/byUser/${this.user.id}`)
+      axios.get(`/api/orders/availables`)
       .then(response => {
         this.orders = response.data
         this.loading = false
       })
     },
-    cancelOrder (order, index) {
-      swal({
-        title: "¿Estas seguro?",
-        text: "¿En verdad quieres cancelar el mandado?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 4})
-          .then(response => {
-            this.orders[index].status_id = response.data.status_id
-            this.orders[index].status = response.data.status
-            this.$toasted.global.error('¡Mandado cancelado!')
-          })
-        }
+    takeOrder (order, index) {
+      axios.put(`/api/orders/takeOrder/${order.id}`)
+      .then(response => {
+        this.$toasted.global.error('¡Mandado tomado!')
+        location.href = `/orders/dealer`
       })
     },
-    scoreOrder (order, index) {
-      axios.put(`/api/orders/updateScoreClient/${order.id}`, {'scoreClient': order.score_client})
+    finalizeOrder (order, index) {
+      axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 3})
       .then(response => {
-        this.orders[index].score_client = response.data.score_client
-        this.$toasted.global.error('¡Mandado calificado!')
+        this.orders[index].status_id = response.data.status_id
+        this.orders[index].status = response.data.status
+        this.$toasted.global.error('¡Mandado finalizado!')
+        this.getOrders()
       })
     }
   }
