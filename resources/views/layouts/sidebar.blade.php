@@ -3,30 +3,31 @@
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="/">
-                    <i class="far fa-comment-alt mr-2"></i> Pedir
+                    <i class="nav-icon far fa-comment-alt mr-2"></i> Pedir
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/profile">
-                    <i class="far fa-user-circle mr-2"></i> Mi cuenta
+                    <i class="nav-icon far fa-user-circle mr-2"></i> Mi cuenta
                 </a>
             </li>
             @auth
                 @can('read-orders')
                     <li class="nav-item">
                         <a class="nav-link" href="/orders">
-                            <i class="fas fa-list-ul mr-2"></i> Mandados
+                            <i class="nav-icon fas fa-list-ul mr-2"></i> Mandados
                         </a>
                     </li>
                     @role('dealer')
+                        <li class="nav-title">Repartidor</li>
                         <li class="nav-item">
                             <a class="nav-link" href="/orders/availables">
-                                <i class="far fa-sticky-note mr-2"></i> Pedidos
+                                <i class="nav-icon far fa-sticky-note mr-2"></i> Pedidos
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/orders/dealer">
-                                <i class="fas fa-motorcycle mr-2"></i> Mis vueltas
+                                <i class="nav-icon fas fa-motorcycle mr-2"></i> Mis vueltas
                             </a>
                         </li>
                     @endrole
@@ -34,7 +35,7 @@
                 @can('read-address')
                     <li class="nav-item">
                         <a class="nav-link" href="/address">
-                            <i class="fas fa-map-marker-alt mr-2"></i> Direcciones
+                            <i class="nav-icon fas fa-map-marker-alt mr-2"></i> Direcciones
                         </a>
                     </li>
                 @endcan
@@ -71,13 +72,9 @@
     <nav>
         <ul class="nav">
             <li class="nav-item">
-            <a class="btn btn-link btn-lg btn-phone" href="tel:813-089-8642">
-                <small class="fa-stack">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
-                </small>
-                813 089 8642
-            </a>
+                <a class="nav-link" href="tel:813-089-8642">
+                    <i class="nav-icon fas fa-phone"></i> 813 089 8642
+                </a>
             </li>
         </ul>
     </nav>
