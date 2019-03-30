@@ -18,6 +18,13 @@
                             <i class="nav-icon fas fa-list-ul mr-2"></i> Mandados
                         </a>
                     </li>
+                    @can('read-address')
+                        <li class="nav-item">
+                            <a class="nav-link" href="/address">
+                                <i class="nav-icon fas fa-map-marker-alt mr-2"></i> Direcciones
+                            </a>
+                        </li>
+                    @endcan
                     @role('dealer')
                         <li class="nav-title">Repartidor</li>
                         <li class="nav-item">
@@ -31,13 +38,6 @@
                             </a>
                         </li>
                     @endrole
-                @endcan
-                @can('read-address')
-                    <li class="nav-item">
-                        <a class="nav-link" href="/address">
-                            <i class="nav-icon fas fa-map-marker-alt mr-2"></i> Direcciones
-                        </a>
-                    </li>
                 @endcan
             @endauth
             @auth

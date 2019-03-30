@@ -60802,7 +60802,7 @@ var render = function() {
   return _c("div", { staticClass: "row justify-content-center mb-3" }, [
     _c(
       "div",
-      { staticClass: "col-12" },
+      { staticClass: "col-12 text-center" },
       [
         _c("img", {
           staticClass: "rounded-circle mb-2",
@@ -63117,7 +63117,7 @@ var render = function() {
   return _c("div", { staticClass: "row justify-content-center mb-3" }, [
     _c(
       "div",
-      { staticClass: "col-12" },
+      { staticClass: "col-12 text-center" },
       [
         _c("img", {
           staticClass: "rounded-circle mb-2",
