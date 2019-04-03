@@ -8,7 +8,7 @@
                 <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
             </a> -->
             <p class="lead mt-4 mb-0">Mandados a domicilio</p>
-            <p><small>Tarifa del dia <b>$15.00</b> pesos</small></p>
+            <p><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
         </div>
 
         <div class="col-9 col-sm-6 col-md-4 text-center mb-5">
@@ -31,7 +31,7 @@
                   <span>Registrate con Facebook</span>
                 </a>
                 <p class="mb-4">y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
-                <a class="btn btn-light" href="/register">
+                <a class="btn btn-light mb-2" href="/register">
                   <span>Registrate</span>
                 </a>
                 <a class="btn btn-link btn-phone btn-block" href="/login">

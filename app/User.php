@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar',
+        'name', 'email', 'password', 'avatar', 'cellphone', 'description'
     ];
 
     /**
@@ -43,7 +43,6 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute()
     {
-        //return $this->avatar;
         if (Str::startsWith($this->avatar, 'http')) {
             return $this->avatar;
         } else {

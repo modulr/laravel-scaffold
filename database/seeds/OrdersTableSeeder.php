@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class OrdersTableSeeder extends Seeder
 {
@@ -50,14 +49,17 @@ class OrdersTableSeeder extends Seeder
         ]);
 
         // Assign permissions
+        $superadmin = Role::findByName('superadmin');
+        $superadmin->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
 
         $user = Role::findByName('user');
         $user->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
 
-        $user = Role::findByName('dealer');
-        $user->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+        $dealer = Role::findByName('dealer');
+        $dealer->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
 
 
         DB::table('order_status')->insert([
@@ -65,10 +67,10 @@ class OrdersTableSeeder extends Seeder
                 'status' => 'Abierto'
             ],
             [
-                'status' => 'En curso'
+                'status' => 'En camino'
             ],
             [
-                'status' => 'Finalizado'
+                'status' => 'Entregado'
             ],
             [
                 'status' => 'Cancelado'

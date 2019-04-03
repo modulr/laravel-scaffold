@@ -4,7 +4,7 @@
 <div class="container">
       <div class="row justify-content-md-center">
             <div class="col-md-9 col-xl-7">
-              En construccion
+              <orders-all></orders-all>
             </div>
       </div>
 </div>

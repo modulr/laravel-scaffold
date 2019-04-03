@@ -41,6 +41,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
+            'cellphone' => 'required|numeric',
+            'description' => 'string|nullable',
             'password' => 'required|string',
             'roles' => 'required|array'
         ]);
@@ -48,6 +50,8 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'cellphone' => $request->cellphone,
+            'description' => $request->description,
             'password' => Hash::make($request->password)
         ]);
 
@@ -65,6 +69,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$request->id,
+            'cellphone' => 'required|numeric',
+            'description' => 'string|nullable',
             'password' => 'string|nullable',
             'roles' => 'required|array'
         ]);
@@ -78,6 +84,12 @@ class UserController extends Controller
         }
         if ($user->email != $request->email) {
             $user->email = $request->email;
+        }
+        if ($user->cellphone != $request->cellphone) {
+            $user->cellphone = $request->cellphone;
+        }
+        if ($user->description != $request->description) {
+            $user->description = $request->description;
         }
         if ($request->password != '') {
             $user->password = Hash::make($request->password);
@@ -129,4 +141,14 @@ class UserController extends Controller
     //
     //     return $user;
     // }
+
+    public function getDealers ()
+    {
+        return User::role('dealer')->get();
+    }
+
+    public function getClients ()
+    {
+        return User::role('user')->get();
+    }
 }

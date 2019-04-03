@@ -12,21 +12,28 @@
             <div class="form-group row justify-content-md-center">
               <label class="col-md-3">Nombre</label>
               <div class="col-md-9">
-                <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="user.name">
+                <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="Juan Perez">
                 <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
               </div>
             </div>
             <div class="form-group row justify-content-md-center">
               <label class="col-md-3">Correo electrónico</label>
               <div class="col-md-9">
-                <input class="form-control" :class="{'is-invalid': errors.email}" type="email" v-model="user.email">
+                <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="user.email" placeholder="juan@traeme.app">
                 <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
+              </div>
+            </div>
+            <div class="form-group row justify-content-md-center">
+              <label class="col-md-3">Teléfono celular</label>
+              <div class="col-md-9">
+                <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="user.cellphone" placeholder="6271012345">
+                <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
               </div>
             </div>
             <div class="form-group row justify-content-md-center">
               <label class="col-md-3">Descripción</label>
               <div class="col-md-9">
-                <textarea class="form-control" rows="3" placeholder="¡Cuentanos algo!" v-model="user.description"></textarea>
+                <textarea class="form-control" rows="3" placeholder="¡Cuentanos algo sobre ti!" v-model="user.description"></textarea>
               </div>
             </div>
             <div class="text-center">

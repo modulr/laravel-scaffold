@@ -8,7 +8,7 @@
         <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
           <a class="btn btn-primary btn-block mb-2" href="/">
-            <span class="ml-1">Pedir</span>
+            <i class="fa fa-plus mr-1"></i>Pedir
           </a>
         </div>
       </div>
@@ -16,11 +16,14 @@
         <ul class="list-group mb-1" v-for="(item, index) in orders">
           <li class="list-group-item">
             <div class="row">
-              <div class="col-6">
+              <div class="col">
                 <small class="text-muted">Mandado: {{item.id}}</small>
               </div>
-              <div class="col-6">
-                <span class="badge badge-pill float-right" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
+              <div class="col text-center">
+                <small class="text-muted">Tarifa: ${{item.rate}}</small>
+              </div>
+              <div class="col text-right">
+                <span class="badge badge-pill" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
                   {{item.status.status}}
                 </span>
               </div>
@@ -46,12 +49,12 @@
                   </div>
                   <div class="media-body">
                     <div>{{item.dealer.name}}</div>
-                    <small class="text-muted">repartidor</small>
+                    <small class="text-muted">Repartidor</small>
                   </div>
                 </div>
               </div>
               <div class="col-6 text-right">
-                <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3" :disabled="item.score_client > 0"/>
+                <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
                 <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)" v-if="item.status_id == 1">
                   Cancelar
                 </a>
@@ -60,6 +63,14 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
+      <i class="icon-magnifier fa-3x text-muted"></i>
+      <p class="mb-0 mt-3"><strong>No tienes ningun mandado</strong></p>
+      <p class="text-muted">Haz tu primer pedido dando clic en el boton de abajo</p>
+      <a class="btn btn-primary" href="/">
+        <i class="fa fa-plus mr-1"></i>Pedir
+      </a>
     </div>
   </div>
 </template>

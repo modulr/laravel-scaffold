@@ -6,11 +6,6 @@
                     <i class="nav-icon far fa-comment-alt mr-2"></i> Pedir
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile">
-                    <i class="nav-icon far fa-user-circle mr-2"></i> Mi cuenta
-                </a>
-            </li>
             @auth
                 @can('read-orders')
                     <li class="nav-item">
@@ -50,6 +45,41 @@
                     <p class="ml-1 mb-5 text-center">y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
                 </li>
             @endauth
+            @hasanyrole('superadmin|admin')
+                <li class="nav-title">Administrador</li>
+                @can('read-rates')
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders/all">
+                        <i class="nav-icon far fa-sticky-note mr-2"></i> Pedidos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/clients">
+                        <i class="nav-icon fas fa-users mr-2"></i> Clientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/dealers">
+                        <i class="nav-icon fas fa-motorcycle mr-2"></i> Repartidores
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/stores">
+                        <i class="nav-icon fas fa-store mr-2"></i> Tiendas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/codes">
+                        <i class="nav-icon fas fa-percent"></i> Cupones
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rates">
+                        <i class="nav-icon fas fa-dollar-sign"></i> Tarifas
+                    </a>
+                </li>
+                @endcan
+            @endhasanyrole
             @can('read-users','read-roles')
                 <li class="nav-title">Settings</li>
             @endcan

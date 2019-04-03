@@ -37,6 +37,18 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                    </div>
+                    <input id="cellphone" type="tel" class="form-control{{ $errors->has('cellphone') ? ' is-invalid' : '' }}" name="cellphone" value="{{ old('cellphone') }}" placeholder="Numero de celular" required>
+
+                    @if ($errors->has('cellphone'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('cellphone') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="icon-lock"></i>
                         </span>

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class ProfileTableSeeder extends Seeder
 {
@@ -50,8 +49,11 @@ class ProfileTableSeeder extends Seeder
         ]);
 
         // Assign permissions
+        $superadmin = Role::findByName('superadmin');
+        $superadmin->givePermissionTo('read-profile', 'update-profile', 'read-profile-password', 'update-profile-password');
+
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('read-profile', 'update-profile', 'read-profile-password', 'update-profile-password');
 
         $user = Role::findByName('user');
         $user->givePermissionTo('read-profile', 'update-profile', 'read-profile-password', 'update-profile-password');

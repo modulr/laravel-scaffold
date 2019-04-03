@@ -7,10 +7,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Orders\Order;
 use App\Models\Orders\OrderStatus;
+use App\Models\Rates\Rate;
 use App\User;
+use Validator;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
+    public function all (Request $request)
+    {
+        return Order::with('status', 'code', 'creator', 'dealer')->latest()->get();
+    }
+
     public function availables ()
     {
         $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
@@ -40,15 +48,52 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'order' => 'required|string',
-            'address.title' => 'required|string',
-            'clientId' => 'required|integer'
+            'address' => 'required|array',
+            'client' => 'required|array'
         ]);
+
+        if ($request->dealer) {
+            $status = 2;
+        } else {
+            $status = 1;
+        }
+
+        $order = Order::create([
+            'order' => $request->order,
+            'address' => $request->address['address'],
+            'status_id' => $status,
+            'client_id' => $request->client['id'],
+            'dealer_id' => $request->dealer['id'],
+            'rate' => Rate::latest()->first()->rate
+        ]);
+
+        return $this->show($order->id);
+    }
+
+    public function storeAuth (Request $request)
+    {
+        $this->validate($request, [
+            'order' => 'required|string',
+            'address' => 'required|array',
+            //'cellphone' => 'numeric|nullable'
+        ]);
+
+        Validator::make($request->all(), [
+            'cellphone' => Rule::requiredIf($request->user()->cellphone == null),
+        ])->validate();
+
+        if ($request->cellphone) {
+            $user = User::find(Auth::id());
+            $user->cellphone = $request->cellphone;
+            $user->save();
+        }
 
         return Order::create([
             'order' => $request->order,
-            'address' => $request->address['title'],
+            'address' => $request->address['address'],
             'status_id' => 1,
-            'client_id' => $request->clientId
+            'client_id' => Auth::id(),
+            'rate' => Rate::latest()->first()->rate
         ]);
     }
 
@@ -125,6 +170,20 @@ class OrderController extends Controller
         $order->save();
 
         return $order;
+    }
+
+    public function assignDealer ($orderId, Request $request)
+    {
+        $this->validate($request, [
+            'dealer' => 'required'
+        ]);
+
+        $order = Order::find($orderId);
+        $order->dealer_id = $request->dealer['id'];
+        $order->status_id = 2;
+        $order->save();
+
+        return $this->show($order->id);
     }
 
     public function status ()

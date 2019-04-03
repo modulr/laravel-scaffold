@@ -23,7 +23,7 @@ Vue.use(require('vue-moment'));
 Vue.use(Toasted)
 Vue.toasted.register('error', message => message, {
     position : 'bottom-center',
-    duration : 1000
+    duration : 2000
 })
 Vue.use(VueClip)
 Vue.component('multiselect', Multiselect)
@@ -62,6 +62,7 @@ Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
 // Orders
 Vue.component('orders-index', require('./components/orders/Index.vue'));
+Vue.component('orders-all', require('./components/orders/All.vue'));
 Vue.component('orders-availables', require('./components/orders/Availables.vue'));
 Vue.component('orders-dealer', require('./components/orders/Dealer.vue'));
 Vue.component('orders-create', require('./components/orders/Create.vue'));
@@ -69,6 +70,10 @@ Vue.component('orders-create-auth', require('./components/orders/CreateAuth.vue'
 
 // Address
 Vue.component('address-index', require('./components/address/Index.vue'));
+
+// Rates
+Vue.component('rates-index', require('./components/rates/Index.vue'));
+Vue.component('rates-day', require('./components/rates/Day.vue'));
 
 const app = new Vue({
     el: '#app'

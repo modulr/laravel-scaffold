@@ -1,15 +1,17 @@
 <template>
   <div>
     <div class="form-group">
-      <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order.order"></textarea>
+      <textarea class="form-control" rows="3" :class="{'is-invalid': errors.order}" :placeholder="placeholder"
+      v-model="newOrder.order"></textarea>
+      <small class="form-text text-white" v-if="errors.order">Dinos que te llevamos</small>
     </div>
     <div class="form-group">
       <multiselect
-        v-model="order.address"
+        v-model="newOrder.address"
         :options="address"
         openDirection="bottom"
-        label="title"
-        track-by="title"
+        label="address"
+        track-by="id"
         :custom-label="customLabel"
         selectLabel="Seleccionar"
         selectedLabel="Seleccionado"
@@ -17,11 +19,12 @@
         placeholder="Selecciona o agrega una dirección"
         tag-placeholder="Agregar esta dirección"
         :taggable="true"
-        @tag="addTag">
+        @tag="addTag"
+        :class="{'border border-danger rounded': errors.address}">
         <template slot="singleLabel" slot-scope="props">
           <span>
             <strong class="mr-2">{{ props.option.alias }}</strong>
-            <span>{{ props.option.title }}</span>
+            <span>{{ props.option.address }}</span>
           </span>
         </template>
         <template slot="option" slot-scope="props">
@@ -30,19 +33,23 @@
           </div>
           <div v-else>
             <strong class="mr-2">{{ props.option.alias }}</strong>
-            <span>{{ props.option.title }}</span>
+            <span>{{ props.option.address }}</span>
           </div>
         </template>
       </multiselect>
+      <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
       <!-- <div class="input-group border-right-0">
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
         </div>
-        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.destination">
+        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address">
       </div> -->
     </div>
-    <div class="bg-info mt-3 mb-3"><small>{{errors}}</small></div>
-    <a class="btn btn-light btn-lg" href="#" @click.prevent="save">Pedir</a>
+    <div class="form-group" v-if="!user.cellphone">
+      <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newOrder.cellphone" placeholder="Escribe tu numero de celular">
+      <small class="form-text text-white" v-if="errors.cellphone">¿Cual es tu numero celular?</small>
+    </div>
+    <a class="btn btn-light btn-lg" href="#" @click.prevent="createOrder">Pedir</a>
   </div>
 </template>
 
@@ -52,59 +59,62 @@ export default {
     return {
       user: Laravel.user,
       address: [],
-      order: {
-        order: '',
-        address: '',
-        clientId: null
-      },
-      errors: '',
+      newOrder: {},
+      placeholder: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
         'Traeme unos tacos',
         'Pagame la luz',
+        'Me puedes pagar el Agua de la Dirección...',
         '¿Necesitas enviar un paquete?'
       ],
-      placeholder: ''
+      loading: true,
+      errors: ''
     }
   },
   mounted () {
-    if (localStorage.getItem("address")) {
-      this.address = JSON.parse(localStorage.getItem("address"))
-    }
-    if (localStorage.getItem("currentAddress")) {
-      this.order.address = JSON.parse(localStorage.getItem("currentAddress"))
-    }
+    this.getAddress()
     this.randomPlaceholder()
   },
   methods: {
-    save () {
+    getAddress () {
+      this.loading = true
+      axios.get(`/api/address/byClient`)
+      .then(response => {
+        this.address = response.data
+        this.loading = false
+      })
+    },
+    createOrder () {
       if (!this.submiting) {
         this.submiting = true
-        this.order.clientId = this.user.id
-        axios.post(`/api/orders/store`, this.order)
+        axios.post(`/api/orders/storeAuth`, this.newOrder)
         .then(response => {
-          localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
           this.$toasted.global.error('¡Mandado enviado!')
           location.href = `/orders`
-          //location.href = `/orders/${response.data.id}`
         })
         .catch(error => {
-          this.errors = 'Dinos que te llevamos y a donde'
+          this.errors = error.response.data.errors
           this.submiting = false
         })
       }
     },
     addTag (newTag) {
       const tag = {
-        title: newTag,
-        alias: ''
+        address: newTag
       }
-      this.address.unshift(tag)
-      localStorage.setItem("address", JSON.stringify(this.address))
-      this.order.address = tag
+      axios.post(`/api/address/store`, tag)
+      .then(response => {
+        this.newOrder.address = tag
+        this.address.unshift(response.data)
+        this.$toasted.global.error('¡Direccion agregada!')
+      })
+      .catch(error => {
+        this.errors = error.response.data.errors
+      })
     },
-    customLabel ({ title, alias }) {
-      return `${alias} ${title}`
+    customLabel ({ address, alias }) {
+      return `${alias} ${address}`
     },
     randomPlaceholder () {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)]

@@ -24,9 +24,14 @@
             <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
-            <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
+            <label>Cellphone</label>
+            <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="user.cellphone" placeholder="6271012345">
+            <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" rows="3" placeholder="About" v-model="user.description"></textarea>
+            <div class="invalid-feedback" v-if="errors.description">{{errors.description[0]}}</div>
           </div>
           <div class="form-group">
             <label>Roles</label>
@@ -40,6 +45,11 @@
               :class="{'border border-danger rounded': errors.roles}">
             </multiselect>
             <small class="form-text text-danger" v-if="errors.roles">{{errors.roles[0]}}</small>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
+            <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
           </div>
         </div>
       </div>

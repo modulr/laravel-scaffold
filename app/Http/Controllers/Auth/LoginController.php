@@ -75,7 +75,7 @@ class LoginController extends Controller
             return $this->authAndRedirect($user); // Login y redirección
         }
 
-        dd($user);
+        //dd($socialUser);
 
         // $user->token;
     }

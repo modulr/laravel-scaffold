@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
-class AddressTableSeeder extends Seeder
+class RatesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class AddressTableSeeder extends Seeder
     {
         // Module
         $moduleId = DB::table('modules')->insertGetId([
-            'name' => 'address',
-            'display_name' => 'Direcciones',
+            'name' => 'rates',
+            'display_name' => 'Tarifas',
             'icon' => 'icon-user',
             'active' => false
         ]);
@@ -23,43 +23,36 @@ class AddressTableSeeder extends Seeder
         // Permissions
         DB::table('permissions')->insert([
             [
-                'name' => 'read-address',
+                'name' => 'read-rates',
                 'display_name' => 'Read',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'create-address',
+                'name' => 'create-rates',
                 'display_name' => 'Create',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'update-address',
+                'name' => 'update-rates',
                 'display_name' => 'Update',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'delete-address',
+                'name' => 'delete-rates',
                 'display_name' => 'Delete',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]
         ]);
 
-        // Assign permissions to admin role
+        // Assign permissions
         $superadmin = Role::findByName('superadmin');
-        $superadmin->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
+        $superadmin->givePermissionTo('read-rates', 'create-rates', 'update-rates', 'delete-rates');
 
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
-
-        $user = Role::findByName('user');
-        $user->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
-
-        $dealer = Role::findByName('dealer');
-        $dealer->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
-
+        $admin->givePermissionTo('read-rates', 'create-rates', 'update-rates', 'delete-rates');
     }
 }

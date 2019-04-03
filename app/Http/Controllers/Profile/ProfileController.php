@@ -25,8 +25,7 @@ class ProfileController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,'.Auth::id(),
-            'description' => 'string',
+            'email' => 'required|email|unique:users,email,'.Auth::id()
         ]);
 
         $user = User::find(Auth::id());
@@ -34,6 +33,8 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->description = $request->description;
+        $user->cellphone = $request->cellphone;
+        $user->active = $request->active;
         $user->save();
 
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');

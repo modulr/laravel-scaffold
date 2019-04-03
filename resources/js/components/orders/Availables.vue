@@ -11,11 +11,14 @@
         <ul class="list-group mb-1" v-for="(item, index) in orders">
           <li class="list-group-item">
             <div class="row">
-              <div class="col-6">
+              <div class="col">
                 <small class="text-muted">Mandado: {{item.id}}</small>
               </div>
-              <div class="col-6">
-                <span class="badge badge-pill float-right" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
+              <div class="col text-center">
+                <small class="text-muted">Tarifa: ${{item.rate}}</small>
+              </div>
+              <div class="col text-right">
+                <span class="badge badge-pill" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
                   {{item.status.status}}
                 </span>
               </div>
@@ -41,12 +44,11 @@
                   </div>
                   <div class="media-body">
                     <div>{{item.creator.name}}</div>
-                    <small class="text-muted">cliente</small>
+                    <small class="text-muted">Cliente</small>
                   </div>
                 </div>
               </div>
               <div class="col-6 text-right">
-                <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3" :disabled="item.score_client > 0"/>
                 <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="takeOrder(item, index)" v-if="item.status_id == 1">
                   Tomar pedido
                 </a>
@@ -64,6 +66,14 @@
         </ul>
       </div>
     </div>
+    <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
+      <i class="icon-magnifier fa-3x text-muted"></i>
+      <p class="mb-0 mt-3"><strong>No existe ningun pedido nuevo</strong></p>
+      <p class="text-muted">Revisa mas tarde o da clic en el boton de abajo para refrescar la pantalla</p>
+      <a class="btn btn-primary" href="/orders/availables">
+        <i class="fa fa-sync mr-1"></i>Refrescar
+      </a>
+    </div>
   </div>
 </template>
 
@@ -71,7 +81,6 @@
 export default {
   data () {
     return {
-      user: Laravel.user,
       orders: [],
       loading: true
     }
@@ -98,8 +107,6 @@ export default {
     finalizeOrder (order, index) {
       axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 3})
       .then(response => {
-        this.orders[index].status_id = response.data.status_id
-        this.orders[index].status = response.data.status
         this.$toasted.global.error('¡Mandado finalizado!')
         this.getOrders()
       })
