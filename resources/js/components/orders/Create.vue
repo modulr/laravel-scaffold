@@ -2,6 +2,7 @@
   <div>
     <div class="form-group">
       <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order.order"></textarea>
+      <small class="form-text text-white" v-if="errors.order">Dinos que te llevamos</small>
     </div>
     <div class="form-group">
       <div class="input-group border-right-0">
@@ -10,8 +11,8 @@
         </div>
         <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address.title">
       </div>
+      <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
-    <div class="bg-info mt-3 mb-3"><small>{{errors}}</small></div>
     <a class="btn btn-light btn-lg" href="#" @click.prevent="send">
       <i class="fab fa-whatsapp mr-1"></i> Pedir por WhatsApp
     </a>
@@ -30,11 +31,12 @@ export default {
           alias: ''
         }
       },
-      errors: '',
+      errors: {},
       placeholders: [
         '¿Necesitas algo de la tienda?',
         'Traeme unos tacos',
         'Pagame la luz',
+        'Me puedes pagar el Agua de la Dirección...',
         '¿Necesitas enviar un paquete?'
       ],
       placeholder: ''
@@ -51,14 +53,16 @@ export default {
   },
   methods: {
     send () {
-      this.errors = ''
-      if (this.order.order && this.order.address.title) {
+      this.errors = {}
+      if (!this.order.order) {
+        this.errors.order = true
+      } else if (!this.order.address.title) {
+        this.errors.address = true
+      } else {
         location.href = `https://api.whatsapp.com/send?phone=528130898642&text=Orden:%20${this.order.order},%20%20Destino:%20%20${this.order.address.title}`
         this.address.unshift(this.order.address)
         localStorage.setItem("address", JSON.stringify(this.address))
         localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
-      } else {
-        this.errors = 'Dinos que te llevamos y a donde'
       }
       // if (!this.submiting) {
       //   this.submiting = true

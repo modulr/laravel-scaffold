@@ -66646,6 +66646,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66658,8 +66659,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           alias: ''
         }
       },
-      errors: '',
-      placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', '¿Necesitas enviar un paquete?'],
+      errors: {},
+      placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
       placeholder: ''
     };
   },
@@ -66675,14 +66676,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     send: function send() {
-      this.errors = '';
-      if (this.order.order && this.order.address.title) {
+      this.errors = {};
+      if (!this.order.order) {
+        this.errors.order = true;
+      } else if (!this.order.address.title) {
+        this.errors.address = true;
+      } else {
         location.href = 'https://api.whatsapp.com/send?phone=528130898642&text=Orden:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.address.title;
         this.address.unshift(this.order.address);
         localStorage.setItem("address", JSON.stringify(this.address));
         localStorage.setItem("currentAddress", JSON.stringify(this.order.address));
-      } else {
-        this.errors = 'Dinos que te llevamos y a donde';
       }
       // if (!this.submiting) {
       //   this.submiting = true
@@ -66732,7 +66735,13 @@ var render = function() {
             _vm.$set(_vm.order, "order", $event.target.value)
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.errors.order
+        ? _c("small", { staticClass: "form-text text-white" }, [
+            _vm._v("Dinos que te llevamos")
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
@@ -66763,11 +66772,13 @@ var render = function() {
             }
           }
         })
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "bg-info mt-3 mb-3" }, [
-      _c("small", [_vm._v(_vm._s(_vm.errors))])
+      ]),
+      _vm._v(" "),
+      _vm.errors.address
+        ? _c("small", { staticClass: "form-text text-white" }, [
+            _vm._v("¿A donde te lo llevamos?")
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c(
