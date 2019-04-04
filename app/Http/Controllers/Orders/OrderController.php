@@ -5,43 +5,45 @@ namespace App\Http\Controllers\Orders;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use App\Models\Orders\Order;
 use App\Models\Orders\OrderStatus;
 use App\Models\Rates\Rate;
 use App\User;
 use Validator;
 use Illuminate\Validation\Rule;
+use App\Notifications\NewOrder;
 
 class OrderController extends Controller
 {
     public function all (Request $request)
     {
-        return Order::with('status', 'code', 'creator', 'dealer')->latest()->get();
+        return Order::with('status', 'code', 'client', 'dealer')->latest()->get();
     }
 
     public function availables ()
     {
         $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
         if ($ordersCount > 0) {
-            return Order::with('status', 'code', 'creator')->where('dealer_id', Auth::id())->where('status_id', 2)->get();
+            return Order::with('status', 'code', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->get();
         } else {
-            return Order::with('status', 'code', 'creator')->where('status_id', 1)->latest()->get();
+            return Order::with('status', 'code', 'client')->where('status_id', 1)->latest()->get();
         }
     }
 
-    public function byUser ($userId)
+    public function byClient ($userId)
     {
         return Order::with('status', 'code', 'dealer')->where('client_id', $userId)->latest()->get();
     }
 
     public function byDealer ($userId)
     {
-        return Order::with('status', 'code', 'creator')->where('dealer_id', $userId)->latest()->get();
+        return Order::with('status', 'code', 'client')->where('dealer_id', $userId)->latest()->get();
     }
 
     public function show ($orderId)
     {
-        return Order::with('status', 'code', 'creator', 'dealer')->findOrFail($orderId);
+        return Order::with('status', 'code', 'client', 'dealer')->findOrFail($orderId);
     }
 
     public function store (Request $request)
@@ -67,6 +69,8 @@ class OrderController extends Controller
             'rate' => Rate::latest()->first()->rate
         ]);
 
+        Auth::user()->notify(new NewOrder($order));
+
         return $this->show($order->id);
     }
 
@@ -88,13 +92,21 @@ class OrderController extends Controller
             $user->save();
         }
 
-        return Order::create([
+        $order = Order::create([
             'order' => $request->order,
             'address' => $request->address['address'],
             'status_id' => 1,
             'client_id' => Auth::id(),
             'rate' => Rate::latest()->first()->rate
         ]);
+
+        Auth::user()->notify(new NewOrder($order));
+
+        // Send more than one
+        // $users = User::role('superadmin', 'admin', 'dealer')->get();
+        // Notification::send($users, new NewOrder($message));
+
+        return $order;
     }
 
     public function updateStatus ($orderId, Request $request)

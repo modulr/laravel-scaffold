@@ -65521,7 +65521,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.loading = true;
-      axios.get("/api/orders/byUser/" + this.user.id).then(function (response) {
+      axios.get("/api/orders/byClient/" + this.user.id).then(function (response) {
         _this.orders = response.data;
         _this.loading = false;
       });
@@ -66067,12 +66067,12 @@ var render = function() {
                           _c("div", { staticClass: "avatar float-left mr-2" }, [
                             _c("img", {
                               staticClass: "img-avatar",
-                              attrs: { src: item.creator.avatar_url }
+                              attrs: { src: item.client.avatar_url }
                             })
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "media-body" }, [
-                            _c("div", [_vm._v(_vm._s(item.creator.name))]),
+                            _c("div", [_vm._v(_vm._s(item.client.name))]),
                             _vm._v(" "),
                             _c("small", { staticClass: "text-muted" }, [
                               _vm._v("Cliente")
@@ -66464,12 +66464,12 @@ var render = function() {
                           _c("div", { staticClass: "avatar float-left mr-2" }, [
                             _c("img", {
                               staticClass: "img-avatar",
-                              attrs: { src: item.creator.avatar_url }
+                              attrs: { src: item.client.avatar_url }
                             })
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "media-body" }, [
-                            _c("div", [_vm._v(_vm._s(item.creator.name))]),
+                            _c("div", [_vm._v(_vm._s(item.client.name))]),
                             _vm._v(" "),
                             _c("small", { staticClass: "text-muted" }, [
                               _vm._v("Cliente")
@@ -66665,13 +66665,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
+    this.randomPlaceholder();
     if (localStorage.getItem("address")) {
       this.address = JSON.parse(localStorage.getItem("address"));
     }
     if (localStorage.getItem("currentAddress")) {
       this.order.address = JSON.parse(localStorage.getItem("currentAddress"));
     }
-    this.randomPlaceholder();
   },
 
   methods: {
@@ -66682,7 +66682,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else if (!this.order.address.title) {
         this.errors.address = true;
       } else {
-        location.href = 'https://api.whatsapp.com/send?phone=528130898642&text=Pedido:%20' + this.order.order + ',%20%20Direcci\xF3n:%20%20' + this.order.address.title;
+        location.href = 'https://api.whatsapp.com/send?phone=528130898642&text=Pedido:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.address.title;
         this.address.unshift(this.order.address);
         localStorage.setItem("address", JSON.stringify(this.address));
         localStorage.setItem("currentAddress", JSON.stringify(this.order.address));
@@ -66929,6 +66929,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66939,12 +66943,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       placeholder: '',
       placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
       loading: true,
+      submiting: false,
       errors: ''
     };
   },
   mounted: function mounted() {
     this.getAddress();
     this.randomPlaceholder();
+    if (localStorage.getItem("currentAddress")) {
+      //this.newOrder.address = JSON.parse(localStorage.getItem("currentAddress"))
+      this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("currentAddress")));
+    }
   },
 
   methods: {
@@ -66963,6 +66972,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.submiting) {
         this.submiting = true;
         axios.post('/api/orders/storeAuth', this.newOrder).then(function (response) {
+          localStorage.setItem("currentAddress", JSON.stringify(_this2.newOrder.address));
           _this2.$toasted.global.error('¡Mandado enviado!');
           location.href = '/orders';
         }).catch(function (error) {
@@ -67148,7 +67158,7 @@ var render = function() {
       "a",
       {
         staticClass: "btn btn-light btn-lg",
-        attrs: { href: "#" },
+        attrs: { href: "#", disabled: _vm.submiting },
         on: {
           click: function($event) {
             $event.preventDefault()
@@ -67156,7 +67166,13 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Pedir")]
+      [
+        _vm.submiting
+          ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+          : _vm._e(),
+        _vm._v(" "),
+        _c("span", { staticClass: "ml-1" }, [_vm._v("Pedir")])
+      ]
     )
   ])
 }
@@ -68656,13 +68672,13 @@ var render = function() {
                               [
                                 _c("img", {
                                   staticClass: "img-avatar",
-                                  attrs: { src: item.creator.avatar_url }
+                                  attrs: { src: item.client.avatar_url }
                                 })
                               ]
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "media-body" }, [
-                              _c("div", [_vm._v(_vm._s(item.creator.name))]),
+                              _c("div", [_vm._v(_vm._s(item.client.name))]),
                               _vm._v(" "),
                               _c("small", { staticClass: "text-muted" }, [
                                 _vm._v("Cliente")
@@ -68731,9 +68747,9 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col text-right" }, [
-                        item.status_id == 1
-                          ? _c(
+                      item.status_id == 1
+                        ? _c("div", { staticClass: "col text-right" }, [
+                            _c(
                               "a",
                               {
                                 staticClass: "btn btn-outline-info btn-sm",
@@ -68751,8 +68767,8 @@ var render = function() {
                                 )
                               ]
                             )
-                          : _vm._e()
-                      ])
+                          ])
+                        : _vm._e()
                     ])
                   ])
                 ])

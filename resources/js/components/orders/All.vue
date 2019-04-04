@@ -45,10 +45,10 @@
               <div class="col">
                 <div class="media">
                   <div class="avatar float-left mr-2">
-                    <img class="img-avatar" :src="item.creator.avatar_url">
+                    <img class="img-avatar" :src="item.client.avatar_url">
                   </div>
                   <div class="media-body">
-                    <div>{{item.creator.name}}</div>
+                    <div>{{item.client.name}}</div>
                     <small class="text-muted">Cliente</small>
                   </div>
                 </div>
@@ -66,8 +66,8 @@
                 </div>
                 <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
               </div>
-              <div class="col text-right">
-                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="assignModal(item, index)" v-if="item.status_id == 1">
+              <div class="col text-right" v-if="item.status_id == 1">
+                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="assignModal(item, index)">
                   Asignar repartidor
                 </a>
               </div>

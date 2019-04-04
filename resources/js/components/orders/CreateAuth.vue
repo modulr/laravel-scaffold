@@ -49,7 +49,11 @@
       <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newOrder.cellphone" placeholder="Escribe tu numero de celular">
       <small class="form-text text-white" v-if="errors.cellphone">¿Cual es tu numero celular?</small>
     </div>
-    <a class="btn btn-light btn-lg" href="#" @click.prevent="createOrder">Pedir</a>
+    <!-- <a class="btn btn-light btn-lg" href="#" @click.prevent="createOrder">Pedir</a> -->
+    <a class="btn btn-light btn-lg" href="#" :disabled="submiting" @click.prevent="createOrder">
+      <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+      <span class="ml-1">Pedir</span>
+    </a>
   </div>
 </template>
 
@@ -69,12 +73,18 @@ export default {
         '¿Necesitas enviar un paquete?'
       ],
       loading: true,
+      submiting: false,
       errors: ''
     }
   },
   mounted () {
     this.getAddress()
     this.randomPlaceholder()
+    if (localStorage.getItem("currentAddress")) {
+      //this.newOrder.address = JSON.parse(localStorage.getItem("currentAddress"))
+      this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("currentAddress")))
+
+    }
   },
   methods: {
     getAddress () {
@@ -90,6 +100,7 @@ export default {
         this.submiting = true
         axios.post(`/api/orders/storeAuth`, this.newOrder)
         .then(response => {
+          localStorage.setItem("currentAddress", JSON.stringify(this.newOrder.address))
           this.$toasted.global.error('¡Mandado enviado!')
           location.href = `/orders`
         })

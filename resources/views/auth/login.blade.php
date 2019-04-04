@@ -75,7 +75,8 @@
                     <img src="svg/traeme.svg" class="mb-5" width="150" alt="Traeme">
                     <h2>Registrate</h2>
                     <p>Si no tienes una cuenta crea una.</p>
-                    <a class="btn btn-primary active mt-2" href="{{ route('register') }}">¡Registrate ahora!</a>
+                    <a class="btn btn-primary active mt-2 mb-2" href="{{ route('register') }}">¡Registrate ahora!</a>
+                    <a class="btn btn-brand btn-facebook btn-block" href="/auth/facebook">Registrate con Facebook</a>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'api/orders'], function() {
             Route::get('/status', 'OrderController@status')->middleware('permission:read-orders');
             Route::get('/availables', 'OrderController@availables')->middleware('permission:read-orders');
-            Route::get('/byUser/{user}', 'OrderController@byUser')->middleware('permission:read-orders');
+            Route::get('/byClient/{user}', 'OrderController@byClient')->middleware('permission:read-orders');
             Route::get('/byDealer/{user}', 'OrderController@byDealer')->middleware('permission:read-orders');
 
             Route::put('/updateStatus/{order}', 'OrderController@updateStatus')->middleware('permission:update-orders');

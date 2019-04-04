@@ -23,6 +23,11 @@ class Order extends Model
         return $this->belongsTo('App\Models\Codes\Code');
     }
 
+    public function client()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public function dealer()
     {
         return $this->belongsTo('App\User');

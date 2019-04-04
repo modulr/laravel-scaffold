@@ -38,5 +38,14 @@
             </div>
         </li>
     </ul>
+    @else
+    <ul class="nav navbar-nav ml-auto mr-3">
+        <li class="nav-item ">
+            <a class="btn btn-outline-primary btn-sm" href="/login" role="button">
+                Entrar
+            </a>
+          </li>
+        </ul>
+      </header>
     @endauth
 </header>

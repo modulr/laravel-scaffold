@@ -40,10 +40,10 @@
               <div class="col-6">
                 <div class="media">
                   <div class="avatar float-left mr-2">
-                    <img class="img-avatar" :src="item.creator.avatar_url">
+                    <img class="img-avatar" :src="item.client.avatar_url">
                   </div>
                   <div class="media-body">
-                    <div>{{item.creator.name}}</div>
+                    <div>{{item.client.name}}</div>
                     <small class="text-muted">Cliente</small>
                   </div>
                 </div>

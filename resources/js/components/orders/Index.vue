@@ -90,7 +90,7 @@ export default {
   methods: {
     getOrders () {
       this.loading = true
-      axios.get(`/api/orders/byUser/${this.user.id}`)
+      axios.get(`/api/orders/byClient/${this.user.id}`)
       .then(response => {
         this.orders = response.data
         this.loading = false
