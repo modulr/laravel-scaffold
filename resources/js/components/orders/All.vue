@@ -8,7 +8,7 @@
         <h4 class="float-left pt-2">Pedidos</h4>
         <div class="card-header-actions mr-1">
           <a class="btn btn-primary" href="#" @click.prevent="orderModal">
-            <i class="fa fa-plus mr-1"></i>Crear
+            <i class="fa fa-plus mr-2"></i>Crear
           </a>
         </div>
       </div>

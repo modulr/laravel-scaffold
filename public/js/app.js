@@ -65591,7 +65591,7 @@ var render = function() {
                       attrs: { href: "/" }
                     },
                     [
-                      _c("i", { staticClass: "fa fa-plus mr-1" }),
+                      _c("i", { staticClass: "fa fa-plus mr-2" }),
                       _vm._v("Pedir\n        ")
                     ]
                   )
@@ -66232,7 +66232,7 @@ var render = function() {
                       }
                     },
                     [
-                      _c("i", { staticClass: "fa fa-plus mr-1" }),
+                      _c("i", { staticClass: "fa fa-plus mr-2" }),
                       _vm._v("Crear\n        ")
                     ]
                   )
@@ -68007,7 +68007,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68243,10 +68242,9 @@ var render = function() {
       },
       [
         _vm.submiting
-          ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+          ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-2" })
           : _vm._e(),
-        _vm._v(" "),
-        _c("span", { staticClass: "ml-1" }, [_vm._v("Pedir")])
+        _vm._v("Pedir\n  ")
       ]
     )
   ])

@@ -51,8 +51,7 @@
     </div>
     <!-- <a class="btn btn-light btn-lg" href="#" @click.prevent="createOrder">Pedir</a> -->
     <a class="btn btn-light btn-lg" href="#" :disabled="submiting" @click.prevent="createOrder">
-      <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-      <span class="ml-1">Pedir</span>
+      <i class="fas fa-spinner fa-spin mr-2" v-if="submiting"></i>Pedir
     </a>
   </div>
 </template>
