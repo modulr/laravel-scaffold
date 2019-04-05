@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
@@ -55,8 +56,12 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
+        if (!$request->has('code') || $request->has('denied')) {
+          return redirect('/');
+        }
+
         $socialUser = Socialite::driver('facebook')->user();
 
         if ($user = User::where('email', $socialUser->email)->first()) {
