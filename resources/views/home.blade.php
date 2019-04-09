@@ -27,10 +27,9 @@
                 </a>
                 <p>ó</p>
                 <a class="btn btn-brand btn-facebook" href="/auth/facebook">
-                  <i class="fab fa-facebook-f"></i>
                   <span>Registrate con Facebook</span>
                 </a>
-                <p class="mb-4">y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
+                <p class="mt-3 mb-4">y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
                 <a class="btn btn-light mb-2" href="/register">
                   <span>Registrate</span>
                 </a>
