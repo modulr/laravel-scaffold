@@ -56,7 +56,7 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col">
+        <div class="col text-center">
             <img src="/img/pasos.png" class="img-fluid" alt="pasos">
             <img src="/img/repartidor_bici.png" class="img-fluid" alt="Repartidor">
         </div>
