@@ -45,7 +45,7 @@ mix.webpackConfig({
                handler: 'cacheFirst'
            }
        ],
-       // importScripts: ['./js/push_message.js']
+       importScripts: ['/js/push_message.js']
    })
    ]
 });

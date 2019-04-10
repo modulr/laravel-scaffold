@@ -4,6 +4,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      user: Laravel.user,
+    }
+  },
   mounted () {
     this.addMinimizedClass()
   },

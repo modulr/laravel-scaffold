@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 //use Illuminate\Notifications\Messages\MailMessage;
-//use Illuminate\Notifications\Messages\BroadcastMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
@@ -35,7 +35,8 @@ class NewOrder extends Notification
     public function via($notifiable)
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
-        return ['database', TelegramChannel::class];
+        //return ['database', TelegramChannel::class];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -71,17 +72,17 @@ class NewOrder extends Notification
      * @param  mixed  $notifiable
      * @return BroadcastMessage
      */
-    // public function toBroadcast($notifiable)
-    // {
-    //     return new BroadcastMessage([
-    //         message => [
-                //     'title' => 'Pedido nuevo '.$order->order,
-                //     'url' => '/orders/availables',
-                //     'userName' => $order->client->name,
-                //     'userAvatarUrl' => $order->client->avatar_url,
-                // ];
-    //     ]);
-    // }
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message' => [
+                    'title' => "*¡Llego un nuevo pedido! *  \n Pedido: ".$this->order->order." \n Destino: ".$this->order->address,
+                    'url' => '/orders/availables',
+                    'userName' => $this->order->client->name,
+                    'userAvatarUrl' => $this->order->client->avatar_url
+                ]
+        ]);
+    }
 
     public function toTelegram($notifiable)
     {
