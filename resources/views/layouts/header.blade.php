@@ -44,8 +44,7 @@
             <a class="btn btn-outline-primary btn-sm" href="/login" role="button">
                 Entrar
             </a>
-          </li>
-        </ul>
-      </header>
+        </li>
+    </ul>
     @endauth
 </header>

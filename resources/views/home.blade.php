@@ -8,34 +8,35 @@
                 <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
             </a> -->
             <p class="lead mt-4 mb-0">Mandados a domicilio</p>
-            <p><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
+            <p class="mb-0"><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
+            <p><small>Horario: 9:00am a 9:00pm</small></p>
         </div>
 
         <div class="col-9 col-sm-6 col-md-4 text-center mb-5">
             <p>¿Que te llevamos?</p>
             @auth
-                <orders-create-auth class="mb-4"></orders-create-auth>
+            <orders-create-auth class="mb-4"></orders-create-auth>
             @else
-                <orders-create class="mb-4"></orders-create>
-                <p class="mb-0"><small>Pidelo por teléfono</small></p>
-                <a class="btn btn-link btn-lg btn-phone" href="tel:813-089-8642">
-                    <small class="fa-stack">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
-                    </small>
-                    813 089 8642
-                </a>
-                <p>ó</p>
-                <a class="btn btn-brand btn-facebook" href="/auth/facebook">
-                  <span>Registrate con Facebook</span>
-                </a>
-                <p class="mt-3 mb-4">y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
-                <a class="btn btn-light mb-2" href="/register">
-                  <span>Registrate</span>
-                </a>
-                <a class="btn btn-link btn-phone btn-block" href="/login">
-                  Ya tengo una cuenta
-                </a>
+            <orders-create class="mb-4"></orders-create>
+            <p class="mb-0"><small>Pidelo por teléfono</small></p>
+            <a class="btn btn-link btn-lg btn-phone" href="tel:813-089-8642">
+                <small class="fa-stack">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
+                </small>
+                813 089 8642
+            </a>
+            <p>ó</p>
+            <a class="btn btn-brand btn-facebook" href="/auth/facebook">
+              <span>Registrate con Facebook</span>
+            </a>
+            <p class="mt-3 mb-4">y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
+            <a class="btn btn-light mb-2" href="/register">
+              <span>Registrate</span>
+            </a>
+            <a class="btn btn-link btn-phone btn-block" href="/login">
+              Ya tengo una cuenta
+            </a>
             @endauth
         </div>
 
@@ -76,7 +77,7 @@
                 megusta@traeme.app
             </a>
             <p>
-                <small class="mb-2">© 2019 Traeme, all rights reserved.</small>
+                <small class="mb-2">© 2019 Traeme, all rights reserved. Parral Chih.</small>
             </p>
         </div>
     </div>
