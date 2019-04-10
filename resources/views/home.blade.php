@@ -6,7 +6,7 @@
             <img class="img-fluid logo mt-5" src="/img/traeme.png" alt="">
             <p class="lead mt-4 mb-2">Mandados a domicilio</p>
         </div>
-        <div class="col-9 col-sm-6 col-md-4 text-center mb-3">
+        <div class="col-9 col-sm-6 col-md-4 text-center">
             <p>¿Que te llevamos?</p>
             @auth
             <orders-create-auth class="mb-4"></orders-create-auth>
@@ -23,8 +23,8 @@
             @endauth
             <p class="mb-0"><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
             <p><small>Horario: 9:00am a 9:00pm</small></p>
+            <p class="mb-0"><small>Parral Chih.</small></p>
         </div>
-
         <div class="col-sm-12">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 1400 253.176" enable-background="new 0 0 1400 253.176" xml:space="preserve">
@@ -41,12 +41,13 @@
             <a class="btn btn-brand btn-facebook mb-2" href="/auth/facebook">
               <span>Registrate con Facebook</span>
             </a>
-            <p class="mb-1">ó</p>
-            <a class="btn btn-primary mb-2" href="/register">
-              <span>Registrate con tu correo</span>
-            </a>
+            <div>
+                <a class="btn btn-info mb-2" href="/register">
+                  <span>Registrate con tu correo</span>
+                </a>
+            </div>
             <div class="mb-5">
-                <a class="btn btn-link" href="/login">
+                <a class="btn btn-outline-secondary" href="/login">
                   Ya tengo una cuenta
                 </a>
             </div>
@@ -90,7 +91,7 @@
                 megusta@traeme.app
             </a>
             <p>
-                <small class="mb-2">© 2019 Traeme, all rights reserved. Parral Chih.</small>
+                <small class="mb-2">© 2019 Traeme, all rights reserved.</small>
             </p>
         </div>
     </div>
