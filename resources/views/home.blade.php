@@ -57,7 +57,7 @@
 
     <div class="row justify-content-center">
         <div class="col">
-            <img src="/img/pasos-01.png" class="img-fluid" alt="pasos">
+            <img src="/img/pasos.png" class="img-fluid" alt="pasos">
             <img src="/img/repartidor_bici.png" class="img-fluid" alt="Repartidor">
         </div>
     </div>
