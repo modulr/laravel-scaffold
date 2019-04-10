@@ -9,7 +9,7 @@
             @can('read-orders')
             <li class="nav-item">
                 <a class="nav-link" href="/orders">
-                    <i class="nav-icon fas fa-list-ul mr-2"></i>Mandados
+                    <i class="nav-icon fas fa-list-ul mr-2"></i>Mis Mandados
                 </a>
             </li>
             @endcan

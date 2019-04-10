@@ -10,8 +10,8 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
     </button>
-    @auth
     <ul class="nav navbar-nav ml-auto mr-3">
+        @auth
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <img class="img-avatar" src="{{Auth::user()->avatar_url}}">
@@ -37,14 +37,12 @@
                 </form>
             </div>
         </li>
-    </ul>
-    @else
-    <ul class="nav navbar-nav ml-auto mr-3">
-        <li class="nav-item ">
+        @else
+        <li class="nav-item">
             <a class="btn btn-outline-primary btn-sm" href="/login" role="button">
                 Entrar
             </a>
         </li>
+        @endauth
     </ul>
-    @endauth
 </header>

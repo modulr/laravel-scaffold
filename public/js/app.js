@@ -67723,6 +67723,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67871,7 +67874,7 @@ var render = function() {
       },
       [
         _c("i", { staticClass: "fab fa-whatsapp mr-1" }),
-        _vm._v(" Pedir por WhatsApp\n  ")
+        _vm._v(" Pídelo por WhatsApp\n  ")
       ]
     )
   ])

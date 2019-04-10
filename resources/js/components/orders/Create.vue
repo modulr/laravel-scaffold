@@ -14,8 +14,11 @@
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
     <a class="btn btn-light btn-lg" href="#" @click.prevent="send">
-      <i class="fab fa-whatsapp mr-1"></i> Pedir por WhatsApp
+      <i class="fab fa-whatsapp mr-1"></i> Pídelo por WhatsApp
     </a>
+    <!-- <a class="btn btn-lg btn-light" href="https://m.me/sisiapp">
+              <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
+          </a> -->
   </div>
 </template>
 
