@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 use Socialite;
 use Auth;
 use App\User;
@@ -73,7 +74,7 @@ class LoginController extends Controller
                 'name' => $socialUser->getName(),
                 'email' => $socialUser->getEmail() ?? $socialUser->getId().'@facebook.com',
                 'avatar' => $socialUser->getAvatar(),
-                'password' => $socialUser->token
+                'password' => Hash::make($socialUser->getId())
             ]);
 
             $user->assignRole('user');
