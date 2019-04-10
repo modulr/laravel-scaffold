@@ -64,25 +64,23 @@ class LoginController extends Controller
 
         $socialUser = Socialite::driver('facebook')->user();
 
-        if ($user = User::where('email', $socialUser->email)->first()) {
-            return $this->authAndRedirect($user); // Login y redirección
+        $user = User::where('email', $socialUser->getEmail())->first();
+
+        if ($user) {
+            return $this->authAndRedirect($user);
         } else {
-            // En caso de que no exista creamos un nuevo usuario con sus datos.
             $user = User::create([
-                'name' => $socialUser->name,
-                'email' => $socialUser->email,
-                'avatar' => $socialUser->avatar,
+                'name' => $socialUser->getName(),
+                'email' => $socialUser->getEmail() ?? $socialUser->getId().'@facebook.com',
+                'avatar' => $socialUser->getAvatar(),
                 'password' => $socialUser->token
             ]);
 
             $user->assignRole('user');
 
-            return $this->authAndRedirect($user); // Login y redirección
+            return $this->authAndRedirect($user);
         }
 
-        //dd($socialUser);
-
-        // $user->token;
     }
 
     public function authAndRedirect($user)
