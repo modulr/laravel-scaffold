@@ -5,7 +5,7 @@
     </content-placeholders>
     <div v-else>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Pedidos</h4>
+        <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
           <a class="btn btn-primary" href="#" @click.prevent="orderModal">
             <i class="fa fa-plus mr-2"></i>Crear
@@ -78,7 +78,7 @@
     </div>
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
       <i class="icon-magnifier fa-3x text-muted"></i>
-      <p class="mb-0 mt-3"><strong>No existe ningun pedido</strong></p>
+      <p class="mb-0 mt-3"><strong>No existe ningun mandado</strong></p>
       <p class="text-muted">Crea una dando clic en el boton de abajo</p>
       <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#addModal">
         <i class="fa fa-plus mr-1"></i>Crear
@@ -89,14 +89,14 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Crea un pedido</h5>
+            <h5 class="modal-title">Crea un mandado</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label>Pedido</label>
+              <label>Mandado</label>
               <textarea class="form-control" rows="3" placeholder="¡Traeme unos tacos!" v-model="newOrder.order" :class="{'is-invalid': errors.order}"></textarea>
               <div class="invalid-feedback" v-if="errors.order">{{errors.order[0]}}</div>
             </div>

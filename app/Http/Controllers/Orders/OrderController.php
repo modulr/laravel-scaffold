@@ -31,6 +31,11 @@ class OrderController extends Controller
         }
     }
 
+    public function availablesCount ()
+    {
+        return Order::where('status_id', 1)->count();
+    }
+
     public function byClient ($userId)
     {
         return Order::with('status', 'code', 'dealer')->where('client_id', $userId)->latest()->get();

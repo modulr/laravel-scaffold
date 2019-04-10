@@ -5,7 +5,7 @@
     </content-placeholders>
     <div v-else>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Pedidos</h4>
+        <h4 class="float-left pt-2">Mandados</h4>
       </div>
       <div class="card-body px-0">
         <ul class="list-group mb-1" v-for="(item, index) in orders">
@@ -50,7 +50,7 @@
               </div>
               <div class="col-6 text-right">
                 <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="takeOrder(item, index)" v-if="item.status_id == 1">
-                  Tomar pedido
+                  Tomar mandado
                 </a>
                 <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)" v-if="item.status_id == 2">
                   Finalizar
@@ -58,7 +58,7 @@
               </div>
               <div class="col-12">
                 <p class="text-primary text-center mt-5" v-if="item.status_id == 2">
-                  Finaliza este mandado para poder tomar mas pedidos
+                  Finaliza este mandado para poder tomar mas
                 </p>
               </div>
             </div>
@@ -68,7 +68,7 @@
     </div>
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
       <i class="icon-magnifier fa-3x text-muted"></i>
-      <p class="mb-0 mt-3"><strong>No existe ningun pedido nuevo</strong></p>
+      <p class="mb-0 mt-3"><strong>No existe ningun mandado nuevo</strong></p>
       <p class="text-muted">Revisa mas tarde o da clic en el boton de abajo para refrescar la pantalla</p>
       <a class="btn btn-primary" href="/orders/availables">
         <i class="fa fa-sync mr-1"></i>Refrescar
