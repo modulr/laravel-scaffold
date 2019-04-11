@@ -57,8 +57,18 @@
 
     <div class="row justify-content-center">
         <div class="col text-center">
+            <svg version="1.1" id="Layer_1" class="curve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">
+            <path fill="#FFFFFF" d="M0,16.607v207.391c315.782-256.167,1050.855,52.862,1400,0.007V5.225
+                C639.719,229.38,228.031-71.309,0,16.607z"/>
+            </svg>
             <img src="/img/pasos.png" class="img-fluid" alt="pasos">
             <img src="/img/repartidor_bici.png" class="img-fluid" alt="Repartidor">
+            <svg version="1.1" id="Layer_1" class="curve-bottom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">
+            <path fill="#FFFFFF" d="M0,16.607v207.391c315.782-256.167,1050.855,52.862,1400,0.007V5.225
+                C639.719,229.38,228.031-71.309,0,16.607z"/>
+            </svg>
         </div>
     </div>
 
@@ -87,12 +97,9 @@
             </ul> -->
             <!-- <img class="img-fluid logo mt-5 mb-5" src="/svg/traeme.svg" alt=""> -->
             <p class="mt-5"><i>Ahorra tiempo y dinero</i></p>
-            <a href="mailto:megusta@traeme.app">
-                megusta@traeme.app
-            </a>
-            <p>
-                <small class="mb-2">© 2019 Traeme, all rights reserved.</small>
-            </p>
+            <!-- <a href="mailto:megusta@traeme.app">megusta@traeme.app</a> -->
+            <p class="mb-0"><small>© 2019 Traeme, Todos los derechos reservados.</small></p>
+            <p class="mb-5"><small>Creado por <a href="https://modulr.io" target="_blank">Modulr</a></small></p>
         </div>
     </div>
 @endsection

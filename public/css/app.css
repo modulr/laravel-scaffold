@@ -11282,14 +11282,16 @@ a:hover {
 
 .curve {
   width: 100%;
+  position: absolute;
+  top: -2%;
+  left: 0;
 }
 
-.curve_white {
-  margin-bottom: -40px;
-}
-
-.curve_gradient {
-  margin-bottom: -85px;
+.curve-bottom {
+  width: 100%;
+  position: absolute;
+  bottom: -2.4%;
+  left: 0;
 }
 
 .logo {
