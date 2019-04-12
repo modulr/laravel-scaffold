@@ -63,7 +63,7 @@ class LoginController extends Controller
           return redirect('/');
         }
 
-        $socialUser = Socialite::driver('facebook')->user();
+        $socialUser = Socialite::driver('facebook')->stateless()->user();
 
         $user = User::where('email', $socialUser->getEmail())->first();
 
