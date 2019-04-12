@@ -21,6 +21,7 @@
                 813 089 8642
             </a>
             @endauth
+            <p class="mb-0">Recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
             <p class="mb-0"><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
             <p><small>Horario: 9:00am a 9:00pm</small></p>
             <p class="mb-0"><small>Parral Chih.</small></p>
@@ -33,11 +34,10 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col text-center">
+    <div class="row justify-content-center pb-5">
+        <div class="col-6 text-center">
             @auth
             @else
-            <p class="mb-4">Recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
             <a class="btn btn-brand btn-facebook mb-2" href="/auth/facebook">
               <span>Registrate con Facebook</span>
             </a>
@@ -46,16 +46,17 @@
                   <span>Registrate con tu correo</span>
                 </a>
             </div>
-            <div class="mb-5">
+            <div>
                 <a class="btn btn-outline-secondary" href="/login">
                   Ya tengo una cuenta
                 </a>
             </div>
+            <p class="small mt-4">Revisa el historial de tus mandados y guarda tus direcciones.</p>
             @endauth
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pt-5">
         <div class="col text-center">
             <svg version="1.1" id="Layer_1" class="curve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">

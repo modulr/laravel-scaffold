@@ -6,7 +6,9 @@
         <div class="card">
             <div class="card-body p-5">
                 <div class="text-center d-lg-none">
+                    <a href="/">
                     <img src="svg/traeme.svg" class="mb-5" width="150" alt="Traeme">
+                    </a>
                 </div>
                 <h1>Iniciar sesión</h1>
                 <p class="text-muted">Inicia sesion con tu cuenta</p>
@@ -59,20 +61,25 @@
                                 ¿Olvidaste tu contraseña?
                             </a>
                         </div>
+                        <div class="col-12 mt-4">
+                          <a class="btn btn-brand btn-facebook btn-block" href="/auth/facebook">Entrar con Facebook</a>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer p-4 d-lg-none">
-                <div class="col-12 text-right">
+                <div class="col-12">
+                    <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">Registrate con tu correo</a>
                     <a class="btn btn-brand btn-facebook btn-block" href="/auth/facebook">Registrate con Facebook</a>
-                    <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">Registrate</a>
                 </div>
             </div>
         </div>
         <div class="card text-white bg-primary py-5 d-md-down-none">
             <div class="card-body text-center">
                 <div>
-                    <img src="img/traeme.png" class="mb-5" width="150" alt="Traeme">
+                    <a href="/">
+                        <img src="img/traeme.png" class="mb-5" width="150" alt="Traeme">
+                    </a>
                     <h2>Registrate</h2>
                     <p>Si no tienes una cuenta crea una.</p>
                     <a class="btn btn-primary active mt-2" href="{{ route('register') }}">¡Registrate ahora!</a>
