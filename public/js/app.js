@@ -14182,12 +14182,14 @@ Vue.component('roles-count', __webpack_require__(62));
 Vue.component('profile', __webpack_require__(65));
 Vue.component('profile-password', __webpack_require__(70));
 Vue.component('profile-avatar', __webpack_require__(14));
+Vue.component('profile-view', __webpack_require__(151));
 
 // Users
 Vue.component('users-index', __webpack_require__(73));
 Vue.component('users-create', __webpack_require__(76));
 Vue.component('users-edit', __webpack_require__(79));
 Vue.component('users-avatar', __webpack_require__(82));
+Vue.component('users-view', __webpack_require__(154));
 
 // Roles
 Vue.component('roles-index', __webpack_require__(85));
@@ -60820,7 +60822,7 @@ var render = function() {
         _c("img", {
           staticClass: "rounded-circle mb-2",
           staticStyle: { width: "120px", height: "120px" },
-          attrs: { src: _vm.user.avatar_url }
+          attrs: { src: _vm.user.avatar_url_large }
         }),
         _vm._v(" "),
         _c("rate", {
@@ -63332,7 +63334,7 @@ var render = function() {
         _c("img", {
           staticClass: "rounded-circle mb-2",
           staticStyle: { width: "120px", height: "120px" },
-          attrs: { src: _vm.user.avatar_url }
+          attrs: { src: _vm.user.avatar_url_large }
         }),
         _vm._v(" "),
         _c("rate", {
@@ -65498,18 +65500,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
       orders: [],
+      userView: {},
       loading: true
     };
   },
@@ -65581,7 +65578,7 @@ var render = function() {
               { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
               [
                 _c("h4", { staticClass: "float-left pt-2" }, [
-                  _vm._v("Mandados")
+                  _vm._v("Mis mandados")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-header-actions mr-1" }, [
@@ -65669,30 +65666,26 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        item.dealer_id
-                          ? _c("div", { staticClass: "media" }, [
-                              _c(
-                                "div",
-                                { staticClass: "avatar float-left mr-2" },
-                                [
-                                  _c("img", {
-                                    staticClass: "img-avatar",
-                                    attrs: { src: item.dealer.avatar_url }
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "media-body" }, [
-                                _c("div", [_vm._v(_vm._s(item.dealer.name))]),
-                                _vm._v(" "),
-                                _c("small", { staticClass: "text-muted" }, [
-                                  _vm._v("Repartidor")
-                                ])
-                              ])
-                            ])
-                          : _vm._e()
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "col-6" },
+                        [
+                          item.dealer_id
+                            ? _c("users-view", {
+                                attrs: {
+                                  user: item.dealer,
+                                  role: "Repartidor"
+                                },
+                                on: {
+                                  viewUser: function($event) {
+                                    _vm.userView = $event
+                                  }
+                                }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -65759,7 +65752,9 @@ var render = function() {
             _vm._v(" "),
             _vm._m(1)
           ])
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c("profile-view", { attrs: { user: _vm.userView } })
     ],
     1
   )
@@ -66039,24 +66034,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66067,9 +66044,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       address: [],
       newOrder: {},
       editOrder: {},
+      userView: {},
       loading: true,
-      loadingDealers: true,
-      loadingClients: true,
       submiting: false,
       submitingDealer: false,
       errors: {}
@@ -66093,10 +66069,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       if (this.clients.length == 0) {
-        this.loadingClients = true;
         axios.get('/api/users/getClients').then(function (response) {
           _this2.clients = response.data;
-          _this2.loadingClients = false;
         });
       }
     },
@@ -66104,28 +66078,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       if (this.dealers.length == 0) {
-        this.loadingDealers = true;
         axios.get('/api/users/getDealers').then(function (response) {
           _this3.dealers = response.data;
-          _this3.loadingDealers = false;
         });
       }
     },
     getAddress: function getAddress(client) {
       var _this4 = this;
 
-      this.loading = true;
       axios.get('/api/address/byClient/' + client.id).then(function (response) {
         _this4.address = response.data;
-        _this4.loading = false;
       });
     },
     orderModal: function orderModal() {
       this.newOrder = {};
       this.errors = {};
       $('#orderModal').modal('show');
-      this.getDealers();
       this.getClients();
+      this.getDealers();
     },
     createOrder: function createOrder() {
       var _this5 = this;
@@ -66292,17 +66262,14 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("small", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin" }),
-                          _vm._v(
-                            "  " + _vm._s(item.address) + "\n              "
-                          )
+                          _c("i", { staticClass: "icon-location-pin mr-2" }),
+                          _vm._v(_vm._s(item.address) + "\n              ")
                         ]),
                         _vm._v(" "),
                         _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-calendar" }),
+                          _c("i", { staticClass: "icon-calendar mr-2" }),
                           _vm._v(
-                            "  " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
+                            _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
                               "\n              "
                           )
                         ])
@@ -66314,26 +66281,14 @@ var render = function() {
                         "div",
                         { staticClass: "col" },
                         [
-                          _c("div", { staticClass: "media" }, [
-                            _c(
-                              "div",
-                              { staticClass: "avatar float-left mr-2" },
-                              [
-                                _c("img", {
-                                  staticClass: "img-avatar",
-                                  attrs: { src: item.client.avatar_url }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "media-body" }, [
-                              _c("div", [_vm._v(_vm._s(item.client.name))]),
-                              _vm._v(" "),
-                              _c("small", { staticClass: "text-muted" }, [
-                                _vm._v("Cliente")
-                              ])
-                            ])
-                          ]),
+                          _c("users-view", {
+                            attrs: { user: item.client, role: "Cliente" },
+                            on: {
+                              viewUser: function($event) {
+                                _vm.userView = $event
+                              }
+                            }
+                          }),
                           _vm._v(" "),
                           _c("rate", {
                             attrs: { length: 5, disabled: true },
@@ -66349,75 +66304,58 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      item.dealer_id
-                        ? _c(
-                            "div",
-                            { staticClass: "col" },
-                            [
-                              item.dealer_id
-                                ? _c("div", { staticClass: "media" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "avatar float-left mr-2" },
-                                      [
-                                        _c("img", {
-                                          staticClass: "img-avatar",
-                                          attrs: { src: item.dealer.avatar_url }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "media-body" }, [
-                                      _c("div", [
-                                        _vm._v(_vm._s(item.dealer.name))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "small",
-                                        { staticClass: "text-muted" },
-                                        [_vm._v("Repartidor")]
-                                      )
-                                    ])
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c("rate", {
-                                attrs: { length: 5, disabled: true },
-                                model: {
-                                  value: item.score_dealer,
-                                  callback: function($$v) {
-                                    _vm.$set(item, "score_dealer", $$v)
-                                  },
-                                  expression: "item.score_dealer"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      item.status_id == 1
-                        ? _c("div", { staticClass: "col text-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-info btn-sm",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.assignModal(item, index)
-                                  }
-                                }
-                              },
+                      _c("div", { staticClass: "col" }, [
+                        item.dealer_id
+                          ? _c(
+                              "div",
                               [
-                                _vm._v(
-                                  "\n                Asignar repartidor\n              "
-                                )
-                              ]
+                                _c("users-view", {
+                                  attrs: {
+                                    user: item.dealer,
+                                    role: "Repartidor"
+                                  },
+                                  on: {
+                                    viewUser: function($event) {
+                                      _vm.userView = $event
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rate", {
+                                  attrs: { length: 5, disabled: true },
+                                  model: {
+                                    value: item.score_dealer,
+                                    callback: function($$v) {
+                                      _vm.$set(item, "score_dealer", $$v)
+                                    },
+                                    expression: "item.score_dealer"
+                                  }
+                                })
+                              ],
+                              1
                             )
-                          ])
-                        : _vm._e()
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn btn-outline-info btn-sm float-right",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.assignModal(item, index)
+                              }
+                            }
+                          },
+                          [
+                            !item.dealer_id
+                              ? _c("span", [_vm._v("Asignar repartidor")])
+                              : _c("span", [_vm._v("Cambiar repartidor")])
+                          ]
+                        )
+                      ])
                     ])
                   ])
                 ])
@@ -66693,100 +66631,76 @@ var render = function() {
             "div",
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
-              _c(
-                "div",
-                { staticClass: "modal-content" },
-                [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _vm.loadingDealers
-                    ? _c(
-                        "content-placeholders",
-                        { staticClass: "modal-body" },
-                        [
-                          _c("content-placeholders-text", {
-                            attrs: { lines: 3 }
-                          })
-                        ],
-                        1
-                      )
-                    : _c("div", [
-                        _c("div", { staticClass: "modal-body" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Repartidor")]),
-                              _vm._v(" "),
-                              _c("multiselect", {
-                                class: {
-                                  "border border-danger rounded":
-                                    _vm.errors.dealer
-                                },
-                                attrs: {
-                                  options: _vm.dealers,
-                                  openDirection: "bottom",
-                                  "track-by": "id",
-                                  label: "name"
-                                },
-                                model: {
-                                  value: _vm.editOrder.dealer,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.editOrder, "dealer", $$v)
-                                  },
-                                  expression: "editOrder.dealer"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm.errors.dealer
-                                ? _c(
-                                    "small",
-                                    { staticClass: "form-text text-danger" },
-                                    [_vm._v(_vm._s(_vm.errors.dealer[0]))]
-                                  )
-                                : _vm._e()
-                            ],
-                            1
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [_vm._v("Repartidor")]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        class: {
+                          "border border-danger rounded": _vm.errors.dealer
+                        },
+                        attrs: {
+                          options: _vm.dealers,
+                          openDirection: "bottom",
+                          "track-by": "id",
+                          label: "name"
+                        },
+                        model: {
+                          value: _vm.editOrder.dealer,
+                          callback: function($$v) {
+                            _vm.$set(_vm.editOrder, "dealer", $$v)
+                          },
+                          expression: "editOrder.dealer"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.dealer
+                        ? _c(
+                            "small",
+                            { staticClass: "form-text text-danger" },
+                            [_vm._v(_vm._s(_vm.errors.dealer[0]))]
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "modal-footer" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: {
-                                href: "#",
-                                disabled: _vm.submitingDealer
-                              },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.assignDealer($event)
-                                }
-                              }
-                            },
-                            [
-                              _vm.submitingDealer
-                                ? _c("i", {
-                                    staticClass: "fas fa-spinner fa-spin"
-                                  })
-                                : _c("i", { staticClass: "fas fa-check" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "ml-1" }, [
-                                _vm._v("Guardar")
-                              ])
-                            ]
-                          )
-                        ])
-                      ])
-                ],
-                1
-              )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "#", disabled: _vm.submitingDealer },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.assignDealer($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm.submitingDealer
+                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                        : _c("i", { staticClass: "fas fa-check" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
+                    ]
+                  )
+                ])
+              ])
             ]
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("profile-view", { attrs: { user: _vm.userView } })
     ],
     1
   )
@@ -66818,7 +66732,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Crea un mandado")]),
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Crea mandado")]),
       _vm._v(" "),
       _c(
         "button",
@@ -66993,17 +66907,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       orders: [],
+      userView: {},
       loading: true
     };
   },
@@ -67138,24 +67047,21 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c("div", { staticClass: "media" }, [
-                          _c("div", { staticClass: "avatar float-left mr-2" }, [
-                            _c("img", {
-                              staticClass: "img-avatar",
-                              attrs: { src: item.client.avatar_url }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("div", [_vm._v(_vm._s(item.client.name))]),
-                            _vm._v(" "),
-                            _c("small", { staticClass: "text-muted" }, [
-                              _vm._v("Cliente")
-                            ])
-                          ])
-                        ])
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "col-6" },
+                        [
+                          _c("users-view", {
+                            attrs: { user: item.client, role: "Cliente" },
+                            on: {
+                              viewUser: function($event) {
+                                _vm.userView = $event
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-6 text-right" }, [
                         item.status_id == 1
@@ -67235,7 +67141,9 @@ var render = function() {
             _vm._v(" "),
             _vm._m(1)
           ])
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c("profile-view", { attrs: { user: _vm.userView } })
     ],
     1
   )
@@ -67388,18 +67296,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
       orders: [],
+      userView: {},
       loading: true
     };
   },
@@ -67535,24 +67438,21 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c("div", { staticClass: "media" }, [
-                          _c("div", { staticClass: "avatar float-left mr-2" }, [
-                            _c("img", {
-                              staticClass: "img-avatar",
-                              attrs: { src: item.client.avatar_url }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("div", [_vm._v(_vm._s(item.client.name))]),
-                            _vm._v(" "),
-                            _c("small", { staticClass: "text-muted" }, [
-                              _vm._v("Cliente")
-                            ])
-                          ])
-                        ])
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "col-6" },
+                        [
+                          _c("users-view", {
+                            attrs: { user: item.client, role: "Cliente" },
+                            on: {
+                              viewUser: function($event) {
+                                _vm.userView = $event
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -67625,7 +67525,9 @@ var render = function() {
               [_vm._v("\n      Ir a Pedidos\n    ")]
             )
           ])
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c("profile-view", { attrs: { user: _vm.userView } })
     ],
     1
   )
@@ -69394,7 +69296,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       axios.get("/api/orders/availablesCount").then(function (response) {
-        console.log(response);
         _this.ordersCount = response.data;
       });
     }
@@ -69420,6 +69321,371 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-226633a6", module.exports)
+  }
+}
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(152)
+/* template */
+var __vue_template__ = __webpack_require__(153)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/profile/View.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-24f099b6", Component.options)
+  } else {
+    hotAPI.reload("data-v-24f099b6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 152 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user']
+});
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "viewUser",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-body" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "row justify-content-center mb-3" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-12 text-center" },
+                  [
+                    _c("img", {
+                      staticClass: "rounded-circle mb-2",
+                      staticStyle: { width: "120px", height: "120px" },
+                      attrs: { src: _vm.user.avatar_url_large }
+                    }),
+                    _vm._v(" "),
+                    _c("rate", {
+                      staticClass: "mb-3",
+                      attrs: { length: 5, disabled: true },
+                      model: {
+                        value: _vm.user.score,
+                        callback: function($$v) {
+                          _vm.$set(_vm.user, "score", $$v)
+                        },
+                        expression: "user.score"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 text-center" }, [
+                  _c("h3", [_vm._v(_vm._s(_vm.user.name))]),
+                  _vm._v(" "),
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm.user.description))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-2 mb-1" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-info",
+                        attrs: {
+                          href: "mailto:" + _vm.user.email,
+                          target: "_blank"
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-envelope mr-1" })]
+                    ),
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.user.email) +
+                        "\n              "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.user.cellphone
+                    ? _c("p", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-info",
+                            attrs: {
+                              href:
+                                "https://api.whatsapp.com/send?phone=52" +
+                                _vm.user.cellphone,
+                              target: "_blank"
+                            }
+                          },
+                          [_c("i", { staticClass: "fab fa-whatsapp mr-1" })]
+                        ),
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.user.cellphone) +
+                            "\n              "
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-24f099b6", module.exports)
+  }
+}
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(155)
+/* template */
+var __vue_template__ = __webpack_require__(156)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/users/View.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-839c7e12", Component.options)
+  } else {
+    hotAPI.reload("data-v-839c7e12", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 155 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user', 'role'],
+  methods: {
+    viewUser: function viewUser() {
+      this.$emit('viewUser', this.user);
+      $('#viewUser').modal('show');
+    }
+  }
+});
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "a",
+      {
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.viewUser($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "media" }, [
+          _c("div", { staticClass: "avatar float-left mr-2" }, [
+            _c("img", {
+              staticClass: "img-avatar",
+              attrs: { src: _vm.user.avatar_url }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-body" }, [
+            _c("div", { staticClass: "text-body" }, [
+              _vm._v(_vm._s(_vm.user.name))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "small text-muted" }, [
+              _vm._v(_vm._s(_vm.role))
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-839c7e12", module.exports)
   }
 }
 

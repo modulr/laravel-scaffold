@@ -144,11 +144,11 @@ class UserController extends Controller
 
     public function getDealers ()
     {
-        return User::role('dealer')->get();
+        return User::role('dealer')->orderBy('name')->get();
     }
 
     public function getClients ()
     {
-        return User::role('user')->get();
+        return User::role('user')->orderBy('name')->get();
     }
 }

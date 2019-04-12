@@ -16,7 +16,6 @@ export default {
     getOrders () {
       axios.get(`/api/orders/availablesCount`)
       .then(response => {
-        console.log(response);
         this.ordersCount = response.data
       })
     }

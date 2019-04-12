@@ -33,42 +33,27 @@
               <div class="col-12">
                 <p class="mb-0">{{item.order}}</p>
                 <small class="text-muted mr-3">
-                  <i class="icon-location-pin"></i>&nbsp; {{item.address}}
+                  <i class="icon-location-pin mr-2"></i>{{item.address}}
                 </small>
                 <small class="text-muted">
-                  <i class="icon-calendar"></i>&nbsp; {{item.created_at | moment('LLL')}}
+                  <i class="icon-calendar mr-2"></i>{{item.created_at | moment('LLL')}}
                 </small>
               </div>
               <div class="col-12">
                 <hr>
               </div>
               <div class="col">
-                <div class="media">
-                  <div class="avatar float-left mr-2">
-                    <img class="img-avatar" :src="item.client.avatar_url">
-                  </div>
-                  <div class="media-body">
-                    <div>{{item.client.name}}</div>
-                    <small class="text-muted">Cliente</small>
-                  </div>
-                </div>
+                <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
                 <rate :length="5" v-model="item.score_client" :disabled="true"/>
               </div>
-              <div class="col" v-if="item.dealer_id">
-                <div class="media" v-if="item.dealer_id">
-                  <div class="avatar float-left mr-2">
-                    <img class="img-avatar" :src="item.dealer.avatar_url">
-                  </div>
-                  <div class="media-body">
-                    <div>{{item.dealer.name}}</div>
-                    <small class="text-muted">Repartidor</small>
-                  </div>
+              <div class="col">
+                <div v-if="item.dealer_id">
+                  <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event"></users-view>
+                  <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
                 </div>
-                <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
-              </div>
-              <div class="col text-right" v-if="item.status_id == 1">
-                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="assignModal(item, index)">
-                  Asignar repartidor
+                <a href="#" class="btn btn-outline-info btn-sm float-right" @click.prevent="assignModal(item, index)">
+                  <span v-if="!item.dealer_id">Asignar repartidor</span>
+                  <span v-else>Cambiar repartidor</span>
                 </a>
               </div>
             </div>
@@ -89,7 +74,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Crea un mandado</h5>
+            <h5 class="modal-title">Crea mandado</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -178,35 +163,32 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <content-placeholders class="modal-body" v-if="loadingDealers">
-            <content-placeholders-text :lines="3"/>
-          </content-placeholders>
-          <div v-else>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Repartidor</label>
-                <multiselect
-                  v-model="editOrder.dealer"
-                  :options="dealers"
-                  openDirection="bottom"
-                  track-by="id"
-                  label="name"
-                  :class="{'border border-danger rounded': errors.dealer}">
-                </multiselect>
-                <small class="form-text text-danger" v-if="errors.dealer">{{errors.dealer[0]}}</small>
-              </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Repartidor</label>
+              <multiselect
+                v-model="editOrder.dealer"
+                :options="dealers"
+                openDirection="bottom"
+                track-by="id"
+                label="name"
+                :class="{'border border-danger rounded': errors.dealer}">
+              </multiselect>
+              <small class="form-text text-danger" v-if="errors.dealer">{{errors.dealer[0]}}</small>
             </div>
-            <div class="modal-footer">
-              <a class="btn btn-primary" href="#" :disabled="submitingDealer" @click.prevent="assignDealer">
-                <i class="fas fa-spinner fa-spin" v-if="submitingDealer"></i>
-                <i class="fas fa-check" v-else></i>
-                <span class="ml-1">Guardar</span>
-              </a>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary" href="#" :disabled="submitingDealer" @click.prevent="assignDealer">
+              <i class="fas fa-spinner fa-spin" v-if="submitingDealer"></i>
+              <i class="fas fa-check" v-else></i>
+              <span class="ml-1">Guardar</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
+    <!-- Modal -->
+    <profile-view :user="userView"></profile-view>
   </div>
 </template>
 
@@ -220,9 +202,8 @@ export default {
       address: [],
       newOrder: {},
       editOrder: {},
+      userView: {},
       loading: true,
-      loadingDealers: true,
-      loadingClients: true,
       submiting: false,
       submitingDealer: false,
       errors: {}
@@ -242,38 +223,32 @@ export default {
     },
     getClients () {
       if (this.clients.length == 0) {
-        this.loadingClients = true
         axios.get(`/api/users/getClients`)
         .then(response => {
           this.clients = response.data
-          this.loadingClients = false
         })
       }
     },
     getDealers () {
       if (this.dealers.length == 0) {
-        this.loadingDealers = true
         axios.get(`/api/users/getDealers`)
         .then(response => {
           this.dealers = response.data
-          this.loadingDealers = false
         })
       }
     },
     getAddress (client) {
-      this.loading = true
       axios.get(`/api/address/byClient/${client.id}`)
       .then(response => {
         this.address = response.data
-        this.loading = false
       })
     },
     orderModal () {
       this.newOrder = {}
       this.errors = {}
       $('#orderModal').modal('show')
-      this.getDealers()
       this.getClients()
+      this.getDealers()
     },
     createOrder () {
       if (!this.submiting) {

@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-center mb-3">
     <div class="col-12 text-center">
-      <img class="rounded-circle mb-2" style="width: 120px; height: 120px" :src="user.avatar_url">
+      <img class="rounded-circle mb-2" style="width: 120px; height: 120px" :src="user.avatar_url_large">
       <rate class="mb-3" :length="5" v-model="user.score" :disabled="true"/>
     </div>
     <div class="col-4 text-center">

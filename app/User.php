@@ -39,12 +39,22 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['avatar_url', 'hasPermission', 'hasRole'];
+    protected $appends = ['avatar_url', 'avatar_url_large', 'hasPermission', 'hasRole'];
 
     public function getAvatarUrlAttribute()
     {
         if (Str::startsWith($this->avatar, 'http')) {
             return $this->avatar;
+        } else {
+            return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+        }
+    }
+
+    public function getAvatarUrlLargeAttribute()
+    {
+        if (Str::startsWith($this->avatar, 'http')) {
+            $avatar = Str::replaceLast('type=normal', 'type=large', $this->avatar);
+            return $avatar;
         } else {
             return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
         }

@@ -5,7 +5,7 @@
     </content-placeholders>
     <div v-else>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mandados</h4>
+        <h4 class="float-left pt-2">Mis mandados</h4>
         <div class="card-header-actions mr-1">
           <a class="btn btn-primary btn-block mb-2" href="/">
             <i class="fa fa-plus mr-2"></i>Pedir
@@ -43,15 +43,7 @@
                 <hr>
               </div>
               <div class="col-6">
-                <div class="media" v-if="item.dealer_id">
-                  <div class="avatar float-left mr-2">
-                    <img class="img-avatar" :src="item.dealer.avatar_url">
-                  </div>
-                  <div class="media-body">
-                    <div>{{item.dealer.name}}</div>
-                    <small class="text-muted">Repartidor</small>
-                  </div>
-                </div>
+                <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event" v-if="item.dealer_id"></users-view>
               </div>
               <div class="col-6 text-right">
                 <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
@@ -72,6 +64,8 @@
         <i class="fa fa-plus mr-1"></i>Pedir
       </a>
     </div>
+    <!-- Modal -->
+    <profile-view :user="userView"></profile-view>
   </div>
 </template>
 
@@ -81,6 +75,7 @@ export default {
     return {
       user: Laravel.user,
       orders: [],
+      userView: {},
       loading: true
     }
   },

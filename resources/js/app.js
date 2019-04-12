@@ -48,12 +48,14 @@ Vue.component('roles-count', require('./components/dashboard/RolesCount.vue'));
 Vue.component('profile', require('./components/profile/Profile.vue'));
 Vue.component('profile-password', require('./components/profile/Password.vue'));
 Vue.component('profile-avatar', require('./components/profile/Avatar.vue'));
+Vue.component('profile-view', require('./components/profile/View.vue'));
 
 // Users
 Vue.component('users-index', require('./components/users/Index.vue'));
 Vue.component('users-create', require('./components/users/Create.vue'));
 Vue.component('users-edit', require('./components/users/Edit.vue'));
 Vue.component('users-avatar', require('./components/users/Avatar.vue'));
+Vue.component('users-view', require('./components/users/View.vue'));
 
 // Roles
 Vue.component('roles-index', require('./components/roles/Index.vue'));

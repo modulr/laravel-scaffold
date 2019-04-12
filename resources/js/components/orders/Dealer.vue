@@ -38,15 +38,7 @@
                 <hr>
               </div>
               <div class="col-6">
-                <div class="media">
-                  <div class="avatar float-left mr-2">
-                    <img class="img-avatar" :src="item.client.avatar_url">
-                  </div>
-                  <div class="media-body">
-                    <div>{{item.client.name}}</div>
-                    <small class="text-muted">Cliente</small>
-                  </div>
-                </div>
+                <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
               </div>
               <div class="col-6 text-right">
                 <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
@@ -67,6 +59,8 @@
         Ir a Pedidos
       </a>
     </div>
+    <!-- Modal -->
+    <profile-view :user="userView"></profile-view>
   </div>
 </template>
 
@@ -76,6 +70,7 @@ export default {
     return {
       user: Laravel.user,
       orders: [],
+      userView: {},
       loading: true
     }
   },
