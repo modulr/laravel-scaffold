@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="modal fade" id="viewUser" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-body">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -21,8 +21,9 @@
                   {{user.email}}
                 </p>
                 <p v-if="user.cellphone">
-                  <a class="text-info" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank"><i class="fab fa-whatsapp mr-1"></i></a>
-                  {{user.cellphone}}
+                  <a class="text-info" :href="`tel:${user.cellphone}`" target="_blank"><i class="fas fa-phone mr-1"></i> {{user.cellphone}}</a>
+                  <br><br>
+                  <a class="btn btn-outline-primary" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank"><i class="fab fa-whatsapp mr-1"></i> Enviar WhatsApp</a>
                 </p>
               </div>
             </div>

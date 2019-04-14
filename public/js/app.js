@@ -69412,6 +69412,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user']
@@ -69438,7 +69439,7 @@ var render = function() {
         }
       },
       [
-        _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
           _c("div", { staticClass: "modal-content" }, [
             _c("div", { staticClass: "modal-body" }, [
               _vm._m(0),
@@ -69504,18 +69505,34 @@ var render = function() {
                           {
                             staticClass: "text-info",
                             attrs: {
+                              href: "tel:" + _vm.user.cellphone,
+                              target: "_blank"
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-phone mr-1" }),
+                            _vm._v(" " + _vm._s(_vm.user.cellphone))
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-outline-primary",
+                            attrs: {
                               href:
                                 "https://api.whatsapp.com/send?phone=52" +
                                 _vm.user.cellphone,
                               target: "_blank"
                             }
                           },
-                          [_c("i", { staticClass: "fab fa-whatsapp mr-1" })]
-                        ),
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(_vm.user.cellphone) +
-                            "\n              "
+                          [
+                            _c("i", { staticClass: "fab fa-whatsapp mr-1" }),
+                            _vm._v(" Enviar WhatsApp")
+                          ]
                         )
                       ])
                     : _vm._e()
