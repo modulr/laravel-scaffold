@@ -69504,10 +69504,7 @@ var render = function() {
                           "a",
                           {
                             staticClass: "text-info",
-                            attrs: {
-                              href: "tel:+52" + _vm.user.cellphone,
-                              target: "_blank"
-                            }
+                            attrs: { href: "tel:+52" + _vm.user.cellphone }
                           },
                           [
                             _c("i", { staticClass: "fas fa-phone mr-1" }),
