@@ -69505,7 +69505,7 @@ var render = function() {
                           {
                             staticClass: "text-info",
                             attrs: {
-                              href: "tel:" + _vm.user.cellphone,
+                              href: "tel:+52" + _vm.user.cellphone,
                               target: "_blank"
                             }
                           },
