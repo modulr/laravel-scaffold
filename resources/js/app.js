@@ -78,6 +78,9 @@ Vue.component('address-index', require('./components/address/Index.vue'));
 Vue.component('rates-index', require('./components/rates/Index.vue'));
 Vue.component('rates-day', require('./components/rates/Day.vue'));
 
+// Stores
+Vue.component('stores-index', require('./components/stores/Index.vue'));
+
 const app = new Vue({
     el: '#app'
 });

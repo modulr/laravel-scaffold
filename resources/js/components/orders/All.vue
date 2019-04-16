@@ -51,6 +51,16 @@
                   <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event"></users-view>
                   <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
                 </div>
+              </div>
+              <div class="col-12">
+                <hr>
+              </div>
+              <div class="col">
+                <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
+                  Cancelar
+                </a>
+              </div>
+              <div class="col">
                 <a href="#" class="btn btn-outline-info btn-sm float-right" @click.prevent="assignModal(item, index)">
                   <span v-if="!item.dealer_id">Asignar repartidor</span>
                   <span v-else>Cambiar repartidor</span>
@@ -64,8 +74,8 @@
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
       <i class="icon-magnifier fa-3x text-muted"></i>
       <p class="mb-0 mt-3"><strong>No existe ningun mandado</strong></p>
-      <p class="text-muted">Crea una dando clic en el boton de abajo</p>
-      <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#addModal">
+      <p class="text-muted">Crea uno dando clic en el boton de abajo</p>
+      <a class="btn btn-primary" href="#" @click.prevent="orderModal">
         <i class="fa fa-plus mr-1"></i>Crear
       </a>
     </div>
@@ -265,6 +275,25 @@ export default {
           this.submiting = false
         })
       }
+    },
+    cancelOrder (order, index) {
+      swal({
+        title: "¿Estas seguro?",
+        text: "¿En verdad quieres cancelar el mandado?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 4})
+          .then(response => {
+            this.orders[index].status_id = response.data.status_id
+            this.orders[index].status = response.data.status
+            this.$toasted.global.error('¡Mandado cancelado!')
+          })
+        }
+      })
     },
     addTag (newTag) {
       const tag = {

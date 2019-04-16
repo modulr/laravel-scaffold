@@ -13,6 +13,7 @@ use App\User;
 use Validator;
 use Illuminate\Validation\Rule;
 use App\Notifications\NewOrder;
+use App\Notifications\TakeOrder;
 
 class OrderController extends Controller
 {
@@ -186,6 +187,8 @@ class OrderController extends Controller
 
         $order->save();
 
+        Auth::user()->notify(new TakeOrder($order));
+
         return $order;
     }
 
@@ -199,6 +202,8 @@ class OrderController extends Controller
         $order->dealer_id = $request->dealer['id'];
         $order->status_id = 2;
         $order->save();
+
+        Auth::user()->notify(new TakeOrder($order));
 
         return $this->show($order->id);
     }

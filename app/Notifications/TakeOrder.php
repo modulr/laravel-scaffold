@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class NewOrder extends Notification
+class TakeOrder extends Notification
 {
     use Queueable;
 
@@ -87,8 +87,6 @@ class NewOrder extends Notification
     {
         return TelegramMessage::create()
             ->to('-260576056') // Optional.
-            ->content("*¡Llego un nuevo mandado! *  \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone. "[Llamar](".$this->order->client->cellphone.")" ) // Markdown supported.
-            //->file($this->order->client->avatar_url, 'photo') // local photo
-            ->button('Tomar Pedido', 'http://traeme.app/orders/availables'); // Inline Button
+            ->content("*¡Mandado tomado! *  \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone. " \n Repartidor: " .$this->order->dealer->name);
     }
 }
