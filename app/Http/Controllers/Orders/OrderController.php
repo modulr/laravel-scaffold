@@ -14,6 +14,7 @@ use Validator;
 use Illuminate\Validation\Rule;
 use App\Notifications\NewOrder;
 use App\Notifications\TakeOrder;
+use App\Notifications\FinalizeOrder;
 
 class OrderController extends Controller
 {
@@ -128,6 +129,10 @@ class OrderController extends Controller
         }
 
         $order->save();
+
+        if ($order->status_id == 3) {
+            Auth::user()->notify(new FinalizeOrder($order));
+        }
 
         return $this->show($order->id);
     }

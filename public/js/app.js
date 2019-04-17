@@ -66371,29 +66371,34 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-outline-secondary btn-sm",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.cancelOrder(item, index)
-                              }
-                            }
-                          },
-                          [_vm._v("\n                Cancelar\n              ")]
-                        )
-                      ]),
+                      item.status_id == 1 || item.status_id == 2
+                        ? _c("div", { staticClass: "col" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-outline-secondary btn-sm",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.cancelOrder(item, index)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                Cancelar\n              "
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col" }, [
+                      _c("div", { staticClass: "col text-right" }, [
                         _c(
                           "a",
                           {
-                            staticClass:
-                              "btn btn-outline-info btn-sm float-right",
+                            staticClass: "btn btn-outline-info btn-sm",
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {

@@ -55,13 +55,13 @@
               <div class="col-12">
                 <hr>
               </div>
-              <div class="col">
+              <div class="col" v-if="item.status_id == 1 || item.status_id == 2">
                 <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
                   Cancelar
                 </a>
               </div>
-              <div class="col">
-                <a href="#" class="btn btn-outline-info btn-sm float-right" @click.prevent="assignModal(item, index)">
+              <div class="col text-right">
+                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="assignModal(item, index)">
                   <span v-if="!item.dealer_id">Asignar repartidor</span>
                   <span v-else>Cambiar repartidor</span>
                 </a>
