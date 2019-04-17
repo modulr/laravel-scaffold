@@ -52,10 +52,12 @@
                   <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
                 </div>
               </div>
+            </div>
+            <div class="row" v-if="item.status_id == 1 || item.status_id == 2">
               <div class="col-12">
                 <hr>
               </div>
-              <div class="col" v-if="item.status_id == 1 || item.status_id == 2">
+              <div class="col">
                 <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
                   Cancelar
                 </a>
