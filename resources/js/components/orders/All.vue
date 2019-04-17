@@ -63,7 +63,7 @@
                 </a>
               </div>
               <div class="col text-right">
-                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="assignModal(item, index)">
+                <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="assignModal(item, index)">
                   <span v-if="!item.dealer_id">Asignar repartidor</span>
                   <span v-else>Cambiar repartidor</span>
                 </a>
