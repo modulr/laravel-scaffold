@@ -1,19 +1,23 @@
 <template lang="html">
   <div>
-    <content-placeholders class="mt-5" v-if="loading">
-      <content-placeholders-text :lines="6"/>
-    </content-placeholders>
-    <div v-else>
+    <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
+          <a class="card-header-action mr-3" href="#">
+            <i class="fas fa-filter"></i>
+          </a>
           <a class="btn btn-primary" href="#" @click.prevent="orderModal">
-            <i class="fa fa-plus mr-2"></i>Crear
+            <i class="fa fa-plus"></i>
+            <span class="d-md-down-none ml-1">Crear</span>
           </a>
         </div>
       </div>
       <div class="card-body px-0">
-        <ul class="list-group mb-1" v-for="(item, index) in orders">
+        <content-placeholders v-if="loading">
+          <content-placeholders-text :lines="6"/>
+        </content-placeholders>
+        <ul class="list-group mb-1" v-for="(item, index) in orders" v-else>
           <li class="list-group-item">
             <div class="row">
               <div class="col">
@@ -23,7 +27,11 @@
                 <small class="text-muted">Tarifa: ${{item.rate}}</small>
               </div>
               <div class="col text-right">
-                <span class="badge badge-pill" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
+                <span class="badge badge-pill" :class="{
+                  'badge-primary': item.status_id == 1,
+                  'badge-success': item.status_id == 2,
+                  'badge-info': item.status_id == 3,
+                  'badge-secondary': item.status_id == 4 }">
                   {{item.status.status}}
                 </span>
               </div>

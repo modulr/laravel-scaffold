@@ -12,6 +12,7 @@ use App\Models\Rates\Rate;
 use App\User;
 use Validator;
 use Illuminate\Validation\Rule;
+use DB;
 use App\Notifications\NewOrder;
 use App\Notifications\TakeOrder;
 use App\Notifications\FinalizeOrder;
@@ -20,16 +21,27 @@ class OrderController extends Controller
 {
     public function all (Request $request)
     {
-        return Order::with('status', 'code', 'client', 'dealer')->latest()->get();
+        $query = Order::query();
+
+        //if($request->status) {
+            $query->whereIn('status_id', [1,2]);
+        //}
+        $orders = $query->latest()->get();
+
+        $orders->load('status', 'client', 'dealer');
+
+        return $orders;
+
+        //return Order::with('status', 'client', 'dealer')->latest()->get();
     }
 
     public function availables ()
     {
         $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
         if ($ordersCount > 0) {
-            return Order::with('status', 'code', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->get();
+            return Order::with('status', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->get();
         } else {
-            return Order::with('status', 'code', 'client')->where('status_id', 1)->latest()->get();
+            return Order::with('status', 'client')->where('status_id', 1)->latest()->get();
         }
     }
 
@@ -40,17 +52,17 @@ class OrderController extends Controller
 
     public function byClient ($userId)
     {
-        return Order::with('status', 'code', 'dealer')->where('client_id', $userId)->latest()->get();
+        return Order::with('status', 'dealer')->where('client_id', $userId)->latest()->get();
     }
 
     public function byDealer ($userId)
     {
-        return Order::with('status', 'code', 'client')->where('dealer_id', $userId)->latest()->get();
+        return Order::with('status', 'client')->where('dealer_id', $userId)->latest()->get();
     }
 
     public function show ($orderId)
     {
-        return Order::with('status', 'code', 'client', 'dealer')->findOrFail($orderId);
+        return Order::with('status', 'client', 'dealer')->findOrFail($orderId);
     }
 
     public function store (Request $request)

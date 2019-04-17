@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="card-body px-0">
-        <content-placeholders class="mt-5" v-if="loading">
+        <content-placeholders v-if="loading">
           <content-placeholders-text :lines="6"/>
         </content-placeholders>
         <ul class="list-group mb-1" v-for="(item, index) in stores" v-else>
@@ -36,7 +36,7 @@
               <div class="col-12">
                 <h5 class="mb-1" @click.prevent="edit(item, index)">{{item.store}}</h5>
                 <div class="mb-2" @click.prevent="edit(item, index)">
-                  <small v-if="item.description" v-html="item.description"></small>
+                  <small class="description" v-if="item.description">{{item.description}}</small>
                 </div>
                 <div>
                   <span class="small mr-3" v-if="item.address">

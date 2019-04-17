@@ -66428,6 +66428,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66586,229 +66594,236 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.loading
-        ? _c(
-            "content-placeholders",
-            { staticClass: "mt-5" },
-            [_c("content-placeholders-text", { attrs: { lines: 6 } })],
-            1
-          )
-        : _c("div", [
-            _c(
-              "div",
-              { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
-              [
-                _c("h4", { staticClass: "float-left pt-2" }, [
-                  _vm._v("Mandados")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-header-actions mr-1" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.orderModal($event)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fa fa-plus mr-2" }),
-                      _vm._v("Crear\n        ")
-                    ]
-                  )
-                ])
-              ]
-            ),
+      _c("div", [
+        _c(
+          "div",
+          { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
+          [
+            _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Mandados")]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-body px-0" },
-              _vm._l(_vm.orders, function(item, index) {
-                return _c("ul", { staticClass: "list-group mb-1" }, [
-                  _c("li", { staticClass: "list-group-item" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col" }, [
-                        _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Mandado: " + _vm._s(item.id))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col text-center" }, [
-                        _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Tarifa: $" + _vm._s(item.rate))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col text-right" }, [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "badge badge-pill",
-                            class: {
-                              "badge-primary": item.status_id == 1,
-                              "badge-success": item.status_id == 2,
-                              "badge-info": item.status_id == 3,
-                              "badge-secondary": item.status_id == 4
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                " +
-                                _vm._s(item.status.status) +
-                                "\n              "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-12" }, [
-                        _c("hr", { staticClass: "mt-1 mb-2" })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-12" }, [
-                        _c("p", { staticClass: "mb-0" }, [
-                          _vm._v(_vm._s(item.order))
+            _c("div", { staticClass: "card-header-actions mr-1" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.orderModal($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "d-md-down-none ml-1" }, [
+                    _vm._v("Crear")
+                  ])
+                ]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-body px-0" },
+          [
+            _vm.loading
+              ? _c(
+                  "content-placeholders",
+                  [_c("content-placeholders-text", { attrs: { lines: 6 } })],
+                  1
+                )
+              : _vm._l(_vm.orders, function(item, index) {
+                  return _c("ul", { staticClass: "list-group mb-1" }, [
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Mandado: " + _vm._s(item.id))
+                          ])
                         ]),
                         _vm._v(" "),
-                        _c("small", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin mr-2" }),
-                          _vm._v(_vm._s(item.address) + "\n              ")
+                        _c("div", { staticClass: "col text-center" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Tarifa: $" + _vm._s(item.rate))
+                          ])
                         ]),
                         _vm._v(" "),
-                        _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-calendar mr-2" }),
-                          _vm._v(
-                            _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
-                              "\n              "
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col" },
-                        [
-                          _c("users-view", {
-                            attrs: { user: item.client, role: "Cliente" },
-                            on: {
-                              viewUser: function($event) {
-                                _vm.userView = $event
+                        _c("div", { staticClass: "col text-right" }, [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "badge badge-pill",
+                              class: {
+                                "badge-primary": item.status_id == 1,
+                                "badge-success": item.status_id == 2,
+                                "badge-info": item.status_id == 3,
+                                "badge-secondary": item.status_id == 4
                               }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("rate", {
-                            attrs: { length: 5, disabled: true },
-                            model: {
-                              value: item.score_client,
-                              callback: function($$v) {
-                                _vm.$set(item, "score_client", $$v)
-                              },
-                              expression: "item.score_client"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col" }, [
-                        item.dealer_id
-                          ? _c(
-                              "div",
-                              [
-                                _c("users-view", {
-                                  attrs: {
-                                    user: item.dealer,
-                                    role: "Repartidor"
-                                  },
-                                  on: {
-                                    viewUser: function($event) {
-                                      _vm.userView = $event
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("rate", {
-                                  attrs: { length: 5, disabled: true },
-                                  model: {
-                                    value: item.score_dealer,
-                                    callback: function($$v) {
-                                      _vm.$set(item, "score_dealer", $$v)
-                                    },
-                                    expression: "item.score_dealer"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    item.status_id == 1 || item.status_id == 2
-                      ? _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.cancelOrder(item, index)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                Cancelar\n              "
-                                )
-                              ]
-                            )
+                            },
+                            [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(item.status.status) +
+                                  "\n              "
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12" }, [
+                          _c("hr", { staticClass: "mt-1 mb-2" })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12" }, [
+                          _c("p", { staticClass: "mb-0" }, [
+                            _vm._v(_vm._s(item.order))
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col text-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-outline-secondary btn-sm",
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.assignModal(item, index)
-                                  }
-                                }
-                              },
-                              [
-                                !item.dealer_id
-                                  ? _c("span", [_vm._v("Asignar repartidor")])
-                                  : _c("span", [_vm._v("Cambiar repartidor")])
-                              ]
+                          _c("small", { staticClass: "text-muted mr-3" }, [
+                            _c("i", { staticClass: "icon-location-pin mr-2" }),
+                            _vm._v(_vm._s(item.address) + "\n              ")
+                          ]),
+                          _vm._v(" "),
+                          _c("small", { staticClass: "text-muted" }, [
+                            _c("i", { staticClass: "icon-calendar mr-2" }),
+                            _vm._v(
+                              _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
+                                "\n              "
                             )
                           ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col" },
+                          [
+                            _c("users-view", {
+                              attrs: { user: item.client, role: "Cliente" },
+                              on: {
+                                viewUser: function($event) {
+                                  _vm.userView = $event
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("rate", {
+                              attrs: { length: 5, disabled: true },
+                              model: {
+                                value: item.score_client,
+                                callback: function($$v) {
+                                  _vm.$set(item, "score_client", $$v)
+                                },
+                                expression: "item.score_client"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col" }, [
+                          item.dealer_id
+                            ? _c(
+                                "div",
+                                [
+                                  _c("users-view", {
+                                    attrs: {
+                                      user: item.dealer,
+                                      role: "Repartidor"
+                                    },
+                                    on: {
+                                      viewUser: function($event) {
+                                        _vm.userView = $event
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("rate", {
+                                    attrs: { length: 5, disabled: true },
+                                    model: {
+                                      value: item.score_dealer,
+                                      callback: function($$v) {
+                                        _vm.$set(item, "score_dealer", $$v)
+                                      },
+                                      expression: "item.score_dealer"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e()
                         ])
-                      : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      item.status_id == 1 || item.status_id == 2
+                        ? _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-outline-secondary btn-sm",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.cancelOrder(item, index)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                Cancelar\n              "
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col text-right" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-outline-secondary btn-sm",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.assignModal(item, index)
+                                    }
+                                  }
+                                },
+                                [
+                                  !item.dealer_id
+                                    ? _c("span", [_vm._v("Asignar repartidor")])
+                                    : _c("span", [_vm._v("Cambiar repartidor")])
+                                ]
+                              )
+                            ])
+                          ])
+                        : _vm._e()
+                    ])
                   ])
-                ])
-              })
-            )
-          ]),
+                })
+          ],
+          2
+        )
+      ]),
       _vm._v(" "),
       !_vm.loading && !_vm.orders.length > 0
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
             _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
             _vm._v(" "),
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted" }, [
               _vm._v("Crea uno dando clic en el boton de abajo")
@@ -66851,7 +66866,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -67089,7 +67104,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c(
@@ -67163,6 +67178,16 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "card-header-action mr-3", attrs: { href: "#" } },
+      [_c("i", { staticClass: "fas fa-filter" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -70134,7 +70159,6 @@ var render = function() {
           _vm.loading
             ? _c(
                 "content-placeholders",
-                { staticClass: "mt-5" },
                 [_c("content-placeholders-text", { attrs: { lines: 6 } })],
                 1
               )
@@ -70203,11 +70227,9 @@ var render = function() {
                           },
                           [
                             item.description
-                              ? _c("small", {
-                                  domProps: {
-                                    innerHTML: _vm._s(item.description)
-                                  }
-                                })
+                              ? _c("small", { staticClass: "description" }, [
+                                  _vm._v(_vm._s(item.description))
+                                ])
                               : _vm._e()
                           ]
                         ),
