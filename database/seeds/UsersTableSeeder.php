@@ -49,19 +49,24 @@ class UsersTableSeeder extends Seeder
 
         // Assign permissions to superadmin role
         $superadmin = Role::findByName('superadmin');
-        $superadmin->givePermissionTo('read-users', 'create-users', 'update-users', 'delete-users');
+        $superadmin->givePermissionTo(
+            'read-users',
+            'create-users',
+            'update-users',
+            'delete-users'
+        );
 
-        // Create superadmin user
-        $user = \App\User::create([
-            'name' => 'superadmin',
-            'email' => 'superadmin@modulr.io',
-            'password' => bcrypt('superadmin'),
-            'avatar' => 'avatar.png'
-        ]);
-        // Assign superadmin role to superadmin user
-        $user->assignRole('superadmin');
-        // Generate avatar to defautl user
-        $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
-        Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+        // // Create superadmin user
+        // $user = \App\User::create([
+        //     'name' => 'superadmin',
+        //     'email' => 'superadmin@modulr.io',
+        //     'password' => bcrypt('superadmin'),
+        //     'avatar' => 'avatar.png'
+        // ]);
+        // // Assign superadmin role to superadmin user
+        // $user->assignRole('superadmin');
+        // // Generate avatar to defautl user
+        // $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
+        // Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
     }
 }

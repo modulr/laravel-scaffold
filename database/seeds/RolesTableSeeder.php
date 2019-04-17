@@ -66,6 +66,11 @@ class RolesTableSeeder extends Seeder
         ]);
 
         // Assign permissions to admin role
-        $superadmin->givePermissionTo('read-roles', 'create-roles', 'update-roles', 'delete-roles');
+        $superadmin->givePermissionTo(
+          'read-roles',
+          'create-roles',
+          'update-roles',
+          'delete-roles'
+        );
     }
 }

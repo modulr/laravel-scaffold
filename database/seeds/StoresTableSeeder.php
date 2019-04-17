@@ -26,25 +26,25 @@ class StoresTableSeeder extends Seeder
         DB::table('permissions')->insert([
             [
                 'name' => 'read-'.$name,
-                'display_name' => 'Read',
+                'display_name' => 'Read '.$name,
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'create-'.$name,
-                'display_name' => 'Create',
+                'display_name' => 'Create '.$name,
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'update-'.$name,
-                'display_name' => 'Update',
+                'display_name' => 'Update '.$name,
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
                 'name' => 'delete-'.$name,
-                'display_name' => 'Delete',
+                'display_name' => 'Delete '.$name,
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ]

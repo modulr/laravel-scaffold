@@ -50,16 +50,32 @@ class AddressTableSeeder extends Seeder
 
         // Assign permissions to admin role
         $superadmin = Role::findByName('superadmin');
-        $superadmin->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
+        $superadmin->givePermissionTo('read-address',
+            'create-address',
+            'update-address',
+            'delete-address'
+        );
 
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
+        $admin->givePermissionTo('read-address',
+            'create-address',
+            'update-address',
+            'delete-address'
+        );
 
         $user = Role::findByName('user');
-        $user->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
+        $user->givePermissionTo('read-address',
+            'create-address',
+            'update-address',
+            'delete-address'
+        );
 
         $dealer = Role::findByName('dealer');
-        $dealer->givePermissionTo('read-address', 'create-address', 'update-address', 'delete-address');
+        $dealer->givePermissionTo('read-address',
+            'create-address',
+            'update-address',
+            'delete-address'
+        );
 
     }
 }

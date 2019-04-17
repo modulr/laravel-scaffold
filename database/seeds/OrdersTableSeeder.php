@@ -50,16 +50,36 @@ class OrdersTableSeeder extends Seeder
 
         // Assign permissions
         $superadmin = Role::findByName('superadmin');
-        $superadmin->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+        $superadmin->givePermissionTo(
+            'read-orders',
+            'create-orders',
+            'update-orders',
+            'delete-orders'
+        );
 
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+        $admin->givePermissionTo(
+            'read-orders',
+            'create-orders',
+            'update-orders',
+            'delete-orders'
+        );
 
         $user = Role::findByName('user');
-        $user->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+        $user->givePermissionTo(
+            'read-orders',
+            'create-orders',
+            'update-orders',
+            'delete-orders'
+        );
 
         $dealer = Role::findByName('dealer');
-        $dealer->givePermissionTo('read-orders', 'create-orders', 'update-orders', 'delete-orders');
+        $dealer->givePermissionTo(
+            'read-orders',
+            'create-orders',
+            'update-orders',
+            'delete-orders'
+        );
 
 
         DB::table('order_status')->insert([

@@ -50,9 +50,19 @@ class RatesTableSeeder extends Seeder
 
         // Assign permissions
         $superadmin = Role::findByName('superadmin');
-        $superadmin->givePermissionTo('read-rates', 'create-rates', 'update-rates', 'delete-rates');
+        $superadmin->givePermissionTo(
+            'read-rates',
+            'create-rates',
+            'update-rates',
+            'delete-rates'
+        );
 
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo('read-rates', 'create-rates', 'update-rates', 'delete-rates');
+        $admin->givePermissionTo(
+            'read-rates',
+            'create-rates',
+            'update-rates',
+            'delete-rates'
+        );
     }
 }
