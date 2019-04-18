@@ -14,24 +14,24 @@
         </div>
       </div>
       <div class="card-body px-0">
+        <div class="mb-4" v-if="statusShow">
+          <multiselect
+            v-model="filters.status"
+            :options="status"
+            :multiple="true"
+            openDirection="bottom"
+            track-by="id"
+            label="status"
+            @select="getOrders"
+            @remove="getOrders"
+            placeholder="Filtra por Estatus"
+            :class="{'border border-danger rounded': errors.status}">
+          </multiselect>
+        </div>
         <content-placeholders v-if="loading">
           <content-placeholders-text :lines="6"/>
         </content-placeholders>
         <div v-else>
-          <div class="mb-4" v-if="statusShow">
-            <multiselect
-              v-model="filters.status"
-              :options="status"
-              :multiple="true"
-              openDirection="bottom"
-              track-by="id"
-              label="status"
-              @select="getOrders"
-              @remove="getOrders"
-              placeholder="Filtra por Estatus"
-              :class="{'border border-danger rounded': errors.status}">
-            </multiselect>
-          </div>
           <ul class="list-group mb-1" v-for="(item, index) in orders">
             <li class="list-group-item">
               <div class="row">
