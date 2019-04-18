@@ -24,7 +24,7 @@
             <p class="mb-0">Recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
             <p class="mb-0"><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
             <p><small>Horario: 9:00am a 9:00pm</small></p>
-            <p class="mb-0"><small>Parral Chih.</small></p>
+            <p><small>Parral Chih.</small></p>
         </div>
         <div class="col-sm-12">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -34,10 +34,10 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5 mb-5 px-5">
-        <div class="col-12 text-center">
-            @auth
-            @else
+    <div class="row justify-content-center mt-5 mb-5">
+        @auth
+        @else
+        <div class="col-8 text-center">
             <a class="btn btn-brand btn-facebook mb-2" href="/auth/facebook">
               <span>Registrate con Facebook</span>
             </a>
@@ -52,18 +52,38 @@
                 </a>
             </div>
             <p class="small mt-4 mb-5">Revisa el historial de tus mandados y guarda tus direcciones.</p>
-            @endauth
         </div>
-        <div class="col-12 pb-3 text-center">
-            <img src="/img/stores/tienda.svg" class="img-fluid w-50" alt="Traeme Tienda">
+        <div class="col-12 text-center">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 1400 281.582" enable-background="new 0 0 1400 281.582" xml:space="preserve">
+                <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="17.0752" y1="25.6475" x2="1428.4752" y2="292.9289">
+                    <stop  offset="0" style="stop-color:#EF374B"/>
+                    <stop  offset="0.3814" style="stop-color:#EC374C"/>
+                    <stop  offset="0.5188" style="stop-color:#E6364E"/>
+                    <stop  offset="0.6168" style="stop-color:#DD3552"/>
+                    <stop  offset="0.696" style="stop-color:#D03457"/>
+                    <stop  offset="0.7638" style="stop-color:#BF335C"/>
+                    <stop  offset="0.8239" style="stop-color:#AC3163"/>
+                    <stop  offset="0.8783" style="stop-color:#952F6B"/>
+                    <stop  offset="0.9283" style="stop-color:#7C2E74"/>
+                    <stop  offset="0.9727" style="stop-color:#5E2D7D"/>
+                    <stop  offset="1" style="stop-color:#472C83"/>
+                </linearGradient>
+                <path fill="url(#SVGID_1_)" d="M1400.07,28.394c-257.404,122.357-706.822-104.342-1400,0v253.188
+                c659.208-251.47,1308.758-125.986,1400-18.135V28.394z"/>
+            </svg>
         </div>
-        <div class="col-12 col-md-4">
+        @endauth
+        <div class="col-12 pb-3 text-center px-5">
+            <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
+        </div>
+        <div class="col-12 col-md-4 px-5 pt-4 text-center">
             <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
         </div>
-        <div class="col-12 col-md-4 text-center">
+        <div class="col-12 col-md-4 px-5 text-center">
             <img src="/img/stores/paraiso_pay.svg" class="img-fluid" alt="Paraiso del Pay">
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/bolas_arroz.jpeg" class="img-fluid" alt="Bolas de Arroz">
         </div>
     </div>
@@ -77,13 +97,18 @@
             <div class="px-5">
                 <img src="/svg/pasos.svg" class="img-fluid" alt="pasos">
             </div>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
                 <path fill="#FFFFFF" d="M0,18.184v94.667l1400,0.009V5.719C639.719,251.149,228.03-78.078,0,18.184z"/>
             </svg>
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
                 <path fill="#FFFFFF" d="M1400,94.676V0.009L0,0v107.141C760.281-138.29,1171.969,190.938,1400,94.676z"/>
+            </svg> -->
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">
+                <path fill="#FFFFFF" d="M0,16.607v207.391c315.782-256.167,1050.855,52.862,1400,0.007V5.225
+                C639.719,229.38,228.031-71.309,0,16.607z"/>
             </svg>
             <div class="px-5 py-5">
                 <img src="/svg/repartidor.svg" class="img-fluid" alt="Repartidor">
@@ -96,7 +121,7 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-sm-12 text-center">
+        <div class="col-sm-12 text-center pt-5">
             <!-- <h5 class="mt-5">Ultimos Pedidos</h5>
             <ul class="list-unstyled">
                 <li>Pagar el Gas</li>
@@ -118,7 +143,7 @@
                 <li>Farmacia</li>
                 <li>Restaurant</li>
             </ul> -->
-            <img class="img-fluid logo mt-5 mb-5" src="/svg/traeme.svg" alt="">
+            <img class="img-fluid logo" src="/svg/traeme.svg" alt="">
             <p class="mt-5"><i>Ahorra tiempo y dinero</i></p>
             <!-- <a href="mailto:megusta@traeme.app">megusta@traeme.app</a> -->
             <p class="mb-0"><small>© 2019 Traeme, Todos los derechos reservados.</small></p>
