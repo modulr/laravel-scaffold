@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5 mb-4 px-5">
+    <div class="row justify-content-center mt-5 mb-5 px-5">
         <div class="col-12 text-center">
             @auth
             @else
@@ -51,19 +51,19 @@
                   Ya tengo una cuenta
                 </a>
             </div>
-            <p class="small mt-4">Revisa el historial de tus mandados y guarda tus direcciones.</p>
+            <p class="small mt-4 mb-5">Revisa el historial de tus mandados y guarda tus direcciones.</p>
             @endauth
         </div>
-        <div class="col-12 pt-4 pb-3 text-center">
+        <div class="col-12 pb-3 text-center">
             <img src="/img/stores/tienda.svg" class="img-fluid w-50" alt="Traeme Tienda">
         </div>
-        <div class="col">
-            <img src="/img/stores/vape.png" class="img-fluid" alt="Vape City">
+        <div class="col-12 col-md-4">
+            <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
         </div>
-        <div class="col text-center">
+        <div class="col-12 col-md-4 text-center">
             <img src="/img/stores/paraiso_pay.svg" class="img-fluid" alt="Paraiso del Pay">
         </div>
-        <div class="col">
+        <div class="col-12 col-md-4">
             <img src="/img/stores/bolas_arroz.jpeg" class="img-fluid" alt="Bolas de Arroz">
         </div>
     </div>
