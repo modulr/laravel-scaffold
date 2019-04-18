@@ -87,6 +87,6 @@ class TakeOrder extends Notification
     {
         return TelegramMessage::create()
             ->to('-260576056') // Optional.
-            ->content("*¡Mandado tomado! *  \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone. " \n Repartidor: " .$this->order->dealer->name);
+            ->content("*¡Mandado tomado!* 🖐 \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone. " \n Repartidor: " .$this->order->dealer->name);
     }
 }

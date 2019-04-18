@@ -4,10 +4,10 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
-          <a class="card-header-action mr-3" href="#">
+          <a class="text-secondary" :class="{'text-success': statusShow}" href="#" @click.prevent="getStatus">
             <i class="fas fa-filter"></i>
           </a>
-          <a class="btn btn-primary" href="#" @click.prevent="orderModal">
+          <a class="btn btn-primary ml-4" href="#" @click.prevent="orderModal">
             <i class="fa fa-plus"></i>
             <span class="d-md-down-none ml-1">Crear</span>
           </a>
@@ -17,68 +17,84 @@
         <content-placeholders v-if="loading">
           <content-placeholders-text :lines="6"/>
         </content-placeholders>
-        <ul class="list-group mb-1" v-for="(item, index) in orders" v-else>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col">
-                <small class="text-muted">Mandado: {{item.id}}</small>
-              </div>
-              <div class="col text-center">
-                <small class="text-muted">Tarifa: ${{item.rate}}</small>
-              </div>
-              <div class="col text-right">
-                <span class="badge badge-pill" :class="{
-                  'badge-primary': item.status_id == 1,
-                  'badge-success': item.status_id == 2,
-                  'badge-info': item.status_id == 3,
-                  'badge-secondary': item.status_id == 4 }">
-                  {{item.status.status}}
-                </span>
-              </div>
-              <div class="col-12">
-                <hr class="mt-1 mb-2">
-              </div>
-              <div class="col-12">
-                <p class="mb-0">{{item.order}}</p>
-                <small class="text-muted mr-3">
-                  <i class="icon-location-pin mr-2"></i>{{item.address}}
-                </small>
-                <small class="text-muted">
-                  <i class="icon-calendar mr-2"></i>{{item.created_at | moment('LLL')}}
-                </small>
-              </div>
-              <div class="col-12">
-                <hr>
-              </div>
-              <div class="col">
-                <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
-                <rate :length="5" v-model="item.score_client" :disabled="true"/>
-              </div>
-              <div class="col">
-                <div v-if="item.dealer_id">
-                  <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event"></users-view>
-                  <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
+        <div v-else>
+          <div class="mb-4" v-if="statusShow">
+            <multiselect
+              v-model="filters.status"
+              :options="status"
+              :multiple="true"
+              openDirection="bottom"
+              track-by="id"
+              label="status"
+              @select="getOrders"
+              @remove="getOrders"
+              placeholder="Filtra por Estatus"
+              :class="{'border border-danger rounded': errors.status}">
+            </multiselect>
+          </div>
+          <ul class="list-group mb-1" v-for="(item, index) in orders">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col">
+                  <small class="text-muted">Mandado: {{item.id}}</small>
+                </div>
+                <div class="col text-center">
+                  <small class="text-muted">Tarifa: ${{item.rate}}</small>
+                </div>
+                <div class="col text-right">
+                  <span class="badge badge-pill" :class="{
+                    'badge-primary': item.status_id == 1,
+                    'badge-success': item.status_id == 2,
+                    'badge-info': item.status_id == 3,
+                    'badge-secondary': item.status_id == 4 }">
+                    {{item.status.status}}
+                  </span>
+                </div>
+                <div class="col-12">
+                  <hr class="mt-1 mb-2">
+                </div>
+                <div class="col-12">
+                  <p class="mb-0">{{item.order}}</p>
+                  <small class="text-muted mr-3">
+                    <i class="icon-location-pin mr-2"></i>{{item.address}}
+                  </small>
+                  <small class="text-muted">
+                    <i class="icon-calendar mr-2"></i>{{item.created_at | moment('LLL')}}
+                  </small>
+                </div>
+                <div class="col-12">
+                  <hr>
+                </div>
+                <div class="col">
+                  <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
+                  <rate :length="5" v-model="item.score_client" :disabled="true"/>
+                </div>
+                <div class="col">
+                  <div v-if="item.dealer_id">
+                    <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event"></users-view>
+                    <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row" v-if="item.status_id == 1 || item.status_id == 2">
-              <div class="col-12">
-                <hr>
+              <div class="row" v-if="item.status_id == 1 || item.status_id == 2">
+                <div class="col-12">
+                  <hr>
+                </div>
+                <div class="col">
+                  <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
+                    Cancelar
+                  </a>
+                </div>
+                <div class="col text-right">
+                  <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="assignModal(item, index)">
+                    <span v-if="!item.dealer_id">Asignar repartidor</span>
+                    <span v-else>Cambiar repartidor</span>
+                  </a>
+                </div>
               </div>
-              <div class="col">
-                <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
-                  Cancelar
-                </a>
-              </div>
-              <div class="col text-right">
-                <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="assignModal(item, index)">
-                  <span v-if="!item.dealer_id">Asignar repartidor</span>
-                  <span v-else>Cambiar repartidor</span>
-                </a>
-              </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
@@ -217,6 +233,8 @@ export default {
   data () {
     return {
       orders: [],
+      status:[],
+      statusShow: false,
       clients: [],
       dealers: [],
       address: [],
@@ -226,20 +244,40 @@ export default {
       loading: true,
       submiting: false,
       submitingDealer: false,
-      errors: {}
+      errors: {},
+      filters: {
+        status: []
+      }
     }
   },
   mounted () {
+    if (localStorage.getItem("filtersOrders")) {
+      this.filters = JSON.parse(localStorage.getItem("filtersOrders"))
+    } else {
+      localStorage.setItem("filtersOrders", JSON.stringify(this.filters))
+    }
     this.getOrders()
   },
   methods: {
     getOrders () {
       this.loading = true
-      axios.get(`/api/orders/all`)
+      axios.post(`/api/orders/filters`, this.filters)
       .then(response => {
         this.orders = response.data
         this.loading = false
+        localStorage.setItem("filtersOrders", JSON.stringify(this.filters))
       })
+    },
+    getStatus () {
+      this.statusShow = !this.statusShow
+      if (this.status.length <= 0) {
+        axios.get(`/api/orders/status`)
+        .then(response => {
+          this.status = response.data
+
+          console.log(this.status);
+        })
+      }
     },
     getClients () {
       if (this.clients.length == 0) {

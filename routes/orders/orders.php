@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/assignDealer/{order}', 'OrderController@assignDealer')->middleware('permission:update-orders');
 
             Route::get('/all', 'OrderController@all')->middleware('permission:read-orders');
+            Route::post('/filters', 'OrderController@filters')->middleware('permission:read-orders');
             Route::get('/{order}', 'OrderController@show')->middleware('permission:read-orders');
             Route::post('/store', 'OrderController@store')->middleware('permission:create-orders');
             Route::post('/storeAuth', 'OrderController@storeAuth')->middleware('permission:create-orders');

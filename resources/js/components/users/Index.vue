@@ -151,9 +151,7 @@ export default {
     getUsers () {
       this.loading = true
       this.users = []
-
       localStorage.setItem("filtersTableUsers", JSON.stringify(this.filters));
-
       axios.post(`/api/users/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
         this.users = response.data.data

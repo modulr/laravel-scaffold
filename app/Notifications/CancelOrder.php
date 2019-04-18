@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class FinalizeOrder extends Notification
+class CancelOrder extends Notification
 {
     use Queueable;
 
@@ -87,6 +87,6 @@ class FinalizeOrder extends Notification
     {
         return TelegramMessage::create()
             ->to('-260576056') // Optional.
-            ->content("*¡Mandado finalizado!* 😎 \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone. " \n Repartidor: " .$this->order->dealer->name);
+            ->content("*¡Mandado cancelado!* 🤬 \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone);
     }
 }

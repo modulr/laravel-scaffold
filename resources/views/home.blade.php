@@ -28,14 +28,14 @@
         </div>
         <div class="col-sm-12">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             viewBox="0 0 1400 253.176" enable-background="new 0 0 1400 253.176" xml:space="preserve">
-            <path fill="#FFFFFF" d="M0,21.479v231.688l1400,0.01V6.756C639.719,296.66,228.03-92.227,0,21.479z"/>
+                viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
+                <path fill="#FFFFFF" d="M0,18.184v94.667l1400,0.009V5.719C639.719,251.149,228.03-78.078,0,18.184z"/>
             </svg>
         </div>
     </div>
 
-    <div class="row justify-content-center pb-5">
-        <div class="col-6 text-center">
+    <div class="row justify-content-center mt-5 mb-4 px-5">
+        <div class="col-12 text-center">
             @auth
             @else
             <a class="btn btn-brand btn-facebook mb-2" href="/auth/facebook">
@@ -54,21 +54,43 @@
             <p class="small mt-4">Revisa el historial de tus mandados y guarda tus direcciones.</p>
             @endauth
         </div>
+        <div class="col-12 pt-4 pb-3 text-center">
+            <img src="/img/stores/tienda.svg" class="img-fluid w-50" alt="Traeme Tienda">
+        </div>
+        <div class="col">
+            <img src="/img/stores/vape.png" class="img-fluid" alt="Vape City">
+        </div>
+        <div class="col text-center">
+            <img src="/img/stores/paraiso_pay.svg" class="img-fluid" alt="Paraiso del Pay">
+        </div>
+        <div class="col">
+            <img src="/img/stores/bolas_arroz.jpeg" class="img-fluid" alt="Bolas de Arroz">
+        </div>
     </div>
 
-    <div class="row justify-content-center pt-5">
+    <div class="row justify-content-center bg-gradient">
         <div class="col text-center">
-            <svg version="1.1" id="Layer_1" class="curve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">
-            <path fill="#FFFFFF" d="M0,16.607v207.391c315.782-256.167,1050.855,52.862,1400,0.007V5.225
-                C639.719,229.38,228.031-71.309,0,16.607z"/>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
+                <path fill="#FFFFFF" d="M1400,94.676V0.009L0,0v107.141C760.281-138.29,1171.969,190.938,1400,94.676z"/>
             </svg>
-            <img src="/img/pasos.png" class="img-fluid" alt="pasos">
-            <img src="/img/repartidor_bici.png" class="img-fluid" alt="Repartidor">
-            <svg version="1.1" id="Layer_1" class="curve-bottom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">
-            <path fill="#FFFFFF" d="M0,16.607v207.391c315.782-256.167,1050.855,52.862,1400,0.007V5.225
-                C639.719,229.38,228.031-71.309,0,16.607z"/>
+            <div class="px-5">
+                <img src="/svg/pasos.svg" class="img-fluid" alt="pasos">
+            </div>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
+                <path fill="#FFFFFF" d="M0,18.184v94.667l1400,0.009V5.719C639.719,251.149,228.03-78.078,0,18.184z"/>
+            </svg>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
+                <path fill="#FFFFFF" d="M1400,94.676V0.009L0,0v107.141C760.281-138.29,1171.969,190.938,1400,94.676z"/>
+            </svg>
+            <div class="px-5 py-5">
+                <img src="/svg/repartidor.svg" class="img-fluid" alt="Repartidor">
+            </div>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
+                <path fill="#FFFFFF" d="M0,18.184v94.667l1400,0.009V5.719C639.719,251.149,228.03-78.078,0,18.184z"/>
             </svg>
         </div>
     </div>
@@ -96,7 +118,7 @@
                 <li>Farmacia</li>
                 <li>Restaurant</li>
             </ul> -->
-            <!-- <img class="img-fluid logo mt-5 mb-5" src="/svg/traeme.svg" alt=""> -->
+            <img class="img-fluid logo mt-5 mb-5" src="/svg/traeme.svg" alt="">
             <p class="mt-5"><i>Ahorra tiempo y dinero</i></p>
             <!-- <a href="mailto:megusta@traeme.app">megusta@traeme.app</a> -->
             <p class="mb-0"><small>© 2019 Traeme, Todos los derechos reservados.</small></p>

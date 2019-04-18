@@ -16,23 +16,31 @@ use DB;
 use App\Notifications\NewOrder;
 use App\Notifications\TakeOrder;
 use App\Notifications\FinalizeOrder;
+use App\Notifications\CancelOrder;
 
 class OrderController extends Controller
 {
-    public function all (Request $request)
+    public function filters (Request $request)
     {
         $query = Order::query();
 
-        //if($request->status) {
-            $query->whereIn('status_id', [1,2]);
-        //}
+        if(!empty($request->status)) {
+            $collection = collect($request->status);
+            $plucked = $collection->pluck('id');
+            $ids = $plucked->all();
+            $query->whereIn('status_id', $ids);
+        }
+
         $orders = $query->latest()->get();
 
         $orders->load('status', 'client', 'dealer');
 
         return $orders;
+    }
 
-        //return Order::with('status', 'client', 'dealer')->latest()->get();
+    public function all ()
+    {
+        return Order::with('status', 'client', 'dealer')->latest()->get();
     }
 
     public function availables ()
@@ -144,6 +152,10 @@ class OrderController extends Controller
 
         if ($order->status_id == 3) {
             Auth::user()->notify(new FinalizeOrder($order));
+        }
+
+        if ($order->status_id == 4) {
+            Auth::user()->notify(new CancelOrder($order));
         }
 
         return $this->show($order->id);

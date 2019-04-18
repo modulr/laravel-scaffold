@@ -61940,9 +61940,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.loading = true;
       this.users = [];
-
       localStorage.setItem("filtersTableUsers", JSON.stringify(this.filters));
-
       axios.post('/api/users/filter?page=' + this.filters.pagination.current_page, this.filters).then(function (response) {
         _this.users = response.data.data;
         delete response.data.data;
@@ -66436,11 +66434,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       orders: [],
+      status: [],
+      statusShow: false,
       clients: [],
       dealers: [],
       address: [],
@@ -66450,10 +66466,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loading: true,
       submiting: false,
       submitingDealer: false,
-      errors: {}
+      errors: {},
+      filters: {
+        status: []
+      }
     };
   },
   mounted: function mounted() {
+    if (localStorage.getItem("filtersOrders")) {
+      this.filters = JSON.parse(localStorage.getItem("filtersOrders"));
+    } else {
+      localStorage.setItem("filtersOrders", JSON.stringify(this.filters));
+    }
     this.getOrders();
   },
 
@@ -66462,34 +66486,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.loading = true;
-      axios.get('/api/orders/all').then(function (response) {
+      axios.post("/api/orders/filters", this.filters).then(function (response) {
         _this.orders = response.data;
         _this.loading = false;
+        localStorage.setItem("filtersOrders", JSON.stringify(_this.filters));
       });
     },
-    getClients: function getClients() {
+    getStatus: function getStatus() {
       var _this2 = this;
 
+      this.statusShow = !this.statusShow;
+      if (this.status.length <= 0) {
+        axios.get("/api/orders/status").then(function (response) {
+          _this2.status = response.data;
+
+          console.log(_this2.status);
+        });
+      }
+    },
+    getClients: function getClients() {
+      var _this3 = this;
+
       if (this.clients.length == 0) {
-        axios.get('/api/users/getClients').then(function (response) {
-          _this2.clients = response.data;
+        axios.get("/api/users/getClients").then(function (response) {
+          _this3.clients = response.data;
         });
       }
     },
     getDealers: function getDealers() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.dealers.length == 0) {
-        axios.get('/api/users/getDealers').then(function (response) {
-          _this3.dealers = response.data;
+        axios.get("/api/users/getDealers").then(function (response) {
+          _this4.dealers = response.data;
         });
       }
     },
     getAddress: function getAddress(client) {
-      var _this4 = this;
+      var _this5 = this;
 
-      axios.get('/api/address/byClient/' + client.id).then(function (response) {
-        _this4.address = response.data;
+      axios.get("/api/address/byClient/" + client.id).then(function (response) {
+        _this5.address = response.data;
       });
     },
     orderModal: function orderModal() {
@@ -66500,23 +66537,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getDealers();
     },
     createOrder: function createOrder() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (!this.submiting) {
         this.submiting = true;
-        axios.post('/api/orders/store', this.newOrder).then(function (response) {
-          _this5.orders.unshift(response.data);
-          _this5.submiting = false;
+        axios.post("/api/orders/store", this.newOrder).then(function (response) {
+          _this6.orders.unshift(response.data);
+          _this6.submiting = false;
           $('#orderModal').modal('hide');
-          _this5.$toasted.global.error('¡Mandado creado!');
+          _this6.$toasted.global.error('¡Mandado creado!');
         }).catch(function (error) {
-          _this5.errors = error.response.data.errors;
-          _this5.submiting = false;
+          _this6.errors = error.response.data.errors;
+          _this6.submiting = false;
         });
       }
     },
     cancelOrder: function cancelOrder(order, index) {
-      var _this6 = this;
+      var _this7 = this;
 
       swal({
         title: "¿Estas seguro?",
@@ -66526,33 +66563,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         dangerMode: true
       }).then(function (willDelete) {
         if (willDelete) {
-          axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 4 }).then(function (response) {
-            _this6.orders[index].status_id = response.data.status_id;
-            _this6.orders[index].status = response.data.status;
-            _this6.$toasted.global.error('¡Mandado cancelado!');
+          axios.put("/api/orders/updateStatus/" + order.id, { 'statusId': 4 }).then(function (response) {
+            _this7.orders[index].status_id = response.data.status_id;
+            _this7.orders[index].status = response.data.status;
+            _this7.$toasted.global.error('¡Mandado cancelado!');
           });
         }
       });
     },
     addTag: function addTag(newTag) {
-      var _this7 = this;
+      var _this8 = this;
 
       var tag = {
         address: newTag
       };
-      axios.post('/api/address/store/' + this.newOrder.client.id, tag).then(function (response) {
-        _this7.newOrder.address = tag;
-        _this7.address.unshift(response.data);
-        _this7.$toasted.global.error('¡Direccion agregada!');
+      axios.post("/api/address/store/" + this.newOrder.client.id, tag).then(function (response) {
+        _this8.newOrder.address = tag;
+        _this8.address.unshift(response.data);
+        _this8.$toasted.global.error('¡Direccion agregada!');
       }).catch(function (error) {
-        _this7.errors = error.response.data.errors;
+        _this8.errors = error.response.data.errors;
       });
     },
     customLabel: function customLabel(_ref) {
       var address = _ref.address,
           alias = _ref.alias;
 
-      return alias + ' ' + address;
+      return alias + " " + address;
     },
     assignModal: function assignModal(order, index) {
       this.errors = {};
@@ -66562,21 +66599,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getDealers();
     },
     assignDealer: function assignDealer() {
-      var _this8 = this;
+      var _this9 = this;
 
       if (!this.submitingDealer) {
         this.submitingDealer = true;
-        axios.put('/api/orders/assignDealer/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this8.orders[_this8.editOrder.index].status_id = response.data.status_id;
-          _this8.orders[_this8.editOrder.index].status = response.data.status;
-          _this8.orders[_this8.editOrder.index].dealer_id = response.data.dealer_id;
-          _this8.orders[_this8.editOrder.index].dealer = response.data.dealer;
-          _this8.submitingDealer = false;
+        axios.put("/api/orders/assignDealer/" + this.editOrder.id, this.editOrder).then(function (response) {
+          _this9.orders[_this9.editOrder.index].status_id = response.data.status_id;
+          _this9.orders[_this9.editOrder.index].status = response.data.status;
+          _this9.orders[_this9.editOrder.index].dealer_id = response.data.dealer_id;
+          _this9.orders[_this9.editOrder.index].dealer = response.data.dealer;
+          _this9.submitingDealer = false;
           $('#assingModal').modal('hide');
-          _this8.$toasted.global.error('¡Repartidor Asignado!');
+          _this9.$toasted.global.error('¡Repartidor Asignado!');
         }).catch(function (error) {
-          _this8.errors = error.response.data.errors;
-          _this8.submitingDealer = false;
+          _this9.errors = error.response.data.errors;
+          _this9.submitingDealer = false;
         });
       }
     }
@@ -66602,12 +66639,26 @@ var render = function() {
             _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Mandados")]),
             _vm._v(" "),
             _c("div", { staticClass: "card-header-actions mr-1" }, [
-              _vm._m(0),
+              _c(
+                "a",
+                {
+                  staticClass: "text-secondary",
+                  class: { "text-success": _vm.statusShow },
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.getStatus($event)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-filter" })]
+              ),
               _vm._v(" "),
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary",
+                  staticClass: "btn btn-primary ml-4",
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -66638,184 +66689,236 @@ var render = function() {
                   [_c("content-placeholders-text", { attrs: { lines: 6 } })],
                   1
                 )
-              : _vm._l(_vm.orders, function(item, index) {
-                  return _c("ul", { staticClass: "list-group mb-1" }, [
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col" }, [
-                          _c("small", { staticClass: "text-muted" }, [
-                            _vm._v("Mandado: " + _vm._s(item.id))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col text-center" }, [
-                          _c("small", { staticClass: "text-muted" }, [
-                            _vm._v("Tarifa: $" + _vm._s(item.rate))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col text-right" }, [
-                          _c(
-                            "span",
-                            {
-                              staticClass: "badge badge-pill",
-                              class: {
-                                "badge-primary": item.status_id == 1,
-                                "badge-success": item.status_id == 2,
-                                "badge-info": item.status_id == 3,
-                                "badge-secondary": item.status_id == 4
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(item.status.status) +
-                                  "\n              "
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12" }, [
-                          _c("hr", { staticClass: "mt-1 mb-2" })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12" }, [
-                          _c("p", { staticClass: "mb-0" }, [
-                            _vm._v(_vm._s(item.order))
-                          ]),
-                          _vm._v(" "),
-                          _c("small", { staticClass: "text-muted mr-3" }, [
-                            _c("i", { staticClass: "icon-location-pin mr-2" }),
-                            _vm._v(_vm._s(item.address) + "\n              ")
-                          ]),
-                          _vm._v(" "),
-                          _c("small", { staticClass: "text-muted" }, [
-                            _c("i", { staticClass: "icon-calendar mr-2" }),
-                            _vm._v(
-                              _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
-                                "\n              "
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                        _vm._v(" "),
-                        _c(
+              : _c(
+                  "div",
+                  [
+                    _vm.statusShow
+                      ? _c(
                           "div",
-                          { staticClass: "col" },
+                          { staticClass: "mb-4" },
                           [
-                            _c("users-view", {
-                              attrs: { user: item.client, role: "Cliente" },
+                            _c("multiselect", {
+                              class: {
+                                "border border-danger rounded":
+                                  _vm.errors.status
+                              },
+                              attrs: {
+                                options: _vm.status,
+                                multiple: true,
+                                openDirection: "bottom",
+                                "track-by": "id",
+                                label: "status",
+                                placeholder: "Filtra por Estatus"
+                              },
                               on: {
-                                viewUser: function($event) {
-                                  _vm.userView = $event
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("rate", {
-                              attrs: { length: 5, disabled: true },
+                                select: _vm.getOrders,
+                                remove: _vm.getOrders
+                              },
                               model: {
-                                value: item.score_client,
+                                value: _vm.filters.status,
                                 callback: function($$v) {
-                                  _vm.$set(item, "score_client", $$v)
+                                  _vm.$set(_vm.filters, "status", $$v)
                                 },
-                                expression: "item.score_client"
+                                expression: "filters.status"
                               }
                             })
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col" }, [
-                          item.dealer_id
-                            ? _c(
-                                "div",
-                                [
-                                  _c("users-view", {
-                                    attrs: {
-                                      user: item.dealer,
-                                      role: "Repartidor"
-                                    },
-                                    on: {
-                                      viewUser: function($event) {
-                                        _vm.userView = $event
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("rate", {
-                                    attrs: { length: 5, disabled: true },
-                                    model: {
-                                      value: item.score_dealer,
-                                      callback: function($$v) {
-                                        _vm.$set(item, "score_dealer", $$v)
-                                      },
-                                      expression: "item.score_dealer"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      item.status_id == 1 || item.status_id == 2
-                        ? _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                            _vm._v(" "),
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._l(_vm.orders, function(item, index) {
+                      return _c("ul", { staticClass: "list-group mb-1" }, [
+                        _c("li", { staticClass: "list-group-item" }, [
+                          _c("div", { staticClass: "row" }, [
                             _c("div", { staticClass: "col" }, [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _vm._v("Mandado: " + _vm._s(item.id))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col text-center" }, [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _vm._v("Tarifa: $" + _vm._s(item.rate))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col text-right" }, [
                               _c(
-                                "a",
+                                "span",
                                 {
-                                  staticClass:
-                                    "btn btn-outline-secondary btn-sm",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.cancelOrder(item, index)
-                                    }
+                                  staticClass: "badge badge-pill",
+                                  class: {
+                                    "badge-primary": item.status_id == 1,
+                                    "badge-success": item.status_id == 2,
+                                    "badge-info": item.status_id == 3,
+                                    "badge-secondary": item.status_id == 4
                                   }
                                 },
                                 [
                                   _vm._v(
-                                    "\n                Cancelar\n              "
+                                    "\n                  " +
+                                      _vm._s(item.status.status) +
+                                      "\n                "
                                   )
                                 ]
                               )
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "col text-right" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-outline-secondary btn-sm",
-                                  attrs: { href: "#" },
+                            _c("div", { staticClass: "col-12" }, [
+                              _c("hr", { staticClass: "mt-1 mb-2" })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-12" }, [
+                              _c("p", { staticClass: "mb-0" }, [
+                                _vm._v(_vm._s(item.order))
+                              ]),
+                              _vm._v(" "),
+                              _c("small", { staticClass: "text-muted mr-3" }, [
+                                _c("i", {
+                                  staticClass: "icon-location-pin mr-2"
+                                }),
+                                _vm._v(
+                                  _vm._s(item.address) + "\n                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("small", { staticClass: "text-muted" }, [
+                                _c("i", { staticClass: "icon-calendar mr-2" }),
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("moment")(item.created_at, "LLL")
+                                  ) + "\n                "
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col" },
+                              [
+                                _c("users-view", {
+                                  attrs: { user: item.client, role: "Cliente" },
                                   on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.assignModal(item, index)
+                                    viewUser: function($event) {
+                                      _vm.userView = $event
                                     }
                                   }
-                                },
-                                [
-                                  !item.dealer_id
-                                    ? _c("span", [_vm._v("Asignar repartidor")])
-                                    : _c("span", [_vm._v("Cambiar repartidor")])
-                                ]
-                              )
+                                }),
+                                _vm._v(" "),
+                                _c("rate", {
+                                  attrs: { length: 5, disabled: true },
+                                  model: {
+                                    value: item.score_client,
+                                    callback: function($$v) {
+                                      _vm.$set(item, "score_client", $$v)
+                                    },
+                                    expression: "item.score_client"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col" }, [
+                              item.dealer_id
+                                ? _c(
+                                    "div",
+                                    [
+                                      _c("users-view", {
+                                        attrs: {
+                                          user: item.dealer,
+                                          role: "Repartidor"
+                                        },
+                                        on: {
+                                          viewUser: function($event) {
+                                            _vm.userView = $event
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("rate", {
+                                        attrs: { length: 5, disabled: true },
+                                        model: {
+                                          value: item.score_dealer,
+                                          callback: function($$v) {
+                                            _vm.$set(item, "score_dealer", $$v)
+                                          },
+                                          expression: "item.score_dealer"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
                             ])
-                          ])
-                        : _vm._e()
-                    ])
-                  ])
-                })
+                          ]),
+                          _vm._v(" "),
+                          item.status_id == 1 || item.status_id == 2
+                            ? _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-12" }, [
+                                  _c("hr")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-secondary btn-sm",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.cancelOrder(item, index)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                  Cancelar\n                "
+                                      )
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col text-right" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-secondary btn-sm",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.assignModal(item, index)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      !item.dealer_id
+                                        ? _c("span", [
+                                            _vm._v("Asignar repartidor")
+                                          ])
+                                        : _c("span", [
+                                            _vm._v("Cambiar repartidor")
+                                          ])
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      ])
+                    })
+                  ],
+                  2
+                )
           ],
-          2
+          1
         )
       ]),
       _vm._v(" "),
@@ -66823,7 +66926,7 @@ var render = function() {
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
             _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted" }, [
               _vm._v("Crea uno dando clic en el boton de abajo")
@@ -66866,7 +66969,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -67104,7 +67207,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c(
@@ -67178,16 +67281,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "card-header-action mr-3", attrs: { href: "#" } },
-      [_c("i", { staticClass: "fas fa-filter" })]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
