@@ -77,14 +77,14 @@
         <div class="col-12 pb-3 text-center px-5">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
-        <div class="col-12 col-md-4 px-5 pt-4 text-center">
+        <div class="col-12 col-md-4 px-5 text-center">
             <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
         </div>
         <div class="col-12 col-md-4 px-5 text-center">
-            <img src="/img/stores/paraiso_pay.svg" class="img-fluid" alt="Paraiso del Pay">
+            <img src="/img/stores/banner_paraiso_pay.png" class="img-fluid" alt="Paraiso del Pay">
         </div>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/bolas_arroz.jpeg" class="img-fluid" alt="Bolas de Arroz">
+        <div class="col-12 col-md-4 px-5 text-center">
+            <img src="/img/stores/banner_express.png" class="img-fluid" alt="Bolas de Arroz Express">
         </div>
     </div>
 
