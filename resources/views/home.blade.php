@@ -146,8 +146,8 @@
             <img class="img-fluid logo" src="/svg/traeme.svg" alt="">
             <p class="mt-5 mb-5"><i>Ahorra tiempo y dinero</i></p>
             <div class="text-center">
-                <a href="https://www.facebook.com/traeme.parral" target="_blank" class="mr-3"><i class="fab fa-facebook-square fa-2x"></i></a>
-                <a href="https://www.instagram.com/traeme_parral" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://www.facebook.com/traeme.parral" target="_blank" class="text-success mr-3"><i class="fab fa-facebook-square fa-2x"></i></a>
+                <a href="https://www.instagram.com/traeme_parral" target="_blank" class="text-success"><i class="fab fa-instagram fa-2x"></i></a>
             </div>
             <!-- <a href="mailto:megusta@traeme.app">megusta@traeme.app</a> -->
             <p class="mb-0"><small>© 2019 Traeme, Todos los derechos reservados.</small></p>
