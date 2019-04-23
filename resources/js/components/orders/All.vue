@@ -18,10 +18,11 @@
           <multiselect
             v-model="filters.status"
             :options="status"
-            :multiple="true"
-            openDirection="bottom"
             track-by="id"
             label="status"
+            :multiple="true"
+            openDirection="bottom"
+            :searchable="false"
             @select="getOrders"
             @remove="getOrders"
             placeholder="Filtra por Estatus"
@@ -246,7 +247,7 @@ export default {
       submitingDealer: false,
       errors: {},
       filters: {
-        status: []
+        status: [{'id': 1, 'status': 'Abierto'}, {'id': 2, 'status': 'En camino'}]
       }
     }
   },
@@ -274,8 +275,6 @@ export default {
         axios.get(`/api/orders/status`)
         .then(response => {
           this.status = response.data
-
-          console.log(this.status);
         })
       }
     },

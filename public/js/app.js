@@ -66450,6 +66450,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66468,7 +66469,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       submitingDealer: false,
       errors: {},
       filters: {
-        status: []
+        status: [{ 'id': 1, 'status': 'Abierto' }, { 'id': 2, 'status': 'En camino' }]
       }
     };
   },
@@ -66486,7 +66487,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.loading = true;
-      axios.post("/api/orders/filters", this.filters).then(function (response) {
+      axios.post('/api/orders/filters', this.filters).then(function (response) {
         _this.orders = response.data;
         _this.loading = false;
         localStorage.setItem("filtersOrders", JSON.stringify(_this.filters));
@@ -66497,10 +66498,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.statusShow = !this.statusShow;
       if (this.status.length <= 0) {
-        axios.get("/api/orders/status").then(function (response) {
+        axios.get('/api/orders/status').then(function (response) {
           _this2.status = response.data;
-
-          console.log(_this2.status);
         });
       }
     },
@@ -66508,7 +66507,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       if (this.clients.length == 0) {
-        axios.get("/api/users/getClients").then(function (response) {
+        axios.get('/api/users/getClients').then(function (response) {
           _this3.clients = response.data;
         });
       }
@@ -66517,7 +66516,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this4 = this;
 
       if (this.dealers.length == 0) {
-        axios.get("/api/users/getDealers").then(function (response) {
+        axios.get('/api/users/getDealers').then(function (response) {
           _this4.dealers = response.data;
         });
       }
@@ -66525,7 +66524,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getAddress: function getAddress(client) {
       var _this5 = this;
 
-      axios.get("/api/address/byClient/" + client.id).then(function (response) {
+      axios.get('/api/address/byClient/' + client.id).then(function (response) {
         _this5.address = response.data;
       });
     },
@@ -66541,7 +66540,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (!this.submiting) {
         this.submiting = true;
-        axios.post("/api/orders/store", this.newOrder).then(function (response) {
+        axios.post('/api/orders/store', this.newOrder).then(function (response) {
           _this6.orders.unshift(response.data);
           _this6.submiting = false;
           $('#orderModal').modal('hide');
@@ -66563,7 +66562,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         dangerMode: true
       }).then(function (willDelete) {
         if (willDelete) {
-          axios.put("/api/orders/updateStatus/" + order.id, { 'statusId': 4 }).then(function (response) {
+          axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 4 }).then(function (response) {
             _this7.orders[index].status_id = response.data.status_id;
             _this7.orders[index].status = response.data.status;
             _this7.$toasted.global.error('¡Mandado cancelado!');
@@ -66577,7 +66576,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var tag = {
         address: newTag
       };
-      axios.post("/api/address/store/" + this.newOrder.client.id, tag).then(function (response) {
+      axios.post('/api/address/store/' + this.newOrder.client.id, tag).then(function (response) {
         _this8.newOrder.address = tag;
         _this8.address.unshift(response.data);
         _this8.$toasted.global.error('¡Direccion agregada!');
@@ -66589,7 +66588,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var address = _ref.address,
           alias = _ref.alias;
 
-      return alias + " " + address;
+      return alias + ' ' + address;
     },
     assignModal: function assignModal(order, index) {
       this.errors = {};
@@ -66603,7 +66602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (!this.submitingDealer) {
         this.submitingDealer = true;
-        axios.put("/api/orders/assignDealer/" + this.editOrder.id, this.editOrder).then(function (response) {
+        axios.put('/api/orders/assignDealer/' + this.editOrder.id, this.editOrder).then(function (response) {
           _this9.orders[_this9.editOrder.index].status_id = response.data.status_id;
           _this9.orders[_this9.editOrder.index].status = response.data.status;
           _this9.orders[_this9.editOrder.index].dealer_id = response.data.dealer_id;
@@ -66694,10 +66693,11 @@ var render = function() {
                       },
                       attrs: {
                         options: _vm.status,
-                        multiple: true,
-                        openDirection: "bottom",
                         "track-by": "id",
                         label: "status",
+                        multiple: true,
+                        openDirection: "bottom",
+                        searchable: false,
                         placeholder: "Filtra por Estatus"
                       },
                       on: { select: _vm.getOrders, remove: _vm.getOrders },
