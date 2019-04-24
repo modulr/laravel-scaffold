@@ -68317,14 +68317,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else if (!this.order.address.title) {
         this.errors.address = true;
       } else {
-        location.href = 'https://api.whatsapp.com/send?phone=528130898642&text=Pedido:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.address.title;
+        location.href = 'https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.address.title;
         this.address.unshift(this.order.address);
         localStorage.setItem("address", JSON.stringify(this.address));
         localStorage.setItem("currentAddress", JSON.stringify(this.order.address));
       }
       // if (!this.submiting) {
       //   this.submiting = true
-      //   axios.get(`https://api.whatsapp.com/send?phone=528130898642&text=${this.order.order}&source=&data=${this.order.address}`)
+      //   axios.get(`https://api.whatsapp.com/send?phone=526271101145&text=${this.order.order}&source=&data=${this.order.address}`)
       //   .then(response => {
       //     this.$toasted.global.error('¡Orden enviada!')
       //   })
