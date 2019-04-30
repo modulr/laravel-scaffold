@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{order}', 'OrderController@show')->middleware('permission:read-orders');
             Route::post('/store', 'OrderController@store')->middleware('permission:create-orders');
             Route::post('/storeAuth', 'OrderController@storeAuth')->middleware('permission:create-orders');
+            Route::put('/update/{order}', 'OrderController@update')->middleware('permission:update-orders');
         });
     });
 });

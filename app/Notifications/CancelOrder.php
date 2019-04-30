@@ -86,7 +86,7 @@ class CancelOrder extends Notification
     public function toTelegram($notifiable)
     {
         return TelegramMessage::create()
-            ->to('-260576056') // Optional.
+            ->to(env('TELEGRAM_BOT_TO', 'YOUR BOT TO HERE')) // Optional.
             ->content("*¡Mandado cancelado!* 🤬 \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone);
     }
 }

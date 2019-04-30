@@ -14132,6 +14132,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_content_placeholders__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_rate__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_rate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_rate__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_step__ = __webpack_require__(160);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14152,6 +14153,7 @@ window.Vue = __webpack_require__(42);
 
 
 
+
 Vue.use(__webpack_require__(55));
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_toasted___default.a);
 Vue.toasted.register('error', function (message) {
@@ -14164,6 +14166,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_clip___default.a);
 Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_2_vue_multiselect___default.a);
 Vue.use(__WEBPACK_IMPORTED_MODULE_4_vue_content_placeholders__["default"]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_5_vue_rate___default.a);
+Vue.component('vue-step', __WEBPACK_IMPORTED_MODULE_6_vue_step__["a" /* default */]);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -65880,18 +65883,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
       orders: [],
+      status: [],
       userView: {},
       loading: true
     };
   },
   mounted: function mounted() {
     this.getOrders();
+    this.getStatus();
   },
 
   methods: {
@@ -65904,8 +65912,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
       });
     },
-    cancelOrder: function cancelOrder(order, index) {
+    getStatus: function getStatus() {
       var _this2 = this;
+
+      axios.get("/api/orders/status").then(function (response) {
+        response.data.pop();
+        _this2.status = response.data.map(function (i, index) {
+          return i.status;
+        });
+      });
+    },
+    cancelOrder: function cancelOrder(order, index) {
+      var _this3 = this;
 
       swal({
         title: "¿Estas seguro?",
@@ -65916,19 +65934,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (willDelete) {
         if (willDelete) {
           axios.put("/api/orders/updateStatus/" + order.id, { 'statusId': 4 }).then(function (response) {
-            _this2.orders[index].status_id = response.data.status_id;
-            _this2.orders[index].status = response.data.status;
-            _this2.$toasted.global.error('¡Mandado cancelado!');
+            _this3.orders[index].status_id = response.data.status_id;
+            _this3.orders[index].status = response.data.status;
+            _this3.$toasted.global.error('¡Mandado cancelado!');
           });
         }
       });
     },
     scoreOrder: function scoreOrder(order, index) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.put("/api/orders/updateScoreClient/" + order.id, { 'scoreClient': order.score_client }).then(function (response) {
-        _this3.orders[index].score_client = response.data.score_client;
-        _this3.$toasted.global.error('¡Mandado calificado!');
+        _this4.orders[index].score_client = response.data.score_client;
+        _this4.$toasted.global.error('¡Mandado calificado!');
       });
     }
   }
@@ -66045,6 +66063,24 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                      _vm._v(" "),
+                      item.status_id != 4
+                        ? _c(
+                            "div",
+                            { staticClass: "col-12" },
+                            [
+                              _c("vue-step", {
+                                staticClass: "mb-3",
+                                attrs: {
+                                  "now-step": item.status_id,
+                                  "step-list": _vm.status,
+                                  "style-type": "style2"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -66451,6 +66487,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66466,6 +66547,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       userView: {},
       loading: true,
       submiting: false,
+      submitingUpdate: false,
       submitingDealer: false,
       errors: {},
       filters: {
@@ -66496,7 +66578,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getStatus: function getStatus() {
       var _this2 = this;
 
-      this.statusShow = !this.statusShow;
       if (this.status.length <= 0) {
         axios.get('/api/orders/status').then(function (response) {
           _this2.status = response.data;
@@ -66528,12 +66609,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this5.address = response.data;
       });
     },
+    showFilters: function showFilters() {
+      this.statusShow = !this.statusShow;
+      this.getStatus();
+    },
     orderModal: function orderModal() {
-      this.newOrder = {};
       this.errors = {};
-      $('#orderModal').modal('show');
+      this.newOrder = {};
       this.getClients();
       this.getDealers();
+      $('#orderModal').modal('show');
     },
     createOrder: function createOrder() {
       var _this6 = this;
@@ -66551,8 +66636,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    cancelOrder: function cancelOrder(order, index) {
+    showOrderUpdateModal: function showOrderUpdateModal(order, index) {
+      this.errors = {};
+      // this.getDealers()
+      // this.getStatus()
+      //this.editOrder = order
+      this.editOrder = Object.assign({}, order);
+      this.editOrder.index = index;
+      $('#orderUpdateModal').modal('show');
+    },
+    updateOrder: function updateOrder() {
       var _this7 = this;
+
+      if (!this.submitingUpdate) {
+        this.submitingUpdate = true;
+        axios.put('/api/orders/update/' + this.editOrder.id, this.editOrder).then(function (response) {
+          _this7.orders[_this7.editOrder.index].order = response.data.order;
+          _this7.submitingUpdate = false;
+          $('#orderUpdateModal').modal('hide');
+          _this7.$toasted.global.error('Mandado actualizado!');
+        }).catch(function (error) {
+          _this7.errors = error.response.data.errors;
+          _this7.submitingUpdate = false;
+        });
+      }
+    },
+    cancelOrder: function cancelOrder(order, index) {
+      var _this8 = this;
 
       swal({
         title: "¿Estas seguro?",
@@ -66563,25 +66673,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (willDelete) {
         if (willDelete) {
           axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 4 }).then(function (response) {
-            _this7.orders[index].status_id = response.data.status_id;
-            _this7.orders[index].status = response.data.status;
-            _this7.$toasted.global.error('¡Mandado cancelado!');
+            _this8.orders[index].status_id = response.data.status_id;
+            _this8.orders[index].status = response.data.status;
+            _this8.$toasted.global.error('¡Mandado cancelado!');
           });
         }
       });
     },
     addTag: function addTag(newTag) {
-      var _this8 = this;
+      var _this9 = this;
 
       var tag = {
         address: newTag
       };
       axios.post('/api/address/store/' + this.newOrder.client.id, tag).then(function (response) {
-        _this8.newOrder.address = tag;
-        _this8.address.unshift(response.data);
-        _this8.$toasted.global.error('¡Direccion agregada!');
+        _this9.newOrder.address = tag;
+        _this9.address.unshift(response.data);
+        _this9.$toasted.global.error('¡Direccion agregada!');
       }).catch(function (error) {
-        _this8.errors = error.response.data.errors;
+        _this9.errors = error.response.data.errors;
       });
     },
     customLabel: function customLabel(_ref) {
@@ -66598,21 +66708,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getDealers();
     },
     assignDealer: function assignDealer() {
-      var _this9 = this;
+      var _this10 = this;
 
       if (!this.submitingDealer) {
         this.submitingDealer = true;
         axios.put('/api/orders/assignDealer/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this9.orders[_this9.editOrder.index].status_id = response.data.status_id;
-          _this9.orders[_this9.editOrder.index].status = response.data.status;
-          _this9.orders[_this9.editOrder.index].dealer_id = response.data.dealer_id;
-          _this9.orders[_this9.editOrder.index].dealer = response.data.dealer;
-          _this9.submitingDealer = false;
+          _this10.orders[_this10.editOrder.index].status_id = response.data.status_id;
+          _this10.orders[_this10.editOrder.index].status = response.data.status;
+          _this10.orders[_this10.editOrder.index].dealer_id = response.data.dealer_id;
+          _this10.orders[_this10.editOrder.index].dealer = response.data.dealer;
+          _this10.submitingDealer = false;
           $('#assingModal').modal('hide');
-          _this9.$toasted.global.error('¡Repartidor Asignado!');
+          _this10.$toasted.global.error('¡Repartidor Asignado!');
         }).catch(function (error) {
-          _this9.errors = error.response.data.errors;
-          _this9.submitingDealer = false;
+          _this10.errors = error.response.data.errors;
+          _this10.submitingDealer = false;
         });
       }
     }
@@ -66647,7 +66757,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      return _vm.getStatus($event)
+                      return _vm.showFilters($event)
                     }
                   }
                 },
@@ -66696,7 +66806,6 @@ var render = function() {
                         "track-by": "id",
                         label: "status",
                         multiple: true,
-                        openDirection: "bottom",
                         searchable: false,
                         placeholder: "Filtra por Estatus"
                       },
@@ -66727,15 +66836,35 @@ var render = function() {
                       _c("li", { staticClass: "list-group-item" }, [
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col" }, [
-                            _c("small", { staticClass: "text-muted" }, [
-                              _vm._v("Mandado: " + _vm._s(item.id))
-                            ])
+                            _c(
+                              "small",
+                              {
+                                staticClass: "text-muted",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showOrderUpdateModal(item, index)
+                                  }
+                                }
+                              },
+                              [_vm._v("Mandado: " + _vm._s(item.id))]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col text-center" }, [
-                            _c("small", { staticClass: "text-muted" }, [
-                              _vm._v("Tarifa: $" + _vm._s(item.rate))
-                            ])
+                            _c(
+                              "small",
+                              {
+                                staticClass: "text-muted",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showOrderUpdateModal(item, index)
+                                  }
+                                }
+                              },
+                              [_vm._v("Tarifa: $" + _vm._s(item.rate))]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col text-right" }, [
@@ -66748,6 +66877,12 @@ var render = function() {
                                   "badge-success": item.status_id == 2,
                                   "badge-info": item.status_id == 3,
                                   "badge-secondary": item.status_id == 4
+                                },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showOrderUpdateModal(item, index)
+                                  }
                                 }
                               },
                               [
@@ -66765,27 +66900,61 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [
-                            _c("p", { staticClass: "mb-0" }, [
-                              _vm._v(_vm._s(item.order))
-                            ]),
+                            _c(
+                              "p",
+                              {
+                                staticClass: "mb-0",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showOrderUpdateModal(item, index)
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(item.order))]
+                            ),
                             _vm._v(" "),
-                            _c("small", { staticClass: "text-muted mr-3" }, [
-                              _c("i", {
-                                staticClass: "icon-location-pin mr-2"
-                              }),
-                              _vm._v(
-                                _vm._s(item.address) + "\n                "
-                              )
-                            ]),
+                            _c(
+                              "small",
+                              {
+                                staticClass: "text-muted mr-3",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showOrderUpdateModal(item, index)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "icon-location-pin mr-2"
+                                }),
+                                _vm._v(
+                                  _vm._s(item.address) + "\n                "
+                                )
+                              ]
+                            ),
                             _vm._v(" "),
-                            _c("small", { staticClass: "text-muted" }, [
-                              _c("i", { staticClass: "icon-calendar mr-2" }),
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("moment")(item.created_at, "LLL")
-                                ) + "\n                "
-                              )
-                            ])
+                            _c(
+                              "small",
+                              {
+                                staticClass: "text-muted",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showOrderUpdateModal(item, index)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "icon-calendar mr-2" }),
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("moment")(item.created_at, "LLL")
+                                  ) + "\n                "
+                                )
+                              ]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [_c("hr")]),
@@ -67008,7 +67177,6 @@ var render = function() {
                         },
                         attrs: {
                           options: _vm.clients,
-                          openDirection: "bottom",
                           "track-by": "id",
                           label: "name"
                         },
@@ -67045,12 +67213,11 @@ var render = function() {
                         },
                         attrs: {
                           options: _vm.address,
-                          openDirection: "bottom",
-                          label: "address",
                           "track-by": "id",
+                          label: "address",
                           "custom-label": _vm.customLabel,
                           placeholder: "Selecciona o agrega una dirección",
-                          "tag-placeholder": "Agregar esta dirección",
+                          "tag-placeholder": "Agregar dirección",
                           taggable: true
                         },
                         on: { tag: _vm.addTag },
@@ -67128,7 +67295,6 @@ var render = function() {
                         },
                         attrs: {
                           options: _vm.dealers,
-                          openDirection: "bottom",
                           "track-by": "id",
                           label: "name"
                         },
@@ -67186,7 +67352,7 @@ var render = function() {
         {
           staticClass: "modal fade",
           attrs: {
-            id: "assingModal",
+            id: "orderUpdateModal",
             tabindex: "-1",
             role: "dialog",
             "aria-hidden": "true"
@@ -67201,6 +67367,88 @@ var render = function() {
                 _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Mandado")]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editOrder.order,
+                          expression: "editOrder.order"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.errors.order },
+                      attrs: { rows: "3", placeholder: "¡Traeme unos tacos!" },
+                      domProps: { value: _vm.editOrder.order },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.editOrder, "order", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.order
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.order[0]))
+                        ])
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "#", disabled: _vm.submiting },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateOrder($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm.submiting
+                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                        : _c("i", { staticClass: "fas fa-check" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "assingModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
                   _c(
                     "div",
                     { staticClass: "form-group" },
@@ -67213,7 +67461,6 @@ var render = function() {
                         },
                         attrs: {
                           options: _vm.dealers,
-                          openDirection: "bottom",
                           "track-by": "id",
                           label: "name"
                         },
@@ -67285,7 +67532,28 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Crea mandado")]),
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Crear mandado")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Editar mandado")]),
       _vm._v(" "),
       _c(
         "button",
@@ -68566,13 +68834,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
       address: [],
+      status: ['Abierto', 'En camino', 'Entregado'],
       newOrder: {},
       placeholder: '',
       placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
@@ -68605,10 +68873,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (!this.submiting) {
         this.submiting = true;
+        this.errors = {};
         axios.post('/api/orders/storeAuth', this.newOrder).then(function (response) {
           localStorage.setItem("currentAddress", JSON.stringify(_this2.newOrder.address));
-          _this2.$toasted.global.error('¡Mandado enviado!');
-          location.href = '/orders';
+          //this.$toasted.global.error('¡Mandado creado!')
+          _this2.newOrder.order = '';
+          _this2.submiting = false;
+          swal({
+            title: "¡Mandado creado!",
+            text: "¡Sigue el estatus de tu mandado!",
+            icon: "success",
+            button: "Ver mandado"
+          }).then(function (value) {
+            if (value) {
+              location.href = '/orders';
+            }
+          });
         }).catch(function (error) {
           _this2.errors = error.response.data.errors;
           _this2.submiting = false;
@@ -68689,7 +68969,6 @@ var render = function() {
           class: { "border border-danger rounded": _vm.errors.address },
           attrs: {
             options: _vm.address,
-            openDirection: "bottom",
             label: "address",
             "track-by": "id",
             "custom-label": _vm.customLabel,
@@ -70943,6 +71222,172 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* unused harmony export install */
+(function(){ if(typeof document !== 'undefined'){ var head=document.head||document.getElementsByTagName('head')[0], style=document.createElement('style'), css=" .v-step-warp-horizontal[data-v-3500aeb9] { position: relative; padding: 10px 0; z-index: 2; } .v-step-warp-horizontal .v-step-progress-bg[data-v-3500aeb9] { position: absolute; width: 100%; height: 4px; bottom: 22px; background-color: #ddd; } .v-step-warp-horizontal .v-step-progress-value[data-v-3500aeb9] { position: inherit; top: 0; left: 0; height: inherit; } .v-step-list[data-v-3500aeb9] { position: relative; display: -webkit-flex; display: flex; cursor: pointer; user-select: none; } .v-step-list[data-v-3500aeb9], .v-step-item[data-v-3500aeb9] { margin: 0; padding: 0; list-style-type: none; } .v-step-warp-horizontal .v-step-list[data-v-3500aeb9] { justify-content: space-around; text-align: center; } .v-step-item-label[data-v-3500aeb9] { font-size: 12px; color: #666; } .v-step-item-number[data-v-3500aeb9] { width: 18px; height: 18px; line-height: 18px; font-size: 12px; border-radius: 50%; color: #666; background-color: #ddd; } .v-step-warp-horizontal .v-step-item-label[data-v-3500aeb9] { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .v-step-warp-horizontal .v-step-item-number[data-v-3500aeb9] { margin: 5px auto; } .v-step-warp-horizontal.style2 .v-step-progress-bg[data-v-3500aeb9] { height: 2px; bottom: 19px; } .v-step-warp-horizontal.style2 .v-step-item-number[data-v-3500aeb9] { width: 10px; height: 10px; line-height: 10px; } .v-step-warp-vertical[data-v-3500aeb9] { position: relative; padding: 0; z-index: 2; } .v-step-warp-vertical .v-step-progress-bg[data-v-3500aeb9] { position: absolute; width: 4px; height: 100%; top: 0; left: 15px; background-color: #ddd; } .v-step-warp-vertical .v-step-progress-value[data-v-3500aeb9] { position: absolute; top: 0; left: 0; width: inherit; } .v-step-warp-vertical .v-step-list[data-v-3500aeb9] { height: inherit; flex-direction: column; padding-left: 8px; } .v-step-warp-vertical .v-step-item[data-v-3500aeb9] { display: -webkit-flex; display: flex; height: 25%; align-items: center; } .v-step-warp-vertical .v-step-item-number[data-v-3500aeb9] { text-align: center; } .v-step-warp-vertical .v-step-item-label[data-v-3500aeb9] { position: absolute; order: 1; padding-left: 34px; } .v-step-warp-vertical.style2 .v-step-progress-bg[data-v-3500aeb9] { width: 2px; } .v-step-warp-vertical.style2 .v-step-item-number[data-v-3500aeb9] { width: 10px; height: 10px; line-height: 10px; margin-left: 3px; } .v-step-warp-vertical.style2 .v-step-item-label[data-v-3500aeb9] { padding-top: 0; } "; style.type='text/css'; if (style.styleSheet){ style.styleSheet.cssText = css; } else { style.appendChild(document.createTextNode(css)); } head.appendChild(style); } })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var component = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[("v-step-warp-" + (_vm.direction)), _vm.styleType]},[_c('div',{staticClass:"v-step-progress-bg"},[_c('div',{staticClass:"v-step-progress-value",style:(_vm.progressStyle)})]),_vm._v(" "),_c('ul',{staticClass:"v-step-list"},_vm._l((_vm.stepList),function(label,index){return _c('li',{key:index,staticClass:"v-step-item",style:(_vm.horizontalItemWidth),on:{"click":function($event){_vm.selectItem(index);}}},[_c('label',{staticClass:"v-step-item-label"},[_vm._v(" "+_vm._s(label)+" ")]),_vm._v(" "),_c('div',{staticClass:"v-step-item-number",style:(_vm.itemNumberStyle(index))},[_vm._v(" "+_vm._s(_vm.showItemNumber(index))+" ")])])}))])},staticRenderFns: [],_scopeId: 'data-v-3500aeb9',
+  name: 'vue-step',
+  props: {
+    nowStep: {
+      type: Number,
+      required: true
+    },
+    stepList: {
+      type: Array,
+      required: true
+    },
+    activeColor: {
+      type: String,
+      default: '#1fb11d'
+    },
+    styleType: {
+      type: String,
+      default: 'style1',
+      validator: function (value) {
+        return ['style1', 'style2'].indexOf(value) !== -1
+      }
+    },
+    direction: {
+      type: String,
+      default: 'horizontal'
+    }
+  },
+  computed: {
+    stepItemWidth: function stepItemWidth () {
+      return 100 / this.stepList.length
+    },
+    horizontalItemWidth: function horizontalItemWidth () {
+      return this.direction === 'vertical'
+        ? ''
+        : { width: this.stepItemWidth + '%' }
+    },
+    progressStyle: function progressStyle () {
+      var oStyle = {
+        'background-color': this.activeColor
+      };
+      if (this.direction === 'vertical') {
+        oStyle.height = this.stepItemWidth * this.nowStep + '%';
+      } else {
+        oStyle.width = this.stepItemWidth * this.nowStep + '%';
+      }
+      return oStyle
+    }
+  },
+  methods: {
+    itemNumberStyle: function itemNumberStyle (index) {
+      var style = '';
+      if (index < this.nowStep) {
+        style = {
+          'background-color': this.activeColor,
+          'color': '#fff'
+        };
+      }
+      return style
+    },
+    showItemNumber: function showItemNumber (index) {
+      return this.styleType !== 'style2' ? index + 1 : ''
+    },
+    selectItem: function selectItem (itemIndex) {
+      this.$emit('selected', this.showItemNumber(itemIndex));
+    }
+  }
+}
+
+// Import vue component
+
+// install function executed by Vue.use()
+function install(Vue) {
+	if (install.installed) { return; }
+	install.installed = true;
+	Vue.component('VueStep', component);
+}
+
+// Create module definition for Vue.use()
+var plugin = {
+	install: install,
+};
+
+// To auto-install when vue is found
+var GlobalVue = null;
+if (typeof window !== 'undefined') {
+	GlobalVue = window.Vue;
+} else if (typeof global !== 'undefined') {
+	GlobalVue = global.Vue;
+}
+if (GlobalVue) {
+	GlobalVue.use(plugin);
+}
+
+// It's possible to expose named exports when writing components that can
+// also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
+// export const RollupDemoDirective = component;
+
+/* harmony default export */ __webpack_exports__["a"] = (component);
+
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ })
 /******/ ]);

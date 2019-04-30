@@ -12,14 +12,15 @@ window.Vue = require('vue');
 
 // Dependencies --------------------------------------
 
-import Toasted from 'vue-toasted';
+import Toasted from 'vue-toasted'
 import VueClip from 'vue-clip'
 import Multiselect from 'vue-multiselect'
-import swal from 'sweetalert';
+import swal from 'sweetalert'
 import VueContentPlaceholders from 'vue-content-placeholders'
-import rate from 'vue-rate';
+import rate from 'vue-rate'
+import vueStep from 'vue-step'
 
-Vue.use(require('vue-moment'));
+Vue.use(require('vue-moment'))
 Vue.use(Toasted)
 Vue.toasted.register('error', message => message, {
     position : 'bottom-center',
@@ -29,6 +30,7 @@ Vue.use(VueClip)
 Vue.component('multiselect', Multiselect)
 Vue.use(VueContentPlaceholders)
 Vue.use(rate)
+Vue.component('vue-step', vueStep)
 
 
 /**

@@ -42,6 +42,9 @@
               <div class="col-12">
                 <hr>
               </div>
+              <div class="col-12" v-if="item.status_id != 4">
+                <vue-step class="mb-3" :now-step="item.status_id" :step-list="status" style-type="style2"></vue-step>
+              </div>
               <div class="col-6">
                 <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event" v-if="item.dealer_id"></users-view>
               </div>
@@ -75,12 +78,14 @@ export default {
     return {
       user: Laravel.user,
       orders: [],
+      status:[],
       userView: {},
       loading: true
     }
   },
   mounted () {
     this.getOrders()
+    this.getStatus()
   },
   methods: {
     getOrders () {
@@ -89,6 +94,15 @@ export default {
       .then(response => {
         this.orders = response.data
         this.loading = false
+      })
+    },
+    getStatus () {
+      axios.get(`/api/orders/status`)
+      .then(response => {
+        response.data.pop()
+        this.status = response.data.map(function(i, index) {
+          return i.status
+        })
       })
     },
     cancelOrder (order, index) {

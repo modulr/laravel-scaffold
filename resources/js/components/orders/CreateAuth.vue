@@ -9,7 +9,6 @@
       <multiselect
         v-model="newOrder.address"
         :options="address"
-        openDirection="bottom"
         label="address"
         track-by="id"
         :custom-label="customLabel"
@@ -62,6 +61,7 @@ export default {
     return {
       user: Laravel.user,
       address: [],
+      status: ['Abierto', 'En camino', 'Entregado'],
       newOrder: {},
       placeholder: '',
       placeholders: [
@@ -97,11 +97,24 @@ export default {
     createOrder () {
       if (!this.submiting) {
         this.submiting = true
+        this.errors = {}
         axios.post(`/api/orders/storeAuth`, this.newOrder)
         .then(response => {
           localStorage.setItem("currentAddress", JSON.stringify(this.newOrder.address))
-          this.$toasted.global.error('¡Mandado enviado!')
-          location.href = `/orders`
+          //this.$toasted.global.error('¡Mandado creado!')
+          this.newOrder.order = ''
+          this.submiting = false
+          swal({
+            title: "¡Mandado creado!",
+            text: "¡Sigue el estatus de tu mandado!",
+            icon: "success",
+            button: "Ver mandado"
+          })
+          .then((value) => {
+            if (value) {
+              location.href = `/orders`
+            }
+          })
         })
         .catch(error => {
           this.errors = error.response.data.errors

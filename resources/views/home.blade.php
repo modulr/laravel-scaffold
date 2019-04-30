@@ -21,10 +21,9 @@
                 627 110 1145
             </a>
             @endauth
-            <p class="mb-0">Recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
+            <p class="mb-0">Registrate y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
             <p class="mb-0"><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
-            <p><small>Horario: 9:00am a 9:00pm</small></p>
-            <p><small>Parral Chih.</small></p>
+            <p><small>Horario: 8:00am a 9:00pm</small></p>
         </div>
         <div class="col-sm-12">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

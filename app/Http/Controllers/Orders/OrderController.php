@@ -136,6 +136,19 @@ class OrderController extends Controller
         return $order;
     }
 
+    public function update ($orderId, Request $request)
+    {
+        $this->validate($request, [
+            'order' => 'required|string'
+        ]);
+
+        $order = Order::find($orderId);
+        $order->order = $request->order;
+        $order->save();
+
+        return $this->show($order->id);
+    }
+
     public function updateStatus ($orderId, Request $request)
     {
         $this->validate($request, [

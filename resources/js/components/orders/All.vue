@@ -4,7 +4,7 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
-          <a class="text-secondary" :class="{'text-success': statusShow}" href="#" @click.prevent="getStatus">
+          <a class="text-secondary" :class="{'text-success': statusShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
           </a>
           <a class="btn btn-primary ml-4" href="#" @click.prevent="orderModal">
@@ -21,7 +21,6 @@
             track-by="id"
             label="status"
             :multiple="true"
-            openDirection="bottom"
             :searchable="false"
             @select="getOrders"
             @remove="getOrders"
@@ -37,13 +36,13 @@
             <li class="list-group-item">
               <div class="row">
                 <div class="col">
-                  <small class="text-muted">Mandado: {{item.id}}</small>
+                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Mandado: {{item.id}}</small>
                 </div>
                 <div class="col text-center">
-                  <small class="text-muted">Tarifa: ${{item.rate}}</small>
+                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Tarifa: ${{item.rate}}</small>
                 </div>
                 <div class="col text-right">
-                  <span class="badge badge-pill" :class="{
+                  <span class="badge badge-pill" @click.prevent="showOrderUpdateModal(item, index)" :class="{
                     'badge-primary': item.status_id == 1,
                     'badge-success': item.status_id == 2,
                     'badge-info': item.status_id == 3,
@@ -55,11 +54,11 @@
                   <hr class="mt-1 mb-2">
                 </div>
                 <div class="col-12">
-                  <p class="mb-0">{{item.order}}</p>
-                  <small class="text-muted mr-3">
+                  <p class="mb-0" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
+                  <small class="text-muted mr-3" @click.prevent="showOrderUpdateModal(item, index)">
                     <i class="icon-location-pin mr-2"></i>{{item.address}}
                   </small>
-                  <small class="text-muted">
+                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
                     <i class="icon-calendar mr-2"></i>{{item.created_at | moment('LLL')}}
                   </small>
                 </div>
@@ -106,12 +105,12 @@
         <i class="fa fa-plus mr-1"></i>Crear
       </a>
     </div>
-    <!-- Modal -->
+    <!-- Modal create -->
     <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Crea mandado</h5>
+            <h5 class="modal-title">Crear mandado</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -127,7 +126,6 @@
               <multiselect
                 v-model="newOrder.client"
                 :options="clients"
-                openDirection="bottom"
                 track-by="id"
                 label="name"
                 @select="getAddress"
@@ -140,12 +138,11 @@
               <multiselect
                 v-model="newOrder.address"
                 :options="address"
-                openDirection="bottom"
-                label="address"
                 track-by="id"
+                label="address"
                 :custom-label="customLabel"
                 placeholder="Selecciona o agrega una dirección"
-                tag-placeholder="Agregar esta dirección"
+                tag-placeholder="Agregar dirección"
                 :taggable="true"
                 @tag="addTag"
                 :class="{'border border-danger rounded': errors.address}">
@@ -172,7 +169,6 @@
               <multiselect
                 v-model="newOrder.dealer"
                 :options="dealers"
-                openDirection="bottom"
                 track-by="id"
                 label="name"
                 :class="{'border border-danger rounded': errors.dealer}">
@@ -190,7 +186,57 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal update -->
+    <div class="modal fade" id="orderUpdateModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar mandado</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Mandado</label>
+              <textarea class="form-control" rows="3" placeholder="¡Traeme unos tacos!" v-model="editOrder.order" :class="{'is-invalid': errors.order}"></textarea>
+              <div class="invalid-feedback" v-if="errors.order">{{errors.order[0]}}</div>
+            </div>
+            <!-- <div class="form-group">
+              <label>Repartidor</label>
+              <multiselect
+                v-model="editOrder.dealer"
+                :options="dealers"
+                track-by="id"
+                label="name"
+                :class="{'border border-danger rounded': errors.dealer}">
+              </multiselect>
+              <small class="form-text text-danger" v-if="errors.dealer">{{errors.dealer[0]}}</small>
+            </div>
+            <div class="form-group">
+              <label>Estatus</label>
+              <multiselect
+                v-model="editOrder.status"
+                :options="status"
+                track-by="id"
+                label="status"
+                :searchable="false"
+                :class="{'border border-danger rounded': errors.status}">
+              </multiselect>
+              <small class="form-text text-danger" v-if="errors.status">{{errors.status[0]}}</small>
+            </div> -->
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="updateOrder">
+              <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+              <i class="fas fa-check" v-else></i>
+              <span class="ml-1">Guardar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal assign -->
     <div class="modal fade" id="assingModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -206,7 +252,6 @@
               <multiselect
                 v-model="editOrder.dealer"
                 :options="dealers"
-                openDirection="bottom"
                 track-by="id"
                 label="name"
                 :class="{'border border-danger rounded': errors.dealer}">
@@ -244,10 +289,14 @@ export default {
       userView: {},
       loading: true,
       submiting: false,
+      submitingUpdate: false,
       submitingDealer: false,
       errors: {},
       filters: {
-        status: [{'id': 1, 'status': 'Abierto'}, {'id': 2, 'status': 'En camino'}]
+        status: [
+          {'id': 1, 'status': 'Abierto'},
+          {'id': 2, 'status': 'En camino'}
+        ]
       }
     }
   },
@@ -270,7 +319,6 @@ export default {
       })
     },
     getStatus () {
-      this.statusShow = !this.statusShow
       if (this.status.length <= 0) {
         axios.get(`/api/orders/status`)
         .then(response => {
@@ -300,12 +348,16 @@ export default {
         this.address = response.data
       })
     },
+    showFilters () {
+      this.statusShow = !this.statusShow
+      this.getStatus()
+    },
     orderModal () {
-      this.newOrder = {}
       this.errors = {}
-      $('#orderModal').modal('show')
+      this.newOrder = {}
       this.getClients()
       this.getDealers()
+      $('#orderModal').modal('show')
     },
     createOrder () {
       if (!this.submiting) {
@@ -320,6 +372,31 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors
           this.submiting = false
+        })
+      }
+    },
+    showOrderUpdateModal (order, index) {
+      this.errors = {}
+      // this.getDealers()
+      // this.getStatus()
+      //this.editOrder = order
+      this.editOrder = Object.assign({}, order)
+      this.editOrder.index = index
+      $('#orderUpdateModal').modal('show')
+    },
+    updateOrder () {
+      if (!this.submitingUpdate) {
+        this.submitingUpdate = true
+        axios.put(`/api/orders/update/${this.editOrder.id}`, this.editOrder)
+        .then(response => {
+          this.orders[this.editOrder.index].order = response.data.order
+          this.submitingUpdate = false
+          $('#orderUpdateModal').modal('hide')
+          this.$toasted.global.error('Mandado actualizado!')
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submitingUpdate = false
         })
       }
     },
