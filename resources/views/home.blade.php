@@ -77,7 +77,10 @@
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
         <div class="col-12 col-md-3 px-5 pt-3 text-center">
-            <img src="/img/stores/wings_co.png" class="img-fluid" alt="Wings Co">
+            <img src="/img/stores/banner_dogos.png" class="img-fluid" alt="Dogos & Co">
+        </div>
+        <div class="col-12 col-md-3 px-5 pt-3 text-center">
+            <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">
         </div>
         <div class="col-12 col-md-3 px-5 text-center">
             <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
