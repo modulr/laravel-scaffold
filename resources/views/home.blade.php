@@ -21,9 +21,9 @@
                 627 110 1145
             </a>
             @endauth
-            <p class="mb-0">Registrate y recibe tu primer mandado ¡<strong>Gratis</strong>!</p>
-            <p class="mb-0"><small>Tarifa del dia desde <rates-day></rates-day> pesos</small></p>
-            <p><small>Horario: 8:00am a 9:00pm</small></p>
+            <!-- <p class="mb-0">Registrate y recibe tu primer mandado ¡<strong>Gratis</strong>!</p> -->
+            <p class="mb-0">Tarifa del dia desde <rates-day></rates-day> pesos</p>
+            <p><small>Horario: 8:00am a 9:30pm</small></p>
         </div>
         <div class="col-sm-12">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -36,7 +36,7 @@
     <div class="row justify-content-center mt-5 mb-5">
         @auth
         @else
-        <div class="col-8 text-center">
+        <div class="col-8 text-center mb-5">
             <a class="btn btn-brand btn-facebook mb-2" href="/auth/facebook">
               <span>Registrate con Facebook</span>
             </a>
@@ -50,7 +50,7 @@
                   Ya tengo una cuenta
                 </a>
             </div>
-            <p class="small mt-4 mb-5">Revisa el historial de tus mandados y guarda tus direcciones.</p>
+            <!-- <p class="small mt-4 mb-5">Revisa el historial de tus mandados y guarda tus direcciones.</p> -->
         </div>
         <div class="col-12 text-center">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -75,6 +75,9 @@
         @endauth
         <div class="col-12 pb-3 text-center px-5">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
+        </div>
+        <div class="col-12 col-md-3 px-5 pt-3 text-center">
+            <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
         </div>
         <div class="col-12 col-md-3 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos.png" class="img-fluid" alt="Dogos & Co">
