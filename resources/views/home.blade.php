@@ -76,22 +76,22 @@
         <div class="col-12 pb-3 text-center px-5">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
-        <div class="col-12 col-md-3 px-5 pt-3 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
         </div>
-        <div class="col-12 col-md-3 px-5 pt-3 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos.png" class="img-fluid" alt="Dogos & Co">
         </div>
-        <div class="col-12 col-md-3 px-5 pt-3 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">
         </div>
-        <div class="col-12 col-md-3 px-5 text-center">
+        <div class="col-12 col-md-4 px-5 text-center">
             <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
         </div>
-        <div class="col-12 col-md-3 px-5 pt-2 text-center">
+        <div class="col-12 col-md-4 px-5 pt-2 text-center">
             <img src="/img/stores/banner_paraiso_pay.png" class="img-fluid" alt="Paraiso del Pay">
         </div>
-        <div class="col-12 col-md-3 px-5 pt-2 text-center">
+        <div class="col-12 col-md-4 px-5 pt-2 text-center">
             <img src="/img/stores/banner_express.png" class="img-fluid" alt="Bolas de Arroz Express">
         </div>
     </div>
