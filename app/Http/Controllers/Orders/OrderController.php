@@ -13,6 +13,7 @@ use App\User;
 use Validator;
 use Illuminate\Validation\Rule;
 use DB;
+use Carbon\Carbon;
 use App\Notifications\NewOrder;
 use App\Notifications\TakeOrder;
 use App\Notifications\FinalizeOrder;
@@ -31,7 +32,7 @@ class OrderController extends Controller
             $query->whereIn('status_id', $ids);
         }
 
-        $orders = $query->latest()->get();
+        $orders = $query->whereDate('created_at', Carbon::today())->latest()->get();
 
         $orders->load('status', 'client', 'dealer');
 
@@ -93,7 +94,8 @@ class OrderController extends Controller
             'status_id' => $status,
             'client_id' => $request->client['id'],
             'dealer_id' => $request->dealer['id'],
-            'rate' => Rate::latest()->first()->rate
+            'rate' => Rate::latest()->first()->rate,
+            'delivery_costs' => Rate::latest()->first()->rate
         ]);
 
         Auth::user()->notify(new NewOrder($order));
@@ -124,7 +126,8 @@ class OrderController extends Controller
             'address' => $request->address['address'],
             'status_id' => 1,
             'client_id' => Auth::id(),
-            'rate' => Rate::latest()->first()->rate
+            'rate' => Rate::latest()->first()->rate,
+            'delivery_costs' => Rate::latest()->first()->rate
         ]);
 
         Auth::user()->notify(new NewOrder($order));
@@ -139,11 +142,13 @@ class OrderController extends Controller
     public function update ($orderId, Request $request)
     {
         $this->validate($request, [
-            'order' => 'required|string'
+            'order' => 'required|string',
+            'delivery_costs' => 'required|numeric'
         ]);
 
         $order = Order::find($orderId);
         $order->order = $request->order;
+        $order->delivery_costs = $request->delivery_costs;
         $order->save();
 
         return $this->show($order->id);

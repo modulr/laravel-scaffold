@@ -66010,7 +66010,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Tarifa: $" + _vm._s(item.rate))
+                          _vm._v("Envio: $" + _vm._s(item.delivery_costs))
                         ])
                       ]),
                       _vm._v(" "),
@@ -66041,22 +66041,19 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [
-                        _c("p", { staticClass: "mb-0" }, [
+                        _c("p", { staticClass: "mb-1" }, [
                           _vm._v(_vm._s(item.order))
                         ]),
                         _vm._v(" "),
-                        _c("small", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin" }),
-                          _vm._v(
-                            "  " + _vm._s(item.address) + "\n              "
-                          )
+                        _c("span", { staticClass: "text-muted mr-3" }, [
+                          _c("i", { staticClass: "icon-location-pin mr-2" }),
+                          _vm._v(_vm._s(item.address) + "\n              ")
                         ]),
                         _vm._v(" "),
                         _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-calendar" }),
+                          _c("i", { staticClass: "icon-calendar mr-2" }),
                           _vm._v(
-                            "  " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
+                            _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
                               "\n              "
                           )
                         ])
@@ -66532,6 +66529,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66546,6 +66556,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       editOrder: {},
       userView: {},
       loading: true,
+      isLoading: false,
       submiting: false,
       submitingUpdate: false,
       submitingDealer: false,
@@ -66584,23 +66595,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    getClients: function getClients() {
-      var _this3 = this;
 
-      if (this.clients.length == 0) {
-        axios.get('/api/users/getClients').then(function (response) {
-          _this3.clients = response.data;
-        });
-      }
-    },
+    // getClients () {
+    //   if (this.clients.length == 0) {
+    //     axios.get(`/api/users/getClients`)
+    //     .then(response => {
+    //       this.clients = response.data
+    //     })
+    //   }
+    // },
     getDealers: function getDealers() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.dealers.length == 0) {
         axios.get('/api/users/getDealers').then(function (response) {
-          _this4.dealers = response.data;
+          _this3.dealers = response.data;
         });
       }
+    },
+    searchClients: function searchClients(query) {
+      var _this4 = this;
+
+      this.isLoading = true;
+      axios.get('/api/users/searchClients/' + query).then(function (response) {
+        _this4.clients = response.data;
+        _this4.isLoading = false;
+      });
     },
     getAddress: function getAddress(client) {
       var _this5 = this;
@@ -66616,7 +66636,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     orderModal: function orderModal() {
       this.errors = {};
       this.newOrder = {};
-      this.getClients();
+      //this.getClients()
       this.getDealers();
       $('#orderModal').modal('show');
     },
@@ -66652,6 +66672,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submitingUpdate = true;
         axios.put('/api/orders/update/' + this.editOrder.id, this.editOrder).then(function (response) {
           _this7.orders[_this7.editOrder.index].order = response.data.order;
+          _this7.orders[_this7.editOrder.index].delivery_costs = response.data.delivery_costs;
           _this7.submitingUpdate = false;
           $('#orderUpdateModal').modal('hide');
           _this7.$toasted.global.error('Mandado actualizado!');
@@ -66863,7 +66884,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Tarifa: $" + _vm._s(item.rate))]
+                              [_vm._v("Envio: $" + _vm._s(item.delivery_costs))]
                             )
                           ]),
                           _vm._v(" "),
@@ -66903,7 +66924,7 @@ var render = function() {
                             _c(
                               "p",
                               {
-                                staticClass: "mb-0",
+                                staticClass: "mb-1",
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -66915,7 +66936,7 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "small",
+                              "span",
                               {
                                 staticClass: "text-muted mr-3",
                                 on: {
@@ -67178,9 +67199,14 @@ var render = function() {
                         attrs: {
                           options: _vm.clients,
                           "track-by": "id",
-                          label: "name"
+                          label: "name",
+                          loading: _vm.isLoading,
+                          "internal-search": false
                         },
-                        on: { select: _vm.getAddress },
+                        on: {
+                          "search-change": _vm.searchClients,
+                          select: _vm.getAddress
+                        },
                         model: {
                           value: _vm.newOrder.client,
                           callback: function($$v) {
@@ -67398,6 +67424,47 @@ var render = function() {
                           _vm._v(_vm._s(_vm.errors.order[0]))
                         ])
                       : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Costo de envio")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group border-right-0" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editOrder.delivery_costs,
+                            expression: "editOrder.delivery_costs"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.errors.delivery_costs },
+                        attrs: { type: "text", placeholder: "20" },
+                        domProps: { value: _vm.editOrder.delivery_costs },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editOrder,
+                              "delivery_costs",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.errors.delivery_costs
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.delivery_costs[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -67446,7 +67513,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(3),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c(
@@ -67567,6 +67634,14 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("$")])
     ])
   },
   function() {
@@ -67814,7 +67889,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Tarifa: $" + _vm._s(item.rate))
+                          _vm._v("Envio: $" + _vm._s(item.delivery_costs))
                         ])
                       ]),
                       _vm._v(" "),
@@ -67845,21 +67920,21 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [
-                        _c("p", { staticClass: "mb-0" }, [
+                        _c("p", { staticClass: "mb-1" }, [
                           _vm._v(_vm._s(item.order))
                         ]),
                         _vm._v(" "),
-                        _c("small", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin" }),
+                        _c("span", { staticClass: "text-muted mr-3" }, [
+                          _c("i", { staticClass: "icon-location-pin mr-2" }),
                           _vm._v(
-                            "  " + _vm._s(item.address) + "\n              "
+                            " " + _vm._s(item.address) + "\n              "
                           )
                         ]),
                         _vm._v(" "),
                         _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-calendar" }),
+                          _c("i", { staticClass: "icon-calendar mr-2" }),
                           _vm._v(
-                            "  " +
+                            " " +
                               _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
                               "\n              "
                           )

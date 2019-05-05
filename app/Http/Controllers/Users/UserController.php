@@ -142,6 +142,15 @@ class UserController extends Controller
     //     return $user;
     // }
 
+    public function searchClients ($query)
+    {
+        if (isset($query)) {
+            return User::role('user')->where('name', 'like', '%'.$query.'%')->orderBy('name')->get();
+        } else {
+            return [];
+        }
+    }
+
     public function getDealers ()
     {
         return User::role('dealer')->orderBy('name')->get();

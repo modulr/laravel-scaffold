@@ -39,7 +39,7 @@
                   <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Mandado: {{item.id}}</small>
                 </div>
                 <div class="col text-center">
-                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Tarifa: ${{item.rate}}</small>
+                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Envio: ${{item.delivery_costs}}</small>
                 </div>
                 <div class="col text-right">
                   <span class="badge badge-pill" @click.prevent="showOrderUpdateModal(item, index)" :class="{
@@ -54,10 +54,10 @@
                   <hr class="mt-1 mb-2">
                 </div>
                 <div class="col-12">
-                  <p class="mb-0" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
-                  <small class="text-muted mr-3" @click.prevent="showOrderUpdateModal(item, index)">
+                  <p class="mb-1" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
+                  <span class="text-muted mr-3" @click.prevent="showOrderUpdateModal(item, index)">
                     <i class="icon-location-pin mr-2"></i>{{item.address}}
-                  </small>
+                  </span>
                   <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
                     <i class="icon-calendar mr-2"></i>{{item.created_at | moment('LLL')}}
                   </small>
@@ -128,6 +128,9 @@
                 :options="clients"
                 track-by="id"
                 label="name"
+                :loading="isLoading"
+                :internal-search="false"
+                @search-change="searchClients"
                 @select="getAddress"
                 :class="{'border border-danger rounded': errors.client}">
               </multiselect>
@@ -201,6 +204,16 @@
               <label>Mandado</label>
               <textarea class="form-control" rows="3" placeholder="¡Traeme unos tacos!" v-model="editOrder.order" :class="{'is-invalid': errors.order}"></textarea>
               <div class="invalid-feedback" v-if="errors.order">{{errors.order[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Costo de envio</label>
+              <div class="input-group border-right-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.delivery_costs}" v-model="editOrder.delivery_costs" placeholder="20">
+              </div>
+              <div class="invalid-feedback" v-if="errors.delivery_costs">{{errors.delivery_costs[0]}}</div>
             </div>
             <!-- <div class="form-group">
               <label>Repartidor</label>
@@ -288,6 +301,7 @@ export default {
       editOrder: {},
       userView: {},
       loading: true,
+      isLoading: false,
       submiting: false,
       submitingUpdate: false,
       submitingDealer: false,
@@ -326,14 +340,14 @@ export default {
         })
       }
     },
-    getClients () {
-      if (this.clients.length == 0) {
-        axios.get(`/api/users/getClients`)
-        .then(response => {
-          this.clients = response.data
-        })
-      }
-    },
+    // getClients () {
+    //   if (this.clients.length == 0) {
+    //     axios.get(`/api/users/getClients`)
+    //     .then(response => {
+    //       this.clients = response.data
+    //     })
+    //   }
+    // },
     getDealers () {
       if (this.dealers.length == 0) {
         axios.get(`/api/users/getDealers`)
@@ -341,6 +355,14 @@ export default {
           this.dealers = response.data
         })
       }
+    },
+    searchClients (query) {
+      this.isLoading = true
+      axios.get(`/api/users/searchClients/${query}`)
+      .then(response => {
+        this.clients = response.data
+        this.isLoading = false
+      })
     },
     getAddress (client) {
       axios.get(`/api/address/byClient/${client.id}`)
@@ -355,7 +377,7 @@ export default {
     orderModal () {
       this.errors = {}
       this.newOrder = {}
-      this.getClients()
+      //this.getClients()
       this.getDealers()
       $('#orderModal').modal('show')
     },
@@ -390,6 +412,7 @@ export default {
         axios.put(`/api/orders/update/${this.editOrder.id}`, this.editOrder)
         .then(response => {
           this.orders[this.editOrder.index].order = response.data.order
+          this.orders[this.editOrder.index].delivery_costs = response.data.delivery_costs
           this.submitingUpdate = false
           $('#orderUpdateModal').modal('hide')
           this.$toasted.global.error('Mandado actualizado!')

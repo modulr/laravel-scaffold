@@ -15,6 +15,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/filter', 'UserController@filter')->middleware('permission:read-users');
             Route::post('/uploadAvatar', 'UserController@uploadAvatar')->middleware('permission:update-users');
             // Route::post('/removeAvatar', 'UserController@removeAvatar')->middleware('permission:update-users');
+            Route::get('/searchClients/{query}', 'UserController@searchClients');
             Route::get('/getDealers', 'UserController@getDealers');
             Route::get('/getClients', 'UserController@getClients');
 
