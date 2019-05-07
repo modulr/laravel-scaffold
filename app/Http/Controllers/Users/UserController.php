@@ -142,10 +142,10 @@ class UserController extends Controller
     //     return $user;
     // }
 
-    public function searchClients ($query)
+    public function searchClients (Request $request)
     {
-        if (isset($query)) {
-            return User::role('user')->where('name', 'like', '%'.$query.'%')->orderBy('name')->get();
+        if (isset($request->name) && strlen($request->name) > 2) {
+            return User::role('user')->where('name', 'like', '%'.$request->name.'%')->orderBy('name')->get();
         } else {
             return [];
         }

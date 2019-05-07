@@ -66542,6 +66542,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66549,6 +66559,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       orders: [],
       status: [],
       statusShow: false,
+      rate: null,
       clients: [],
       dealers: [],
       address: [],
@@ -66604,29 +66615,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //     })
     //   }
     // },
-    getDealers: function getDealers() {
+    getRate: function getRate() {
       var _this3 = this;
+
+      if (this.rate == null) {
+        axios.get('/api/rates/day').then(function (response) {
+          _this3.rate = response.data;
+          _this3.newOrder.delivery_costs = _this3.rate.rate;
+        });
+      } else {
+        this.newOrder.delivery_costs = this.rate.rate;
+      }
+    },
+    getDealers: function getDealers() {
+      var _this4 = this;
 
       if (this.dealers.length == 0) {
         axios.get('/api/users/getDealers').then(function (response) {
-          _this3.dealers = response.data;
+          _this4.dealers = response.data;
         });
       }
     },
     searchClients: function searchClients(query) {
-      var _this4 = this;
-
-      this.isLoading = true;
-      axios.get('/api/users/searchClients/' + query).then(function (response) {
-        _this4.clients = response.data;
-        _this4.isLoading = false;
-      });
-    },
-    getAddress: function getAddress(client) {
       var _this5 = this;
 
+      if (query.length > 2) {
+        this.isLoading = true;
+        axios.post('/api/users/searchClients', { name: query }).then(function (response) {
+          _this5.clients = response.data;
+          _this5.isLoading = false;
+        });
+      }
+    },
+    getAddress: function getAddress(client) {
+      var _this6 = this;
+
       axios.get('/api/address/byClient/' + client.id).then(function (response) {
-        _this5.address = response.data;
+        _this6.address = response.data;
       });
     },
     showFilters: function showFilters() {
@@ -66638,21 +66663,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.newOrder = {};
       //this.getClients()
       this.getDealers();
+      this.getRate();
       $('#orderModal').modal('show');
     },
     createOrder: function createOrder() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         axios.post('/api/orders/store', this.newOrder).then(function (response) {
-          _this6.orders.unshift(response.data);
-          _this6.submiting = false;
+          _this7.orders.unshift(response.data);
+          _this7.submiting = false;
           $('#orderModal').modal('hide');
-          _this6.$toasted.global.error('¡Mandado creado!');
+          _this7.$toasted.global.error('¡Mandado creado!');
         }).catch(function (error) {
-          _this6.errors = error.response.data.errors;
-          _this6.submiting = false;
+          _this7.errors = error.response.data.errors;
+          _this7.submiting = false;
         });
       }
     },
@@ -66666,24 +66692,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       $('#orderUpdateModal').modal('show');
     },
     updateOrder: function updateOrder() {
-      var _this7 = this;
+      var _this8 = this;
 
       if (!this.submitingUpdate) {
         this.submitingUpdate = true;
         axios.put('/api/orders/update/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this7.orders[_this7.editOrder.index].order = response.data.order;
-          _this7.orders[_this7.editOrder.index].delivery_costs = response.data.delivery_costs;
-          _this7.submitingUpdate = false;
+          _this8.orders[_this8.editOrder.index].order = response.data.order;
+          _this8.orders[_this8.editOrder.index].delivery_costs = response.data.delivery_costs;
+          _this8.submitingUpdate = false;
           $('#orderUpdateModal').modal('hide');
-          _this7.$toasted.global.error('Mandado actualizado!');
+          _this8.$toasted.global.error('Mandado actualizado!');
         }).catch(function (error) {
-          _this7.errors = error.response.data.errors;
-          _this7.submitingUpdate = false;
+          _this8.errors = error.response.data.errors;
+          _this8.submitingUpdate = false;
         });
       }
     },
     cancelOrder: function cancelOrder(order, index) {
-      var _this8 = this;
+      var _this9 = this;
 
       swal({
         title: "¿Estas seguro?",
@@ -66694,25 +66720,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (willDelete) {
         if (willDelete) {
           axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 4 }).then(function (response) {
-            _this8.orders[index].status_id = response.data.status_id;
-            _this8.orders[index].status = response.data.status;
-            _this8.$toasted.global.error('¡Mandado cancelado!');
+            _this9.orders[index].status_id = response.data.status_id;
+            _this9.orders[index].status = response.data.status;
+            _this9.$toasted.global.error('¡Mandado cancelado!');
           });
         }
       });
     },
     addTag: function addTag(newTag) {
-      var _this9 = this;
+      var _this10 = this;
 
       var tag = {
         address: newTag
       };
       axios.post('/api/address/store/' + this.newOrder.client.id, tag).then(function (response) {
-        _this9.newOrder.address = tag;
-        _this9.address.unshift(response.data);
-        _this9.$toasted.global.error('¡Direccion agregada!');
+        _this10.newOrder.address = tag;
+        _this10.address.unshift(response.data);
+        _this10.$toasted.global.error('¡Direccion agregada!');
       }).catch(function (error) {
-        _this9.errors = error.response.data.errors;
+        _this10.errors = error.response.data.errors;
       });
     },
     customLabel: function customLabel(_ref) {
@@ -66729,21 +66755,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getDealers();
     },
     assignDealer: function assignDealer() {
-      var _this10 = this;
+      var _this11 = this;
 
       if (!this.submitingDealer) {
         this.submitingDealer = true;
         axios.put('/api/orders/assignDealer/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this10.orders[_this10.editOrder.index].status_id = response.data.status_id;
-          _this10.orders[_this10.editOrder.index].status = response.data.status;
-          _this10.orders[_this10.editOrder.index].dealer_id = response.data.dealer_id;
-          _this10.orders[_this10.editOrder.index].dealer = response.data.dealer;
-          _this10.submitingDealer = false;
+          _this11.orders[_this11.editOrder.index].status_id = response.data.status_id;
+          _this11.orders[_this11.editOrder.index].status = response.data.status;
+          _this11.orders[_this11.editOrder.index].dealer_id = response.data.dealer_id;
+          _this11.orders[_this11.editOrder.index].dealer = response.data.dealer;
+          _this11.submitingDealer = false;
           $('#assingModal').modal('hide');
-          _this10.$toasted.global.error('¡Repartidor Asignado!');
+          _this11.$toasted.global.error('¡Repartidor Asignado!');
         }).catch(function (error) {
-          _this10.errors = error.response.data.errors;
-          _this10.submitingDealer = false;
+          _this11.errors = error.response.data.errors;
+          _this11.submitingDealer = false;
         });
       }
     }
@@ -67342,7 +67368,48 @@ var render = function() {
                         : _vm._e()
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Costo de envio")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group border-right-0" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newOrder.delivery_costs,
+                            expression: "newOrder.delivery_costs"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.errors.delivery_costs },
+                        attrs: { type: "text", placeholder: "20" },
+                        domProps: { value: _vm.newOrder.delivery_costs },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newOrder,
+                              "delivery_costs",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.delivery_costs
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.delivery_costs[0]))
+                          ])
+                        : _vm._e()
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-footer" }, [
@@ -67390,7 +67457,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -67430,7 +67497,7 @@ var render = function() {
                     _c("label", [_vm._v("Costo de envio")]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-group border-right-0" }, [
-                      _vm._m(3),
+                      _vm._m(4),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -67513,7 +67580,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c(
@@ -67613,6 +67680,14 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("$")])
     ])
   },
   function() {

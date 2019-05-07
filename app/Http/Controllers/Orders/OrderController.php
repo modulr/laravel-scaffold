@@ -79,7 +79,8 @@ class OrderController extends Controller
         $this->validate($request, [
             'order' => 'required|string',
             'address' => 'required|array',
-            'client' => 'required|array'
+            'client' => 'required|array',
+            'delivery_costs' => 'required|numeric'
         ]);
 
         if ($request->dealer) {
@@ -95,7 +96,7 @@ class OrderController extends Controller
             'client_id' => $request->client['id'],
             'dealer_id' => $request->dealer['id'],
             'rate' => Rate::latest()->first()->rate,
-            'delivery_costs' => Rate::latest()->first()->rate
+            'delivery_costs' => $request->delivery_costs
         ]);
 
         Auth::user()->notify(new NewOrder($order));

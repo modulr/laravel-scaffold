@@ -178,6 +178,16 @@
               </multiselect>
               <small class="form-text text-danger" v-if="errors.dealer">{{errors.dealer[0]}}</small>
             </div>
+            <div class="form-group">
+              <label>Costo de envio</label>
+              <div class="input-group border-right-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.delivery_costs}" v-model="newOrder.delivery_costs" placeholder="20">
+                <div class="invalid-feedback" v-if="errors.delivery_costs">{{errors.delivery_costs[0]}}</div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="createOrder">
@@ -294,6 +304,7 @@ export default {
       orders: [],
       status:[],
       statusShow: false,
+      rate: null,
       clients: [],
       dealers: [],
       address: [],
@@ -348,6 +359,17 @@ export default {
     //     })
     //   }
     // },
+    getRate () {
+      if (this.rate == null) {
+        axios.get(`/api/rates/day`)
+        .then(response => {
+          this.rate = response.data
+          this.newOrder.delivery_costs = this.rate.rate
+        })
+      } else {
+        this.newOrder.delivery_costs = this.rate.rate
+      }
+    },
     getDealers () {
       if (this.dealers.length == 0) {
         axios.get(`/api/users/getDealers`)
@@ -357,12 +379,14 @@ export default {
       }
     },
     searchClients (query) {
-      this.isLoading = true
-      axios.get(`/api/users/searchClients/${query}`)
-      .then(response => {
-        this.clients = response.data
-        this.isLoading = false
-      })
+      if (query.length > 2) {
+        this.isLoading = true
+        axios.post(`/api/users/searchClients`, {name: query})
+        .then(response => {
+          this.clients = response.data
+          this.isLoading = false
+        })
+      }
     },
     getAddress (client) {
       axios.get(`/api/address/byClient/${client.id}`)
@@ -379,6 +403,7 @@ export default {
       this.newOrder = {}
       //this.getClients()
       this.getDealers()
+      this.getRate()
       $('#orderModal').modal('show')
     },
     createOrder () {
