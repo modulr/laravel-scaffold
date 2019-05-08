@@ -66,7 +66,7 @@ class OrderController extends Controller
 
     public function byDealer ($userId)
     {
-        return Order::with('status', 'client')->where('dealer_id', $userId)->latest()->get();
+        return Order::with('status', 'client')->where('dealer_id', $userId)->whereDate('created_at', Carbon::today())->latest()->get();
     }
 
     public function show ($orderId)

@@ -5,7 +5,7 @@
     </content-placeholders>
     <div v-else>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mis vueltas</h4>
+        <h4 class="float-left pt-2">Mis vueltas <small class="text-muted">({{orders.length}})</small></h4>
       </div>
       <div class="card-body px-0">
         <ul class="list-group mb-1" v-for="(item, index) in orders">

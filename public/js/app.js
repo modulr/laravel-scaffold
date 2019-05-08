@@ -66792,7 +66792,12 @@ var render = function() {
           "div",
           { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
           [
-            _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Mandados")]),
+            _c("h4", { staticClass: "float-left pt-2" }, [
+              _vm._v("Mandados "),
+              _c("small", { staticClass: "text-muted" }, [
+                _vm._v("(" + _vm._s(_vm.orders.length) + ")")
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-header-actions mr-1" }, [
               _c(
@@ -68436,7 +68441,10 @@ var render = function() {
               { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
               [
                 _c("h4", { staticClass: "float-left pt-2" }, [
-                  _vm._v("Mis vueltas")
+                  _vm._v("Mis vueltas "),
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v("(" + _vm._s(_vm.orders.length) + ")")
+                  ])
                 ])
               ]
             ),
