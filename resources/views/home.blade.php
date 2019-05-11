@@ -23,7 +23,7 @@
             @endauth
             <!-- <p class="mb-0">Registrate y recibe tu primer mandado ¡<strong>Gratis</strong>!</p> -->
             <p class="mb-0">Tarifa del dia desde <rates-day></rates-day> pesos</p>
-            <p><small>Horario: 8:00am a 9:00pm</small></p>
+            <p><small>Horario: 8:00am a 10:00pm</small></p>
         </div>
         <div class="col-sm-12">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -75,6 +75,9 @@
         @endauth
         <div class="col-12 pb-3 text-center px-5">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
+        </div>
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
+            <img src="/img/stores/blvdchino.png" class="img-fluid" alt="Blvd Chino">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
