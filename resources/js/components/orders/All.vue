@@ -39,7 +39,7 @@
                   <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Mandado: {{item.id}}</small>
                 </div>
                 <div class="col text-center">
-                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Envio: ${{item.delivery_costs}}</small>
+                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">Envio: <strong>${{item.delivery_costs}}</strong></small>
                 </div>
                 <div class="col text-right">
                   <span class="badge badge-pill" @click.prevent="showOrderUpdateModal(item, index)" :class="{
@@ -55,11 +55,13 @@
                 </div>
                 <div class="col-12">
                   <p class="mb-1" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
-                  <span class="text-muted mr-3" @click.prevent="showOrderUpdateModal(item, index)">
-                    <i class="icon-location-pin mr-2"></i>{{item.address}}
-                  </span>
-                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                    <i class="icon-calendar mr-2"></i>{{item.created_at | moment('LLL')}}
+                  <a :href="`https://www.google.com/maps/search/calle ${item.address}, Parral Chihuahua`" target="_blank">
+                    <small class="text-muted mr-3">
+                      <i class="icon-location-pin"></i>&nbsp; {{item.address}}
+                    </small>
+                  </a>
+                  <small class="text-muted">
+                    <i class="icon-clock"></i>&nbsp; {{item.created_at | moment('LT')}}
                   </small>
                 </div>
                 <div class="col-12">

@@ -66010,7 +66010,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Envio: $" + _vm._s(item.delivery_costs))
+                          _vm._v("Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
@@ -66045,15 +66048,18 @@ var render = function() {
                           _vm._v(_vm._s(item.order))
                         ]),
                         _vm._v(" "),
-                        _c("span", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin mr-2" }),
-                          _vm._v(_vm._s(item.address) + "\n              ")
+                        _c("small", { staticClass: "text-muted mr-3" }, [
+                          _c("i", { staticClass: "icon-location-pin" }),
+                          _vm._v(
+                            "  " + _vm._s(item.address) + "\n              "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-calendar mr-2" }),
+                          _c("i", { staticClass: "icon-clock" }),
                           _vm._v(
-                            _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
+                            "  " +
+                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               "\n              "
                           )
                         ])
@@ -66253,6 +66259,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -66915,7 +66923,12 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Envio: $" + _vm._s(item.delivery_costs))]
+                              [
+                                _vm._v("Envio: "),
+                                _c("strong", [
+                                  _vm._v("$" + _vm._s(item.delivery_costs))
+                                ])
+                              ]
                             )
                           ]),
                           _vm._v(" "),
@@ -66967,46 +66980,44 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "span",
+                              "a",
                               {
-                                staticClass: "text-muted mr-3",
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.showOrderUpdateModal(item, index)
-                                  }
+                                attrs: {
+                                  href:
+                                    "https://www.google.com/maps/search/calle " +
+                                    item.address +
+                                    ", Parral Chihuahua",
+                                  target: "_blank"
                                 }
                               },
                               [
-                                _c("i", {
-                                  staticClass: "icon-location-pin mr-2"
-                                }),
-                                _vm._v(
-                                  _vm._s(item.address) + "\n                "
+                                _c(
+                                  "small",
+                                  { staticClass: "text-muted mr-3" },
+                                  [
+                                    _c("i", {
+                                      staticClass: "icon-location-pin"
+                                    }),
+                                    _vm._v(
+                                      "  " +
+                                        _vm._s(item.address) +
+                                        "\n                  "
+                                    )
+                                  ]
                                 )
                               ]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "small",
-                              {
-                                staticClass: "text-muted",
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.showOrderUpdateModal(item, index)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "icon-calendar mr-2" }),
-                                _vm._v(
+                            _c("small", { staticClass: "text-muted" }, [
+                              _c("i", { staticClass: "icon-clock" }),
+                              _vm._v(
+                                "  " +
                                   _vm._s(
-                                    _vm._f("moment")(item.created_at, "LLL")
-                                  ) + "\n                "
-                                )
-                              ]
-                            )
+                                    _vm._f("moment")(item.created_at, "LT")
+                                  ) +
+                                  "\n                "
+                              )
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [_c("hr")]),
@@ -67883,6 +67894,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67969,7 +67982,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Envio: $" + _vm._s(item.delivery_costs))
+                          _vm._v("Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
@@ -68004,18 +68020,33 @@ var render = function() {
                           _vm._v(_vm._s(item.order))
                         ]),
                         _vm._v(" "),
-                        _c("span", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin mr-2" }),
-                          _vm._v(
-                            " " + _vm._s(item.address) + "\n              "
-                          )
-                        ]),
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                "https://www.google.com/maps/search/" +
+                                item.address,
+                              target: "_blank"
+                            }
+                          },
+                          [
+                            _c("small", { staticClass: "text-muted mr-3" }, [
+                              _c("i", { staticClass: "icon-location-pin" }),
+                              _vm._v(
+                                "  " +
+                                  _vm._s(item.address) +
+                                  "\n                "
+                              )
+                            ])
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-calendar mr-2" }),
+                          _c("i", { staticClass: "icon-clock" }),
                           _vm._v(
-                            " " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
+                            "  " +
+                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               "\n              "
                           )
                         ])
@@ -68373,6 +68404,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68464,7 +68497,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Tarifa: $" + _vm._s(item.rate))
+                          _vm._v("Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
@@ -68495,22 +68531,37 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [
-                        _c("p", { staticClass: "mb-0" }, [
+                        _c("p", { staticClass: "mb-1" }, [
                           _vm._v(_vm._s(item.order))
                         ]),
                         _vm._v(" "),
-                        _c("small", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin" }),
-                          _vm._v(
-                            "  " + _vm._s(item.address) + "\n              "
-                          )
-                        ]),
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                "https://www.google.com/maps/search/" +
+                                item.address,
+                              target: "_blank"
+                            }
+                          },
+                          [
+                            _c("small", { staticClass: "text-muted mr-3" }, [
+                              _c("i", { staticClass: "icon-location-pin" }),
+                              _vm._v(
+                                "  " +
+                                  _vm._s(item.address) +
+                                  "\n                "
+                              )
+                            ])
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-calendar" }),
+                          _c("i", { staticClass: "icon-clock" }),
                           _vm._v(
                             "  " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LLL")) +
+                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               "\n              "
                           )
                         ])

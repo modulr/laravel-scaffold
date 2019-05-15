@@ -15,7 +15,7 @@
                 <small class="text-muted">Mandado: {{item.id}}</small>
               </div>
               <div class="col text-center">
-                <small class="text-muted">Envio: ${{item.delivery_costs}}</small>
+                <small class="text-muted">Envio: <strong>${{item.delivery_costs}}</strong></small>
               </div>
               <div class="col text-right">
                 <span class="badge badge-pill" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
@@ -27,11 +27,13 @@
               </div>
               <div class="col-12">
                 <p class="mb-1">{{item.order}}</p>
-                <span class="text-muted mr-3">
-                  <i class="icon-location-pin mr-2"></i> {{item.address}}
-                </span>
+                <a :href="`https://www.google.com/maps/search/${item.address}`" target="_blank">
+                  <small class="text-muted mr-3">
+                    <i class="icon-location-pin"></i>&nbsp; {{item.address}}
+                  </small>
+                </a>
                 <small class="text-muted">
-                  <i class="icon-calendar mr-2"></i> {{item.created_at | moment('LLL')}}
+                  <i class="icon-clock"></i>&nbsp; {{item.created_at | moment('LT')}}
                 </small>
               </div>
               <div class="col-12">
