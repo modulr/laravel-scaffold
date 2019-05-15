@@ -66700,6 +66700,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66707,7 +66720,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       orders: [],
       profit: 0,
       status: [],
-      statusShow: false,
       rate: null,
       clients: [],
       dealers: [],
@@ -66721,8 +66733,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       submitingUpdate: false,
       submitingDealer: false,
       errors: {},
+      filtersShow: false,
       filters: {
-        status: [{ 'id': 1, 'status': 'Abierto' }, { 'id': 2, 'status': 'En camino' }]
+        status: [{ 'id': 1, 'status': 'Abierto' }, { 'id': 2, 'status': 'En camino' }],
+        dealer: []
       }
     };
   },
@@ -66805,8 +66819,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     showFilters: function showFilters() {
-      this.statusShow = !this.statusShow;
+      this.filtersShow = !this.filtersShow;
       this.getStatus();
+      this.getDealers();
     },
     orderModal: function orderModal() {
       this.errors = {};
@@ -66960,7 +66975,7 @@ var render = function() {
                 "a",
                 {
                   staticClass: "text-secondary",
-                  class: { "text-success": _vm.statusShow },
+                  class: { "text-success": _vm.filtersShow },
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
@@ -67000,36 +67015,64 @@ var render = function() {
           "div",
           { staticClass: "card-body px-0" },
           [
-            _vm.statusShow
-              ? _c(
-                  "div",
-                  { staticClass: "mb-4" },
-                  [
-                    _c("multiselect", {
-                      class: {
-                        "border border-danger rounded": _vm.errors.status
-                      },
-                      attrs: {
-                        options: _vm.status,
-                        "track-by": "id",
-                        label: "status",
-                        multiple: true,
-                        searchable: false,
-                        placeholder: "Filtra por Estatus"
-                      },
-                      on: { select: _vm.getOrders, remove: _vm.getOrders },
-                      model: {
-                        value: _vm.filters.status,
-                        callback: function($$v) {
-                          _vm.$set(_vm.filters, "status", $$v)
-                        },
-                        expression: "filters.status"
-                      }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.filtersShow,
+                    expression: "filtersShow"
+                  }
+                ],
+                staticClass: "mb-4"
+              },
+              [
+                _c("multiselect", {
+                  class: { "border border-danger rounded": _vm.errors.status },
+                  attrs: {
+                    options: _vm.status,
+                    "track-by": "id",
+                    label: "status",
+                    multiple: true,
+                    searchable: false,
+                    placeholder: "Filtra por Estatus"
+                  },
+                  on: { select: _vm.getOrders, remove: _vm.getOrders },
+                  model: {
+                    value: _vm.filters.status,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "status", $$v)
+                    },
+                    expression: "filters.status"
+                  }
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("multiselect", {
+                  class: { "border border-danger rounded": _vm.errors.dealer },
+                  attrs: {
+                    options: _vm.dealers,
+                    "track-by": "id",
+                    label: "name",
+                    multiple: true,
+                    searchable: false,
+                    placeholder: "Filtra por Repartidor"
+                  },
+                  on: { select: _vm.getOrders, remove: _vm.getOrders },
+                  model: {
+                    value: _vm.filters.dealers,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "dealers", $$v)
+                    },
+                    expression: "filters.dealers"
+                  }
+                })
+              ],
+              1
+            ),
             _vm._v(" "),
             _vm.loading
               ? _c(

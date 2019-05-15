@@ -35,6 +35,17 @@ class OrderController extends Controller
             $profit = DB::table('orders')->whereDate('created_at', Carbon::today())->sum('delivery_costs');
         }
 
+        if(!empty($request->dealers)) {
+            $collection = collect($request->dealers);
+            $plucked = $collection->pluck('id');
+            $ids = $plucked->all();
+            $query->whereIn('dealer_id', $ids);
+            $profit = DB::table('orders')->whereIn('dealer_id', $ids)->whereDate('created_at', Carbon::today())->sum('delivery_costs');
+        }
+        else {
+           $profit = DB::table('orders')->whereDate('created_at', Carbon::today())->sum('delivery_costs');
+       }
+
         $orders = $query->whereDate('created_at', Carbon::today())->latest()->get();
 
         $orders->load('status', 'client', 'dealer');

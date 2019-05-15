@@ -4,7 +4,7 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados <small class="text-muted">({{orders.length}}/${{profit}})</small></h4>
         <div class="card-header-actions mr-1">
-          <a class="text-secondary" :class="{'text-success': statusShow}" href="#" @click.prevent="showFilters">
+          <a class="text-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
           </a>
           <a class="btn btn-primary ml-4" href="#" @click.prevent="orderModal">
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="card-body px-0">
-        <div class="mb-4" v-if="statusShow">
+        <div class="mb-4" v-show="filtersShow">
           <multiselect
             v-model="filters.status"
             :options="status"
@@ -26,6 +26,19 @@
             @remove="getOrders"
             placeholder="Filtra por Estatus"
             :class="{'border border-danger rounded': errors.status}">
+          </multiselect>
+          <br>
+          <multiselect
+            v-model="filters.dealers"
+            :options="dealers"
+            track-by="id"
+            label="name"
+            :multiple="true"
+            :searchable="false"
+            @select="getOrders"
+            @remove="getOrders"
+            placeholder="Filtra por Repartidor"
+            :class="{'border border-danger rounded': errors.dealer}">
           </multiselect>
         </div>
         <content-placeholders v-if="loading">
@@ -306,7 +319,6 @@ export default {
       orders: [],
       profit: 0,
       status:[],
-      statusShow: false,
       rate: null,
       clients: [],
       dealers: [],
@@ -320,11 +332,13 @@ export default {
       submitingUpdate: false,
       submitingDealer: false,
       errors: {},
+      filtersShow: false,
       filters: {
         status: [
           {'id': 1, 'status': 'Abierto'},
           {'id': 2, 'status': 'En camino'}
-        ]
+        ],
+        dealer: []
       }
     }
   },
@@ -399,8 +413,9 @@ export default {
       })
     },
     showFilters () {
-      this.statusShow = !this.statusShow
+      this.filtersShow = !this.filtersShow
       this.getStatus()
+      this.getDealers()
     },
     orderModal () {
       this.errors = {}
