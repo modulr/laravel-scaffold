@@ -66984,9 +66984,9 @@ var render = function() {
                               {
                                 attrs: {
                                   href:
-                                    "https://www.google.com/maps/search/calle " +
+                                    "https://www.google.com/maps/search/Calle " +
                                     item.address +
-                                    ", Parral Chihuahua",
+                                    ", Hidalgo delParral, Chih.",
                                   target: "_blank"
                                 }
                               },
@@ -68025,8 +68025,9 @@ var render = function() {
                           {
                             attrs: {
                               href:
-                                "https://www.google.com/maps/search/" +
-                                item.address,
+                                "https://www.google.com/maps/search/Calle " +
+                                item.address +
+                                ", Hidalgo delParral, Chih.",
                               target: "_blank"
                             }
                           },
@@ -68540,8 +68541,9 @@ var render = function() {
                           {
                             attrs: {
                               href:
-                                "https://www.google.com/maps/search/" +
-                                item.address,
+                                "https://www.google.com/maps/search/Calle " +
+                                item.address +
+                                ", Hidalgo delParral, Chih.",
                               target: "_blank"
                             }
                           },

@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-12">
                   <p class="mb-1" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
-                  <a :href="`https://www.google.com/maps/search/calle ${item.address}, Parral Chihuahua`" target="_blank">
+                  <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo delParral, Chih.`" target="_blank">
                     <small class="text-muted mr-3">
                       <i class="icon-location-pin"></i>&nbsp; {{item.address}}
                     </small>

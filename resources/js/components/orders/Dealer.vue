@@ -27,7 +27,7 @@
               </div>
               <div class="col-12">
                 <p class="mb-1">{{item.order}}</p>
-                <a :href="`https://www.google.com/maps/search/${item.address}`" target="_blank">
+                <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo delParral, Chih.`" target="_blank">
                   <small class="text-muted mr-3">
                     <i class="icon-location-pin"></i>&nbsp; {{item.address}}
                   </small>
