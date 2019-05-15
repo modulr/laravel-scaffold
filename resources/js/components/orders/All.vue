@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mandados <small class="text-muted">({{orders.length}})</small></h4>
+        <h4 class="float-left pt-2">Mandados <small class="text-muted">({{orders.length}}/${{profit}})</small></h4>
         <div class="card-header-actions mr-1">
           <a class="text-secondary" :class="{'text-success': statusShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
@@ -304,6 +304,7 @@ export default {
   data () {
     return {
       orders: [],
+      profit: 0,
       status:[],
       statusShow: false,
       rate: null,
@@ -340,7 +341,8 @@ export default {
       this.loading = true
       axios.post(`/api/orders/filters`, this.filters)
       .then(response => {
-        this.orders = response.data
+        this.orders = response.data.orders
+        this.profit = response.data.profit
         this.loading = false
         localStorage.setItem("filtersOrders", JSON.stringify(this.filters))
       })

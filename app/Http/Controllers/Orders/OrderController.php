@@ -30,13 +30,19 @@ class OrderController extends Controller
             $plucked = $collection->pluck('id');
             $ids = $plucked->all();
             $query->whereIn('status_id', $ids);
+            $profit = DB::table('orders')->whereIn('status_id', $ids)->whereDate('created_at', Carbon::today())->sum('delivery_costs');
+        } else {
+            $profit = DB::table('orders')->whereDate('created_at', Carbon::today())->sum('delivery_costs');
         }
 
         $orders = $query->whereDate('created_at', Carbon::today())->latest()->get();
 
         $orders->load('status', 'client', 'dealer');
 
-        return $orders;
+
+        //return $orders;
+
+        return ['orders' => $orders, 'profit' => $profit];
     }
 
     public function all ()
