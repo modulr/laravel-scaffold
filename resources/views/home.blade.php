@@ -77,7 +77,7 @@
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/blvdchino.png" class="img-fluid" alt="Blvd Chino">
+            <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
