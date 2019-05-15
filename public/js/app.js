@@ -66712,7 +66712,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67058,7 +67057,6 @@ var render = function() {
                     "track-by": "id",
                     label: "name",
                     multiple: true,
-                    searchable: false,
                     placeholder: "Filtra por Repartidor"
                   },
                   on: { select: _vm.getOrders, remove: _vm.getOrders },

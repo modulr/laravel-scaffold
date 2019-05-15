@@ -34,7 +34,6 @@
             track-by="id"
             label="name"
             :multiple="true"
-            :searchable="false"
             @select="getOrders"
             @remove="getOrders"
             placeholder="Filtra por Repartidor"
