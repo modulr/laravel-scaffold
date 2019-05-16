@@ -13,12 +13,7 @@
             <div class="row">
               <div class="col">
                 <small class="text-muted">
-                  Envio: <strong>${{item.delivery_costs}}</strong>
-                </small>
-              </div>
-              <div class="col text-center">
-                <small class="text-muted">
-                  <i class="far fa-clock mr-1"></i> {{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
+                  <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
                 </small>
               </div>
               <div class="col text-right">
@@ -36,6 +31,11 @@
                     <i class="icon-location-pin mr-1"></i>{{item.address}}
                   </small>
                 </a>
+                <div class="text-right">
+                  <small class="text-muted">
+                    Envio: <strong>${{item.delivery_costs}}</strong>
+                  </small>
+                </div>
               </div>
               <div class="col-12">
                 <hr>

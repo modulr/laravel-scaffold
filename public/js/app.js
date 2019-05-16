@@ -66145,19 +66145,9 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("\n                Envio: "),
-                          _c("strong", [
-                            _vm._v("$" + _vm._s(item.delivery_costs))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col text-center" }, [
-                        _c("small", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "far fa-clock mr-1" }),
                           _vm._v(
-                            " " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
+                            _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               " / " +
                               _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
                               "\n              "
@@ -66199,6 +66189,15 @@ var render = function() {
                         _c("small", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "icon-location-pin mr-1" }),
                           _vm._v(_vm._s(item.address) + "\n              ")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-right" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("\n                  Envio: "),
+                            _c("strong", [
+                              _vm._v("$" + _vm._s(item.delivery_costs))
+                            ])
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
@@ -67084,21 +67083,11 @@ var render = function() {
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col" }, [
                             _c("small", { staticClass: "text-muted" }, [
-                              _vm._v("\n                  Envio: "),
-                              _c("strong", [
-                                _vm._v("$" + _vm._s(item.delivery_costs))
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col text-center" }, [
-                            _c("small", { staticClass: "text-muted" }, [
                               _c("i", { staticClass: "far fa-clock mr-1" }),
                               _vm._v(
-                                " " +
-                                  _vm._s(
-                                    _vm._f("moment")(item.created_at, "LT")
-                                  ) +
+                                _vm._s(
+                                  _vm._f("moment")(item.created_at, "LT")
+                                ) +
                                   " / " +
                                   _vm._s(
                                     _vm._f("moment")(item.updated_at, "LT")
@@ -67171,7 +67160,16 @@ var render = function() {
                                   )
                                 ])
                               ]
-                            )
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "text-right" }, [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _vm._v("\n                    Envio: "),
+                                _c("strong", [
+                                  _vm._v("$" + _vm._s(item.delivery_costs))
+                                ])
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [_c("hr")]),
@@ -68131,19 +68129,9 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("\n                Envio: "),
-                          _c("strong", [
-                            _vm._v("$" + _vm._s(item.delivery_costs))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col text-center" }, [
-                        _c("small", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "far fa-clock mr-1" }),
                           _vm._v(
-                            " " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
+                            _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               " / " +
                               _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
                               "\n              "
@@ -68203,7 +68191,16 @@ var render = function() {
                               )
                             ])
                           ]
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-right" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("\n                  Envio: "),
+                            _c("strong", [
+                              _vm._v("$" + _vm._s(item.delivery_costs))
+                            ])
+                          ])
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
@@ -68646,19 +68643,9 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("\n                Envio: "),
-                          _c("strong", [
-                            _vm._v("$" + _vm._s(item.delivery_costs))
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col text-center" }, [
-                        _c("small", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "far fa-clock mr-1" }),
                           _vm._v(
-                            " " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
+                            _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               " / " +
                               _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
                               "\n              "
@@ -68718,7 +68705,16 @@ var render = function() {
                               )
                             ])
                           ]
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-right" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("\n                  Envio: "),
+                            _c("strong", [
+                              _vm._v("$" + _vm._s(item.delivery_costs))
+                            ])
+                          ])
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
