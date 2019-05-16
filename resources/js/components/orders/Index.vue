@@ -17,10 +17,14 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col">
-                <small class="text-muted">Mandado: {{item.id}}</small>
+                <small class="text-muted">
+                  Envio: <strong>${{item.delivery_costs}}</strong>
+                </small>
               </div>
               <div class="col text-center">
-                <small class="text-muted">Envio: <strong>${{item.delivery_costs}}</strong></small>
+                <small class="text-muted">
+                  <i class="far fa-clock mr-1"></i> {{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
+                </small>
               </div>
               <div class="col text-right">
                 <span class="badge badge-pill" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
@@ -32,11 +36,8 @@
               </div>
               <div class="col-12">
                 <p class="mb-1">{{item.order}}</p>
-                <small class="text-muted mr-3">
-                  <i class="icon-location-pin"></i>&nbsp; {{item.address}}
-                </small>
                 <small class="text-muted">
-                  <i class="icon-clock"></i>&nbsp; {{item.created_at | moment('LT')}}
+                  <i class="icon-location-pin mr-1"></i>{{item.address}}
                 </small>
               </div>
               <div class="col-12">

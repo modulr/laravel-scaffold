@@ -66026,6 +66026,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66144,16 +66145,23 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Mandado: " + _vm._s(item.id))
+                          _vm._v("\n                Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Envio: "),
-                          _c("strong", [
-                            _vm._v("$" + _vm._s(item.delivery_costs))
-                          ])
+                          _c("i", { staticClass: "far fa-clock mr-1" }),
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
+                              " / " +
+                              _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
+                              "\n              "
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -66188,20 +66196,9 @@ var render = function() {
                           _vm._v(_vm._s(item.order))
                         ]),
                         _vm._v(" "),
-                        _c("small", { staticClass: "text-muted mr-3" }, [
-                          _c("i", { staticClass: "icon-location-pin" }),
-                          _vm._v(
-                            "  " + _vm._s(item.address) + "\n              "
-                          )
-                        ]),
-                        _vm._v(" "),
                         _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-clock" }),
-                          _vm._v(
-                            "  " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
-                              "\n              "
-                          )
+                          _c("i", { staticClass: "icon-location-pin mr-1" }),
+                          _vm._v(_vm._s(item.address) + "\n              ")
                         ])
                       ]),
                       _vm._v(" "),
@@ -66399,6 +66396,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -67085,40 +67083,29 @@ var render = function() {
                       _c("li", { staticClass: "list-group-item" }, [
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col" }, [
-                            _c(
-                              "small",
-                              {
-                                staticClass: "text-muted",
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.showOrderUpdateModal(item, index)
-                                  }
-                                }
-                              },
-                              [_vm._v("Mandado: " + _vm._s(item.id))]
-                            )
+                            _c("small", { staticClass: "text-muted" }, [
+                              _vm._v("\n                  Envio: "),
+                              _c("strong", [
+                                _vm._v("$" + _vm._s(item.delivery_costs))
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col text-center" }, [
-                            _c(
-                              "small",
-                              {
-                                staticClass: "text-muted",
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.showOrderUpdateModal(item, index)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v("Envio: "),
-                                _c("strong", [
-                                  _vm._v("$" + _vm._s(item.delivery_costs))
-                                ])
-                              ]
-                            )
+                            _c("small", { staticClass: "text-muted" }, [
+                              _c("i", { staticClass: "far fa-clock mr-1" }),
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm._f("moment")(item.created_at, "LT")
+                                  ) +
+                                  " / " +
+                                  _vm._s(
+                                    _vm._f("moment")(item.updated_at, "LT")
+                                  ) +
+                                  "\n                "
+                              )
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col text-right" }, [
@@ -67131,12 +67118,6 @@ var render = function() {
                                   "badge-success": item.status_id == 2,
                                   "badge-info": item.status_id == 3,
                                   "badge-secondary": item.status_id == 4
-                                },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.showOrderUpdateModal(item, index)
-                                  }
                                 }
                               },
                               [
@@ -67180,33 +67161,17 @@ var render = function() {
                                 }
                               },
                               [
-                                _c(
-                                  "small",
-                                  { staticClass: "text-muted mr-3" },
-                                  [
-                                    _c("i", {
-                                      staticClass: "icon-location-pin"
-                                    }),
-                                    _vm._v(
-                                      "  " +
-                                        _vm._s(item.address) +
-                                        "\n                  "
-                                    )
-                                  ]
-                                )
+                                _c("small", { staticClass: "text-muted" }, [
+                                  _c("i", {
+                                    staticClass: "icon-location-pin mr-1"
+                                  }),
+                                  _vm._v(
+                                    _vm._s(item.address) +
+                                      "\n                  "
+                                  )
+                                ])
                               ]
-                            ),
-                            _vm._v(" "),
-                            _c("small", { staticClass: "text-muted" }, [
-                              _c("i", { staticClass: "icon-clock" }),
-                              _vm._v(
-                                "  " +
-                                  _vm._s(
-                                    _vm._f("moment")(item.created_at, "LT")
-                                  ) +
-                                  "\n                "
-                              )
-                            ])
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [_c("hr")]),
@@ -68085,6 +68050,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68165,16 +68131,23 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Mandado: " + _vm._s(item.id))
+                          _vm._v("\n                Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Envio: "),
-                          _c("strong", [
-                            _vm._v("$" + _vm._s(item.delivery_costs))
-                          ])
+                          _c("i", { staticClass: "far fa-clock mr-1" }),
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
+                              " / " +
+                              _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
+                              "\n              "
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -68221,25 +68194,16 @@ var render = function() {
                             }
                           },
                           [
-                            _c("small", { staticClass: "text-muted mr-3" }, [
-                              _c("i", { staticClass: "icon-location-pin" }),
+                            _c("small", { staticClass: "text-muted" }, [
+                              _c("i", {
+                                staticClass: "icon-location-pin mr-1"
+                              }),
                               _vm._v(
-                                "  " +
-                                  _vm._s(item.address) +
-                                  "\n                "
+                                _vm._s(item.address) + "\n                "
                               )
                             ])
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-clock" }),
-                          _vm._v(
-                            "  " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
-                              "\n              "
-                          )
-                        ])
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
@@ -68596,6 +68560,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68681,16 +68646,23 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Mandado: " + _vm._s(item.id))
+                          _vm._v("\n                Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-center" }, [
                         _c("small", { staticClass: "text-muted" }, [
-                          _vm._v("Envio: "),
-                          _c("strong", [
-                            _vm._v("$" + _vm._s(item.delivery_costs))
-                          ])
+                          _c("i", { staticClass: "far fa-clock mr-1" }),
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
+                              " / " +
+                              _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
+                              "\n              "
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -68737,25 +68709,16 @@ var render = function() {
                             }
                           },
                           [
-                            _c("small", { staticClass: "text-muted mr-3" }, [
-                              _c("i", { staticClass: "icon-location-pin" }),
+                            _c("small", { staticClass: "text-muted" }, [
+                              _c("i", {
+                                staticClass: "icon-location-pin mr-1"
+                              }),
                               _vm._v(
-                                "  " +
-                                  _vm._s(item.address) +
-                                  "\n                "
+                                _vm._s(item.address) + "\n                "
                               )
                             ])
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "text-muted" }, [
-                          _c("i", { staticClass: "icon-clock" }),
-                          _vm._v(
-                            "  " +
-                              _vm._s(_vm._f("moment")(item.created_at, "LT")) +
-                              "\n              "
-                          )
-                        ])
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
