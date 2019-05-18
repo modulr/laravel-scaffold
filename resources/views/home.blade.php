@@ -77,6 +77,9 @@
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
+            <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">
+        </div>
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
