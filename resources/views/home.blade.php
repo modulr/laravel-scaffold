@@ -76,7 +76,7 @@
         <div class="col-12 pb-3 text-center px-5">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
+        <div class="col-12 col-md-4 px-5 pt-1 text-center">
             <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
