@@ -14,12 +14,20 @@
               <div class="col">
                 <small class="text-muted">
                   <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
+                   = <strong>{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
                 </small>
               </div>
               <div class="col text-right">
-                <span class="badge badge-pill" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
+                <!-- <span class="badge badge-pill" :class="{
+                  'badge-primary': item.status_id == 1,
+                  'badge-success': item.status_id == 2,
+                  'badge-info': item.status_id == 3,
+                  'badge-secondary': item.status_id == 4 }">
                   {{item.status.status}}
-                </span>
+                </span> -->
+                <small class="text-muted">
+                  Envio: <strong>${{item.delivery_costs}}</strong>
+                </small>
               </div>
               <div class="col-12">
                 <hr class="mt-1 mb-2">
@@ -27,15 +35,10 @@
               <div class="col-12">
                 <p class="mb-1">{{item.order}}</p>
                 <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo delParral, Chih.`" target="_blank">
-                  <small class="text-muted">
+                  <span class="text-muted">
                     <i class="icon-location-pin mr-1"></i>{{item.address}}
-                  </small>
+                  </span>
                 </a>
-                <div class="text-right">
-                  <small class="text-muted">
-                    Envio: <strong>${{item.delivery_costs}}</strong>
-                  </small>
-                </div>
               </div>
               <div class="col-12">
                 <hr>

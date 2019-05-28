@@ -39,6 +39,9 @@
         </li>
         @else
         <li class="nav-item">
+            <a class="btn btn-outline-success btn-sm" href="/register" role="button">
+                Registrate
+            </a>
             <a class="btn btn-outline-primary btn-sm" href="/login" role="button">
                 Entrar
             </a>

@@ -29,6 +29,8 @@
     <meta name="description" content="Mandados a domicilio en Parral">
 
     <!-- Scripts -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu7T6uxlvBXGalDdmU5pk8a8nKb5r8krE" async defer></script>
+
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script>

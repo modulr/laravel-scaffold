@@ -22,23 +22,25 @@
                 </small>
               </div>
               <div class="col text-right">
-                <span class="badge badge-pill" :class="{ 'badge-primary': item.status_id == 1, 'badge-success': item.status_id == 2, 'badge-info': item.status_id == 3, 'badge-secondary': item.status_id == 4 }">
+                <!-- <span class="badge badge-pill" :class="{
+                  'badge-primary': item.status_id == 1,
+                  'badge-success': item.status_id == 2,
+                  'badge-info': item.status_id == 3,
+                  'badge-secondary': item.status_id == 4 }">
                   {{item.status.status}}
-                </span>
+                </span> -->
+                <small class="text-muted">
+                  Envio: <strong>${{item.delivery_costs}}</strong>
+                </small>
               </div>
               <div class="col-12">
                 <hr class="mt-1 mb-2">
               </div>
               <div class="col-12">
                 <p class="mb-1">{{item.order}}</p>
-                <small class="text-muted">
+                <span class="text-muted">
                   <i class="icon-location-pin mr-1"></i>{{item.address}}
-                </small>
-                <div class="text-right">
-                  <small class="text-muted">
-                    Envio: <strong>${{item.delivery_costs}}</strong>
-                  </small>
-                </div>
+                </span>
               </div>
               <div class="col-12">
                 <hr>

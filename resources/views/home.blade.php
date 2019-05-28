@@ -11,7 +11,7 @@
             @auth
             <orders-create-auth class="mb-4"></orders-create-auth>
             @else
-            <orders-create class="mb-4"></orders-create>
+            <orders-create class="mb-3"></orders-create>
             <p class="mt-0 mb-0"><small>ó por teléfono</small></p>
             <a class="btn btn-link btn-lg btn-phone mb-4" href="tel:627-110-1145">
                 <small class="fa-stack">
@@ -34,7 +34,7 @@
     </div>
 
     <div class="row justify-content-center mt-5 mb-5">
-        @auth
+        <!-- @auth
         @else
         <div class="col-8 text-center mb-5">
             <a class="btn btn-brand btn-facebook mb-2" href="/auth/facebook">
@@ -50,7 +50,7 @@
                   Ya tengo una cuenta
                 </a>
             </div>
-            <!-- <p class="small mt-4 mb-5">Revisa el historial de tus mandados y guarda tus direcciones.</p> -->
+            <p class="small mt-4 mb-5">Revisa el historial de tus mandados y guarda tus direcciones.</p>
         </div>
         <div class="col-12 text-center">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -72,7 +72,7 @@
                 c659.208-251.47,1308.758-125.986,1400-18.135V28.394z"/>
             </svg>
         </div>
-        @endauth
+        @endauth -->
         <div class="col-12 pb-3 text-center px-5">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
@@ -82,11 +82,11 @@
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
         </div>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
+        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
-        </div>
+        </div> -->
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/banner_dogos.png" class="img-fluid" alt="Dogos & Co">
+            <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">
@@ -97,9 +97,9 @@
         <div class="col-12 col-md-4 px-5 pt-2 text-center">
             <img src="/img/stores/banner_paraiso_pay.png" class="img-fluid" alt="Paraiso del Pay">
         </div>
-        <div class="col-12 col-md-4 px-5 pt-2 text-center">
+        <!-- <div class="col-12 col-md-4 px-5 pt-2 text-center">
             <img src="/img/stores/banner_express.png" class="img-fluid" alt="Bolas de Arroz Express">
-        </div>
+        </div> -->
     </div>
 
     <div class="row justify-content-center bg-gradient">

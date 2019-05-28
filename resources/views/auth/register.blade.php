@@ -77,6 +77,9 @@
         <div class="card-footer p-4">
             <div class="row">
                 <div class="col-12">
+                  <a class="btn btn-brand btn-facebook btn-block mb-2" href="/auth/facebook">Registrate con Facebook</a>
+                </div>
+                <div class="col-12">
                     <a class="btn btn-outline-primary btn-block" href="{{ route('login') }}">Iniciar sesión</a>
                 </div>
             </div>

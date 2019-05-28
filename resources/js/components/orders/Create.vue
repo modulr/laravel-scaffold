@@ -13,8 +13,12 @@
       </div>
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
-    <a class="btn btn-light btn-lg" href="#" @click.prevent="send">
-      <i class="fab fa-whatsapp mr-1"></i> Pídelo por WhatsApp
+    <a class="btn btn-brand btn-facebook mb-1" href="/auth/facebook">
+      Pídelo por Facebook
+    </a>
+    <br>
+    <a class="btn btn-light" href="#" @click.prevent="send">
+      Pídelo por WhatsApp
     </a>
     <!-- <a class="btn btn-lg btn-light" href="https://m.me/traeme">
         <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
@@ -53,6 +57,14 @@ export default {
     if (localStorage.getItem("currentAddress")) {
       this.order.address = JSON.parse(localStorage.getItem("currentAddress"))
     }
+    //var x = document.getElementById("demo");
+    //function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    //}
   },
   methods: {
     send () {
@@ -78,6 +90,12 @@ export default {
       //     this.submiting = false
       //   })
       // }
+    },
+    showPosition(position) {
+      axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+      .then(response => {
+        this.order.address.title = response.data.display_name
+      })
     },
     randomPlaceholder () {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)]

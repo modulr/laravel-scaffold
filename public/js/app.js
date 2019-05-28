@@ -66027,6 +66027,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66156,25 +66158,12 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-right" }, [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "badge badge-pill",
-                            class: {
-                              "badge-primary": item.status_id == 1,
-                              "badge-success": item.status_id == 2,
-                              "badge-info": item.status_id == 3,
-                              "badge-secondary": item.status_id == 4
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                " +
-                                _vm._s(item.status.status) +
-                                "\n              "
-                            )
-                          ]
-                        )
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("\n                Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [
@@ -66186,18 +66175,9 @@ var render = function() {
                           _vm._v(_vm._s(item.order))
                         ]),
                         _vm._v(" "),
-                        _c("small", { staticClass: "text-muted" }, [
+                        _c("span", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "icon-location-pin mr-1" }),
                           _vm._v(_vm._s(item.address) + "\n              ")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-right" }, [
-                          _c("small", { staticClass: "text-muted" }, [
-                            _vm._v("\n                  Envio: "),
-                            _c("strong", [
-                              _vm._v("$" + _vm._s(item.delivery_costs))
-                            ])
-                          ])
                         ])
                       ]),
                       _vm._v(" "),
@@ -66709,6 +66689,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66716,6 +66698,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       orders: [],
       profit: 0,
       status: [],
+      listStatus: [],
       rate: null,
       clients: [],
       dealers: [],
@@ -66743,6 +66726,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       localStorage.setItem("filtersOrders", JSON.stringify(this.filters));
     }
     this.getOrders();
+    this.getStatus();
   },
 
   methods: {
@@ -66763,6 +66747,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.status.length <= 0) {
         axios.get('/api/orders/status').then(function (response) {
           _this2.status = response.data;
+          response.data.pop();
+          _this2.listStatus = response.data.map(function (i, index) {
+            return i.status;
+          });
         });
       }
     },
@@ -67092,29 +67080,40 @@ var render = function() {
                                   _vm._s(
                                     _vm._f("moment")(item.updated_at, "LT")
                                   ) +
-                                  "\n                "
-                              )
+                                  "\n                   = "
+                              ),
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("moment")(
+                                      item.created_at,
+                                      "from",
+                                      item.updated_at,
+                                      true
+                                    )
+                                  )
+                                )
+                              ])
                             ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col text-right" }, [
                             _c(
-                              "span",
+                              "small",
                               {
-                                staticClass: "badge badge-pill",
-                                class: {
-                                  "badge-primary": item.status_id == 1,
-                                  "badge-success": item.status_id == 2,
-                                  "badge-info": item.status_id == 3,
-                                  "badge-secondary": item.status_id == 4
+                                staticClass: "text-muted",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showOrderUpdateModal(item, index)
+                                  }
                                 }
                               },
                               [
-                                _vm._v(
-                                  "\n                  " +
-                                    _vm._s(item.status.status) +
-                                    "\n                "
-                                )
+                                _vm._v("\n                  Envio: "),
+                                _c("strong", [
+                                  _vm._v("$" + _vm._s(item.delivery_costs))
+                                ])
                               ]
                             )
                           ]),
@@ -67150,7 +67149,7 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("small", { staticClass: "text-muted" }, [
+                                _c("span", { staticClass: "text-muted" }, [
                                   _c("i", {
                                     staticClass: "icon-location-pin mr-1"
                                   }),
@@ -67160,19 +67159,28 @@ var render = function() {
                                   )
                                 ])
                               ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "text-right" }, [
-                              _c("small", { staticClass: "text-muted" }, [
-                                _vm._v("\n                    Envio: "),
-                                _c("strong", [
-                                  _vm._v("$" + _vm._s(item.delivery_costs))
-                                ])
-                              ])
-                            ])
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                          _vm._v(" "),
+                          item.status_id != 4
+                            ? _c(
+                                "div",
+                                { staticClass: "col-12" },
+                                [
+                                  _c("vue-step", {
+                                    staticClass: "mb-3",
+                                    attrs: {
+                                      "now-step": item.status_id,
+                                      "step-list": _vm.listStatus,
+                                      "style-type": "style2"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -68049,6 +68057,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68134,31 +68145,30 @@ var render = function() {
                             _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               " / " +
                               _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
-                              "\n              "
-                          )
+                              "\n                 = "
+                          ),
+                          _c("strong", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("moment")(
+                                  item.created_at,
+                                  "from",
+                                  item.updated_at,
+                                  true
+                                )
+                              )
+                            )
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-right" }, [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "badge badge-pill",
-                            class: {
-                              "badge-primary": item.status_id == 1,
-                              "badge-success": item.status_id == 2,
-                              "badge-info": item.status_id == 3,
-                              "badge-secondary": item.status_id == 4
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                " +
-                                _vm._s(item.status.status) +
-                                "\n              "
-                            )
-                          ]
-                        )
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("\n                Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [
@@ -68182,7 +68192,7 @@ var render = function() {
                             }
                           },
                           [
-                            _c("small", { staticClass: "text-muted" }, [
+                            _c("span", { staticClass: "text-muted" }, [
                               _c("i", {
                                 staticClass: "icon-location-pin mr-1"
                               }),
@@ -68191,16 +68201,7 @@ var render = function() {
                               )
                             ])
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-right" }, [
-                          _c("small", { staticClass: "text-muted" }, [
-                            _vm._v("\n                  Envio: "),
-                            _c("strong", [
-                              _vm._v("$" + _vm._s(item.delivery_costs))
-                            ])
-                          ])
-                        ])
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
@@ -68558,18 +68559,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
       orders: [],
+      profit: 0,
+      status: [],
       userView: {},
       loading: true
     };
   },
   mounted: function mounted() {
     this.getOrders();
+    this.getStatus();
   },
 
   methods: {
@@ -68578,25 +68588,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.loading = true;
       axios.get('/api/orders/byDealer/' + this.user.id).then(function (response) {
-        _this.orders = response.data;
+        _this.orders = response.data.orders;
+        _this.profit = response.data.profit;
         _this.loading = false;
       });
     },
-    finalizeOrder: function finalizeOrder(order, index) {
+    getStatus: function getStatus() {
       var _this2 = this;
 
+      axios.get('/api/orders/status').then(function (response) {
+        response.data.pop();
+        _this2.status = response.data.map(function (i, index) {
+          return i.status;
+        });
+      });
+    },
+    finalizeOrder: function finalizeOrder(order, index) {
+      var _this3 = this;
+
       axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
-        _this2.orders[index].status_id = response.data.status_id;
-        _this2.orders[index].status = response.data.status;
-        _this2.$toasted.global.error('¡Mandado finalizado!');
+        _this3.orders[index].status_id = response.data.status_id;
+        _this3.orders[index].status = response.data.status;
+        _this3.$toasted.global.error('¡Mandado finalizado!');
       });
     },
     scoreOrder: function scoreOrder(order, index) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.put('/api/orders/updateScoreDealer/' + order.id, { 'scoreDealer': order.score_dealer }).then(function (response) {
-        _this3.orders[index].score_dealer = response.data.score_dealer;
-        _this3.$toasted.global.error('¡Mandado calificado!');
+        _this4.orders[index].score_dealer = response.data.score_dealer;
+        _this4.$toasted.global.error('¡Mandado calificado!');
       });
     }
   }
@@ -68628,7 +68649,13 @@ var render = function() {
                 _c("h4", { staticClass: "float-left pt-2" }, [
                   _vm._v("Mis vueltas "),
                   _c("small", { staticClass: "text-muted" }, [
-                    _vm._v("(" + _vm._s(_vm.orders.length) + ")")
+                    _vm._v(
+                      "(" +
+                        _vm._s(_vm.orders.length) +
+                        "/$" +
+                        _vm._s(_vm.profit) +
+                        ")"
+                    )
                   ])
                 ])
               ]
@@ -68648,31 +68675,30 @@ var render = function() {
                             _vm._s(_vm._f("moment")(item.created_at, "LT")) +
                               " / " +
                               _vm._s(_vm._f("moment")(item.updated_at, "LT")) +
-                              "\n              "
-                          )
+                              "\n                 = "
+                          ),
+                          _c("strong", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("moment")(
+                                  item.created_at,
+                                  "from",
+                                  item.updated_at,
+                                  true
+                                )
+                              )
+                            )
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col text-right" }, [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "badge badge-pill",
-                            class: {
-                              "badge-primary": item.status_id == 1,
-                              "badge-success": item.status_id == 2,
-                              "badge-info": item.status_id == 3,
-                              "badge-secondary": item.status_id == 4
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                " +
-                                _vm._s(item.status.status) +
-                                "\n              "
-                            )
-                          ]
-                        )
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("\n                Envio: "),
+                          _c("strong", [
+                            _vm._v("$" + _vm._s(item.delivery_costs))
+                          ])
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [
@@ -68696,7 +68722,7 @@ var render = function() {
                             }
                           },
                           [
-                            _c("small", { staticClass: "text-muted" }, [
+                            _c("span", { staticClass: "text-muted" }, [
                               _c("i", {
                                 staticClass: "icon-location-pin mr-1"
                               }),
@@ -68705,19 +68731,28 @@ var render = function() {
                               )
                             ])
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-right" }, [
-                          _c("small", { staticClass: "text-muted" }, [
-                            _vm._v("\n                  Envio: "),
-                            _c("strong", [
-                              _vm._v("$" + _vm._s(item.delivery_costs))
-                            ])
-                          ])
-                        ])
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                      _vm._v(" "),
+                      item.status_id != 4
+                        ? _c(
+                            "div",
+                            { staticClass: "col-12" },
+                            [
+                              _c("vue-step", {
+                                staticClass: "mb-3",
+                                attrs: {
+                                  "now-step": item.status_id,
+                                  "step-list": _vm.status,
+                                  "style-type": "style2"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -68909,6 +68944,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68934,6 +68973,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     if (localStorage.getItem("currentAddress")) {
       this.order.address = JSON.parse(localStorage.getItem("currentAddress"));
     }
+    //var x = document.getElementById("demo");
+    //function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    //}
   },
 
   methods: {
@@ -68960,6 +69007,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //     this.submiting = false
       //   })
       // }
+    },
+    showPosition: function showPosition(position) {
+      var _this = this;
+
+      axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
+        _this.order.address.title = response.data.display_name;
+      });
     },
     randomPlaceholder: function randomPlaceholder() {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)];
@@ -69046,7 +69100,18 @@ var render = function() {
     _c(
       "a",
       {
-        staticClass: "btn btn-light btn-lg",
+        staticClass: "btn btn-brand btn-facebook mb-1",
+        attrs: { href: "/auth/facebook" }
+      },
+      [_vm._v("\n    Pídelo por Facebook\n  ")]
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "a",
+      {
+        staticClass: "btn btn-light",
         attrs: { href: "#" },
         on: {
           click: function($event) {
@@ -69055,10 +69120,7 @@ var render = function() {
           }
         }
       },
-      [
-        _c("i", { staticClass: "fab fa-whatsapp mr-1" }),
-        _vm._v(" Pídelo por WhatsApp\n  ")
-      ]
+      [_vm._v("\n    Pídelo por WhatsApp\n  ")]
     )
   ])
 }
