@@ -80,7 +80,7 @@ class OrderController extends Controller
 
     public function byDealer ($userId)
     {
-        $profit = DB::table('orders')->whereDate('created_at', Carbon::today())->sum('delivery_costs');
+        $profit = DB::table('orders')->where('dealer_id', $userId)->whereDate('created_at', Carbon::today())->sum('delivery_costs');
         $orders = Order::with('status', 'client')->where('dealer_id', $userId)->whereDate('created_at', Carbon::today())->latest()->get();
 
         return ['orders' => $orders, 'profit' => $profit];

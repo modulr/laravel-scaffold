@@ -66747,7 +66747,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.status.length <= 0) {
         axios.get('/api/orders/status').then(function (response) {
           _this2.status = response.data;
-          response.data.pop();
+          _this2.listStatus = [response.data];
+          _this2.listStatus.pop();
           _this2.listStatus = response.data.map(function (i, index) {
             return i.status;
           });
@@ -68973,14 +68974,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     if (localStorage.getItem("currentAddress")) {
       this.order.address = JSON.parse(localStorage.getItem("currentAddress"));
     }
-    //var x = document.getElementById("demo");
-    //function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
     } else {
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
-    //}
   },
 
   methods: {

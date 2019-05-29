@@ -370,7 +370,8 @@ export default {
         axios.get(`/api/orders/status`)
         .then(response => {
           this.status = response.data
-          response.data.pop()
+          this.listStatus = [response.data]
+          this.listStatus.pop()
           this.listStatus = response.data.map(function(i, index) {
             return i.status
           })
