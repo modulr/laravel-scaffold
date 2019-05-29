@@ -67158,7 +67158,7 @@ var render = function() {
                                   href:
                                     "https://www.google.com/maps/search/Calle " +
                                     item.address +
-                                    ", Hidalgo delParral, Chih.",
+                                    ", Hidalgo del Parral, Chih.",
                                   target: "_blank"
                                 }
                               },
@@ -68230,7 +68230,7 @@ var render = function() {
                               href:
                                 "https://www.google.com/maps/search/Calle " +
                                 item.address +
-                                ", Hidalgo delParral, Chih.",
+                                ", Hidalgo del Parral, Chih.",
                               target: "_blank"
                             }
                           },
@@ -68788,7 +68788,7 @@ var render = function() {
                               href:
                                 "https://www.google.com/maps/search/Calle " +
                                 item.address +
-                                ", Hidalgo delParral, Chih.",
+                                ", Hidalgo del Parral, Chih.",
                               target: "_blank"
                             }
                           },

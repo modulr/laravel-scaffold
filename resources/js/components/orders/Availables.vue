@@ -34,7 +34,7 @@
               </div>
               <div class="col-12">
                 <p class="mb-1">{{item.order}}</p>
-                <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo delParral, Chih.`" target="_blank">
+                <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo del Parral, Chih.`" target="_blank">
                   <span class="text-muted">
                     <i class="icon-location-pin mr-1"></i>{{item.address}}
                   </span>
