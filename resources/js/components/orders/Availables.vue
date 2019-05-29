@@ -11,13 +11,13 @@
         <ul class="list-group mb-1" v-for="(item, index) in orders">
           <li class="list-group-item">
             <div class="row">
-              <div class="col">
+              <div class="col-8">
                 <small class="text-muted">
                   <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
                    = <strong>{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
                 </small>
               </div>
-              <div class="col text-right">
+              <div class="col-4 text-right">
                 <!-- <span class="badge badge-pill" :class="{
                   'badge-primary': item.status_id == 1,
                   'badge-success': item.status_id == 2,
@@ -43,6 +43,12 @@
               <div class="col-12">
                 <hr>
               </div>
+              <div class="col-12" v-if="item.status_id != 4">
+                <vue-step class="mb-3" :now-step="item.status_id" :step-list="status" style-type="style2"></vue-step>
+              </div>
+              <div class="col-12 alert alert-secondary text-center" v-else>
+                Cancelado
+              </div>
               <div class="col-6">
                 <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
               </div>
@@ -65,7 +71,7 @@
       </div>
     </div>
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
-      <i class="icon-magnifier fa-3x text-muted"></i>
+      <i class="fas fa-motorcycle fa-3x text-muted"></i>
       <p class="mb-0 mt-3"><strong>No existe ningun mandado nuevo</strong></p>
       <p class="text-muted">Revisa mas tarde o da clic en el boton de abajo para refrescar la pantalla</p>
       <a class="btn btn-primary" href="/orders/availables">
@@ -82,12 +88,14 @@ export default {
   data () {
     return {
       orders: [],
+      status: [],
       userView: {},
       loading: true
     }
   },
   mounted () {
     this.getOrders()
+    this.getStatus()
   },
   methods: {
     getOrders () {
@@ -96,6 +104,15 @@ export default {
       .then(response => {
         this.orders = response.data
         this.loading = false
+      })
+    },
+    getStatus () {
+      axios.get(`/api/orders/status`)
+      .then(response => {
+        response.data.pop()
+        this.status = response.data.map(function(i, index) {
+          return i.status
+        })
       })
     },
     takeOrder (order, index) {

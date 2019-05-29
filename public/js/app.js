@@ -66029,6 +66029,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66145,7 +66148,7 @@ var render = function() {
                 return _c("ul", { staticClass: "list-group mb-1" }, [
                   _c("li", { staticClass: "list-group-item" }, [
                     _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col" }, [
+                      _c("div", { staticClass: "col-8" }, [
                         _c("small", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "far fa-clock mr-1" }),
                           _vm._v(
@@ -66157,7 +66160,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col text-right" }, [
+                      _c("div", { staticClass: "col-4 text-right" }, [
                         _c("small", { staticClass: "text-muted" }, [
                           _vm._v("\n                Envio: "),
                           _c("strong", [
@@ -66199,7 +66202,14 @@ var render = function() {
                             ],
                             1
                           )
-                        : _vm._e(),
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-12 alert alert-secondary text-center"
+                            },
+                            [_vm._v("\n              Cancelado\n            ")]
+                          ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -66277,12 +66287,12 @@ var render = function() {
       _vm._v(" "),
       !_vm.loading && !_vm.orders.length > 0
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
-            _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
+            _c("i", { staticClass: "fas fa-motorcycle fa-3x text-muted" }),
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted" }, [
-              _vm._v("Haz tu primer pedido dando clic en el boton de abajo")
+              _vm._v("Haz tu primer mandado dando clic en el boton de abajo")
             ]),
             _vm._v(" "),
             _vm._m(1)
@@ -66691,6 +66701,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66747,9 +66760,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.status.length <= 0) {
         axios.get('/api/orders/status').then(function (response) {
           _this2.status = response.data;
-          _this2.listStatus = [response.data];
-          _this2.listStatus.pop();
-          _this2.listStatus = response.data.map(function (i, index) {
+          var status = response.data.slice(0);
+          status.pop();
+          _this2.listStatus = status.map(function (i, index) {
             return i.status;
           });
         });
@@ -67070,7 +67083,7 @@ var render = function() {
                     return _c("ul", { staticClass: "list-group mb-1" }, [
                       _c("li", { staticClass: "list-group-item" }, [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col" }, [
+                          _c("div", { staticClass: "col-8" }, [
                             _c("small", { staticClass: "text-muted" }, [
                               _c("i", { staticClass: "far fa-clock mr-1" }),
                               _vm._v(
@@ -67098,7 +67111,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col text-right" }, [
+                          _c("div", { staticClass: "col-4 text-right" }, [
                             _c(
                               "small",
                               {
@@ -67181,7 +67194,18 @@ var render = function() {
                                 ],
                                 1
                               )
-                            : _vm._e(),
+                            : _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-12 alert alert-secondary text-center"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                Cancelado\n              "
+                                  )
+                                ]
+                              ),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -67308,7 +67332,7 @@ var render = function() {
       _vm._v(" "),
       !_vm.loading && !_vm.orders.length > 0
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
-            _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
+            _c("i", { staticClass: "fas fa-motorcycle fa-3x text-muted" }),
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
@@ -68061,17 +68085,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       orders: [],
+      status: [],
       userView: {},
       loading: true
     };
   },
   mounted: function mounted() {
     this.getOrders();
+    this.getStatus();
   },
 
   methods: {
@@ -68084,20 +68116,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
       });
     },
-    takeOrder: function takeOrder(order, index) {
+    getStatus: function getStatus() {
       var _this2 = this;
 
+      axios.get('/api/orders/status').then(function (response) {
+        response.data.pop();
+        _this2.status = response.data.map(function (i, index) {
+          return i.status;
+        });
+      });
+    },
+    takeOrder: function takeOrder(order, index) {
+      var _this3 = this;
+
       axios.put('/api/orders/takeOrder/' + order.id).then(function (response) {
-        _this2.$toasted.global.error('¡Mandado tomado!');
+        _this3.$toasted.global.error('¡Mandado tomado!');
         location.href = '/orders/dealer';
       });
     },
     finalizeOrder: function finalizeOrder(order, index) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
-        _this3.$toasted.global.error('¡Mandado finalizado!');
-        _this3.getOrders();
+        _this4.$toasted.global.error('¡Mandado finalizado!');
+        _this4.getOrders();
       });
     }
   }
@@ -68139,7 +68181,7 @@ var render = function() {
                 return _c("ul", { staticClass: "list-group mb-1" }, [
                   _c("li", { staticClass: "list-group-item" }, [
                     _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col" }, [
+                      _c("div", { staticClass: "col-8" }, [
                         _c("small", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "far fa-clock mr-1" }),
                           _vm._v(
@@ -68163,7 +68205,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col text-right" }, [
+                      _c("div", { staticClass: "col-4 text-right" }, [
                         _c("small", { staticClass: "text-muted" }, [
                           _vm._v("\n                Envio: "),
                           _c("strong", [
@@ -68206,6 +68248,31 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                      _vm._v(" "),
+                      item.status_id != 4
+                        ? _c(
+                            "div",
+                            { staticClass: "col-12" },
+                            [
+                              _c("vue-step", {
+                                staticClass: "mb-3",
+                                attrs: {
+                                  "now-step": item.status_id,
+                                  "step-list": _vm.status,
+                                  "style-type": "style2"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-12 alert alert-secondary text-center"
+                            },
+                            [_vm._v("\n              Cancelado\n            ")]
+                          ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -68289,7 +68356,7 @@ var render = function() {
       _vm._v(" "),
       !_vm.loading && !_vm.orders.length > 0
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
-            _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
+            _c("i", { staticClass: "fas fa-motorcycle fa-3x text-muted" }),
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
@@ -68566,6 +68633,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68669,7 +68739,7 @@ var render = function() {
                 return _c("ul", { staticClass: "list-group mb-1" }, [
                   _c("li", { staticClass: "list-group-item" }, [
                     _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col" }, [
+                      _c("div", { staticClass: "col-8" }, [
                         _c("small", { staticClass: "text-muted" }, [
                           _c("i", { staticClass: "far fa-clock mr-1" }),
                           _vm._v(
@@ -68693,7 +68763,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col text-right" }, [
+                      _c("div", { staticClass: "col-4 text-right" }, [
                         _c("small", { staticClass: "text-muted" }, [
                           _vm._v("\n                Envio: "),
                           _c("strong", [
@@ -68753,7 +68823,14 @@ var render = function() {
                             ],
                             1
                           )
-                        : _vm._e(),
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-12 alert alert-secondary text-center"
+                            },
+                            [_vm._v("\n              Cancelado\n            ")]
+                          ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -68825,12 +68902,12 @@ var render = function() {
       _vm._v(" "),
       !_vm.loading && !_vm.orders.length > 0
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
-            _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
+            _c("i", { staticClass: "fas fa-motorcycle fa-3x text-muted" }),
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted" }, [
-              _vm._v("Toma un pedido en la seccion de Pedidos")
+              _vm._v("Toma un mandado en la seccion de Mandados")
             ]),
             _vm._v(" "),
             _c(
@@ -68839,7 +68916,7 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { href: "/orders/availables" }
               },
-              [_vm._v("\n      Ir a Pedidos\n    ")]
+              [_vm._v("\n      Ir a Mandados\n    ")]
             )
           ])
         : _vm._e(),
@@ -68855,7 +68932,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "mb-0 mt-3" }, [
-      _c("strong", [_vm._v("No tienes ningun pedido asignado")])
+      _c("strong", [_vm._v("No tienes ningun mandado asignado")])
     ])
   }
 ]

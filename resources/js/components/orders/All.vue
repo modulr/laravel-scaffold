@@ -47,13 +47,13 @@
           <ul class="list-group mb-1" v-for="(item, index) in orders">
             <li class="list-group-item">
               <div class="row">
-                <div class="col">
+                <div class="col-8">
                   <small class="text-muted">
                     <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
                      = <strong>{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
                   </small>
                 </div>
-                <div class="col text-right">
+                <div class="col-4 text-right">
                   <!-- <span class="badge badge-pill" :class="{
                     'badge-primary': item.status_id == 1,
                     'badge-success': item.status_id == 2,
@@ -81,6 +81,9 @@
                 </div>
                 <div class="col-12" v-if="item.status_id != 4">
                   <vue-step class="mb-3" :now-step="item.status_id" :step-list="listStatus" style-type="style2"></vue-step>
+                </div>
+                <div class="col-12 alert alert-secondary text-center" v-else>
+                  Cancelado
                 </div>
                 <div class="col">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
@@ -115,7 +118,7 @@
       </div>
     </div>
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
-      <i class="icon-magnifier fa-3x text-muted"></i>
+      <i class="fas fa-motorcycle fa-3x text-muted"></i>
       <p class="mb-0 mt-3"><strong>No existe ningun mandado</strong></p>
       <p class="text-muted">Crea uno dando clic en el boton de abajo</p>
       <a class="btn btn-primary" href="#" @click.prevent="orderModal">
@@ -370,9 +373,9 @@ export default {
         axios.get(`/api/orders/status`)
         .then(response => {
           this.status = response.data
-          this.listStatus = [response.data]
-          this.listStatus.pop()
-          this.listStatus = response.data.map(function(i, index) {
+          let status = response.data.slice(0)
+          status.pop()
+          this.listStatus = status.map(function(i, index) {
             return i.status
           })
         })
