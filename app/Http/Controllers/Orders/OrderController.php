@@ -63,7 +63,7 @@ class OrderController extends Controller
     {
         $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
         if ($ordersCount > 0) {
-            return Order::with('status', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->latest()->get();
+            return Order::with('status', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->oldest()->get();
         } else {
             return Order::with('status', 'client')->where('status_id', 1)->latest()->get();
         }
