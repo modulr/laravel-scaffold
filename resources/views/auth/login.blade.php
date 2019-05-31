@@ -82,7 +82,7 @@
                     </a>
                     <h2>Registrate</h2>
                     <p>Si no tienes una cuenta crea una.</p>
-                    <a class="btn btn-primary active mt-2" href="{{ route('register') }}">¡Registrate ahora!</a>
+                    <a class="btn btn-primary active mt-2" href="{{ route('register') }}">¡Registrate con tu correo!</a>
                     <p class="mt-2 mb-2">ó</p>
                     <a class="btn btn-brand btn-facebook" href="/auth/facebook">Registrate con Facebook</a>
                 </div>

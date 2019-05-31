@@ -13,10 +13,11 @@
       </div>
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
-    <a class="btn btn-brand btn-facebook mb-1" href="/auth/facebook">
-      Pídelo por Facebook
-    </a>
-    <br>
+    <div class="mb-1">
+      <a class="btn btn-brand btn-facebook" href="/auth/facebook">
+        Pídelo por Facebook
+      </a>
+    </div>
     <a class="btn btn-light" href="#" @click.prevent="send">
       Pídelo por WhatsApp
     </a>

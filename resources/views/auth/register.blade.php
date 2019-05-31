@@ -69,7 +69,7 @@
                     </div>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmar contraseña" required>
                 </div>
-                <button type="submit" class="btn btn-block btn-success btn-primary">
+                <button type="submit" class="btn btn-block btn-primary btn-primary">
                     Crear cuenta
                 </button>
             </form>
