@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class CancelOrder extends Notification
+class UpdateOrder extends Notification
 {
     use Queueable;
 
@@ -87,6 +87,8 @@ class CancelOrder extends Notification
     {
         return TelegramMessage::create()
             ->to(env('TELEGRAM_BOT_TO', '-260576056')) // Optional.
-            ->content("*¡Mandado cancelado!* ❌ \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Envio: ".$this->order->delivery_costs." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone);
+            ->content("*¡Mandado actualizado!* ✏ \n Mandado: ".$this->order->order." \n Destino: ".$this->order->address." \n Envio: ".$this->order->delivery_costs." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone. " \n Repartidor: " .$this->order->dealer->name) // Markdown supported.
+            //->file($this->order->client->avatar_url, 'photo') // local photo
+            ->button('Tomar Pedido', 'http://traeme.app/orders/availables'); // Inline Button
     }
 }

@@ -15,6 +15,7 @@ use Illuminate\Validation\Rule;
 use DB;
 use Carbon\Carbon;
 use App\Notifications\NewOrder;
+use App\Notifications\UpdateOrder;
 use App\Notifications\TakeOrder;
 use App\Notifications\FinalizeOrder;
 use App\Notifications\CancelOrder;
@@ -168,6 +169,8 @@ class OrderController extends Controller
         $order->order = $request->order;
         $order->delivery_costs = $request->delivery_costs;
         $order->save();
+
+        Auth::user()->notify(new UpdateOrder($order));
 
         return $this->show($order->id);
     }
