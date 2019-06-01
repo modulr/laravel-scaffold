@@ -67102,7 +67102,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "date" },
+                    attrs: { type: "date", placeholder: "Filtra por Fecha" },
                     domProps: { value: _vm.filters.date },
                     on: {
                       change: _vm.getOrders,

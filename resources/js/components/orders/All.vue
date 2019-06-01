@@ -43,7 +43,7 @@
             </multiselect>
           </div>
           <div class="form-group">
-            <input class="form-control" type="date" v-model="filters.date" @change="getOrders">
+            <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
           </div>
         </div>
         <content-placeholders v-if="loading">
