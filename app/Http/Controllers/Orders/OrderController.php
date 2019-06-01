@@ -26,14 +26,22 @@ class OrderController extends Controller
     {
         $query = Order::query();
 
-        $profit = DB::table('orders')->whereDate('created_at', Carbon::today())->sum('delivery_costs');
+        if(!empty($request->date)) {
+            $date = $request->date;
+        } else {
+            $date = Carbon::today();
+        }
+
+        //return $date;
+
+        $profit = DB::table('orders')->whereDate('created_at', $date)->sum('delivery_costs');
 
         if(!empty($request->status)) {
             $collection = collect($request->status);
             $plucked = $collection->pluck('id');
             $ids = $plucked->all();
             $query->whereIn('status_id', $ids);
-            $profit = DB::table('orders')->whereIn('status_id', $ids)->whereDate('created_at', Carbon::today())->sum('delivery_costs');
+            $profit = DB::table('orders')->whereIn('status_id', $ids)->whereDate('created_at', $date)->sum('delivery_costs');
         }
 
         if(!empty($request->dealers)) {
@@ -41,15 +49,12 @@ class OrderController extends Controller
             $plucked = $collection->pluck('id');
             $ids = $plucked->all();
             $query->whereIn('dealer_id', $ids);
-            $profit = DB::table('orders')->whereIn('dealer_id', $ids)->whereDate('created_at', Carbon::today())->sum('delivery_costs');
+            $profit = DB::table('orders')->whereIn('dealer_id', $ids)->whereDate('created_at', $date)->sum('delivery_costs');
         }
 
-        $orders = $query->whereDate('created_at', Carbon::today())->latest()->get();
+        $orders = $query->whereDate('created_at', $date)->latest()->get();
 
         $orders->load('status', 'client', 'dealer');
-
-
-        //return $orders;
 
         return ['orders' => $orders, 'profit' => $profit];
     }
