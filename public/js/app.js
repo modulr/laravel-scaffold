@@ -71772,7 +71772,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row justify-content-center mt-5" }, [
-    _c("div", { staticClass: "col-12 mb-3 pb-3 text-center px-5" }, [
+    _c("div", { staticClass: "col-12 text-center mb-3 pb-3 px-5" }, [
       _c(
         "a",
         {
@@ -71804,7 +71804,7 @@ var render = function() {
           ? _c("div", { staticClass: "row justify-content-center" }, [
               _c(
                 "div",
-                { staticClass: "col-6 col-md-4 px-5 py-3" },
+                { staticClass: "col-12 col-md-4 px-5 py-3" },
                 [
                   _c(
                     "content-placeholders",
@@ -71821,7 +71821,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "col-6 col-md-4 px-5 py-3" },
+                { staticClass: "col-12 col-md-4 px-5 py-3" },
                 [
                   _c(
                     "content-placeholders",
@@ -71838,7 +71838,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "col-6 col-md-4 px-5 py-3" },
+                { staticClass: "col-12 col-md-4 px-5 py-3" },
                 [
                   _c(
                     "content-placeholders",
@@ -71857,8 +71857,8 @@ var render = function() {
               "div",
               { staticClass: "row justify-content-center" },
               _vm._l(_vm.stores, function(store) {
-                return _c("div", { staticClass: "col-6 col-md-4 px-5 py-3" }, [
-                  _c("div", { staticClass: "media" }, [
+                return _c("div", { staticClass: "col-12 col-md-4 px-5 py-3" }, [
+                  _c("div", { staticClass: "media border rounded p-4" }, [
                     _c("div", { staticClass: "avatar float-left mr-2" }, [
                       _c("img", {
                         staticClass: "img-avatar",
