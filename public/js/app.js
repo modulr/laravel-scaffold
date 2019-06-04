@@ -14193,6 +14193,7 @@ Vue.component('users-create', __webpack_require__(80));
 Vue.component('users-edit', __webpack_require__(83));
 Vue.component('users-avatar', __webpack_require__(86));
 Vue.component('users-view', __webpack_require__(89));
+Vue.component('users-stores', __webpack_require__(161));
 
 // Roles
 Vue.component('roles-index', __webpack_require__(92));
@@ -64387,8 +64388,6 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("th", [_vm._v("Users using")]),
-              _vm._v(" "),
               _c("th", [_vm._v("Permissions")]),
               _vm._v(" "),
               _c("th", { staticClass: "d-none d-sm-table-cell" }, [
@@ -64445,30 +64444,6 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "d-none d-sm-table-cell" }, [
                     _vm._v(_vm._s(role.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "div",
-                      { staticClass: "avatars-stack" },
-                      [
-                        _vm._l(role.users.slice(0, 4), function(user, index) {
-                          return _c("div", { staticClass: "avatar-sm" }, [
-                            _c("img", {
-                              staticClass: "img-avatar",
-                              attrs: { src: user.avatar_url }
-                            })
-                          ])
-                        }),
-                        _vm._v(" "),
-                        role.users.length > 4
-                          ? _c("div", { staticClass: "avatar-sm ml-3" }, [
-                              _vm._v(" +" + _vm._s(role.users.length - 4))
-                            ])
-                          : _vm._e()
-                      ],
-                      2
-                    )
                   ]),
                   _vm._v(" "),
                   _c("td", [
@@ -65757,81 +65732,6 @@ var render = function() {
                 [_c("content-placeholders-heading", { attrs: { img: true } })],
                 1
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-header px-0 bg-transparent" }, [
-            _c("strong", [_vm._v("Users")]),
-            _c("br"),
-            _vm._v(" "),
-            _c("small", { staticClass: "text-muted" }, [
-              _vm._v("This is the list of users who use this role.")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-header-actions" }, [
-              _c("small", { staticClass: "text-muted mr-1 d-sm-down-none" }, [
-                _vm._v(_vm._s(_vm.role.users.length))
-              ]),
-              _vm._v(" "),
-              _vm._m(2)
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "card-body collapse",
-              attrs: { id: "collapseUsers" }
-            },
-            [
-              _c(
-                "ul",
-                { staticClass: "list-unstyled" },
-                _vm._l(_vm.role.users, function(user) {
-                  return _c(
-                    "a",
-                    { attrs: { href: "/users/" + user.id + "/edit" } },
-                    [
-                      _c(
-                        "li",
-                        {
-                          staticClass:
-                            "media border-bottom border-light pb-2 mb-2"
-                        },
-                        [
-                          _c("div", { staticClass: "avatar float-left mr-3" }, [
-                            _c("img", {
-                              staticClass: "img-avatar",
-                              attrs: { src: user.avatar_url }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("div", [_vm._v(_vm._s(user.name))]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "small text-muted" }, [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(user.email) +
-                                  "\n              "
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    ]
-                  )
-                })
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _vm.loading
-            ? _c(
-                "content-placeholders",
-                { staticClass: "card-body" },
-                [_c("content-placeholders-heading", { attrs: { img: true } })],
-                1
-              )
             : _vm._e()
         ],
         1
@@ -65865,24 +65765,6 @@ var staticRenderFns = [
           href: "#",
           "data-toggle": "collapse",
           "data-target": "#collapsePermissions",
-          "aria-expanded": "true"
-        }
-      },
-      [_c("i", { staticClass: "icon-arrow-up" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "card-header-action btn-minimize",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapseUsers",
           "aria-expanded": "true"
         }
       },
@@ -69074,21 +68956,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      address: [],
-      order: {
-        order: '',
-        address: {
-          title: '',
-          alias: ''
-        }
-      },
-      errors: {},
+      order: '',
+      address: '',
+      placeholder: '',
       placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
-      placeholder: ''
+      loading: false,
+      errors: {}
     };
   },
   mounted: function mounted() {
@@ -69096,28 +68977,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     if (localStorage.getItem("address")) {
       this.address = JSON.parse(localStorage.getItem("address"));
     }
-    if (localStorage.getItem("currentAddress")) {
-      this.order.address = JSON.parse(localStorage.getItem("currentAddress"));
-    }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.showPosition);
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    this.getPosition();
   },
 
   methods: {
     send: function send() {
       this.errors = {};
-      if (!this.order.order) {
+      if (!this.order) {
         this.errors.order = true;
-      } else if (!this.order.address.title) {
+      }
+      if (!this.address) {
         this.errors.address = true;
-      } else {
-        location.href = 'https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20' + this.order.order + ',%20%20Destino:%20%20' + this.order.address.title;
-        this.address.unshift(this.order.address);
+      }
+      if (Object.entries(this.errors).length === 0 && this.errors.constructor === Object) {
+        location.href = 'https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20' + this.order + ',%20%20Destino:%20%20' + this.address;
         localStorage.setItem("address", JSON.stringify(this.address));
-        localStorage.setItem("currentAddress", JSON.stringify(this.order.address));
       }
       // if (!this.submiting) {
       //   this.submiting = true
@@ -69131,11 +69005,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //   })
       // }
     },
-    showPosition: function showPosition(position) {
+    getPosition: function getPosition() {
+      if (navigator.geolocation) {
+        this.loading = true;
+        navigator.geolocation.getCurrentPosition(this.setPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    },
+    setPosition: function setPosition(position) {
       var _this = this;
 
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
-        _this.order.address.title = response.data.display_name;
+        _this.address = response.data.address.road;
+        if (response.data.address.suburb) {
+          _this.address.concat(', ' + response.data.address.suburb);
+        }
+        //this.address = `${response.data.address.road}, ${response.data.address.suburb}`
+        localStorage.setItem("address", JSON.stringify(_this.address));
+        _this.loading = false;
       });
     },
     randomPlaceholder: function randomPlaceholder() {
@@ -69159,19 +69047,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.order.order,
-            expression: "order.order"
+            value: _vm.order,
+            expression: "order"
           }
         ],
         staticClass: "form-control",
         attrs: { rows: "3", placeholder: _vm.placeholder },
-        domProps: { value: _vm.order.order },
+        domProps: { value: _vm.order },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.order, "order", $event.target.value)
+            _vm.order = $event.target.value
           }
         }
       }),
@@ -69185,15 +69073,28 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("div", { staticClass: "input-group border-right-0" }, [
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass: "input-group-prepend",
+            on: { click: _vm.getPosition }
+          },
+          [
+            _c("span", { staticClass: "input-group-text" }, [
+              _vm.loading
+                ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                : _c("i", { staticClass: "fas fa-map-marker-alt" })
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.order.address.title,
-              expression: "order.address.title"
+              value: _vm.address,
+              expression: "address"
             }
           ],
           staticClass: "form-control",
@@ -69201,13 +69102,13 @@ var render = function() {
             type: "text",
             placeholder: "¿A donde? Calle, numero y colonia"
           },
-          domProps: { value: _vm.order.address.title },
+          domProps: { value: _vm.address },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.order.address, "title", $event.target.value)
+              _vm.address = $event.target.value
             }
           }
         })
@@ -69220,7 +69121,9 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(1),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("p", { staticClass: "mb-1" }, [_vm._v("ó")]),
     _vm._v(" "),
     _c(
       "a",
@@ -69234,21 +69137,11 @@ var render = function() {
           }
         }
       },
-      [_vm._v("\n    Pídelo por WhatsApp\n  ")]
+      [_vm._v("\n    por WhatsApp\n  ")]
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("span", { staticClass: "input-group-text" }, [
-        _c("i", { staticClass: "fas fa-map-marker-alt" })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -69356,55 +69249,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
-      address: [],
-      status: ['Abierto', 'En camino', 'Entregado'],
       newOrder: {},
+      address: [],
       placeholder: '',
       placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
-      loading: true,
+      loading: false,
+      loadingAddress: false,
       submiting: false,
       errors: ''
     };
   },
   mounted: function mounted() {
-    this.getAddress();
     this.randomPlaceholder();
-    if (localStorage.getItem("currentAddress")) {
-      //this.newOrder.address = JSON.parse(localStorage.getItem("currentAddress"))
-      this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("currentAddress")));
+    if (localStorage.getItem("address")) {
+      this.newOrder.address = JSON.parse(localStorage.getItem("address"));
+      //this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("address")))
     }
   },
 
@@ -69412,10 +69276,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getAddress: function getAddress() {
       var _this = this;
 
-      this.loading = true;
+      this.loadingAddress = true;
       axios.get('/api/address/byClient').then(function (response) {
         _this.address = response.data;
-        _this.loading = false;
+        _this.loadingAddress = false;
       });
     },
     createOrder: function createOrder() {
@@ -69425,15 +69289,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submiting = true;
         this.errors = {};
         axios.post('/api/orders/storeAuth', this.newOrder).then(function (response) {
-          localStorage.setItem("currentAddress", JSON.stringify(_this2.newOrder.address));
+          localStorage.setItem("address", JSON.stringify(_this2.newOrder.address));
           //this.$toasted.global.error('¡Mandado creado!')
           _this2.newOrder.order = '';
           _this2.submiting = false;
+          var wrapper = document.createElement('div');
+          wrapper.innerHTML = '<div data-v-3500aeb9 class="mb-3 v-step-warp-horizontal style2"><div data-v-3500aeb9 class="v-step-progress-bg"><div data-v-3500aeb9 class="v-step-progress-value" style="background-color: rgb(31, 177, 29); width: 33.3333%;"></div></div> <ul data-v-3500aeb9 class="v-step-list"><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Abierto </label> <div data-v-3500aeb9 class="v-step-item-number" style="background-color: rgb(31, 177, 29); color: rgb(255, 255, 255);">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> En camino </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Entregado </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li></ul></div>';
           swal({
             title: "¡Mandado creado!",
-            text: "¡Sigue el estatus de tu mandado!",
+            text: "¡Un repartidor pronto llevara tu mandado!",
             icon: "success",
-            button: "Ver mandado"
+            button: "Ver mandado",
+            content: wrapper
           }).then(function (value) {
             if (value) {
               location.href = '/orders';
@@ -69445,25 +69312,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    addTag: function addTag(newTag) {
+    getPosition: function getPosition() {
+      if (navigator.geolocation) {
+        this.loading = true;
+        navigator.geolocation.getCurrentPosition(this.setPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    },
+    setPosition: function setPosition(position) {
       var _this3 = this;
 
-      var tag = {
-        address: newTag
-      };
-      axios.post('/api/address/store', tag).then(function (response) {
-        _this3.newOrder.address = tag;
-        _this3.address.unshift(response.data);
-        _this3.$toasted.global.error('¡Direccion agregada!');
-      }).catch(function (error) {
-        _this3.errors = error.response.data.errors;
+      axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
+        _this3.newOrder.address = response.data.address.road;
+        if (response.data.address.suburb) {
+          _this3.newOrder.address.concat(', ' + response.data.address.suburb);
+        }
+        //this.newOrder.address = `${response.data.address.road}, ${response.data.address.suburb}`
+        localStorage.setItem("address", JSON.stringify(_this3.newOrder.address));
+        _this3.loading = false;
       });
-    },
-    customLabel: function customLabel(_ref) {
-      var address = _ref.address,
-          alias = _ref.alias;
-
-      return alias + ' ' + address;
     },
     randomPlaceholder: function randomPlaceholder() {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)];
@@ -69511,78 +69379,55 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("multiselect", {
-          class: { "border border-danger rounded": _vm.errors.address },
-          attrs: {
-            options: _vm.address,
-            label: "address",
-            "track-by": "id",
-            "custom-label": _vm.customLabel,
-            selectLabel: "Seleccionar",
-            selectedLabel: "Seleccionado",
-            deselectLabel: "deseleccionar",
-            placeholder: "Selecciona o agrega una dirección",
-            "tag-placeholder": "Agregar esta dirección",
-            taggable: true
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "input-group border-right-0" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group-prepend",
+            on: { click: _vm.getPosition }
           },
-          on: { tag: _vm.addTag },
-          scopedSlots: _vm._u([
-            {
-              key: "singleLabel",
-              fn: function(props) {
-                return [
-                  _c("span", [
-                    _c("strong", { staticClass: "mr-2" }, [
-                      _vm._v(_vm._s(props.option.alias))
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(props.option.address))])
-                  ])
-                ]
-              }
-            },
-            {
-              key: "option",
-              fn: function(props) {
-                return [
-                  props.option.isTag
-                    ? _c("div", [
-                        _vm._v(
-                          "\n          " + _vm._s(props.search) + "\n        "
-                        )
-                      ])
-                    : _c("div", [
-                        _c("strong", { staticClass: "mr-2" }, [
-                          _vm._v(_vm._s(props.option.alias))
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(props.option.address))])
-                      ])
-                ]
-              }
-            }
-          ]),
-          model: {
-            value: _vm.newOrder.address,
-            callback: function($$v) {
-              _vm.$set(_vm.newOrder, "address", $$v)
-            },
-            expression: "newOrder.address"
-          }
-        }),
-        _vm._v(" "),
-        _vm.errors.address
-          ? _c("small", { staticClass: "form-text text-white" }, [
-              _vm._v("¿A donde te lo llevamos?")
+          [
+            _c("span", { staticClass: "input-group-text" }, [
+              _vm.loading
+                ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                : _c("i", { staticClass: "fas fa-map-marker-alt" })
             ])
-          : _vm._e()
-      ],
-      1
-    ),
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newOrder.address,
+              expression: "newOrder.address"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            placeholder: "¿A donde? Calle, numero y colonia"
+          },
+          domProps: { value: _vm.newOrder.address },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.newOrder, "address", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm.errors.address
+        ? _c("small", { staticClass: "form-text text-white" }, [
+            _vm._v("¿A donde te lo llevamos?")
+          ])
+        : _vm._e()
+    ]),
     _vm._v(" "),
     !_vm.user.cellphone
       ? _c("div", { staticClass: "form-group" }, [
@@ -71772,6 +71617,283 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(162)
+/* template */
+var __vue_template__ = __webpack_require__(163)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/users/Stores.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-429295f8", Component.options)
+  } else {
+    hotAPI.reload("data-v-429295f8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 162 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      stores: [],
+      loading: false
+    };
+  },
+
+  methods: {
+    getStores: function getStores() {
+      var _this = this;
+
+      if (this.stores.length == 0) {
+        this.loading = true;
+        axios.get("/api/users/getStores").then(function (response) {
+          _this.stores = response.data;
+          _this.loading = false;
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row justify-content-center mt-5" }, [
+    _c("div", { staticClass: "col-12 mb-3 pb-3 text-center px-5" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "#",
+            "data-toggle": "collapse",
+            "data-target": "#collapseStores",
+            "aria-expanded": "true"
+          },
+          on: { click: _vm.getStores }
+        },
+        [
+          _c("img", {
+            staticClass: "img-fluid w-25",
+            attrs: {
+              src: "/img/stores/tiendas_todas.svg",
+              alt: "Traeme Tienda"
+            }
+          })
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-12 collapse", attrs: { id: "collapseStores" } },
+      [
+        _vm.loading
+          ? _c("div", { staticClass: "row justify-content-center" }, [
+              _c(
+                "div",
+                { staticClass: "col-6 col-md-4 px-5 py-3" },
+                [
+                  _c(
+                    "content-placeholders",
+                    [
+                      _c("content-placeholders-heading", {
+                        attrs: { img: true }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-6 col-md-4 px-5 py-3" },
+                [
+                  _c(
+                    "content-placeholders",
+                    [
+                      _c("content-placeholders-heading", {
+                        attrs: { img: true }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-6 col-md-4 px-5 py-3" },
+                [
+                  _c(
+                    "content-placeholders",
+                    [
+                      _c("content-placeholders-heading", {
+                        attrs: { img: true }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
+          : _c(
+              "div",
+              { staticClass: "row justify-content-center" },
+              _vm._l(_vm.stores, function(store) {
+                return _c("div", { staticClass: "col-6 col-md-4 px-5 py-3" }, [
+                  _c("div", { staticClass: "media" }, [
+                    _c("div", { staticClass: "avatar float-left mr-2" }, [
+                      _c("img", {
+                        staticClass: "img-avatar",
+                        attrs: { src: store.avatar_url }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "media-body" }, [
+                      _c("div", { staticClass: "text-body" }, [
+                        _vm._v(_vm._s(store.name))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "small text-muted" }, [
+                        _c("a", { attrs: { href: "tel:" + store.cellphone } }, [
+                          _vm._v(_vm._s(store.cellphone))
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              })
+            )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-429295f8", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

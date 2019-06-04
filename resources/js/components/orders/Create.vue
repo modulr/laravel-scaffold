@@ -1,15 +1,18 @@
 <template>
   <div>
     <div class="form-group">
-      <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order.order"></textarea>
+      <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order"></textarea>
       <small class="form-text text-white" v-if="errors.order">Dinos que te llevamos</small>
     </div>
     <div class="form-group">
       <div class="input-group border-right-0">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+        <div class="input-group-prepend" @click="getPosition">
+          <span class="input-group-text">
+            <i class="fas fa-spinner fa-spin" v-if="loading"></i>
+            <i class="fas fa-map-marker-alt" v-else></i>
+          </span>
         </div>
-        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address.title">
+        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="address">
       </div>
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
@@ -18,8 +21,9 @@
         Pídelo por Facebook
       </a>
     </div>
+    <p class="mb-1">ó</p>
     <a class="btn btn-light" href="#" @click.prevent="send">
-      Pídelo por WhatsApp
+      por WhatsApp
     </a>
     <!-- <a class="btn btn-lg btn-light" href="https://m.me/traeme">
         <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
@@ -31,15 +35,9 @@
 export default {
   data () {
     return {
-      address: [],
-      order: {
-        order: '',
-        address: {
-          title: '',
-          alias: ''
-        }
-      },
-      errors: {},
+      order: '',
+      address: '',
+      placeholder: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
         'Traeme unos tacos',
@@ -47,7 +45,8 @@ export default {
         'Me puedes pagar el Agua de la Dirección...',
         '¿Necesitas enviar un paquete?'
       ],
-      placeholder: ''
+      loading: false,
+      errors: {}
     }
   },
   mounted () {
@@ -55,27 +54,20 @@ export default {
     if (localStorage.getItem("address")) {
       this.address = JSON.parse(localStorage.getItem("address"))
     }
-    if (localStorage.getItem("currentAddress")) {
-      this.order.address = JSON.parse(localStorage.getItem("currentAddress"))
-    }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.showPosition);
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    this.getPosition()
   },
   methods: {
     send () {
       this.errors = {}
-      if (!this.order.order) {
+      if (!this.order) {
         this.errors.order = true
-      } else if (!this.order.address.title) {
+      }
+      if (!this.address) {
         this.errors.address = true
-      } else {
-        location.href = `https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20${this.order.order},%20%20Destino:%20%20${this.order.address.title}`
-        this.address.unshift(this.order.address)
+      }
+      if (Object.entries(this.errors).length === 0 && this.errors.constructor === Object) {
+        location.href = `https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20${this.order},%20%20Destino:%20%20${this.address}`
         localStorage.setItem("address", JSON.stringify(this.address))
-        localStorage.setItem("currentAddress", JSON.stringify(this.order.address))
       }
       // if (!this.submiting) {
       //   this.submiting = true
@@ -89,10 +81,24 @@ export default {
       //   })
       // }
     },
-    showPosition(position) {
+    getPosition() {
+      if (navigator.geolocation) {
+        this.loading = true
+        navigator.geolocation.getCurrentPosition(this.setPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    },
+    setPosition(position) {
       axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
       .then(response => {
-        this.order.address.title = response.data.display_name
+        this.address = response.data.address.road
+        if (response.data.address.suburb) {
+          this.address.concat(`, ${response.data.address.suburb}`)
+        }
+        //this.address = `${response.data.address.road}, ${response.data.address.suburb}`
+        localStorage.setItem("address", JSON.stringify(this.address))
+        this.loading = false
       })
     },
     randomPlaceholder () {

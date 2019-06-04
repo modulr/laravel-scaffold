@@ -11299,16 +11299,7 @@ a:hover {
 }
 
 .btn-phone {
-  color: #fff;
   text-decoration: none !important;
-}
-
-.btn-phone .fa-phone {
-  color: #EF374B !important;
-}
-
-.btn-phone:hover {
-  color: #ced4da;
 }
 
 .description {

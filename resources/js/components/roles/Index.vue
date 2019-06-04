@@ -45,7 +45,7 @@
               <a href="#" class="text-dark" @click.prevent="sort('name')">Slug</a>
               <i class="ml-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
-            <th>Users using</th>
+            <!-- <th>Users using</th> -->
             <th>Permissions</th>
             <th class="d-none d-sm-table-cell">
               <a href="#" class="text-dark" @click.prevent="sort('created_at')">Created</a>
@@ -59,14 +59,14 @@
             <td class="d-none d-sm-table-cell">{{role.id}}</td>
             <td>{{role.display_name}}</td>
             <td class="d-none d-sm-table-cell">{{role.name}}</td>
-            <td>
+            <!-- <td>
               <div class="avatars-stack">
                 <div class="avatar-sm" v-for="(user, index) in role.users.slice(0,4)">
                   <img class="img-avatar" :src="user.avatar_url">
                 </div>
                 <div class="avatar-sm ml-3" v-if="role.users.length > 4"> +{{role.users.length - 4}}</div>
               </div>
-            </td>
+            </td> -->
             <td>
               Level
               <small class="text-muted float-right">{{role.permissions.length}} of {{permissionsCount}}</small>

@@ -160,4 +160,9 @@ class UserController extends Controller
     {
         return User::role('user')->orderBy('name')->get();
     }
+
+    public function getStores ()
+    {
+        return User::role('store')->orderBy('name')->get();
+    }
 }

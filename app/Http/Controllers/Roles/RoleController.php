@@ -21,7 +21,7 @@ class RoleController extends Controller
         $roles = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
                     ->paginate($request->input('pagination.per_page'));
 
-        $roles->load('permissions', 'users');
+        $roles->load('permissions');
 
         return $roles;
     }
@@ -106,7 +106,7 @@ class RoleController extends Controller
 
     public function getRoleModulesPermissions($role)
     {
-        $role = Role::with('permissions', 'users')->findOrFail($role);
+        $role = Role::with('permissions')->findOrFail($role);
         $modules = Module::has('permissions')->orderBy('name')->get();
 
         foreach ($modules as $key => $value) {

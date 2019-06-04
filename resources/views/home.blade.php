@@ -3,8 +3,7 @@
 @section('content')
     <div class="row justify-content-center bg-gradient">
         <div class="col-sm-12 text-center">
-            <img class="img-fluid logo mt-5" src="/img/traeme.png" alt="">
-            <p class="lead mt-4 mb-2">Mandados a domicilio</p>
+            <img class="img-fluid logo mt-5 mb-3" src="/img/traeme.png" alt="">
         </div>
         <div class="col-9 col-sm-6 col-md-4 text-center">
             <p>¿Que te llevamos?</p>
@@ -12,14 +11,6 @@
             <orders-create-auth class="mb-4"></orders-create-auth>
             @else
             <orders-create class="mb-3"></orders-create>
-            <p class="mt-0 mb-0"><small>ó por teléfono</small></p>
-            <a class="btn btn-link btn-lg btn-phone mb-4" href="tel:627-110-1145">
-                <small class="fa-stack">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
-                </small>
-                627 110 1145
-            </a>
             @endauth
             <!-- <p class="mb-0">Registrate y recibe tu primer mandado ¡<strong>Gratis</strong>!</p> -->
             <p class="mb-0">Tarifa del dia desde <rates-day></rates-day> pesos</p>
@@ -77,30 +68,38 @@
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
         <div class="col-12 col-md-4 px-5 pt-1 text-center">
+            <img src="/img/stores/banner_texas_pizza.png" class="img-fluid" alt="Texas Pizza">
+        </div>
+        <div class="col-12 col-md-4 px-5 pt-1 text-center">
             <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
         </div>
-        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
-        </div> -->
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
         </div>
-        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">
-        </div> -->
-        <!-- <div class="col-12 col-md-4 px-5 text-center">
-            <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
-        </div> -->
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
+            <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
+        </div>
         <div class="col-12 col-md-4 px-5 pt-2 text-center">
             <img src="/img/stores/banner_paraiso_pay.png" class="img-fluid" alt="Paraiso del Pay">
         </div>
-        <!-- <div class="col-12 col-md-4 px-5 pt-2 text-center">
+        <div class="col-12 mt-4">
+            <users-stores></users-stores>
+        </div>
+        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
+            <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">
+        </div>
+        <div class="col-12 col-md-4 px-5 text-center">
+            <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
+        </div>
+        <div class="col-12 col-md-4 px-5 pt-2 text-center">
             <img src="/img/stores/banner_express.png" class="img-fluid" alt="Bolas de Arroz Express">
         </div> -->
     </div>
+
+    <div class="row justify-content-center mt-5 mb-5"></div>
 
     <div class="row justify-content-center bg-gradient">
         <div class="col text-center">
@@ -157,9 +156,20 @@
                 <li>Farmacia</li>
                 <li>Restaurant</li>
             </ul> -->
+
             <img class="img-fluid logo" src="/svg/traeme.svg" alt="">
-            <p class="mt-5 mb-5"><i>Ahorra tiempo y dinero</i></p>
-            <div class="text-center">
+            <p class="lead mt-5 mb-1">Mandados a domicilio</p>
+            <p class="mb-5"><i>Ahorra tiempo y dinero</i></p>
+            <div class="mt-5 mb-4">
+                <a class="btn btn-link btn-lg btn-phone" href="tel:627-110-1145">
+                    <small class="fa-stack mr-1">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
+                    </small>
+                    (627) 110 1145
+                </a>
+            </div>
+            <div class="text-center mb-2">
                 <a href="https://www.facebook.com/traeme.parral" target="_blank" class="text-success mr-3"><i class="fab fa-facebook-square fa-2x"></i></a>
                 <a href="https://www.instagram.com/traeme_parral" target="_blank" class="text-success"><i class="fab fa-instagram fa-2x"></i></a>
             </div>

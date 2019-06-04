@@ -6,49 +6,21 @@
       <small class="form-text text-white" v-if="errors.order">Dinos que te llevamos</small>
     </div>
     <div class="form-group">
-      <multiselect
-        v-model="newOrder.address"
-        :options="address"
-        label="address"
-        track-by="id"
-        :custom-label="customLabel"
-        selectLabel="Seleccionar"
-        selectedLabel="Seleccionado"
-        deselectLabel="deseleccionar"
-        placeholder="Selecciona o agrega una dirección"
-        tag-placeholder="Agregar esta dirección"
-        :taggable="true"
-        @tag="addTag"
-        :class="{'border border-danger rounded': errors.address}">
-        <template slot="singleLabel" slot-scope="props">
-          <span>
-            <strong class="mr-2">{{ props.option.alias }}</strong>
-            <span>{{ props.option.address }}</span>
+      <div class="input-group border-right-0">
+        <div class="input-group-prepend" @click="getPosition">
+          <span class="input-group-text">
+            <i class="fas fa-spinner fa-spin" v-if="loading"></i>
+            <i class="fas fa-map-marker-alt" v-else></i>
           </span>
-        </template>
-        <template slot="option" slot-scope="props">
-          <div v-if="props.option.isTag">
-            {{ props.search }}
-          </div>
-          <div v-else>
-            <strong class="mr-2">{{ props.option.alias }}</strong>
-            <span>{{ props.option.address }}</span>
-          </div>
-        </template>
-      </multiselect>
-      <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
-      <!-- <div class="input-group border-right-0">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
         </div>
-        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address">
-      </div> -->
+        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="newOrder.address">
+      </div>
+      <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
     <div class="form-group" v-if="!user.cellphone">
       <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newOrder.cellphone" placeholder="Escribe tu numero de celular">
       <small class="form-text text-white" v-if="errors.cellphone">¿Cual es tu numero celular?</small>
     </div>
-    <!-- <a class="btn btn-light btn-lg" href="#" @click.prevent="createOrder">Pedir</a> -->
     <a class="btn btn-light btn-lg" href="#" :disabled="submiting" @click.prevent="createOrder">
       <i class="fas fa-spinner fa-spin mr-2" v-if="submiting"></i>Pedir
     </a>
@@ -60,9 +32,8 @@ export default {
   data () {
     return {
       user: Laravel.user,
-      address: [],
-      status: ['Abierto', 'En camino', 'Entregado'],
       newOrder: {},
+      address: [],
       placeholder: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
@@ -71,27 +42,26 @@ export default {
         'Me puedes pagar el Agua de la Dirección...',
         '¿Necesitas enviar un paquete?'
       ],
-      loading: true,
+      loading: false,
+      loadingAddress: false,
       submiting: false,
       errors: ''
     }
   },
   mounted () {
-    this.getAddress()
     this.randomPlaceholder()
-    if (localStorage.getItem("currentAddress")) {
-      //this.newOrder.address = JSON.parse(localStorage.getItem("currentAddress"))
-      this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("currentAddress")))
-
+    if (localStorage.getItem("address")) {
+      this.newOrder.address = JSON.parse(localStorage.getItem("address"))
+      //this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("address")))
     }
   },
   methods: {
     getAddress () {
-      this.loading = true
+      this.loadingAddress = true
       axios.get(`/api/address/byClient`)
       .then(response => {
         this.address = response.data
-        this.loading = false
+        this.loadingAddress = false
       })
     },
     createOrder () {
@@ -100,15 +70,18 @@ export default {
         this.errors = {}
         axios.post(`/api/orders/storeAuth`, this.newOrder)
         .then(response => {
-          localStorage.setItem("currentAddress", JSON.stringify(this.newOrder.address))
+          localStorage.setItem("address", JSON.stringify(this.newOrder.address))
           //this.$toasted.global.error('¡Mandado creado!')
           this.newOrder.order = ''
           this.submiting = false
+          const wrapper = document.createElement('div');
+          wrapper.innerHTML = `<div data-v-3500aeb9 class="mb-3 v-step-warp-horizontal style2"><div data-v-3500aeb9 class="v-step-progress-bg"><div data-v-3500aeb9 class="v-step-progress-value" style="background-color: rgb(31, 177, 29); width: 33.3333%;"></div></div> <ul data-v-3500aeb9 class="v-step-list"><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Abierto </label> <div data-v-3500aeb9 class="v-step-item-number" style="background-color: rgb(31, 177, 29); color: rgb(255, 255, 255);">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> En camino </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Entregado </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li></ul></div>`;
           swal({
             title: "¡Mandado creado!",
-            text: "¡Sigue el estatus de tu mandado!",
+            text: "¡Un repartidor pronto llevara tu mandado!",
             icon: "success",
-            button: "Ver mandado"
+            button: "Ver mandado",
+            content: wrapper
           })
           .then((value) => {
             if (value) {
@@ -122,22 +95,25 @@ export default {
         })
       }
     },
-    addTag (newTag) {
-      const tag = {
-        address: newTag
+    getPosition() {
+      if (navigator.geolocation) {
+        this.loading = true
+        navigator.geolocation.getCurrentPosition(this.setPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
       }
-      axios.post(`/api/address/store`, tag)
-      .then(response => {
-        this.newOrder.address = tag
-        this.address.unshift(response.data)
-        this.$toasted.global.error('¡Direccion agregada!')
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-      })
     },
-    customLabel ({ address, alias }) {
-      return `${alias} ${address}`
+    setPosition(position) {
+      axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+      .then(response => {
+        this.newOrder.address = response.data.address.road
+        if (response.data.address.suburb) {
+          this.newOrder.address.concat(`, ${response.data.address.suburb}`)
+        }
+        //this.newOrder.address = `${response.data.address.road}, ${response.data.address.suburb}`
+        localStorage.setItem("address", JSON.stringify(this.newOrder.address))
+        this.loading = false
+      })
     },
     randomPlaceholder () {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)]

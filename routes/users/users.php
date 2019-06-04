@@ -1,6 +1,8 @@
 <?php
-Route::middleware('auth')->group(function () {
-    Route::group(['namespace' => 'Users'], function() {
+Route::group(['namespace' => 'Users'], function() {
+    Route::get('api/users/getStores', 'UserController@getStores');
+    
+    Route::middleware('auth')->group(function () {
         // views
         Route::group(['prefix' => 'users'], function() {
             Route::view('/', 'users.index')->middleware('permission:read-users');

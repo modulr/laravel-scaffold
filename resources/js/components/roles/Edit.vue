@@ -77,7 +77,7 @@
         <content-placeholders class="card-body" v-if="loading">
           <content-placeholders-heading :img="true"/>
         </content-placeholders>
-        <div class="card-header px-0 bg-transparent">
+        <!-- <div class="card-header px-0 bg-transparent">
           <strong>Users</strong><br>
           <small class="text-muted">This is the list of users who use this role.</small>
           <div class="card-header-actions">
@@ -106,7 +106,7 @@
         </div>
         <content-placeholders class="card-body" v-if="loading">
           <content-placeholders-heading :img="true"/>
-        </content-placeholders>
+        </content-placeholders> -->
       </div>
     </div>
   </div>

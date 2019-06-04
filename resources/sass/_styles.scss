@@ -25,14 +25,10 @@ a:hover {
   max-width: 250px;
 }
 .btn-phone {
-  color: $white;
   text-decoration: none !important;
-  .fa-phone {
-    color: #EF374B !important;
-  }
-}
-.btn-phone:hover {
-  color: $gray-400;
+  // .fa-phone {
+  //   color: #EF374B !important;
+  // }
 }
 .description {
   white-space: pre-line;

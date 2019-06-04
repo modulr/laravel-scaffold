@@ -131,7 +131,7 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'order' => 'required|string',
-            'address' => 'required|array',
+            'address' => 'required|string',
             //'cellphone' => 'numeric|nullable'
         ]);
 
@@ -147,7 +147,7 @@ class OrderController extends Controller
 
         $order = Order::create([
             'order' => $request->order,
-            'address' => $request->address['address'],
+            'address' => $request->address,
             'status_id' => 1,
             'client_id' => Auth::id(),
             'rate' => Rate::latest()->first()->rate,
