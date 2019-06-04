@@ -88,9 +88,9 @@
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
         </div>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
+        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">
-        </div>
+        </div> -->
         <!-- <div class="col-12 col-md-4 px-5 text-center">
             <img src="/img/stores/banner_vape.png" class="img-fluid" alt="Vape City">
         </div> -->
