@@ -2,7 +2,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-12 text-center mb-3 pb-3 px-5">
       <a href="#" data-toggle="collapse" data-target="#collapseStores" aria-expanded="true" @click="getStores">
-        <img src="/img/stores/tiendas_todas.svg" class="img-fluid w-25" alt="Traeme Tienda">
+        <img src="/img/stores/mas_tiendas.svg" class="img-fluid w-50" alt="Traeme Tienda">
       </a>
     </div>
     <div class="col-12 collapse" id="collapseStores">

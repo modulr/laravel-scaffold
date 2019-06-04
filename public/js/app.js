@@ -71801,11 +71801,8 @@ var render = function() {
         },
         [
           _c("img", {
-            staticClass: "img-fluid w-25",
-            attrs: {
-              src: "/img/stores/tiendas_todas.svg",
-              alt: "Traeme Tienda"
-            }
+            staticClass: "img-fluid w-50",
+            attrs: { src: "/img/stores/mas_tiendas.svg", alt: "Traeme Tienda" }
           })
         ]
       )
