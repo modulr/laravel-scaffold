@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use App\Notifications\NewOrder;
 use App\Notifications\UpdateOrder;
 use App\Notifications\TakeOrder;
+use App\Notifications\UntakeOrder;
 use App\Notifications\FinalizeOrder;
 use App\Notifications\CancelOrder;
 
@@ -267,16 +268,23 @@ class OrderController extends Controller
 
     public function assignDealer ($orderId, Request $request)
     {
-        $this->validate($request, [
-            'dealer' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'dealer' => 'required'
+        // ]);
 
         $order = Order::find($orderId);
-        $order->dealer_id = $request->dealer['id'];
-        $order->status_id = 2;
-        $order->save();
 
-        Auth::user()->notify(new TakeOrder($order));
+        if ($request->dealer) {
+            $order->dealer_id = $request->dealer['id'];
+            $order->status_id = 2;
+            $order->save();
+            Auth::user()->notify(new TakeOrder($order));
+        } else {
+            $order->dealer_id = null;
+            $order->status_id = 1;
+            $order->save();
+            Auth::user()->notify(new UntakeOrder($order));
+        }
 
         return $this->show($order->id);
     }

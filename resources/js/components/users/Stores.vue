@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center mt-5">
-    <div class="col-12 text-center mb-3 pb-3 px-5">
+    <div class="col-12 text-center mb-3 pb-3">
       <a href="#" data-toggle="collapse" data-target="#collapseStores" aria-expanded="true" @click="getStores">
         <img src="/img/stores/mas_tiendas.svg" class="img-fluid w-50" alt="Traeme Tienda">
       </a>
@@ -39,16 +39,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="media border rounded p-4">
-            <div class="avatar float-left mr-2">
-              <img class="img-avatar mr-1" style="width: 100px; height: 100px" :src="store.avatar_url">
-            </div>
-            <div class="media-body">
-              <div class="text-body">{{store.name}}</div>
-              <div class="small text-muted"><a :href="`tel:${store.cellphone}`">{{store.cellphone}}</a></div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>

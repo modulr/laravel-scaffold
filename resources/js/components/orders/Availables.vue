@@ -6,6 +6,11 @@
     <div v-else>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados</h4>
+        <div class="card-header-actions mr-1">
+          <a class="btn btn-primary" href="/orders/availables">
+            <i class="fa fa-sync mr-1"></i>Refrescar
+          </a>
+        </div>
       </div>
       <div class="card-body px-0">
         <ul class="list-group mb-1" v-for="(item, index) in orders">

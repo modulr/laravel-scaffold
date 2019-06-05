@@ -7,7 +7,11 @@
           <a class="text-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
           </a>
-          <a class="btn btn-primary ml-4" href="#" @click.prevent="orderModal">
+          <a class="text-success ml-3" href="#" @click.prevent="showUserCreateModal">
+            <i class="fas fa-user-plus"></i>
+            <span class="d-md-down-none ml-1">Crear cliente</span>
+          </a>
+          <a class="btn btn-primary ml-3" href="#" @click.prevent="orderModal">
             <i class="fa fa-plus"></i>
             <span class="d-md-down-none ml-1">Crear</span>
           </a>
@@ -15,6 +19,9 @@
       </div>
       <div class="card-body px-0">
         <div class="mb-4" v-show="filtersShow">
+          <div class="form-group">
+            <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
+          </div>
           <div class="form-group">
             <multiselect
               v-model="filters.status"
@@ -41,9 +48,6 @@
               placeholder="Filtra por Repartidor"
               :class="{'border border-danger rounded': errors.dealer}">
             </multiselect>
-          </div>
-          <div class="form-group">
-            <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
           </div>
         </div>
         <content-placeholders v-if="loading">
@@ -86,9 +90,9 @@
                   <hr>
                 </div>
                 <div class="col-12" v-if="item.status_id != 4">
-                  <vue-step class="mb-3" :now-step="item.status_id" :step-list="listStatus" style-type="style2"></vue-step>
+                  <vue-step class="mb-3" :now-step="item.status_id" :step-list="listStatus" style-type="style2" @selected="finalizeOrder(item, index)"></vue-step>
                 </div>
-                <div class="col-12 alert alert-secondary text-center" v-else>
+                <div class="col-12 alert alert-secondary text-center" @click="finalizeOrder(item, index)" v-else >
                   Cancelado
                 </div>
                 <div class="col">
@@ -133,7 +137,7 @@
     </div>
     <!-- Modal create -->
     <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Crear mandado</h5>
@@ -146,6 +150,16 @@
               <label>Mandado</label>
               <textarea class="form-control" rows="3" placeholder="¡Traeme unos tacos!" v-model="newOrder.order" :class="{'is-invalid': errors.order}"></textarea>
               <div class="invalid-feedback" v-if="errors.order">{{errors.order[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Costo de envio</label>
+              <div class="input-group border-right-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.delivery_costs}" v-model="newOrder.delivery_costs" placeholder="20">
+                <div class="invalid-feedback" v-if="errors.delivery_costs">{{errors.delivery_costs[0]}}</div>
+              </div>
             </div>
             <div class="form-group">
               <label>Cliente</label>
@@ -203,16 +217,6 @@
                 :class="{'border border-danger rounded': errors.dealer}">
               </multiselect>
               <small class="form-text text-danger" v-if="errors.dealer">{{errors.dealer[0]}}</small>
-            </div>
-            <div class="form-group">
-              <label>Costo de envio</label>
-              <div class="input-group border-right-0">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input type="text" class="form-control" :class="{'is-invalid': errors.delivery_costs}" v-model="newOrder.delivery_costs" placeholder="20">
-                <div class="invalid-feedback" v-if="errors.delivery_costs">{{errors.delivery_costs[0]}}</div>
-              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -318,7 +322,49 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal create user -->
+    <div class="modal fade" id="userCreateModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Crear cliente</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="newUser.name" placeholder="John Doe">
+              <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="email" placeholder="john@modulr.io">
+              <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Teléfono celular</label>
+              <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newUser.cellphone" placeholder="6271012345">
+              <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input type="text" class="form-control" :class="{'is-invalid': errors.password}" v-model="newUser.password" placeholder="123456">
+              <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary" href="#" :disabled="submitingUser" @click.prevent="createUser">
+              <i class="fas fa-spinner fa-spin" v-if="submitingUser"></i>
+              <i class="fas fa-check" v-else></i>
+              <span class="ml-1">Guardar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal view user-->
     <profile-view :user="userView"></profile-view>
   </div>
 </template>
@@ -337,12 +383,16 @@ export default {
       address: [],
       newOrder: {},
       editOrder: {},
+      newUser: {
+        name: ''
+      },
       userView: {},
       loading: true,
       isLoading: false,
       submiting: false,
       submitingUpdate: false,
       submitingDealer: false,
+      submitingUser: false,
       errors: {},
       filtersShow: false,
       filters: {
@@ -486,6 +536,22 @@ export default {
         })
       }
     },
+    finalizeOrder (order, index) {
+      let status = 3
+      let message = '¡Mandado finalizado!'
+
+      if (order.status_id == 1 || order.status_id == 3 || order.status_id == 4) {
+        message = '¡Mandado En Camino!'
+        status = 2
+      }
+
+      axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': status})
+      .then(response => {
+        this.orders[index].status_id = response.data.status_id
+        this.orders[index].status = response.data.status
+        this.$toasted.global.error(message)
+      })
+    },
     cancelOrder (order, index) {
       swal({
         title: "¿Estas seguro?",
@@ -505,22 +571,34 @@ export default {
         }
       })
     },
-    addTag (newTag) {
-      const tag = {
-        address: newTag
+    showUserCreateModal () {
+      this.errors = {}
+      this.newUser = {
+        name: '',
+        password: '123456'
       }
-      axios.post(`/api/address/store/${this.newOrder.client.id}`, tag)
-      .then(response => {
-        this.newOrder.address = tag
-        this.address.unshift(response.data)
-        this.$toasted.global.error('¡Direccion agregada!')
-      })
-      .catch(error => {
-        this.errors = error.response.data.errors
-      })
+      $('#userCreateModal').modal('show')
     },
-    customLabel ({ address, alias }) {
-      return `${alias} ${address}`
+    createUser () {
+      if (!this.submitingUser) {
+        this.submitingUser = true
+        this.newUser.email = this.email
+        this.newUser.roles = [{name: 'user', display_name: 'Cliente'}]
+        axios.post(`/api/users/store`, this.newUser)
+        .then(response => {
+          this.newUser = {
+            name: ''
+          }
+          this.submitingUser = false
+          $('#userCreateModal').modal('hide')
+          this.$toasted.global.error('Cliente creado!')
+          this.orderModal()
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submitingUser = false
+        })
+      }
     },
     assignModal (order, index) {
       this.errors = {}
@@ -547,6 +625,40 @@ export default {
           this.submitingDealer = false
         })
       }
+    },
+    addTag (newTag) {
+      const tag = {
+        address: newTag
+      }
+      axios.post(`/api/address/store/${this.newOrder.client.id}`, tag)
+      .then(response => {
+        this.newOrder.address = tag
+        this.address.unshift(response.data)
+        this.$toasted.global.error('¡Direccion agregada!')
+      })
+      .catch(error => {
+        this.errors = error.response.data.errors
+      })
+    },
+    customLabel ({ address, alias }) {
+      return `${alias} ${address}`
+    }
+  },
+  computed: {
+    email: function () {
+      const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœøṕŕßśșțùúüûǘẃẍÿź·/_,:;'
+      const b = 'aaaaaaaaceeeeghiiiimnnnooooooprssstuuuuuwxyz------'
+      const p = new RegExp(a.split('').join('|'), 'g')
+
+      return this.newUser.name.toString().toLowerCase()
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+      .replace(/&/g, '-and-') // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/\-\-+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
+      .concat('@traeme.app')
     }
   }
 }
