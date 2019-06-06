@@ -67,8 +67,24 @@
         <div class="col-12 pb-3 text-center px-5">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
         </div>
+
         <div class="col-12 col-md-4 px-5 pt-1 text-center">
-            <img src="/img/stores/banner_texas_pizza.png" class="img-fluid" alt="Texas Pizza">
+            <a href="#" data-toggle="modal" data-target=".texas-menu">
+                <img src="/img/stores/banner_texas_pizza.png" class="img-fluid" alt="Texas Pizza">
+            </a>
+            <a href="#" class="btn btn-pill btn-primary btn-sm btn-menu" data-toggle="modal" data-target=".texas-menu">
+                menu
+            </a>
+        </div>
+        <div class="modal fade texas-menu" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="/img/stores/menu/texas_pizza/1.jpeg" class="img-fluid" alt="Texas Pizza Menu">
+                    <img src="/img/stores/menu/texas_pizza/2.jpeg" class="img-fluid" alt="Texas Pizza Menu">
+                </div>
+            </div>
+          </div>
         </div>
         <div class="col-12 col-md-4 px-5 pt-1 text-center">
             <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">

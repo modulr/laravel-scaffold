@@ -4,7 +4,7 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <div class="row">
           <div class="col">
-            <h4 class="pt-2">Tiendas</h4>
+            <h4 class="pt-2">Clientes</h4>
           </div>
           <div class="col text-right">
             <input type="text" class="form-control" placeholder="Buscar" v-model.trim="filters.search" @keyup="getStores">
@@ -90,7 +90,7 @@
       </a>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="storeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade modal-xl" id="storeModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -106,16 +106,6 @@
               <div class="invalid-feedback" v-if="errors.store">{{errors.store[0]}}</div>
             </div>
             <div class="form-group">
-              <label>Teléfono *</label>
-              <input type="text" class="form-control" :class="{'is-invalid': errors.phone}" placeholder="5230034" v-model="store.phone" @keyup.enter="save">
-              <div class="invalid-feedback" v-if="errors.phone">{{errors.phone[0]}}</div>
-            </div>
-            <div class="form-group">
-              <label>Celular</label>
-              <input type="text" class="form-control" :class="{'is-invalid': errors.cellphone}" placeholder="6271012233" v-model="store.cellphone" @keyup.enter="save">
-              <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
-            </div>
-            <div class="form-group">
               <label>Dirección</label>
               <input type="text" class="form-control" :class="{'is-invalid': errors.address}" placeholder="Av. Boulevard #15, col. Centro" v-model="store.address" @keyup.enter="save">
               <div class="invalid-feedback" v-if="errors.address">{{errors.address[0]}}</div>
@@ -126,13 +116,33 @@
               <div class="invalid-feedback" v-if="errors.description">{{errors.description[0]}}</div>
             </div>
             <div class="form-group">
+              <label>Teléfono</label>
+              <input type="text" class="form-control" :class="{'is-invalid': errors.phone}" placeholder="5230034" v-model="store.phone" @keyup.enter="save">
+              <div class="invalid-feedback" v-if="errors.phone">{{errors.phone[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Celular</label>
+              <input type="text" class="form-control" :class="{'is-invalid': errors.cellphone}" placeholder="6271012233" v-model="store.cellphone" @keyup.enter="save">
+              <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
+            </div>
+            <div class="form-group">
               <label>Pagina Web</label>
               <input type="text" class="form-control" :class="{'is-invalid': errors.web}" placeholder="http://www.tacos-chu.com" v-model="store.web" @keyup.enter="save">
               <div class="invalid-feedback" v-if="errors.web">{{errors.web[0]}}</div>
             </div>
             <div class="form-group">
+              <label>Facebook</label>
+              <input type="text" class="form-control" :class="{'is-invalid': errors.facebook}" placeholder="facebook.com/profile" v-model="store.facebook" @keyup.enter="save">
+              <div class="invalid-feedback" v-if="errors.facebook">{{errors.link[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Instagram</label>
+              <input type="text" class="form-control" :class="{'is-invalid': errors.instagram}" placeholder="instagram.com/profile" v-model="store.instagram" @keyup.enter="save">
+              <div class="invalid-feedback" v-if="errors.instagram">{{errors.link[0]}}</div>
+            </div>
+            <div class="form-group">
               <label>Otro Link</label>
-              <input type="text" class="form-control" :class="{'is-invalid': errors.link}" placeholder="Facebook" v-model="store.link" @keyup.enter="save">
+              <input type="text" class="form-control" :class="{'is-invalid': errors.link}" placeholder="www.otrolink.com" v-model="store.link" @keyup.enter="save">
               <div class="invalid-feedback" v-if="errors.link">{{errors.link[0]}}</div>
             </div>
           </div>

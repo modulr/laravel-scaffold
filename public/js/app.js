@@ -62189,6 +62189,20 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
+          !_vm.loading
+            ? _c("div", { staticClass: "col pt-2 text-right" }, [
+                _vm._v(
+                  "\n        " +
+                    _vm._s(_vm.filters.pagination.from) +
+                    "-" +
+                    _vm._s(_vm.filters.pagination.to) +
+                    " of " +
+                    _vm._s(_vm.filters.pagination.total) +
+                    "\n      "
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "col-auto" },
@@ -62386,18 +62400,6 @@ var render = function() {
         _vm._v(" "),
         !_vm.loading && _vm.filters.pagination.total > 0
           ? _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col pt-2" }, [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm.filters.pagination.from) +
-                    "-" +
-                    _vm._s(_vm.filters.pagination.to) +
-                    " of " +
-                    _vm._s(_vm.filters.pagination.total) +
-                    "\n      "
-                )
-              ]),
-              _vm._v(" "),
               _vm.filters.pagination.last_page > 1
                 ? _c("div", { staticClass: "col" }, [
                     _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
@@ -66900,6 +66902,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67029,6 +67038,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getDealers();
       this.getRate();
       $('#orderModal').modal('show');
+      $('#userCreateModal').modal('hide');
     },
     createOrder: function createOrder() {
       var _this7 = this;
@@ -67115,6 +67125,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         password: '123456'
       };
       $('#userCreateModal').modal('show');
+      $('#orderModal').modal('hide');
     },
     createUser: function createUser() {
       var _this11 = this;
@@ -67234,10 +67245,12 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-header-actions mr-1" }, [
+              _vm._m(0),
+              _vm._v(" "),
               _c(
                 "a",
                 {
-                  staticClass: "text-secondary",
+                  staticClass: "text-secondary ml-3",
                   class: { "text-success": _vm.filtersShow },
                   attrs: { href: "#" },
                   on: {
@@ -67670,7 +67683,7 @@ var render = function() {
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
             _c("i", { staticClass: "fas fa-motorcycle fa-3x text-muted" }),
             _vm._v(" "),
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted" }, [
               _vm._v("Crea uno dando clic en el boton de abajo")
@@ -67716,7 +67729,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -67756,7 +67769,7 @@ var render = function() {
                     _c("label", [_vm._v("Costo de envio")]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-group border-right-0" }, [
-                      _vm._m(2),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -67956,6 +67969,27 @@ var render = function() {
                   _c(
                     "a",
                     {
+                      staticClass: "text-success mr-3",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.showUserCreateModal($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-user-plus" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "d-md-down-none ml-1" }, [
+                        _vm._v("Crear cliente")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
                       staticClass: "btn btn-primary",
                       attrs: { href: "#", disabled: _vm.submiting },
                       on: {
@@ -67997,7 +68031,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(3),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -68037,7 +68071,7 @@ var render = function() {
                     _c("label", [_vm._v("Costo de envio")]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-group border-right-0" }, [
-                      _vm._m(4),
+                      _vm._m(5),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -68120,7 +68154,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(5),
+                _vm._m(6),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c(
@@ -68207,7 +68241,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(6),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -68381,6 +68415,16 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "text-secondary", attrs: { href: "/orders/all" } },
+      [_c("i", { staticClass: "fa fa-sync mr-1" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -69203,6 +69247,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69295,6 +69344,20 @@ var render = function() {
                         ")"
                     )
                   ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-header-actions mr-1" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "/orders/dealer" }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-sync mr-1" }),
+                      _vm._v("Refrescar\n        ")
+                    ]
+                  )
                 ])
               ]
             ),
@@ -71363,6 +71426,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71792,7 +71865,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal fade modal-xl",
         attrs: {
           id: "storeModal",
           tabindex: "-1",
@@ -71858,7 +71931,94 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Teléfono *")]),
+                  _c("label", [_vm._v("Dirección")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.store.address,
+                        expression: "store.address"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.address },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Av. Boulevard #15, col. Centro"
+                    },
+                    domProps: { value: _vm.store.address },
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.save($event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.store, "address", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.address
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.address[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Descripción")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.store.description,
+                        expression: "store.description"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.description },
+                    attrs: {
+                      rows: "3",
+                      placeholder: "Descripción de la tienda"
+                    },
+                    domProps: { value: _vm.store.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.store, "description", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.description
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.description[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Teléfono")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -71954,93 +72114,6 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Dirección")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.store.address,
-                        expression: "store.address"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: { "is-invalid": _vm.errors.address },
-                    attrs: {
-                      type: "text",
-                      placeholder: "Av. Boulevard #15, col. Centro"
-                    },
-                    domProps: { value: _vm.store.address },
-                    on: {
-                      keyup: function($event) {
-                        if (
-                          !("button" in $event) &&
-                          _vm._k(
-                            $event.keyCode,
-                            "enter",
-                            13,
-                            $event.key,
-                            "Enter"
-                          )
-                        ) {
-                          return null
-                        }
-                        return _vm.save($event)
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.store, "address", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.address
-                    ? _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errors.address[0]))
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Descripción")]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.store.description,
-                        expression: "store.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: { "is-invalid": _vm.errors.description },
-                    attrs: {
-                      rows: "3",
-                      placeholder: "Descripción de la tienda"
-                    },
-                    domProps: { value: _vm.store.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.store, "description", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.description
-                    ? _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errors.description[0]))
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Pagina Web")]),
                   _vm._v(" "),
                   _c("input", {
@@ -72092,6 +72165,108 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Facebook")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.store.facebook,
+                        expression: "store.facebook"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.facebook },
+                    attrs: {
+                      type: "text",
+                      placeholder: "facebook.com/profile"
+                    },
+                    domProps: { value: _vm.store.facebook },
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.save($event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.store, "facebook", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.facebook
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.link[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Instagram")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.store.instagram,
+                        expression: "store.instagram"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.errors.instagram },
+                    attrs: {
+                      type: "text",
+                      placeholder: "instagram.com/profile"
+                    },
+                    domProps: { value: _vm.store.instagram },
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.save($event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.store, "instagram", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.instagram
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.link[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Otro Link")]),
                   _vm._v(" "),
                   _c("input", {
@@ -72105,7 +72280,7 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     class: { "is-invalid": _vm.errors.link },
-                    attrs: { type: "text", placeholder: "Facebook" },
+                    attrs: { type: "text", placeholder: "www.otrolink.com" },
                     domProps: { value: _vm.store.link },
                     on: {
                       keyup: function($event) {
@@ -72200,7 +72375,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col" }, [
-      _c("h4", { staticClass: "pt-2" }, [_vm._v("Tiendas")])
+      _c("h4", { staticClass: "pt-2" }, [_vm._v("Clientes")])
     ])
   },
   function() {

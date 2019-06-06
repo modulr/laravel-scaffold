@@ -4,7 +4,10 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados <small class="text-muted">({{orders.length}}/${{profit}})</small></h4>
         <div class="card-header-actions mr-1">
-          <a class="text-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
+          <a class="text-secondary" href="/orders/all">
+            <i class="fa fa-sync mr-1"></i>
+          </a>
+          <a class="text-secondary ml-3" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
           </a>
           <a class="text-success ml-3" href="#" @click.prevent="showUserCreateModal">
@@ -220,6 +223,10 @@
             </div>
           </div>
           <div class="modal-footer">
+            <a class="text-success mr-3" href="#" @click.prevent="showUserCreateModal">
+              <i class="fas fa-user-plus"></i>
+              <span class="d-md-down-none ml-1">Crear cliente</span>
+            </a>
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="createOrder">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
               <i class="fas fa-check" v-else></i>
@@ -493,6 +500,7 @@ export default {
       this.getDealers()
       this.getRate()
       $('#orderModal').modal('show')
+      $('#userCreateModal').modal('hide')
     },
     createOrder () {
       if (!this.submiting) {
@@ -578,6 +586,7 @@ export default {
         password: '123456'
       }
       $('#userCreateModal').modal('show')
+      $('#orderModal').modal('hide')
     },
     createUser () {
       if (!this.submitingUser) {

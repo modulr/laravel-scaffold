@@ -11403,3 +11403,13 @@ a:hover {
   margin: 0 !important;
 }
 
+.btn-pill {
+  border-radius: 50em !important;
+}
+
+.btn-menu {
+  position: absolute;
+  bottom: 5px;
+  right: 15%;
+}
+

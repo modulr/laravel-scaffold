@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/users/clients">
+                <a class="nav-link" href="/stores">
                     <i class="nav-icon fas fa-users mr-2"></i>Clientes
                 </a>
             </li>
@@ -52,18 +52,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/stores">
-                    <i class="nav-icon fas fa-store mr-2"></i>Tiendas
+                <a class="nav-link" href="/rates">
+                    <i class="nav-icon fas fa-dollar-sign"></i>Tarifas
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/codes">
                     <i class="nav-icon fas fa-percent"></i>Cupones
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/rates">
-                    <i class="nav-icon fas fa-dollar-sign"></i>Tarifas
                 </a>
             </li>
             @endhasanyrole
