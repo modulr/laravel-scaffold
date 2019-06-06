@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-12 col-md-4 px-5 pt-1 text-center">
-            <a href="#" data-toggle="modal" data-target=".texas-menu">
+            <a href="#texas-menu" data-toggle="modal" data-target="#texas-menu">
                 <img src="/img/stores/banner_texas_pizza.png" class="img-fluid" alt="Texas Pizza">
             </a>
             <a href="#texas-menu" class="btn btn-pill btn-primary btn-sm btn-menu" data-toggle="modal" data-target="#texas-menu">
