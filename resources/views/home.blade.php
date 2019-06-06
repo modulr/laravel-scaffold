@@ -77,7 +77,11 @@
             </a>
         </div>
         <div class="modal fade texas-menu" tabindex="-1" role="dialog" aria-hidden="true">
+            <button type="button" class="close text-body mr-2 mt-3" data-dismiss="modal" aria-label="Close">
+               <i class="fas fa-times"></i>
+            </button>
           <div class="modal-dialog modal-xl">
+
             <div class="modal-content">
                 <div class="modal-body">
                     <img src="/img/stores/menu/texas_pizza/1.jpeg" class="img-fluid" alt="Texas Pizza Menu">
