@@ -72,16 +72,15 @@
             <a href="#" data-toggle="modal" data-target=".texas-menu">
                 <img src="/img/stores/banner_texas_pizza.png" class="img-fluid" alt="Texas Pizza">
             </a>
-            <a href="#" class="btn btn-pill btn-primary btn-sm btn-menu" data-toggle="modal" data-target=".texas-menu">
+            <a href="#texas-menu" class="btn btn-pill btn-primary btn-sm btn-menu" data-toggle="modal" data-target="#texas-menu">
                 menu
             </a>
         </div>
-        <div class="modal fade texas-menu" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="texas-menu" tabindex="-1" role="dialog" aria-hidden="true">
             <button type="button" class="close text-body mr-2 mt-3" data-dismiss="modal" aria-label="Close">
                <i class="fas fa-times"></i>
             </button>
           <div class="modal-dialog modal-xl">
-
             <div class="modal-content">
                 <div class="modal-body">
                     <img src="/img/stores/menu/texas_pizza/1.jpeg" class="img-fluid" alt="Texas Pizza Menu">
