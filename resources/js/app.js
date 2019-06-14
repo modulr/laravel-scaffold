@@ -81,6 +81,12 @@ Vue.component('address-index', require('./components/address/Index.vue'));
 Vue.component('rates-index', require('./components/rates/Index.vue'));
 Vue.component('rates-day', require('./components/rates/Day.vue'));
 
+// Clients
+Vue.component('clients-index', require('./components/clients/Index.vue'));
+Vue.component('clients-create', require('./components/clients/Create.vue'));
+Vue.component('clients-edit', require('./components/clients/Edit.vue'));
+Vue.component('clients-avatar', require('./components/clients/Avatar.vue'));
+
 // Stores
 Vue.component('stores-index', require('./components/stores/Index.vue'));
 

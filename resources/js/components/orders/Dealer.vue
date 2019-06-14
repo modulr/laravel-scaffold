@@ -1,71 +1,73 @@
 <template lang="html">
   <div>
-    <content-placeholders class="mt-5" v-if="loading">
-      <content-placeholders-text :lines="6"/>
-    </content-placeholders>
-    <div v-else>
+    <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mis vueltas <small class="text-muted">({{orders.length}}/${{profit}})</small></h4>
         <div class="card-header-actions mr-1">
-          <a class="btn btn-primary" href="/orders/dealer">
-            <i class="fa fa-sync mr-1"></i>Refrescar
+          <a class="btn btn-primary" href="/orders/dealer" @click.prevent="getOrders">
+            <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
           </a>
         </div>
       </div>
       <div class="card-body px-0">
-        <ul class="list-group mb-1" v-for="(item, index) in orders">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-8">
-                <small class="text-muted">
-                  <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
-                   = <strong>{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
-                </small>
+        <content-placeholders v-if="loading">
+          <content-placeholders-text :lines="6"/>
+        </content-placeholders>
+        <div v-else>
+          <ul class="list-group mb-1" v-for="(item, index) in orders">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-8">
+                  <small class="text-muted">
+                    <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
+                     = <strong>{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
+                  </small>
+                </div>
+                <div class="col-4 text-right">
+                  <!-- <span class="badge badge-pill" :class="{
+                    'badge-primary': item.status_id == 1,
+                    'badge-success': item.status_id == 2,
+                    'badge-info': item.status_id == 3,
+                    'badge-secondary': item.status_id == 4 }">
+                    {{item.status.status}}
+                  </span> -->
+                  <small class="text-muted">
+                    Envio: <strong>${{item.delivery_costs}}</strong>
+                  </small>
+                </div>
+                <div class="col-12">
+                  <hr class="mt-1 mb-2">
+                </div>
+                <div class="col-12">
+                  <p class="pre-line mb-1">{{item.order}}</p>
+                  <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo del Parral, Chih.`" target="_blank">
+                    <span class="text-muted">
+                      <i class="icon-location-pin mr-1"></i>{{item.address}}
+                    </span>
+                  </a>
+                </div>
+                <div class="col-12">
+                  <hr>
+                </div>
+                <div class="col-12" v-if="item.status_id != 4">
+                  <vue-step class="mb-3" :now-step="item.status_id" :step-list="status" style-type="style2"></vue-step>
+                </div>
+                <div class="col-12 alert alert-secondary text-center" v-else>
+                  Cancelado
+                </div>
+                <div class="col-6">
+                  <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
+                </div>
+                <div class="col-6 text-right">
+                  <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
+                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)" v-if="item.status_id == 2">
+                    Finalizar
+                  </a>
+                </div>
               </div>
-              <div class="col-4 text-right">
-                <!-- <span class="badge badge-pill" :class="{
-                  'badge-primary': item.status_id == 1,
-                  'badge-success': item.status_id == 2,
-                  'badge-info': item.status_id == 3,
-                  'badge-secondary': item.status_id == 4 }">
-                  {{item.status.status}}
-                </span> -->
-                <small class="text-muted">
-                  Envio: <strong>${{item.delivery_costs}}</strong>
-                </small>
-              </div>
-              <div class="col-12">
-                <hr class="mt-1 mb-2">
-              </div>
-              <div class="col-12">
-                <p class="mb-1">{{item.order}}</p>
-                <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo del Parral, Chih.`" target="_blank">
-                  <span class="text-muted">
-                    <i class="icon-location-pin mr-1"></i>{{item.address}}
-                  </span>
-                </a>
-              </div>
-              <div class="col-12">
-                <hr>
-              </div>
-              <div class="col-12" v-if="item.status_id != 4">
-                <vue-step class="mb-3" :now-step="item.status_id" :step-list="status" style-type="style2"></vue-step>
-              </div>
-              <div class="col-12 alert alert-secondary text-center" v-else>
-                Cancelado
-              </div>
-              <div class="col-6">
-                <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
-              </div>
-              <div class="col-6 text-right">
-                <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
-                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)" v-if="item.status_id == 2">
-                  Finalizar
-                </a>
-              </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">

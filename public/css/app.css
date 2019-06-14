@@ -11302,7 +11302,17 @@ a:hover {
   text-decoration: none !important;
 }
 
-.description {
+.btn-pill {
+  border-radius: 50em !important;
+}
+
+.btn-menu {
+  position: absolute;
+  bottom: 5px;
+  right: 15%;
+}
+
+.pre-line {
   white-space: pre-line;
 }
 
@@ -11401,15 +11411,5 @@ a:hover {
 
 .Rate__star .icon {
   margin: 0 !important;
-}
-
-.btn-pill {
-  border-radius: 50em !important;
-}
-
-.btn-menu {
-  position: absolute;
-  bottom: 5px;
-  right: 15%;
 }
 

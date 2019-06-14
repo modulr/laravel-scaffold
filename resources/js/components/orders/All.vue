@@ -4,8 +4,8 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados <small class="text-muted">({{orders.length}}/${{profit}})</small></h4>
         <div class="card-header-actions mr-1">
-          <a class="text-secondary" href="/orders/all">
-            <i class="fa fa-sync mr-1"></i>
+          <a class="text-secondary" href="/orders/all" @click.prevent="getOrders">
+            <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>
           </a>
           <a class="text-secondary ml-3" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
@@ -60,43 +60,64 @@
           <ul class="list-group mb-1" v-for="(item, index) in orders">
             <li class="list-group-item">
               <div class="row">
+                <!-- <div class="col text-right">
+                  <span class="badge badge-pill" :class="{
+                    'badge-primary': item.status_id == 1,
+                    'badge-success': item.status_id == 2,
+                    'badge-info': item.status_id == 3,
+                    'badge-secondary': item.status_id == 4 }">
+                    {{item.status.status}}
+                  </span>
+                </div> -->
+                <div class="col-12">
+                  <p class="pre-line mb-2" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
+                  <div v-if="item.client.store">
+                    <a :href="`https://www.google.com/maps/search/Calle ${item.origin}, Hidalgo del Parral, Chih.`" target="_blank">
+                      <span class="text-muted">
+                        <i class="far fa-dot-circle mr-1"></i>{{item.origin}}
+                      </span>
+                    </a>
+                  </div>
+                  <div>
+                    <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo del Parral, Chih.`" target="_blank">
+                      <span class="text-muted">
+                        <i class="icon-location-pin mr-1"></i>{{item.address}}
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <hr>
+                </div>
                 <div class="col-8">
+                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" @selected="finalizeOrder(item, index)" v-if="item.status_id != 4"></vue-step>
+                  <div class="alert alert-secondary text-center mb-0" @click="finalizeOrder(item, index)" v-else>
+                    Cancelado
+                  </div>
                   <small class="text-muted">
                     <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
                      = <strong>{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
                   </small>
                 </div>
                 <div class="col-4 text-right">
-                  <!-- <span class="badge badge-pill" :class="{
-                    'badge-primary': item.status_id == 1,
-                    'badge-success': item.status_id == 2,
-                    'badge-info': item.status_id == 3,
-                    'badge-secondary': item.status_id == 4 }">
-                    {{item.status.status}}
-                  </span> -->
-                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                    Envio: <strong>${{item.delivery_costs}}</strong>
-                  </small>
-                </div>
-                <div class="col-12">
-                  <hr class="mt-1 mb-2">
-                </div>
-                <div class="col-12">
-                  <p class="mb-1" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
-                  <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo del Parral, Chih.`" target="_blank">
-                    <span class="text-muted">
-                      <i class="icon-location-pin mr-1"></i>{{item.address}}
+                  <div>
+                    <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
+                      Envio: <strong>${{item.delivery_costs}}</strong>
+                    </small>
+                  </div>
+                  <div>
+                    <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
+                      Costo: <strong>${{item.order_cost}}</strong>
+                    </small>
+                  </div>
+                  <div>
+                    <span class="text-muted border-top" @click.prevent="showOrderUpdateModal(item, index)">
+                      Total: <strong>${{item.delivery_costs + item.order_cost}}</strong>
                     </span>
-                  </a>
+                  </div>
                 </div>
                 <div class="col-12">
                   <hr>
-                </div>
-                <div class="col-12" v-if="item.status_id != 4">
-                  <vue-step class="mb-3" :now-step="item.status_id" :step-list="listStatus" style-type="style2" @selected="finalizeOrder(item, index)"></vue-step>
-                </div>
-                <div class="col-12 alert alert-secondary text-center" @click="finalizeOrder(item, index)" v-else >
-                  Cancelado
                 </div>
                 <div class="col">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
@@ -150,21 +171,6 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label>Mandado</label>
-              <textarea class="form-control" rows="3" placeholder="¡Traeme unos tacos!" v-model="newOrder.order" :class="{'is-invalid': errors.order}"></textarea>
-              <div class="invalid-feedback" v-if="errors.order">{{errors.order[0]}}</div>
-            </div>
-            <div class="form-group">
-              <label>Costo de envio</label>
-              <div class="input-group border-right-0">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input type="text" class="form-control" :class="{'is-invalid': errors.delivery_costs}" v-model="newOrder.delivery_costs" placeholder="20">
-                <div class="invalid-feedback" v-if="errors.delivery_costs">{{errors.delivery_costs[0]}}</div>
-              </div>
-            </div>
-            <div class="form-group">
               <label>Cliente</label>
               <multiselect
                 v-model="newOrder.client"
@@ -209,6 +215,21 @@
                 </template>
               </multiselect>
               <small class="form-text text-danger" v-if="errors.address">{{errors.address[0]}}</small>
+            </div>
+            <div class="form-group">
+              <label>Mandado</label>
+              <textarea class="form-control" rows="3" placeholder="¡Traeme unos tacos!" v-model="newOrder.order" :class="{'is-invalid': errors.order}"></textarea>
+              <div class="invalid-feedback" v-if="errors.order">{{errors.order[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Costo de envio</label>
+              <div class="input-group border-right-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.delivery_costs}" v-model="newOrder.delivery_costs" placeholder="20">
+                <div class="invalid-feedback" v-if="errors.delivery_costs">{{errors.delivery_costs[0]}}</div>
+              </div>
             </div>
             <div class="form-group">
               <label>Repartidor</label>

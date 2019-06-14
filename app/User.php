@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['avatar_url', 'avatar_url_large', 'hasPermission', 'hasRole'];
+    protected $appends = ['avatar_url', 'avatar_url_large', 'avatar_url_banner', 'hasPermission', 'hasRole'];
 
     public function getAvatarUrlAttribute()
     {
@@ -58,6 +58,11 @@ class User extends Authenticatable
         } else {
             return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
         }
+    }
+
+    public function getAvatarUrlBannerAttribute()
+    {
+        return Storage::url('banners/'.$this->id.'/'.$this->avatar);
     }
 
     public function getHasPermissionAttribute()
@@ -84,5 +89,10 @@ class User extends Authenticatable
             }
         }
         return $roles;
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany('App\Models\Address\Address', 'client_id');
     }
 }

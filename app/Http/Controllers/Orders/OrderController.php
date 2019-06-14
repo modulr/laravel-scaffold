@@ -69,7 +69,9 @@ class OrderController extends Controller
     {
         $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
         if ($ordersCount > 0) {
-            return Order::with('status', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->oldest()->get();
+            $orders = Order::with('status', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->oldest()->get();
+            $orders = $orders->concat(Order::with('status', 'client')->where('status_id', 1)->oldest()->get());
+            return $orders;
         } else {
             return Order::with('status', 'client')->where('status_id', 1)->oldest()->get();
         }
@@ -115,6 +117,7 @@ class OrderController extends Controller
 
         $order = Order::create([
             'order' => $request->order,
+            'origin' => $request->client['store'] ? $request->client['address'] : '',
             'address' => $request->address['address'],
             'status_id' => $status,
             'client_id' => $request->client['id'],
@@ -146,8 +149,11 @@ class OrderController extends Controller
             $user->save();
         }
 
+        $user = Auth::user();
+
         $order = Order::create([
             'order' => $request->order,
+            'origin' => $user->store ? $user->address : '',
             'address' => $request->address,
             'status_id' => 1,
             'client_id' => Auth::id(),
@@ -254,16 +260,24 @@ class OrderController extends Controller
 
     public function takeOrder ($orderId, Request $request)
     {
+        $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
+        if ($ordersCount > 0) {
+            return response()->json(['errors' => ['finalize'=> ['Finalize order to take more']]], 422);
+        }
+
         $order = Order::find($orderId);
 
-        $order->status_id = 2;
-        $order->dealer_id = Auth::id();
+        if ($order->status_id == 1) {
+          $order->status_id = 2;
+          $order->dealer_id = Auth::id();
+          $order->save();
 
-        $order->save();
+          Auth::user()->notify(new TakeOrder($order));
 
-        Auth::user()->notify(new TakeOrder($order));
-
-        return $order;
+          return $order;
+        } else {
+          return response()->json(['errors' => ['taken'=> ['The order is already taken']]], 422);
+        }
     }
 
     public function assignDealer ($orderId, Request $request)
