@@ -4,7 +4,7 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <div class="row">
           <div class="col">
-            <h4 class="pt-2">Clientes</h4>
+            <h4 class="pt-2">Tiendas</h4>
           </div>
           <div class="col text-right">
             <input type="text" class="form-control" placeholder="Buscar" v-model.trim="filters.search" @keyup="getStores">

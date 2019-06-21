@@ -23,9 +23,6 @@
       <div class="card-body px-0">
         <div class="mb-4" v-show="filtersShow">
           <div class="form-group">
-            <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
-          </div>
-          <div class="form-group">
             <multiselect
               v-model="filters.status"
               :options="status"
@@ -38,6 +35,9 @@
               placeholder="Filtra por Estatus"
               :class="{'border border-danger rounded': errors.status}">
             </multiselect>
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
           </div>
           <div class="form-group">
             <multiselect

@@ -26,6 +26,7 @@ class OrderController extends Controller
     public function filters (Request $request)
     {
         $query = Order::query();
+        $profit = DB::table('orders');
 
         if(!empty($request->date)) {
             $date = $request->date;
@@ -33,16 +34,12 @@ class OrderController extends Controller
             $date = Carbon::today();
         }
 
-        //return $date;
-
-        $profit = DB::table('orders')->whereDate('created_at', $date)->sum('delivery_costs');
-
         if(!empty($request->status)) {
             $collection = collect($request->status);
             $plucked = $collection->pluck('id');
             $ids = $plucked->all();
             $query->whereIn('status_id', $ids);
-            $profit = DB::table('orders')->whereIn('status_id', $ids)->whereDate('created_at', $date)->sum('delivery_costs');
+            $profit->whereIn('status_id', $ids);
         }
 
         if(!empty($request->dealers)) {
@@ -50,12 +47,13 @@ class OrderController extends Controller
             $plucked = $collection->pluck('id');
             $ids = $plucked->all();
             $query->whereIn('dealer_id', $ids);
-            $profit = DB::table('orders')->whereIn('dealer_id', $ids)->whereDate('created_at', $date)->sum('delivery_costs');
+            $profit->whereIn('dealer_id', $ids);
         }
 
         $orders = $query->whereDate('created_at', $date)->latest()->get();
-
         $orders->load('status', 'client', 'dealer');
+
+        $profit = $profit->whereDate('created_at', $date)->sum('delivery_costs');
 
         return ['orders' => $orders, 'profit' => $profit];
     }
