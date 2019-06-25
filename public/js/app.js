@@ -73988,7 +73988,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       user: {
         level: 0,
         store: true,
-        roles: [{ name: 'store', display_name: 'Store' }]
+        roles: [{ name: 'user', display_name: 'Cliente' }, { name: 'store', display_name: 'Store' }]
       },
       errors: {},
       submiting: false

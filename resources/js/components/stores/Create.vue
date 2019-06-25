@@ -91,7 +91,10 @@ export default {
       user: {
         level: 0,
         store: true,
-        roles: [{name: 'store', display_name: 'Store'}]
+        roles: [
+          {name: 'user', display_name: 'Cliente'},
+          {name: 'store', display_name: 'Store'}
+        ]
       },
       errors: {},
       submiting: false
