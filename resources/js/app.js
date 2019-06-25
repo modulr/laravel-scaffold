@@ -58,7 +58,6 @@ Vue.component('users-create', require('./components/users/Create.vue'));
 Vue.component('users-edit', require('./components/users/Edit.vue'));
 Vue.component('users-avatar', require('./components/users/Avatar.vue'));
 Vue.component('users-view', require('./components/users/View.vue'));
-Vue.component('users-stores', require('./components/users/Stores.vue'));
 
 // Roles
 Vue.component('roles-index', require('./components/roles/Index.vue'));
@@ -89,6 +88,10 @@ Vue.component('clients-avatar', require('./components/clients/Avatar.vue'));
 
 // Stores
 Vue.component('stores-index', require('./components/stores/Index.vue'));
+Vue.component('stores-create', require('./components/stores/Create.vue'));
+Vue.component('stores-edit', require('./components/stores/Edit.vue'));
+Vue.component('stores-avatar', require('./components/stores/Avatar.vue'));
+Vue.component('stores-level1', require('./components/stores/Level1.vue'));
 
 const app = new Vue({
     el: '#app'

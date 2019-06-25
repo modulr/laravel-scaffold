@@ -57,7 +57,7 @@ export default {
     getStores () {
       if (this.stores.length == 0) {
         this.loading = true
-        axios.get(`/api/users/getStores`)
+        axios.get(`/api/stores/getStoresLevel1`)
         .then(response => {
           this.stores = response.data
           this.loading = false

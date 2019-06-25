@@ -42,8 +42,8 @@ class ClientController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'cellphone' => 'required|numeric|unique:users',
-            'description' => 'string|nullable',
+            'phone' => 'numeric|unique:users',
+            'cellphone' => 'numeric|unique:users',
             'password' => 'required|string',
             'roles' => 'required|array'
         ]);
@@ -113,7 +113,6 @@ class ClientController extends Controller
     {
         $upload = new Upload();
         $avatar = $upload->upload($request->file, 'avatars/'.$request->userId)->resize(200, 200)->getData();
-        $upload->upload($request->file, 'banners/'.$request->userId)->resize(600, 300)->getData();
 
         $user = User::find($request->userId);
         $user->avatar = $avatar['basename'];

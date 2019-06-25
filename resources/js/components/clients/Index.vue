@@ -19,9 +19,6 @@
             </div>
           </div>
         </div>
-        <div class="col pt-2 text-right d-none d-sm-block" v-if="!loading">
-          {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
-        </div>
         <div class="col-auto">
           <multiselect
             v-model="filters.pagination.per_page"
@@ -81,6 +78,9 @@
         </tbody>
       </table>
       <div class="row" v-if='!loading && filters.pagination.total > 0'>
+        <div class="col">
+          {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
+        </div>
         <div class="col" v-if="filters.pagination.last_page>1">
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-end">

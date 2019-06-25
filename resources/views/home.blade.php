@@ -150,7 +150,7 @@
             <img src="/img/stores/banner_paraiso_pay.png" class="img-fluid" alt="Paraiso del Pay">
         </div> -->
         <div class="col-12 mt-4">
-            <users-stores></users-stores>
+            <stores-level1></stores-level1>
         </div>
         <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">

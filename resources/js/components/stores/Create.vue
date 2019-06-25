@@ -1,0 +1,117 @@
+<template>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-9 col-xl-7">
+        <div class="card-header px-0 mt-2 bg-transparent clearfix">
+          <h4 class="float-left pt-2">Nueva Tienda</h4>
+          <div class="card-header-actions mr-1">
+            <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="create">
+              <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+              <i class="fas fa-check" v-else></i>
+              <span class="ml-1">Guardar</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-body px-0">
+          <div class="form-group">
+            <label>Tienda *</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="Pollo Feliz">
+            <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Nivel *</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.level}" v-model="user.level" placeholder="1">
+            <div class="invalid-feedback" v-if="errors.level">{{errors.level[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Correo electrónico *</label>
+            <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="user.email" placeholder="john@modulr.io">
+            <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Contraseña *</label>
+            <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
+            <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.address}" v-model="user.address" placeholder="Av. Boulevard #15, col. Centro">
+            <div class="invalid-feedback" v-if="errors.address">{{errors.address[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Horario</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.schedule}" v-model="user.schedule" placeholder="8:00am - 10:00pm">
+            <div class="invalid-feedback" v-if="errors.schedule">{{errors.schedule[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Descripción</label>
+            <textarea class="form-control" rows="3" v-model="user.description" placeholder="Pollos y más"></textarea>
+            <div class="invalid-feedback" v-if="errors.description">{{errors.description[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.phone}" v-model="user.phone" placeholder="5230034">
+            <div class="invalid-feedback" v-if="errors.phone">{{errors.phone[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Celular</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="user.cellphone" placeholder="6271012233">
+            <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Pagina Web</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.web}" v-model="user.web" placeholder="http://www.tacos-chu.com">
+            <div class="invalid-feedback" v-if="errors.web">{{errors.web[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Facebook</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.facebook}" v-model="user.facebook" placeholder="facebook.com/profile">
+            <div class="invalid-feedback" v-if="errors.facebook">{{errors.link[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Instagram</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.instagram}" v-model="user.instagram" placeholder="instagram.com/profile">
+            <div class="invalid-feedback" v-if="errors.instagram">{{errors.link[0]}}</div>
+          </div>
+          <div class="form-group">
+            <label>Otro Link</label>
+            <input type="text" class="form-control" :class="{'is-invalid': errors.link}" v-model="user.link" placeholder="www.otrolink.com">
+            <div class="invalid-feedback" v-if="errors.link">{{errors.link[0]}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      user: {
+        level: 0,
+        store: true,
+        roles: [{name: 'store', display_name: 'Store'}]
+      },
+      errors: {},
+      submiting: false
+    }
+  },
+  methods: {
+    create () {
+      if (!this.submiting) {
+        this.submiting = true
+        axios.post(`/api/stores/store`, this.user)
+        .then(response => {
+          this.$toasted.global.error('¡Tienda creada!')
+          location.href = '/stores'
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submiting = false
+        })
+      }
+    }
+  }
+}
+</script>

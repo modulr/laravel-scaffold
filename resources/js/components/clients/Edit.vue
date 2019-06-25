@@ -91,7 +91,6 @@ export default {
       axios.get(`/api/clients/${res[2]}`)
       .then(response => {
         this.user = response.data
-        console.log(this.user);
       })
       .catch(error => {
         this.$toasted.global.error('User does not exist!')
@@ -129,7 +128,7 @@ export default {
           if (willDelete) {
             axios.delete(`/api/clients/${this.user.id}`)
             .then(response => {
-              this.$toasted.global.error('Cliente Borrado!')
+              this.$toasted.global.error('¡Cliente Borrado!')
               location.href = '/clients'
             })
             .catch(error => {
