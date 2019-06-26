@@ -207,7 +207,7 @@ export default {
           last_page: 0
         },
         orderBy: {
-          column: 'id',
+          column: 'name',
           direction: 'asc'
         },
         search: ''

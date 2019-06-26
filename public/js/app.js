@@ -73225,7 +73225,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           last_page: 0
         },
         orderBy: {
-          column: 'id',
+          column: 'name',
           direction: 'asc'
         },
         search: ''
