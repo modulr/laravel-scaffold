@@ -107,7 +107,7 @@ export default {
         axios.post(`/api/stores/store`, this.user)
         .then(response => {
           this.$toasted.global.error('¡Tienda creada!')
-          location.href = '/stores'
+          location.href = `/stores/${response.data.id}/edit`
         })
         .catch(error => {
           this.errors = error.response.data.errors

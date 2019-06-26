@@ -72011,7 +72011,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submiting = true;
         axios.post('/api/clients/store', this.user).then(function (response) {
           _this.$toasted.global.error('Cliente creado!');
-          location.href = '/clients';
+          location.href = '/clients/' + response.data.id + '/edit';
         }).catch(function (error) {
           _this.errors = error.response.data.errors;
           _this.submiting = false;
@@ -72393,8 +72393,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/api/clients/' + res[2]).then(function (response) {
         _this.user = response.data;
       }).catch(function (error) {
-        _this.$toasted.global.error('User does not exist!');
-        //location.href = '/clients'
+        _this.$toasted.global.error('¡La tienda no existe!');
+        location.href = '/clients';
       }).then(function () {
         _this.loading = false;
       });
@@ -74003,7 +74003,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submiting = true;
         axios.post('/api/stores/store', this.user).then(function (response) {
           _this.$toasted.global.error('¡Tienda creada!');
-          location.href = '/stores';
+          location.href = '/stores/' + response.data.id + '/edit';
         }).catch(function (error) {
           _this.errors = error.response.data.errors;
           _this.submiting = false;
@@ -74692,8 +74692,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/api/stores/' + res[2]).then(function (response) {
         _this.user = response.data;
       }).catch(function (error) {
-        _this.$toasted.global.error('User does not exist!');
-        //location.href = '/stores'
+        _this.$toasted.global.error('¡La tienda no existe!');
+        location.href = '/stores';
       }).then(function () {
         _this.loading = false;
       });

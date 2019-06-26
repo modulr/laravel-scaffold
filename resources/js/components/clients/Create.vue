@@ -62,7 +62,7 @@ export default {
         axios.post(`/api/clients/store`, this.user)
         .then(response => {
           this.$toasted.global.error('Cliente creado!')
-          location.href = '/clients'
+          location.href = `/clients/${response.data.id}/edit`
         })
         .catch(error => {
           this.errors = error.response.data.errors

@@ -133,8 +133,8 @@ export default {
         this.user = response.data
       })
       .catch(error => {
-        this.$toasted.global.error('User does not exist!')
-        //location.href = '/stores'
+        this.$toasted.global.error('¡La tienda no existe!')
+        location.href = '/stores'
       })
       .then(() => {
         this.loading = false
