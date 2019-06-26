@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Stores\Store;
 
-class StoreController extends Controller
+class StoreOldController extends Controller
 {
     public function all (Request $request)
     {
