@@ -44,16 +44,15 @@
               <hr class="mt-1 mb-2">
             </div>
             <div class="col-12">
-              <div class="row no-gutters" @click="editUser(user.id)">
-                <div class="col-4">
+              <div class="row no-gutters">
+                <div class="col-4" @click="editUser(user.id)">
                   <img :src="user.avatar_url" class="card-img" :alt="user.name">
                 </div>
                 <div class="col-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{user.name}}</h5>
-                    <p class="card-text mb-1">{{user.description}}</p>
-                    <p class="card-text mb-1" v-if="user.schedule"><small>{{user.schedule}}</small></p>
-                    <p class="card-text" v-if="user.address">
+                    <h5 class="card-title mb-1" @click="editUser(user.id)">{{user.name}}</h5>
+                    <p class="card-text mb-1" @click="editUser(user.id)">{{user.description}}</p>
+                    <p class="card-text mb-1" v-if="user.address">
                       <small class="text-muted">
                         <a :href="`https://www.google.com/maps/search/Calle ${user.address}, Hidalgo del Parral, Chih.`" target="_blank">
                           <span class="text-muted">
@@ -62,46 +61,42 @@
                         </a>
                       </small>
                     </p>
+                    <p class="card-text mb-1" v-if="user.schedule">
+                      <small class="text-muted">
+                        <i class="far fa-clock mr-1"></i>{{user.schedule}}
+                      </small>
+                    </p>
+                    <a :href="user.web" target="_blank" class="small text-muted" v-if="user.web">
+                      <i class="fas fa-globe fa-fw mr-2"></i>
+                    </a>
+                    <a :href="user.facebook" target="_blank" class="small text-muted" v-if="user.facebook">
+                      <i class="fab fa-facebook fa-fw mr-2"></i>
+                    </a>
+                    <a :href="user.instagram" target="_blank" class="small text-muted" v-if="user.instagram">
+                      <i class="fab fa-instagram fa-fw mr-2"></i>
+                    </a>
+                    <a :href="user.link" target="_blank" class="small text-muted" v-if="user.link">
+                      <i class="fas fa-link fa-fw mr-2"></i>
+                    </a>
+                    <a class="small text-muted" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank">
+                      <i class="fab fa-whatsapp"></i>
+                    </a>
                   </div>
                 </div>
-              </div>
-              <div v-if="user.web">
-                <a :href="user.web" target="_blank" class="small text-muted">
-                  <i class="fas fa-link fa-fw mr-2"></i>{{user.web}}
-                </a>
-              </div>
-              <div v-if="user.facebook">
-                <a :href="user.facebook" target="_blank" class="small text-muted">
-                  <i class="fab fa-facebook-f fa-fw mr-2"></i>{{user.facebook}}
-                </a>
-              </div>
-              <div v-if="user.instagram">
-                <a :href="user.instagram" target="_blank" class="small text-muted">
-                  <i class="fab fa-instagram fa-fw mr-2"></i>{{user.instagram}}
-                </a>
-              </div>
-              <div v-if="user.link">
-                <a :href="user.link" target="_blank" class="small text-muted">
-                  <i class="fas fa-link fa-fw mr-2"></i>{{user.link}}
-                </a>
               </div>
             </div>
             <div class="col-12">
               <hr>
             </div>
             <div class="col" v-if="user.cellphone">
-              <small class="text-muted">Celular</small>
+              <small class="text-muted"><i class="fas fa-mobile-alt mr-1"></i>Celular</small>
               <br>
               <a class="text-info" :href="`tel:+52${user.cellphone}`">
-                <i class="fas fa-mobile-alt mr-1"></i>{{user.cellphone}}
-              </a>
-              <br>
-              <a class="btn btn-outline-primary btn-sm mt-2" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank">
-                <i class="fab fa-whatsapp mr-1"></i>WhatsApp
+                {{user.cellphone}}
               </a>
             </div>
             <div class="col text-right" v-if="user.phone">
-              <small class="text-muted">Teléfono</small>
+              <small class="text-muted"><i class="fas fa-phone mr-1"></i>Teléfono</small>
               <br>
               <a class="text-info" :href="`tel:+${user.phone}`">
                 {{user.phone}}

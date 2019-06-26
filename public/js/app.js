@@ -73205,11 +73205,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -73414,155 +73409,181 @@ var render = function() {
                 _vm._m(1, true),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "row no-gutters",
-                      on: {
-                        click: function($event) {
-                          _vm.editUser(user.id)
+                  _c("div", { staticClass: "row no-gutters" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-4",
+                        on: {
+                          click: function($event) {
+                            _vm.editUser(user.id)
+                          }
                         }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "col-4" }, [
+                      },
+                      [
                         _c("img", {
                           staticClass: "card-img",
                           attrs: { src: user.avatar_url, alt: user.name }
                         })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-8" }, [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("h5", { staticClass: "card-title" }, [
-                            _vm._v(_vm._s(user.name))
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "card-text mb-1" }, [
-                            _vm._v(_vm._s(user.description))
-                          ]),
-                          _vm._v(" "),
-                          user.schedule
-                            ? _c("p", { staticClass: "card-text mb-1" }, [
-                                _c("small", [_vm._v(_vm._s(user.schedule))])
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          user.address
-                            ? _c("p", { staticClass: "card-text" }, [
-                                _c("small", { staticClass: "text-muted" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        href:
-                                          "https://www.google.com/maps/search/Calle " +
-                                          user.address +
-                                          ", Hidalgo del Parral, Chih.",
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "span",
-                                        { staticClass: "text-muted" },
-                                        [
-                                          _c("i", {
-                                            staticClass:
-                                              "icon-location-pin mr-1"
-                                          }),
-                                          _vm._v(
-                                            _vm._s(user.address) +
-                                              "\n                        "
-                                          )
-                                        ]
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-8" }, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c(
+                          "h5",
+                          {
+                            staticClass: "card-title mb-1",
+                            on: {
+                              click: function($event) {
+                                _vm.editUser(user.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(user.name))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          {
+                            staticClass: "card-text mb-1",
+                            on: {
+                              click: function($event) {
+                                _vm.editUser(user.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(user.description))]
+                        ),
+                        _vm._v(" "),
+                        user.address
+                          ? _c("p", { staticClass: "card-text mb-1" }, [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "https://www.google.com/maps/search/Calle " +
+                                        user.address +
+                                        ", Hidalgo del Parral, Chih.",
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "text-muted" }, [
+                                      _c("i", {
+                                        staticClass: "icon-location-pin mr-1"
+                                      }),
+                                      _vm._v(
+                                        _vm._s(user.address) +
+                                          "\n                        "
                                       )
-                                    ]
-                                  )
-                                ])
+                                    ])
+                                  ]
+                                )
                               ])
-                            : _vm._e()
-                        ])
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  user.web
-                    ? _c("div", [
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        user.schedule
+                          ? _c("p", { staticClass: "card-text mb-1" }, [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _c("i", { staticClass: "far fa-clock mr-1" }),
+                                _vm._v(
+                                  _vm._s(user.schedule) +
+                                    "\n                    "
+                                )
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        user.web
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "small text-muted",
+                                attrs: { href: user.web, target: "_blank" }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-globe fa-fw mr-2"
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        user.facebook
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "small text-muted",
+                                attrs: { href: user.facebook, target: "_blank" }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fab fa-facebook fa-fw mr-2"
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        user.instagram
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "small text-muted",
+                                attrs: {
+                                  href: user.instagram,
+                                  target: "_blank"
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fab fa-instagram fa-fw mr-2"
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        user.link
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "small text-muted",
+                                attrs: { href: user.link, target: "_blank" }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-link fa-fw mr-2"
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
                         _c(
                           "a",
                           {
                             staticClass: "small text-muted",
-                            attrs: { href: user.web, target: "_blank" }
+                            attrs: {
+                              href:
+                                "https://api.whatsapp.com/send?phone=52" +
+                                user.cellphone,
+                              target: "_blank"
+                            }
                           },
-                          [
-                            _c("i", { staticClass: "fas fa-link fa-fw mr-2" }),
-                            _vm._v(_vm._s(user.web) + "\n              ")
-                          ]
+                          [_c("i", { staticClass: "fab fa-whatsapp" })]
                         )
                       ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  user.facebook
-                    ? _c("div", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "small text-muted",
-                            attrs: { href: user.facebook, target: "_blank" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fab fa-facebook-f fa-fw mr-2"
-                            }),
-                            _vm._v(_vm._s(user.facebook) + "\n              ")
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  user.instagram
-                    ? _c("div", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "small text-muted",
-                            attrs: { href: user.instagram, target: "_blank" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fab fa-instagram fa-fw mr-2"
-                            }),
-                            _vm._v(_vm._s(user.instagram) + "\n              ")
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  user.link
-                    ? _c("div", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "small text-muted",
-                            attrs: { href: user.link, target: "_blank" }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-link fa-fw mr-2" }),
-                            _vm._v(_vm._s(user.link) + "\n              ")
-                          ]
-                        )
-                      ])
-                    : _vm._e()
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
                 _vm._m(2, true),
                 _vm._v(" "),
                 user.cellphone
                   ? _c("div", { staticClass: "col" }, [
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v("Celular")
-                      ]),
+                      _vm._m(3, true),
                       _vm._v(" "),
                       _c("br"),
                       _vm._v(" "),
@@ -73573,27 +73594,11 @@ var render = function() {
                           attrs: { href: "tel:+52" + user.cellphone }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-mobile-alt mr-1" }),
-                          _vm._v(_vm._s(user.cellphone) + "\n            ")
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-outline-primary btn-sm mt-2",
-                          attrs: {
-                            href:
-                              "https://api.whatsapp.com/send?phone=52" +
-                              user.cellphone,
-                            target: "_blank"
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fab fa-whatsapp mr-1" }),
-                          _vm._v("WhatsApp\n            ")
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(user.cellphone) +
+                              "\n            "
+                          )
                         ]
                       )
                     ])
@@ -73601,9 +73606,7 @@ var render = function() {
                 _vm._v(" "),
                 user.phone
                   ? _c("div", { staticClass: "col text-right" }, [
-                      _c("small", { staticClass: "text-muted" }, [
-                        _vm._v("Teléfono")
-                      ]),
+                      _vm._m(4, true),
                       _vm._v(" "),
                       _c("br"),
                       _vm._v(" "),
@@ -73755,13 +73758,13 @@ var render = function() {
           ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
               _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
               _vm._v(" "),
-              _vm._m(3),
+              _vm._m(5),
               _vm._v(" "),
               _c("p", { staticClass: "text-muted" }, [
                 _vm._v("Try changing the filters or add a new one")
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(6)
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -73810,6 +73813,24 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12" }, [_c("hr")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", { staticClass: "text-muted" }, [
+      _c("i", { staticClass: "fas fa-mobile-alt mr-1" }),
+      _vm._v("Celular")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", { staticClass: "text-muted" }, [
+      _c("i", { staticClass: "fas fa-phone mr-1" }),
+      _vm._v("Teléfono")
+    ])
   },
   function() {
     var _vm = this
