@@ -135,6 +135,43 @@
           </div>
         </div>
         <div class="col-12 col-md-4 px-5 pt-1 text-center">
+            <a href="#el-forastero-menu" data-toggle="modal" data-target="#el-forastero-menu">
+                <img src="/img/stores/banner_el_forastero.png" class="img-fluid" alt="El Forastero">
+            </a>
+        </div>
+        <div class="modal fade" id="el-forastero-menu" tabindex="-1" role="dialog" aria-hidden="true">
+            <button type="button" class="close text-body mr-3 mt-3" data-dismiss="modal" aria-label="Close">
+               <i class="fas fa-times"></i>
+            </button>
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="carouselElForastero" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/img/stores/menu/el_forastero/el_forastero_1.jpg" class="d-block w-100" alt="El Forastero menu 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/img/stores/menu/el_forastero/el_forastero_2.jpg" class="d-block w-100" alt="El Forastero menu 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/img/stores/menu/el_forastero/el_forastero_3.jpg" class="d-block w-100" alt="El Forastero menu 3">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselElForastero" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselElForastero" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 px-5 pt-1 text-center">
             <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
