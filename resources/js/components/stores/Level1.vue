@@ -1,41 +1,33 @@
 <template>
-  <div class="row justify-content-center mt-5">
-    <div class="col-12 text-center mb-3 pb-3">
-      <a href="#" data-toggle="collapse" data-target="#collapseStores" aria-expanded="true" @click="getStores">
-        <img src="/img/stores/mas_tiendas.svg" class="img-fluid w-50" alt="Traeme Tienda">
-      </a>
-    </div>
-    <div class="col-12 collapse" id="collapseStores">
-      <div class="row justify-content-center" v-if="loading">
-        <div class="col-12 col-md-4 px-5 py-3">
-          <content-placeholders>
-            <content-placeholders-heading :img="true"/>
-          </content-placeholders>
-        </div>
-        <div class="col-12 col-md-4 px-5 py-3">
-          <content-placeholders>
-            <content-placeholders-heading :img="true"/>
-          </content-placeholders>
-        </div>
-        <div class="col-12 col-md-4 px-5 py-3">
-          <content-placeholders>
-            <content-placeholders-heading :img="true"/>
-          </content-placeholders>
-        </div>
+  <div class="mb-5">
+    <div class="row justify-content-center" v-if="loading">
+      <div class="col-12 col-md-4 px-5 py-3">
+        <content-placeholders>
+          <content-placeholders-heading :img="true"/>
+        </content-placeholders>
       </div>
-      <div class="row justify-content-center" v-else>
-        <div class="col-12 col-md-4 px-5 py-3" v-for="store in stores">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-4">
-                <img :src="store.avatar_url" class="card-img" :alt="store.name">
-              </div>
-              <div class="col-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{store.name}}</h5>
-                  <p class="card-text">{{store.description}}</p>
-                  <!-- <p class="card-text"><small class="text-muted"><a :href="`tel:${store.cellphone}`">{{store.cellphone}}</a></small></p> -->
-                </div>
+      <div class="col-12 col-md-4 px-5 py-3">
+        <content-placeholders>
+          <content-placeholders-heading :img="true"/>
+        </content-placeholders>
+      </div>
+      <div class="col-12 col-md-4 px-5 py-3">
+        <content-placeholders>
+          <content-placeholders-heading :img="true"/>
+        </content-placeholders>
+      </div>
+    </div>
+    <div class="row justify-content-center" v-else>
+      <div class="col-12 col-md-4 px-5 pt-3" v-for="store in stores">
+        <div class="card">
+          <div class="row no-gutters">
+            <div class="col-4">
+              <img :src="store.avatar_url" class="card-img" :alt="store.name">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title"><strong>{{store.name}}</strong></h5>
+                <p class="card-text">{{store.description}}</p>
               </div>
             </div>
           </div>
@@ -52,6 +44,9 @@ export default {
       stores: [],
       loading: false
     }
+  },
+  mounted () {
+    this.getStores()
   },
   methods: {
     getStores () {

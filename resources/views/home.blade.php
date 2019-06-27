@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5 mb-5">
+    <div class="row justify-content-center mt-5">
         <!-- @auth
         @else
         <div class="col-8 text-center mb-5">
@@ -113,7 +113,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-4 px-5 pt-1 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <a href="#texas-menu" data-toggle="modal" data-target="#texas-menu">
                 <img src="/img/stores/banner_texas_pizza.png" class="img-fluid" alt="Texas Pizza">
             </a>
@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-4 px-5 pt-1 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <a href="#el-forastero-menu" data-toggle="modal" data-target="#el-forastero-menu">
                 <img src="/img/stores/banner_el_forastero.png" class="img-fluid" alt="El Forastero">
             </a>
@@ -171,7 +171,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-4 px-5 pt-1 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
@@ -186,9 +186,6 @@
         <div class="col-12 col-md-4 px-5 pt-2 text-center">
             <img src="/img/stores/banner_paraiso_pay.png" class="img-fluid" alt="Paraiso del Pay">
         </div> -->
-        <div class="col-12 mt-4">
-            <stores-level1></stores-level1>
-        </div>
         <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_wings.png" class="img-fluid" alt="Wings Co">
         </div>
@@ -200,7 +197,7 @@
         </div> -->
     </div>
 
-    <div class="row justify-content-center mt-5 mb-5"></div>
+    <stores-level1></stores-level1>
 
     <div class="row justify-content-center bg-gradient">
         <div class="col text-center">

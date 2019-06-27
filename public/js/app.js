@@ -75683,14 +75683,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -75698,6 +75690,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       stores: [],
       loading: false
     };
+  },
+  mounted: function mounted() {
+    this.getStores();
   },
 
   methods: {
@@ -75723,124 +75718,78 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center mt-5" }, [
-    _c("div", { staticClass: "col-12 text-center mb-3 pb-3" }, [
-      _c(
-        "a",
-        {
-          attrs: {
-            href: "#",
-            "data-toggle": "collapse",
-            "data-target": "#collapseStores",
-            "aria-expanded": "true"
-          },
-          on: { click: _vm.getStores }
-        },
-        [
-          _c("img", {
-            staticClass: "img-fluid w-50",
-            attrs: { src: "/img/stores/mas_tiendas.svg", alt: "Traeme Tienda" }
-          })
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-12 collapse", attrs: { id: "collapseStores" } },
-      [
-        _vm.loading
-          ? _c("div", { staticClass: "row justify-content-center" }, [
+  return _c("div", { staticClass: "mb-5" }, [
+    _vm.loading
+      ? _c("div", { staticClass: "row justify-content-center" }, [
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-4 px-5 py-3" },
+            [
               _c(
-                "div",
-                { staticClass: "col-12 col-md-4 px-5 py-3" },
-                [
-                  _c(
-                    "content-placeholders",
-                    [
-                      _c("content-placeholders-heading", {
-                        attrs: { img: true }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-12 col-md-4 px-5 py-3" },
-                [
-                  _c(
-                    "content-placeholders",
-                    [
-                      _c("content-placeholders-heading", {
-                        attrs: { img: true }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-12 col-md-4 px-5 py-3" },
-                [
-                  _c(
-                    "content-placeholders",
-                    [
-                      _c("content-placeholders-heading", {
-                        attrs: { img: true }
-                      })
-                    ],
-                    1
-                  )
-                ],
+                "content-placeholders",
+                [_c("content-placeholders-heading", { attrs: { img: true } })],
                 1
               )
-            ])
-          : _c(
-              "div",
-              { staticClass: "row justify-content-center" },
-              _vm._l(_vm.stores, function(store) {
-                return _c("div", { staticClass: "col-12 col-md-4 px-5 py-3" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "card mb-3",
-                      staticStyle: { "max-width": "540px" }
-                    },
-                    [
-                      _c("div", { staticClass: "row no-gutters" }, [
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("img", {
-                            staticClass: "card-img",
-                            attrs: { src: store.avatar_url, alt: store.name }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-8" }, [
-                          _c("div", { staticClass: "card-body" }, [
-                            _c("h5", { staticClass: "card-title" }, [
-                              _vm._v(_vm._s(store.name))
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "card-text" }, [
-                              _vm._v(_vm._s(store.description))
-                            ])
-                          ])
-                        ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-4 px-5 py-3" },
+            [
+              _c(
+                "content-placeholders",
+                [_c("content-placeholders-heading", { attrs: { img: true } })],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-12 col-md-4 px-5 py-3" },
+            [
+              _c(
+                "content-placeholders",
+                [_c("content-placeholders-heading", { attrs: { img: true } })],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      : _c(
+          "div",
+          { staticClass: "row justify-content-center" },
+          _vm._l(_vm.stores, function(store) {
+            return _c("div", { staticClass: "col-12 col-md-4 px-5 pt-3" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "row no-gutters" }, [
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("img", {
+                      staticClass: "card-img",
+                      attrs: { src: store.avatar_url, alt: store.name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title" }, [
+                        _c("strong", [_vm._v(_vm._s(store.name))])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v(_vm._s(store.description))
                       ])
-                    ]
-                  )
+                    ])
+                  ])
                 ])
-              })
-            )
-      ]
-    )
+              ])
+            ])
+          })
+        )
   ])
 }
 var staticRenderFns = []
