@@ -199,7 +199,7 @@
 
     <stores-level1></stores-level1>
 
-    <div class="row justify-content-center bg-gradient">
+    <div class="row justify-content-center bg-gradient mt-5">
         <div class="col text-center">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
