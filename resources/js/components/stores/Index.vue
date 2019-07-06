@@ -91,14 +91,14 @@
             <div class="col" v-if="user.cellphone">
               <small class="text-muted"><i class="fas fa-mobile-alt mr-1"></i>Celular</small>
               <br>
-              <a class="text-info" :href="`tel:+52${user.cellphone}`">
+              <a class="text-info" :href="`tel:${user.cellphone}`">
                 {{user.cellphone}}
               </a>
             </div>
             <div class="col text-right" v-if="user.phone">
               <small class="text-muted"><i class="fas fa-phone mr-1"></i>Teléfono</small>
               <br>
-              <a class="text-info" :href="`tel:+${user.phone}`">
+              <a class="text-info" :href="`tel:${user.phone}`">
                 {{user.phone}}
               </a>
             </div>
@@ -141,7 +141,7 @@
                 </div>
               </div>
             </td>
-            <td><a class="text-info" :href="`tel:+52${user.cellphone}`">{{user.cellphone}}</a></td>
+            <td><a class="text-info" :href="`tel:${user.cellphone}`">{{user.cellphone}}</a></td>
             <td class="d-none d-sm-table-cell">
               <small>{{user.created_at | moment("LL")}}</small> - <small class="text-muted">{{user.created_at | moment("LT")}}</small>
             </td>

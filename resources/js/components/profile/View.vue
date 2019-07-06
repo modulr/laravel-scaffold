@@ -21,7 +21,7 @@
                   {{user.email}}
                 </p>
                 <p v-if="user.cellphone">
-                  <a class="text-info" :href="`tel:+52${user.cellphone}`"><i class="fas fa-phone mr-1"></i> {{user.cellphone}}</a>
+                  <a class="text-info" :href="`tel:${user.cellphone}`"><i class="fas fa-phone mr-1"></i> {{user.cellphone}}</a>
                   <br><br>
                   <a class="btn btn-outline-primary" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank"><i class="fab fa-whatsapp mr-1"></i> Enviar WhatsApp</a>
                 </p>

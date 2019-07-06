@@ -67,7 +67,7 @@
                 </div>
               </div>
             </td>
-            <td><a class="text-info" :href="`tel:+52${user.cellphone}`">{{user.cellphone}}</a></td>
+            <td><a class="text-info" :href="`tel:${user.cellphone}`">{{user.cellphone}}</a></td>
             <td class="d-none d-sm-table-cell">
               <small>{{user.created_at | moment("LL")}}</small> - <small class="text-muted">{{user.created_at | moment("LT")}}</small>
             </td>
