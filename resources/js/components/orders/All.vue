@@ -614,7 +614,7 @@ export default {
         this.submitingUser = true
         this.newUser.email = this.email
         this.newUser.roles = [{name: 'user', display_name: 'Cliente'}]
-        axios.post(`/api/users/store`, this.newUser)
+        axios.post(`/api/clients/store`, this.newUser)
         .then(response => {
           this.newUser = {
             name: ''

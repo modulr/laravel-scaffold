@@ -66923,7 +66923,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submitingUser = true;
         this.newUser.email = this.email;
         this.newUser.roles = [{ name: 'user', display_name: 'Cliente' }];
-        axios.post('/api/users/store', this.newUser).then(function (response) {
+        axios.post('/api/clients/store', this.newUser).then(function (response) {
           _this11.newUser = {
             name: ''
           };
@@ -74004,7 +74004,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       user: {
+        name: '',
         level: 0,
+        password: '123456',
         store: true,
         roles: [{ name: 'user', display_name: 'Cliente' }, { name: 'store', display_name: 'Store' }]
       },
@@ -74019,6 +74021,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (!this.submiting) {
         this.submiting = true;
+        this.user.email = this.email;
         axios.post('/api/stores/store', this.user).then(function (response) {
           _this.$toasted.global.error('¡Tienda creada!');
           location.href = '/stores/' + response.data.id + '/edit';
@@ -74027,6 +74030,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this.submiting = false;
         });
       }
+    }
+  },
+  computed: {
+    email: function email() {
+      var a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœøṕŕßśșțùúüûǘẃẍÿź·/_,:;';
+      var b = 'aaaaaaaaceeeeghiiiimnnnooooooprssstuuuuuwxyz------';
+      var p = new RegExp(a.split('').join('|'), 'g');
+
+      return this.user.name.toString().toLowerCase().replace(/\s+/g, '-') // Replace spaces with -
+      .replace(p, function (c) {
+        return b.charAt(a.indexOf(c));
+      }) // Replace special characters
+      .replace(/&/g, '-and-') // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/\-\-+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
+      .concat('@traeme.app');
     }
   }
 });
@@ -74110,39 +74131,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Nivel *")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.user.level,
-                  expression: "user.level"
-                }
-              ],
-              staticClass: "form-control",
-              class: { "is-invalid": _vm.errors.level },
-              attrs: { type: "text", placeholder: "1" },
-              domProps: { value: _vm.user.level },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.user, "level", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.errors.level
-              ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.errors.level[0]))
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
             _c("label", [_vm._v("Correo electrónico *")]),
             _vm._v(" "),
             _c("input", {
@@ -74150,20 +74138,20 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.user.email,
-                  expression: "user.email"
+                  value: _vm.email,
+                  expression: "email"
                 }
               ],
               staticClass: "form-control",
               class: { "is-invalid": _vm.errors.email },
               attrs: { type: "email", placeholder: "john@modulr.io" },
-              domProps: { value: _vm.user.email },
+              domProps: { value: _vm.email },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.user, "email", $event.target.value)
+                  _vm.email = $event.target.value
                 }
               }
             }),
@@ -74171,39 +74159,6 @@ var render = function() {
             _vm.errors.email
               ? _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(_vm._s(_vm.errors.email[0]))
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Contraseña *")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.user.password,
-                  expression: "user.password"
-                }
-              ],
-              staticClass: "form-control",
-              class: { "is-invalid": _vm.errors.password },
-              attrs: { type: "password" },
-              domProps: { value: _vm.user.password },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.user, "password", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.errors.password
-              ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.errors.password[0]))
                 ])
               : _vm._e()
           ]),

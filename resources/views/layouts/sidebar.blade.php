@@ -33,6 +33,11 @@
                         <i class="nav-icon fas fa-motorcycle mr-2"></i>Mis vueltas
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/stores">
+                        <i class="nav-icon fas fa-store mr-2"></i>Tiendas
+                    </a>
+                </li>
             @endrole
             @hasanyrole('superadmin|admin')
             <li class="nav-title">Administrador</li>

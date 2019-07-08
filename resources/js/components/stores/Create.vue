@@ -18,21 +18,21 @@
             <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="Pollo Feliz">
             <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Nivel *</label>
             <input type="text" class="form-control" :class="{'is-invalid': errors.level}" v-model="user.level" placeholder="1">
             <div class="invalid-feedback" v-if="errors.level">{{errors.level[0]}}</div>
-          </div>
+          </div> -->
           <div class="form-group">
             <label>Correo electrónico *</label>
-            <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="user.email" placeholder="john@modulr.io">
+            <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="email" placeholder="john@modulr.io">
             <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Contraseña *</label>
             <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
             <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
-          </div>
+          </div> -->
           <div class="form-group">
             <label>Dirección</label>
             <input type="text" class="form-control" :class="{'is-invalid': errors.address}" v-model="user.address" placeholder="Av. Boulevard #15, col. Centro">
@@ -89,7 +89,9 @@ export default {
   data () {
     return {
       user: {
+        name: '',
         level: 0,
+        password: '123456',
         store: true,
         roles: [
           {name: 'user', display_name: 'Cliente'},
@@ -104,6 +106,7 @@ export default {
     create () {
       if (!this.submiting) {
         this.submiting = true
+        this.user.email = this.email
         axios.post(`/api/stores/store`, this.user)
         .then(response => {
           this.$toasted.global.error('¡Tienda creada!')
@@ -114,6 +117,23 @@ export default {
           this.submiting = false
         })
       }
+    }
+  },
+  computed: {
+    email: function () {
+      const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœøṕŕßśșțùúüûǘẃẍÿź·/_,:;'
+      const b = 'aaaaaaaaceeeeghiiiimnnnooooooprssstuuuuuwxyz------'
+      const p = new RegExp(a.split('').join('|'), 'g')
+
+      return this.user.name.toString().toLowerCase()
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+      .replace(/&/g, '-and-') // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/\-\-+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
+      .concat('@traeme.app')
     }
   }
 }
