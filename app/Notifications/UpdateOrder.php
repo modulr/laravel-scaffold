@@ -87,7 +87,7 @@ class UpdateOrder extends Notification
     {
         return TelegramMessage::create()
             ->to(env('TELEGRAM_BOT_TO', '-260576056')) // Optional.
-            ->content("*¡Mandado actualizado!* ✏ \n Mandado: ".$this->order->order." \n Dirección: ".$this->order->address." \n Envio: ".$this->order->delivery_costs." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone) // Markdown supported.
+            ->content("*¡Mandado Actualizado!* ✏ \n Mandado: ".$this->order->order." \n Dirección: ".$this->order->address." \n Envio: ".$this->order->delivery_costs." \n Cliente: ".$this->order->client->name. ', Tel: '.$this->order->client->cellphone) // Markdown supported.
             //->file($this->order->client->avatar_url, 'photo') // local photo
             ->button('Tomar Pedido', 'http://traeme.app/orders/availables'); // Inline Button
     }
