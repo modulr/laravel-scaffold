@@ -87,6 +87,6 @@ class FinalizeOrder extends Notification
     {
         return TelegramMessage::create()
             ->to(env('TELEGRAM_BOT_TO', '-260576056')) // Optional.
-            ->content("✅ *¡Mandado Finalizado!* \n _Mandado: ".$this->order->order." \n _Dirección:_ ".$this->order->address." \n _Envio:_ $".$this->order->delivery_costs." \n _Cliente:_ ".$this->order->client->name.", _Tel:_ ".$this->order->client->cellphone." \n _Repartidor:_ ".$this->order->dealer->name);
+            ->content("✅ *¡Mandado Finalizado!* \n _Mandado:_ ".$this->order->order." \n _Dirección:_ ".$this->order->address." \n _Envio:_ $".$this->order->delivery_costs." \n _Cliente:_ ".$this->order->client->name.", _Tel:_ ".$this->order->client->cellphone." \n _Repartidor:_ ".$this->order->dealer->name);
     }
 }
