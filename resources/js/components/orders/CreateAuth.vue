@@ -21,7 +21,7 @@
       <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newOrder.cellphone" placeholder="Escribe tu numero de celular">
       <small class="form-text text-white" v-if="errors.cellphone">¿Cual es tu numero celular?</small>
     </div>
-    <a class="btn btn-light btn-lg" href="#" :disabled="submiting" @click.prevent="createOrder">
+    <a class="btn btn-light btn-lg px-5" href="#" :disabled="submiting" @click.prevent="createOrder">
       <i class="fas fa-spinner fa-spin mr-2" v-if="submiting"></i>Pedir
     </a>
   </div>

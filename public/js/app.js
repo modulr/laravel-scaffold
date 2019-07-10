@@ -69788,7 +69788,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "mb-1" }, [
       _c(
         "a",
-        { staticClass: "btn btn-light btn-lg", attrs: { href: "/login" } },
+        { staticClass: "btn btn-light btn-lg px-5", attrs: { href: "/login" } },
         [_vm._v("Pedir")]
       )
     ])
@@ -70097,7 +70097,7 @@ var render = function() {
     _c(
       "a",
       {
-        staticClass: "btn btn-light btn-lg",
+        staticClass: "btn btn-light btn-lg px-5",
         attrs: { href: "#", disabled: _vm.submiting },
         on: {
           click: function($event) {

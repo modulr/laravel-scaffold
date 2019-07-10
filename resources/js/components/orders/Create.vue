@@ -17,7 +17,7 @@
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
     <div class="mb-1">
-      <a class="btn btn-light btn-lg" href="/login">Pedir</a>
+      <a class="btn btn-light btn-lg px-5" href="/login">Pedir</a>
       <!-- <a class="btn btn-brand btn-facebook" href="/auth/facebook">
         Pídelo por Facebook
       </a> -->
