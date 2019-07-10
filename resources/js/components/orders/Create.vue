@@ -17,14 +17,15 @@
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
     <div class="mb-1">
-      <a class="btn btn-brand btn-facebook" href="/auth/facebook">
+      <a class="btn btn-light btn-lg" href="/login">Pedir</a>
+      <!-- <a class="btn btn-brand btn-facebook" href="/auth/facebook">
         Pídelo por Facebook
-      </a>
+      </a> -->
     </div>
-    <p class="mb-1">ó</p>
+    <!-- <p class="mb-1">ó</p>
     <a class="btn btn-light" href="#" @click.prevent="send">
       por WhatsApp
-    </a>
+    </a> -->
     <!-- <a class="btn btn-lg btn-light" href="https://m.me/traeme">
         <i class="fab fa-lg fa-facebook-messenger"></i> Messenger
     </a> -->

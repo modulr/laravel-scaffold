@@ -69619,6 +69619,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69776,24 +69777,7 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("p", { staticClass: "mb-1" }, [_vm._v("ó")]),
-    _vm._v(" "),
-    _c(
-      "a",
-      {
-        staticClass: "btn btn-light",
-        attrs: { href: "#" },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.send($event)
-          }
-        }
-      },
-      [_vm._v("\n    por WhatsApp\n  ")]
-    )
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
@@ -69804,11 +69788,8 @@ var staticRenderFns = [
     return _c("div", { staticClass: "mb-1" }, [
       _c(
         "a",
-        {
-          staticClass: "btn btn-brand btn-facebook",
-          attrs: { href: "/auth/facebook" }
-        },
-        [_vm._v("\n      Pídelo por Facebook\n    ")]
+        { staticClass: "btn btn-light btn-lg", attrs: { href: "/login" } },
+        [_vm._v("Pedir")]
       )
     ])
   }

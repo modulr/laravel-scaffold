@@ -91,7 +91,7 @@
             @endcan
         </ul>
     </nav>
-    <nav>
+    <!-- <nav>
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="tel:627-110-1145">
@@ -99,6 +99,6 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
     <sidebar></sidebar>
 </div>

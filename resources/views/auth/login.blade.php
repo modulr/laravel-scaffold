@@ -51,19 +51,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary px4">
+                        <div class="col-12 mb-2">
+                            <button type="submit" class="btn btn-primary btn-block">
                                 Entrar
                             </button>
                         </div>
-                        <div class="col-8 text-right">
+                        <div class="col-12">
+                          <a class="btn btn-brand btn-facebook btn-block" href="/auth/facebook">Entrar con Facebook</a>
+                        </div>
+                        <!-- <div class="col-12 text-right">
                             <a class="btn btn-link px-0" href="{{ route('password.request') }}">
                                 ¿Olvidaste tu contraseña?
                             </a>
-                        </div>
-                        <div class="col-12 mt-4">
-                          <a class="btn btn-brand btn-facebook btn-block" href="/auth/facebook">Entrar con Facebook</a>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
