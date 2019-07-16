@@ -121,7 +121,8 @@ class OrderController extends Controller
             'client_id' => $request->client['id'],
             'dealer_id' => $request->dealer['id'],
             'rate' => Rate::latest()->first()->rate,
-            'delivery_costs' => $request->delivery_costs
+            'delivery_costs' => $request->delivery_costs,
+            'order_cost' => $request->order_cost
         ]);
 
         Auth::user()->notify(new NewOrder($order));
@@ -172,12 +173,15 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'order' => 'required|string',
+            'address' => 'required|string',
             'delivery_costs' => 'required|numeric'
         ]);
 
         $order = Order::find($orderId);
         $order->order = $request->order;
+        $order->address = $request->address;
         $order->delivery_costs = $request->delivery_costs;
+        $order->order_cost = $request->order_cost;
         $order->save();
 
         Auth::user()->notify(new UpdateOrder($order));

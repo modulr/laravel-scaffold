@@ -17,52 +17,68 @@
           <ul class="list-group mb-1" v-for="(item, index) in orders">
             <li class="list-group-item">
               <div class="row">
-                <div class="col-8">
-                  <small class="text-muted">
-                    <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} / {{item.updated_at | moment('LT')}}
-                     = <strong>{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
-                  </small>
-                </div>
-                <div class="col-4 text-right">
-                  <!-- <span class="badge badge-pill" :class="{
-                    'badge-primary': item.status_id == 1,
-                    'badge-success': item.status_id == 2,
-                    'badge-info': item.status_id == 3,
-                    'badge-secondary': item.status_id == 4 }">
-                    {{item.status.status}}
-                  </span> -->
-                  <small class="text-muted">
-                    Envio: <strong>${{item.delivery_costs}}</strong>
-                  </small>
-                </div>
-                <div class="col-12">
-                  <hr class="mt-1 mb-2">
-                </div>
                 <div class="col-12">
                   <p class="pre-line mb-1">{{item.order}}</p>
-                  <a :href="`https://www.google.com/maps/search/Calle ${item.address}, Hidalgo del Parral, Chih.`" target="_blank">
-                    <span class="text-muted">
+                  <div>
+                    <a class="text-muted" :href="addressGMap[index]" target="_blank">
                       <i class="icon-location-pin mr-1"></i>{{item.address}}
-                    </span>
-                  </a>
+                    </a>
+                  </div>
                 </div>
                 <div class="col-12">
                   <hr>
                 </div>
-                <div class="col-12" v-if="item.status_id != 4">
-                  <vue-step class="mb-3" :now-step="item.status_id" :step-list="status" style-type="style2"></vue-step>
+                <div class="col-12">
+                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" v-if="item.status_id!= 4"></vue-step>
+                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
+                  <small class="text-muted">
+                    <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} - {{item.updated_at | moment('LT')}}
+                    <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
+                  </small>
                 </div>
-                <div class="col-12 alert alert-secondary text-center" v-else>
-                  Cancelado
+                <div class="col-12">
+                  <hr>
                 </div>
-                <div class="col-6">
+                <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
-                </div>
-                <div class="col-6 text-right">
                   <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)" v-if="item.status_id == 2">
+                </div>
+                <div class="col-4 text-right">
+                  <div>
+                    <small class="text-muted">
+                      Envio: <strong>${{item.delivery_costs}}</strong>
+                    </small>
+                  </div>
+                  <div>
+                    <small class="text-muted">
+                      Costo: <strong>${{item.order_cost}}</strong>
+                    </small>
+                  </div>
+                  <div>
+                    <span class="text-muted border-top">
+                      Total: <strong>${{item.delivery_costs + item.order_cost}}</strong>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row" v-if="item.status_id == 2">
+                <div class="col-12">
+                  <hr>
+                </div>
+                <div class="col-12 text-right">
+                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)">
                     Finalizar
                   </a>
+                </div>
+              </div>
+              <div class="row" v-if="item.status_id == 4">
+                <div class="col-12">
+                  <hr>
+                </div>
+                <div class="col">
+                  <div class="alert alert-secondary text-center mb-0">
+                    Cancelado
+                  </div>
                 </div>
               </div>
             </li>
@@ -90,7 +106,7 @@ export default {
       user: Laravel.user,
       orders: [],
       profit: 0,
-      status:[],
+      listStatus:[],
       userView: {},
       loading: true
     }
@@ -98,6 +114,14 @@ export default {
   mounted () {
     this.getOrders()
     this.getStatus()
+  },
+  computed: {
+    addressGMap: function () {
+      return this.orders.map(function(item) {
+        let url = item.address.replace(/#/g, '')
+        return 'https://www.google.com/maps/search/Calle ' + url + ', Hidalgo del Parral, Chih.'
+      });
+    }
   },
   methods: {
     getOrders () {
@@ -113,7 +137,7 @@ export default {
       axios.get(`/api/orders/status`)
       .then(response => {
         response.data.pop()
-        this.status = response.data.map(function(i, index) {
+        this.listStatus = response.data.map(function(i, index) {
           return i.status
         })
       })

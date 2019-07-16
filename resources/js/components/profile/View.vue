@@ -14,17 +14,18 @@
                 <rate class="mb-3" :length="5" v-model="user.score" :disabled="true"/>
               </div>
               <div class="col-12 text-center">
-                <h3>{{user.name}}</h3>
+                <h3 class="mb-0">{{user.name}}</h3>
                 <small class="text-muted">{{user.description}}</small>
-                <p class="mt-2 mb-1">
+                <!-- <p class="mt-2 mb-1">
                   <a class="text-info" :href="`mailto:${user.email}`" target="_blank"><i class="far fa-envelope mr-1"></i></a>
                   {{user.email}}
-                </p>
-                <p v-if="user.cellphone">
-                  <a class="text-info" :href="`tel:${user.cellphone}`"><i class="fas fa-phone mr-1"></i> {{user.cellphone}}</a>
-                  <br><br>
-                  <a class="btn btn-outline-primary" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank"><i class="fab fa-whatsapp mr-1"></i> Enviar WhatsApp</a>
-                </p>
+                </p> -->
+                <div class="mt-2" v-if="user.cellphone">
+                  <div class="mb-2">
+                    <a class="text-info" :href="`tel:${user.cellphone}`"><i class="fas fa-phone mr-2"></i>{{user.cellphone}}</a>
+                  </div>
+                  <a class="btn btn-outline-primary" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank"><i class="fab fa-whatsapp mr-2"></i>Enviar WhatsApp</a>
+                </div>
               </div>
             </div>
           </div>
