@@ -66845,7 +66845,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.rate == null) {
         axios.get('/api/rates/day').then(function (response) {
           _this3.rate = response.data;
-          _this3.newOrder.delivery_costs = _this3.rate.rate;
+          _this3.newOrder.delivery_costs = _this3.rate.rate + 5;
         });
       } else {
         this.newOrder.delivery_costs = this.rate.rate;
@@ -66996,7 +66996,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this11.submitingUser = false;
           $('#userCreateModal').modal('hide');
           _this11.$toasted.global.error('Cliente creado!');
-          _this11.orderModal();
+          //this.orderModal()
         }).catch(function (error) {
           _this11.errors = error.response.data.errors;
           _this11.submitingUser = false;

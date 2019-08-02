@@ -490,7 +490,7 @@ export default {
         axios.get(`/api/rates/day`)
         .then(response => {
           this.rate = response.data
-          this.newOrder.delivery_costs = this.rate.rate
+          this.newOrder.delivery_costs = this.rate.rate + 5
         })
       } else {
         this.newOrder.delivery_costs = this.rate.rate
@@ -636,7 +636,7 @@ export default {
           this.submitingUser = false
           $('#userCreateModal').modal('hide')
           this.$toasted.global.error('Cliente creado!')
-          this.orderModal()
+          //this.orderModal()
         })
         .catch(error => {
           this.errors = error.response.data.errors
