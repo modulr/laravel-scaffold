@@ -490,7 +490,8 @@ export default {
         axios.get(`/api/rates/day`)
         .then(response => {
           this.rate = response.data
-          this.newOrder.delivery_costs = this.rate.rate + 5
+          this.rate.rate = this.rate.rate + 5
+          this.newOrder.delivery_costs = this.rate.rate
         })
       } else {
         this.newOrder.delivery_costs = this.rate.rate

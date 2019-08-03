@@ -66845,7 +66845,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.rate == null) {
         axios.get('/api/rates/day').then(function (response) {
           _this3.rate = response.data;
-          _this3.newOrder.delivery_costs = _this3.rate.rate + 5;
+          _this3.rate.rate = _this3.rate.rate + 5;
+          _this3.newOrder.delivery_costs = _this3.rate.rate;
         });
       } else {
         this.newOrder.delivery_costs = this.rate.rate;
