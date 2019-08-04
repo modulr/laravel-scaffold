@@ -171,15 +171,15 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">
-        </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
-        </div> -->
+        </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
         </div>
+        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
+            <img src="/img/stores/banner_anita.png" class="img-fluid" alt="La Cocina de Anita">
+        </div> -->
         <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/sakura.png" class="img-fluid" alt="Sakura">
         </div>
