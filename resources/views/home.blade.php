@@ -172,7 +172,21 @@
           </div>
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
+            <a href="#blvd-chino-menu" data-toggle="modal" data-target="#blvd-chino-menu">
+                <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
+            </a>
+        </div>
+        <div class="modal fade" id="blvd-chino-menu" tabindex="-1" role="dialog" aria-hidden="true">
+            <button type="button" class="close text-body mr-3 mt-3" data-dismiss="modal" aria-label="Close">
+               <i class="fas fa-times"></i>
+            </button>
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="/img/stores/menu/blvd_chino/blvd_chino_promocion_jueves.jpeg" class="img-fluid" alt="Blvd Chino Promocion">
+                </div>
+            </div>
+          </div>
         </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
