@@ -86,6 +86,13 @@ Vue.component('clients-create', require('./components/clients/Create.vue'));
 Vue.component('clients-edit', require('./components/clients/Edit.vue'));
 Vue.component('clients-avatar', require('./components/clients/Avatar.vue'));
 
+// Dealers
+Vue.component('dealers-index', require('./components/dealers/Index.vue'));
+Vue.component('dealers-create', require('./components/dealers/Create.vue'));
+Vue.component('dealers-edit', require('./components/dealers/Edit.vue'));
+Vue.component('dealers-avatar', require('./components/dealers/Avatar.vue'));
+Vue.component('dealers-active', require('./components/dealers/Active.vue'));
+
 // Stores
 Vue.component('stores-index', require('./components/stores/Index.vue'));
 Vue.component('stores-create', require('./components/stores/Create.vue'));

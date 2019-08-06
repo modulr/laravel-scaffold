@@ -34,4 +34,5 @@ require __DIR__ . '/orders/orders.php';
 require __DIR__ . '/address/address.php';
 require __DIR__ . '/rates/rates.php';
 require __DIR__ . '/clients/clients.php';
+require __DIR__ . '/dealers/dealers.php';
 require __DIR__ . '/stores/stores.php';

@@ -3,7 +3,7 @@
     <div class="row justify-content-md-center">
       <div class="col-md-9 col-xl-7">
         <div class="card-header px-0 mt-2 bg-transparent clearfix">
-          <h4 class="float-left pt-2">Nuevo Cliente</h4>
+          <h4 class="float-left pt-2">Nuevo Repartidor</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="create">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
@@ -51,7 +51,7 @@ export default {
       user: {
         name: '',
         password: '123456',
-        roles: [{name: 'user', display_name: 'Cliente'}]
+        roles: [{name: 'dealer', display_name: 'Dealer'}]
       },
       errors: {},
       submiting: false
@@ -62,10 +62,10 @@ export default {
       if (!this.submiting) {
         this.submiting = true
         this.user.email = this.email
-        axios.post(`/api/clients/store`, this.user)
+        axios.post(`/api/dealers/store`, this.user)
         .then(response => {
-          this.$toasted.global.error('Cliente creado!')
-          location.href = `/clients/${response.data.id}/edit`
+          this.$toasted.global.error('Repartidor creado!')
+          location.href = `/dealers/${response.data.id}/edit`
         })
         .catch(error => {
           this.errors = error.response.data.errors

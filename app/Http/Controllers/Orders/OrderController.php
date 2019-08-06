@@ -262,9 +262,11 @@ class OrderController extends Controller
 
     public function takeOrder ($orderId, Request $request)
     {
-        $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
-        if ($ordersCount > 0) {
-            return response()->json(['errors' => ['finalize'=> ['Finalize order to take more']]], 422);
+        if (!Auth::user()->hasRole('dealer-level-1')) {
+            $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
+            if ($ordersCount > 0) {
+                return response()->json(['errors' => ['finalize'=> ['Finalize order to take more']]], 422);
+            }
         }
 
         $order = Order::find($orderId);

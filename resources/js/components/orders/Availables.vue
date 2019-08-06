@@ -139,7 +139,7 @@ export default {
         if (error.response.data.errors.finalize) {
           swal({
             title: "¡Finaliza tus mandados!",
-            text: "¡No puedes tomar mas de un mandado!",
+            text: "¡Podras tomar mas de un mandado cuando subas de nivel!",
             icon: "warning"
           })
         }

@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
-      <h4 class="float-left pt-2">Clientes</h4>
+      <h4 class="float-left pt-2">Repartidores</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-primary" href="/clients/create">Nuevo cliente</a>
+        <a class="btn btn-primary" href="/dealers/create">Nuevo repartidor</a>
       </div>
     </div>
     <div class="card-body px-0">
@@ -39,7 +39,7 @@
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>
-              <a href="#" class="text-dark" @click.prevent="sort('name')">Cliente</a>
+              <a href="#" class="text-dark" @click.prevent="sort('name')">Repartidor</a>
               <i class="mr-1 fas" :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
             </th>
             <th>Teléfono</th>
@@ -57,7 +57,7 @@
               <div class="media">
                 <div class="avatar float-left mr-3">
                   <img class="img-avatar" :src="user.avatar_url">
-                  <span class="avatar-status badge-success"></span>
+                  <span class="avatar-status" :class="{'badge-success': !user.active, 'badge-primary': user.active}"></span>
                 </div>
                 <div class="media-body">
                   <div>{{user.name}}</div>
@@ -137,10 +137,10 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem("filtersTableClients")) {
-      this.filters = JSON.parse(localStorage.getItem("filtersTableClients"))
+    if (localStorage.getItem("filtersTableDealers")) {
+      this.filters = JSON.parse(localStorage.getItem("filtersTableDealers"))
     } else {
-      localStorage.setItem("filtersTableClients", this.filters);
+      localStorage.setItem("filtersTableDealers", this.filters);
     }
     this.getUsers()
   },
@@ -148,8 +148,8 @@ export default {
     getUsers () {
       this.loading = true
       this.users = []
-      localStorage.setItem("filtersTableClients", JSON.stringify(this.filters));
-      axios.post(`/api/clients/filter?page=${this.filters.pagination.current_page}`, this.filters)
+      localStorage.setItem("filtersTableDealers", JSON.stringify(this.filters));
+      axios.post(`/api/dealers/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
         this.users = response.data.data
         delete response.data.data
@@ -158,7 +158,7 @@ export default {
       })
     },
     editUser (userId) {
-      location.href = `/clients/${userId}/edit`
+      location.href = `/dealers/${userId}/edit`
     },
     // filters
     filter() {

@@ -22,6 +22,9 @@
             @endcan
             @role('dealer')
                 <li class="nav-title">Repartidor</li>
+                <li class="nav-item d-compact-none d-minimized-none">
+                  <dealers-active :user="{{ Auth::user()}}"></dealers-active>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/orders/availables">
                         <i class="nav-icon fas fa-list-ul mr-2"></i>Mandados
