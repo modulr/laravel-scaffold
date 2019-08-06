@@ -87,7 +87,7 @@ class DeactiveDealer extends Notification
     {
         return TelegramMessage::create()
             ->to(env('TELEGRAM_BOT_TO', '-260576056')) // Optional.
-            ->content("*¡Se desactivo ".$this->dealer->name."!*"); // Markdown supported.
+            ->content("🛵 *¡Se desactivo ".$this->dealer->name."!*"); // Markdown supported.
             //->file($this->order->client->avatar_url, 'photo') // local photo
             //->button('Tomar Pedido', 'http://traeme.app/orders/availables'); // Inline Button
     }
