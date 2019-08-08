@@ -57,7 +57,6 @@
               <div class="media">
                 <div class="avatar float-left mr-3">
                   <img class="img-avatar" :src="user.avatar_url">
-                  <span class="avatar-status badge-success"></span>
                 </div>
                 <div class="media-body">
                   <div>{{user.name}}</div>

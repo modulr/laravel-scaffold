@@ -41,6 +41,7 @@
                 </div>
                 <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
+                  <rate :length="5" v-model="item.client.score" :disabled="true" v-if="item.status_id != 3"/>
                   <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
                 </div>
                 <div class="col-4 text-right">

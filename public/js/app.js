@@ -63879,6 +63879,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'role'],
@@ -63925,7 +63927,14 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "small text-muted" }, [
-              _vm._v(_vm._s(_vm.role))
+              _vm._v("\n          " + _vm._s(_vm.role)),
+              _vm.user.level > 0
+                ? _c(
+                    "span",
+                    { staticClass: "badge badge-pill badge-primary ml-1" },
+                    [_vm._v("Nivel " + _vm._s(_vm.user.level))]
+                  )
+                : _vm._e()
             ])
           ])
         ])
@@ -66948,19 +66957,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     finalizeOrder: function finalizeOrder(order, index) {
       var _this9 = this;
 
-      var status = 3;
-      var message = '¡Mandado finalizado!';
+      if (order.dealer_id) {
+        var status = 3;
+        var message = '¡Mandado finalizado!';
 
-      if (order.status_id == 1 || order.status_id == 3 || order.status_id == 4) {
-        message = '¡Mandado En Camino!';
-        status = 2;
+        if (order.status_id == 1 || order.status_id == 3 || order.status_id == 4) {
+          status = 2;
+          message = '¡Mandado en camino!';
+        }
+
+        axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': status }).then(function (response) {
+          _this9.orders[index].status_id = response.data.status_id;
+          _this9.orders[index].status = response.data.status;
+          _this9.$toasted.global.error(message);
+        });
       }
-
-      axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': status }).then(function (response) {
-        _this9.orders[index].status_id = response.data.status_id;
-        _this9.orders[index].status = response.data.status;
-        _this9.$toasted.global.error(message);
-      });
     },
     cancelOrder: function cancelOrder(order, index) {
       var _this10 = this;
@@ -66981,6 +66992,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     },
+    openOrder: function openOrder(order, index) {
+      var _this11 = this;
+
+      var status = 1;
+      var message = '¡Mandado abierto!';
+
+      if (order.dealer_id) {
+        status = 2;
+        message = '¡Mandado en camino!';
+      }
+
+      axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': status }).then(function (response) {
+        _this11.orders[index].status_id = response.data.status_id;
+        _this11.orders[index].status = response.data.status;
+        _this11.$toasted.global.error(message);
+      });
+    },
     showUserCreateModal: function showUserCreateModal() {
       this.errors = {};
       this.newUser = {
@@ -66991,23 +67019,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       $('#orderModal').modal('hide');
     },
     createUser: function createUser() {
-      var _this11 = this;
+      var _this12 = this;
 
       if (!this.submitingUser) {
         this.submitingUser = true;
         this.newUser.email = this.email;
         this.newUser.roles = [{ name: 'user', display_name: 'Cliente' }];
         axios.post('/api/clients/store', this.newUser).then(function (response) {
-          _this11.newUser = {
+          _this12.newUser = {
             name: ''
           };
-          _this11.submitingUser = false;
+          _this12.submitingUser = false;
           $('#userCreateModal').modal('hide');
-          _this11.$toasted.global.error('Cliente creado!');
+          _this12.$toasted.global.error('Cliente creado!');
           //this.orderModal()
         }).catch(function (error) {
-          _this11.errors = error.response.data.errors;
-          _this11.submitingUser = false;
+          _this12.errors = error.response.data.errors;
+          _this12.submitingUser = false;
         });
       }
     },
@@ -67019,36 +67047,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getDealers();
     },
     assignDealer: function assignDealer() {
-      var _this12 = this;
+      var _this13 = this;
 
       if (!this.submitingDealer) {
         this.submitingDealer = true;
         axios.put('/api/orders/assignDealer/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this12.orders[_this12.editOrder.index].status_id = response.data.status_id;
-          _this12.orders[_this12.editOrder.index].status = response.data.status;
-          _this12.orders[_this12.editOrder.index].dealer_id = response.data.dealer_id;
-          _this12.orders[_this12.editOrder.index].dealer = response.data.dealer;
-          _this12.submitingDealer = false;
+          _this13.orders[_this13.editOrder.index].status_id = response.data.status_id;
+          _this13.orders[_this13.editOrder.index].status = response.data.status;
+          _this13.orders[_this13.editOrder.index].dealer_id = response.data.dealer_id;
+          _this13.orders[_this13.editOrder.index].dealer = response.data.dealer;
+          _this13.submitingDealer = false;
           $('#assingModal').modal('hide');
-          _this12.$toasted.global.error('¡Repartidor Asignado!');
+          _this13.$toasted.global.error('¡Repartidor Asignado!');
         }).catch(function (error) {
-          _this12.errors = error.response.data.errors;
-          _this12.submitingDealer = false;
+          _this13.errors = error.response.data.errors;
+          _this13.submitingDealer = false;
         });
       }
     },
     addTag: function addTag(newTag) {
-      var _this13 = this;
+      var _this14 = this;
 
       var tag = {
         address: newTag
       };
       axios.post('/api/address/store/' + this.newOrder.client.id, tag).then(function (response) {
-        _this13.newOrder.address = tag;
-        _this13.address.unshift(response.data);
-        _this13.$toasted.global.error('¡Direccion agregada!');
+        _this14.newOrder.address = tag;
+        _this14.address.unshift(response.data);
+        _this14.$toasted.global.error('¡Direccion agregada!');
       }).catch(function (error) {
-        _this13.errors = error.response.data.errors;
+        _this14.errors = error.response.data.errors;
       });
     },
     customLabel: function customLabel(_ref) {
@@ -67609,7 +67637,7 @@ var render = function() {
                                       "alert alert-secondary text-center mb-0",
                                     on: {
                                       click: function($event) {
-                                        _vm.finalizeOrder(item, index)
+                                        _vm.openOrder(item, index)
                                       }
                                     }
                                   },
@@ -68778,6 +68806,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68825,8 +68854,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this3 = this;
 
       axios.put('/api/orders/takeOrder/' + order.id).then(function (response) {
+        order.status_id = 2;
         _this3.$toasted.global.error('¡Mandado tomado!');
-        location.href = '/orders/dealer';
+        //location.href = `/orders/dealer`
       }).catch(function (error) {
         if (error.response.data.errors.finalize) {
           swal({
@@ -69017,6 +69047,17 @@ var render = function() {
                                   viewUser: function($event) {
                                     _vm.userView = $event
                                   }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("rate", {
+                                attrs: { length: 5, disabled: true },
+                                model: {
+                                  value: item.client.score,
+                                  callback: function($$v) {
+                                    _vm.$set(item.client, "score", $$v)
+                                  },
+                                  expression: "item.client.score"
                                 }
                               })
                             ],
@@ -69430,6 +69471,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69661,6 +69703,19 @@ var render = function() {
                                   }
                                 }
                               }),
+                              _vm._v(" "),
+                              item.status_id != 3
+                                ? _c("rate", {
+                                    attrs: { length: 5, disabled: true },
+                                    model: {
+                                      value: item.client.score,
+                                      callback: function($$v) {
+                                        _vm.$set(item.client, "score", $$v)
+                                      },
+                                      expression: "item.client.score"
+                                    }
+                                  })
+                                : _vm._e(),
                               _vm._v(" "),
                               item.status_id == 3
                                 ? _c("rate", {
@@ -71608,7 +71663,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -71901,10 +71955,6 @@ var render = function() {
                         _c("img", {
                           staticClass: "img-avatar",
                           attrs: { src: user.avatar_url }
-                        }),
-                        _vm._v(" "),
-                        _c("span", {
-                          staticClass: "avatar-status badge-success"
                         })
                       ]),
                       _vm._v(" "),

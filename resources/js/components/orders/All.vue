@@ -145,7 +145,7 @@
                   <hr>
                 </div>
                 <div class="col">
-                  <div class="alert alert-secondary text-center mb-0" @click="finalizeOrder(item, index)">
+                  <div class="alert alert-secondary text-center mb-0" @click="openOrder(item, index)">
                     Cancelado
                   </div>
                 </div>
@@ -581,20 +581,22 @@ export default {
       }
     },
     finalizeOrder (order, index) {
-      let status = 3
-      let message = '¡Mandado finalizado!'
+      if (order.dealer_id) {
+        let status = 3
+        let message = '¡Mandado finalizado!'
 
-      if (order.status_id == 1 || order.status_id == 3 || order.status_id == 4) {
-        message = '¡Mandado En Camino!'
-        status = 2
+        if (order.status_id == 1 || order.status_id == 3 || order.status_id == 4) {
+          status = 2
+          message = '¡Mandado en camino!'
+        }
+
+        axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': status})
+        .then(response => {
+          this.orders[index].status_id = response.data.status_id
+          this.orders[index].status = response.data.status
+          this.$toasted.global.error(message)
+        })
       }
-
-      axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': status})
-      .then(response => {
-        this.orders[index].status_id = response.data.status_id
-        this.orders[index].status = response.data.status
-        this.$toasted.global.error(message)
-      })
     },
     cancelOrder (order, index) {
       swal({
@@ -613,6 +615,22 @@ export default {
             this.$toasted.global.error('¡Mandado cancelado!')
           })
         }
+      })
+    },
+    openOrder (order, index) {
+      let status = 1
+      let message = '¡Mandado abierto!'
+
+      if (order.dealer_id) {
+        status = 2
+        message = '¡Mandado en camino!'
+      }
+
+      axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': status})
+      .then(response => {
+        this.orders[index].status_id = response.data.status_id
+        this.orders[index].status = response.data.status
+        this.$toasted.global.error(message)
       })
     },
     showUserCreateModal () {

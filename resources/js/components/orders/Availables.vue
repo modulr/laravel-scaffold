@@ -41,6 +41,7 @@
                 </div>
                 <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
+                  <rate :length="5" v-model="item.client.score" :disabled="true"/>
                 </div>
                 <div class="col-4 text-right">
                   <div>
@@ -132,8 +133,9 @@ export default {
     takeOrder (order, index) {
       axios.put(`/api/orders/takeOrder/${order.id}`)
       .then(response => {
+        order.status_id = 2
         this.$toasted.global.error('¡Mandado tomado!')
-        location.href = `/orders/dealer`
+        //location.href = `/orders/dealer`
       })
       .catch(error => {
         if (error.response.data.errors.finalize) {
