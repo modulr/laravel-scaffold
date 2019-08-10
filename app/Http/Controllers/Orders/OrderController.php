@@ -65,30 +65,62 @@ class OrderController extends Controller
 
     public function availables ()
     {
-        $ordersCount = Order::where('dealer_id', Auth::id())->where('status_id', 2)->count();
+        $date = Carbon::today();
+
+        $ordersCount = Order::where('dealer_id', Auth::id())
+            ->where('status_id', 2)
+            ->whereDate('created_at', $date)
+            ->count();
+
         if ($ordersCount > 0) {
-            $orders = Order::with('status', 'client')->where('dealer_id', Auth::id())->where('status_id', 2)->oldest()->get();
-            $orders = $orders->concat(Order::with('status', 'client')->where('status_id', 1)->oldest()->get());
+            $orders = Order::with('status', 'client')
+                ->where('dealer_id', Auth::id())
+                ->where('status_id', 2)
+                ->whereDate('created_at', $date)
+                ->oldest()
+                ->get();
+            $orders = $orders->concat(Order::with('status', 'client')
+                ->where('status_id', 1)
+                ->whereDate('created_at', $date)
+                ->oldest()
+                ->get());
             return $orders;
         } else {
-            return Order::with('status', 'client')->where('status_id', 1)->oldest()->get();
+            return Order::with('status', 'client')
+                ->where('status_id', 1)
+                ->whereDate('created_at', $date)
+                ->oldest()
+                ->get();
         }
     }
 
     public function availablesCount ()
     {
-        return Order::where('status_id', 1)->count();
+        return Order::where('status_id', 1)
+            ->whereDate('created_at', $date)
+            ->count();
     }
 
     public function byClient ($userId)
     {
-        return Order::with('status', 'dealer')->where('client_id', $userId)->latest()->get();
+        return Order::with('status', 'dealer')
+            ->where('client_id', $userId)
+            ->latest()
+            ->get();
     }
 
     public function byDealer ($userId)
     {
-        $profit = DB::table('orders')->where('dealer_id', $userId)->whereDate('created_at', Carbon::today())->sum('delivery_costs');
-        $orders = Order::with('status', 'client')->where('dealer_id', $userId)->whereDate('created_at', Carbon::today())->latest()->get();
+        $date = Carbon::today();
+
+        $profit = DB::table('orders')->where('dealer_id', $userId)
+            ->whereDate('created_at', $date)
+            ->sum('delivery_costs');
+
+        $orders = Order::with('status', 'client')
+            ->where('dealer_id', $userId)
+            ->whereDate('created_at', $date)
+            ->latest()->get();
 
         return ['orders' => $orders, 'profit' => $profit];
     }
