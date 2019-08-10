@@ -96,6 +96,8 @@ class OrderController extends Controller
 
     public function availablesCount ()
     {
+        $date = Carbon::today();
+
         return Order::where('status_id', 1)
             ->whereDate('created_at', $date)
             ->count();
@@ -154,7 +156,8 @@ class OrderController extends Controller
             'dealer_id' => $request->dealer['id'],
             'rate' => Rate::latest()->first()->rate,
             'delivery_costs' => $request->delivery_costs,
-            'order_cost' => $request->order_cost
+            'order_cost' => $request->order_cost,
+            'created_at' => $request->created_at
         ]);
 
         Auth::user()->notify(new NewOrder($order));
