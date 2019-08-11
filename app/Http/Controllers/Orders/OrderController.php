@@ -157,7 +157,7 @@ class OrderController extends Controller
             'rate' => Rate::latest()->first()->rate,
             'delivery_costs' => $request->delivery_costs,
             'order_cost' => $request->order_cost,
-            'created_at' => $request->created_at
+            //'created_at' => $request->created_at
         ]);
 
         Auth::user()->notify(new NewOrder($order));
