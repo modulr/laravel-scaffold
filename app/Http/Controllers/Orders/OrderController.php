@@ -69,26 +69,26 @@ class OrderController extends Controller
 
         $ordersCount = Order::where('dealer_id', Auth::id())
             ->where('status_id', 2)
-            ->whereDate('created_at', $date)
+            //->whereDate('created_at', $date)
             ->count();
 
         if ($ordersCount > 0) {
             $orders = Order::with('status', 'client')
                 ->where('dealer_id', Auth::id())
                 ->where('status_id', 2)
-                ->whereDate('created_at', $date)
+                //->whereDate('created_at', $date)
                 ->oldest()
                 ->get();
             $orders = $orders->concat(Order::with('status', 'client')
                 ->where('status_id', 1)
-                ->whereDate('created_at', $date)
+                //->whereDate('created_at', $date)
                 ->oldest()
                 ->get());
             return $orders;
         } else {
             return Order::with('status', 'client')
                 ->where('status_id', 1)
-                ->whereDate('created_at', $date)
+                //->whereDate('created_at', $date)
                 ->oldest()
                 ->get();
         }
@@ -99,7 +99,7 @@ class OrderController extends Controller
         $date = Carbon::today();
 
         return Order::where('status_id', 1)
-            ->whereDate('created_at', $date)
+            //->whereDate('created_at', $date)
             ->count();
     }
 
@@ -157,7 +157,7 @@ class OrderController extends Controller
             'rate' => Rate::latest()->first()->rate,
             'delivery_costs' => $request->delivery_costs,
             'order_cost' => $request->order_cost,
-            //'created_at' => $request->created_at
+            'created_at' => Carbon::parse($request->created_at)->toDateTimeString()
         ]);
 
         Auth::user()->notify(new NewOrder($order));
@@ -169,12 +169,13 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'order' => 'required|string',
-            'address' => 'required|string',
+            'address' => 'required|string'
             //'cellphone' => 'numeric|nullable'
         ]);
 
         Validator::make($request->all(), [
             'cellphone' => Rule::requiredIf($request->user()->cellphone == null),
+            'cellphone' => 'numeric|unique:users'
         ])->validate();
 
         if ($request->cellphone) {
@@ -217,6 +218,7 @@ class OrderController extends Controller
         $order->address = $request->address;
         $order->delivery_costs = $request->delivery_costs;
         $order->order_cost = $request->order_cost;
+        $order->created_at = Carbon::parse($request->created_at)->toDateTimeString();
         $order->save();
 
         Auth::user()->notify(new UpdateOrder($order));

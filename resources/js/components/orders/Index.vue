@@ -38,8 +38,29 @@
                   <hr>
                 </div>
                 <div class="col-8">
-                  <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event" v-if="item.dealer_id"></users-view>
-                  <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
+                  <div v-if="item.status_id == 1">
+                    <div class="media">
+                      <div class="avatar float-left mr-2 text-muted">
+                        <span class="fa-stack" style="font-size: 1.3em;">
+                          <i class="fas fa-circle fa-stack-2x"></i>
+                          <i class="fas fa-user fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </div>
+                      <div class="media-body">
+                        <div class="text-body text-muted">
+                          <i class="fas fa-spinner fa-spin"></i>
+                          Buscando repartidor...
+                        </div>
+                        <div class="small text-muted">
+                          Repartidor
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else>
+                    <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event" v-if="item.dealer_id"></users-view>
+                    <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
+                  </div>
                 </div>
                 <div class="col-4 text-right">
                   <div>

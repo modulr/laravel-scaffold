@@ -65941,6 +65941,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66107,44 +66128,109 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [_c("hr")]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-8" },
-                            [
-                              item.dealer_id
-                                ? _c("users-view", {
-                                    attrs: {
-                                      user: item.dealer,
-                                      role: "Repartidor"
-                                    },
-                                    on: {
-                                      viewUser: function($event) {
-                                        _vm.userView = $event
-                                      }
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              item.status_id == 3
-                                ? _c("rate", {
-                                    attrs: { length: 5 },
-                                    on: {
-                                      "after-rate": function($event) {
-                                        _vm.scoreOrder(item, index)
-                                      }
-                                    },
-                                    model: {
-                                      value: item.score_client,
-                                      callback: function($$v) {
-                                        _vm.$set(item, "score_client", $$v)
+                          _c("div", { staticClass: "col-8" }, [
+                            item.status_id == 1
+                              ? _c("div", [
+                                  _c("div", { staticClass: "media" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "avatar float-left mr-2 text-muted"
                                       },
-                                      expression: "item.score_client"
-                                    }
-                                  })
-                                : _vm._e()
-                            ],
-                            1
-                          ),
+                                      [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "fa-stack",
+                                            staticStyle: {
+                                              "font-size": "1.3em"
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "fas fa-circle fa-stack-2x"
+                                            }),
+                                            _vm._v(" "),
+                                            _c("i", {
+                                              staticClass:
+                                                "fas fa-user fa-stack-1x fa-inverse"
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "media-body" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "text-body text-muted" },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fas fa-spinner fa-spin"
+                                          }),
+                                          _vm._v(
+                                            "\n                        Buscando repartidor...\n                      "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "small text-muted" },
+                                        [
+                                          _vm._v(
+                                            "\n                        Repartidor\n                      "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              : _c(
+                                  "div",
+                                  [
+                                    item.dealer_id
+                                      ? _c("users-view", {
+                                          attrs: {
+                                            user: item.dealer,
+                                            role: "Repartidor"
+                                          },
+                                          on: {
+                                            viewUser: function($event) {
+                                              _vm.userView = $event
+                                            }
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.status_id == 3
+                                      ? _c("rate", {
+                                          attrs: { length: 5 },
+                                          on: {
+                                            "after-rate": function($event) {
+                                              _vm.scoreOrder(item, index)
+                                            }
+                                          },
+                                          model: {
+                                            value: item.score_client,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                item,
+                                                "score_client",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "item.score_client"
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  1
+                                )
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-4 text-right" }, [
                             _c("div", [
@@ -66796,6 +66882,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66917,7 +67013,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getDealers();
       this.getRate();
       this.newOrder.order_cost = 0;
-      //this.newOrder.created_at = Vue.moment().format('YYYY-MM-DD')
+      this.newOrder.created_at = Vue.moment().format('YYYY-MM-DDTHH:mm');
       $('#orderModal').modal('show');
       $('#userCreateModal').modal('hide');
     },
@@ -66944,6 +67040,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // this.editOrder = order
       this.editOrder = Object.assign({}, order);
       this.editOrder.index = index;
+      this.editOrder.created_at = Vue.moment(order.created_at).format('YYYY-MM-DDTHH:mm');
       $('#orderUpdateModal').modal('show');
     },
     updateOrder: function updateOrder() {
@@ -67961,6 +68058,47 @@ var render = function() {
                       : _vm._e()
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Agendar")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group border-right-0" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newOrder.created_at,
+                            expression: "newOrder.created_at"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.errors.created_at },
+                        attrs: { type: "datetime-local" },
+                        domProps: { value: _vm.newOrder.created_at },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newOrder,
+                              "created_at",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.errors.created_at
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.created_at[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "form-group" },
@@ -68063,7 +68201,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -68101,7 +68239,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("div", { staticClass: "input-group" }, [
-                      _vm._m(5),
+                      _vm._m(6),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -68142,7 +68280,7 @@ var render = function() {
                     _c("label", [_vm._v("Costo de envio")]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-group border-right-0" }, [
-                      _vm._m(6),
+                      _vm._m(7),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -68183,7 +68321,7 @@ var render = function() {
                     _c("label", [_vm._v("Costo del paquete")]),
                     _vm._v(" "),
                     _c("div", { staticClass: "input-group border-right-0" }, [
-                      _vm._m(7),
+                      _vm._m(8),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -68216,6 +68354,47 @@ var render = function() {
                     _vm.errors.order_cost
                       ? _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(_vm._s(_vm.errors.order_cost[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Agendar")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group border-right-0" }, [
+                      _vm._m(9),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editOrder.created_at,
+                            expression: "editOrder.created_at"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.errors.created_at },
+                        attrs: { type: "datetime-local" },
+                        domProps: { value: _vm.editOrder.created_at },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editOrder,
+                              "created_at",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.errors.created_at
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.created_at[0]))
                         ])
                       : _vm._e()
                   ])
@@ -68266,7 +68445,7 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(8),
+                _vm._m(10),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c(
@@ -68353,7 +68532,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _vm._m(9),
+                _vm._m(11),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -68576,6 +68755,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("📅")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h5", { staticClass: "modal-title" }, [_vm._v("Editar mandado")]),
       _vm._v(" "),
@@ -68617,6 +68804,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [_vm._v("$")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("📅")])
     ])
   },
   function() {
@@ -70300,6 +70495,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           });
         }).catch(function (error) {
           _this2.errors = error.response.data.errors;
+          if (_this2.errors.cellphone) {
+            if (_this2.errors.cellphone[0] == 'The cellphone field is required.') {
+              _this2.errors.cellphone[1] = '¿Cual es tu numero celular?';
+            } else {
+              _this2.errors.cellphone[1] = 'El numero de celular ya esta registrado';
+            }
+          }
           _this2.submiting = false;
         });
       }
@@ -70444,7 +70646,7 @@ var render = function() {
           _vm._v(" "),
           _vm.errors.cellphone
             ? _c("small", { staticClass: "form-text text-white" }, [
-                _vm._v("¿Cual es tu numero celular?")
+                _vm._v(_vm._s(_vm.errors.cellphone[1]))
               ])
             : _vm._e()
         ])
@@ -72883,40 +73085,40 @@ var render = function() {
           _vm._v(" "),
           !_vm.loading
             ? _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "form-group col-md-9" }, [
-                  _c("label", [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.user.name,
-                        expression: "user.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: { "is-invalid": _vm.errors.name },
-                    attrs: { type: "text", placeholder: "John Doe" },
-                    domProps: { value: _vm.user.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.user, "name", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.name
-                    ? _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errors.name[0]))
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Nombre")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.name,
+                          expression: "user.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.errors.name },
+                      attrs: { type: "text", placeholder: "John Doe" },
+                      domProps: { value: _vm.user.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.name
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.name[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", [_vm._v("Correo electrónico")]),
                     _vm._v(" "),
@@ -74822,40 +75024,40 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group col-md-9" }, [
-                  _c("label", [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.user.name,
-                        expression: "user.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: { "is-invalid": _vm.errors.name },
-                    attrs: { type: "text", placeholder: "John Doe" },
-                    domProps: { value: _vm.user.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.user, "name", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.name
-                    ? _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errors.name[0]))
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Nombre")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.name,
+                          expression: "user.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.errors.name },
+                      attrs: { type: "text", placeholder: "John Doe" },
+                      domProps: { value: _vm.user.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.name
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.name[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", [_vm._v("Correo electrónico")]),
                     _vm._v(" "),
@@ -75115,6 +75317,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -75180,7 +75383,6 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("rate", {
-          staticClass: "mb-3",
           attrs: { length: 5, disabled: true },
           model: {
             value: _vm.user.score,
@@ -75189,14 +75391,20 @@ var render = function() {
             },
             expression: "user.score"
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.user.hasRole && _vm.user.hasRole["dealer-level-1"]
+          ? _c("span", { staticClass: "badge badge-pill badge-primary" }, [
+              _vm._v("Nivel 1")
+            ])
+          : _vm._e()
       ],
       1
     ),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-4 text-center" },
+      { staticClass: "col-4 text-center mt-3" },
       [
         _c(
           "vue-clip",

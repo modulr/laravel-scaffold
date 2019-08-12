@@ -2,9 +2,10 @@
   <div class="row justify-content-center mb-3">
     <div class="col-12 text-center">
       <img class="rounded-circle mb-2" style="width: 120px; height: 120px" :src="user.avatar_url">
-      <rate class="mb-3" :length="5" v-model="user.score" :disabled="true"/>
+      <rate :length="5" v-model="user.score" :disabled="true"/>
+      <span class="badge badge-pill badge-primary" v-if="user.hasRole && user.hasRole['dealer-level-1']">Nivel 1</span>
     </div>
-    <div class="col-4 text-center">
+    <div class="col-4 text-center mt-3">
       <vue-clip
         :options="optionsAvatar"
         :on-sending="sendingAvatar"

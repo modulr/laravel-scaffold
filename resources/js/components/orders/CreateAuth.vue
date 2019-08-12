@@ -19,7 +19,7 @@
     </div>
     <div class="form-group" v-if="!user.cellphone">
       <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newOrder.cellphone" placeholder="Escribe tu numero de celular">
-      <small class="form-text text-white" v-if="errors.cellphone">¿Cual es tu numero celular?</small>
+      <small class="form-text text-white" v-if="errors.cellphone">{{errors.cellphone[1]}}</small>
     </div>
     <a class="btn btn-light btn-lg px-5" href="#" :disabled="submiting" @click.prevent="createOrder">
       <i class="fas fa-spinner fa-spin mr-2" v-if="submiting"></i>Pedir
@@ -91,6 +91,13 @@ export default {
         })
         .catch(error => {
           this.errors = error.response.data.errors
+          if (this.errors.cellphone) {
+            if (this.errors.cellphone[0] == 'The cellphone field is required.') {
+              this.errors.cellphone[1] = '¿Cual es tu numero celular?'
+            } else {
+              this.errors.cellphone[1] = 'El numero de celular ya esta registrado'
+            }
+          }
           this.submiting = false
         })
       }

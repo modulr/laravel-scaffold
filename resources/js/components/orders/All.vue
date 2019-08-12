@@ -245,16 +245,16 @@
               </div>
               <div class="invalid-feedback" v-if="errors.order_cost">{{errors.order_cost[0]}}</div>
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label>Agendar</label>
               <div class="input-group border-right-0">
                 <div class="input-group-prepend">
                   <span class="input-group-text">📅</span>
                 </div>
-                <input type="date" class="form-control" :class="{'is-invalid': errors.created_at}" v-model="newOrder.created_at">
+                <input type="datetime-local" class="form-control" :class="{'is-invalid': errors.created_at}" v-model="newOrder.created_at">
               </div>
               <div class="invalid-feedback" v-if="errors.created_at">{{errors.created_at[0]}}</div>
-            </div> -->
+            </div>
             <div class="form-group">
               <label>Repartidor</label>
               <multiselect
@@ -334,6 +334,16 @@
                 <input type="text" class="form-control" :class="{'is-invalid': errors.order_cost}" v-model="editOrder.order_cost" placeholder="150">
               </div>
               <div class="invalid-feedback" v-if="errors.order_cost">{{errors.order_cost[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Agendar</label>
+              <div class="input-group border-right-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">📅</span>
+                </div>
+                <input type="datetime-local" class="form-control" :class="{'is-invalid': errors.created_at}" v-model="editOrder.created_at">
+              </div>
+              <div class="invalid-feedback" v-if="errors.created_at">{{errors.created_at[0]}}</div>
             </div>
           </div>
           <div class="modal-footer">
@@ -543,7 +553,7 @@ export default {
       this.getDealers()
       this.getRate()
       this.newOrder.order_cost = 0
-      //this.newOrder.created_at = Vue.moment().format('YYYY-MM-DD')
+      this.newOrder.created_at = Vue.moment().format('YYYY-MM-DDTHH:mm')
       $('#orderModal').modal('show')
       $('#userCreateModal').modal('hide')
     },
@@ -570,6 +580,7 @@ export default {
       // this.editOrder = order
       this.editOrder = Object.assign({}, order)
       this.editOrder.index = index
+      this.editOrder.created_at = Vue.moment(order.created_at).format('YYYY-MM-DDTHH:mm')
       $('#orderUpdateModal').modal('show')
     },
     updateOrder () {
