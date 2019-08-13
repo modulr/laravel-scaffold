@@ -57,7 +57,7 @@
               <div class="media">
                 <div class="avatar float-left mr-3">
                   <img class="img-avatar" :src="user.avatar_url">
-                  <span class="avatar-status" :class="{'badge-success': !user.active, 'badge-primary': user.active}"></span>
+                  <span class="avatar-status badge-primary" v-if="user.active"></span>
                 </div>
                 <div class="media-body">
                   <div>{{user.name}}</div>

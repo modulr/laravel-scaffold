@@ -73987,13 +73987,11 @@ var render = function() {
                           attrs: { src: user.avatar_url }
                         }),
                         _vm._v(" "),
-                        _c("span", {
-                          staticClass: "avatar-status",
-                          class: {
-                            "badge-success": !user.active,
-                            "badge-primary": user.active
-                          }
-                        })
+                        user.active
+                          ? _c("span", {
+                              staticClass: "avatar-status badge-primary"
+                            })
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "media-body" }, [
@@ -76213,19 +76211,21 @@ var render = function() {
                             )
                           : _vm._e(),
                         _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "small text-muted",
-                            attrs: {
-                              href:
-                                "https://api.whatsapp.com/send?phone=52" +
-                                user.cellphone,
-                              target: "_blank"
-                            }
-                          },
-                          [_c("i", { staticClass: "fab fa-whatsapp" })]
-                        )
+                        user.cellphone
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "small text-muted",
+                                attrs: {
+                                  href:
+                                    "https://api.whatsapp.com/send?phone=52" +
+                                    user.cellphone,
+                                  target: "_blank"
+                                }
+                              },
+                              [_c("i", { staticClass: "fab fa-whatsapp" })]
+                            )
+                          : _vm._e()
                       ])
                     ])
                   ])

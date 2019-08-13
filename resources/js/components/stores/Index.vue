@@ -78,7 +78,7 @@
                     <a :href="user.link" target="_blank" class="small text-muted" v-if="user.link">
                       <i class="fas fa-link fa-fw mr-2"></i>
                     </a>
-                    <a class="small text-muted" :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank">
+                    <a :href="`https://api.whatsapp.com/send?phone=52${user.cellphone}`" target="_blank" class="small text-muted" v-if="user.cellphone">
                       <i class="fab fa-whatsapp"></i>
                     </a>
                   </div>
