@@ -74944,85 +74944,85 @@ var render = function() {
           _vm._v(" "),
           !_vm.loading
             ? _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "form-group col-md-9 mb-1" }, [
-                  _c(
-                    "form",
-                    {
-                      staticClass: "form-horizontal",
-                      on: { click: _vm.activeToggle }
-                    },
-                    [
-                      _c("div", { staticClass: "form-group row" }, [
-                        _c("label", { staticClass: "col-3" }, [
-                          _vm._v(_vm._s(_vm.activeText))
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-9" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "switch switch-3d switch-primary float-right mb-0"
-                            },
-                            [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.user.active,
-                                    expression: "user.active"
-                                  }
-                                ],
-                                staticClass: "switch-input",
-                                attrs: { type: "checkbox" },
-                                domProps: {
-                                  checked: Array.isArray(_vm.user.active)
-                                    ? _vm._i(_vm.user.active, null) > -1
-                                    : _vm.user.active
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$a = _vm.user.active,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = null,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          _vm.$set(
-                                            _vm.user,
-                                            "active",
-                                            $$a.concat([$$v])
-                                          )
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "form",
+                      {
+                        staticClass: "form-horizontal",
+                        on: { click: _vm.activeToggle }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c("label", { staticClass: "col-3" }, [
+                            _vm._v(_vm._s(_vm.activeText))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-9" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "switch switch-3d switch-primary float-right mb-0"
+                              },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.user.active,
+                                      expression: "user.active"
+                                    }
+                                  ],
+                                  staticClass: "switch-input",
+                                  attrs: { type: "checkbox" },
+                                  domProps: {
+                                    checked: Array.isArray(_vm.user.active)
+                                      ? _vm._i(_vm.user.active, null) > -1
+                                      : _vm.user.active
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$a = _vm.user.active,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              _vm.user,
+                                              "active",
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              _vm.user,
+                                              "active",
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
                                       } else {
-                                        $$i > -1 &&
-                                          _vm.$set(
-                                            _vm.user,
-                                            "active",
-                                            $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1))
-                                          )
+                                        _vm.$set(_vm.user, "active", $$c)
                                       }
-                                    } else {
-                                      _vm.$set(_vm.user, "active", $$c)
                                     }
                                   }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "switch-slider" })
-                            ]
-                          )
+                                }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "switch-slider" })
+                              ]
+                            )
+                          ])
                         ])
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-12" }, [
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", [_vm._v("Nombre")]),
                     _vm._v(" "),

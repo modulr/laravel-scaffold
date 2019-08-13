@@ -24,20 +24,20 @@
             </div>
           </div>
           <div class="row" v-if="!loading">
-            <div class="form-group col-md-9 mb-1">
-              <form class="form-horizontal" @click="activeToggle">
-                <div class="form-group row">
-                  <label class="col-3">{{activeText}}</label>
-                  <div class="col-9">
-                    <label class="switch switch-3d switch-primary float-right mb-0">
-                      <input class="switch-input" type="checkbox" v-model="user.active">
-                      <span class="switch-slider"></span>
-                    </label>
-                  </div>
-                </div>
-              </form>
-            </div>
             <div class="col-md-12">
+              <div class="form-group">
+                <form class="form-horizontal" @click="activeToggle">
+                  <div class="form-group row">
+                    <label class="col-3">{{activeText}}</label>
+                    <div class="col-9">
+                      <label class="switch switch-3d switch-primary float-right mb-0">
+                        <input class="switch-input" type="checkbox" v-model="user.active">
+                        <span class="switch-slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </form>
+              </div>
               <div class="form-group">
                 <label>Nombre</label>
                 <input type="text" class="form-control" :class="{'is-invalid': errors.name}" v-model="user.name" placeholder="John Doe">
