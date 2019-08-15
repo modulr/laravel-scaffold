@@ -65961,7 +65961,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66167,10 +66166,6 @@ var render = function() {
                                         "div",
                                         { staticClass: "text-body text-muted" },
                                         [
-                                          _c("i", {
-                                            staticClass:
-                                              "fas fa-spinner fa-spin"
-                                          }),
                                           _vm._v(
                                             "\n                        Buscando repartidor...\n                      "
                                           )
@@ -66182,7 +66177,7 @@ var render = function() {
                                         { staticClass: "small text-muted" },
                                         [
                                           _vm._v(
-                                            "\n                        Repartidor\n                      "
+                                            "\n                        30 minutos aproximadamente\n                      "
                                           )
                                         ]
                                       )

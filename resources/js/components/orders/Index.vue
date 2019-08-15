@@ -48,11 +48,10 @@
                       </div>
                       <div class="media-body">
                         <div class="text-body text-muted">
-                          <i class="fas fa-spinner fa-spin"></i>
                           Buscando repartidor...
                         </div>
                         <div class="small text-muted">
-                          Repartidor
+                          30 minutos aproximadamente
                         </div>
                       </div>
                     </div>
