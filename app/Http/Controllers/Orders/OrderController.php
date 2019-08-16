@@ -174,8 +174,11 @@ class OrderController extends Controller
         ]);
 
         Validator::make($request->all(), [
-            'cellphone' => Rule::requiredIf($request->user()->cellphone == null),
-            'cellphone' => 'numeric|unique:users'
+            'cellphone' => [
+                Rule::requiredIf($request->user()->cellphone == null),
+                'numeric',
+                'unique:users'
+            ]
         ])->validate();
 
         if ($request->cellphone) {
