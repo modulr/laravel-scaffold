@@ -69,26 +69,26 @@ class OrderController extends Controller
 
         $ordersCount = Order::where('dealer_id', Auth::id())
             ->where('status_id', 2)
-            //->whereDate('created_at', $date)
+            ->whereDate('created_at', $date)
             ->count();
 
         if ($ordersCount > 0) {
             $orders = Order::with('status', 'client')
                 ->where('dealer_id', Auth::id())
                 ->where('status_id', 2)
-                //->whereDate('created_at', $date)
+                ->whereDate('created_at', $date)
                 ->oldest()
                 ->get();
             $orders = $orders->concat(Order::with('status', 'client')
                 ->where('status_id', 1)
-                //->whereDate('created_at', $date)
+                ->whereDate('created_at', $date)
                 ->oldest()
                 ->get());
             return $orders;
         } else {
             return Order::with('status', 'client')
                 ->where('status_id', 1)
-                //->whereDate('created_at', $date)
+                ->whereDate('created_at', $date)
                 ->oldest()
                 ->get();
         }
@@ -99,7 +99,7 @@ class OrderController extends Controller
         $date = Carbon::today();
 
         return Order::where('status_id', 1)
-            //->whereDate('created_at', $date)
+            ->whereDate('created_at', $date)
             ->count();
     }
 
