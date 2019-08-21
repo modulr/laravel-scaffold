@@ -20,7 +20,7 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 mix.webpackConfig({
    plugins: [
    new SWPrecacheWebpackPlugin({
-       cacheId: 'ls_pwa',
+       cacheId: 'traeme_pwa',
        filename: 'service-worker.js',
        staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
        minify: true,
