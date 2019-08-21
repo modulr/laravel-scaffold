@@ -66887,6 +66887,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67060,21 +67078,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     finalizeOrder: function finalizeOrder(order, index) {
       var _this9 = this;
 
-      if (order.dealer_id) {
-        var status = 3;
-        var message = '¡Mandado finalizado!';
+      var status = 3;
+      var message = '¡Mandado finalizado!';
 
+      if (order.dealer_id) {
         if (order.status_id == 1 || order.status_id == 3 || order.status_id == 4) {
           status = 2;
           message = '¡Mandado en camino!';
         }
-
-        axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': status }).then(function (response) {
-          _this9.orders[index].status_id = response.data.status_id;
-          _this9.orders[index].status = response.data.status;
-          _this9.$toasted.global.error(message);
-        });
+      } else {
+        status = 1;
+        message = '¡Mandado abierto!';
       }
+      axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': status }).then(function (response) {
+        _this9.orders[index].status_id = response.data.status_id;
+        _this9.orders[index].status = response.data.status;
+        _this9.$toasted.global.error(message);
+      });
     },
     cancelOrder: function cancelOrder(order, index) {
       var _this10 = this;
@@ -67673,7 +67693,61 @@ var render = function() {
                                   ],
                                   1
                                 )
-                              : _vm._e()
+                              : _c("div", [
+                                  _c("div", { staticClass: "media" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "avatar float-left mr-2 text-muted"
+                                      },
+                                      [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "fa-stack",
+                                            staticStyle: {
+                                              "font-size": "1.3em"
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "fas fa-circle fa-stack-2x"
+                                            }),
+                                            _vm._v(" "),
+                                            _c("i", {
+                                              staticClass:
+                                                "fas fa-user fa-stack-1x fa-inverse"
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "media-body" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "text-body text-muted" },
+                                        [
+                                          _vm._v(
+                                            "\n                        Buscando repartidor...\n                      "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "small text-muted" },
+                                        [
+                                          _vm._v(
+                                            "\n                        30 minutos aproximadamente\n                      "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ])
                           ])
                         ]),
                         _vm._v(" "),

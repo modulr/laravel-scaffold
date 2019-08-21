@@ -124,6 +124,24 @@
                     <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event"></users-view>
                     <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
                   </div>
+                  <div v-else>
+                    <div class="media">
+                      <div class="avatar float-left mr-2 text-muted">
+                        <span class="fa-stack" style="font-size: 1.3em;">
+                          <i class="fas fa-circle fa-stack-2x"></i>
+                          <i class="fas fa-user fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </div>
+                      <div class="media-body">
+                        <div class="text-body text-muted">
+                          Buscando repartidor...
+                        </div>
+                        <div class="small text-muted">
+                          30 minutos aproximadamente
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row" v-if="item.status_id == 1 || item.status_id == 2">
@@ -603,22 +621,24 @@ export default {
       }
     },
     finalizeOrder (order, index) {
-      if (order.dealer_id) {
-        let status = 3
-        let message = '¡Mandado finalizado!'
+      let status = 3
+      let message = '¡Mandado finalizado!'
 
+      if (order.dealer_id) {
         if (order.status_id == 1 || order.status_id == 3 || order.status_id == 4) {
           status = 2
           message = '¡Mandado en camino!'
         }
-
-        axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': status})
-        .then(response => {
-          this.orders[index].status_id = response.data.status_id
-          this.orders[index].status = response.data.status
-          this.$toasted.global.error(message)
-        })
+      } else {
+        status = 1
+        message = '¡Mandado abierto!'
       }
+      axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': status})
+      .then(response => {
+        this.orders[index].status_id = response.data.status_id
+        this.orders[index].status = response.data.status
+        this.$toasted.global.error(message)
+      })
     },
     cancelOrder (order, index) {
       swal({
