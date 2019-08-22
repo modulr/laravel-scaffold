@@ -65961,6 +65961,97 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -65969,7 +66060,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       orders: [],
       listStatus: [],
       userView: {},
-      loading: true
+      newOrder: {},
+      errors: {},
+      loading: true,
+      submiting: false,
+      submitingOpen: false,
+      submitingCreate: false
     };
   },
   mounted: function mounted() {
@@ -66000,28 +66096,76 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     cancelOrder: function cancelOrder(order, index) {
       var _this3 = this;
 
-      swal({
-        title: "¿Estas seguro?",
-        text: "¿En verdad quieres cancelar el mandado?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-      }).then(function (willDelete) {
-        if (willDelete) {
-          axios.put("/api/orders/updateStatus/" + order.id, { 'statusId': 4 }).then(function (response) {
-            _this3.orders[index].status_id = response.data.status_id;
-            _this3.orders[index].status = response.data.status;
-            _this3.$toasted.global.error('¡Mandado cancelado!');
-          });
-        }
-      });
+      if (!this.submiting) {
+        this.submiting = true;
+        swal({
+          title: "¿Estas seguro?",
+          text: "¿En verdad quieres cancelar el mandado?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        }).then(function (willDelete) {
+          if (willDelete) {
+            axios.put("/api/orders/updateStatus/" + order.id, { 'statusId': 4 }).then(function (response) {
+              _this3.orders[index].status_id = response.data.status_id;
+              _this3.orders[index].status = response.data.status;
+              _this3.$toasted.global.error('¡Mandado cancelado!');
+              _this3.submiting = false;
+            });
+          } else {
+            _this3.submiting = false;
+          }
+        });
+      }
     },
-    scoreOrder: function scoreOrder(order, index) {
+    openOrder: function openOrder(order, index) {
       var _this4 = this;
 
+      if (!this.submitingOpen) {
+        this.submitingOpen = true;
+        var status = 1;
+        var message = '¡Mandado abierto!';
+        axios.put("/api/orders/updateStatus/" + order.id, { 'statusId': status }).then(function (response) {
+          _this4.orders[index].status_id = response.data.status_id;
+          _this4.orders[index].status = response.data.status;
+          _this4.$toasted.global.error(message);
+          _this4.submitingOpen = false;
+        });
+      }
+    },
+    showCreateOrderModal: function showCreateOrderModal(order) {
+      this.errors = {};
+      if (order) {
+        this.newOrder.order = order.order;
+        this.newOrder.address = order.address;
+        // this.newOrder.order_cost = order.order_cost
+        // this.newOrder.created_at = Vue.moment().format('YYYY-MM-DDTHH:mm')
+      }
+      $('#createOrderModal').modal('show');
+    },
+    createOrder: function createOrder() {
+      var _this5 = this;
+
+      if (!this.submitingCreate) {
+        this.submitingCreate = true;
+        axios.post("/api/orders/storeAuth", this.newOrder).then(function (response) {
+          _this5.orders.unshift(response.data);
+          _this5.submitingCreate = false;
+          $('#createOrderModal').modal('hide');
+          _this5.$toasted.global.error('¡Mandado creado!');
+        }).catch(function (error) {
+          _this5.errors = error.response.data.errors;
+          console.log(_this5.errors);
+          _this5.submitingCreate = false;
+        });
+      }
+    },
+    scoreOrder: function scoreOrder(order, index) {
+      var _this6 = this;
+
       axios.put("/api/orders/updateScoreClient/" + order.id, { 'scoreClient': order.score_client }).then(function (response) {
-        _this4.orders[index].score_client = response.data.score_client;
-        _this4.$toasted.global.error('¡Mandado calificado!');
+        _this6.orders[index].score_client = response.data.score_client;
+        _this6.$toasted.global.error('¡Mandado calificado!');
       });
     }
   }
@@ -66039,7 +66183,35 @@ var render = function() {
     "div",
     [
       _c("div", [
-        _vm._m(0),
+        _c(
+          "div",
+          { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
+          [
+            _c("h4", { staticClass: "float-left pt-2" }, [
+              _vm._v("Mis mandados")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-header-actions mr-1" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary btn-block mb-2",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.showCreateOrderModal($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-plus mr-2" }),
+                  _vm._v("Pedir\n        ")
+                ]
+              )
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -66199,7 +66371,71 @@ var render = function() {
                                             }
                                           }
                                         })
-                                      : _vm._e(),
+                                      : _c("div", [
+                                          _c("div", { staticClass: "media" }, [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "avatar float-left mr-2 text-muted"
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass: "fa-stack",
+                                                    staticStyle: {
+                                                      "font-size": "1.3em"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "fas fa-circle fa-stack-2x"
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "fas fa-user fa-stack-1x fa-inverse"
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "media-body" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "text-body text-muted"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                          Sin repartidor\n                        "
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "small text-muted"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                          Repartidor\n                        "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        ]),
                                     _vm._v(" "),
                                     item.status_id == 3
                                       ? _c("rate", {
@@ -66270,7 +66506,7 @@ var render = function() {
                           ? _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-12" }, [_c("hr")]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "col-12 text-right" }, [
+                              _c("div", { staticClass: "col-12" }, [
                                 _c(
                                   "a",
                                   {
@@ -66285,6 +66521,11 @@ var render = function() {
                                     }
                                   },
                                   [
+                                    _vm.submiting
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _vm._e(),
                                     _vm._v(
                                       "\n                  Cancelar\n                "
                                     )
@@ -66298,16 +66539,73 @@ var render = function() {
                           ? _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-12" }, [_c("hr")]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "col" }, [
+                              _c("div", { staticClass: "col-7" }, [
                                 _c(
                                   "div",
                                   {
                                     staticClass:
-                                      "alert alert-secondary text-center mb-0"
+                                      "btn btn-outline-secondary btn-sm disabled"
                                   },
                                   [
                                     _vm._v(
                                       "\n                  Cancelado\n                "
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-5 text-right" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-primary btn-sm",
+                                    attrs: {
+                                      href: "#",
+                                      disabled: _vm.submitingOpen
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.openOrder(item, index)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm.submitingOpen
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(
+                                      "\n                  Abrir de nuevo\n                "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        item.status_id == 3
+                          ? _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col text-right" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-outline-info btn-sm",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.showCreateOrderModal(item)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                  Pedir de nuevo\n                "
                                     )
                                   ]
                                 )
@@ -66327,15 +66625,139 @@ var render = function() {
         ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
             _c("i", { staticClass: "fas fa-motorcycle fa-3x text-muted" }),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c("p", { staticClass: "text-muted" }, [
               _vm._v("Haz tu primer mandado dando clic en el boton de abajo")
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(1)
           ])
         : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "createOrderModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-scrollable",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Mandado")]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newOrder.order,
+                          expression: "newOrder.order"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.errors.order },
+                      attrs: { rows: "3", placeholder: "¡Traeme unos tacos!" },
+                      domProps: { value: _vm.newOrder.order },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.newOrder, "order", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.order
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.order[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newOrder.address,
+                            expression: "newOrder.address"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.errors.address },
+                        attrs: { type: "text", placeholder: "Destino" },
+                        domProps: { value: _vm.newOrder.address },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newOrder,
+                              "address",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.address
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.address[0]))
+                          ])
+                        : _vm._e()
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "#", disabled: _vm.submitingCreate },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.createOrder($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm.submitingCreate
+                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                        : _c("i", { staticClass: "fas fa-check" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "ml-1" }, [_vm._v("Guardar")])
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c("profile-view", { attrs: { user: _vm.userView } })
     ],
@@ -66343,32 +66765,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
-      [
-        _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Mis mandados")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-header-actions mr-1" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary btn-block mb-2",
-              attrs: { href: "/" }
-            },
-            [
-              _c("i", { staticClass: "fa fa-plus mr-2" }),
-              _vm._v("Pedir\n        ")
-            ]
-          )
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -66384,6 +66780,37 @@ var staticRenderFns = [
     return _c("a", { staticClass: "btn btn-primary", attrs: { href: "/" } }, [
       _c("i", { staticClass: "fa fa-plus mr-1" }),
       _vm._v("Pedir\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Pedir mandado")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "icon-location-pin" })
+      ])
     ])
   }
 ]
@@ -68335,14 +68762,14 @@ var render = function() {
                             )
                           }
                         }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _vm.errors.address
-                      ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errors.address[0]))
-                        ])
-                      : _vm._e()
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.address
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.address[0]))
+                          ])
+                        : _vm._e()
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
@@ -69082,6 +69509,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69089,7 +69518,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       orders: [],
       listStatus: [],
       userView: {},
-      loading: true
+      loading: true,
+      submiting: false
     };
   },
   mounted: function mounted() {
@@ -69128,39 +69558,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     takeOrder: function takeOrder(order, index) {
       var _this3 = this;
 
-      axios.put('/api/orders/takeOrder/' + order.id).then(function (response) {
-        order.status_id = 2;
-        _this3.$toasted.global.error('¡Mandado tomado!');
-        //location.href = `/orders/dealer`
-      }).catch(function (error) {
-        if (error.response.data.errors.finalize) {
-          swal({
-            title: "¡Finaliza tus mandados!",
-            text: "¡Podras tomar mas de un mandado cuando subas de nivel!",
-            icon: "warning"
-          });
-        }
-        if (error.response.data.errors.taken) {
-          swal({
-            title: "¡El mandado ya fue tomado!",
-            text: "¡Refresca la lista de mandados para ver lo nuevo!",
-            icon: "warning",
-            button: "Refrescar"
-          }).then(function (value) {
-            if (value) {
-              _this3.getOrders();
-            }
-          });
-        }
-      });
+      if (!this.submiting) {
+        this.submiting = true;
+        axios.put('/api/orders/takeOrder/' + order.id).then(function (response) {
+          order.status_id = 2;
+          _this3.$toasted.global.error('¡Mandado tomado!');
+          //location.href = `/orders/dealer`
+          _this3.submiting = false;
+        }).catch(function (error) {
+          if (error.response.data.errors.finalize) {
+            swal({
+              title: "¡Finaliza tus mandados!",
+              text: "¡Podras tomar mas de un mandado cuando subas de nivel!",
+              icon: "warning"
+            });
+          }
+          if (error.response.data.errors.taken) {
+            swal({
+              title: "¡El mandado ya fue tomado!",
+              text: "¡Refresca la lista de mandados para ver lo nuevo!",
+              icon: "warning",
+              button: "Refrescar"
+            }).then(function (value) {
+              if (value) {
+                _this3.getOrders();
+              }
+            });
+          }
+          _this3.submiting = false;
+        });
+      }
     },
     finalizeOrder: function finalizeOrder(order, index) {
       var _this4 = this;
 
-      axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
-        _this4.$toasted.global.error('¡Mandado finalizado!');
-        _this4.getOrders();
-      });
+      if (!this.submiting) {
+        this.submiting = true;
+        axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
+          _this4.$toasted.global.error('¡Mandado finalizado!');
+          _this4.getOrders();
+          _this4.submiting = false;
+        });
+      }
     }
   }
 });
@@ -69394,6 +69833,11 @@ var render = function() {
                                     }
                                   },
                                   [
+                                    _vm.submiting
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _vm._e(),
                                     _vm._v(
                                       "\n                  Tomar mandado\n                "
                                     )
@@ -69415,6 +69859,11 @@ var render = function() {
                                     }
                                   },
                                   [
+                                    _vm.submiting
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _vm._e(),
                                     _vm._v(
                                       "\n                  Finalizar\n                "
                                     )
@@ -69747,6 +70196,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69756,7 +70206,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       profit: 0,
       listStatus: [],
       userView: {},
-      loading: true
+      loading: true,
+      submiting: false
     };
   },
   mounted: function mounted() {
@@ -69796,11 +70247,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     finalizeOrder: function finalizeOrder(order, index) {
       var _this3 = this;
 
-      axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
-        _this3.orders[index].status_id = response.data.status_id;
-        _this3.orders[index].status = response.data.status;
-        _this3.$toasted.global.error('¡Mandado finalizado!');
-      });
+      if (!this.submiting) {
+        this.submiting = true;
+        axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
+          _this3.orders[index].status_id = response.data.status_id;
+          _this3.orders[index].status = response.data.status;
+          _this3.$toasted.global.error('¡Mandado finalizado!');
+          _this3.submiting = false;
+        });
+      }
     },
     scoreOrder: function scoreOrder(order, index) {
       var _this4 = this;
@@ -70061,7 +70516,10 @@ var render = function() {
                                   "a",
                                   {
                                     staticClass: "btn btn-outline-info btn-sm",
-                                    attrs: { href: "#" },
+                                    attrs: {
+                                      href: "#",
+                                      disabled: _vm.submiting
+                                    },
                                     on: {
                                       click: function($event) {
                                         $event.preventDefault()
@@ -70070,6 +70528,11 @@ var render = function() {
                                     }
                                   },
                                   [
+                                    _vm.submiting
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _vm._e(),
                                     _vm._v(
                                       "\n                  Finalizar\n                "
                                     )
@@ -70296,7 +70759,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setPosition: function setPosition(position) {
       var _this = this;
 
+      //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
+        //console.log(response.data);
         _this.address = response.data.display_name;
         localStorage.setItem("address", JSON.stringify(_this.address));
         _this.loading = false;
@@ -70586,7 +71051,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     setPosition: function setPosition(position) {
       var _this3 = this;
 
+      //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
+        //console.log(response.data);
         _this3.newOrder.address = response.data.display_name;
         localStorage.setItem("address", JSON.stringify(_this3.newOrder.address));
         _this3.loading = false;

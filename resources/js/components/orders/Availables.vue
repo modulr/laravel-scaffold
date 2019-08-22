@@ -65,9 +65,11 @@
                 </div>
                 <div class="col-12 text-right">
                   <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="takeOrder(item, index)" v-if="item.status_id == 1">
+                    <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Tomar mandado
                   </a>
                   <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)" v-if="item.status_id == 2">
+                    <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Finalizar
                   </a>
                 </div>
@@ -97,7 +99,8 @@ export default {
       orders: [],
       listStatus: [],
       userView: {},
-      loading: true
+      loading: true,
+      submiting: false
     }
   },
   mounted () {
@@ -131,41 +134,50 @@ export default {
       })
     },
     takeOrder (order, index) {
-      axios.put(`/api/orders/takeOrder/${order.id}`)
-      .then(response => {
-        order.status_id = 2
-        this.$toasted.global.error('¡Mandado tomado!')
-        //location.href = `/orders/dealer`
-      })
-      .catch(error => {
-        if (error.response.data.errors.finalize) {
-          swal({
-            title: "¡Finaliza tus mandados!",
-            text: "¡Podras tomar mas de un mandado cuando subas de nivel!",
-            icon: "warning"
-          })
-        }
-        if (error.response.data.errors.taken) {
-          swal({
-            title: "¡El mandado ya fue tomado!",
-            text: "¡Refresca la lista de mandados para ver lo nuevo!",
-            icon: "warning",
-            button: "Refrescar"
-          })
-          .then((value) => {
-            if (value) {
-              this.getOrders()
-            }
-          })
-        }
-      })
+      if (!this.submiting) {
+        this.submiting = true
+        axios.put(`/api/orders/takeOrder/${order.id}`)
+        .then(response => {
+          order.status_id = 2
+          this.$toasted.global.error('¡Mandado tomado!')
+          //location.href = `/orders/dealer`
+          this.submiting = false
+        })
+        .catch(error => {
+          if (error.response.data.errors.finalize) {
+            swal({
+              title: "¡Finaliza tus mandados!",
+              text: "¡Podras tomar mas de un mandado cuando subas de nivel!",
+              icon: "warning"
+            })
+          }
+          if (error.response.data.errors.taken) {
+            swal({
+              title: "¡El mandado ya fue tomado!",
+              text: "¡Refresca la lista de mandados para ver lo nuevo!",
+              icon: "warning",
+              button: "Refrescar"
+            })
+            .then((value) => {
+              if (value) {
+                this.getOrders()
+              }
+            })
+          }
+          this.submiting = false
+        })
+      }
     },
     finalizeOrder (order, index) {
-      axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 3})
-      .then(response => {
-        this.$toasted.global.error('¡Mandado finalizado!')
-        this.getOrders()
-      })
+      if (!this.submiting) {
+        this.submiting = true
+        axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 3})
+        .then(response => {
+          this.$toasted.global.error('¡Mandado finalizado!')
+          this.getOrders()
+          this.submiting = false
+        })
+      }
     }
   }
 }

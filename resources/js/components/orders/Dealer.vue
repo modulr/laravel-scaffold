@@ -67,7 +67,8 @@
                   <hr>
                 </div>
                 <div class="col-12 text-right">
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)">
+                  <a href="#" class="btn btn-outline-info btn-sm" :disabled="submiting" @click.prevent="finalizeOrder(item, index)">
+                    <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Finalizar
                   </a>
                 </div>
@@ -109,7 +110,8 @@ export default {
       profit: 0,
       listStatus:[],
       userView: {},
-      loading: true
+      loading: true,
+      submiting: false
     }
   },
   mounted () {
@@ -144,12 +146,16 @@ export default {
       })
     },
     finalizeOrder (order, index) {
-      axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 3})
-      .then(response => {
-        this.orders[index].status_id = response.data.status_id
-        this.orders[index].status = response.data.status
-        this.$toasted.global.error('¡Mandado finalizado!')
-      })
+      if (!this.submiting) {
+        this.submiting = true
+        axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 3})
+        .then(response => {
+          this.orders[index].status_id = response.data.status_id
+          this.orders[index].status = response.data.status
+          this.$toasted.global.error('¡Mandado finalizado!')
+          this.submiting = false
+        })
+      }
     },
     scoreOrder (order, index) {
       axios.put(`/api/orders/updateScoreDealer/${order.id}`, {'scoreDealer': order.score_dealer})

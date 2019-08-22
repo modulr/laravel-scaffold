@@ -13,13 +13,13 @@
                 </a>
             </li>
             @endcan
-            @can('read-address')
+            <!-- @can('read-address')
                 <li class="nav-item">
                     <a class="nav-link" href="/address">
                         <i class="nav-icon fas fa-map-marker-alt mr-2"></i>Direcciones
                     </a>
                 </li>
-            @endcan
+            @endcan -->
             @role('dealer')
                 <li class="nav-title">Repartidor</li>
                 <li class="nav-item d-compact-none d-minimized-none">

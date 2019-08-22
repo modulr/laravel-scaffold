@@ -330,8 +330,8 @@
                   <span class="input-group-text"><i class="icon-location-pin"></i></span>
                 </div>
                 <input type="text" class="form-control" :class="{'is-invalid': errors.address}" v-model="editOrder.address" placeholder="Destino">
+                <div class="invalid-feedback" v-if="errors.address">{{errors.address[0]}}</div>
               </div>
-              <div class="invalid-feedback" v-if="errors.address">{{errors.address[0]}}</div>
             </div>
             <div class="form-group">
               <label>Costo de envio</label>

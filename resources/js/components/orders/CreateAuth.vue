@@ -111,8 +111,10 @@ export default {
       }
     },
     setPosition(position) {
+      //console.log(position);
       axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
       .then(response => {
+        //console.log(response.data);
         this.newOrder.address = response.data.display_name
         localStorage.setItem("address", JSON.stringify(this.newOrder.address))
         this.loading = false
