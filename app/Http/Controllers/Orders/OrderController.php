@@ -107,7 +107,7 @@ class OrderController extends Controller
     {
         return Order::with('status', 'dealer')
             ->where('client_id', $userId)
-            //->latest()
+            ->latest()
             //->get();
             ->paginate(10);
     }
