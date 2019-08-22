@@ -19,6 +19,8 @@ import swal from 'sweetalert'
 import VueContentPlaceholders from 'vue-content-placeholders'
 import rate from 'vue-rate'
 import vueStep from 'vue-step'
+import InfiniteLoading from 'vue-infinite-loading';
+Vue.use(InfiniteLoading);
 
 Vue.use(require('vue-moment'))
 Vue.use(Toasted)

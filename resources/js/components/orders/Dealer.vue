@@ -4,12 +4,34 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mis vueltas <small class="text-muted">({{orders.length}}/${{profit}})</small></h4>
         <div class="card-header-actions mr-1">
-          <a class="btn btn-primary" href="/orders/dealer" @click.prevent="getOrders">
+          <a class="text-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
+            <i class="fas fa-filter"></i>
+          </a>
+          <a class="btn btn-primary ml-3" href="/orders/dealer" @click.prevent="getOrders">
             <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
           </a>
         </div>
       </div>
       <div class="card-body px-0">
+        <div class="mb-4" v-show="filtersShow">
+          <div class="form-group">
+            <multiselect
+              v-model="filters.status"
+              :options="status"
+              track-by="id"
+              label="status"
+              :multiple="true"
+              :searchable="false"
+              @select="getOrders"
+              @remove="getOrders"
+              placeholder="Filtra por Estatus"
+              :class="{'border border-danger rounded': errors.status}">
+            </multiselect>
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
+          </div>
+        </div>
         <content-placeholders v-if="loading">
           <content-placeholders-text :lines="6"/>
         </content-placeholders>
@@ -108,10 +130,22 @@ export default {
       user: Laravel.user,
       orders: [],
       profit: 0,
+      status: [],
       listStatus:[],
       userView: {},
+      filtersShow: false,
+      filters: {
+        userId: Laravel.user.id,
+        date: '',
+        status: [
+          {'id': 1, 'status': 'Abierto'},
+          {'id': 2, 'status': 'En camino'},
+          {'id': 3, 'status': 'Entregado'}
+        ]
+      },
       loading: true,
-      submiting: false
+      submiting: false,
+      errors: {}
     }
   },
   mounted () {
@@ -129,7 +163,8 @@ export default {
   methods: {
     getOrders () {
       this.loading = true
-      axios.get(`/api/orders/byDealer/${this.user.id}`)
+      axios.post(`/api/orders/byDealer/filters`, this.filters)
+      //axios.get(`/api/orders/byDealer/${this.user.id}`)
       .then(response => {
         this.orders = response.data.orders
         this.profit = response.data.profit
@@ -137,13 +172,21 @@ export default {
       })
     },
     getStatus () {
-      axios.get(`/api/orders/status`)
-      .then(response => {
-        response.data.pop()
-        this.listStatus = response.data.map(function(i, index) {
-          return i.status
+      if (this.status.length <= 0) {
+        axios.get(`/api/orders/status`)
+        .then(response => {
+          this.status = response.data
+          let status = response.data.slice(0)
+          status.pop()
+          this.listStatus = status.map(function(i, index) {
+            return i.status
+          })
         })
-      })
+      }
+    },
+    showFilters () {
+      this.filtersShow = !this.filtersShow
+      this.getStatus()
     },
     finalizeOrder (order, index) {
       if (!this.submiting) {

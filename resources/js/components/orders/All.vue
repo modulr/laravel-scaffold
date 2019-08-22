@@ -469,7 +469,8 @@ export default {
       newOrder: {},
       editOrder: {},
       newUser: {
-        name: ''
+        name: '',
+        cellphone: ''
       },
       userView: {},
       loading: true,
@@ -544,7 +545,7 @@ export default {
       }
     },
     searchClients (query) {
-      if (query.length > 2) {
+      if (query.length > 4 && !this.isLoading) {
         this.isLoading = true
         axios.post(`/api/users/searchClients`, {name: query})
         .then(response => {
@@ -679,7 +680,8 @@ export default {
       this.errors = {}
       this.newUser = {
         name: '',
-        password: '123456'
+        password: '123456',
+        cellphone: ''
       }
       $('#userCreateModal').modal('show')
       $('#orderModal').modal('hide')
@@ -688,11 +690,13 @@ export default {
       if (!this.submitingUser) {
         this.submitingUser = true
         this.newUser.email = this.email
+        this.newUser.cellphone = this.cellphone
         this.newUser.roles = [{name: 'user', display_name: 'Cliente'}]
         axios.post(`/api/clients/store`, this.newUser)
         .then(response => {
           this.newUser = {
-            name: ''
+            name: '',
+            cellphone: ''
           }
           this.submitingUser = false
           $('#userCreateModal').modal('hide')
@@ -764,6 +768,14 @@ export default {
       .replace(/^-+/, '') // Trim - from start of text
       .replace(/-+$/, '') // Trim - from end of text
       .concat('@traeme.app')
+    },
+    cellphone: function () {
+      return this.newUser.cellphone.toString().toLowerCase()
+      .replace(/\s+/g, '') // Replace spaces with -
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/^521/g, '') // Replace & with 'and'
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
     },
     originGMap: function () {
       return this.orders.map(function(item) {

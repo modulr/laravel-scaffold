@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/availables', 'OrderController@availables')->middleware('permission:read-orders');
             Route::get('/availablesCount', 'OrderController@availablesCount')->middleware('permission:read-orders');
             Route::get('/byClient/{user}', 'OrderController@byClient')->middleware('permission:read-orders');
+            Route::post('/byDealer/filters', 'OrderController@byDealerFilters')->middleware('permission:read-orders');
             Route::get('/byDealer/{user}', 'OrderController@byDealer')->middleware('permission:read-orders');
 
             Route::put('/updateStatus/{order}', 'OrderController@updateStatus')->middleware('permission:update-orders');

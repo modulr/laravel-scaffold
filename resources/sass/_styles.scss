@@ -69,6 +69,10 @@ a:hover {
   display: none;
 }
 
+.app-body {
+  overflow-x: visible !important;
+}
+
 // Sidebar ---------------------------------------
 @media (min-width: 992px) {
   .sidebar-minimized .sidebar .sidebar-nav {

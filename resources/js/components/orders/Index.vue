@@ -13,7 +13,7 @@
         <content-placeholders v-if="loading">
           <content-placeholders-text :lines="6"/>
         </content-placeholders>
-        <div v-else>
+        <div>
           <ul class="list-group mb-1" v-for="(item, index) in orders">
             <li class="list-group-item">
               <div class="row">
@@ -137,6 +137,11 @@
             </li>
           </ul>
         </div>
+        <!-- Loading -->
+        <infinite-loading @infinite="loadOrders" ref="infiniteLoading">
+          <span slot="no-results"></span>
+          <span slot="no-more"></span>
+        </infinite-loading>
       </div>
     </div>
     <div class="no-items-found text-center mt-5" v-if="!loading && !orders.length > 0">
@@ -214,6 +219,9 @@ export default {
     return {
       user: Laravel.user,
       orders: [],
+      pagination: {
+        current_page: 0
+      },
       listStatus:[],
       userView: {},
       newOrder: {},
@@ -225,17 +233,30 @@ export default {
     }
   },
   mounted () {
-    this.getOrders()
+    //this.getOrders()
     this.getStatus()
   },
   methods: {
-    getOrders () {
-      this.loading = true
-      axios.get(`/api/orders/byClient/${this.user.id}`)
-      .then(response => {
-        this.orders = response.data
-        this.loading = false
-      })
+    // getOrders () {
+    //   this.loading = true
+    //   axios.get(`/api/orders/byClient/${this.user.id}`)
+    //   .then(response => {
+    //     this.orders = response.data
+    //     this.loading = false
+    //   })
+    // },
+    loadOrders ($state) {
+        this.loading = true
+        var page = Number(this.pagination.current_page) + 1;
+        axios.get(`/api/orders/byClient/${this.user.id}?page=${page}`)
+        .then(response => {
+            this.orders = this.orders.concat(response.data.data);
+            this.pagination = response.data
+            $state.loaded();
+            this.loading = false
+            if (!this.pagination.next_page_url)
+                $state.complete();
+        });
     },
     getStatus () {
       axios.get(`/api/orders/status`)
@@ -307,7 +328,6 @@ export default {
         })
         .catch(error => {
           this.errors = error.response.data.errors
-          console.log(this.errors);
           this.submitingCreate = false
         })
       }

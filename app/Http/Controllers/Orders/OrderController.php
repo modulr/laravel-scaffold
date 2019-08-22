@@ -107,8 +107,9 @@ class OrderController extends Controller
     {
         return Order::with('status', 'dealer')
             ->where('client_id', $userId)
-            ->latest()
-            ->get();
+            //->latest()
+            //->get();
+            ->paginate(10);
     }
 
     public function byDealer ($userId)
@@ -123,6 +124,33 @@ class OrderController extends Controller
             ->where('dealer_id', $userId)
             ->whereDate('created_at', $date)
             ->latest()->get();
+
+        return ['orders' => $orders, 'profit' => $profit];
+    }
+
+    public function byDealerFilters (Request $request)
+    {
+        $query = Order::query();
+        $profit = DB::table('orders');
+
+        if(!empty($request->date)) {
+            $date = $request->date;
+        } else {
+            $date = Carbon::today();
+        }
+
+        if(!empty($request->status)) {
+            $collection = collect($request->status);
+            $plucked = $collection->pluck('id');
+            $ids = $plucked->all();
+            $query->whereIn('status_id', $ids);
+            $profit->whereIn('status_id', $ids);
+        }
+
+        $orders = $query->where('dealer_id', $request->userId)->whereDate('created_at', $date)->latest()->get();
+        $orders->load('status', 'client', 'dealer');
+
+        $profit = $profit->where('dealer_id', $request->userId)->whereDate('created_at', $date)->sum('delivery_costs');
 
         return ['orders' => $orders, 'profit' => $profit];
     }
