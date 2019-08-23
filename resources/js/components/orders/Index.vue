@@ -10,9 +10,9 @@
         </div>
       </div>
       <div class="card-body px-0">
-        <content-placeholders v-if="loading">
-          <content-placeholders-text :lines="20"/>
-        </content-placeholders>
+        <!-- <content-placeholders v-if="loading">
+          <content-placeholders-text :lines="6"/>
+        </content-placeholders> -->
         <div>
           <ul class="list-group mb-1" v-for="(item, index) in orders">
             <li class="list-group-item">

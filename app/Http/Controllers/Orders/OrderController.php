@@ -67,6 +67,11 @@ class OrderController extends Controller
     {
         $date = Carbon::today();
 
+        $profit = DB::table('orders')
+            ->where('status_id', 1)
+            ->whereDate('created_at', $date)
+            ->sum('delivery_costs');
+
         $ordersCount = Order::where('dealer_id', Auth::id())
             ->where('status_id', 2)
             ->whereDate('created_at', $date)
@@ -84,14 +89,15 @@ class OrderController extends Controller
                 ->whereDate('created_at', $date)
                 ->oldest()
                 ->get());
-            return $orders;
         } else {
-            return Order::with('status', 'client')
+            $orders = Order::with('status', 'client')
                 ->where('status_id', 1)
                 ->whereDate('created_at', $date)
                 ->oldest()
                 ->get();
         }
+
+        return ['orders' => $orders, 'profit' => $profit];
     }
 
     public function availablesCount ()

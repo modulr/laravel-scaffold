@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mandados</h4>
+        <h4 class="float-left pt-2">Mandados <small class="text-muted">${{profit}}|{{orders.length}}</small></h4>
         <div class="card-header-actions mr-1">
           <a class="btn btn-primary" href="/orders/availables" @click.prevent="getOrders">
             <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
@@ -97,6 +97,7 @@ export default {
   data () {
     return {
       orders: [],
+      profit: 0,
       listStatus: [],
       userView: {},
       loading: true,
@@ -120,7 +121,9 @@ export default {
       this.loading = true
       axios.get(`/api/orders/availables`)
       .then(response => {
-        this.orders = response.data
+        //this.orders = response.data
+        this.orders = response.data.orders
+        this.profit = response.data.profit
         this.loading = false
       })
     },

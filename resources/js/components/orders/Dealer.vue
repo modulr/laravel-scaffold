@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mis vueltas <small class="text-muted">({{orders.length}}/${{profit}})</small></h4>
+        <h4 class="float-left pt-2">Mis vueltas <small class="text-muted">${{profit}}|{{orders.length}}</small></h4>
         <div class="card-header-actions mr-1">
           <a class="text-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
@@ -29,7 +29,12 @@
             </multiselect>
           </div>
           <div class="form-group">
-            <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">📅</span>
+              </div>
+              <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
+            </div>
           </div>
         </div>
         <content-placeholders v-if="loading">
