@@ -19,8 +19,10 @@ import swal from 'sweetalert'
 import VueContentPlaceholders from 'vue-content-placeholders'
 import rate from 'vue-rate'
 import vueStep from 'vue-step'
-import InfiniteLoading from 'vue-infinite-loading';
-Vue.use(InfiniteLoading);
+import InfiniteLoading from 'vue-infinite-loading'
+Vue.use(InfiniteLoading)
+import Vue2TouchEvents from 'vue2-touch-events'
+Vue.use(Vue2TouchEvents)
 
 Vue.use(require('vue-moment'))
 Vue.use(Toasted)
@@ -101,6 +103,7 @@ Vue.component('stores-create', require('./components/stores/Create.vue'));
 Vue.component('stores-edit', require('./components/stores/Edit.vue'));
 Vue.component('stores-avatar', require('./components/stores/Avatar.vue'));
 Vue.component('stores-level1', require('./components/stores/Level1.vue'));
+Vue.component('stores-pollo-feliz', require('./components/stores/PolloFeliz.vue'));
 
 const app = new Vue({
     el: '#app'

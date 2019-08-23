@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <span>
     <div class="row justify-content-center" v-if="loading">
       <div class="col-12 col-md-4 px-5 py-3">
         <content-placeholders>
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </span>
 </template>
 
 <script>

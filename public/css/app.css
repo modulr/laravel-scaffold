@@ -11347,10 +11347,6 @@ a:hover {
   display: none;
 }
 
-.app-body {
-  overflow-x: visible !important;
-}
-
 .main .container-fluid {
   padding-right: 15px;
   padding-left: 15px;

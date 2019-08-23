@@ -253,7 +253,7 @@ class OrderController extends Controller
         $order->created_at = Carbon::parse($request->created_at)->toDateTimeString();
         $order->save();
 
-        //Auth::user()->notify(new UpdateOrder($order));
+        Auth::user()->notify(new UpdateOrder($order));
 
         return $this->show($order->id);
     }
@@ -272,13 +272,13 @@ class OrderController extends Controller
 
         $order->save();
 
-        // if ($order->status_id == 3) {
-        //     Auth::user()->notify(new FinalizeOrder($order));
-        // }
-        //
-        // if ($order->status_id == 4) {
-        //     Auth::user()->notify(new CancelOrder($order));
-        // }
+        if ($order->status_id == 3) {
+            Auth::user()->notify(new FinalizeOrder($order));
+        }
+
+        if ($order->status_id == 4) {
+            Auth::user()->notify(new CancelOrder($order));
+        }
 
         return $this->show($order->id);
     }
@@ -345,7 +345,7 @@ class OrderController extends Controller
           $order->dealer_id = Auth::id();
           $order->save();
 
-          //Auth::user()->notify(new TakeOrder($order));
+          Auth::user()->notify(new TakeOrder($order));
 
           return $order;
         } else {
@@ -365,12 +365,12 @@ class OrderController extends Controller
             $order->dealer_id = $request->dealer['id'];
             $order->status_id = 2;
             $order->save();
-            //Auth::user()->notify(new TakeOrder($order));
+            Auth::user()->notify(new TakeOrder($order));
         } else {
             $order->dealer_id = null;
             $order->status_id = 1;
             $order->save();
-            //Auth::user()->notify(new UntakeOrder($order));
+            Auth::user()->notify(new UntakeOrder($order));
         }
 
         return $this->show($order->id);
