@@ -14,6 +14,7 @@
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
         "laravolt/avatar": "^2.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "spatie/laravel-permission": "^2.23",
         "wildside/userstamps": "^0.5.5"
     },
