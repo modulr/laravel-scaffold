@@ -13,14 +13,14 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-   .browserSync('laravel-scaffold.test');
+   .browserSync('vuno.test');
 
 
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 mix.webpackConfig({
    plugins: [
    new SWPrecacheWebpackPlugin({
-       cacheId: 'ls_pwa',
+       cacheId: 'vuno_pwa',
        filename: 'service-worker.js',
        staticFileGlobs: ['public/**/*.{css,eot,svg,ttf,woff,woff2,js,html}'],
        minify: true,
