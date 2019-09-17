@@ -107,9 +107,9 @@
         <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
         </div> -->
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
+        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/sabor_de_casa.png" class="img-fluid" alt="La Cocina de Anita">
-        </div>
+        </div> -->
     </div>
 
     <stores-level1></stores-level1>
