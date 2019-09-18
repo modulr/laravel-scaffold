@@ -112,7 +112,7 @@ export default {
     addressGMap: function () {
       return this.orders.map(function(item) {
         let url = item.address.replace(/#/g, '')
-        return 'https://www.google.com/maps/search/Calle ' + url + ', Hidalgo del Parral, Chih.'
+        return 'https://www.google.com/maps/search/' + url + ', Hidalgo del Parral, Chih.'
       });
     }
   },

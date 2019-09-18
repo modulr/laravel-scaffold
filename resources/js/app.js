@@ -98,6 +98,7 @@ Vue.component('dealers-avatar', require('./components/dealers/Avatar.vue'));
 Vue.component('dealers-active', require('./components/dealers/Active.vue'));
 
 // Stores
+Vue.component('stores-stores', require('./components/stores/Stores.vue'));
 Vue.component('stores-index', require('./components/stores/Index.vue'));
 Vue.component('stores-create', require('./components/stores/Create.vue'));
 Vue.component('stores-edit', require('./components/stores/Edit.vue'));

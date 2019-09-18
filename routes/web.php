@@ -22,6 +22,9 @@ Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbac
 Route::get('/home', function () {
     return redirect('/');
 });
+Route::get('/tiendas', function () {
+    return view('stores');
+});
 
 Route::get('/dashboard', 'DashboardController@index');
 

@@ -6,6 +6,11 @@
                     <i class="nav-icon far fa-comment-alt mr-2"></i>Pedir
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tiendas">
+                    <i class="nav-icon far fa-store mr-2"></i>Tiendas
+                </a>
+            </li>
             @can('read-orders')
             <li class="nav-item">
                 <a class="nav-link" href="/orders">

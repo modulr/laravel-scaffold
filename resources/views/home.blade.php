@@ -26,7 +26,9 @@
 
     <div class="row justify-content-center mt-5">
         <div class="col-12 pb-3 text-center px-5">
+          <a href="/tiendas">
             <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
+          </a>
         </div>
         <stores-pollo-feliz></stores-pollo-feliz>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
@@ -113,6 +115,16 @@
     </div>
 
     <stores-level1></stores-level1>
+
+    <div class="row">
+        <div class="col text-center">
+            <a href="/tiendas">
+            <h4 class="text-primary mt-5">
+                Ver todas las tiendas
+            </h4>
+            </a>
+        </div>
+    </div>
 
     <div class="row justify-content-center bg-gradient mt-5">
         <div class="col text-center px-0">
