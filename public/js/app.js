@@ -80044,6 +80044,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -80054,7 +80055,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           from: 0,
           to: 0,
           total: 0,
-          per_page: 25,
+          per_page: 15,
           current_page: 1,
           last_page: 0
         },
@@ -80064,6 +80065,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         search: ''
       },
+      clearSearchBtn: false,
       loading: true
     };
   },
@@ -80090,13 +80092,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.loading = true;
+      this.clearSearchBtn = false;
       this.users = [];
       axios.post('/api/stores/filters?page=' + this.filters.pagination.current_page, this.filters).then(function (response) {
         _this.users = response.data.data;
         delete response.data.data;
         _this.filters.pagination = response.data;
         _this.loading = false;
+        if (_this.filters.search != '') {
+          _this.clearSearchBtn = true;
+        }
       });
+    },
+    clearSearch: function clearSearch() {
+      this.filters.search = '';
+      this.filter();
     },
     editUser: function editUser(userId) {
       location.href = '/stores/' + userId + '/edit';
@@ -80107,21 +80117,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.filters.pagination.current_page = 1;
       this.getUsers();
     },
-    changeSize: function changeSize(perPage) {
-      this.filters.pagination.current_page = 1;
-      this.filters.pagination.per_page = perPage;
-      this.getUsers();
-    },
-    sort: function sort(column) {
-      if (column == this.filters.orderBy.column) {
-        this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc';
-      } else {
-        this.filters.orderBy.column = column;
-        this.filters.orderBy.direction = 'asc';
-      }
 
-      this.getUsers();
-    },
+    // changeSize (perPage) {
+    //   this.filters.pagination.current_page = 1
+    //   this.filters.pagination.per_page = perPage
+    //   this.getUsers()
+    // },
+    // sort (column) {
+    //   if(column == this.filters.orderBy.column) {
+    //     this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc'
+    //   } else {
+    //     this.filters.orderBy.column = column
+    //     this.filters.orderBy.direction = 'asc'
+    //   }
+    //
+    //   this.getUsers()
+    // },
     changePage: function changePage(page) {
       this.filters.pagination.current_page = page;
       this.getUsers();
@@ -80144,7 +80155,7 @@ var render = function() {
       [
         _c("div", { staticClass: "row justify-content-center" }, [
           _c("div", { staticClass: "col-7 col-md-5" }, [
-            _c("div", { staticClass: "input-group mb-4" }, [
+            _c("div", { staticClass: "input-group mt-3 mb-4" }, [
               _c("input", {
                 directives: [
                   {
@@ -80155,7 +80166,7 @@ var render = function() {
                     modifiers: { trim: true }
                   }
                 ],
-                staticClass: "form-control",
+                staticClass: "form-control border-right-0",
                 attrs: { type: "text", placeholder: "Buscar" },
                 domProps: { value: _vm.filters.search },
                 on: {
@@ -80181,6 +80192,17 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "input-group-prepend" }, [
+                _vm.clearSearchBtn
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "input-group-text border-left-0",
+                        on: { click: _vm.clearSearch }
+                      },
+                      [_vm._v("x")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "span",
                   {
@@ -80216,17 +80238,17 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-8" }, [
-                          _c("div", { staticClass: "card-body" }, [
-                            _c("h5", { staticClass: "card-title mb-1" }, [
+                          _c("div", { staticClass: "card-body pb-0" }, [
+                            _c("h5", { staticClass: "card-title mb-0" }, [
                               _vm._v(_vm._s(user.name))
                             ]),
                             _vm._v(" "),
-                            _c("p", { staticClass: "card-text mb-1" }, [
+                            _c("p", { staticClass: "card-text mb-0" }, [
                               _vm._v(_vm._s(user.description))
                             ]),
                             _vm._v(" "),
                             user.address
-                              ? _c("p", { staticClass: "card-text mb-1" }, [
+                              ? _c("p", { staticClass: "card-text mb-0" }, [
                                   _c("small", { staticClass: "text-muted" }, [
                                     _c(
                                       "a",
@@ -80261,7 +80283,7 @@ var render = function() {
                               : _vm._e(),
                             _vm._v(" "),
                             user.schedule
-                              ? _c("p", { staticClass: "card-text mb-1" }, [
+                              ? _c("p", { staticClass: "card-text mb-0" }, [
                                   _c("small", { staticClass: "text-muted" }, [
                                     _c("i", {
                                       staticClass: "far fa-clock mr-1"
@@ -80281,26 +80303,11 @@ var render = function() {
                     _vm._m(0, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "col" }, [
-                      user.web
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "text-muted",
-                              attrs: { href: user.web, target: "_blank" }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-globe fa-fw mr-2"
-                              })
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
                       user.facebook
                         ? _c(
                             "a",
                             {
-                              staticClass: "text-muted",
+                              staticClass: "text-info",
                               attrs: { href: user.facebook, target: "_blank" }
                             },
                             [
@@ -80321,6 +80328,21 @@ var render = function() {
                             [
                               _c("i", {
                                 staticClass: "fab fa-instagram fa-fw mr-2"
+                              })
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      user.web
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "text-muted",
+                              attrs: { href: user.web, target: "_blank" }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-globe fa-fw mr-2"
                               })
                             ]
                           )

@@ -3,9 +3,10 @@
     <div class="card-body px-0 pt-0 pb-5">
       <div class="row justify-content-center">
         <div class="col-7 col-md-5">
-          <div class="input-group mb-4">
-            <input type="text" class="form-control" placeholder="Buscar" v-model.trim="filters.search" @keyup.enter="filter">
+          <div class="input-group mt-3 mb-4">
+            <input type="text" class="form-control border-right-0" placeholder="Buscar" v-model.trim="filters.search" @keyup.enter="filter">
             <div class="input-group-prepend">
+              <span class="input-group-text border-left-0" v-if="clearSearchBtn" @click="clearSearch">x</span>
               <span class="input-group-text" @click="filter">
                 <i class="fas fa-spinner fa-spin" v-if="loading"></i>
                 <i class="fas fa-search" v-else></i>
@@ -25,10 +26,10 @@
                     <img :src="user.avatar_url" class="card-img" :alt="user.name">
                   </div>
                   <div class="col-8">
-                    <div class="card-body">
-                      <h5 class="card-title mb-1">{{user.name}}</h5>
-                      <p class="card-text mb-1">{{user.description}}</p>
-                      <p class="card-text mb-1" v-if="user.address">
+                    <div class="card-body pb-0">
+                      <h5 class="card-title mb-0">{{user.name}}</h5>
+                      <p class="card-text mb-0">{{user.description}}</p>
+                      <p class="card-text mb-0" v-if="user.address">
                         <small class="text-muted">
                           <a :href="`https://www.google.com/maps/search/${user.address}, Hidalgo del Parral, Chih.`" target="_blank">
                             <span class="text-muted">
@@ -37,7 +38,7 @@
                           </a>
                         </small>
                       </p>
-                      <p class="card-text mb-1" v-if="user.schedule">
+                      <p class="card-text mb-0" v-if="user.schedule">
                         <small class="text-muted">
                           <i class="far fa-clock mr-1"></i>{{user.schedule}}
                         </small>
@@ -50,14 +51,14 @@
                 <hr>
               </div>
               <div class="col">
-                <a :href="user.web" target="_blank" class="text-muted" v-if="user.web">
-                  <i class="fas fa-globe fa-fw mr-2"></i>
-                </a>
-                <a :href="user.facebook" target="_blank" class="text-muted" v-if="user.facebook">
+                <a :href="user.facebook" target="_blank" class="text-info" v-if="user.facebook">
                   <i class="fab fa-facebook fa-fw mr-2"></i>
                 </a>
                 <a :href="user.instagram" target="_blank" class="text-muted" v-if="user.instagram">
                   <i class="fab fa-instagram fa-fw mr-2"></i>
+                </a>
+                <a :href="user.web" target="_blank" class="text-muted" v-if="user.web">
+                  <i class="fas fa-globe fa-fw mr-2"></i>
                 </a>
                 <a :href="user.link" target="_blank" class="text-muted" v-if="user.link">
                   <i class="fas fa-link fa-fw mr-2"></i>
@@ -124,7 +125,7 @@ export default {
           from: 0,
           to: 0,
           total: 0,
-          per_page: 25,
+          per_page: 15,
           current_page: 1,
           last_page: 0
         },
@@ -134,6 +135,7 @@ export default {
         },
         search: ''
       },
+      clearSearchBtn: false,
       loading: true
     }
   },
@@ -157,6 +159,7 @@ export default {
     // },
     getUsers () {
       this.loading = true
+      this.clearSearchBtn = false
       this.users = []
       axios.post(`/api/stores/filters?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
@@ -164,7 +167,14 @@ export default {
         delete response.data.data
         this.filters.pagination = response.data
         this.loading = false
+        if (this.filters.search != '') {
+          this.clearSearchBtn = true
+        }
       })
+    },
+    clearSearch() {
+      this.filters.search = ''
+      this.filter()
     },
     editUser (userId) {
       location.href = `/stores/${userId}/edit`
@@ -174,21 +184,21 @@ export default {
       this.filters.pagination.current_page = 1
       this.getUsers()
     },
-    changeSize (perPage) {
-      this.filters.pagination.current_page = 1
-      this.filters.pagination.per_page = perPage
-      this.getUsers()
-    },
-    sort (column) {
-      if(column == this.filters.orderBy.column) {
-        this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc'
-      } else {
-        this.filters.orderBy.column = column
-        this.filters.orderBy.direction = 'asc'
-      }
-
-      this.getUsers()
-    },
+    // changeSize (perPage) {
+    //   this.filters.pagination.current_page = 1
+    //   this.filters.pagination.per_page = perPage
+    //   this.getUsers()
+    // },
+    // sort (column) {
+    //   if(column == this.filters.orderBy.column) {
+    //     this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc'
+    //   } else {
+    //     this.filters.orderBy.column = column
+    //     this.filters.orderBy.direction = 'asc'
+    //   }
+    //
+    //   this.getUsers()
+    // },
     changePage (page) {
       this.filters.pagination.current_page = page
       this.getUsers()
