@@ -107,8 +107,13 @@
           <i class="fa fa-plus"></i>&nbsp; New User
         </a>
       </div>
-      <content-placeholders v-if="loading">
-        <content-placeholders-text :lines="10"/>
+      <content-placeholders v-if="loading" class="mt-3">
+        <content-placeholders-heading :img="true" />
+        <content-placeholders-heading :img="true" />
+        <content-placeholders-heading :img="true" />
+        <content-placeholders-heading :img="true" />
+        <content-placeholders-heading :img="true" />
+        <content-placeholders-heading :img="true" />
       </content-placeholders>
     </div>
   </div>

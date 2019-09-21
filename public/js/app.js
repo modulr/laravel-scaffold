@@ -80044,6 +80044,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -80505,7 +80510,20 @@ var render = function() {
         _vm.loading
           ? _c(
               "content-placeholders",
-              [_c("content-placeholders-text", { attrs: { lines: 10 } })],
+              { staticClass: "mt-3" },
+              [
+                _c("content-placeholders-heading", { attrs: { img: true } }),
+                _vm._v(" "),
+                _c("content-placeholders-heading", { attrs: { img: true } }),
+                _vm._v(" "),
+                _c("content-placeholders-heading", { attrs: { img: true } }),
+                _vm._v(" "),
+                _c("content-placeholders-heading", { attrs: { img: true } }),
+                _vm._v(" "),
+                _c("content-placeholders-heading", { attrs: { img: true } }),
+                _vm._v(" "),
+                _c("content-placeholders-heading", { attrs: { img: true } })
+              ],
               1
             )
           : _vm._e()
