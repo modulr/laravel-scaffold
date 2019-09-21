@@ -2,8 +2,8 @@
   <div class="container">
     <div class="card-body px-0 pt-0 pb-5">
       <div class="row justify-content-center">
-        <div class="col-7 col-md-5">
-          <div class="input-group mt-3 mb-4">
+        <div class="col-7 col-md-5 mb-3">
+          <div class="input-group mt-3 mb-1">
             <input type="text" class="form-control border-right-0" placeholder="Buscar" v-model.trim="filters.search" @keyup.enter="filter">
             <div class="input-group-prepend">
               <span class="input-group-text border-left-0" v-if="clearSearchBtn" @click="clearSearch">x</span>
@@ -13,10 +13,13 @@
               </span>
             </div>
           </div>
+          <div class="text-center text-primary small" v-if='!loading && filters.pagination.total > 0'>
+            {{filters.pagination.total}} Tiendas
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-md-6 p-2" v-for="(user, index) in users">
+        <div class="col-12 col-md-6 px-2 py-1" v-for="(user, index) in users">
           <ul class="list-group">
           <li class="list-group-item">
             <div class="row">
@@ -47,9 +50,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12">
-                <hr>
-              </div>
+            </div>
+            <div class="row pt-2">
               <div class="col">
                 <a :href="user.facebook" target="_blank" class="text-info" v-if="user.facebook">
                   <i class="fab fa-facebook fa-fw mr-2"></i>
@@ -80,9 +82,6 @@
         </infinite-loading> -->
       </div>
       <div class="row mt-3" v-if='!loading && filters.pagination.total > 0'>
-        <!-- <div class="col">
-          {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
-        </div> -->
         <div class="col" v-if="filters.pagination.last_page>1">
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-end">
@@ -109,7 +108,7 @@
         </a>
       </div>
       <content-placeholders v-if="loading">
-        <content-placeholders-text/>
+        <content-placeholders-text :lines="10"/>
       </content-placeholders>
     </div>
   </div>
@@ -125,7 +124,7 @@ export default {
           from: 0,
           to: 0,
           total: 0,
-          per_page: 15,
+          per_page: 20,
           current_page: 1,
           last_page: 0
         },

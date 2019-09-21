@@ -80044,7 +80044,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -80055,7 +80054,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           from: 0,
           to: 0,
           total: 0,
-          per_page: 15,
+          per_page: 20,
           current_page: 1,
           last_page: 0
         },
@@ -80154,8 +80153,8 @@ var render = function() {
       { staticClass: "card-body px-0 pt-0 pb-5" },
       [
         _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-7 col-md-5" }, [
-            _c("div", { staticClass: "input-group mt-3 mb-4" }, [
+          _c("div", { staticClass: "col-7 col-md-5 mb-3" }, [
+            _c("div", { staticClass: "input-group mt-3 mb-1" }, [
               _c("input", {
                 directives: [
                   {
@@ -80216,7 +80215,17 @@ var render = function() {
                   ]
                 )
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            !_vm.loading && _vm.filters.pagination.total > 0
+              ? _c("div", { staticClass: "text-center text-primary small" }, [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(_vm.filters.pagination.total) +
+                      " Tiendas\n        "
+                  )
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -80224,7 +80233,7 @@ var render = function() {
           "div",
           { staticClass: "row" },
           _vm._l(_vm.users, function(user, index) {
-            return _c("div", { staticClass: "col-12 col-md-6 p-2" }, [
+            return _c("div", { staticClass: "col-12 col-md-6 px-2 py-1" }, [
               _c("ul", { staticClass: "list-group" }, [
                 _c("li", { staticClass: "list-group-item" }, [
                   _c("div", { staticClass: "row" }, [
@@ -80298,10 +80307,10 @@ var render = function() {
                           ])
                         ])
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(0, true),
-                    _vm._v(" "),
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row pt-2" }, [
                     _c("div", { staticClass: "col" }, [
                       user.facebook
                         ? _c(
@@ -80360,7 +80369,7 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _vm._m(1, true)
+                    _vm._m(0, true)
                   ])
                 ])
               ])
@@ -80483,18 +80492,22 @@ var render = function() {
           ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
               _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
               _vm._v(" "),
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("p", { staticClass: "text-muted" }, [
                 _vm._v("Try changing the filters or add a new one")
               ]),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(2)
             ])
           : _vm._e(),
         _vm._v(" "),
         _vm.loading
-          ? _c("content-placeholders", [_c("content-placeholders-text")], 1)
+          ? _c(
+              "content-placeholders",
+              [_c("content-placeholders-text", { attrs: { lines: 10 } })],
+              1
+            )
           : _vm._e()
       ],
       1
@@ -80502,12 +80515,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [_c("hr")])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

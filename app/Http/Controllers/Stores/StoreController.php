@@ -21,8 +21,7 @@ class StoreController extends Controller
 
         if($request->search) {
             $query->where('name', 'LIKE', '%'.$request->search.'%');
-            $query->orWhere('phone', 'LIKE', '%'.$request->search.'%');
-            $query->orWhere('cellphone', 'LIKE', '%'.$request->search.'%');
+            $query->orWhere('description', 'LIKE', '%'.$request->search.'%');
         }
 
         $query->role('store');
