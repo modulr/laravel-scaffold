@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="form-group">
-      <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order"></textarea>
+      <textarea class="form-control" rows="3" :placeholder="placeholder" v-model="order.order"></textarea>
       <small class="form-text text-white" v-if="errors.order">Dinos que te llevamos</small>
     </div>
     <div class="form-group">
@@ -12,12 +12,12 @@
             <i class="fas fa-map-marker-alt" v-else></i>
           </span>
         </div>
-        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="address">
+        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address">
       </div>
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
     <div class="mb-1">
-      <a class="btn btn-light btn-lg px-5" href="/login">Pedir</a>
+      <a class="btn btn-light btn-lg px-5" href="" @click.prevent="create">Pedir</a>
       <!-- <a class="btn btn-brand btn-facebook" href="/auth/facebook">
         Pídelo por Facebook
       </a> -->
@@ -36,8 +36,8 @@
 export default {
   data () {
     return {
-      order: '',
-      address: '',
+      order: {},
+      //address: '',
       placeholder: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
@@ -52,36 +52,40 @@ export default {
   },
   mounted () {
     this.randomPlaceholder()
-    if (localStorage.getItem("address")) {
-      this.address = JSON.parse(localStorage.getItem("address"))
+    if (localStorage.getItem("order")) {
+      this.order = JSON.parse(localStorage.getItem("order"))
     }
     this.getPosition()
   },
   methods: {
-    send () {
-      this.errors = {}
-      if (!this.order) {
-        this.errors.order = true
-      }
-      if (!this.address) {
-        this.errors.address = true
-      }
-      if (Object.entries(this.errors).length === 0 && this.errors.constructor === Object) {
-        location.href = `https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20${this.order},%20%20Destino:%20%20${this.address}`
-        localStorage.setItem("address", JSON.stringify(this.address))
-      }
-      // if (!this.submiting) {
-      //   this.submiting = true
-      //   axios.get(`https://api.whatsapp.com/send?phone=526271101145&text=${this.order.order}&source=&data=${this.order.address}`)
-      //   .then(response => {
-      //     this.$toasted.global.error('¡Orden enviada!')
-      //   })
-      //   .catch(error => {
-      //     this.errors = error.response.data.errors
-      //     this.submiting = false
-      //   })
-      // }
+    create () {
+      localStorage.setItem("order", JSON.stringify(this.order))
+      location.href = `/login`
     },
+    // send () {
+    //   this.errors = {}
+    //   if (!this.order) {
+    //     this.errors.order = true
+    //   }
+    //   if (!this.address) {
+    //     this.errors.address = true
+    //   }
+    //   if (Object.entries(this.errors).length === 0 && this.errors.constructor === Object) {
+    //     location.href = `https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20${this.order},%20%20Destino:%20%20${this.address}`
+    //     localStorage.setItem("address", JSON.stringify(this.address))
+    //   }
+    //   // if (!this.submiting) {
+    //   //   this.submiting = true
+    //   //   axios.get(`https://api.whatsapp.com/send?phone=526271101145&text=${this.order.order}&source=&data=${this.order.address}`)
+    //   //   .then(response => {
+    //   //     this.$toasted.global.error('¡Orden enviada!')
+    //   //   })
+    //   //   .catch(error => {
+    //   //     this.errors = error.response.data.errors
+    //   //     this.submiting = false
+    //   //   })
+    //   // }
+    // },
     getPosition() {
       if (navigator.geolocation) {
         this.loading = true
@@ -95,8 +99,8 @@ export default {
       axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
       .then(response => {
         //console.log(response.data);
-        this.address = response.data.display_name
-        localStorage.setItem("address", JSON.stringify(this.address))
+        this.order.address = response.data.display_name
+        localStorage.setItem("order", JSON.stringify(this.order))
         this.loading = false
       })
     },

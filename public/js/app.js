@@ -71243,8 +71243,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      order: '',
-      address: '',
+      order: {},
+      //address: '',
       placeholder: '',
       placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
       loading: false,
@@ -71253,37 +71253,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.randomPlaceholder();
-    if (localStorage.getItem("address")) {
-      this.address = JSON.parse(localStorage.getItem("address"));
+    if (localStorage.getItem("order")) {
+      this.order = JSON.parse(localStorage.getItem("order"));
     }
     this.getPosition();
   },
 
   methods: {
-    send: function send() {
-      this.errors = {};
-      if (!this.order) {
-        this.errors.order = true;
-      }
-      if (!this.address) {
-        this.errors.address = true;
-      }
-      if (Object.entries(this.errors).length === 0 && this.errors.constructor === Object) {
-        location.href = 'https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20' + this.order + ',%20%20Destino:%20%20' + this.address;
-        localStorage.setItem("address", JSON.stringify(this.address));
-      }
-      // if (!this.submiting) {
-      //   this.submiting = true
-      //   axios.get(`https://api.whatsapp.com/send?phone=526271101145&text=${this.order.order}&source=&data=${this.order.address}`)
-      //   .then(response => {
-      //     this.$toasted.global.error('¡Orden enviada!')
-      //   })
-      //   .catch(error => {
-      //     this.errors = error.response.data.errors
-      //     this.submiting = false
-      //   })
-      // }
+    create: function create() {
+      localStorage.setItem("order", JSON.stringify(this.order));
+      location.href = '/login';
     },
+
+    // send () {
+    //   this.errors = {}
+    //   if (!this.order) {
+    //     this.errors.order = true
+    //   }
+    //   if (!this.address) {
+    //     this.errors.address = true
+    //   }
+    //   if (Object.entries(this.errors).length === 0 && this.errors.constructor === Object) {
+    //     location.href = `https://api.whatsapp.com/send?phone=526271101145&text=Pedido:%20${this.order},%20%20Destino:%20%20${this.address}`
+    //     localStorage.setItem("address", JSON.stringify(this.address))
+    //   }
+    //   // if (!this.submiting) {
+    //   //   this.submiting = true
+    //   //   axios.get(`https://api.whatsapp.com/send?phone=526271101145&text=${this.order.order}&source=&data=${this.order.address}`)
+    //   //   .then(response => {
+    //   //     this.$toasted.global.error('¡Orden enviada!')
+    //   //   })
+    //   //   .catch(error => {
+    //   //     this.errors = error.response.data.errors
+    //   //     this.submiting = false
+    //   //   })
+    //   // }
+    // },
     getPosition: function getPosition() {
       if (navigator.geolocation) {
         this.loading = true;
@@ -71298,8 +71303,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
         //console.log(response.data);
-        _this.address = response.data.display_name;
-        localStorage.setItem("address", JSON.stringify(_this.address));
+        _this.order.address = response.data.display_name;
+        localStorage.setItem("order", JSON.stringify(_this.order));
         _this.loading = false;
       });
     },
@@ -71324,19 +71329,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.order,
-            expression: "order"
+            value: _vm.order.order,
+            expression: "order.order"
           }
         ],
         staticClass: "form-control",
         attrs: { rows: "3", placeholder: _vm.placeholder },
-        domProps: { value: _vm.order },
+        domProps: { value: _vm.order.order },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.order = $event.target.value
+            _vm.$set(_vm.order, "order", $event.target.value)
           }
         }
       }),
@@ -71370,8 +71375,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.address,
-              expression: "address"
+              value: _vm.order.address,
+              expression: "order.address"
             }
           ],
           staticClass: "form-control",
@@ -71379,13 +71384,13 @@ var render = function() {
             type: "text",
             placeholder: "¿A donde? Calle, numero y colonia"
           },
-          domProps: { value: _vm.address },
+          domProps: { value: _vm.order.address },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.address = $event.target.value
+              _vm.$set(_vm.order, "address", $event.target.value)
             }
           }
         })
@@ -71398,23 +71403,25 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-1" }, [
+    _c("div", { staticClass: "mb-1" }, [
       _c(
         "a",
-        { staticClass: "btn btn-light btn-lg px-5", attrs: { href: "/login" } },
+        {
+          staticClass: "btn btn-light btn-lg px-5",
+          attrs: { href: "" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.create($event)
+            }
+          }
+        },
         [_vm._v("Pedir")]
       )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -71523,8 +71530,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.randomPlaceholder();
-    if (localStorage.getItem("address")) {
-      this.newOrder.address = JSON.parse(localStorage.getItem("address"));
+    if (localStorage.getItem("order")) {
+      this.newOrder = JSON.parse(localStorage.getItem("order"));
       //this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("address")))
     }
   },
@@ -71546,9 +71553,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submiting = true;
         this.errors = {};
         axios.post('/api/orders/storeAuth', this.newOrder).then(function (response) {
-          localStorage.setItem("address", JSON.stringify(_this2.newOrder.address));
           //this.$toasted.global.error('¡Mandado creado!')
           _this2.newOrder.order = '';
+          localStorage.setItem("order", JSON.stringify(_this2.newOrder));
           _this2.submiting = false;
           var wrapper = document.createElement('div');
           wrapper.innerHTML = '<div data-v-3500aeb9 class="mb-3 v-step-warp-horizontal style2"><div data-v-3500aeb9 class="v-step-progress-bg"><div data-v-3500aeb9 class="v-step-progress-value" style="background-color: rgb(31, 177, 29); width: 33.3333%;"></div></div> <ul data-v-3500aeb9 class="v-step-list"><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Abierto </label> <div data-v-3500aeb9 class="v-step-item-number" style="background-color: rgb(31, 177, 29); color: rgb(255, 255, 255);">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> En camino </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Entregado </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li></ul></div>';
@@ -71591,7 +71598,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
         //console.log(response.data);
         _this3.newOrder.address = response.data.display_name;
-        localStorage.setItem("address", JSON.stringify(_this3.newOrder.address));
+        localStorage.setItem("order", JSON.stringify(_this3.newOrder));
         _this3.loading = false;
       });
     },
@@ -80045,15 +80052,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
+      order: {},
       filters: {
         pagination: {
           from: 0,
@@ -80075,6 +80079,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.getUsers();
+    if (localStorage.getItem("order")) {
+      this.order = JSON.parse(localStorage.getItem("order"));
+    }
     //this.loadUsers();
   },
 
@@ -80107,6 +80114,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this.clearSearchBtn = true;
         }
       });
+    },
+    create: function create(user) {
+      this.order.order = 'Traeme de ' + user.name;
+      localStorage.setItem("order", JSON.stringify(this.order));
+      location.href = '/';
     },
     clearSearch: function clearSearch() {
       this.filters.search = '';
@@ -80252,7 +80264,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-8" }, [
-                          _c("div", { staticClass: "card-body pb-0" }, [
+                          _c("div", { staticClass: "card-body pb-0 pr-0" }, [
                             _c("h5", { staticClass: "card-title mb-0" }, [
                               _vm._v(_vm._s(user.name))
                             ]),
@@ -80308,73 +80320,107 @@ var render = function() {
                                     )
                                   ])
                                 ])
-                              : _vm._e()
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mt-2" }, [
+                              user.facebook
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass: "text-info",
+                                      attrs: {
+                                        href: user.facebook,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass:
+                                          "fab fa-facebook fa-fw mr-2"
+                                      })
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              user.instagram
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass: "text-muted",
+                                      attrs: {
+                                        href: user.instagram,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass:
+                                          "fab fa-instagram fa-fw mr-2"
+                                      })
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              user.web
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass: "text-muted",
+                                      attrs: {
+                                        href: user.web,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-globe fa-fw mr-2"
+                                      })
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              user.link
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass: "text-muted",
+                                      attrs: {
+                                        href: user.link,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-link fa-fw mr-2"
+                                      })
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-light btn-sm float-right",
+                                  attrs: { href: "" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.create(user)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        Pedir\n                      "
+                                  )
+                                ]
+                              )
+                            ])
                           ])
                         ])
                       ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row pt-2" }, [
-                    _c("div", { staticClass: "col" }, [
-                      user.facebook
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "text-info",
-                              attrs: { href: user.facebook, target: "_blank" }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fab fa-facebook fa-fw mr-2"
-                              })
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      user.instagram
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "text-muted",
-                              attrs: { href: user.instagram, target: "_blank" }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fab fa-instagram fa-fw mr-2"
-                              })
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      user.web
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "text-muted",
-                              attrs: { href: user.web, target: "_blank" }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-globe fa-fw mr-2"
-                              })
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      user.link
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "text-muted",
-                              attrs: { href: user.link, target: "_blank" }
-                            },
-                            [_c("i", { staticClass: "fas fa-link fa-fw mr-2" })]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(0, true)
                   ])
                 ])
               ])
@@ -80497,13 +80543,13 @@ var render = function() {
           ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
               _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
               _vm._v(" "),
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("p", { staticClass: "text-muted" }, [
                 _vm._v("Try changing the filters or add a new one")
               ]),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(1)
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -80533,16 +80579,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col text-right" }, [
-      _c("a", { staticClass: "btn btn-light btn-sm", attrs: { href: "/" } }, [
-        _vm._v("\n                Pedir\n              ")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -29,7 +29,7 @@
                     <img :src="user.avatar_url" class="card-img" :alt="user.name">
                   </div>
                   <div class="col-8">
-                    <div class="card-body pb-0">
+                    <div class="card-body pb-0 pr-0">
                       <h5 class="card-title mb-0">{{user.name}}</h5>
                       <p class="card-text mb-0">{{user.description}}</p>
                       <p class="card-text mb-0" v-if="user.address">
@@ -46,30 +46,26 @@
                           <i class="far fa-clock mr-1"></i>{{user.schedule}}
                         </small>
                       </p>
+                      <div class="mt-2">
+                        <a :href="user.facebook" target="_blank" class="text-info" v-if="user.facebook">
+                          <i class="fab fa-facebook fa-fw mr-2"></i>
+                        </a>
+                        <a :href="user.instagram" target="_blank" class="text-muted" v-if="user.instagram">
+                          <i class="fab fa-instagram fa-fw mr-2"></i>
+                        </a>
+                        <a :href="user.web" target="_blank" class="text-muted" v-if="user.web">
+                          <i class="fas fa-globe fa-fw mr-2"></i>
+                        </a>
+                        <a :href="user.link" target="_blank" class="text-muted" v-if="user.link">
+                          <i class="fas fa-link fa-fw mr-2"></i>
+                        </a>
+                        <a class="btn btn-light btn-sm float-right" href="" @click.prevent="create(user)">
+                          Pedir
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="row pt-2">
-              <div class="col">
-                <a :href="user.facebook" target="_blank" class="text-info" v-if="user.facebook">
-                  <i class="fab fa-facebook fa-fw mr-2"></i>
-                </a>
-                <a :href="user.instagram" target="_blank" class="text-muted" v-if="user.instagram">
-                  <i class="fab fa-instagram fa-fw mr-2"></i>
-                </a>
-                <a :href="user.web" target="_blank" class="text-muted" v-if="user.web">
-                  <i class="fas fa-globe fa-fw mr-2"></i>
-                </a>
-                <a :href="user.link" target="_blank" class="text-muted" v-if="user.link">
-                  <i class="fas fa-link fa-fw mr-2"></i>
-                </a>
-              </div>
-              <div class="col text-right">
-                <a class="btn btn-light btn-sm" href="/">
-                  Pedir
-                </a>
               </div>
             </div>
           </li>
@@ -124,6 +120,7 @@ export default {
   data () {
     return {
       users: [],
+      order: {},
       filters: {
         pagination: {
           from: 0,
@@ -145,6 +142,9 @@ export default {
   },
   mounted () {
     this.getUsers()
+    if (localStorage.getItem("order")) {
+      this.order = JSON.parse(localStorage.getItem("order"))
+    }
     //this.loadUsers();
   },
   methods: {
@@ -175,6 +175,11 @@ export default {
           this.clearSearchBtn = true
         }
       })
+    },
+    create (user) {
+      this.order.order = `Traeme de ${user.name}`
+      localStorage.setItem("order", JSON.stringify(this.order))
+      location.href = `/`
     },
     clearSearch() {
       this.filters.search = ''

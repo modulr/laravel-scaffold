@@ -50,8 +50,8 @@ export default {
   },
   mounted () {
     this.randomPlaceholder()
-    if (localStorage.getItem("address")) {
-      this.newOrder.address = JSON.parse(localStorage.getItem("address"))
+    if (localStorage.getItem("order")) {
+      this.newOrder = JSON.parse(localStorage.getItem("order"))
       //this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("address")))
     }
   },
@@ -70,9 +70,9 @@ export default {
         this.errors = {}
         axios.post(`/api/orders/storeAuth`, this.newOrder)
         .then(response => {
-          localStorage.setItem("address", JSON.stringify(this.newOrder.address))
           //this.$toasted.global.error('¡Mandado creado!')
           this.newOrder.order = ''
+          localStorage.setItem("order", JSON.stringify(this.newOrder))
           this.submiting = false
           const wrapper = document.createElement('div');
           wrapper.innerHTML = `<div data-v-3500aeb9 class="mb-3 v-step-warp-horizontal style2"><div data-v-3500aeb9 class="v-step-progress-bg"><div data-v-3500aeb9 class="v-step-progress-value" style="background-color: rgb(31, 177, 29); width: 33.3333%;"></div></div> <ul data-v-3500aeb9 class="v-step-list"><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Abierto </label> <div data-v-3500aeb9 class="v-step-item-number" style="background-color: rgb(31, 177, 29); color: rgb(255, 255, 255);">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> En camino </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Entregado </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li></ul></div>`;
@@ -116,7 +116,7 @@ export default {
       .then(response => {
         //console.log(response.data);
         this.newOrder.address = response.data.display_name
-        localStorage.setItem("address", JSON.stringify(this.newOrder.address))
+        localStorage.setItem("order", JSON.stringify(this.newOrder))
         this.loading = false
       })
     },
