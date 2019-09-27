@@ -45,17 +45,17 @@
                 </div>
                 <div class="col-4 text-right">
                   <div>
-                    <small class="text-muted">
+                    <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
                       Envio: <strong>${{item.delivery_costs}}</strong>
                     </small>
                   </div>
                   <div>
-                    <small class="text-muted">
+                    <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
                       Costo: <strong>${{item.order_cost}}</strong>
                     </small>
                   </div>
                   <div>
-                    <span class="text-muted border-top">
+                    <span class="text-muted border-top" @click.prevent="showOrderUpdateModal(item, index)">
                       Total: <strong>${{item.delivery_costs + item.order_cost}}</strong>
                     </span>
                   </div>
@@ -89,6 +89,48 @@
     </div>
     <!-- Modal -->
     <profile-view :user="userView"></profile-view>
+    <!-- Modal update -->
+    <div class="modal fade" id="orderUpdateModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar mandado</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Costo de envio</label>
+              <div class="input-group border-right-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.delivery_costs}" v-model="editOrder.delivery_costs" placeholder="20">
+              </div>
+              <div class="invalid-feedback" v-if="errors.delivery_costs">{{errors.delivery_costs[0]}}</div>
+            </div>
+            <div class="form-group">
+              <label>Costo del paquete</label>
+              <div class="input-group border-right-0">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.order_cost}" v-model="editOrder.order_cost" placeholder="150">
+              </div>
+              <div class="invalid-feedback" v-if="errors.order_cost">{{errors.order_cost[0]}}</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-primary" href="#" :disabled="submitingUpdate" @click.prevent="updateOrder">
+              <i class="fas fa-spinner fa-spin" v-if="submitingUpdate"></i>
+              <i class="fas fa-check" v-else></i>
+              <span class="ml-1">Guardar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -96,12 +138,16 @@
 export default {
   data () {
     return {
+      user: Laravel.user,
       orders: [],
+      editOrder: {},
       profit: 0,
       listStatus: [],
       userView: {},
       loading: true,
-      submiting: false
+      submiting: false,
+      submitingUpdate: false,
+      errors: {},
     }
   },
   mounted () {
@@ -142,6 +188,8 @@ export default {
         axios.put(`/api/orders/takeOrder/${order.id}`)
         .then(response => {
           order.status_id = 2
+          this.orders[index].status_id = 2
+          this.orders[index].dealer_id = this.user.id
           this.$toasted.global.error('¡Mandado tomado!')
           //location.href = `/orders/dealer`
           this.submiting = false
@@ -179,6 +227,31 @@ export default {
           this.$toasted.global.error('¡Mandado finalizado!')
           this.getOrders()
           this.submiting = false
+        })
+      }
+    },
+    showOrderUpdateModal (order, index) {
+      if (order.dealer_id == this.user.id && this.user.hasRole['dealer-level-2']) {
+        this.errors = {}
+        this.editOrder = Object.assign({}, order)
+        this.editOrder.index = index
+        $('#orderUpdateModal').modal('show')
+      }
+    },
+    updateOrder () {
+      if (!this.submitingUpdate) {
+        this.submitingUpdate = true
+        axios.put(`/api/orders/update/${this.editOrder.id}`, this.editOrder)
+        .then(response => {
+          this.orders[this.editOrder.index].delivery_costs = response.data.delivery_costs
+          this.orders[this.editOrder.index].order_cost = response.data.order_cost
+          this.submitingUpdate = false
+          $('#orderUpdateModal').modal('hide')
+          this.$toasted.global.error('Mandado actualizado!')
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors
+          this.submitingUpdate = false
         })
       }
     }
