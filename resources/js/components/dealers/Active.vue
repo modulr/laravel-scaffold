@@ -11,10 +11,11 @@ export default {
   data () {
     return {
       currentUser: {},
+      user: Laravel.user,
       activeText: 'Desactivo',
     }
   },
-  props: ['user'],
+  //props: ['user'],
   mounted () {
     this.currentUser = this.user
     if (this.currentUser.active) {
@@ -31,9 +32,11 @@ export default {
         .then(response => {
           this.currentUser = response.data
           if (this.currentUser.active) {
+            this.user.active = true
             this.activeText = 'Activo'
             this.$toasted.global.error('Activado!')
           } else {
+            this.user.active = false
             this.activeText = 'Desactivo'
             this.$toasted.global.error('Desactivado!')
           }

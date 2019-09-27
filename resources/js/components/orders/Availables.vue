@@ -64,7 +64,8 @@
                   <hr>
                 </div>
                 <div class="col-12 text-right">
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="takeOrder(item, index)" v-if="item.status_id == 1">
+                  <dealers-active :user="user" v-if="!user.active && item.status_id == 1"></dealers-active>
+                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="takeOrder(item, index)" v-if="user.active && item.status_id == 1">
                     <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Tomar mandado
                   </a>

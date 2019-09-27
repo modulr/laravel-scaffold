@@ -28,6 +28,12 @@ class DealerController extends Controller
             $query->orWhere('cellphone', 'LIKE', '%'.$request->search.'%');
         }
 
+        if ($request->status) {
+            if ($request->status == 'active') {
+                $query->where('active', true);
+            }
+        }
+
         $query->role('dealer');
 
         $users = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))

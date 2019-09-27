@@ -69940,6 +69940,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70320,59 +70321,74 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12" }, [_c("hr")]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12 text-right" }, [
-                            item.status_id == 1
-                              ? _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-outline-info btn-sm",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.takeOrder(item, index)
+                          _c(
+                            "div",
+                            { staticClass: "col-12 text-right" },
+                            [
+                              !_vm.user.active && item.status_id == 1
+                                ? _c("dealers-active", {
+                                    attrs: { user: _vm.user }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.user.active && item.status_id == 1
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-info btn-sm",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.takeOrder(item, index)
+                                        }
                                       }
-                                    }
-                                  },
-                                  [
-                                    _vm.submiting
-                                      ? _c("i", {
-                                          staticClass: "fas fa-spinner fa-spin"
-                                        })
-                                      : _vm._e(),
-                                    _vm._v(
-                                      "\n                  Tomar mandado\n                "
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item.status_id == 2
-                              ? _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-outline-info btn-sm",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.finalizeOrder(item, index)
+                                    },
+                                    [
+                                      _vm.submiting
+                                        ? _c("i", {
+                                            staticClass:
+                                              "fas fa-spinner fa-spin"
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(
+                                        "\n                  Tomar mandado\n                "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              item.status_id == 2
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-info btn-sm",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.finalizeOrder(item, index)
+                                        }
                                       }
-                                    }
-                                  },
-                                  [
-                                    _vm.submiting
-                                      ? _c("i", {
-                                          staticClass: "fas fa-spinner fa-spin"
-                                        })
-                                      : _vm._e(),
-                                    _vm._v(
-                                      "\n                  Finalizar\n                "
-                                    )
-                                  ]
-                                )
-                              : _vm._e()
-                          ])
+                                    },
+                                    [
+                                      _vm.submiting
+                                        ? _c("i", {
+                                            staticClass:
+                                              "fas fa-spinner fa-spin"
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(
+                                        "\n                  Finalizar\n                "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
                         ])
                       ])
                     ])
@@ -75314,11 +75330,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
+      selected: 'active',
       filters: {
         pagination: {
           from: 0,
@@ -75332,7 +75355,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           column: 'id',
           direction: 'asc'
         },
-        search: ''
+        search: '',
+        status: ''
       },
       loading: true
     };
@@ -75367,6 +75391,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // filters
     filter: function filter() {
       this.filters.pagination.current_page = 1;
+      this.getUsers();
+    },
+    filterStatus: function filterStatus(status) {
+      this.filters.status = status;
+      console.log(status);
       this.getUsers();
     },
     changeSize: function changeSize(perPage) {
@@ -75407,7 +75436,7 @@ var render = function() {
       { staticClass: "card-body px-0" },
       [
         _c("div", { staticClass: "row justify-content-between" }, [
-          _c("div", { staticClass: "col-7 col-md-5" }, [
+          _c("div", { staticClass: "col-12 col-sm-5" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
               _c("input", {
                 directives: [
@@ -75459,6 +75488,50 @@ var render = function() {
                 )
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-auto" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selected,
+                    expression: "selected"
+                  }
+                ],
+                staticClass: "custom-select mb-3",
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      _vm.filterStatus(_vm.selected)
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "active" } }, [
+                  _vm._v("Activos")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "all" } }, [_vm._v("Todos")])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -77164,11 +77237,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       currentUser: {},
+      user: Laravel.user,
       activeText: 'Desactivo'
     };
   },
 
-  props: ['user'],
+  //props: ['user'],
   mounted: function mounted() {
     this.currentUser = this.user;
     if (this.currentUser.active) {
@@ -77187,9 +77261,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.post('/api/dealers/activeToggle', this.currentUser).then(function (response) {
           _this.currentUser = response.data;
           if (_this.currentUser.active) {
+            _this.user.active = true;
             _this.activeText = 'Activo';
             _this.$toasted.global.error('Activado!');
           } else {
+            _this.user.active = false;
             _this.activeText = 'Desactivo';
             _this.$toasted.global.error('Desactivado!');
           }

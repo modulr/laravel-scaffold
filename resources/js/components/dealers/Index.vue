@@ -8,7 +8,7 @@
     </div>
     <div class="card-body px-0">
       <div class="row justify-content-between">
-        <div class="col-7 col-md-5">
+        <div class="col-12 col-sm-5">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter">
             <div class="input-group-prepend">
@@ -18,6 +18,12 @@
               </span>
             </div>
           </div>
+        </div>
+        <div class="col-auto">
+          <select class="custom-select mb-3" v-model="selected" @change="filterStatus(selected)">
+            <option value="active">Activos</option>
+            <option value="all">Todos</option>
+          </select>
         </div>
         <div class="col-auto">
           <multiselect
@@ -118,6 +124,7 @@ export default {
   data () {
     return {
       users: [],
+      selected: 'active',
       filters: {
         pagination: {
           from: 0,
@@ -131,7 +138,8 @@ export default {
           column: 'id',
           direction: 'asc'
         },
-        search: ''
+        search: '',
+        status: ''
       },
       loading: true
     }
@@ -163,6 +171,11 @@ export default {
     // filters
     filter() {
       this.filters.pagination.current_page = 1
+      this.getUsers()
+    },
+    filterStatus (status) {
+      this.filters.status = status
+      console.log(status);
       this.getUsers()
     },
     changeSize (perPage) {
