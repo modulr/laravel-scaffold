@@ -76937,6 +76937,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77012,9 +77013,17 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _vm.user.hasRole && _vm.user.hasRole["dealer-level-1"]
+        _vm.user.hasRole &&
+        _vm.user.hasRole["dealer-level-1"] &&
+        !_vm.user.hasRole["dealer-level-2"]
           ? _c("span", { staticClass: "badge badge-pill badge-primary" }, [
               _vm._v("Nivel 1")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.user.hasRole && _vm.user.hasRole["dealer-level-2"]
+          ? _c("span", { staticClass: "badge badge-pill badge-primary" }, [
+              _vm._v("Nivel 2")
             ])
           : _vm._e()
       ],
