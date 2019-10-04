@@ -77489,6 +77489,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77568,6 +77588,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // filters
     filter: function filter() {
       this.filters.pagination.current_page = 1;
+      this.getUsers();
+    },
+    filterByCategory: function filterByCategory(category) {
+      this.filters.search = category;
       this.getUsers();
     },
 
@@ -77669,18 +77693,142 @@ var render = function() {
                   ]
                 )
               ])
-            ]),
-            _vm._v(" "),
-            !_vm.loading && _vm.filters.pagination.total > 0
-              ? _c("div", { staticClass: "text-center text-primary small" }, [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm.filters.pagination.total) +
-                      " Tiendas\n        "
-                  )
-                ])
-              : _vm._e()
+            ])
           ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col pb-3 pt-1 scrollmenu invisible-scrollbar" },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Tacos")
+                    }
+                  }
+                },
+                [_vm._v("Tacos")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Hamburguesas")
+                    }
+                  }
+                },
+                [_vm._v("Hamburguesas")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Pizza")
+                    }
+                  }
+                },
+                [_vm._v("Pizza")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Sushi")
+                    }
+                  }
+                },
+                [_vm._v("Sushi")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Gorditas")
+                    }
+                  }
+                },
+                [_vm._v("Gorditas")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Tortas")
+                    }
+                  }
+                },
+                [_vm._v("Tortas")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Lonches")
+                    }
+                  }
+                },
+                [_vm._v("Lonches")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Flautas")
+                    }
+                  }
+                },
+                [_vm._v("Flautas")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.filterByCategory("Quesadillas")
+                    }
+                  }
+                },
+                [_vm._v("Quesadillas")]
+              )
+            ]
+          )
         ]),
         _vm._v(" "),
         _c(
@@ -77867,6 +78015,20 @@ var render = function() {
         _vm._v(" "),
         !_vm.loading && _vm.filters.pagination.total > 0
           ? _c("div", { staticClass: "row mt-3" }, [
+              _c("div", { staticClass: "col" }, [
+                !_vm.loading && _vm.filters.pagination.total > 0
+                  ? _c("span", [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(_vm.filters.pagination.total) +
+                          "\n        "
+                      )
+                    ])
+                  : _c("i", { staticClass: "fas fa-spinner fa-spin" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "ml-1" }, [_vm._v("Tiendas")])
+              ]),
+              _vm._v(" "),
               _vm.filters.pagination.last_page > 1
                 ? _c("div", { staticClass: "col" }, [
                     _c("nav", { attrs: { "aria-label": "Page navigation" } }, [

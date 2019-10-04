@@ -11413,3 +11413,16 @@ a:hover {
   margin: 0 !important;
 }
 
+.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.invisible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollmenu a {
+  display: inline-block;
+}
+

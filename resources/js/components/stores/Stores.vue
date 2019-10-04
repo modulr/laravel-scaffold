@@ -13,9 +13,22 @@
               </span>
             </div>
           </div>
-          <div class="text-center text-primary small" v-if='!loading && filters.pagination.total > 0'>
-            {{filters.pagination.total}} Tiendas
-          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col pb-3 pt-1 scrollmenu invisible-scrollbar">
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Tacos')">Tacos</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Hamburguesas')">Hamburguesas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Pizza')">Pizza</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Sushi')">Sushi</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Gorditas')">Gorditas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Tortas')">Tortas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Lonches')">Lonches</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Flautas')">Flautas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Quesadillas')">Quesadillas</a>
+          <!-- <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Tripitas')">Tripitas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Pasteles')">Pasteles</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Pay')">Pay</a> -->
         </div>
       </div>
       <div class="row">
@@ -78,6 +91,13 @@
         </infinite-loading> -->
       </div>
       <div class="row mt-3" v-if='!loading && filters.pagination.total > 0'>
+        <div class="col">
+          <span v-if='!loading && filters.pagination.total > 0'>
+            {{filters.pagination.total}}
+          </span>
+          <i class="fas fa-spinner fa-spin" v-else></i>
+          <span class="ml-1">Tiendas</span>
+        </div>
         <div class="col" v-if="filters.pagination.last_page>1">
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-end">
@@ -191,6 +211,10 @@ export default {
     // filters
     filter() {
       this.filters.pagination.current_page = 1
+      this.getUsers()
+    },
+    filterByCategory (category) {
+      this.filters.search = category
       this.getUsers()
     },
     // changeSize (perPage) {
