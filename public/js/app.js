@@ -60759,8 +60759,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      user: Laravel.user
+    };
+  },
   mounted: function mounted() {
     this.addMinimizedClass();
   },
@@ -60777,6 +60860,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (localStorage.getItem("sidebarMinimized")) {
         document.body.classList.add("brand-minimized", "sidebar-minimized");
       }
+    },
+    swipeHandler: function swipeHandler(direction) {
+      if (direction == 'left') {
+        document.body.classList.remove("sidebar-show");
+      }
     }
   }
 });
@@ -60789,13 +60877,240 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("button", {
-    staticClass: "sidebar-minimizer brand-minimizer",
-    attrs: { type: "button" },
-    on: { click: _vm.toogleStorage }
-  })
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "touch",
+          rawName: "v-touch:swipe",
+          value: _vm.swipeHandler,
+          expression: "swipeHandler",
+          arg: "swipe"
+        }
+      ],
+      staticClass: "sidebar"
+    },
+    [
+      _c("nav", { staticClass: "sidebar-nav" }, [
+        _c("ul", { staticClass: "nav" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasPermission["read-orders"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(1)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["dealer"]
+            ? _c("li", { staticClass: "nav-title" }, [_vm._v("Repartidor")])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user
+            ? _c(
+                "li",
+                { staticClass: "nav-item d-compact-none d-minimized-none" },
+                [_c("dealers-active", { attrs: { user: _vm.user } })],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["dealer"]
+            ? _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "/orders/availables" }
+                  },
+                  [
+                    _c("i", { staticClass: "nav-icon fas fa-list-ul mr-2" }),
+                    _vm._v("Mandados\n                    "),
+                    _c("orders-availables-count")
+                  ],
+                  1
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["dealer"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(3)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["dealer"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(4)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-title" }, [_vm._v("Administrador")])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(5)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(6)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(7)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(8)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(9)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user &&
+          (_vm.user.hasPermission["read-users"] ||
+            _vm.user.hasPermission["read-roles"])
+            ? _c("li", { staticClass: "nav-title" }, [_vm._v("Settings")])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasPermission["read-users"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(10)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasPermission["read-roles"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(11)])
+            : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "sidebar-minimizer brand-minimizer",
+        attrs: { type: "button" },
+        on: { click: _vm.toogleStorage }
+      })
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "/" } }, [
+        _c("i", { staticClass: "nav-icon far fa-comment-alt mr-2" }),
+        _vm._v("Pedir\n                ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/orders" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-list-ul mr-2" }),
+      _vm._v("Mis Mandados\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "/tiendas" } }, [
+        _c("i", { staticClass: "nav-icon fas fa-store mr-2" }),
+        _vm._v("Tiendas\n                ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "/orders/dealer" } },
+      [
+        _c("i", { staticClass: "nav-icon fas fa-motorcycle mr-2" }),
+        _vm._v("Mis vueltas\n                ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/stores" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-store mr-2" }),
+      _vm._v("Tiendas\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "nav-link", attrs: { href: "/orders/all" } },
+      [
+        _c("i", { staticClass: "nav-icon fas fa-list-ul mr-2" }),
+        _vm._v("Mandados\n                ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/clients" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-users mr-2" }),
+      _vm._v("Clientes\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/stores" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-store mr-2" }),
+      _vm._v("Tiendas\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/dealers" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-motorcycle mr-2" }),
+      _vm._v("Repartidores\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/rates" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-dollar-sign" }),
+      _vm._v("Tarifas\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/users" } }, [
+      _c("i", { staticClass: "nav-icon icon-people" }),
+      _vm._v("Users\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/roles" } }, [
+      _c("i", { staticClass: "nav-icon icon-key" }),
+      _vm._v("Roles\n                ")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -81080,10 +81395,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $('#carouselPolloFeliz').carousel('next');
       } else if (direction == 'right') {
         $('#carouselPolloFeliz').carousel('prev');
+      } else if (direction == 'top' || direction == 'bottom') {
+        $('#pollo-feliz-menu').modal('hide');
       }
-      // else if (direction == 'top' || direction == 'bottom') {
-      //   $('#pollo-feliz-menu').modal('hide')
-      // }
     }
   }
 });
@@ -81111,8 +81425,6 @@ var render = function() {
         }
       },
       [
-        _vm._m(1),
-        _vm._v(" "),
         _c("div", { staticClass: "modal-dialog modal-xl" }, [
           _c("div", { staticClass: "modal-content" }, [
             _c("div", { staticClass: "modal-body" }, [
@@ -81120,7 +81432,12 @@ var render = function() {
                 "div",
                 {
                   staticClass: "carousel slide",
-                  attrs: { id: "carouselPolloFeliz", "data-ride": "carousel" }
+                  attrs: {
+                    id: "carouselPolloFeliz",
+                    "data-ride": "carousel",
+                    "data-interval": "false",
+                    "data-touch": "true"
+                  }
                 },
                 [
                   _c("div", { staticClass: "carousel-inner" }, [
@@ -81255,9 +81572,9 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(2)
                 ]
               )
             ])
@@ -81290,23 +81607,6 @@ var staticRenderFns = [
           }
         })
       ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close text-body mr-3 mt-3",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("i", { staticClass: "fas fa-times" })]
     )
   },
   function() {

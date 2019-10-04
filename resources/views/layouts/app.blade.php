@@ -75,7 +75,7 @@
     <div id="app">
         @include('layouts.header')
         <div class="app-body">
-            @include('layouts.sidebar')
+            <sidebar></sidebar>
             <main class="main animated fadeIn">
               @yield('content')
             </main>
