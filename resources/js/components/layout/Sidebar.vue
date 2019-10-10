@@ -18,7 +18,7 @@
                   </a>
               </li>
               <li class="nav-title" v-if="user && user.hasRole['dealer']">Repartidor</li>
-              <li class="nav-item d-compact-none d-minimized-none" v-if="user">
+              <li class="nav-item" v-if="user && user.hasRole['dealer']">
                 <dealers-active :user="user"></dealers-active>
               </li>
               <li class="nav-item" v-if="user && user.hasRole['dealer']">
