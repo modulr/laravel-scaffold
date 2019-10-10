@@ -60906,10 +60906,10 @@ var render = function() {
             ? _c("li", { staticClass: "nav-title" }, [_vm._v("Repartidor")])
             : _vm._e(),
           _vm._v(" "),
-          _vm.user
+          _vm.user && _vm.user.hasRole["dealer"]
             ? _c(
                 "li",
-                { staticClass: "nav-item d-compact-none d-minimized-none" },
+                { staticClass: "nav-item" },
                 [_c("dealers-active", { attrs: { user: _vm.user } })],
                 1
               )
