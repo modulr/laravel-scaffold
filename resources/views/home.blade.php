@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <a href="#el-forastero-menu" data-toggle="modal" data-target="#el-forastero-menu">
                 <img src="/img/stores/banner_el_forastero.png" class="img-fluid" alt="El Forastero">
             </a>
@@ -88,7 +88,7 @@
                 </div>
             </div>
           </div>
-        </div> -->
+        </div>
         <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <a href="#blvd-chino-menu" data-toggle="modal" data-target="#blvd-chino-menu">
                 <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
@@ -106,9 +106,9 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
+        <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
-        </div> -->
+        </div>
         <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
             <img src="/img/stores/sabor_de_casa.png" class="img-fluid" alt="La Cocina de Anita">
         </div> -->

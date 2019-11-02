@@ -162,6 +162,7 @@ class StoreController extends Controller
 
     public function getStoresLevel1 ()
     {
-        return User::role('store')->where('level', 1)->orderBy('name')->get();
+        //return User::role('store')->where('level', 1)->orderBy('name')->get();
+        return User::where('store', 1)->orderByRaw("RAND()")->take(5)->get();
     }
 }
