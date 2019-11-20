@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Notifications\AddCompanyToTransaction;
 
 class TransactionController extends Controller
 {
@@ -204,12 +205,14 @@ class TransactionController extends Controller
             'acronym' => 'required|string'
         ]);
 
+        $transaction = Transaction::find($transactionId);
         $company = Company::find($request->company);
         $attach = $company->transactions()->syncWithoutDetaching([$transactionId => ['company_type' => $request->type, 'company_type_acronym' => $request->acronym]]);
 
         $users = User::where('company_id', $request->company)->get();
         foreach ($users as $user) {
             $user->transactions()->syncWithoutDetaching($transactionId);
+            $user->notify(new AddCompanyToTransaction($transaction));
         }
 
         return $this->groupCompaniesUsers ($transactionId);
