@@ -25,105 +25,9 @@
     </div>
 
     <div class="row justify-content-center mt-5">
-        <div class="col-12 pb-3 text-center px-5">
-          <a href="/tiendas">
-            <img src="/img/stores/tienda.svg" class="img-fluid w-75" alt="Traeme Tienda">
-          </a>
-        </div>
-        <stores-pollo-feliz></stores-pollo-feliz>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <a href="#texas-menu" data-toggle="modal" data-target="#texas-menu">
-                <img src="/img/stores/banner_texas_pizza.png" class="img-fluid" alt="Texas Pizza">
-            </a>
-            <!-- <a href="#texas-menu" class="btn btn-pill btn-primary btn-sm btn-menu" data-toggle="modal" data-target="#texas-menu">
-                menu
-            </a> -->
-        </div>
-        <div class="modal fade" id="texas-menu" tabindex="-1" role="dialog" aria-hidden="true">
-            <button type="button" class="close text-body mr-3 mt-3" data-dismiss="modal" aria-label="Close">
-               <i class="fas fa-times"></i>
-            </button>
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img src="/img/stores/menu/texas_pizza/1.jpeg" class="img-fluid" alt="Texas Pizza Menu">
-                    <img src="/img/stores/menu/texas_pizza/2.jpeg" class="img-fluid" alt="Texas Pizza Menu">
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <a href="#el-forastero-menu" data-toggle="modal" data-target="#el-forastero-menu">
-                <img src="/img/stores/banner_el_forastero.png" class="img-fluid" alt="El Forastero">
-            </a>
-        </div>
-        <div class="modal fade" id="el-forastero-menu" tabindex="-1" role="dialog" aria-hidden="true">
-            <button type="button" class="close text-body mr-3 mt-3" data-dismiss="modal" aria-label="Close">
-               <i class="fas fa-times"></i>
-            </button>
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div id="carouselElForastero" class="carousel slide" data-ride="carousel" data-touch="true" data-keyboard="false">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="/img/stores/menu/el_forastero/el_forastero_1.jpg" class="d-block w-100" alt="El Forastero menu 1">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/img/stores/menu/el_forastero/el_forastero_2.jpg" class="d-block w-100" alt="El Forastero menu 2">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="/img/stores/menu/el_forastero/el_forastero_3.jpg" class="d-block w-100" alt="El Forastero menu 3">
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselElForastero" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselElForastero" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <a href="#blvd-chino-menu" data-toggle="modal" data-target="#blvd-chino-menu">
-                <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
-            </a>
-        </div>
-        <div class="modal fade" id="blvd-chino-menu" tabindex="-1" role="dialog" aria-hidden="true">
-            <button type="button" class="close text-body mr-3 mt-3" data-dismiss="modal" aria-label="Close">
-               <i class="fas fa-times"></i>
-            </button>
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img src="/img/stores/menu/blvd_chino/blvd_chino_promocion_jueves.jpeg" class="img-fluid" alt="Blvd Chino Promocion">
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
-        </div>
-        <!-- <div class="col-12 col-md-4 px-5 pt-3 text-center">
-            <img src="/img/stores/sabor_de_casa.png" class="img-fluid" alt="La Cocina de Anita">
-        </div> -->
-    </div>
-
-    <stores-level1></stores-level1>
-
-    <div class="row">
-        <div class="col text-center">
-            <a href="/tiendas">
-            <h4 class="text-primary mt-5">
-                Ver todas las tiendas
-            </h4>
-            </a>
-        </div>
+        <stores-categories></stores-categories>
+        <stores-sales></stores-sales>
+        <stores-random></stores-random>
     </div>
 
     <div class="row justify-content-center bg-gradient mt-5">
@@ -132,24 +36,30 @@
                 viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
                 <path fill="#FFFFFF" d="M1400,94.676V0.009L0,0v107.141C760.281-138.29,1171.969,190.938,1400,94.676z"/>
             </svg>
-            <div class="px-5">
+            <div class="row justify-content-center px-5">
+              <div class="col-lg-6 col-md-12">
                 <img src="/svg/pasos.svg" class="img-fluid" alt="Pasos para pedir">
+              </div>
             </div>
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">
                 <path fill="#FFFFFF" d="M0,16.607v207.391c315.782-256.167,1050.855,52.862,1400,0.007V5.225
                 C639.719,229.38,228.031-71.309,0,16.607z"/>
             </svg>
-            <div class="px-5">
+            <div class="row justify-content-center px-5">
+              <div class="col-lg-6 col-md-12">
                 <img src="/svg/tarifa.svg" class="img-fluid" alt="Tarifa Dinámica">
+              </div>
             </div>
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 1400 230.219" enable-background="new 0 0 1400 230.219" xml:space="preserve">
                 <path fill="#FFFFFF" d="M0,16.607v207.391c315.782-256.167,1050.855,52.862,1400,0.007V5.225
                 C639.719,229.38,228.031-71.309,0,16.607z"/>
             </svg>
-            <div class="px-5 py-5">
+            <div class="row justify-content-center px-5">
+              <div class="col-lg-4 col-md-12">
                 <img src="/svg/repartidor.svg" class="img-fluid" alt="Repartidor">
+              </div>
             </div>
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 1400 112.859" enable-background="new 0 0 1400 112.859" xml:space="preserve">
@@ -159,10 +69,28 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-sm-12 text-center pt-5">
+        <div class="col-12 text-center pt-5">
             <img class="img-fluid logo" src="/svg/traeme.svg" alt="">
             <p class="lead mt-5 mb-1">Mandados a domicilio</p>
             <p class="mb-5"><i>Ahorra tiempo y dinero</i></p>
+            <div class="text-center mb-2">
+                <!-- <a href="https://play.google.com/store/apps/details?id=com.traeme.traemeapp" target="_blank">
+                  <img src="/img/google-play-badge.png" class="img-fluid" alt="...">
+                </a> -->
+                <a target="_blank" href='https://play.google.com/store/apps/details?id=com.traeme.traemeapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+                  <img alt='Disponible en Google Play' class="img-fluid logo" src='https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png'/>
+                </a>
+            </div>
+            <div class="text-center mb-2">
+                <a href="https://www.facebook.com/traeme.parral" target="_blank" class="text-success mr-3">
+                  <i class="fab fa-facebook-square fa-3x"></i>
+                  <!-- <img src="/img/facebook.png" class="img-fluid" alt="Facebook"> -->
+                </a>
+                <a href="https://www.instagram.com/traeme_parral" target="_blank" class="text-success">
+                  <i class="fab fa-instagram fa-3x"></i>
+                  <!-- <img src="/img/instagram.png" class="img-fluid" alt="Instagram"> -->
+                </a>
+            </div>
             <div class="mt-5 mb-4">
                 <a class="btn btn-link btn-lg btn-phone" href="tel:627-110-1145">
                     <small class="fa-stack mr-1">
@@ -172,12 +100,8 @@
                     (627) 110 1145
                 </a>
             </div>
-            <div class="text-center mb-2">
-                <a href="https://www.facebook.com/traeme.parral" target="_blank" class="text-success mr-3"><i class="fab fa-facebook-square fa-2x"></i></a>
-                <a href="https://www.instagram.com/traeme_parral" target="_blank" class="text-success"><i class="fab fa-instagram fa-2x"></i></a>
-            </div>
-            <p class="mb-0"><small>© 2019 Traeme, Todos los derechos reservados.</small></p>
-            <p class="mb-5"><small>Creado por <a href="https://modulr.io" target="_blank">Modulr</a></small></p>
+            <p class="mb-0"><small>© 2020 Tráeme, Todos los derechos reservados.</small></p>
+            <p class="mb-5"><small>Creado por <a href="https://alfredobarron.com" target="_blank">Alfredo Barrón</a></small></p>
         </div>
     </div>
 </div>

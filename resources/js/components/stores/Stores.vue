@@ -1,12 +1,15 @@
 <template>
   <div class="container">
-    <div class="card-body px-0 pt-0 pb-5">
-      <div class="row justify-content-center">
-        <div class="col-7 col-md-5 mb-3">
-          <div class="input-group mt-3 mb-1">
+    <div class="card-body pt-0 pb-5">
+      <div class="row justify-content-center pt-2 pb-3">
+        <div class="col-lg-7 col-md-12">
+          <h1>Tus tiendas favoritas</h1>
+        </div>
+        <div class="col-lg-5 col-md-12">
+          <div class="input-group mt-1 mb-1">
             <input type="text" class="form-control border-right-0" placeholder="Buscar" v-model.trim="filters.search" @keyup.enter="filter">
             <div class="input-group-prepend">
-              <span class="input-group-text border-left-0" v-if="clearSearchBtn" @click="clearSearch">x</span>
+              <a href="#" class="input-group-text border-left-0" v-if="clearSearchBtn" @click.prevent="clearSearch">x</a>
               <span class="input-group-text" @click="filter">
                 <i class="fas fa-spinner fa-spin" v-if="loading"></i>
                 <i class="fas fa-search" v-else></i>
@@ -17,18 +20,24 @@
       </div>
       <div class="row">
         <div class="col pb-3 pt-1 scrollmenu invisible-scrollbar">
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Tacos')">Tacos</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Hamburguesas')">Hamburguesas</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Pizza')">Pizza</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Sushi')">Sushi</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Gorditas')">Gorditas</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Tortas')">Tortas</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Lonches')">Lonches</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Flautas')">Flautas</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Quesadillas')">Quesadillas</a>
-          <!-- <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Tripitas')">Tripitas</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Pasteles')">Pasteles</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click="filterByCategory('Pay')">Pay</a> -->
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Comida')">Comida</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Postres')">Postres</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Recibos')">Recibos</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Super')">Super</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Licores')">Licores</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Paquetes')">Paquetes</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Farmacia')">Farmacia</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Regalos')">Regalos</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Tacos')">Tacos</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Hamburguesas')">Hamburguesas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Pizza')">Pizza</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Sushi')">Sushi</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Gorditas')">Gorditas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Tortas')">Tortas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Lonches')">Lonches</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Flautas')">Flautas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Quesadillas')">Quesadillas</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Tripitas')">Tripitas</a>
         </div>
       </div>
       <div class="row">
@@ -90,17 +99,17 @@
           <span slot="no-more"></span>
         </infinite-loading> -->
       </div>
-      <div class="row mt-3" v-if='!loading && filters.pagination.total > 0'>
-        <div class="col">
+      <div class="row" v-if='!loading && filters.pagination.total > 0'>
+        <!-- <div class="col">
           <span v-if='!loading && filters.pagination.total > 0'>
             {{filters.pagination.total}}
           </span>
           <i class="fas fa-spinner fa-spin" v-else></i>
           <span class="ml-1">Tiendas</span>
-        </div>
-        <div class="col" v-if="filters.pagination.last_page>1">
+        </div> -->
+        <div class="col mt-4" v-if="filters.pagination.last_page>1">
           <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-end">
+            <ul class="pagination">
               <li class="page-item" :class="{'disabled': filters.pagination.current_page <= 1}">
                 <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page -  1)"><i class="fas fa-angle-left"></i></a>
               </li>
@@ -117,11 +126,8 @@
       </div>
       <div class="no-items-found text-center mt-5" v-if="!loading && !users.length > 0">
         <i class="icon-magnifier fa-3x text-muted"></i>
-        <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
-        <p class="text-muted">Try changing the filters or add a new one</p>
-        <a class="btn btn-success" href="/users/create" role="button">
-          <i class="fa fa-plus"></i>&nbsp; New User
-        </a>
+        <p class="mb-0 mt-3"><strong>No se encontro ninguna tienda</strong></p>
+        <p class="text-muted">Intenta con otra palabra</p>
       </div>
       <content-placeholders v-if="loading" class="mt-3">
         <content-placeholders-heading :img="true" />
@@ -164,6 +170,11 @@ export default {
     this.getUsers()
     if (localStorage.getItem("order")) {
       this.order = JSON.parse(localStorage.getItem("order"))
+    }
+    let str = window.location.pathname
+    let res = str.split("/")
+    if (res[2]) {
+      this.filterByCategory(res[2])
     }
     //this.loadUsers();
   },

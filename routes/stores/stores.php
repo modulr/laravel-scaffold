@@ -1,12 +1,12 @@
 <?php
 Route::group(['namespace' => 'Stores'], function() {
-    Route::get('api/stores/getStoresLevel1', 'StoreController@getStoresLevel1');
+    Route::get('api/stores/getStoresRandom', 'StoreController@getStoresRandom');
     Route::post('api/stores/filters', 'StoreController@filter');
 
     Route::middleware('auth')->group(function () {
       // views
       Route::group(['prefix' => 'stores'], function() {
-          Route::view('/', 'stores.index')->middleware('permission:read-stores');
+          Route::view('/{tag?}', 'stores.index')->middleware('permission:read-stores');
           Route::view('/create', 'stores.create')->middleware('permission:create-stores');
           Route::view('/{user}/edit', 'stores.edit')->middleware('permission:update-stores');
       });

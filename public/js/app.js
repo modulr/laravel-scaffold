@@ -14112,7 +14112,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(181);
+module.exports = __webpack_require__(184);
 
 
 /***/ }),
@@ -14242,8 +14242,9 @@ Vue.component('stores-index', __webpack_require__(163));
 Vue.component('stores-create', __webpack_require__(166));
 Vue.component('stores-edit', __webpack_require__(169));
 Vue.component('stores-avatar', __webpack_require__(172));
-Vue.component('stores-level1', __webpack_require__(175));
-Vue.component('stores-pollo-feliz', __webpack_require__(178));
+Vue.component('stores-random', __webpack_require__(211));
+Vue.component('stores-sales', __webpack_require__(178));
+Vue.component('stores-categories', __webpack_require__(181));
 
 var app = new Vue({
   el: '#app'
@@ -77824,6 +77825,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77853,6 +77860,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.getUsers();
     if (localStorage.getItem("order")) {
       this.order = JSON.parse(localStorage.getItem("order"));
+    }
+    var str = window.location.pathname;
+    var res = str.split("/");
+    if (res[2]) {
+      this.filterByCategory(res[2]);
     }
     //this.loadUsers();
   },
@@ -77943,11 +77955,13 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c(
       "div",
-      { staticClass: "card-body px-0 pt-0 pb-5" },
+      { staticClass: "card-body pt-0 pb-5" },
       [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-7 col-md-5 mb-3" }, [
-            _c("div", { staticClass: "input-group mt-3 mb-1" }, [
+        _c("div", { staticClass: "row justify-content-center pt-2 pb-3" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-5 col-md-12" }, [
+            _c("div", { staticClass: "input-group mt-1 mb-1" }, [
               _c("input", {
                 directives: [
                   {
@@ -77986,10 +78000,16 @@ var render = function() {
               _c("div", { staticClass: "input-group-prepend" }, [
                 _vm.clearSearchBtn
                   ? _c(
-                      "span",
+                      "a",
                       {
                         staticClass: "input-group-text border-left-0",
-                        on: { click: _vm.clearSearch }
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.clearSearch($event)
+                          }
+                        }
                       },
                       [_vm._v("x")]
                     )
@@ -78024,6 +78044,127 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Comida")
+                    }
+                  }
+                },
+                [_vm._v("Comida")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Postres")
+                    }
+                  }
+                },
+                [_vm._v("Postres")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Recibos")
+                    }
+                  }
+                },
+                [_vm._v("Recibos")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Super")
+                    }
+                  }
+                },
+                [_vm._v("Super")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Licores")
+                    }
+                  }
+                },
+                [_vm._v("Licores")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Paquetes")
+                    }
+                  }
+                },
+                [_vm._v("Paquetes")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Farmacia")
+                    }
+                  }
+                },
+                [_vm._v("Farmacia")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Regalos")
+                    }
+                  }
+                },
+                [_vm._v("Regalos")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Tacos")
                     }
                   }
@@ -78038,6 +78179,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Hamburguesas")
                     }
                   }
@@ -78052,6 +78194,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Pizza")
                     }
                   }
@@ -78066,6 +78209,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Sushi")
                     }
                   }
@@ -78080,6 +78224,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Gorditas")
                     }
                   }
@@ -78094,6 +78239,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Tortas")
                     }
                   }
@@ -78108,6 +78254,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Lonches")
                     }
                   }
@@ -78122,6 +78269,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Flautas")
                     }
                   }
@@ -78136,11 +78284,27 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.filterByCategory("Quesadillas")
                     }
                   }
                 },
                 [_vm._v("Quesadillas")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary py-0 btn-pill",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.filterByCategory("Tripitas")
+                    }
+                  }
+                },
+                [_vm._v("Tripitas")]
               )
             ]
           )
@@ -78329,27 +78493,13 @@ var render = function() {
         ),
         _vm._v(" "),
         !_vm.loading && _vm.filters.pagination.total > 0
-          ? _c("div", { staticClass: "row mt-3" }, [
-              _c("div", { staticClass: "col" }, [
-                !_vm.loading && _vm.filters.pagination.total > 0
-                  ? _c("span", [
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(_vm.filters.pagination.total) +
-                          "\n        "
-                      )
-                    ])
-                  : _c("i", { staticClass: "fas fa-spinner fa-spin" }),
-                _vm._v(" "),
-                _c("span", { staticClass: "ml-1" }, [_vm._v("Tiendas")])
-              ]),
-              _vm._v(" "),
+          ? _c("div", { staticClass: "row" }, [
               _vm.filters.pagination.last_page > 1
-                ? _c("div", { staticClass: "col" }, [
+                ? _c("div", { staticClass: "col mt-4" }, [
                     _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
                       _c(
                         "ul",
-                        { staticClass: "pagination justify-content-end" },
+                        { staticClass: "pagination" },
                         [
                           _c(
                             "li",
@@ -78457,13 +78607,11 @@ var render = function() {
           ? _c("div", { staticClass: "no-items-found text-center mt-5" }, [
               _c("i", { staticClass: "icon-magnifier fa-3x text-muted" }),
               _vm._v(" "),
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("p", { staticClass: "text-muted" }, [
-                _vm._v("Try changing the filters or add a new one")
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
+                _vm._v("Intenta con otra palabra")
+              ])
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -78497,22 +78645,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "mb-0 mt-3" }, [
-      _c("strong", [_vm._v("Could not find any items")])
+    return _c("div", { staticClass: "col-lg-7 col-md-12" }, [
+      _c("h1", [_vm._v("Tus tiendas favoritas")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "btn btn-success",
-        attrs: { href: "/users/create", role: "button" }
-      },
-      [_c("i", { staticClass: "fa fa-plus" }), _vm._v("  New User\n      ")]
-    )
+    return _c("p", { staticClass: "mb-0 mt-3" }, [
+      _c("strong", [_vm._v("No se encontro ninguna tienda")])
+    ])
   }
 ]
 render._withStripped = true
@@ -81078,217 +81221,9 @@ if (false) {
 }
 
 /***/ }),
-/* 175 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(176)
-/* template */
-var __vue_template__ = __webpack_require__(177)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/stores/Level1.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6842f90f", Component.options)
-  } else {
-    hotAPI.reload("data-v-6842f90f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 176 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      stores: [],
-      loading: false
-    };
-  },
-  mounted: function mounted() {
-    this.getStores();
-  },
-
-  methods: {
-    getStores: function getStores() {
-      var _this = this;
-
-      if (this.stores.length == 0) {
-        this.loading = true;
-        axios.get("/api/stores/getStoresLevel1").then(function (response) {
-          _this.stores = response.data;
-          _this.loading = false;
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-/* 177 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("span", [
-    _vm.loading
-      ? _c("div", { staticClass: "row justify-content-center" }, [
-          _c(
-            "div",
-            { staticClass: "col-12 col-md-4 px-5 py-3" },
-            [
-              _c(
-                "content-placeholders",
-                [_c("content-placeholders-heading", { attrs: { img: true } })],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 col-md-4 px-5 py-3" },
-            [
-              _c(
-                "content-placeholders",
-                [_c("content-placeholders-heading", { attrs: { img: true } })],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 col-md-4 px-5 py-3" },
-            [
-              _c(
-                "content-placeholders",
-                [_c("content-placeholders-heading", { attrs: { img: true } })],
-                1
-              )
-            ],
-            1
-          )
-        ])
-      : _c(
-          "div",
-          { staticClass: "row justify-content-center" },
-          _vm._l(_vm.stores, function(store) {
-            return _c("div", { staticClass: "col-12 col-md-4 px-5 pt-3" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "row no-gutters" }, [
-                  _c("div", { staticClass: "col-4" }, [
-                    _c("img", {
-                      staticClass: "card-img",
-                      attrs: { src: store.avatar_url, alt: store.name }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-8" }, [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _c("strong", [_vm._v(_vm._s(store.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v(_vm._s(store.description))
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          })
-        )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6842f90f", module.exports)
-  }
-}
-
-/***/ }),
+/* 175 */,
+/* 176 */,
+/* 177 */,
 /* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -81314,7 +81249,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/stores/PolloFeliz.vue"
+Component.options.__file = "resources/js/components/stores/Sales.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -81323,9 +81258,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-03102da0", Component.options)
+    hotAPI.createRecord("data-v-0644a49a", Component.options)
   } else {
-    hotAPI.reload("data-v-03102da0", Component.options)
+    hotAPI.reload("data-v-0644a49a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -81387,16 +81322,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     swipeHandler: function swipeHandler(direction) {
       if (direction == 'left') {
-        $('#carouselPolloFeliz').carousel('next');
+        $('#carouselPromo1').carousel('next');
       } else if (direction == 'right') {
-        $('#carouselPolloFeliz').carousel('prev');
-      } else if (direction == 'top' || direction == 'bottom') {
-        $('#pollo-feliz-menu').modal('hide');
+        $('#carouselPromo1').carousel('prev');
+      }
+      if (direction == 'top' || direction == 'bottom') {
+        $('#modalPromo1, #modalPromo2').modal('hide');
       }
     }
   }
@@ -81410,181 +81375,235 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-12 col-md-4 px-5 pt-1 text-center" }, [
+  return _c("div", { staticClass: "row justify-content-center mb-3" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "pollo-feliz-menu",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog modal-xl" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-body" }, [
-              _c(
-                "div",
+    _c("div", { staticClass: "col-10" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
                 {
-                  staticClass: "carousel slide",
-                  attrs: {
-                    id: "carouselPolloFeliz",
-                    "data-ride": "carousel",
-                    "data-interval": "false",
-                    "data-touch": "true"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "carousel-inner" }, [
+                  name: "touch",
+                  rawName: "v-touch:swipe",
+                  value: _vm.swipeHandler,
+                  expression: "swipeHandler",
+                  arg: "swipe"
+                }
+              ],
+              staticClass: "modal fade",
+              attrs: {
+                id: "modalPromo1",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-xl" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-body" }, [
                     _c(
                       "div",
                       {
-                        directives: [
-                          {
-                            name: "touch",
-                            rawName: "v-touch:swipe",
-                            value: _vm.swipeHandler,
-                            expression: "swipeHandler",
-                            arg: "swipe"
-                          }
-                        ],
-                        staticClass: "carousel-item active"
+                        staticClass: "carousel slide",
+                        attrs: {
+                          id: "carouselPromo1",
+                          "data-ride": "carousel",
+                          "data-interval": "false",
+                          "data-touch": "true"
+                        }
                       },
                       [
-                        _c("img", {
-                          staticClass: "d-block w-100",
-                          attrs: {
-                            src:
-                              "/img/stores/menu/pollo_feliz/pollo_feliz_1.jpg",
-                            alt: "Pollo Feliz menu 1"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "touch",
-                            rawName: "v-touch:swipe",
-                            value: _vm.swipeHandler,
-                            expression: "swipeHandler",
-                            arg: "swipe"
-                          }
-                        ],
-                        staticClass: "carousel-item"
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "d-block w-100",
-                          attrs: {
-                            src:
-                              "/img/stores/menu/pollo_feliz/pollo_feliz_2.jpg",
-                            alt: "Pollo Feliz menu 2"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "touch",
-                            rawName: "v-touch:swipe",
-                            value: _vm.swipeHandler,
-                            expression: "swipeHandler",
-                            arg: "swipe"
-                          }
-                        ],
-                        staticClass: "carousel-item"
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "d-block w-100",
-                          attrs: {
-                            src:
-                              "/img/stores/menu/pollo_feliz/pollo_feliz_3.jpg",
-                            alt: "Pollo Feliz menu 3"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "touch",
-                            rawName: "v-touch:swipe",
-                            value: _vm.swipeHandler,
-                            expression: "swipeHandler",
-                            arg: "swipe"
-                          }
-                        ],
-                        staticClass: "carousel-item"
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "d-block w-100",
-                          attrs: {
-                            src:
-                              "/img/stores/menu/pollo_feliz/pollo_feliz_4.jpg",
-                            alt: "Pollo Feliz menu 4"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "touch",
-                            rawName: "v-touch:swipe",
-                            value: _vm.swipeHandler,
-                            expression: "swipeHandler",
-                            arg: "swipe"
-                          }
-                        ],
-                        staticClass: "carousel-item"
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "d-block w-100",
-                          attrs: {
-                            src:
-                              "/img/stores/menu/pollo_feliz/pollo_feliz_5.jpg",
-                            alt: "Pollo Feliz menu 5"
-                          }
-                        })
+                        _c("div", { staticClass: "carousel-inner" }, [
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "touch",
+                                  rawName: "v-touch:swipe",
+                                  value: _vm.swipeHandler,
+                                  expression: "swipeHandler",
+                                  arg: "swipe"
+                                }
+                              ],
+                              staticClass: "carousel-item active"
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "d-block w-100",
+                                attrs: {
+                                  src:
+                                    "/img/stores/menu/pollo_feliz/pollo_feliz_1.jpg",
+                                  alt: "Pollo Feliz menu 1"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "touch",
+                                  rawName: "v-touch:swipe",
+                                  value: _vm.swipeHandler,
+                                  expression: "swipeHandler",
+                                  arg: "swipe"
+                                }
+                              ],
+                              staticClass: "carousel-item"
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "d-block w-100",
+                                attrs: {
+                                  src:
+                                    "/img/stores/menu/pollo_feliz/pollo_feliz_2.jpg",
+                                  alt: "Pollo Feliz menu 2"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "touch",
+                                  rawName: "v-touch:swipe",
+                                  value: _vm.swipeHandler,
+                                  expression: "swipeHandler",
+                                  arg: "swipe"
+                                }
+                              ],
+                              staticClass: "carousel-item"
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "d-block w-100",
+                                attrs: {
+                                  src:
+                                    "/img/stores/menu/pollo_feliz/pollo_feliz_3.jpg",
+                                  alt: "Pollo Feliz menu 3"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "touch",
+                                  rawName: "v-touch:swipe",
+                                  value: _vm.swipeHandler,
+                                  expression: "swipeHandler",
+                                  arg: "swipe"
+                                }
+                              ],
+                              staticClass: "carousel-item"
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "d-block w-100",
+                                attrs: {
+                                  src:
+                                    "/img/stores/menu/pollo_feliz/pollo_feliz_4.jpg",
+                                  alt: "Pollo Feliz menu 4"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "touch",
+                                  rawName: "v-touch:swipe",
+                                  value: _vm.swipeHandler,
+                                  expression: "swipeHandler",
+                                  arg: "swipe"
+                                }
+                              ],
+                              staticClass: "carousel-item"
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "d-block w-100",
+                                attrs: {
+                                  src:
+                                    "/img/stores/menu/pollo_feliz/pollo_feliz_5.jpg",
+                                  alt: "Pollo Feliz menu 5"
+                                }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _vm._m(3)
                       ]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ]
-              )
-            ])
-          ])
-        ])
-      ]
-    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "touch",
+                  rawName: "v-touch:swipe",
+                  value: _vm.swipeHandler,
+                  expression: "swipeHandler",
+                  arg: "swipe"
+                }
+              ],
+              staticClass: "modal fade",
+              attrs: {
+                id: "modalPromo2",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-hidden": "true"
+              }
+            },
+            [_vm._m(5)]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(6)
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-10 pb-3 text-center mt-4 mb-4" }, [
+      _c("h1", { staticClass: "font-weight-bold" }, [_vm._v("Promociones")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -81593,9 +81612,9 @@ var staticRenderFns = [
       "a",
       {
         attrs: {
-          href: "#pollo-feliz-menu",
+          href: "#modalPromo1",
           "data-toggle": "modal",
-          "data-target": "#pollo-feliz-menu"
+          "data-target": "#modalPromo1"
         }
       },
       [
@@ -81617,11 +81636,7 @@ var staticRenderFns = [
       "a",
       {
         staticClass: "carousel-control-prev",
-        attrs: {
-          href: "#carouselPolloFeliz",
-          role: "button",
-          "data-slide": "prev"
-        }
+        attrs: { href: "#carouselPromo1", role: "button", "data-slide": "prev" }
       },
       [
         _c("span", {
@@ -81641,11 +81656,7 @@ var staticRenderFns = [
       "a",
       {
         staticClass: "carousel-control-next",
-        attrs: {
-          href: "#carouselPolloFeliz",
-          role: "button",
-          "data-slide": "next"
-        }
+        attrs: { href: "#carouselPromo1", role: "button", "data-slide": "next" }
       },
       [
         _c("span", {
@@ -81656,6 +81667,75 @@ var staticRenderFns = [
         _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        attrs: {
+          href: "#modalPromo2",
+          "data-toggle": "modal",
+          "data-target": "#modalPromo2"
+        }
+      },
+      [
+        _c("img", {
+          staticClass: "img-fluid",
+          attrs: { src: "/img/stores/banner_blvd_chino.png", alt: "Blvd Chino" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-dialog modal-xl" }, [
+      _c("div", { staticClass: "modal-content" }, [
+        _c("div", { staticClass: "modal-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "carousel slide",
+              attrs: {
+                id: "carouselPromo2",
+                "data-ride": "carousel",
+                "data-interval": "false",
+                "data-touch": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "carousel-inner" }, [
+                _c("div", { staticClass: "carousel-item active" }, [
+                  _c("img", {
+                    staticClass: "img-fluid",
+                    attrs: {
+                      src:
+                        "/img/stores/menu/blvd_chino/blvd_chino_promocion_jueves.jpeg",
+                      alt: "Blvd Chino Promocion"
+                    }
+                  })
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: { src: "/img/stores/banner_dogos_co_2.png", alt: "Dogos & Co" }
+      })
+    ])
   }
 ]
 render._withStripped = true
@@ -81663,15 +81743,530 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-03102da0", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0644a49a", module.exports)
   }
 }
 
 /***/ }),
 /* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(182)
+/* template */
+var __vue_template__ = __webpack_require__(183)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/stores/Categories.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6387657e", Component.options)
+  } else {
+    hotAPI.reload("data-v-6387657e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 182 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-10 pb-3 text-center mx-4" }, [
+        _c("h1", { staticClass: "font-weight-bold" }, [
+          _vm._v("Todo lo que necesitas")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-8 col-md-12" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12 text-center mb-5 categories" }, [
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Comida" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: { src: "/img/categories/comida.png", alt: "Comida" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Comida")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Postres" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: { src: "/img/categories/postres.png", alt: "Postres" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Postres")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Super" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: { src: "/img/categories/super.png", alt: "Super" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Super")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Recibos" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: { src: "/img/categories/recibos.png", alt: "Recibos" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Recibos")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Regalos" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: { src: "/img/categories/regalos.png", alt: "Regalos" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Regalos")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Licores" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: { src: "/img/categories/licores.png", alt: "Licores" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Licores")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Farmacia" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: {
+                    src: "/img/categories/farmacia.png",
+                    alt: "Farmacia"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Farmacia")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                attrs: { href: "/tiendas/Paquetes" }
+              },
+              [
+                _c("img", {
+                  staticClass: "img-fluid rounded mb-2",
+                  attrs: {
+                    src: "/img/categories/paquetes.png",
+                    alt: "Paquetes"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "font-weight-bold text-dark" }, [
+                  _vm._v("Paquetes")
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6387657e", module.exports)
+  }
+}
+
+/***/ }),
+/* 184 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(212)
+/* template */
+var __vue_template__ = __webpack_require__(213)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/stores/Random.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65664da5", Component.options)
+  } else {
+    hotAPI.reload("data-v-65664da5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 212 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      stores: []
+    };
+  },
+  mounted: function mounted() {
+    this.getStores();
+  },
+
+  methods: {
+    getStores: function getStores() {
+      var _this = this;
+
+      if (this.stores.length == 0) {
+        axios.get("/api/stores/getStoresRandom").then(function (response) {
+          _this.stores = response.data;
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-10" }, [
+      _c(
+        "div",
+        { staticClass: "row justify-content-center" },
+        _vm._l(_vm.stores, function(store) {
+          return _c("div", { staticClass: "col-12 col-md-4 px-2 pt-2" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "row no-gutters" }, [
+                _c("div", { staticClass: "col-4" }, [
+                  _c("img", {
+                    staticClass: "card-img",
+                    attrs: { src: store.avatar_url, alt: store.name }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-8" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h5", { staticClass: "card-title" }, [
+                      _c("strong", [_vm._v(_vm._s(store.name))])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(_vm._s(store.description))
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        })
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-65664da5", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

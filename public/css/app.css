@@ -11295,7 +11295,7 @@ a:hover {
 }
 
 .logo {
-  max-width: 250px;
+  max-width: 200px;
 }
 
 .btn-phone {
@@ -11383,6 +11383,14 @@ a:hover {
 
 .breadcrumb-menu .btn-link {
   color: #6c757d;
+}
+
+.categories a {
+  display: inline-block;
+}
+
+.categories img {
+  max-width: 150px;
 }
 
 .input-group-text {

@@ -22,6 +22,7 @@ class StoreController extends Controller
         if($request->search) {
             $query->where('name', 'LIKE', '%'.$request->search.'%');
             $query->orWhere('description', 'LIKE', '%'.$request->search.'%');
+            $query->orWhere('tags', 'LIKE', '%'.$request->search.'%');
         }
 
         $query->role('store');
@@ -160,9 +161,9 @@ class StoreController extends Controller
         return $user;
     }
 
-    public function getStoresLevel1 ()
+    public function getStoresRandom ()
     {
         //return User::role('store')->where('level', 1)->orderBy('name')->get();
-        return User::where('store', 1)->orderByRaw("RAND()")->take(5)->get();
+        return User::where('store', 1)->orderByRaw("RAND()")->take(3)->get();
     }
 }

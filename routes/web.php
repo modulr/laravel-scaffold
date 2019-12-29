@@ -22,7 +22,7 @@ Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbac
 Route::get('/home', function () {
     return redirect('/');
 });
-Route::get('/tiendas', function () {
+Route::get('/tiendas/{tag?}', function () {
     return view('stores');
 });
 

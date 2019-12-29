@@ -22,8 +22,9 @@ a:hover {
   left: 0;
 }
 .logo {
-  max-width: 250px;
+  max-width: 200px;
 }
+
 .btn-phone {
   text-decoration: none !important;
   // .fa-phone {
@@ -118,6 +119,15 @@ a:hover {
   }
   .btn-link {
     color: $gray-600;
+  }
+}
+
+.categories {
+  a {
+    display: inline-block;
+  }
+  img {
+    max-width: 150px;
   }
 }
 
