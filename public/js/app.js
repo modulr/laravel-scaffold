@@ -14242,7 +14242,7 @@ Vue.component('stores-index', __webpack_require__(163));
 Vue.component('stores-create', __webpack_require__(166));
 Vue.component('stores-edit', __webpack_require__(169));
 Vue.component('stores-avatar', __webpack_require__(172));
-Vue.component('stores-random', __webpack_require__(211));
+Vue.component('stores-random', __webpack_require__(175));
 Vue.component('stores-sales', __webpack_require__(178));
 Vue.component('stores-categories', __webpack_require__(181));
 
@@ -81193,9 +81193,167 @@ if (false) {
 }
 
 /***/ }),
-/* 175 */,
-/* 176 */,
-/* 177 */,
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(176)
+/* template */
+var __vue_template__ = __webpack_require__(177)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/stores/Random.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65664da5", Component.options)
+  } else {
+    hotAPI.reload("data-v-65664da5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 176 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      stores: []
+    };
+  },
+  mounted: function mounted() {
+    this.getStores();
+  },
+
+  methods: {
+    getStores: function getStores() {
+      var _this = this;
+
+      if (this.stores.length == 0) {
+        axios.get("/api/stores/getStoresRandom").then(function (response) {
+          _this.stores = response.data;
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-10" }, [
+      _c(
+        "div",
+        { staticClass: "row justify-content-center" },
+        _vm._l(_vm.stores, function(store) {
+          return _c("div", { staticClass: "col-12 col-md-4 px-2 pt-2" }, [
+            _c(
+              "a",
+              {
+                staticClass: "card",
+                attrs: { href: "/tiendas/" + store.tags }
+              },
+              [
+                _c("div", { staticClass: "row no-gutters" }, [
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("img", {
+                      staticClass: "card-img",
+                      attrs: { src: store.avatar_url, alt: store.name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title text-dark" }, [
+                        _c("strong", [_vm._v(_vm._s(store.name))])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text text-muted" }, [
+                        _vm._v(_vm._s(store.description))
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ])
+        })
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-65664da5", module.exports)
+  }
+}
+
+/***/ }),
 /* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -82059,193 +82217,6 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(212)
-/* template */
-var __vue_template__ = __webpack_require__(213)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/stores/Random.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-65664da5", Component.options)
-  } else {
-    hotAPI.reload("data-v-65664da5", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 212 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      stores: []
-    };
-  },
-  mounted: function mounted() {
-    this.getStores();
-  },
-
-  methods: {
-    getStores: function getStores() {
-      var _this = this;
-
-      if (this.stores.length == 0) {
-        axios.get("/api/stores/getStoresRandom").then(function (response) {
-          _this.stores = response.data;
-        });
-      }
-    }
-  }
-});
-
-/***/ }),
-/* 213 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-10" }, [
-      _c(
-        "div",
-        { staticClass: "row justify-content-center" },
-        _vm._l(_vm.stores, function(store) {
-          return _c("div", { staticClass: "col-12 col-md-4 px-2 pt-2" }, [
-            _c(
-              "a",
-              {
-                staticClass: "card",
-                attrs: { href: "/tiendas/" + store.tags }
-              },
-              [
-                _c("div", { staticClass: "row no-gutters" }, [
-                  _c("div", { staticClass: "col-4" }, [
-                    _c("img", {
-                      staticClass: "card-img",
-                      attrs: { src: store.avatar_url, alt: store.name }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-8" }, [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title text-dark" }, [
-                        _c("strong", [_vm._v(_vm._s(store.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text text-muted" }, [
-                        _vm._v(_vm._s(store.description))
-                      ])
-                    ])
-                  ])
-                ])
-              ]
-            )
-          ])
-        })
-      )
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-65664da5", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
