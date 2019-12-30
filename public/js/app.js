@@ -78027,7 +78027,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col-12 mt-3 scrollmenu invisible-scrollbar" },
+            { staticClass: "col-12 mt-3 py-1 scrollmenu invisible-scrollbar" },
             [
               _c(
                 "a",

@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 mt-3 scrollmenu invisible-scrollbar">
+        <div class="col-12 mt-3 py-1 scrollmenu invisible-scrollbar">
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Comida')">Comida</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Postres')">Postres</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Recibos')">Recibos</a>
