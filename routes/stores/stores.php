@@ -6,7 +6,7 @@ Route::group(['namespace' => 'Stores'], function() {
     Route::middleware('auth')->group(function () {
       // views
       Route::group(['prefix' => 'stores'], function() {
-          Route::view('/{tag?}', 'stores.index')->middleware('permission:read-stores');
+          Route::view('/', 'stores.index')->middleware('permission:read-stores');
           Route::view('/create', 'stores.create')->middleware('permission:create-stores');
           Route::view('/{user}/edit', 'stores.edit')->middleware('permission:update-stores');
       });
