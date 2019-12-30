@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="card-body pt-0 pb-5">
-      <div class="row justify-content-center pt-2 pb-3">
+      <div class="row justify-content-center pt-2 pb-4">
         <div class="col-lg-7 col-md-12">
           <h1>Tus tiendas favoritas</h1>
         </div>
@@ -17,9 +17,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col pb-3 pt-1 scrollmenu invisible-scrollbar">
+        <div class="col-12 mt-3 scrollmenu invisible-scrollbar">
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Comida')">Comida</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Postres')">Postres</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Recibos')">Recibos</a>
@@ -41,57 +39,53 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-md-6 px-2 py-1" v-for="(user, index) in users">
-          <ul class="list-group">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-12">
-                <div class="row no-gutters">
-                  <div class="col-4">
-                    <img :src="user.avatar_url" class="card-img" :alt="user.name">
-                  </div>
-                  <div class="col-8">
-                    <div class="card-body pb-0 pr-0">
-                      <h5 class="card-title mb-0">{{user.name}}</h5>
-                      <p class="card-text mb-0">{{user.description}}</p>
-                      <p class="card-text mb-0" v-if="user.address">
-                        <small class="text-muted">
-                          <a :href="`https://www.google.com/maps/search/${user.address}, Hidalgo del Parral, Chih.`" target="_blank">
-                            <span class="text-muted">
-                              <i class="icon-location-pin mr-1"></i>{{user.address}}
-                            </span>
-                          </a>
-                        </small>
-                      </p>
-                      <p class="card-text mb-0" v-if="user.schedule">
-                        <small class="text-muted">
-                          <i class="far fa-clock mr-1"></i>{{user.schedule}}
-                        </small>
-                      </p>
-                      <div class="mt-2">
-                        <a :href="user.facebook" target="_blank" class="text-info" v-if="user.facebook">
-                          <i class="fab fa-facebook fa-fw mr-2"></i>
+        <div class="col-12 px-2 pt-2">
+          <div class="card-columns">
+            <div class="card" v-for="(user, index) in users">
+              <div class="row no-gutters">
+                <div class="col-4">
+                  <img :src="user.avatar_url" class="card-img" :alt="user.name">
+                </div>
+                <div class="col-8">
+                  <div class="card-body">
+                    <h5 class="card-title mb-0">{{user.name}}</h5>
+                    <p class="card-text mb-0">{{user.description}}</p>
+                    <p class="card-text mb-0" v-if="user.address">
+                      <small class="text-muted">
+                        <a :href="`https://www.google.com/maps/search/${user.address}, Hidalgo del Parral, Chih.`" target="_blank">
+                          <span class="text-muted">
+                            <i class="icon-location-pin mr-1"></i>{{user.address}}
+                          </span>
                         </a>
-                        <a :href="user.instagram" target="_blank" class="text-muted" v-if="user.instagram">
-                          <i class="fab fa-instagram fa-fw mr-2"></i>
-                        </a>
-                        <a :href="user.web" target="_blank" class="text-muted" v-if="user.web">
-                          <i class="fas fa-globe fa-fw mr-2"></i>
-                        </a>
-                        <a :href="user.link" target="_blank" class="text-muted" v-if="user.link">
-                          <i class="fas fa-link fa-fw mr-2"></i>
-                        </a>
-                        <a class="btn btn-light btn-sm float-right" href="" @click.prevent="create(user)">
-                          Pedir
-                        </a>
-                      </div>
+                      </small>
+                    </p>
+                    <p class="card-text mb-0" v-if="user.schedule">
+                      <small class="text-muted">
+                        <i class="far fa-clock mr-1"></i>{{user.schedule}}
+                      </small>
+                    </p>
+                    <div class="mt-2">
+                      <a :href="user.facebook" target="_blank" class="text-info" v-if="user.facebook">
+                        <i class="fab fa-facebook fa-fw mr-2"></i>
+                      </a>
+                      <a :href="user.instagram" target="_blank" class="text-muted" v-if="user.instagram">
+                        <i class="fab fa-instagram fa-fw mr-2"></i>
+                      </a>
+                      <a :href="user.web" target="_blank" class="text-muted" v-if="user.web">
+                        <i class="fas fa-globe fa-fw mr-2"></i>
+                      </a>
+                      <a :href="user.link" target="_blank" class="text-muted" v-if="user.link">
+                        <i class="fas fa-link fa-fw mr-2"></i>
+                      </a>
+                      <a class="btn btn-light btn-sm float-right" href="" @click.prevent="create(user)">
+                        Pedir
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </li>
-          </ul>
+          </div>
         </div>
         <!-- Loading -->
         <!-- <infinite-loading @infinite="loadUsers" ref="infiniteLoading">

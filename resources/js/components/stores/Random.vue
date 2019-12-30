@@ -3,19 +3,19 @@
       <div class="col-10">
         <div class="row justify-content-center">
           <div class="col-12 col-md-4 px-2 pt-2" v-for="store in stores">
-            <div class="card">
+            <a :href="`/tiendas/${store.tags}`" class="card">
               <div class="row no-gutters">
                 <div class="col-4">
                   <img :src="store.avatar_url" class="card-img" :alt="store.name">
                 </div>
                 <div class="col-8">
                   <div class="card-body">
-                    <h5 class="card-title"><strong>{{store.name}}</strong></h5>
-                    <p class="card-text">{{store.description}}</p>
+                    <h5 class="card-title text-dark"><strong>{{store.name}}</strong></h5>
+                    <p class="card-text text-muted">{{store.description}}</p>
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>

@@ -77825,12 +77825,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77957,7 +77951,7 @@ var render = function() {
       "div",
       { staticClass: "card-body pt-0 pb-5" },
       [
-        _c("div", { staticClass: "row justify-content-center pt-2 pb-3" }, [
+        _c("div", { staticClass: "row justify-content-center pt-2 pb-4" }, [
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-5 col-md-12" }, [
@@ -78029,13 +78023,11 @@ var render = function() {
                 )
               ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
+          ]),
+          _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col pb-3 pt-1 scrollmenu invisible-scrollbar" },
+            { staticClass: "col-12 mt-3 scrollmenu invisible-scrollbar" },
             [
               _c(
                 "a",
@@ -78310,187 +78302,167 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row" },
-          _vm._l(_vm.users, function(user, index) {
-            return _c("div", { staticClass: "col-12 col-md-6 px-2 py-1" }, [
-              _c("ul", { staticClass: "list-group" }, [
-                _c("li", { staticClass: "list-group-item" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("div", { staticClass: "row no-gutters" }, [
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("img", {
-                            staticClass: "card-img",
-                            attrs: { src: user.avatar_url, alt: user.name }
-                          })
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12 px-2 pt-2" }, [
+            _c(
+              "div",
+              { staticClass: "card-columns" },
+              _vm._l(_vm.users, function(user, index) {
+                return _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "row no-gutters" }, [
+                    _c("div", { staticClass: "col-4" }, [
+                      _c("img", {
+                        staticClass: "card-img",
+                        attrs: { src: user.avatar_url, alt: user.name }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-8" }, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h5", { staticClass: "card-title mb-0" }, [
+                          _vm._v(_vm._s(user.name))
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-8" }, [
-                          _c("div", { staticClass: "card-body pb-0 pr-0" }, [
-                            _c("h5", { staticClass: "card-title mb-0" }, [
-                              _vm._v(_vm._s(user.name))
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "card-text mb-0" }, [
-                              _vm._v(_vm._s(user.description))
-                            ]),
-                            _vm._v(" "),
-                            user.address
-                              ? _c("p", { staticClass: "card-text mb-0" }, [
-                                  _c("small", { staticClass: "text-muted" }, [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: {
-                                          href:
-                                            "https://www.google.com/maps/search/" +
-                                            user.address +
-                                            ", Hidalgo del Parral, Chih.",
-                                          target: "_blank"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "text-muted" },
-                                          [
-                                            _c("i", {
-                                              staticClass:
-                                                "icon-location-pin mr-1"
-                                            }),
-                                            _vm._v(
-                                              _vm._s(user.address) +
-                                                "\n                          "
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            user.schedule
-                              ? _c("p", { staticClass: "card-text mb-0" }, [
-                                  _c("small", { staticClass: "text-muted" }, [
-                                    _c("i", {
-                                      staticClass: "far fa-clock mr-1"
-                                    }),
-                                    _vm._v(
-                                      _vm._s(user.schedule) +
-                                        "\n                      "
-                                    )
-                                  ])
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mt-2" }, [
-                              user.facebook
-                                ? _c(
-                                    "a",
-                                    {
-                                      staticClass: "text-info",
-                                      attrs: {
-                                        href: user.facebook,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
+                        _c("p", { staticClass: "card-text mb-0" }, [
+                          _vm._v(_vm._s(user.description))
+                        ]),
+                        _vm._v(" "),
+                        user.address
+                          ? _c("p", { staticClass: "card-text mb-0" }, [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "https://www.google.com/maps/search/" +
+                                        user.address +
+                                        ", Hidalgo del Parral, Chih.",
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "text-muted" }, [
                                       _c("i", {
-                                        staticClass:
-                                          "fab fa-facebook fa-fw mr-2"
-                                      })
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              user.instagram
-                                ? _c(
-                                    "a",
-                                    {
-                                      staticClass: "text-muted",
-                                      attrs: {
-                                        href: user.instagram,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fab fa-instagram fa-fw mr-2"
-                                      })
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              user.web
-                                ? _c(
-                                    "a",
-                                    {
-                                      staticClass: "text-muted",
-                                      attrs: {
-                                        href: user.web,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-globe fa-fw mr-2"
-                                      })
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              user.link
-                                ? _c(
-                                    "a",
-                                    {
-                                      staticClass: "text-muted",
-                                      attrs: {
-                                        href: user.link,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-link fa-fw mr-2"
-                                      })
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c(
+                                        staticClass: "icon-location-pin mr-1"
+                                      }),
+                                      _vm._v(
+                                        _vm._s(user.address) +
+                                          "\n                        "
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        user.schedule
+                          ? _c("p", { staticClass: "card-text mb-0" }, [
+                              _c("small", { staticClass: "text-muted" }, [
+                                _c("i", { staticClass: "far fa-clock mr-1" }),
+                                _vm._v(
+                                  _vm._s(user.schedule) +
+                                    "\n                    "
+                                )
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mt-2" }, [
+                          user.facebook
+                            ? _c(
                                 "a",
                                 {
-                                  staticClass:
-                                    "btn btn-light btn-sm float-right",
-                                  attrs: { href: "" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.create(user)
-                                    }
+                                  staticClass: "text-info",
+                                  attrs: {
+                                    href: user.facebook,
+                                    target: "_blank"
                                   }
                                 },
                                 [
-                                  _vm._v(
-                                    "\n                        Pedir\n                      "
-                                  )
+                                  _c("i", {
+                                    staticClass: "fab fa-facebook fa-fw mr-2"
+                                  })
                                 ]
                               )
-                            ])
-                          ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          user.instagram
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "text-muted",
+                                  attrs: {
+                                    href: user.instagram,
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fab fa-instagram fa-fw mr-2"
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          user.web
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "text-muted",
+                                  attrs: { href: user.web, target: "_blank" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-globe fa-fw mr-2"
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          user.link
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "text-muted",
+                                  attrs: { href: user.link, target: "_blank" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-link fa-fw mr-2"
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-light btn-sm float-right",
+                              attrs: { href: "" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.create(user)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                      Pedir\n                    "
+                              )
+                            ]
+                          )
                         ])
                       ])
                     ])
                   ])
                 ])
-              ])
-            ])
-          })
-        ),
+              })
+            )
+          ])
+        ]),
         _vm._v(" "),
         !_vm.loading && _vm.filters.pagination.total > 0
           ? _c("div", { staticClass: "row" }, [
@@ -82230,28 +82202,35 @@ var render = function() {
         { staticClass: "row justify-content-center" },
         _vm._l(_vm.stores, function(store) {
           return _c("div", { staticClass: "col-12 col-md-4 px-2 pt-2" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "row no-gutters" }, [
-                _c("div", { staticClass: "col-4" }, [
-                  _c("img", {
-                    staticClass: "card-img",
-                    attrs: { src: store.avatar_url, alt: store.name }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-8" }, [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h5", { staticClass: "card-title" }, [
-                      _c("strong", [_vm._v(_vm._s(store.name))])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(store.description))
+            _c(
+              "a",
+              {
+                staticClass: "card",
+                attrs: { href: "/tiendas/" + store.tags }
+              },
+              [
+                _c("div", { staticClass: "row no-gutters" }, [
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("img", {
+                      staticClass: "card-img",
+                      attrs: { src: store.avatar_url, alt: store.name }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title text-dark" }, [
+                        _c("strong", [_vm._v(_vm._s(store.name))])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text text-muted" }, [
+                        _vm._v(_vm._s(store.description))
+                      ])
                     ])
                   ])
                 ])
-              ])
-            ])
+              ]
+            )
           ])
         })
       )
