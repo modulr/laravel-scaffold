@@ -198,15 +198,15 @@ export default {
         .catch(error => {
           if (error.response.data.errors.finalize) {
             swal({
-              title: "¡Finaliza tus mandados!",
-              text: "¡Podras tomar mas de un mandado cuando subas de nivel!",
+              title: "¡Solo puedes tomar 2 mandados!",
+              text: "Finaliza un mandado o pidele a @Traeme que te asigne otro mandado por el Chat de Telegram",
               icon: "warning"
             })
           }
           if (error.response.data.errors.taken) {
             swal({
               title: "¡El mandado ya fue tomado!",
-              text: "¡Refresca la lista de mandados para ver lo nuevo!",
+              text: "Refresca la lista de mandados para ver lo nuevo",
               icon: "warning",
               button: "Refrescar"
             })
@@ -232,7 +232,8 @@ export default {
       }
     },
     showOrderUpdateModal (order, index) {
-      if (order.dealer_id == this.user.id && this.user.hasRole['dealer-level-2']) {
+      //if (order.dealer_id == this.user.id && this.user.hasRole['dealer-level-2']) {
+      if (order.dealer_id == this.user.id) {
         this.errors = {}
         this.editOrder = Object.assign({}, order)
         this.editOrder.index = index

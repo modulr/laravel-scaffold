@@ -257,7 +257,8 @@ export default {
       })
     },
     showOrderUpdateModal (order, index) {
-      if (order.status_id == 2 && this.user.hasRole['dealer-level-2']) {
+      //if (order.status_id == 2 && this.user.hasRole['dealer-level-2']) {
+      if (order.status_id == 2) {
         this.errors = {}
         this.editOrder = Object.assign({}, order)
         this.editOrder.index = index
