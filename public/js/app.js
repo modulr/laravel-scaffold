@@ -77820,13 +77820,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77843,8 +77836,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           last_page: 0
         },
         orderBy: {
-          column: 'name',
-          direction: 'asc'
+          column: 'level',
+          direction: 'desc'
         },
         search: ''
       },
@@ -77904,9 +77897,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.filters.search = '';
       this.filter();
     },
-    editUser: function editUser(userId) {
-      location.href = '/stores/' + userId + '/edit';
-    },
 
     // filters
     filter: function filter() {
@@ -77917,22 +77907,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.filters.search = category;
       this.getUsers();
     },
-
-    // changeSize (perPage) {
-    //   this.filters.pagination.current_page = 1
-    //   this.filters.pagination.per_page = perPage
-    //   this.getUsers()
-    // },
-    // sort (column) {
-    //   if(column == this.filters.orderBy.column) {
-    //     this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc'
-    //   } else {
-    //     this.filters.orderBy.column = column
-    //     this.filters.orderBy.direction = 'asc'
-    //   }
-    //
-    //   this.getUsers()
-    // },
     changePage: function changePage(page) {
       this.filters.pagination.current_page = page;
       this.getUsers();
@@ -78304,13 +78278,15 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 px-2 pt-2" }, [
-            _c(
-              "div",
-              { staticClass: "card-columns" },
-              _vm._l(_vm.users, function(user, index) {
-                return _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.users, function(user, index) {
+            return _c("div", { staticClass: "col-12 col-md-6 px-2 pt-2" }, [
+              _c(
+                "div",
+                { staticClass: "card", class: { "shadow-sm": user.level > 0 } },
+                [
                   _c("div", { staticClass: "row no-gutters" }, [
                     _c("div", { staticClass: "col-4" }, [
                       _c("img", {
@@ -78441,7 +78417,8 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              staticClass: "btn btn-light btn-sm float-right",
+                              staticClass:
+                                "btn btn-secondary btn-sm float-right",
                               attrs: { href: "" },
                               on: {
                                 click: function($event) {
@@ -78460,11 +78437,11 @@ var render = function() {
                       ])
                     ])
                   ])
-                ])
-              })
-            )
-          ])
-        ]),
+                ]
+              )
+            ])
+          })
+        ),
         _vm._v(" "),
         !_vm.loading && _vm.filters.pagination.total > 0
           ? _c("div", { staticClass: "row" }, [

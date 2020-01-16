@@ -28,6 +28,7 @@ class StoreController extends Controller
         $query->role('store');
 
         $users = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
+                    ->orderBy('name', 'asc')
                     ->paginate($request->input('pagination.per_page'));
 
         return $users;

@@ -39,9 +39,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 px-2 pt-2">
-          <div class="card-columns">
-            <div class="card" v-for="(user, index) in users">
+        <div class="col-12 col-md-6 px-2 pt-2" v-for="(user, index) in users">
+          <!-- <div class="card-deck"> -->
+            <div class="card" :class="{'shadow-sm': user.level > 0}">
               <div class="row no-gutters">
                 <div class="col-4">
                   <img :src="user.avatar_url" class="card-img" :alt="user.name">
@@ -77,7 +77,7 @@
                       <a :href="user.link" target="_blank" class="text-muted" v-if="user.link">
                         <i class="fas fa-link fa-fw mr-2"></i>
                       </a>
-                      <a class="btn btn-light btn-sm float-right" href="" @click.prevent="create(user)">
+                      <a class="btn btn-secondary btn-sm float-right" href="" @click.prevent="create(user)">
                         Pedir
                       </a>
                     </div>
@@ -85,7 +85,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
         <!-- Loading -->
         <!-- <infinite-loading @infinite="loadUsers" ref="infiniteLoading">
@@ -94,13 +94,6 @@
         </infinite-loading> -->
       </div>
       <div class="row" v-if='!loading && filters.pagination.total > 0'>
-        <!-- <div class="col">
-          <span v-if='!loading && filters.pagination.total > 0'>
-            {{filters.pagination.total}}
-          </span>
-          <i class="fas fa-spinner fa-spin" v-else></i>
-          <span class="ml-1">Tiendas</span>
-        </div> -->
         <div class="col mt-4" v-if="filters.pagination.last_page>1">
           <nav aria-label="Page navigation">
             <ul class="pagination">
@@ -151,8 +144,8 @@ export default {
           last_page: 0
         },
         orderBy: {
-          column: 'name',
-          direction: 'asc'
+          column: 'level',
+          direction: 'desc'
         },
         search: ''
       },
@@ -210,9 +203,6 @@ export default {
       this.filters.search = ''
       this.filter()
     },
-    editUser (userId) {
-      location.href = `/stores/${userId}/edit`
-    },
     // filters
     filter() {
       this.filters.pagination.current_page = 1
@@ -222,21 +212,6 @@ export default {
       this.filters.search = category
       this.getUsers()
     },
-    // changeSize (perPage) {
-    //   this.filters.pagination.current_page = 1
-    //   this.filters.pagination.per_page = perPage
-    //   this.getUsers()
-    // },
-    // sort (column) {
-    //   if(column == this.filters.orderBy.column) {
-    //     this.filters.orderBy.direction = this.filters.orderBy.direction == 'asc' ? 'desc' : 'asc'
-    //   } else {
-    //     this.filters.orderBy.column = column
-    //     this.filters.orderBy.direction = 'asc'
-    //   }
-    //
-    //   this.getUsers()
-    // },
     changePage (page) {
       this.filters.pagination.current_page = page
       this.getUsers()
