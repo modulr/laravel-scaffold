@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
 use App\Models\Transactions\Transaction;
 
 class AddCompanyToTransaction extends Notification implements ShouldQueue
@@ -45,7 +44,7 @@ class AddCompanyToTransaction extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Te invitaron a participar en la transaccion '.$this->transaction->name)
+                    ->subject($this->transaction->name.' - Te invitaron a participar en la transaccion')
                     ->line('Te invitaron a participar en la transaccion '.$this->transaction->name.', para ver todos los detalles da clic en el boton de abajo.')
                     ->action('Ver transaccion', url('/'));
     }

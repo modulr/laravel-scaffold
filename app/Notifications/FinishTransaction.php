@@ -6,10 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
 use App\Models\Transactions\Transaction;
 
-class UploadDocToTransaction extends Notification implements ShouldQueue
+class FinishTransaction extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -45,8 +44,8 @@ class UploadDocToTransaction extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->transaction->name.' - Subieron un archivo')
-                    ->line('Acaban de subir un archivo en la transaccion '.$this->transaction->name.', para ver todos los detalles da clic en el boton de abajo.')
+                    ->subject($this->transaction->name.' - Se finalizo la transaccion')
+                    ->line('Fue finalizada la transaccion '.$this->transaction->name.', para ver todos los detalles da clic en el boton de abajo.')
                     ->action('Ver transaccion', url('/'));
     }
 

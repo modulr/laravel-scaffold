@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Notifications\AddCompanyToTransaction;
+use App\Notifications\FinishTransaction;
 
 class TransactionController extends Controller
 {
@@ -187,6 +188,10 @@ class TransactionController extends Controller
             if ($request->finished) {
                 $transaction->finished_by = Auth::id();
                 $transaction->finished_at = now();
+
+                foreach ($transaction->users as $user) {
+                    $user->notify(new FinishTransaction($transaction));
+                }
             } else {
                 $transaction->finished_by = null;
                 $transaction->finished_at = null;

@@ -25,10 +25,8 @@ class FileController extends Controller
             'stage_id' => $request->stageId
         ]);
 
-
         $stage = Stage::find($request->stageId);
         $transaction = Transaction::find($stage->transaction_id);
-
         foreach ($transaction->users as $user) {
             $user->notify(new UploadDocToTransaction($transaction));
         }

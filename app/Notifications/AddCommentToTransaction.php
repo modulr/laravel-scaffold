@@ -45,7 +45,7 @@ class AddCommentToTransaction extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Hicieron un comentario en la transaccion '.$this->transaction->name)
+                    ->subject($this->transaction->name.' - Hicieron un comentario')
                     ->line('Acaban de hacer un comentario en la transaccion '.$this->transaction->name.', para ver todos los detalles da clic en el boton de abajo.')
                     ->action('Ver transaccion', url('/'));
     }

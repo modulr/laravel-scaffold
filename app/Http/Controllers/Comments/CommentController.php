@@ -36,7 +36,6 @@ class CommentController extends Controller
 
         $stage = Stage::find($request->stage_id);
         $transaction = Transaction::find($stage->transaction_id);
-
         foreach ($transaction->users as $user) {
             $user->notify(new AddCommentToTransaction($transaction));
         }

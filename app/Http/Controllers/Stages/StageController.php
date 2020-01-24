@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Stages\Stage;
+use App\Models\Transactions\Transaction;
+use App\Notifications\AuthorizeStage;
 
 class StageController extends Controller
 {
@@ -63,6 +65,11 @@ class StageController extends Controller
             if ($request->authorized) {
                 $stage->authorized_by = Auth::id();
                 $stage->authorized_at = now();
+                
+                $transaction = Transaction::find($stage->transaction_id);
+                foreach ($transaction->users as $user) {
+                    $user->notify(new AuthorizeStage($transaction));
+                }
             } else {
                 $stage->authorized_by = null;
                 $stage->authorized_at = null;
