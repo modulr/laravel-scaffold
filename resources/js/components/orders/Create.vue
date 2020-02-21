@@ -16,12 +16,15 @@
       </div>
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
-    <div class="mb-1">
+    <div class="mb-4">
       <a class="btn btn-light btn-lg px-5" href="" @click.prevent="create">Pedir</a>
       <!-- <a class="btn btn-brand btn-facebook" href="/auth/facebook">
         Pídelo por Facebook
       </a> -->
     </div>
+    <p class="mb-0">Tarifa del dia desde <rates-day></rates-day> pesos</p>
+    <p class="mb-1"><small>Horario: 8:00am a 10:00pm</small></p>
+    <a class="text-white" href="#">{{order.city}}</a>
     <!-- <p class="mb-1">ó</p>
     <a class="btn btn-light" href="#" @click.prevent="send">
       por WhatsApp
@@ -41,9 +44,8 @@ export default {
       placeholder: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
-        'Traeme unos tacos',
-        'Pagame la luz',
-        'Me puedes pagar el Agua de la Dirección...',
+        'Tráeme unos tacos',
+        'Pagame la luz de la dirección...',
         '¿Necesitas enviar un paquete?'
       ],
       loading: false,
@@ -99,7 +101,8 @@ export default {
       axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
       .then(response => {
         //console.log(response.data);
-        this.order.address = response.data.display_name
+        this.order.address = response.data.name
+        this.order.city = response.data.address.city
         localStorage.setItem("order", JSON.stringify(this.order))
         this.loading = false
       })

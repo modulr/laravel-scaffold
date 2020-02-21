@@ -4,17 +4,16 @@
 <div class="container-fluid">
     <div class="row justify-content-center bg-gradient">
         <div class="col-sm-12 text-center">
-            <img class="img-fluid logo mt-5 mb-3" src="/img/traeme.png" alt="">
+            <img class="img-fluid logo mt-5 mb-3" src="/img/traeme.png" alt="Tráeme">
+            <p class="lead mt-2 mb-4">Mandados a domicilio</p>
         </div>
-        <div class="col-9 col-sm-6 col-md-4 text-center">
-            <p>¿Que te llevamos?</p>
+        <div class="col-9 col-sm-6 col-md-4 mb-4 text-center">
+            <!-- <p>¿Que te llevamos?</p> -->
             @auth
-            <orders-create-auth class="mb-4"></orders-create-auth>
+            <orders-create-auth></orders-create-auth>
             @else
-            <orders-create class="mb-3"></orders-create>
+            <orders-create></orders-create>
             @endauth
-            <p class="mb-0">Tarifa del dia desde <rates-day></rates-day> pesos</p>
-            <p><small>Horario: 8:00am a 10:00pm</small></p>
         </div>
         <div class="col-12 px-0">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -70,7 +69,7 @@
 
     <div class="row justify-content-center">
         <div class="col-12 text-center pt-5">
-            <img class="img-fluid logo" src="/svg/traeme.svg" alt="">
+            <img class="img-fluid logo" src="/svg/traeme.svg" alt="Mandados a domicilio">
             <p class="lead mt-5 mb-1">Mandados a domicilio</p>
             <p class="mb-5"><i>Ahorra tiempo y dinero</i></p>
             <div class="text-center mb-2">
@@ -91,7 +90,7 @@
                   <!-- <img src="/img/instagram.png" class="img-fluid" alt="Instagram"> -->
                 </a>
             </div>
-            <div class="mt-5 mb-4">
+            <div class="m-5">
                 <a class="btn btn-link btn-lg btn-phone" href="tel:627-110-1145">
                     <small class="fa-stack mr-1">
                         <i class="fas fa-circle fa-stack-2x"></i>
@@ -100,8 +99,8 @@
                     (627) 110 1145
                 </a>
             </div>
-            <p class="mb-0"><small>© 2020 Tráeme, Todos los derechos reservados.</small></p>
-            <p class="mb-5"><small>Creado por <a href="https://alfredobarron.com" target="_blank">Alfredo Barrón</a></small></p>
+            <p class="mb-5"><small>© 2020 Tráeme, Todos los derechos reservados.</small></p>
+            <!-- <p class="mb-5"><small>Creado por <a href="https://alfredobarron.com" target="_blank">Alfredo Barrón</a></small></p> -->
         </div>
     </div>
 </div>

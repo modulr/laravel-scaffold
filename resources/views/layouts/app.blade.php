@@ -26,7 +26,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta name="description" content="Mandados a domicilio en Parral">
+    <meta name="description" content="¡Nosotros te lo llevamos! Te llevamos cualquier cosa en minutos. Testaurantes, supermercado, medicamentos y mucho más. Tus tiendas favoritas están en Tráeme."/>
+    <meta name="keywords" content="traeme, mandados, domicilio, tiendas, restaurantes, supermercado, medicamentos"/>
+    <meta name="author" content="Alfredo Barrón"/>
+    <meta name="robots" content="index,follow"/>
 
     <!-- Scripts -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu7T6uxlvBXGalDdmU5pk8a8nKb5r8krE" async defer></script>

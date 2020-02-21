@@ -11264,6 +11264,16 @@ a.text-dark:focus {
   }
 }
 
+@font-face {
+  font-family: FibonSansRegular;
+  src: url("/fonts/Fibon_Sans_Regular.otf");
+}
+
+.lead,
+h1 {
+  font-family: FibonSansRegular;
+}
+
 a:hover {
   text-decoration: none;
   color: inherit;
@@ -11383,14 +11393,6 @@ a:hover {
 
 .breadcrumb-menu .btn-link {
   color: #6c757d;
-}
-
-.categories a {
-  display: inline-block;
-}
-
-.categories img {
-  max-width: 150px;
 }
 
 .input-group-text {

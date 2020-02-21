@@ -72115,6 +72115,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72122,7 +72125,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       order: {},
       //address: '',
       placeholder: '',
-      placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
+      placeholders: ['¿Necesitas algo de la tienda?', 'Tráeme unos tacos', 'Pagame la luz de la dirección...', '¿Necesitas enviar un paquete?'],
       loading: false,
       errors: {}
     };
@@ -72179,7 +72182,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
         //console.log(response.data);
-        _this.order.address = response.data.display_name;
+        _this.order.address = response.data.name;
+        _this.order.city = response.data.address.city;
         localStorage.setItem("order", JSON.stringify(_this.order));
         _this.loading = false;
       });
@@ -72279,7 +72283,7 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "mb-1" }, [
+    _c("div", { staticClass: "mb-4" }, [
       _c(
         "a",
         {
@@ -72294,10 +72298,32 @@ var render = function() {
         },
         [_vm._v("Pedir")]
       )
+    ]),
+    _vm._v(" "),
+    _c(
+      "p",
+      { staticClass: "mb-0" },
+      [_vm._v("Tarifa del dia desde "), _c("rates-day"), _vm._v(" pesos")],
+      1
+    ),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("a", { staticClass: "text-white", attrs: { href: "#" } }, [
+      _vm._v(_vm._s(_vm.order.city))
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mb-1" }, [
+      _c("small", [_vm._v("Horario: 8:00am a 10:00pm")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -72397,7 +72423,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       newOrder: {},
       address: [],
       placeholder: '',
-      placeholders: ['¿Necesitas algo de la tienda?', 'Traeme unos tacos', 'Pagame la luz', 'Me puedes pagar el Agua de la Dirección...', '¿Necesitas enviar un paquete?'],
+      placeholders: ['¿Necesitas algo de la tienda?', 'Tráeme unos tacos', 'Pagame la luz de la dirección...', '¿Necesitas enviar un paquete?'],
       loading: false,
       loadingAddress: false,
       submiting: false,
@@ -72473,7 +72499,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
         //console.log(response.data);
-        _this3.newOrder.address = response.data.display_name;
+        _this3.newOrder.address = response.data.name;
         localStorage.setItem("order", JSON.stringify(_this3.newOrder));
         _this3.loading = false;
       });
@@ -81670,36 +81696,7 @@ var render = function() {
               ])
             ]
           )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "touch",
-                  rawName: "v-touch:swipe",
-                  value: _vm.swipeHandler,
-                  expression: "swipeHandler",
-                  arg: "swipe"
-                }
-              ],
-              staticClass: "modal fade",
-              attrs: {
-                id: "modalPromo2",
-                tabindex: "-1",
-                role: "dialog",
-                "aria-hidden": "true"
-              }
-            },
-            [_vm._m(5)]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(6)
+        ])
       ])
     ])
   ])
@@ -81776,75 +81773,6 @@ var staticRenderFns = [
         _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        attrs: {
-          href: "#modalPromo2",
-          "data-toggle": "modal",
-          "data-target": "#modalPromo2"
-        }
-      },
-      [
-        _c("img", {
-          staticClass: "img-fluid",
-          attrs: { src: "/img/stores/banner_blvd_chino.png", alt: "Blvd Chino" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-dialog modal-xl" }, [
-      _c("div", { staticClass: "modal-content" }, [
-        _c("div", { staticClass: "modal-body" }, [
-          _c(
-            "div",
-            {
-              staticClass: "carousel slide",
-              attrs: {
-                id: "carouselPromo2",
-                "data-ride": "carousel",
-                "data-interval": "false",
-                "data-touch": "true"
-              }
-            },
-            [
-              _c("div", { staticClass: "carousel-inner" }, [
-                _c("div", { staticClass: "carousel-item active" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src:
-                        "/img/stores/menu/blvd_chino/blvd_chino_promocion_jueves.jpeg",
-                      alt: "Blvd Chino Promocion"
-                    }
-                  })
-                ])
-              ])
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
-      _c("img", {
-        staticClass: "img-fluid",
-        attrs: { src: "/img/stores/banner_dogos_co_2.png", alt: "Dogos & Co" }
-      })
-    ])
   }
 ]
 render._withStripped = true
@@ -81999,6 +81927,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -82024,156 +81968,186 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-lg-8 col-md-12" }, [
+      _c("div", { staticClass: "col-10" }, [
         _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-12 text-center mb-5 categories" }, [
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Comida" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: { src: "/img/categories/comida.png", alt: "Comida" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Comida")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Comida")]
+                )
               ]
-            ),
-            _vm._v(" "),
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Postres" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: { src: "/img/categories/postres.png", alt: "Postres" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Postres")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Postres")]
+                )
               ]
-            ),
-            _vm._v(" "),
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Super" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: { src: "/img/categories/super.png", alt: "Super" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Super")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Super")]
+                )
               ]
-            ),
-            _vm._v(" "),
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Recibos" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: { src: "/img/categories/recibos.png", alt: "Recibos" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Recibos")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Recibos")]
+                )
               ]
-            ),
-            _vm._v(" "),
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Regalos" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: { src: "/img/categories/regalos.png", alt: "Regalos" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Regalos")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Regalos")]
+                )
               ]
-            ),
-            _vm._v(" "),
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Licores" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: { src: "/img/categories/licores.png", alt: "Licores" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Licores")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Licores")]
+                )
               ]
-            ),
-            _vm._v(" "),
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Farmacia" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: {
                     src: "/img/categories/farmacia.png",
                     alt: "Farmacia"
                   }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Farmacia")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Farmacia")]
+                )
               ]
-            ),
-            _vm._v(" "),
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
               {
-                staticClass: "shadow rounded text-center p-3 mx-2 my-3",
+                staticClass: "figure shadow rounded text-center p-3 my-2",
                 attrs: { href: "/tiendas/Paquetes" }
               },
               [
                 _c("img", {
-                  staticClass: "img-fluid rounded mb-2",
+                  staticClass: "figure-img img-fluid rounded mb-2",
                   attrs: {
                     src: "/img/categories/paquetes.png",
                     alt: "Paquetes"
                   }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "font-weight-bold text-dark" }, [
-                  _vm._v("Paquetes")
-                ])
+                _c(
+                  "figcaption",
+                  { staticClass: "font-weight-bold text-dark" },
+                  [_vm._v("Paquetes")]
+                )
               ]
             )
           ])

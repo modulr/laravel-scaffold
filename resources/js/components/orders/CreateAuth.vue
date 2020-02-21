@@ -37,9 +37,8 @@ export default {
       placeholder: '',
       placeholders: [
         '¿Necesitas algo de la tienda?',
-        'Traeme unos tacos',
-        'Pagame la luz',
-        'Me puedes pagar el Agua de la Dirección...',
+        'Tráeme unos tacos',
+        'Pagame la luz de la dirección...',
         '¿Necesitas enviar un paquete?'
       ],
       loading: false,
@@ -115,7 +114,7 @@ export default {
       axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
       .then(response => {
         //console.log(response.data);
-        this.newOrder.address = response.data.display_name
+        this.newOrder.address = response.data.name
         localStorage.setItem("order", JSON.stringify(this.newOrder))
         this.loading = false
       })
