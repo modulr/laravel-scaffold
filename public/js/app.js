@@ -72395,7 +72395,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "modal fade",
+        staticClass: "modal",
         attrs: {
           id: "modalCity",
           tabindex: "-1",
@@ -72450,36 +72450,6 @@ var staticRenderFns = [
                       attrs: { href: "https://delicias.traeme.app" }
                     },
                     [_vm._v("Delicias")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "list-group-item list-group-item-action disabled",
-                      attrs: { tabindex: "-1", "aria-disabled": "true" }
-                    },
-                    [
-                      _vm._v("Chihuahua "),
-                      _c("span", { staticClass: "text-muted" }, [
-                        _vm._v(" - Próximamente")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "list-group-item list-group-item-action disabled",
-                      attrs: { tabindex: "-1", "aria-disabled": "true" }
-                    },
-                    [
-                      _vm._v("Juárez "),
-                      _c("span", { staticClass: "text-muted" }, [
-                        _vm._v(" - Próximamente")
-                      ])
-                    ]
                   )
                 ])
               ])
