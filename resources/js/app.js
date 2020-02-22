@@ -45,6 +45,7 @@ Vue.component('vue-step', vueStep)
 
  // Layout
  Vue.component('sidebar', require('./components/layout/Sidebar.vue'));
+ Vue.component('config', require('./components/layout/Config.vue'));
 
 // Dashboard
 Vue.component('users-count', require('./components/dashboard/UsersCount.vue'));

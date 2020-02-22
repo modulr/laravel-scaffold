@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="row justify-content-center mb-3">
-      <div class="col-10 pb-3 text-center mt-4 mb-4">
+      <div class="col-10 pb-3 text-center mt-5 mb-4">
           <h1 class="font-weight-bold">Promociones</h1>
       </div>
-      <div class="col-10">
+      <div class="col-10 col-lg-8">
         <div class="row justify-content-center">
           <div class="col-12 col-md-4 px-2 text-center">
               <a href="#modalPromo1" data-toggle="modal" data-target="#modalPromo1">
@@ -45,7 +45,7 @@
                 </div>
               </div>
           </div>
-          <!-- <div class="col-12 col-md-4 px-2 text-center">
+          <div class="col-12 col-md-4 px-2 text-center">
             <a href="#modalPromo2" data-toggle="modal" data-target="#modalPromo2">
                 <img src="/img/stores/banner_blvd_chino.png" class="img-fluid" alt="Blvd Chino">
             </a>
@@ -64,10 +64,10 @@
                   </div>
                 </div>
               </div>
-          </div> -->
-          <!-- <div class="col-12 col-md-4 px-2 text-center">
+          </div>
+          <div class="col-12 col-md-4 px-2 text-center">
               <img src="/img/stores/banner_dogos_co_2.png" class="img-fluid" alt="Dogos & Co">
-          </div> -->
+          </div>
         </div>
       </div>
   </div>

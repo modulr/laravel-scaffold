@@ -14184,6 +14184,7 @@ Vue.component('vue-step', __WEBPACK_IMPORTED_MODULE_6_vue_step__["a" /* default 
 
 // Layout
 Vue.component('sidebar', __webpack_require__(59));
+Vue.component('config', __webpack_require__(211));
 
 // Dashboard
 Vue.component('users-count', __webpack_require__(62));
@@ -72122,6 +72123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      config: {},
       order: {},
       //address: '',
       placeholder: '',
@@ -72132,6 +72134,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.randomPlaceholder();
+    this.getConfig();
     if (localStorage.getItem("order")) {
       this.order = JSON.parse(localStorage.getItem("order"));
     }
@@ -72139,6 +72142,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    getConfig: function getConfig() {
+      var _this = this;
+
+      axios.get('/api/configs/first').then(function (response) {
+        _this.config = response.data;
+      }).catch(function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    },
     create: function create() {
       localStorage.setItem("order", JSON.stringify(this.order));
       location.href = '/login';
@@ -72171,22 +72183,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getPosition: function getPosition() {
       if (navigator.geolocation) {
         this.loading = true;
-        navigator.geolocation.getCurrentPosition(this.setPosition);
+        navigator.geolocation.getCurrentPosition(this.setPosition, this.showError);
       } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        this.loading = false;
+        console.log("Geolocation is not supported by this browser.");
       }
     },
     setPosition: function setPosition(position) {
-      var _this = this;
+      var _this2 = this;
 
       //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
-        //console.log(response.data);
-        _this.order.address = response.data.name;
-        _this.order.city = response.data.address.city;
-        localStorage.setItem("order", JSON.stringify(_this.order));
-        _this.loading = false;
+        console.log(response.data);
+        _this2.order.address = response.data.name;
+        localStorage.setItem("order", JSON.stringify(_this2.order));
+        _this2.loading = false;
       });
+    },
+    showError: function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          console.log("User denied the request for Geolocation.");
+          this.loading = false;
+          break;
+        case error.POSITION_UNAVAILABLE:
+          console.log("Location information is unavailable.");
+          this.loading = false;
+          break;
+        case error.TIMEOUT:
+          console.log("The request to get user location timed out.");
+          this.loading = false;
+          break;
+        case error.UNKNOWN_ERROR:
+          console.log("An unknown error occurred.");
+          this.loading = false;
+          break;
+      }
     },
     randomPlaceholder: function randomPlaceholder() {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)];
@@ -72202,128 +72234,120 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.order.order,
-            expression: "order.order"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { rows: "3", placeholder: _vm.placeholder },
-        domProps: { value: _vm.order.order },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.order, "order", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.errors.order
-        ? _c("small", { staticClass: "form-text text-white" }, [
-            _vm._v("Dinos que te llevamos")
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "input-group border-right-0" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group-prepend",
-            on: { click: _vm.getPosition }
-          },
-          [
-            _c("span", { staticClass: "input-group-text" }, [
-              _vm.loading
-                ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                : _c("i", { staticClass: "fas fa-map-marker-alt" })
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "form-group" }, [
+        _c("textarea", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.order.address,
-              expression: "order.address"
+              value: _vm.order.order,
+              expression: "order.order"
             }
           ],
           staticClass: "form-control",
-          attrs: {
-            type: "text",
-            placeholder: "¿A donde? Calle, numero y colonia"
-          },
-          domProps: { value: _vm.order.address },
+          attrs: { rows: "3", placeholder: _vm.placeholder },
+          domProps: { value: _vm.order.order },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.order, "address", $event.target.value)
+              _vm.$set(_vm.order, "order", $event.target.value)
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.errors.order
+          ? _c("small", { staticClass: "form-text text-white" }, [
+              _vm._v("Dinos que te llevamos")
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
-      _vm.errors.address
-        ? _c("small", { staticClass: "form-text text-white" }, [
-            _vm._v("¿A donde te lo llevamos?")
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "mb-4" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-light btn-lg px-5",
-          attrs: { href: "" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.create($event)
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "input-group border-right-0" }, [
+          _c(
+            "div",
+            {
+              staticClass: "input-group-prepend",
+              on: { click: _vm.getPosition }
+            },
+            [
+              _c("span", { staticClass: "input-group-text" }, [
+                _vm.loading
+                  ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                  : _c("i", { staticClass: "fas fa-map-marker-alt" })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.order.address,
+                expression: "order.address"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Dirección (calle, numero y colonia)"
+            },
+            domProps: { value: _vm.order.address },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.order, "address", $event.target.value)
+              }
             }
-          }
-        },
-        [_vm._v("Pedir")]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "p",
-      { staticClass: "mb-0" },
-      [_vm._v("Tarifa del dia desde "), _c("rates-day"), _vm._v(" pesos")],
-      1
-    ),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("a", { staticClass: "text-white", attrs: { href: "#" } }, [
-      _vm._v(_vm._s(_vm.order.city))
-    ])
-  ])
+          })
+        ]),
+        _vm._v(" "),
+        _vm.errors.address
+          ? _c("small", { staticClass: "form-text text-white" }, [
+              _vm._v("¿A donde te lo llevamos?")
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-light btn-lg px-5",
+            attrs: { href: "" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.create($event)
+              }
+            }
+          },
+          [_vm._v("Pedir")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("rates-day"),
+      _vm._v(" "),
+      _c("p", { staticClass: "mb-1" }, [
+        _c("small", [_vm._v(_vm._s(_vm.config.schedule))])
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "text-white", attrs: { href: "#" } }, [
+        _vm._v(_vm._s(_vm.config.city))
+      ])
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "mb-1" }, [
-      _c("small", [_vm._v("Horario: 8:00am a 10:00pm")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -72415,11 +72439,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: Laravel.user,
+      config: {},
       newOrder: {},
       address: [],
       placeholder: '',
@@ -72432,6 +72462,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.randomPlaceholder();
+    this.getConfig();
     if (localStorage.getItem("order")) {
       this.newOrder = JSON.parse(localStorage.getItem("order"));
       //this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("address")))
@@ -72448,17 +72479,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loadingAddress = false;
       });
     },
-    createOrder: function createOrder() {
+    getConfig: function getConfig() {
       var _this2 = this;
+
+      axios.get('/api/configs/first').then(function (response) {
+        _this2.config = response.data;
+      }).catch(function (error) {
+        _this2.errors = error.response.data.errors;
+      });
+    },
+    createOrder: function createOrder() {
+      var _this3 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         this.errors = {};
         axios.post('/api/orders/storeAuth', this.newOrder).then(function (response) {
           //this.$toasted.global.error('¡Mandado creado!')
-          _this2.newOrder.order = '';
-          localStorage.setItem("order", JSON.stringify(_this2.newOrder));
-          _this2.submiting = false;
+          _this3.newOrder.order = '';
+          localStorage.setItem("order", JSON.stringify(_this3.newOrder));
+          _this3.submiting = false;
           var wrapper = document.createElement('div');
           wrapper.innerHTML = '<div data-v-3500aeb9 class="mb-3 v-step-warp-horizontal style2"><div data-v-3500aeb9 class="v-step-progress-bg"><div data-v-3500aeb9 class="v-step-progress-value" style="background-color: rgb(31, 177, 29); width: 33.3333%;"></div></div> <ul data-v-3500aeb9 class="v-step-list"><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Abierto </label> <div data-v-3500aeb9 class="v-step-item-number" style="background-color: rgb(31, 177, 29); color: rgb(255, 255, 255);">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> En camino </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Entregado </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li></ul></div>';
           swal({
@@ -72473,15 +72513,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
           });
         }).catch(function (error) {
-          _this2.errors = error.response.data.errors;
-          if (_this2.errors.cellphone) {
-            if (_this2.errors.cellphone[0] == 'The cellphone field is required.') {
-              _this2.errors.cellphone[1] = '¿Cual es tu numero celular?';
+          _this3.errors = error.response.data.errors;
+          if (_this3.errors.cellphone) {
+            if (_this3.errors.cellphone[0] == 'The cellphone field is required.') {
+              _this3.errors.cellphone[1] = '¿Cual es tu numero celular?';
             } else {
-              _this2.errors.cellphone[1] = 'El numero de celular ya esta registrado';
+              _this3.errors.cellphone[1] = 'El numero de celular ya esta registrado';
             }
           }
-          _this2.submiting = false;
+          _this3.submiting = false;
         });
       }
     },
@@ -72494,14 +72534,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     setPosition: function setPosition(position) {
-      var _this3 = this;
+      var _this4 = this;
 
       //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
         //console.log(response.data);
-        _this3.newOrder.address = response.data.name;
-        localStorage.setItem("order", JSON.stringify(_this3.newOrder));
-        _this3.loading = false;
+        _this4.newOrder.address = response.data.name;
+        _this4.config.city = response.data.address.city;
+        localStorage.setItem("order", JSON.stringify(_this4.newOrder));
+        _this4.loading = false;
       });
     },
     randomPlaceholder: function randomPlaceholder() {
@@ -72518,141 +72559,160 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.newOrder.order,
-            expression: "newOrder.order"
-          }
-        ],
-        staticClass: "form-control",
-        class: { "is-invalid": _vm.errors.order },
-        attrs: { rows: "3", placeholder: _vm.placeholder },
-        domProps: { value: _vm.newOrder.order },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.newOrder, "order", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm.errors.order
-        ? _c("small", { staticClass: "form-text text-white" }, [
-            _vm._v("Dinos que te llevamos")
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "input-group border-right-0" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group-prepend",
-            on: { click: _vm.getPosition }
-          },
-          [
-            _c("span", { staticClass: "input-group-text" }, [
-              _vm.loading
-                ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                : _c("i", { staticClass: "fas fa-map-marker-alt" })
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "form-group" }, [
+        _c("textarea", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.newOrder.address,
-              expression: "newOrder.address"
+              value: _vm.newOrder.order,
+              expression: "newOrder.order"
             }
           ],
           staticClass: "form-control",
-          attrs: {
-            type: "text",
-            placeholder: "¿A donde? Calle, numero y colonia"
-          },
-          domProps: { value: _vm.newOrder.address },
+          class: { "is-invalid": _vm.errors.order },
+          attrs: { rows: "3", placeholder: _vm.placeholder },
+          domProps: { value: _vm.newOrder.order },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.newOrder, "address", $event.target.value)
+              _vm.$set(_vm.newOrder, "order", $event.target.value)
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.errors.order
+          ? _c("small", { staticClass: "form-text text-white" }, [
+              _vm._v("Dinos que te llevamos")
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
-      _vm.errors.address
-        ? _c("small", { staticClass: "form-text text-white" }, [
-            _vm._v("¿A donde te lo llevamos?")
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    !_vm.user.cellphone
-      ? _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "input-group border-right-0" }, [
+          _c(
+            "div",
+            {
+              staticClass: "input-group-prepend",
+              on: { click: _vm.getPosition }
+            },
+            [
+              _c("span", { staticClass: "input-group-text" }, [
+                _vm.loading
+                  ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                  : _c("i", { staticClass: "fas fa-map-marker-alt" })
+              ])
+            ]
+          ),
+          _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.newOrder.cellphone,
-                expression: "newOrder.cellphone"
+                value: _vm.newOrder.address,
+                expression: "newOrder.address"
               }
             ],
             staticClass: "form-control",
-            class: { "is-invalid": _vm.errors.cellphone },
-            attrs: { type: "tel", placeholder: "Escribe tu numero de celular" },
-            domProps: { value: _vm.newOrder.cellphone },
+            attrs: {
+              type: "text",
+              placeholder: "Dirección (calle, numero y colonia)"
+            },
+            domProps: { value: _vm.newOrder.address },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.newOrder, "cellphone", $event.target.value)
+                _vm.$set(_vm.newOrder, "address", $event.target.value)
               }
             }
-          }),
-          _vm._v(" "),
-          _vm.errors.cellphone
-            ? _c("small", { staticClass: "form-text text-white" }, [
-                _vm._v(_vm._s(_vm.errors.cellphone[1]))
-              ])
-            : _vm._e()
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "a",
-      {
-        staticClass: "btn btn-light btn-lg px-5",
-        attrs: { href: "#", disabled: _vm.submiting },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.createOrder($event)
-          }
-        }
-      },
-      [
-        _vm.submiting
-          ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-2" })
-          : _vm._e(),
-        _vm._v("Pedir\n  ")
-      ]
-    )
-  ])
+          })
+        ]),
+        _vm._v(" "),
+        _vm.errors.address
+          ? _c("small", { staticClass: "form-text text-white" }, [
+              _vm._v("¿A donde te lo llevamos?")
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      !_vm.user.cellphone
+        ? _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newOrder.cellphone,
+                  expression: "newOrder.cellphone"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.errors.cellphone },
+              attrs: {
+                type: "tel",
+                placeholder: "Escribe tu numero de celular"
+              },
+              domProps: { value: _vm.newOrder.cellphone },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.newOrder, "cellphone", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.cellphone
+              ? _c("small", { staticClass: "form-text text-white" }, [
+                  _vm._v(_vm._s(_vm.errors.cellphone[1]))
+                ])
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-light btn-lg px-5",
+            attrs: { href: "#", disabled: _vm.submiting },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.createOrder($event)
+              }
+            }
+          },
+          [
+            _vm.submiting
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-2" })
+              : _vm._e(),
+            _vm._v("Pedir\n    ")
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("rates-day"),
+      _vm._v(" "),
+      _c("p", { staticClass: "mb-1" }, [
+        _c("small", [_vm._v(_vm._s(_vm.config.schedule))])
+      ]),
+      _vm._v(" "),
+      _c("a", { staticClass: "text-white", attrs: { href: "#" } }, [
+        _vm._v(_vm._s(_vm.config.city))
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -73678,7 +73738,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("b", [_vm._v("$" + _vm._s(_vm.rate.rate))])
+  return _c("p", { staticClass: "mb-0" }, [
+    _vm._v("Tarifa del dia desde "),
+    _c("b", [_vm._v("$" + _vm._s(_vm.rate.rate))]),
+    _vm._v(" pesos")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -81307,7 +81371,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-10" }, [
+    _c("div", { staticClass: "col-10 col-lg-8" }, [
       _c(
         "div",
         { staticClass: "row justify-content-center" },
@@ -81513,7 +81577,7 @@ var render = function() {
   return _c("div", { staticClass: "row justify-content-center mb-3" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "col-10" }, [
+    _c("div", { staticClass: "col-10 col-lg-8" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
           _vm._m(1),
@@ -81696,7 +81760,36 @@ var render = function() {
               ])
             ]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "touch",
+                  rawName: "v-touch:swipe",
+                  value: _vm.swipeHandler,
+                  expression: "swipeHandler",
+                  arg: "swipe"
+                }
+              ],
+              staticClass: "modal fade",
+              attrs: {
+                id: "modalPromo2",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-hidden": "true"
+              }
+            },
+            [_vm._m(5)]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(6)
       ])
     ])
   ])
@@ -81706,7 +81799,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-10 pb-3 text-center mt-4 mb-4" }, [
+    return _c("div", { staticClass: "col-10 pb-3 text-center mt-5 mb-4" }, [
       _c("h1", { staticClass: "font-weight-bold" }, [_vm._v("Promociones")])
     ])
   },
@@ -81773,6 +81866,75 @@ var staticRenderFns = [
         _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        attrs: {
+          href: "#modalPromo2",
+          "data-toggle": "modal",
+          "data-target": "#modalPromo2"
+        }
+      },
+      [
+        _c("img", {
+          staticClass: "img-fluid",
+          attrs: { src: "/img/stores/banner_blvd_chino.png", alt: "Blvd Chino" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-dialog modal-xl" }, [
+      _c("div", { staticClass: "modal-content" }, [
+        _c("div", { staticClass: "modal-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "carousel slide",
+              attrs: {
+                id: "carouselPromo2",
+                "data-ride": "carousel",
+                "data-interval": "false",
+                "data-touch": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "carousel-inner" }, [
+                _c("div", { staticClass: "carousel-item active" }, [
+                  _c("img", {
+                    staticClass: "img-fluid",
+                    attrs: {
+                      src:
+                        "/img/stores/menu/blvd_chino/blvd_chino_promocion_jueves.jpeg",
+                      alt: "Blvd Chino Promocion"
+                    }
+                  })
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: { src: "/img/stores/banner_dogos_co_2.png", alt: "Dogos & Co" }
+      })
+    ])
   }
 ]
 render._withStripped = true
@@ -81961,15 +82123,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
+    return _c("div", { staticClass: "row justify-content-center mb-3" }, [
       _c("div", { staticClass: "col-10 pb-3 text-center mx-4" }, [
         _c("h1", { staticClass: "font-weight-bold" }, [
           _vm._v("Todo lo que necesitas")
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-10" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-10 col-lg-8" }, [
+        _c("div", { staticClass: "row justify-content-center categories" }, [
           _c("div", { staticClass: "col-6 col-md-3 px-2 text-center" }, [
             _c(
               "a",
@@ -82170,6 +82332,199 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(212)
+/* template */
+var __vue_template__ = __webpack_require__(213)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/layout/Config.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6a73e22c", Component.options)
+  } else {
+    hotAPI.reload("data-v-6a73e22c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 212 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      config: {}
+    };
+  },
+  mounted: function mounted() {
+    this.getConfig();
+  },
+
+  methods: {
+    getConfig: function getConfig() {
+      var _this = this;
+
+      axios.get("/api/configs/first").then(function (response) {
+        _this.config = response.data;
+        console.log(_this.config);
+      }).catch(function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "text-center mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-success mr-3",
+          attrs: { href: this.config.facebook, target: "_blank" }
+        },
+        [_c("i", { staticClass: "fab fa-facebook-square fa-3x" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "text-success",
+          attrs: { href: this.config.instagram, target: "_blank" }
+        },
+        [_c("i", { staticClass: "fab fa-instagram fa-3x" })]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "m-5" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-link btn-lg btn-phone",
+          attrs: { href: "tel:" + this.config.phone }
+        },
+        [
+          _vm._m(0),
+          _vm._v("\n          " + _vm._s(this.config.phone) + "\n      ")
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", { staticClass: "fa-stack mr-1" }, [
+      _c("i", { staticClass: "fas fa-circle fa-stack-2x" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-phone fa-stack-1x fa-inverse" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6a73e22c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -12,7 +12,7 @@
             <i class="fas fa-map-marker-alt" v-else></i>
           </span>
         </div>
-        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="order.address">
+        <input type="text" class="form-control" placeholder="Dirección (calle, numero y colonia)" v-model="order.address">
       </div>
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
@@ -22,9 +22,9 @@
         Pídelo por Facebook
       </a> -->
     </div>
-    <p class="mb-0">Tarifa del dia desde <rates-day></rates-day> pesos</p>
-    <p class="mb-1"><small>Horario: 8:00am a 10:00pm</small></p>
-    <a class="text-white" href="#">{{order.city}}</a>
+    <rates-day></rates-day>
+    <p class="mb-1"><small>{{config.schedule}}</small></p>
+    <a class="text-white" href="#">{{config.city}}</a>
     <!-- <p class="mb-1">ó</p>
     <a class="btn btn-light" href="#" @click.prevent="send">
       por WhatsApp
@@ -39,6 +39,7 @@
 export default {
   data () {
     return {
+      config: {},
       order: {},
       //address: '',
       placeholder: '',
@@ -54,12 +55,22 @@ export default {
   },
   mounted () {
     this.randomPlaceholder()
+    this.getConfig()
     if (localStorage.getItem("order")) {
       this.order = JSON.parse(localStorage.getItem("order"))
     }
     this.getPosition()
   },
   methods: {
+    getConfig () {
+      axios.get(`/api/configs/first`)
+      .then(response => {
+        this.config = response.data
+      })
+      .catch(error => {
+        this.errors = error.response.data.errors
+      })
+    },
     create () {
       localStorage.setItem("order", JSON.stringify(this.order))
       location.href = `/login`
@@ -91,21 +102,41 @@ export default {
     getPosition() {
       if (navigator.geolocation) {
         this.loading = true
-        navigator.geolocation.getCurrentPosition(this.setPosition);
+        navigator.geolocation.getCurrentPosition(this.setPosition, this.showError);
       } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        this.loading = false
+        console.log("Geolocation is not supported by this browser.")
       }
     },
     setPosition(position) {
       //console.log(position);
       axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
       .then(response => {
-        //console.log(response.data);
+        console.log(response.data);
         this.order.address = response.data.name
-        this.order.city = response.data.address.city
         localStorage.setItem("order", JSON.stringify(this.order))
         this.loading = false
       })
+    },
+    showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          console.log("User denied the request for Geolocation.")
+          this.loading = false
+          break;
+        case error.POSITION_UNAVAILABLE:
+          console.log("Location information is unavailable.")
+          this.loading = false
+          break;
+        case error.TIMEOUT:
+          console.log("The request to get user location timed out.")
+          this.loading = false
+          break;
+        case error.UNKNOWN_ERROR:
+          console.log("An unknown error occurred.")
+          this.loading = false
+          break;
+      }
     },
     randomPlaceholder () {
       this.placeholder = this.placeholders[Math.floor(Math.random() * this.placeholders.length)]

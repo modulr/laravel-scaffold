@@ -131,14 +131,18 @@ a:hover {
   }
 }
 
-// .categories {
-//   a {
-//     display: inline-block;
-//   }
-//   img {
-//     max-width: 110px;
-//   }
-// }
+.categories {
+  a:hover {
+    -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important
+  }
+  // a {
+  //   display: inline-block;
+  // }
+  // img {
+  //   max-width: 110px;
+  // }
+}
 
 // Form ------------------------------------------
 .input-group-text {

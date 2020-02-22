@@ -13,7 +13,7 @@
             <i class="fas fa-map-marker-alt" v-else></i>
           </span>
         </div>
-        <input type="text" class="form-control" placeholder="¿A donde? Calle, numero y colonia" v-model="newOrder.address">
+        <input type="text" class="form-control" placeholder="Dirección (calle, numero y colonia)" v-model="newOrder.address">
       </div>
       <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
@@ -21,9 +21,14 @@
       <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newOrder.cellphone" placeholder="Escribe tu numero de celular">
       <small class="form-text text-white" v-if="errors.cellphone">{{errors.cellphone[1]}}</small>
     </div>
-    <a class="btn btn-light btn-lg px-5" href="#" :disabled="submiting" @click.prevent="createOrder">
-      <i class="fas fa-spinner fa-spin mr-2" v-if="submiting"></i>Pedir
-    </a>
+    <div class="mb-4">
+      <a class="btn btn-light btn-lg px-5" href="#" :disabled="submiting" @click.prevent="createOrder">
+        <i class="fas fa-spinner fa-spin mr-2" v-if="submiting"></i>Pedir
+      </a>
+    </div>
+    <rates-day></rates-day>
+    <p class="mb-1"><small>{{config.schedule}}</small></p>
+    <a class="text-white" href="#">{{config.city}}</a>
   </div>
 </template>
 
@@ -32,6 +37,7 @@ export default {
   data () {
     return {
       user: Laravel.user,
+      config: {},
       newOrder: {},
       address: [],
       placeholder: '',
@@ -49,6 +55,7 @@ export default {
   },
   mounted () {
     this.randomPlaceholder()
+    this.getConfig()
     if (localStorage.getItem("order")) {
       this.newOrder = JSON.parse(localStorage.getItem("order"))
       //this.$set(this.newOrder, 'address', JSON.parse(localStorage.getItem("address")))
@@ -61,6 +68,15 @@ export default {
       .then(response => {
         this.address = response.data
         this.loadingAddress = false
+      })
+    },
+    getConfig () {
+      axios.get(`/api/configs/first`)
+      .then(response => {
+        this.config = response.data
+      })
+      .catch(error => {
+        this.errors = error.response.data.errors
       })
     },
     createOrder () {
@@ -115,6 +131,7 @@ export default {
       .then(response => {
         //console.log(response.data);
         this.newOrder.address = response.data.name
+        this.config.city = response.data.address.city
         localStorage.setItem("order", JSON.stringify(this.newOrder))
         this.loading = false
       })

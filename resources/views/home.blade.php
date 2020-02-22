@@ -25,8 +25,8 @@
 
     <div class="row justify-content-center mt-5">
         <stores-categories></stores-categories>
-        <stores-sales></stores-sales>
-        <stores-random></stores-random>
+        <!-- <stores-sales></stores-sales> -->
+        <!-- <stores-random></stores-random> -->
     </div>
 
     <div class="row justify-content-center bg-gradient mt-5">
@@ -80,25 +80,7 @@
                   <img alt='Disponible en Google Play' class="img-fluid logo" src='https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png'/>
                 </a>
             </div>
-            <div class="text-center mb-2">
-                <a href="https://www.facebook.com/traeme.parral" target="_blank" class="text-success mr-3">
-                  <i class="fab fa-facebook-square fa-3x"></i>
-                  <!-- <img src="/img/facebook.png" class="img-fluid" alt="Facebook"> -->
-                </a>
-                <a href="https://www.instagram.com/traeme_parral" target="_blank" class="text-success">
-                  <i class="fab fa-instagram fa-3x"></i>
-                  <!-- <img src="/img/instagram.png" class="img-fluid" alt="Instagram"> -->
-                </a>
-            </div>
-            <div class="m-5">
-                <a class="btn btn-link btn-lg btn-phone" href="tel:627-110-1145">
-                    <small class="fa-stack mr-1">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
-                    </small>
-                    (627) 110 1145
-                </a>
-            </div>
+            <config></config>
             <p class="mb-5"><small>© 2020 Tráeme, Todos los derechos reservados.</small></p>
             <!-- <p class="mb-5"><small>Creado por <a href="https://alfredobarron.com" target="_blank">Alfredo Barrón</a></small></p> -->
         </div>

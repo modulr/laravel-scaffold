@@ -39,3 +39,4 @@ require __DIR__ . '/rates/rates.php';
 require __DIR__ . '/clients/clients.php';
 require __DIR__ . '/dealers/dealers.php';
 require __DIR__ . '/stores/stores.php';
+require __DIR__ . '/configs/configs.php';

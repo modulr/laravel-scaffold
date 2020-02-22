@@ -1,10 +1,10 @@
 <template>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center mb-3">
       <div class="col-10 pb-3 text-center mx-4">
         <h1 class="font-weight-bold">Todo lo que necesitas</h1>
       </div>
-      <div class="col-10">
-        <div class="row justify-content-center">
+      <div class="col-10 col-lg-8">
+        <div class="row justify-content-center categories">
           <!-- <div class="col-12 text-center mb-5 categories"> -->
           <div class="col-6 col-md-3 px-2 text-center">
             <a href="/tiendas/Comida" class="figure shadow rounded text-center p-3 my-2">

@@ -11395,6 +11395,11 @@ a:hover {
   color: #6c757d;
 }
 
+.categories a:hover {
+  -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
 .input-group-text {
   background-color: white;
 }

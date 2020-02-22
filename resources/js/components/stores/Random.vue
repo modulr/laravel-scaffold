@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center">
-      <div class="col-10">
+      <div class="col-10 col-lg-8">
         <div class="row justify-content-center">
           <div class="col-12 col-md-4 px-2 pt-2" v-for="store in stores">
             <a :href="`/tiendas/${store.tags}`" class="card">
