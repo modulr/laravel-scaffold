@@ -37,7 +37,6 @@ export default {
       axios.get(`/api/configs/first`)
       .then(response => {
         this.config = response.data
-        console.log(this.config);
       })
       .catch(error => {
         this.errors = error.response.data.errors

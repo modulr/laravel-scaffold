@@ -24,7 +24,28 @@
     </div>
     <rates-day></rates-day>
     <p class="mb-1"><small>{{config.schedule}}</small></p>
-    <a class="text-white" href="#">{{config.city}}</a>
+    <a class="text-white" href="#modalCity" data-toggle="modal" data-target="#modalCity">{{config.city}}</a>
+    <!-- Modal -->
+    <div class="modal fade" id="modalCity" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Selecciona tu ciudad</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-left">
+            <div class="list-group list-group-flush">
+              <a href="https://traeme.app" class="list-group-item list-group-item-action">Hidalgo del Parral</a>
+              <a href="https://delicias.traeme.app" class="list-group-item list-group-item-action">Delicias</a>
+              <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Chihuahua <span class="text-muted"> - Próximamente</span></a>
+              <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Juárez <span class="text-muted"> - Próximamente</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- <p class="mb-1">ó</p>
     <a class="btn btn-light" href="#" @click.prevent="send">
       por WhatsApp
@@ -66,6 +87,9 @@ export default {
       axios.get(`/api/configs/first`)
       .then(response => {
         this.config = response.data
+        if (this.order.city != this.config.city) {
+          $('#modalCity').modal('show')
+        }
       })
       .catch(error => {
         this.errors = error.response.data.errors
@@ -112,8 +136,9 @@ export default {
       //console.log(position);
       axios.get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         this.order.address = response.data.name
+        this.order.city = response.data.address.city
         localStorage.setItem("order", JSON.stringify(this.order))
         this.loading = false
       })
@@ -123,18 +148,22 @@ export default {
         case error.PERMISSION_DENIED:
           console.log("User denied the request for Geolocation.")
           this.loading = false
+          $('#modalCity').modal('show')
           break;
         case error.POSITION_UNAVAILABLE:
           console.log("Location information is unavailable.")
           this.loading = false
+          $('#modalCity').modal('show')
           break;
         case error.TIMEOUT:
           console.log("The request to get user location timed out.")
           this.loading = false
+          $('#modalCity').modal('show')
           break;
         case error.UNKNOWN_ERROR:
           console.log("An unknown error occurred.")
           this.loading = false
+          $('#modalCity').modal('show')
           break;
       }
     },

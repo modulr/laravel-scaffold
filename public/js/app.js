@@ -72119,6 +72119,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72147,6 +72168,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/api/configs/first').then(function (response) {
         _this.config = response.data;
+        if (_this.order.city != _this.config.city) {
+          $('#modalCity').modal('show');
+        }
       }).catch(function (error) {
         _this.errors = error.response.data.errors;
       });
@@ -72194,8 +72218,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         _this2.order.address = response.data.name;
+        _this2.order.city = response.data.address.city;
         localStorage.setItem("order", JSON.stringify(_this2.order));
         _this2.loading = false;
       });
@@ -72205,18 +72230,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         case error.PERMISSION_DENIED:
           console.log("User denied the request for Geolocation.");
           this.loading = false;
+          $('#modalCity').modal('show');
           break;
         case error.POSITION_UNAVAILABLE:
           console.log("Location information is unavailable.");
           this.loading = false;
+          $('#modalCity').modal('show');
           break;
         case error.TIMEOUT:
           console.log("The request to get user location timed out.");
           this.loading = false;
+          $('#modalCity').modal('show');
           break;
         case error.UNKNOWN_ERROR:
           console.log("An unknown error occurred.");
           this.loading = false;
+          $('#modalCity').modal('show');
           break;
       }
     },
@@ -72340,14 +72369,127 @@ var render = function() {
         _c("small", [_vm._v(_vm._s(_vm.config.schedule))])
       ]),
       _vm._v(" "),
-      _c("a", { staticClass: "text-white", attrs: { href: "#" } }, [
-        _vm._v(_vm._s(_vm.config.city))
-      ])
+      _c(
+        "a",
+        {
+          staticClass: "text-white",
+          attrs: {
+            href: "#modalCity",
+            "data-toggle": "modal",
+            "data-target": "#modalCity"
+          }
+        },
+        [_vm._v(_vm._s(_vm.config.city))]
+      ),
+      _vm._v(" "),
+      _vm._m(0)
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalCity",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v("Selecciona tu ciudad")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body text-left" }, [
+                _c("div", { staticClass: "list-group list-group-flush" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "https://traeme.app" }
+                    },
+                    [_vm._v("Hidalgo del Parral")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "https://delicias.traeme.app" }
+                    },
+                    [_vm._v("Delicias")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "list-group-item list-group-item-action disabled",
+                      attrs: { tabindex: "-1", "aria-disabled": "true" }
+                    },
+                    [
+                      _vm._v("Chihuahua "),
+                      _c("span", { staticClass: "text-muted" }, [
+                        _vm._v(" - Próximamente")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "list-group-item list-group-item-action disabled",
+                      attrs: { tabindex: "-1", "aria-disabled": "true" }
+                    },
+                    [
+                      _vm._v("Juárez "),
+                      _c("span", { staticClass: "text-muted" }, [
+                        _vm._v(" - Próximamente")
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -72470,35 +72612,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    getAddress: function getAddress() {
+    // getAddress () {
+    //   this.loadingAddress = true
+    //   axios.get(`/api/address/byClient`)
+    //   .then(response => {
+    //     this.address = response.data
+    //     this.loadingAddress = false
+    //   })
+    // },
+    getConfig: function getConfig() {
       var _this = this;
 
-      this.loadingAddress = true;
-      axios.get('/api/address/byClient').then(function (response) {
-        _this.address = response.data;
-        _this.loadingAddress = false;
-      });
-    },
-    getConfig: function getConfig() {
-      var _this2 = this;
-
       axios.get('/api/configs/first').then(function (response) {
-        _this2.config = response.data;
+        _this.config = response.data;
       }).catch(function (error) {
-        _this2.errors = error.response.data.errors;
+        _this.errors = error.response.data.errors;
       });
     },
     createOrder: function createOrder() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         this.errors = {};
         axios.post('/api/orders/storeAuth', this.newOrder).then(function (response) {
           //this.$toasted.global.error('¡Mandado creado!')
-          _this3.newOrder.order = '';
-          localStorage.setItem("order", JSON.stringify(_this3.newOrder));
-          _this3.submiting = false;
+          _this2.newOrder.order = '';
+          localStorage.setItem("order", JSON.stringify(_this2.newOrder));
+          _this2.submiting = false;
           var wrapper = document.createElement('div');
           wrapper.innerHTML = '<div data-v-3500aeb9 class="mb-3 v-step-warp-horizontal style2"><div data-v-3500aeb9 class="v-step-progress-bg"><div data-v-3500aeb9 class="v-step-progress-value" style="background-color: rgb(31, 177, 29); width: 33.3333%;"></div></div> <ul data-v-3500aeb9 class="v-step-list"><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Abierto </label> <div data-v-3500aeb9 class="v-step-item-number" style="background-color: rgb(31, 177, 29); color: rgb(255, 255, 255);">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> En camino </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li><li data-v-3500aeb9 class="v-step-item" style="width: 33.3333%;"><label data-v-3500aeb9 class="v-step-item-label"> Entregado </label> <div data-v-3500aeb9 class="v-step-item-number">  </div></li></ul></div>';
           swal({
@@ -72513,15 +72654,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
           });
         }).catch(function (error) {
-          _this3.errors = error.response.data.errors;
-          if (_this3.errors.cellphone) {
-            if (_this3.errors.cellphone[0] == 'The cellphone field is required.') {
-              _this3.errors.cellphone[1] = '¿Cual es tu numero celular?';
+          _this2.errors = error.response.data.errors;
+          if (_this2.errors.cellphone) {
+            if (_this2.errors.cellphone[0] == 'The cellphone field is required.') {
+              _this2.errors.cellphone[1] = '¿Cual es tu numero celular?';
             } else {
-              _this3.errors.cellphone[1] = 'El numero de celular ya esta registrado';
+              _this2.errors.cellphone[1] = 'El numero de celular ya esta registrado';
             }
           }
-          _this3.submiting = false;
+          _this2.submiting = false;
         });
       }
     },
@@ -72534,15 +72675,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     setPosition: function setPosition(position) {
-      var _this4 = this;
+      var _this3 = this;
 
       //console.log(position);
       axios.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude).then(function (response) {
         //console.log(response.data);
-        _this4.newOrder.address = response.data.name;
-        _this4.config.city = response.data.address.city;
-        localStorage.setItem("order", JSON.stringify(_this4.newOrder));
-        _this4.loading = false;
+        _this3.newOrder.address = response.data.name;
+        localStorage.setItem("order", JSON.stringify(_this3.newOrder));
+        _this3.loading = false;
       });
     },
     randomPlaceholder: function randomPlaceholder() {
@@ -72707,9 +72847,7 @@ var render = function() {
         _c("small", [_vm._v(_vm._s(_vm.config.schedule))])
       ]),
       _vm._v(" "),
-      _c("a", { staticClass: "text-white", attrs: { href: "#" } }, [
-        _vm._v(_vm._s(_vm.config.city))
-      ])
+      _c("a", { staticClass: "text-white" }, [_vm._v(_vm._s(_vm.config.city))])
     ],
     1
   )
@@ -82453,7 +82591,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get("/api/configs/first").then(function (response) {
         _this.config = response.data;
-        console.log(_this.config);
       }).catch(function (error) {
         _this.errors = error.response.data.errors;
       });

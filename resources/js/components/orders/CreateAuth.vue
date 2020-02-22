@@ -28,7 +28,7 @@
     </div>
     <rates-day></rates-day>
     <p class="mb-1"><small>{{config.schedule}}</small></p>
-    <a class="text-white" href="#">{{config.city}}</a>
+    <a class="text-white">{{config.city}}</a>
   </div>
 </template>
 
@@ -62,14 +62,14 @@ export default {
     }
   },
   methods: {
-    getAddress () {
-      this.loadingAddress = true
-      axios.get(`/api/address/byClient`)
-      .then(response => {
-        this.address = response.data
-        this.loadingAddress = false
-      })
-    },
+    // getAddress () {
+    //   this.loadingAddress = true
+    //   axios.get(`/api/address/byClient`)
+    //   .then(response => {
+    //     this.address = response.data
+    //     this.loadingAddress = false
+    //   })
+    // },
     getConfig () {
       axios.get(`/api/configs/first`)
       .then(response => {
@@ -131,7 +131,6 @@ export default {
       .then(response => {
         //console.log(response.data);
         this.newOrder.address = response.data.name
-        this.config.city = response.data.address.city
         localStorage.setItem("order", JSON.stringify(this.newOrder))
         this.loading = false
       })
