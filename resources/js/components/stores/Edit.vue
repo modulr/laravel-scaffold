@@ -31,11 +31,6 @@
                 <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
               </div>
               <div class="form-group">
-                <label>Nivel *</label>
-                <input type="text" class="form-control" :class="{'is-invalid': errors.level}" v-model="user.level" placeholder="1">
-                <div class="invalid-feedback" v-if="errors.level">{{errors.level[0]}}</div>
-              </div>
-              <div class="form-group">
                 <label>Correo electrónico *</label>
                 <input type="email" class="form-control" :class="{'is-invalid': errors.email}" v-model="user.email" placeholder="john@modulr.io">
                 <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
@@ -69,6 +64,22 @@
                 <label>Celular</label>
                 <input type="text" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="user.cellphone" placeholder="6271012233">
                 <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
+              </div>
+              <div class="form-group">
+                <label>Categorias</label>
+                <multiselect
+                  v-model="user.tags"
+                  :options="categories"
+                  :multiple="true"
+                  openDirection="bottom"
+                  :class="{'border border-danger rounded': errors.roles}">
+                </multiselect>
+                <div class="invalid-feedback" v-if="errors.tags">{{errors.tags[0]}}</div>
+              </div>
+              <div class="form-group">
+                <label>Paquete Publicidad *</label>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.level}" v-model="user.level" placeholder="0, 1, 2, 3">
+                <div class="invalid-feedback" v-if="errors.level">{{errors.level[0]}}</div>
               </div>
               <div class="form-group">
                 <label>Pagina Web</label>
@@ -114,6 +125,27 @@ export default {
   data () {
     return {
       user: {},
+      categories: [
+        'Comida',
+        'Postres',
+        'Recibos',
+        'Super',
+        'Licores',
+        'Paquetes',
+        'Farmacia',
+        'Regalos',
+        'Tacos',
+        'Hamburguesas',
+        'Pizza',
+        'Sushi',
+        'Gorditas',
+        'Tortas',
+        'Lonches',
+        'Flautas',
+        'Quesadillas',
+        'Tripitas',
+        'Otro'
+      ],
       errors: {},
       loading: true,
       submiting: false,

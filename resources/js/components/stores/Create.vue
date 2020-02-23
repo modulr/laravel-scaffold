@@ -59,6 +59,17 @@
             <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
           </div>
           <div class="form-group">
+            <label>Categorias</label>
+            <multiselect
+              v-model="user.tags"
+              :options="categories"
+              :multiple="true"
+              openDirection="bottom"
+              :class="{'border border-danger rounded': errors.roles}">
+            </multiselect>
+            <div class="invalid-feedback" v-if="errors.tags">{{errors.tags[0]}}</div>
+          </div>
+          <div class="form-group">
             <label>Pagina Web</label>
             <input type="text" class="form-control" :class="{'is-invalid': errors.web}" v-model="user.web" placeholder="http://www.tacos-chu.com">
             <div class="invalid-feedback" v-if="errors.web">{{errors.web[0]}}</div>
@@ -98,6 +109,10 @@ export default {
           {name: 'store', display_name: 'Store'}
         ]
       },
+      categories: [
+        'Comida',
+        'Postres'
+      ],
       errors: {},
       submiting: false
     }

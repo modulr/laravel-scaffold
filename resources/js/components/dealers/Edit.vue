@@ -54,14 +54,19 @@
                 <div class="invalid-feedback" v-if="errors.cellphone">{{errors.cellphone[0]}}</div>
               </div>
               <div class="form-group">
-                <label>Descripción</label>
-                <textarea class="form-control" rows="3" placeholder="About" v-model="user.description"></textarea>
-                <div class="invalid-feedback" v-if="errors.description">{{errors.description[0]}}</div>
+                <label>Ganancia %</label>
+                <input type="text" class="form-control" :class="{'is-invalid': errors.profit}" v-model="user.profit" placeholder="70">
+                <div class="invalid-feedback" v-if="errors.profit">{{errors.profit[0]}}</div>
               </div>
               <div class="form-group">
                 <label>Cambiar contraseña</label>
                 <input type="password" class="form-control" :class="{'is-invalid': errors.password}" v-model="user.password">
                 <div class="invalid-feedback" v-if="errors.password">{{errors.password[0]}}</div>
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea class="form-control" rows="3" placeholder="About" v-model="user.description"></textarea>
+                <div class="invalid-feedback" v-if="errors.description">{{errors.description[0]}}</div>
               </div>
               <div class="form-group">
                 <label class="col-form-label">Registrado</label>

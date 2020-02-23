@@ -35,7 +35,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col">
-              <small class="text-muted">Nivel: {{user.level}}</small>
+              <small class="text-muted">Paquete Publicidad: {{user.level}}</small>
             </div>
             <div class="col text-right">
               <rate :length="5" v-model="user.score" :disabled="true"/>

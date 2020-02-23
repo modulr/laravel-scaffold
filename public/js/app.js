@@ -76571,6 +76571,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       user: {
         name: '',
+        pforif: 70,
         password: '123456',
         roles: [{ name: 'dealer', display_name: 'Dealer' }]
       },
@@ -76761,33 +76762,34 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Descripción")]),
+            _c("label", [_vm._v("Ganancia %")]),
             _vm._v(" "),
-            _c("textarea", {
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.user.description,
-                  expression: "user.description"
+                  value: _vm.user.profit,
+                  expression: "user.profit"
                 }
               ],
               staticClass: "form-control",
-              attrs: { rows: "3", placeholder: "About" },
-              domProps: { value: _vm.user.description },
+              class: { "is-invalid": _vm.errors.profit },
+              attrs: { type: "text", placeholder: "70" },
+              domProps: { value: _vm.user.profit },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.user, "description", $event.target.value)
+                  _vm.$set(_vm.user, "profit", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.errors.description
+            _vm.errors.profit
               ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.errors.description[0]))
+                  _vm._v(_vm._s(_vm.errors.profit[0]))
                 ])
               : _vm._e()
           ]),
@@ -76892,6 +76894,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -77333,33 +77340,34 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Descripción")]),
+                    _c("label", [_vm._v("Ganancia %")]),
                     _vm._v(" "),
-                    _c("textarea", {
+                    _c("input", {
                       directives: [
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.description,
-                          expression: "user.description"
+                          value: _vm.user.profit,
+                          expression: "user.profit"
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { rows: "3", placeholder: "About" },
-                      domProps: { value: _vm.user.description },
+                      class: { "is-invalid": _vm.errors.profit },
+                      attrs: { type: "text", placeholder: "70" },
+                      domProps: { value: _vm.user.profit },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.user, "description", $event.target.value)
+                          _vm.$set(_vm.user, "profit", $event.target.value)
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _vm.errors.description
+                    _vm.errors.profit
                       ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errors.description[0]))
+                          _vm._v(_vm._s(_vm.errors.profit[0]))
                         ])
                       : _vm._e()
                   ]),
@@ -77393,6 +77401,38 @@ var render = function() {
                     _vm.errors.password
                       ? _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(_vm._s(_vm.errors.password[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Descripción")]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.description,
+                          expression: "user.description"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { rows: "3", placeholder: "About" },
+                      domProps: { value: _vm.user.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "description", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.description
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.description[0]))
                         ])
                       : _vm._e()
                   ]),
@@ -79237,7 +79277,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col" }, [
                   _c("small", { staticClass: "text-muted" }, [
-                    _vm._v("Nivel: " + _vm._s(user.level))
+                    _vm._v("Paquete Publicidad: " + _vm._s(user.level))
                   ])
                 ]),
                 _vm._v(" "),
@@ -79857,6 +79897,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -79868,6 +79919,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         store: true,
         roles: [{ name: 'user', display_name: 'Cliente' }, { name: 'store', display_name: 'Store' }]
       },
+      categories: ['Comida', 'Postres'],
       errors: {},
       submiting: false
     };
@@ -80188,6 +80240,37 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", [_vm._v("Categorias")]),
+              _vm._v(" "),
+              _c("multiselect", {
+                class: { "border border-danger rounded": _vm.errors.roles },
+                attrs: {
+                  options: _vm.categories,
+                  multiple: true,
+                  openDirection: "bottom"
+                },
+                model: {
+                  value: _vm.user.tags,
+                  callback: function($$v) {
+                    _vm.$set(_vm.user, "tags", $$v)
+                  },
+                  expression: "user.tags"
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.tags
+                ? _c("div", { staticClass: "invalid-feedback" }, [
+                    _vm._v(_vm._s(_vm.errors.tags[0]))
+                  ])
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", [_vm._v("Pagina Web")]),
             _vm._v(" "),
@@ -80498,11 +80581,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
+      categories: ['Comida', 'Postres', 'Recibos', 'Super', 'Licores', 'Paquetes', 'Farmacia', 'Regalos', 'Tacos', 'Hamburguesas', 'Pizza', 'Sushi', 'Gorditas', 'Tortas', 'Lonches', 'Flautas', 'Quesadillas', 'Tripitas', 'Otro'],
       errors: {},
       loading: true,
       submiting: false,
@@ -80683,39 +80778,6 @@ var render = function() {
                     _vm.errors.name
                       ? _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(_vm._s(_vm.errors.name[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Nivel *")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.level,
-                          expression: "user.level"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: { "is-invalid": _vm.errors.level },
-                      attrs: { type: "text", placeholder: "1" },
-                      domProps: { value: _vm.user.level },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "level", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.level
-                      ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errors.level[0]))
                         ])
                       : _vm._e()
                   ]),
@@ -80949,6 +81011,72 @@ var render = function() {
                     _vm.errors.cellphone
                       ? _c("div", { staticClass: "invalid-feedback" }, [
                           _vm._v(_vm._s(_vm.errors.cellphone[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [_vm._v("Categorias")]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        class: {
+                          "border border-danger rounded": _vm.errors.roles
+                        },
+                        attrs: {
+                          options: _vm.categories,
+                          multiple: true,
+                          openDirection: "bottom"
+                        },
+                        model: {
+                          value: _vm.user.tags,
+                          callback: function($$v) {
+                            _vm.$set(_vm.user, "tags", $$v)
+                          },
+                          expression: "user.tags"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.tags
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.tags[0]))
+                          ])
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Paquete Publicidad *")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.level,
+                          expression: "user.level"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.errors.level },
+                      attrs: { type: "text", placeholder: "0, 1, 2, 3" },
+                      domProps: { value: _vm.user.level },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "level", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.level
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.level[0]))
                         ])
                       : _vm._e()
                   ]),

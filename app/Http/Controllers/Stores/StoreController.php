@@ -61,6 +61,7 @@ class StoreController extends Controller
             'description' => $request->description,
             'phone' => $request->phone,
             'cellphone' => $request->cellphone,
+            'tags' => implode(",", $request->tags),
             'web' => $request->web,
             'facebook' => $request->facebook,
             'instagram' => $request->instagram,
@@ -101,6 +102,9 @@ class StoreController extends Controller
         }
         if ($user->cellphone != $request->cellphone) {
             $user->cellphone = $request->cellphone;
+        }
+        if ($user->tags != $request->tags) {
+            $user->tags = implode(",", $request->tags);
         }
         if ($user->description != $request->description) {
             $user->description = $request->description;

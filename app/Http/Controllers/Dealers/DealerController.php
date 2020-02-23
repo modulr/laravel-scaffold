@@ -54,6 +54,7 @@ class DealerController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => 'numeric|unique:users',
             'cellphone' => 'numeric|unique:users',
+            'profit' => 'required|numeric',
             'password' => 'required|string',
             'roles' => 'required|array'
         ]);
@@ -62,6 +63,7 @@ class DealerController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'cellphone' => $request->cellphone,
+            'profit' => $request->profit,
             'description' => $request->description,
             'password' => Hash::make($request->password)
         ]);
@@ -81,6 +83,7 @@ class DealerController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$request->id,
             'cellphone' => 'required|numeric',
+            'profit' => 'required|numeric',
             'description' => 'string|nullable',
             'password' => 'string|nullable',
             'roles' => 'required|array'
@@ -98,6 +101,9 @@ class DealerController extends Controller
         }
         if ($user->cellphone != $request->cellphone) {
             $user->cellphone = $request->cellphone;
+        }
+        if ($user->profit != $request->profit) {
+            $user->profit = $request->profit;
         }
         if ($user->description != $request->description) {
             $user->description = $request->description;
