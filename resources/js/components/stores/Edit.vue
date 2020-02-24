@@ -191,7 +191,7 @@ export default {
         this.submitingDestroy = true
         swal({
           title: "¿Estas seguro?",
-          text: "Una vez borrada la tienda no se podra recuperar!",
+          text: "¡Se borrara como tienda y seguira como cliente!",
           icon: "warning",
           buttons: true,
           dangerMode: true,

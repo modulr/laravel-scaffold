@@ -143,6 +143,9 @@ class StoreController extends Controller
         $user->save();
 
         $rolesNames = array_pluck($request->roles, ['name']);
+        if (!in_array("store", $rolesNames)) {
+            array_push($rolesNames, "store");
+        }
         $user->syncRoles($rolesNames);
 
         return $user;
@@ -150,7 +153,9 @@ class StoreController extends Controller
 
     public function destroy ($user)
     {
-        return User::destroy($user);
+        $user = User::find($user);
+        return $user->removeRole('store');
+        //return User::destroy($user);
     }
 
     public function uploadAvatar(Request $request)

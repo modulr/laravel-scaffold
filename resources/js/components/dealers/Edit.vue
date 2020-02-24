@@ -143,7 +143,7 @@ export default {
         this.submitingDestroy = true
         swal({
           title: "¿Estas seguro?",
-          text: "Una vez borrado el repartidor no se podra recuperar!",
+          text: "¡Se borrara como repartidor y seguira como cliente!",
           icon: "warning",
           buttons: true,
           dangerMode: true,

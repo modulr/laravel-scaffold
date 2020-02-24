@@ -115,6 +115,9 @@ class DealerController extends Controller
         $user->save();
 
         $rolesNames = array_pluck($request->roles, ['name']);
+        if (!in_array("dealer", $rolesNames)) {
+            array_push($rolesNames, "dealer");
+        }
         $user->syncRoles($rolesNames);
 
         return $user;
@@ -122,7 +125,9 @@ class DealerController extends Controller
 
     public function destroy ($user)
     {
-        return User::destroy($user);
+        $user = User::find($user);
+        return $user->removeRole('dealer');
+        //return User::destroy($user);
     }
 
     public function uploadAvatar(Request $request)

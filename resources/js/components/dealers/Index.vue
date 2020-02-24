@@ -3,7 +3,16 @@
     <div class="card-header px-0 mt-2 bg-transparent clearfix">
       <h4 class="float-left pt-2">Repartidores</h4>
       <div class="card-header-actions mr-1">
-        <a class="btn btn-primary" href="/dealers/create">Nuevo repartidor</a>
+        <!-- <a class="btn btn-primary" href="/dealers/create">Nuevo repartidor</a> -->
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Nuevo repartidor
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/dealers/create">Crear una nuevo</a>
+            <a class="dropdown-item" href="#clientModal" data-toggle="modal" data-target="#clientModal">Desde un cliente</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card-body px-0">
@@ -116,6 +125,33 @@
         <content-placeholders-text/>
       </content-placeholders>
     </div>
+    <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Buscar cliente</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Cliente</label>
+              <multiselect
+                v-model="client"
+                :options="clients"
+                track-by="id"
+                label="name"
+                :loading="isLoading"
+                :internal-search="false"
+                @search-change="searchClients"
+                @select="editClient">
+              </multiselect>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -124,6 +160,8 @@ export default {
   data () {
     return {
       users: [],
+      client: {},
+      clients: [],
       selected: 'active',
       filters: {
         pagination: {
@@ -141,7 +179,8 @@ export default {
         search: '',
         status: ''
       },
-      loading: true
+      loading: true,
+      isLoading: false
     }
   },
   mounted () {
@@ -165,6 +204,19 @@ export default {
         this.loading = false
       })
     },
+    searchClients (query) {
+      if (query.length > 4 && !this.isLoading) {
+        this.isLoading = true
+        axios.post(`/api/users/searchClients`, {name: query})
+        .then(response => {
+          this.clients = response.data
+          this.isLoading = false
+        })
+      }
+    },
+    editClient (client) {
+      this.editUser(client.id)
+    },
     editUser (userId) {
       location.href = `/dealers/${userId}/edit`
     },
@@ -175,7 +227,6 @@ export default {
     },
     filterStatus (status) {
       this.filters.status = status
-      console.log(status);
       this.getUsers()
     },
     changeSize (perPage) {

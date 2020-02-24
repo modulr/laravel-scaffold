@@ -72406,7 +72406,10 @@ var staticRenderFns = [
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
@@ -75852,11 +75855,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
+      client: {},
+      clients: [],
       selected: 'active',
       filters: {
         pagination: {
@@ -75874,7 +75915,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         search: '',
         status: ''
       },
-      loading: true
+      loading: true,
+      isLoading: false
     };
   },
   mounted: function mounted() {
@@ -75900,6 +75942,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
       });
     },
+    searchClients: function searchClients(query) {
+      var _this2 = this;
+
+      if (query.length > 4 && !this.isLoading) {
+        this.isLoading = true;
+        axios.post('/api/users/searchClients', { name: query }).then(function (response) {
+          _this2.clients = response.data;
+          _this2.isLoading = false;
+        });
+      }
+    },
+    editClient: function editClient(client) {
+      this.editUser(client.id);
+    },
     editUser: function editUser(userId) {
       location.href = '/dealers/' + userId + '/edit';
     },
@@ -75911,7 +75967,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     filterStatus: function filterStatus(status) {
       this.filters.status = status;
-      console.log(status);
       this.getUsers();
     },
     changeSize: function changeSize(perPage) {
@@ -76398,6 +76453,65 @@ var render = function() {
           : _vm._e()
       ],
       1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "clientModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-scrollable",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Cliente")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      attrs: {
+                        options: _vm.clients,
+                        "track-by": "id",
+                        label: "name",
+                        loading: _vm.isLoading,
+                        "internal-search": false
+                      },
+                      on: {
+                        "search-change": _vm.searchClients,
+                        select: _vm.editClient
+                      },
+                      model: {
+                        value: _vm.client,
+                        callback: function($$v) {
+                          _vm.client = $$v
+                        },
+                        expression: "client"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -76413,14 +76527,53 @@ var staticRenderFns = [
         _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Repartidores")]),
         _vm._v(" "),
         _c("div", { staticClass: "card-header-actions mr-1" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { href: "/dealers/create" }
-            },
-            [_vm._v("Nuevo repartidor")]
-          )
+          _c("div", { staticClass: "dropdown" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary dropdown-toggle",
+                attrs: {
+                  type: "button",
+                  id: "dropdownMenuButton",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
+                }
+              },
+              [_vm._v("\n          Nuevo repartidor\n        ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu dropdown-menu-right",
+                attrs: { "aria-labelledby": "dropdownMenuButton" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "/dealers/create" }
+                  },
+                  [_vm._v("Crear una nuevo")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: {
+                      href: "#clientModal",
+                      "data-toggle": "modal",
+                      "data-target": "#clientModal"
+                    }
+                  },
+                  [_vm._v("Desde un cliente")]
+                )
+              ]
+            )
+          ])
         ])
       ]
     )
@@ -76455,6 +76608,27 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fa fa-plus" }), _vm._v("  New User\n      ")]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Buscar cliente")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -77041,7 +77215,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submitingDestroy = true;
         swal({
           title: "¿Estas seguro?",
-          text: "Una vez borrado el repartidor no se podra recuperar!",
+          text: "¡Se borrara como repartidor y seguira como cliente!",
           icon: "warning",
           buttons: true,
           dangerMode: true
@@ -79098,11 +79272,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
+      client: {},
+      clients: [],
       filters: {
         pagination: {
           from: 0,
@@ -79118,7 +79330,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         search: ''
       },
-      loading: true
+      loading: true,
+      isLoading: false
     };
   },
   mounted: function mounted() {
@@ -79143,6 +79356,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.filters.pagination = response.data;
         _this.loading = false;
       });
+    },
+    searchClients: function searchClients(query) {
+      var _this2 = this;
+
+      if (query.length > 4 && !this.isLoading) {
+        this.isLoading = true;
+        axios.post('/api/users/searchClients', { name: query }).then(function (response) {
+          _this2.clients = response.data;
+          _this2.isLoading = false;
+        });
+      }
+    },
+    editClient: function editClient(client) {
+      this.editUser(client.id);
     },
     editUser: function editUser(userId) {
       location.href = '/stores/' + userId + '/edit';
@@ -79668,6 +79895,65 @@ var render = function() {
           : _vm._e()
       ],
       2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "clientModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-scrollable",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(7),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v("Cliente")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      attrs: {
+                        options: _vm.clients,
+                        "track-by": "id",
+                        label: "name",
+                        loading: _vm.isLoading,
+                        "internal-search": false
+                      },
+                      on: {
+                        "search-change": _vm.searchClients,
+                        select: _vm.editClient
+                      },
+                      model: {
+                        value: _vm.client,
+                        callback: function($$v) {
+                          _vm.client = $$v
+                        },
+                        expression: "client"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -79683,14 +79969,53 @@ var staticRenderFns = [
         _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Tiendas")]),
         _vm._v(" "),
         _c("div", { staticClass: "card-header-actions mr-1" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { href: "/stores/create" }
-            },
-            [_vm._v("Nueva tienda")]
-          )
+          _c("div", { staticClass: "dropdown" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary dropdown-toggle",
+                attrs: {
+                  type: "button",
+                  id: "dropdownMenuButton",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
+                }
+              },
+              [_vm._v("\n          Nueva tienda\n        ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu dropdown-menu-right",
+                attrs: { "aria-labelledby": "dropdownMenuButton" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "/stores/create" }
+                  },
+                  [_vm._v("Crear una nueva")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: {
+                      href: "#clientModal",
+                      "data-toggle": "modal",
+                      "data-target": "#clientModal"
+                    }
+                  },
+                  [_vm._v("Desde un cliente")]
+                )
+              ]
+            )
+          ])
         ])
       ]
     )
@@ -79747,6 +80072,27 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fa fa-plus" }), _vm._v("  New User\n      ")]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Buscar cliente")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -80645,7 +80991,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.submitingDestroy = true;
         swal({
           title: "¿Estas seguro?",
-          text: "Una vez borrada la tienda no se podra recuperar!",
+          text: "¡Se borrara como tienda y seguira como cliente!",
           icon: "warning",
           buttons: true,
           dangerMode: true
