@@ -81,6 +81,10 @@
                 </a>
             </div>
             <config></config>
+            <div class="mb-3">
+                <a href="/privacy-policy"><small>Aviso de privacidad</small></a> |
+                <a href="/terms-of-use"><small>Términos y condiciones</small></a>
+            </div>
             <p class="mb-5"><small>© 2020 Tráeme, Todos los derechos reservados.</small></p>
             <!-- <p class="mb-5"><small>Creado por <a href="https://alfredobarron.com" target="_blank">Alfredo Barrón</a></small></p> -->
         </div>
