@@ -11270,7 +11270,8 @@ a.text-dark:focus {
 }
 
 .lead,
-h1 {
+h1,
+h2 {
   font-family: FibonSansRegular;
 }
 
