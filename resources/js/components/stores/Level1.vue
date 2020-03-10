@@ -1,8 +1,11 @@
 <template>
     <div class="row justify-content-center">
+      <div class="col-10 pb-3 text-center mt-5 mb-4">
+        <h2 class="font-weight-bold">Sugerencias</h2>
+      </div>
       <div class="col-10 col-lg-8">
         <div class="row justify-content-center">
-          <div class="col-12 col-md-4 px-2 pt-2" v-for="store in stores">
+          <div class="col-12 col-md-4 px-2" v-for="store in stores">
             <div class="card shadow-sm">
               <div class="row no-gutters">
                 <div class="col-4">
