@@ -111,7 +111,24 @@ export default {
       },
       categories: [
         'Comida',
-        'Postres'
+        'Postres',
+        'Recibos',
+        'Super',
+        'Licores',
+        'Paquetes',
+        'Farmacia',
+        'Regalos',
+        'Tacos',
+        'Hamburguesas',
+        'Pizza',
+        'Sushi',
+        'Gorditas',
+        'Tortas',
+        'Lonches',
+        'Flautas',
+        'Quesadillas',
+        'Tripitas',
+        'Otro'
       ],
       errors: {},
       submiting: false

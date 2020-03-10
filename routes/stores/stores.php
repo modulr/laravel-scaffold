@@ -1,6 +1,7 @@
 <?php
 Route::group(['namespace' => 'Stores'], function() {
     Route::get('api/stores/getStoresRandom', 'StoreController@getStoresRandom');
+    Route::get('api/stores/getStoresLevel1', 'StoreController@getStoresLevel1');
     Route::post('api/stores/filters', 'StoreController@filter');
 
     Route::middleware('auth')->group(function () {

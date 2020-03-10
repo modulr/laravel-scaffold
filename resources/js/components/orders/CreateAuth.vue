@@ -28,7 +28,28 @@
     </div>
     <rates-day></rates-day>
     <p class="mb-1"><small>{{config.schedule}}</small></p>
-    <a class="text-white">{{config.city}}</a>
+    <a class="text-white" href="#modalCity" data-toggle="modal" data-target="#modalCity">{{config.city}}</a>
+    <!-- Modal -->
+    <div class="modal" id="modalCity" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Selecciona tu ciudad</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-left">
+            <div class="list-group list-group-flush">
+              <a href="https://traeme.app" class="list-group-item list-group-item-action">Hidalgo del Parral</a>
+              <a href="https://delicias.traeme.app" class="list-group-item list-group-item-action">Delicias</a>
+              <!-- <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Chihuahua <small class="text-muted"> - Próximamente</small></a>
+              <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Juárez <small class="text-muted"> - Próximamente</small></a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

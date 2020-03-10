@@ -26,6 +26,7 @@
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Paquetes')">Paquetes</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Farmacia')">Farmacia</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Regalos')">Regalos</a>
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Otro')">Otro</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Tacos')">Tacos</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Hamburguesas')">Hamburguesas</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Pizza')">Pizza</a>

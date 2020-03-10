@@ -27,6 +27,7 @@
         <stores-categories></stores-categories>
         <!-- <stores-sales></stores-sales> -->
         <!-- <stores-random></stores-random> -->
+        <stores-level1></stores-level1>
     </div>
 
     <div class="row justify-content-center bg-gradient mt-5">
