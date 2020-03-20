@@ -28,3 +28,4 @@ require __DIR__ . '/users/users.php';
 require __DIR__ . '/roles/roles.php';
 require __DIR__ . '/roles/permissions.php';
 require __DIR__ . '/modules/modules.php';
+require __DIR__ . '/questions/questions.php';

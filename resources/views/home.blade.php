@@ -93,14 +93,7 @@
                 </div>
 
                 <div class="links m-b-xl">
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="/test">Tomar cuestionario</a>
-                        @else
-                            <a href="{{ route('login') }}">Entrar</a>
-                            <a href="{{ route('register') }}">Registrarse</a>
-                        @endauth
-                    @endif
+                    <test-questions></test-questions>
                 </div>
             </div>
         </div>

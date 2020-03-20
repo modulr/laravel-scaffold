@@ -56,6 +56,9 @@ Vue.component('roles-index', require('./components/roles/Index.vue'));
 Vue.component('roles-create', require('./components/roles/Create.vue'));
 Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
+// Test
+Vue.component('questions', require('./components/questions/Questions.vue'));
+
 const app = new Vue({
     el: '#app'
 });

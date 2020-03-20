@@ -15,9 +15,12 @@ class CreateQuestionsResultsTable extends Migration
     {
         Schema::create('questions_results', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('answer');
             $table->integer('question_id')->unsigned()->nullable();
             $table->foreign('question_id')->references('id')->on('questions');
+            $table->string('name');
+            $table->integer('personality_id')->unsigned()->nullable();
+            $table->foreign('personality_id')->references('id')->on('personalities');
+            $table->string('answer')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
