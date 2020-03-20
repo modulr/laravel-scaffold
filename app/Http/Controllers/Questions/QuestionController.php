@@ -30,7 +30,7 @@ class QuestionController extends Controller
 
     public function getQuestions ()
     {
-        $count = QuestionsResult::whereNotNull('answer')->count();
+        $count = QuestionsResult::where('user_id', Auth::id())->whereNotNull('answer')->count();
 
         if ($count < 80) {
             $questions = QuestionsResult::where('user_id', Auth::id())->whereNull('answer')->orderByRaw("RAND()")->take(5)->get();

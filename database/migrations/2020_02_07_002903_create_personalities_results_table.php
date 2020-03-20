@@ -15,7 +15,7 @@ class CreatePersonalitiesResultsTable extends Migration
     {
         Schema::create('personalities_results', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('result');
+            $table->integer('result')->nullable();
             $table->integer('personality_id')->unsigned()->nullable();
             $table->foreign('personality_id')->references('id')->on('personalities');
             $table->integer('user_id')->unsigned()->nullable();

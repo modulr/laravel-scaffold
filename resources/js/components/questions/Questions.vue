@@ -19,7 +19,7 @@
           <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors">
             <strong>Warning!</strong> {{this.errors}}
           </div>
-          <div class="text-center" v-if="count == 0 && !loading">
+          <div class="text-center" v-if="count == 0 && questions.length == 0 && !loading">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="setQuestions">
               <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
               <i class="fas fa-file-alt" v-else></i>
