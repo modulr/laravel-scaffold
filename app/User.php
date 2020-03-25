@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['avatar_url', 'avatar_url_large', 'avatar_url_banner', 'hasPermission', 'hasRole'];
+    protected $appends = ['avatar_url', 'avatar_url_large', 'banner_url', 'hasPermission', 'hasRole'];
 
     public function getAvatarUrlAttribute()
     {
@@ -61,9 +61,9 @@ class User extends Authenticatable
         }
     }
 
-    public function getAvatarUrlBannerAttribute()
+    public function getBannerUrlAttribute()
     {
-        return Storage::url('banners/'.$this->id.'/'.$this->avatar);
+        return Storage::url('banners/'.$this->id.'/'.$this->banner);
     }
 
     public function getHasPermissionAttribute()

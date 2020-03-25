@@ -14243,6 +14243,7 @@ Vue.component('stores-index', __webpack_require__(166));
 Vue.component('stores-create', __webpack_require__(169));
 Vue.component('stores-edit', __webpack_require__(172));
 Vue.component('stores-avatar', __webpack_require__(175));
+Vue.component('stores-banner', __webpack_require__(217));
 Vue.component('stores-random', __webpack_require__(178));
 Vue.component('stores-level1', __webpack_require__(181));
 Vue.component('stores-sales', __webpack_require__(184));
@@ -81230,6 +81231,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -81378,7 +81380,11 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "col-md-9 text-center" },
-                [_c("stores-avatar", { attrs: { user: _vm.user } })],
+                [
+                  _c("stores-banner", { attrs: { user: _vm.user } }),
+                  _vm._v(" "),
+                  _c("stores-avatar", { attrs: { user: _vm.user } })
+                ],
                 1
               )
             ]
@@ -81997,7 +82003,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       preview: {},
       optionsAvatar: {
         headers: { 'X-CSRF-TOKEN': Laravel.csrfToken },
-        url: '/api/clients/uploadAvatar',
+        url: '/api/stores/uploadAvatar',
         paramName: 'file',
         parallelUploads: 1,
         maxFilesize: {
@@ -82404,7 +82410,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     create: function create(store) {
       this.order.order = "Traeme de " + store.name;
       localStorage.setItem("order", JSON.stringify(this.order));
-      location.href = "#";
+      location.href = "/";
     }
   }
 });
@@ -82594,40 +82600,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      stores: [],
+      order: {}
+    };
+  },
+  mounted: function mounted() {
+    this.getStores();
+  },
+
   methods: {
     swipeHandler: function swipeHandler(direction) {
       if (direction == 'left') {
-        $('#carouselPromo1').carousel('next');
+        $('#carouselPromo').carousel('next');
       } else if (direction == 'right') {
-        $('#carouselPromo1').carousel('prev');
+        $('.carouselPromo').carousel('prev');
       }
       if (direction == 'top' || direction == 'bottom') {
-        $('#modalPromo1, #modalPromo2').modal('hide');
+        $('#modalPromo').modal('hide');
       }
+    },
+    getStores: function getStores() {
+      var _this = this;
+
+      if (this.stores.length == 0) {
+        axios.get('/api/stores/getStoresLevel23').then(function (response) {
+          _this.stores = response.data;
+        });
+      }
+    },
+    create: function create(store) {
+      this.order.order = 'Traeme de ' + store.name;
+      localStorage.setItem("order", JSON.stringify(this.order));
+      location.href = '/';
     }
   }
 });
@@ -82644,219 +82652,32 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "col-10 col-lg-8" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "touch",
-                  rawName: "v-touch:swipe",
-                  value: _vm.swipeHandler,
-                  expression: "swipeHandler",
-                  arg: "swipe"
+      _c(
+        "div",
+        { staticClass: "row justify-content-center" },
+        _vm._l(_vm.stores, function(store) {
+          return _c("div", { staticClass: "col-12 col-md-4 px-3" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.create(store)
+                  }
                 }
-              ],
-              staticClass: "modal fade",
-              attrs: {
-                id: "modalPromo1",
-                tabindex: "-1",
-                role: "dialog",
-                "aria-hidden": "true"
-              }
-            },
-            [
-              _c("div", { staticClass: "modal-dialog modal-xl" }, [
-                _c("div", { staticClass: "modal-content" }, [
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "carousel slide",
-                        attrs: {
-                          id: "carouselPromo1",
-                          "data-ride": "carousel",
-                          "data-interval": "false",
-                          "data-touch": "true"
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "carousel-inner" }, [
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "touch",
-                                  rawName: "v-touch:swipe",
-                                  value: _vm.swipeHandler,
-                                  expression: "swipeHandler",
-                                  arg: "swipe"
-                                }
-                              ],
-                              staticClass: "carousel-item active"
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "d-block w-100",
-                                attrs: {
-                                  src:
-                                    "/img/stores/menu/pollo_feliz/pollo_feliz_1.jpg",
-                                  alt: "Pollo Feliz menu 1"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "touch",
-                                  rawName: "v-touch:swipe",
-                                  value: _vm.swipeHandler,
-                                  expression: "swipeHandler",
-                                  arg: "swipe"
-                                }
-                              ],
-                              staticClass: "carousel-item"
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "d-block w-100",
-                                attrs: {
-                                  src:
-                                    "/img/stores/menu/pollo_feliz/pollo_feliz_2.jpg",
-                                  alt: "Pollo Feliz menu 2"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "touch",
-                                  rawName: "v-touch:swipe",
-                                  value: _vm.swipeHandler,
-                                  expression: "swipeHandler",
-                                  arg: "swipe"
-                                }
-                              ],
-                              staticClass: "carousel-item"
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "d-block w-100",
-                                attrs: {
-                                  src:
-                                    "/img/stores/menu/pollo_feliz/pollo_feliz_3.jpg",
-                                  alt: "Pollo Feliz menu 3"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "touch",
-                                  rawName: "v-touch:swipe",
-                                  value: _vm.swipeHandler,
-                                  expression: "swipeHandler",
-                                  arg: "swipe"
-                                }
-                              ],
-                              staticClass: "carousel-item"
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "d-block w-100",
-                                attrs: {
-                                  src:
-                                    "/img/stores/menu/pollo_feliz/pollo_feliz_4.jpg",
-                                  alt: "Pollo Feliz menu 4"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "touch",
-                                  rawName: "v-touch:swipe",
-                                  value: _vm.swipeHandler,
-                                  expression: "swipeHandler",
-                                  arg: "swipe"
-                                }
-                              ],
-                              staticClass: "carousel-item"
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "d-block w-100",
-                                attrs: {
-                                  src:
-                                    "/img/stores/menu/pollo_feliz/pollo_feliz_5.jpg",
-                                  alt: "Pollo Feliz menu 5"
-                                }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _vm._m(3)
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "touch",
-                  rawName: "v-touch:swipe",
-                  value: _vm.swipeHandler,
-                  expression: "swipeHandler",
-                  arg: "swipe"
-                }
-              ],
-              staticClass: "modal fade",
-              attrs: {
-                id: "modalPromo2",
-                tabindex: "-1",
-                role: "dialog",
-                "aria-hidden": "true"
-              }
-            },
-            [_vm._m(5)]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(6)
-      ])
+              },
+              [
+                _c("img", {
+                  staticClass: "rounded img-fluid",
+                  attrs: { src: store.banner_url, alt: store.name }
+                })
+              ]
+            )
+          ])
+        })
+      )
     ])
   ])
 }
@@ -82866,140 +82687,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-10 pb-3 text-center mt-5 mb-4" }, [
-      _c("h1", { staticClass: "font-weight-bold" }, [_vm._v("Promociones")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        attrs: {
-          href: "#modalPromo1",
-          "data-toggle": "modal",
-          "data-target": "#modalPromo1"
-        }
-      },
-      [
-        _c("img", {
-          staticClass: "img-fluid",
-          attrs: {
-            src: "/img/stores/banner_pollo_feliz.png",
-            alt: "Pollo Feliz"
-          }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "carousel-control-prev",
-        attrs: { href: "#carouselPromo1", role: "button", "data-slide": "prev" }
-      },
-      [
-        _c("span", {
-          staticClass: "carousel-control-prev-icon",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "carousel-control-next",
-        attrs: { href: "#carouselPromo1", role: "button", "data-slide": "next" }
-      },
-      [
-        _c("span", {
-          staticClass: "carousel-control-next-icon",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        attrs: {
-          href: "#modalPromo2",
-          "data-toggle": "modal",
-          "data-target": "#modalPromo2"
-        }
-      },
-      [
-        _c("img", {
-          staticClass: "img-fluid",
-          attrs: { src: "/img/stores/banner_blvd_chino.png", alt: "Blvd Chino" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-dialog modal-xl" }, [
-      _c("div", { staticClass: "modal-content" }, [
-        _c("div", { staticClass: "modal-body" }, [
-          _c(
-            "div",
-            {
-              staticClass: "carousel slide",
-              attrs: {
-                id: "carouselPromo2",
-                "data-ride": "carousel",
-                "data-interval": "false",
-                "data-touch": "true"
-              }
-            },
-            [
-              _c("div", { staticClass: "carousel-inner" }, [
-                _c("div", { staticClass: "carousel-item active" }, [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src:
-                        "/img/stores/menu/blvd_chino/blvd_chino_promocion_jueves.jpeg",
-                      alt: "Blvd Chino Promocion"
-                    }
-                  })
-                ])
-              ])
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-md-4 px-2 text-center" }, [
-      _c("img", {
-        staticClass: "img-fluid",
-        attrs: { src: "/img/stores/banner_dogos_co_2.png", alt: "Dogos & Co" }
-      })
+      _c("h2", { staticClass: "font-weight-bold" }, [_vm._v("Promociones")])
     ])
   }
 ]
@@ -83190,9 +82878,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center mb-3" }, [
-      _c("div", { staticClass: "col-10 pb-3 text-center mx-4" }, [
-        _c("h1", { staticClass: "font-weight-bold" }, [
-          _vm._v("Todo lo que necesitas")
+      _c("div", { staticClass: "col-10 pb-3 text-center" }, [
+        _c("h1", { staticClass: "font-weight-bold mt-3 mb-4" }, [
+          _vm._v("Lo que quieras cuando quieras")
         ])
       ]),
       _vm._v(" "),
@@ -83398,6 +83086,242 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(218)
+/* template */
+var __vue_template__ = __webpack_require__(219)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/stores/Banner.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-21038b8e", Component.options)
+  } else {
+    hotAPI.reload("data-v-21038b8e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 218 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      errors: {},
+      submiting: false,
+      preview: {},
+      optionsBanner: {
+        headers: { 'X-CSRF-TOKEN': Laravel.csrfToken },
+        url: '/api/stores/uploadBanner',
+        paramName: 'file',
+        parallelUploads: 1,
+        maxFilesize: {
+          limit: 10,
+          message: 'The size image is {{filesize}}MB is greater than the {{maxFilesize}}MB'
+        },
+        acceptedFiles: {
+          extensions: ['image/*'],
+          message: 'You are uploading an invalid file'
+        }
+      }
+    };
+  },
+
+  props: ['user'],
+  methods: {
+    sendingBanner: function sendingBanner(file, xhr, formData) {
+      this.errors = {};
+      this.preview = file;
+      formData.append('userId', this.user.id);
+    },
+    completeBanner: function completeBanner(file, status, xhr) {
+      if (status == 'success') {
+        this.user.banner_url = JSON.parse(xhr.response).banner_url;
+        this.preview = {};
+      } else {
+        this.errors = {
+          status: status,
+          message: file.errorMessage
+        };
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row justify-content-center mb-3" }, [
+    _c("div", { staticClass: "col-12 text-center" }, [
+      _c("img", {
+        staticClass: "rounded img-fluid mb-2",
+        attrs: { src: _vm.user.banner_url }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-4 text-center" },
+      [
+        _c(
+          "vue-clip",
+          {
+            attrs: {
+              options: _vm.optionsBanner,
+              "on-sending": _vm.sendingBanner,
+              "on-complete": _vm.completeBanner
+            }
+          },
+          [
+            _c("template", { slot: "clip-uploader-action" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "dz-message btn btn-outline-info btn-sm",
+                  attrs: { type: "button" }
+                },
+                [_vm._v("Cambiar Banner")]
+              )
+            ])
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm.errors.status
+          ? _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.message))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.preview.progress
+          ? _c(
+              "div",
+              {
+                staticClass: "progress mt-2 mb-3",
+                staticStyle: { height: "2px" }
+              },
+              [
+                _c("div", {
+                  staticClass: "progress-bar",
+                  class: {
+                    "bg-success": _vm.preview.status == "success",
+                    "bg-danger": _vm.preview.status == "error"
+                  },
+                  style: { width: _vm.preview.progress + "%" }
+                })
+              ]
+            )
+          : _vm._e()
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-21038b8e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

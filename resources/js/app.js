@@ -104,6 +104,7 @@ Vue.component('stores-index', require('./components/stores/Index.vue'));
 Vue.component('stores-create', require('./components/stores/Create.vue'));
 Vue.component('stores-edit', require('./components/stores/Edit.vue'));
 Vue.component('stores-avatar', require('./components/stores/Avatar.vue'));
+Vue.component('stores-banner', require('./components/stores/Banner.vue'));
 Vue.component('stores-random', require('./components/stores/Random.vue'));
 Vue.component('stores-level1', require('./components/stores/Level1.vue'));
 Vue.component('stores-sales', require('./components/stores/Sales.vue'));

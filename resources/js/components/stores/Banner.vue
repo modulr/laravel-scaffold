@@ -1,16 +1,15 @@
 <template>
   <div class="row justify-content-center mb-3">
     <div class="col-12 text-center">
-      <img class="rounded-circle mb-2" style="width: 120px; height: 120px" :src="user.avatar_url">
-      <rate class="mb-3" :length="5" v-model="user.score" :disabled="true"/>
+      <img class="rounded img-fluid mb-2" :src="user.banner_url">
     </div>
     <div class="col-4 text-center">
       <vue-clip
-        :options="optionsAvatar"
-        :on-sending="sendingAvatar"
-        :on-complete="completeAvatar">
+        :options="optionsBanner"
+        :on-sending="sendingBanner"
+        :on-complete="completeBanner">
         <template slot="clip-uploader-action">
-            <button class="dz-message btn btn-outline-info btn-sm" type="button">Cambiar Avatar</button>
+            <button class="dz-message btn btn-outline-info btn-sm" type="button">Cambiar Banner</button>
         </template>
       </vue-clip>
       <small class="form-text text-danger" v-if="errors.status">{{errors.message}}</small>
@@ -20,8 +19,8 @@
           :style="{width: preview.progress+'%'}">
         </div>
       </div>
-      <!-- <button class="btn btn-ghost-info btn-sm" type="button" @click="removeAvatarAuthUser" :disabled="submiting">
-        <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Restart avatar
+      <!-- <button class="btn btn-ghost-info btn-sm" type="button" @click="removeBannerAuthUser" :disabled="submiting">
+        <i class="fas fa-spinner fa-spin" v-if="submiting"></i> Restart banner
       </button> -->
     </div>
   </div>
@@ -34,9 +33,9 @@ export default {
       errors: {},
       submiting: false,
       preview: {},
-      optionsAvatar: {
+      optionsBanner: {
         headers: {'X-CSRF-TOKEN': Laravel.csrfToken},
-        url: '/api/stores/uploadAvatar',
+        url: '/api/stores/uploadBanner',
         paramName: 'file',
         parallelUploads: 1,
         maxFilesize: {
@@ -52,14 +51,14 @@ export default {
   },
   props: ['user'],
   methods: {
-    sendingAvatar (file, xhr, formData) {
+    sendingBanner (file, xhr, formData) {
       this.errors = {}
       this.preview = file
       formData.append('userId', this.user.id)
     },
-    completeAvatar (file, status, xhr) {
+    completeBanner (file, status, xhr) {
       if (status == 'success') {
-        this.user.avatar_url = JSON.parse(xhr.response).avatar_url
+        this.user.banner_url = JSON.parse(xhr.response).banner_url
         this.preview = {}
       } else {
         this.errors = {
@@ -68,13 +67,13 @@ export default {
         }
       }
     },
-    // removeAvatarAuthUser () {
+    // removeBannerAuthUser () {
     //   this.submiting = true
-    //   axios.post(`/api/users/removeAvatar`)
+    //   axios.post(`/api/users/removeBanner`)
     //   .then(response => {
     //     this.errors = {}
     //     this.submiting = false
-    //     this.user.avatar_url = response.data.avatar_url
+    //     this.user.banner_url = response.data.banner_url
     //   })
     //   .catch(error => {
     //     this.errors = error.response.data.errors

@@ -51,7 +51,7 @@ export default {
     create (store) {
       this.order.order = `Traeme de ${store.name}`
       localStorage.setItem("order", JSON.stringify(this.order))
-      location.href = `#`
+      location.href = `/`
     }
   }
 }

@@ -25,7 +25,7 @@
 
     <div class="row justify-content-center mt-5">
         <stores-categories></stores-categories>
-        <!-- <stores-sales></stores-sales> -->
+        <stores-sales></stores-sales>
         <!-- <stores-random></stores-random> -->
         <stores-level1></stores-level1>
     </div>

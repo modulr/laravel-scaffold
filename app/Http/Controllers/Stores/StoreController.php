@@ -171,6 +171,18 @@ class StoreController extends Controller
         return $user;
     }
 
+    public function uploadBanner(Request $request)
+    {
+        $upload = new Upload();
+        $banner = $upload->upload($request->file, 'banners/'.$request->userId)->resize2(600, 300)->getData();
+
+        $user = User::find($request->userId);
+        $user->banner = $banner['basename'];
+        $user->save();
+
+        return $user;
+    }
+
     public function getStoresRandom ()
     {
         //return User::role('store')->where('level', 1)->orderBy('name')->get();
@@ -180,5 +192,10 @@ class StoreController extends Controller
     public function getStoresLevel1 ()
     {
         return User::role('store')->where('level', 1)->orderByRaw("RAND()")->take(3)->get();
+    }
+
+    public function getStoresLevel23 ()
+    {
+        return User::role('store')->whereIn('level', [2,3])->orderByRaw("RAND()")->take(3)->get();
     }
 }

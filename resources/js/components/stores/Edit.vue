@@ -20,6 +20,7 @@
         <div class="card-body px-0">
           <div class="form-group row justify-content-md-center">
             <div class="col-md-9 text-center">
+              <stores-banner :user="user"></stores-banner>
               <stores-avatar :user="user"></stores-avatar>
             </div>
           </div>

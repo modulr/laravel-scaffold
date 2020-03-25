@@ -94,6 +94,32 @@ class Upload {
     }
 
     /**
+     * [resize description]
+     * @param  [integer] $width [pixels]
+     * @param  [integer] $height [pixels]
+     * @return [obj]    $this [description]
+     */
+    public function resize2($width=null, $height=null)
+    {
+        if (in_array($this->meta['type'], $this->allowedResize)) {
+
+            $file = Storage::get($this->meta['path']);
+
+            $img = Image::make($file)
+                        ->resize($width, $height, function ($constraint) {
+                            $constraint->upsize();
+                        })
+                        ->encode();
+
+            $this->meta['size'] = strlen((string) $img);
+
+            Storage::put($this->meta['path'], (string) $img);
+        }
+
+        return $this;
+    }
+
+    /**
      * [thumbnail description]
      * @param  [integer] $width [pixels]
      * @param  [integer] $height [pixels]
