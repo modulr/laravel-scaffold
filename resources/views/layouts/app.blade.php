@@ -58,11 +58,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="app header-fixed sidebar-fixed sidebar-lg-show">
+<body class="app header-fixed">
     <div id="app">
         @include('layouts.header')
         <div class="app-body">
-            @include('layouts.sidebar')
+            <!-- @include('layouts.sidebar') -->
             <main class="main animated fadeIn">
               @yield('content')
             </main>

@@ -6,10 +6,10 @@
         <div class="card">
             <div class="card-body p-5">
                 <div class="text-center d-lg-none">
-                    <img src="svg/modulr.svg" class="mb-5" width="150" alt="Modulr Logo">
+                    <img src="img/medeex.png" class="mb-5" width="150" alt="Medeex">
                 </div>
-                <h1>{{ __('Login') }}</h1>
-                <p class="text-muted">Sign In to your account</p>
+                <h1 class="text-muted">Entrar</h1>
+                <p class="text-muted">Iniciar Sesión</p>
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
@@ -43,38 +43,38 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
+                            <label class="form-check-label text-muted" for="remember">
+                                Recordarme
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary px4">
-                                {{ __('Login') }}
+                                Entrar
                             </button>
                         </div>
-                        <div class="col-8 text-right">
+                        <!-- <div class="col-8 text-right">
                             <a class="btn btn-link px-0" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
             <div class="card-footer p-4 d-lg-none">
                 <div class="col-12 text-right">
-                    <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">Regístrate</a>
                 </div>
             </div>
         </div>
         <div class="card text-white bg-primary py-5 d-md-down-none">
             <div class="card-body text-center">
                 <div>
-                    <img src="svg/modulr.svg" class="mb-5" width="150" alt="Modulr Logo">
-                    <h2>{{ __('Sign up') }}</h2>
-                    <p>If you don't have account create one.</p>
-                    <a class="btn btn-primary active mt-2" href="{{ route('register') }}">{{ __('Register Now!') }}</a>
+                    <img src="img/medeex-blanco.png" class="mb-5" width="150" alt="Medeex">
+                    <h2>Regístrate</h2>
+                    <p>Si no tienes cuenta crea una.</p>
+                    <a class="btn btn-primary active mt-2" href="{{ route('register') }}">Registrate</a>
                 </div>
             </div>
         </div>

@@ -68972,17 +68972,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       count: 0,
       questions: [],
-      max: 0,
       personalities: [],
       loading: true,
       submiting: false,
-      errors: ''
+      errors: false
     };
   },
   mounted: function mounted() {
@@ -68990,49 +68990,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    setQuestions: function setQuestions() {
+    getQuestions: function getQuestions() {
       var _this = this;
 
       this.loading = true;
-      axios.get('/api/questions/setQuestions').then(function (response) {
-        _this.getQuestions();
+      axios.get('/api/questions/getQuestions').then(function (response) {
+        _this.count = response.data.count;
+        _this.questions = response.data.questions;
+        _this.personalities = response.data.personalities;
         _this.loading = false;
       });
     },
-    getQuestions: function getQuestions() {
+    saveQuestions: function saveQuestions() {
       var _this2 = this;
 
-      this.loading = true;
-      axios.get('/api/questions/getQuestions').then(function (response) {
-        _this2.count = response.data.count;
-        _this2.questions = response.data.questions;
-        _this2.max = response.data.max, _this2.personalities = response.data.personalities;
-        _this2.loading = false;
-      });
-    },
-    saveQuestions: function saveQuestions() {
-      var _this3 = this;
-
       this.submiting = true;
+      this.errors = false;
       this.questions.some(function (question) {
         if (question.answer == null) {
-          _this3.errors = 'Por favor responde todas las preguntas';
-          return _this3.errors;
-        } else {
-          _this3.errors = '';
+          _this2.errors = true;
+          return _this2.errors;
         }
       });
-      this.submiting = false;
-      if (this.errors == '') {
+      if (this.errors) {
+        this.$toasted.global.error('Por favor responde todas las preguntas');
+        this.submiting = false;
+      } else {
         axios.put('/api/questions/saveQuestions', this.questions).then(function (response) {
-          _this3.count = response.data.count;
-          _this3.questions = response.data.questions;
-          _this3.max = response.data.max, _this3.personalities = response.data.personalities;
-          _this3.errors = '';
-          _this3.submiting = false;
+          _this2.count = response.data.count;
+          _this2.questions = response.data.questions;
+          _this2.personalities = response.data.personalities;
+          _this2.submiting = false;
         }).catch(function (error) {
-          _this3.errors = error.response.data.errors;
-          _this3.submiting = false;
+          _this2.submiting = false;
         });
       }
     }
@@ -69049,7 +69039,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-md-center" }, [
-      _c("div", { staticClass: "col-md-9 col-xl-7" }, [
+      _c("div", { staticClass: "col-md-10 col-xl-7" }, [
         _c(
           "div",
           {
@@ -69058,8 +69048,7 @@ var render = function() {
           },
           [
             _c("h4", { staticClass: "float-left pt-2" }, [
-              _vm._v("Test "),
-              _vm.count == 80 ? _c("span", [_vm._v("Resultados")]) : _vm._e()
+              _vm._v("DIAGNOSTICO")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-header-actions mr-1" }, [
@@ -69109,47 +69098,8 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "card-body px-0" }, [
-          _vm.errors
-            ? _c(
-                "div",
-                {
-                  staticClass:
-                    "alert alert-warning alert-dismissible fade show",
-                  attrs: { role: "alert" }
-                },
-                [
-                  _c("strong", [_vm._v("Warning!")]),
-                  _vm._v(" " + _vm._s(this.errors) + "\n        ")
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.count == 0 && _vm.questions.length == 0 && !_vm.loading
-            ? _c("div", { staticClass: "text-center" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { href: "#", disabled: _vm.submiting },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.setQuestions($event)
-                      }
-                    }
-                  },
-                  [
-                    _vm.submiting
-                      ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                      : _c("i", { staticClass: "fas fa-file-alt" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "ml-1" }, [
-                      _vm._v("Iniciar Test")
-                    ])
-                  ]
-                )
-              ])
-            : _c("div", [
+          _vm.questions.length > 0
+            ? _c("div", [
                 !_vm.loading
                   ? _c(
                       "form",
@@ -69157,10 +69107,7 @@ var render = function() {
                       _vm._l(_vm.questions, function(question) {
                         return _c(
                           "div",
-                          {
-                            key: question.id,
-                            staticClass: "my-4 border-bottom"
-                          },
+                          { key: question.id, staticClass: "my-4" },
                           [
                             _c("p", { staticClass: "lead" }, [
                               _vm._v(_vm._s(question.name))
@@ -69284,71 +69231,103 @@ var render = function() {
                           1
                         )
                       ]
-                    )
-              ]),
+                    ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-right border-top pt-3" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "#", disabled: _vm.submiting },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.saveQuestions($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { staticClass: "mr-2" }, [
+                        _vm._v("Siguiente")
+                      ]),
+                      _vm._v(" "),
+                      _vm.submiting
+                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
+                        : _c("i", { staticClass: "fas fa-chevron-right" })
+                    ]
+                  )
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm.count == 80
             ? _c(
                 "div",
-                _vm._l(_vm.personalities, function(personality) {
-                  return _c(
-                    "div",
-                    { key: personality.id, staticClass: "my-4 border-bottom" },
-                    [
-                      _c("p", { staticClass: "lead" }, [
-                        _vm._v(_vm._s(personality.personality.name) + " "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "small",
-                            attrs: {
-                              href: personality.personality.link,
-                              target: "_blank"
-                            }
-                          },
-                          [_vm._v("link")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "progress mb-0",
-                          staticStyle: { height: "30px" }
-                        },
-                        [
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.personalities, function(personality) {
+                    return _c(
+                      "div",
+                      { key: personality.id, staticClass: "my-4" },
+                      [
+                        _c("p", { staticClass: "lead mb-2" }, [
+                          _c("span", { staticClass: "mr-2" }, [
+                            _vm._v(_vm._s(personality.personality.name))
+                          ]),
+                          _vm._v(" [ "),
                           _c(
-                            "div",
+                            "a",
                             {
-                              staticClass: "progress-bar",
-                              style:
-                                "width: " +
-                                (personality.result * 100) / _vm.max +
-                                "%;",
+                              staticClass: "small",
                               attrs: {
-                                role: "progressbar",
-                                "aria-valuenow":
-                                  "" + (personality.result * 100) / _vm.max,
-                                "aria-valuemin": "0",
-                                "aria-valuemax": _vm.max
+                                href: personality.personality.link,
+                                target: "_blank"
                               }
                             },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  Math.round(
-                                    (personality.result * 100) / _vm.max
-                                  )
-                                ) + "%"
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                }),
-                0
+                            [_vm._v("Link")]
+                          ),
+                          _vm._v(" ]")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "progress mb-0",
+                            staticStyle: { height: "30px" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "progress-bar",
+                                style:
+                                  "width: " +
+                                  (personality.result * 100) / 20 +
+                                  "%;",
+                                attrs: {
+                                  role: "progressbar",
+                                  "aria-valuenow":
+                                    "" + (personality.result * 100) / 20,
+                                  "aria-valuemin": "0",
+                                  "aria-valuemax": "20"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    Math.round((personality.result * 100) / 20)
+                                  ) + "%"
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
               )
             : _vm._e()
         ])
@@ -69356,7 +69335,25 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "video",
+      { attrs: { width: "100%", autoplay: "", controls: "" } },
+      [
+        _c("source", {
+          attrs: { src: "/videos/test_real_final.mp4", type: "video/mp4" }
+        }),
+        _vm._v(
+          "\n              Your browser does not support the video tag.\n          "
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

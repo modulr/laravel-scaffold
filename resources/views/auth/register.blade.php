@@ -4,8 +4,8 @@
 <div class="col-md-6">
     <div class="card mx-4">
         <div class="card-body p-4">
-            <h1>{{ __('Register') }}</h1>
-            <p class="text-muted">Create your account</p>
+            <h1 class="text-muted">Regístrate</h1>
+            <p class="text-muted">Crea tu cuenta</p>
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
@@ -58,14 +58,14 @@
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
                 </div>
                 <button type="submit" class="btn btn-block btn-success btn-primary">
-                    {{ __('Create Account') }}
+                    Crear Cuenta
                 </button>
             </form>
         </div>
         <div class="card-footer p-4">
             <div class="row">
                 <div class="col-12">
-                    <a class="btn btn-outline-primary btn-block" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="btn btn-outline-primary btn-block" href="{{ route('login') }}">Iniciar Sesión</a>
                 </div>
             </div>
         </div>

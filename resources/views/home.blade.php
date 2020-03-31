@@ -89,11 +89,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    Test de Personalidad
-                </div>
-
-                <div class="links m-b-xl">
-                    <test-questions></test-questions>
+                    Test
                 </div>
             </div>
         </div>

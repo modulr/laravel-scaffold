@@ -1,3 +1,6 @@
+body {
+  color: #fff;
+}
 // app ---------------------------------------
 #app {
   display: flex;
@@ -5,9 +8,16 @@
   flex-direction: row;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  background-color: #0d538a;
+  background-image: url("/img/back.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 // Header ---------------------------------------
 .app-header {
+  background-color: #09498c;
+  border-bottom: none !important;
   padding: 0;
   position: fixed;
   .dropdown-menu {
@@ -29,6 +39,7 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+
 }
 
 // Main ------------------------------------------

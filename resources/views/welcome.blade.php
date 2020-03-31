@@ -30,8 +30,12 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #0d538a;
+                background-image: url("/img/back.jpg");
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                color: #fff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -62,12 +66,16 @@
                 text-align: center;
             }
 
+            .logo {
+                height: 100px;
+            }
+
             .title {
                 font-size: 84px;
             }
 
             .links > a {
-                color: #636b6f;
+                color: #fff;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -83,19 +91,34 @@
             .m-b-xl {
                 margin-bottom: 60px;
             }
+
+            video {
+                width: 720px;
+            }
+            @media (max-width: 600px) {
+                video {
+                    width: 90%;
+                } 
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             <div class="content">
-                <div class="title m-b-md">
-                    Test de Personalidad
+                <div class="">
+                    <img src="/img/medeex-blanco.png" alt="Medeex" class="logo">
+                </div>
+                <div class="m-b-md">
+                    <video autoplay controls>
+                        <source src="/videos/test_real_inicio.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
 
                 <div class="links m-b-xl">
                     @if (Route::has('login'))
                         @auth
-                            <a href="/test">Tomar cuestionario</a>
+                            <a href="/test">Iniciar Diagnostico</a>
                         @else
                             <a href="{{ route('login') }}">Entrar</a>
                             <a href="{{ route('register') }}">Registrarse</a>

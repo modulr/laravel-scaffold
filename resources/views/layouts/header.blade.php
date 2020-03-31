@@ -1,14 +1,14 @@
 <header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+    <!-- <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <a class="navbar-brand" href="{{ url('/') }}">
-        <img class="navbar-brand-full" src="/svg/modulr.svg" width="89" height="25" alt="Modulr Logo">
-        <img class="navbar-brand-minimized" src="/svg/modulr-icon.svg" width="30" height="30" alt="Modulr Logo">
+        <img class="navbar-brand" src="/img/medeex-blanco.png" height="30" alt="Medeex">
+        <!-- <img class="navbar-brand-minimized" src="/img/medeex-blanco.png" height="30" alt="Medeex"> -->
     </a>
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+    <!-- <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <ul class="nav navbar-nav ml-auto mr-3">
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

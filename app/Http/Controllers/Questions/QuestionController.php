@@ -12,7 +12,7 @@ use App\Models\Personalities\PersonalitiesResult;
 
 class QuestionController extends Controller
 {
-    public function setQuestions ()
+    private function setQuestions ()
     {
         $questions = Question::all();
 
@@ -30,6 +30,12 @@ class QuestionController extends Controller
 
     public function getQuestions ()
     {
+        $exist = QuestionsResult::where('user_id', Auth::id())->first();
+
+        if (is_null($exist)) {
+            $this->setQuestions();
+        }
+
         $count = QuestionsResult::where('user_id', Auth::id())->whereNotNull('answer')->count();
 
         if ($count < 80) {
@@ -40,9 +46,8 @@ class QuestionController extends Controller
             if (is_null($personality)) {
                 $this->setPersonalitiesResults();
             }
-            $max = PersonalitiesResult::where('user_id', Auth::id())->max('result');
             $personalities = $this->getPersonalitiesResults();
-            return ['count' => $count, 'questions' => [], 'max' => $max, 'personalities' => $personalities];
+            return ['count' => $count, 'questions' => [], 'personalities' => $personalities];
         }
     }
 

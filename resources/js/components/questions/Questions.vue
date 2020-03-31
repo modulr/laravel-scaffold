@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col-md-9 col-xl-7">
+      <div class="col-md-10 col-xl-7">
         <div class="card-header px-0 mt-2 bg-transparent border-bottom-0 clearfix">
-          <h4 class="float-left pt-2">Test <span v-if="count == 80">Resultados</span></h4>
+          <h4 class="float-left pt-2">DIAGNOSTICO</h4>
           <div class="card-header-actions mr-1">
             <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="saveQuestions" v-if="questions.length > 0">
               <span class="mr-2">Siguiente</span>
@@ -16,19 +16,9 @@
           <div class="progress-bar" role="progressbar" :style="`width: ${count*100/80}%;`" :aria-valuenow="count*100/80" aria-valuemin="0" aria-valuemax="80"></div>
         </div>
         <div class="card-body px-0">
-          <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="errors">
-            <strong>Warning!</strong> {{this.errors}}
-          </div>
-          <div class="text-center" v-if="count == 0 && questions.length == 0 && !loading">
-            <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="setQuestions">
-              <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-              <i class="fas fa-file-alt" v-else></i>
-              <span class="ml-1">Iniciar Test</span>
-            </a>
-          </div>
-          <div v-else>
+          <div v-if="questions.length > 0">
             <form class="form-horizontal" v-if="!loading">
-              <div class="my-4 border-bottom" v-for="question in questions" :key="question.id">
+              <div class="my-4" v-for="question in questions" :key="question.id">
                 <p class="lead">{{question.name}}</p>
                 <div class="mb-4 col-form-label">
                   <div class="form-check form-check-inline mr-3">
@@ -50,12 +40,23 @@
                 </content-placeholders>
               </div>
             </div>
+            <div class="text-right border-top pt-3">
+              <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="saveQuestions">
+                <span class="mr-2">Siguiente</span>
+                <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+                <i class="fas fa-chevron-right" v-else></i>
+              </a>
+            </div>  
           </div>
           <div v-if="count == 80">
-            <div class="my-4 border-bottom" v-for="personality in personalities" :key="personality.id">
-              <p class="lead">{{personality.personality.name}} <a :href="personality.personality.link" target="_blank" class="small">link</a></p>
+            <video width="100%" autoplay controls>
+                <source src="/videos/test_real_final.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="my-4" v-for="personality in personalities" :key="personality.id">
+              <p class="lead mb-2"><span class="mr-2">{{personality.personality.name}}</span> [ <a :href="personality.personality.link" target="_blank" class="small">Link</a> ]</p>
               <div class="progress mb-0" style="height: 30px;">
-                <div class="progress-bar" role="progressbar" :style="`width: ${personality.result*100/max}%;`" :aria-valuenow="`${personality.result*100/max}`" aria-valuemin="0" :aria-valuemax="max">{{Math.round(personality.result*100/max)}}%</div>
+                <div class="progress-bar" role="progressbar" :style="`width: ${personality.result*100/20}%;`" :aria-valuenow="`${personality.result*100/20}`" aria-valuemin="0" aria-valuemax="20">{{Math.round(personality.result*100/20)}}%</div>
               </div>
             </div>
           </div>
@@ -70,63 +71,50 @@ export default {
     return {
       count: 0,
       questions: [],
-      max: 0,
       personalities: [],
       loading: true,
       submiting: false,
-      errors: ''
+      errors: false
     }
   },
   mounted () {
     this.getQuestions()
   },
   methods: {
-    setQuestions () {
-      this.loading = true
-      axios.get(`/api/questions/setQuestions`)
-        .then(response => {
-          this.getQuestions()
-          this.loading = false
-      })
-    },
     getQuestions () {
       this.loading = true
       axios.get(`/api/questions/getQuestions`)
         .then(response => {
           this.count = response.data.count
           this.questions = response.data.questions
-          this.max = response.data.max,
           this.personalities = response.data.personalities
           this.loading = false
       })
     },
     saveQuestions () {
       this.submiting = true
+      this.errors = false
       this.questions.some(question => {
         if (question.answer == null ) {
-          this.errors = 'Por favor responde todas las preguntas'
+          this.errors = true
           return this.errors
-        } else {
-          this.errors = ''
         }
       });
-      this.submiting = false
-      if (this.errors == '') {
+      if (this.errors) {
+        this.$toasted.global.error('Por favor responde todas las preguntas');
+        this.submiting = false
+      } else { 
         axios.put(`/api/questions/saveQuestions`, this.questions)
         .then(response => {
           this.count = response.data.count
           this.questions = response.data.questions
-          this.max = response.data.max,
           this.personalities = response.data.personalities
-          this.errors = ''
           this.submiting = false
         })
         .catch(error => {
-          this.errors = error.response.data.errors
           this.submiting = false
         })
       }
-      
     }
   }
 }
