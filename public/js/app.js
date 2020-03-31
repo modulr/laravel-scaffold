@@ -14112,7 +14112,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(190);
+module.exports = __webpack_require__(193);
 
 
 /***/ }),
@@ -14236,6 +14236,7 @@ Vue.component('dealers-create', __webpack_require__(151));
 Vue.component('dealers-edit', __webpack_require__(154));
 Vue.component('dealers-avatar', __webpack_require__(157));
 Vue.component('dealers-active', __webpack_require__(160));
+Vue.component('dealers-agree', __webpack_require__(220));
 
 // Stores
 Vue.component('stores-stores', __webpack_require__(163));
@@ -14243,11 +14244,11 @@ Vue.component('stores-index', __webpack_require__(166));
 Vue.component('stores-create', __webpack_require__(169));
 Vue.component('stores-edit', __webpack_require__(172));
 Vue.component('stores-avatar', __webpack_require__(175));
-Vue.component('stores-banner', __webpack_require__(217));
-Vue.component('stores-random', __webpack_require__(178));
-Vue.component('stores-level1', __webpack_require__(181));
-Vue.component('stores-sales', __webpack_require__(184));
-Vue.component('stores-categories', __webpack_require__(187));
+Vue.component('stores-banner', __webpack_require__(178));
+Vue.component('stores-random', __webpack_require__(181));
+Vue.component('stores-level1', __webpack_require__(184));
+Vue.component('stores-sales', __webpack_require__(187));
+Vue.component('stores-categories', __webpack_require__(190));
 
 var app = new Vue({
   el: '#app'
@@ -60841,6 +60842,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60945,12 +60951,12 @@ var render = function() {
             ? _c("li", { staticClass: "nav-item" }, [_vm._m(4)])
             : _vm._e(),
           _vm._v(" "),
-          _vm.user && _vm.user.hasRole["admin"]
-            ? _c("li", { staticClass: "nav-title" }, [_vm._v("Administrador")])
+          _vm.user && _vm.user.hasRole["dealer"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(5)])
             : _vm._e(),
           _vm._v(" "),
           _vm.user && _vm.user.hasRole["admin"]
-            ? _c("li", { staticClass: "nav-item" }, [_vm._m(5)])
+            ? _c("li", { staticClass: "nav-title" }, [_vm._v("Administrador")])
             : _vm._e(),
           _vm._v(" "),
           _vm.user && _vm.user.hasRole["admin"]
@@ -60969,6 +60975,10 @@ var render = function() {
             ? _c("li", { staticClass: "nav-item" }, [_vm._m(9)])
             : _vm._e(),
           _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(10)])
+            : _vm._e(),
+          _vm._v(" "),
           _vm.user &&
           (_vm.user.hasPermission["read-users"] ||
             _vm.user.hasPermission["read-roles"])
@@ -60976,11 +60986,11 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.user && _vm.user.hasPermission["read-users"]
-            ? _c("li", { staticClass: "nav-item" }, [_vm._m(10)])
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(11)])
             : _vm._e(),
           _vm._v(" "),
           _vm.user && _vm.user.hasPermission["read-roles"]
-            ? _c("li", { staticClass: "nav-item" }, [_vm._m(11)])
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(12)])
             : _vm._e()
         ])
       ]),
@@ -61045,6 +61055,15 @@ var staticRenderFns = [
     return _c("a", { staticClass: "nav-link", attrs: { href: "/stores" } }, [
       _c("i", { staticClass: "nav-icon fas fa-store mr-2" }),
       _vm._v("Tiendas\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/contract" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-file-signature mr-2" }),
+      _vm._v("Contrato\n                ")
     ])
   },
   function() {
@@ -70426,6 +70445,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70443,6 +70477,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
+    this.showAgreeModal();
     this.getOrders();
     this.getStatus();
   },
@@ -70549,6 +70584,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this5.errors = error.response.data.errors;
           _this5.submitingUpdate = false;
         });
+      }
+    },
+    showAgreeModal: function showAgreeModal() {
+      if (!this.user.agree) {
+        $('#agreeModal').modal('show');
       }
     }
   }
@@ -71051,7 +71091,9 @@ var render = function() {
             ]
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _vm._m(4)
     ],
     1
   )
@@ -71101,6 +71143,65 @@ var staticRenderFns = [
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("span", { staticClass: "input-group-text" }, [_vm._v("$")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "agreeModal",
+          tabindex: "-1",
+          role: "dialog",
+          "data-backdrop": "static",
+          "data-keyboard": "false"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v("Contrato de Servicios Tecnológicos")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("p", [
+                  _vm._v(
+                    "Para completar tu registro como Repartidor, debes leer y aceptar el "
+                  ),
+                  _c("strong", [
+                    _vm._v("Contrato de Servicios Tecnológicos de Tráeme")
+                  ]),
+                  _vm._v(".")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "/contract" }
+                  },
+                  [_vm._v("Ver contrato")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -82167,6 +82268,216 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources/js/components/stores/Banner.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-21038b8e", Component.options)
+  } else {
+    hotAPI.reload("data-v-21038b8e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 179 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      errors: {},
+      submiting: false,
+      preview: {},
+      optionsBanner: {
+        headers: { 'X-CSRF-TOKEN': Laravel.csrfToken },
+        url: '/api/stores/uploadBanner',
+        paramName: 'file',
+        parallelUploads: 1,
+        maxFilesize: {
+          limit: 10,
+          message: 'The size image is {{filesize}}MB is greater than the {{maxFilesize}}MB'
+        },
+        acceptedFiles: {
+          extensions: ['image/*'],
+          message: 'You are uploading an invalid file'
+        }
+      }
+    };
+  },
+
+  props: ['user'],
+  methods: {
+    sendingBanner: function sendingBanner(file, xhr, formData) {
+      this.errors = {};
+      this.preview = file;
+      formData.append('userId', this.user.id);
+    },
+    completeBanner: function completeBanner(file, status, xhr) {
+      if (status == 'success') {
+        this.user.banner_url = JSON.parse(xhr.response).banner_url;
+        this.preview = {};
+      } else {
+        this.errors = {
+          status: status,
+          message: file.errorMessage
+        };
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row justify-content-center mb-3" }, [
+    _c("div", { staticClass: "col-12 text-center" }, [
+      _c("img", {
+        staticClass: "rounded img-fluid mb-2",
+        attrs: { src: _vm.user.banner_url }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-4 text-center" },
+      [
+        _c(
+          "vue-clip",
+          {
+            attrs: {
+              options: _vm.optionsBanner,
+              "on-sending": _vm.sendingBanner,
+              "on-complete": _vm.completeBanner
+            }
+          },
+          [
+            _c("template", { slot: "clip-uploader-action" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "dz-message btn btn-outline-info btn-sm",
+                  attrs: { type: "button" }
+                },
+                [_vm._v("Cambiar Banner")]
+              )
+            ])
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm.errors.status
+          ? _c("small", { staticClass: "form-text text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.message))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.preview.progress
+          ? _c(
+              "div",
+              {
+                staticClass: "progress mt-2 mb-3",
+                staticStyle: { height: "2px" }
+              },
+              [
+                _c("div", {
+                  staticClass: "progress-bar",
+                  class: {
+                    "bg-success": _vm.preview.status == "success",
+                    "bg-danger": _vm.preview.status == "error"
+                  },
+                  style: { width: _vm.preview.progress + "%" }
+                })
+              ]
+            )
+          : _vm._e()
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-21038b8e", module.exports)
+  }
+}
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(182)
+/* template */
+var __vue_template__ = __webpack_require__(183)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources/js/components/stores/Random.vue"
 
 /* hot reload */
@@ -82189,7 +82500,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 179 */
+/* 182 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82243,7 +82554,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 180 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82303,15 +82614,15 @@ if (false) {
 }
 
 /***/ }),
-/* 181 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(182)
+var __vue_script__ = __webpack_require__(185)
 /* template */
-var __vue_template__ = __webpack_require__(183)
+var __vue_template__ = __webpack_require__(186)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -82350,7 +82661,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 182 */
+/* 185 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82416,7 +82727,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 183 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82495,15 +82806,15 @@ if (false) {
 }
 
 /***/ }),
-/* 184 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(185)
+var __vue_script__ = __webpack_require__(188)
 /* template */
-var __vue_template__ = __webpack_require__(186)
+var __vue_template__ = __webpack_require__(189)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -82542,7 +82853,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 185 */
+/* 188 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82641,7 +82952,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 186 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82701,15 +83012,15 @@ if (false) {
 }
 
 /***/ }),
-/* 187 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(188)
+var __vue_script__ = __webpack_require__(191)
 /* template */
-var __vue_template__ = __webpack_require__(189)
+var __vue_template__ = __webpack_require__(192)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -82748,7 +83059,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 188 */
+/* 191 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82863,7 +83174,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 189 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -83082,15 +83393,12 @@ if (false) {
 }
 
 /***/ }),
-/* 190 */
+/* 193 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 191 */,
-/* 192 */,
-/* 193 */,
 /* 194 */,
 /* 195 */,
 /* 196 */,
@@ -83114,15 +83422,18 @@ if (false) {
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(218)
+var __vue_script__ = __webpack_require__(221)
 /* template */
-var __vue_template__ = __webpack_require__(219)
+var __vue_template__ = __webpack_require__(222)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -83139,7 +83450,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/stores/Banner.vue"
+Component.options.__file = "resources/js/components/dealers/Agree.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -83148,9 +83459,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-21038b8e", Component.options)
+    hotAPI.createRecord("data-v-5dd1dc08", Component.options)
   } else {
-    hotAPI.reload("data-v-21038b8e", Component.options)
+    hotAPI.reload("data-v-5dd1dc08", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -83161,7 +83472,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 218 */
+/* 221 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83176,141 +83487,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      errors: {},
-      submiting: false,
-      preview: {},
-      optionsBanner: {
-        headers: { 'X-CSRF-TOKEN': Laravel.csrfToken },
-        url: '/api/stores/uploadBanner',
-        paramName: 'file',
-        parallelUploads: 1,
-        maxFilesize: {
-          limit: 10,
-          message: 'The size image is {{filesize}}MB is greater than the {{maxFilesize}}MB'
-        },
-        acceptedFiles: {
-          extensions: ['image/*'],
-          message: 'You are uploading an invalid file'
-        }
-      }
+      user: Laravel.user,
+      submiting: false
     };
   },
 
-  props: ['user'],
   methods: {
-    sendingBanner: function sendingBanner(file, xhr, formData) {
-      this.errors = {};
-      this.preview = file;
-      formData.append('userId', this.user.id);
-    },
-    completeBanner: function completeBanner(file, status, xhr) {
-      if (status == 'success') {
-        this.user.banner_url = JSON.parse(xhr.response).banner_url;
-        this.preview = {};
-      } else {
-        this.errors = {
-          status: status,
-          message: file.errorMessage
-        };
+    agree: function agree() {
+      var _this = this;
+
+      if (!this.submiting) {
+        this.submiting = true;
+        axios.put("/api/dealers/agree/" + this.user.id).then(function (response) {
+          _this.user.agree = response.data.agree;
+        }).catch(function (error) {
+          _this.submiting = false;
+        });
       }
     }
   }
 });
 
 /***/ }),
-/* 219 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center mb-3" }, [
-    _c("div", { staticClass: "col-12 text-center" }, [
-      _c("img", {
-        staticClass: "rounded img-fluid mb-2",
-        attrs: { src: _vm.user.banner_url }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-4 text-center" },
-      [
-        _c(
-          "vue-clip",
+  return _c("div", { staticClass: "text-center mt-5 mb-4" }, [
+    !_vm.user.agree
+      ? _c(
+          "a",
           {
-            attrs: {
-              options: _vm.optionsBanner,
-              "on-sending": _vm.sendingBanner,
-              "on-complete": _vm.completeBanner
+            staticClass: "btn btn-primary py-2 px-5",
+            attrs: { href: "#", disabled: _vm.submiting },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.agree($event)
+              }
             }
           },
           [
-            _c("template", { slot: "clip-uploader-action" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "dz-message btn btn-outline-info btn-sm",
-                  attrs: { type: "button" }
-                },
-                [_vm._v("Cambiar Banner")]
-              )
-            ])
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _vm.errors.status
-          ? _c("small", { staticClass: "form-text text-danger" }, [
-              _vm._v(_vm._s(_vm.errors.message))
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.preview.progress
-          ? _c(
-              "div",
-              {
-                staticClass: "progress mt-2 mb-3",
-                staticStyle: { height: "2px" }
-              },
-              [
-                _c("div", {
-                  staticClass: "progress-bar",
-                  class: {
-                    "bg-success": _vm.preview.status == "success",
-                    "bg-danger": _vm.preview.status == "error"
-                  },
-                  style: { width: _vm.preview.progress + "%" }
-                })
-              ]
-            )
-          : _vm._e()
-      ],
-      1
-    )
+            _vm.submiting
+              ? _c("i", { staticClass: "fas fa-spinner fa-spin mr-1" })
+              : _vm._e(),
+            _vm._v(" "),
+            _c("span", [_vm._v("ACEPTAR")])
+          ]
+        )
+      : _c("p", { staticClass: "lead text-primary" }, [
+          _vm._v("¡Haz aceptado el contrato!")
+        ])
   ])
 }
 var staticRenderFns = []
@@ -83319,7 +83553,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-21038b8e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5dd1dc08", module.exports)
   }
 }
 

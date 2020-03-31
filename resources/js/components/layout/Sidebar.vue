@@ -37,6 +37,11 @@
                       <i class="nav-icon fas fa-store mr-2"></i>Tiendas
                   </a>
               </li>
+              <li class="nav-item" v-if="user && user.hasRole['dealer']">
+                  <a class="nav-link" href="/contract">
+                      <i class="nav-icon fas fa-file-signature mr-2"></i>Contrato
+                  </a>
+              </li>
               <li class="nav-title" v-if="user && user.hasRole['admin']">Administrador</li>
               <li class="nav-item" v-if="user && user.hasRole['admin']">
                   <a class="nav-link" href="/orders/all">

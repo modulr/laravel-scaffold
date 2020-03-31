@@ -156,4 +156,13 @@ class DealerController extends Controller
 
         return $user;
     }
+
+    public function agree($user, Request $request)
+    {
+        $user = User::find($user);
+        $user->agree = true;
+        $user->save();
+
+        return $user;
+    }
 }

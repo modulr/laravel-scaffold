@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center py-5">
-        <div class="col-8">
+        <div class="col-10 col-md-8">
             <h2>Términos Y Condiciones De Uso De Plataforma “Tráeme”</h2>
             <h5 class="my-4">ASPECTOS GENERALES</h5>
             <h5 class="my-4">RELACIÓN CONTRACTUAL:</h5>

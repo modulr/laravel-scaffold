@@ -132,6 +132,21 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="agreeModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Contrato de Servicios Tecnológicos</h5>
+          </div>
+          <div class="modal-body">
+            <p>Para completar tu registro como Repartidor, debes leer y aceptar el <strong>Contrato de Servicios Tecnológicos de Tráeme</strong>.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/contract" class="btn btn-primary">Ver contrato</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -152,6 +167,7 @@ export default {
     }
   },
   mounted () {
+    this.showAgreeModal()
     this.getOrders()
     this.getStatus()
   },
@@ -255,6 +271,11 @@ export default {
           this.errors = error.response.data.errors
           this.submitingUpdate = false
         })
+      }
+    },
+    showAgreeModal () {
+      if (!this.user.agree) {
+        $('#agreeModal').modal('show')
       }
     }
   }

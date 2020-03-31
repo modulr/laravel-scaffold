@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center py-5">
-        <div class="col-8">
+        <div class="col-10 col-md-8">
             <h2>Aviso de Privacidad – Usuarios</h2>
             <h5 class="my-4">A</h5>
             <p class="text-muted">De conformidad en lo dispuesto por la Ley Federal de Protección de Datos Personales en Posesión de Particulares, su Reglamento y la normativa relacionada (la “Legislación de Datos Personales”), se emite el presente Aviso de Privacidad en los siguientes términos:</p>

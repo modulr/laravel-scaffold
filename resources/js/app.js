@@ -97,6 +97,7 @@ Vue.component('dealers-create', require('./components/dealers/Create.vue'));
 Vue.component('dealers-edit', require('./components/dealers/Edit.vue'));
 Vue.component('dealers-avatar', require('./components/dealers/Avatar.vue'));
 Vue.component('dealers-active', require('./components/dealers/Active.vue'));
+Vue.component('dealers-agree', require('./components/dealers/Agree.vue'));
 
 // Stores
 Vue.component('stores-stores', require('./components/stores/Stores.vue'));

@@ -1,6 +1,7 @@
 <?php
 Route::group(['namespace' => 'Dealers'], function() {
     Route::middleware('auth')->group(function () {
+        Route::view('/contract', 'dealers.contract')->middleware('permission:read-dealers');
         // views
         Route::group(['prefix' => 'dealers'], function() {
             Route::view('/', 'dealers.index')->middleware('permission:read-dealers');
@@ -13,6 +14,7 @@ Route::group(['namespace' => 'Dealers'], function() {
             Route::post('/filter', 'DealerController@filter')->middleware('permission:read-dealers');
             Route::post('/uploadAvatar', 'DealerController@uploadAvatar')->middleware('permission:update-dealers');
             Route::post('/activeToggle', 'DealerController@activeToggle')->middleware('permission:update-dealers');
+            Route::put('/agree/{user}', 'DealerController@agree')->middleware('permission:update-dealers');
 
             Route::get('/{user}', 'DealerController@show')->middleware('permission:read-dealers');
             Route::post('/store', 'DealerController@store')->middleware('permission:create-dealers');
