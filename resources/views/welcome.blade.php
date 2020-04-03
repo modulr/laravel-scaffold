@@ -1,130 +1,103 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/icon/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
-        <link rel="manifest" href="/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
-        <title>Personality Test</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #0d538a;
-                background-image: url("/img/back.jpg");
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-                color: #fff;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-            .full-height {
-                height: 100vh;
-            }
+    <script>
+      window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+        'user' => Auth::user()
+      ]) !!};
+    </script>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <script>
+    if ('serviceWorker' in navigator ) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          // registration failed :(
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+    </script>
 
-            .position-ref {
-                position: relative;
-            }
+    <!-- Fonts -->
+    <!-- <link rel="dns-prefetch" href="https://fonts.gstatic.com"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .logo {
-                height: 100px;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #fff;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-
-            .m-b-xl {
-                margin-bottom: 60px;
-            }
-
-            video {
-                width: 720px;
-            }
-            @media (max-width: 600px) {
-                video {
-                    width: 90%;
-                } 
-            }
-        </style>
-    </head>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="">
-                    <img src="/img/medeex-blanco.png" alt="Medeex" class="logo">
-                </div>
-                <div class="m-b-md">
-                    <video autoplay controls>
-                        <source src="/videos/test_real_inicio.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-
-                <div class="links m-b-xl">
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="/test">Iniciar Diagnostico</a>
-                        @else
-                            <a href="{{ route('login') }}">Entrar</a>
-                            <a href="{{ route('register') }}">Registrarse</a>
-                        @endauth
-                    @endif
-                </div>
+        <div id="app">
+            <div class="container d-flex align-items-center">
+                <div class="row justify-content-around align-items-center">
+                    <div class="col-12 text-center">
+                        <h2 class="title mt-5 mb-4">TEST DE DIAGNÓSTICO</h2>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row justify-content-center">
+                            <div class="col-12 video text-center pt-3 pb-3">
+                                <video autoplay controls class="mt-2">
+                                    <source src="/videos/test_real_inicio.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="col-10">
+                                <img src="/img/video-footer.png" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="/img/register-text.png" class="img-fluid">
+                        <!-- <p>A continuación en este <br> Test de Diagnóstico vas a encontrar más de 80 reactivos con el objetivo de identificar con claridad cuales son los problemas críticos los cuales impiden que crezcas dentro de tu empresa.</p>
+                        <p>Para iniciar con el test es necesariocrear una cuenta.</p>
+                        <p><strong>"REGISTRATE PARA INICIAR"</strong></p> -->
+                        <div class="text-center my-4">
+                        @if (Route::has('login'))
+                            @auth
+                                <a href="/test" class="btn btn-primary title">Iniciar Diagnostico</a>
+                            @else
+                                <!-- <a href="{{ route('login') }}">Entrar</a> -->
+                                <a href="{{ route('register') }}" class="btn btn-primary rounded-0 btn-cut title px-4 py-2">REGISTRARTÉ</a>
+                            @endauth
+                        @endif
+                        </div>
+                        <div class="col-12 text-right">
+                            <img src="/img/medeex-blanco.png" alt="Medeex" class="logo">
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>
     </body>

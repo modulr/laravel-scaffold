@@ -1,4 +1,5 @@
 body {
+  background-color: #011648;
   color: #fff;
 }
 // app ---------------------------------------
@@ -8,7 +9,6 @@ body {
   flex-direction: row;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  background-color: #0d538a;
   background-image: url("/img/back.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -108,4 +108,30 @@ body {
   &.bottom-left, &.bottom-center, &.bottom-right {
     bottom: 3% !important;
   }
+}
+
+.video {
+  background-image: url("/img/video-back.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  video {
+    width: 85%;
+  }
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.title {
+  font-family: "neutrondance";
+}
+
+.logo {
+  height: 80px;
+}
+
+.btn-cut {
+  clip-path: polygon(5% 0%, 100% 0, 100% 80%, 95% 100%, 0 100%, 0% 20%);
 }
