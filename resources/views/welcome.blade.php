@@ -27,77 +27,47 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <script>
-      window.Laravel = {!! json_encode([
-        'csrfToken' => csrf_token(),
-        'user' => Auth::user()
-      ]) !!};
-    </script>
-
-    <script>
-    if ('serviceWorker' in navigator ) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-          // Registration was successful
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-          // registration failed :(
-          console.log('ServiceWorker registration failed: ', err);
-        });
-      });
-    }
-    </script>
-
-    <!-- Fonts -->
-    <!-- <link rel="dns-prefetch" href="https://fonts.gstatic.com"> -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
     <body>
-        <div id="app">
-            <div class="container d-flex align-items-center">
-                <div class="row justify-content-around align-items-center">
-                    <div class="col-12 text-center">
-                        <h2 class="title mt-5 mb-4">TEST DE DIAGNÓSTICO</h2>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="row justify-content-center">
-                            <div class="col-12 video text-center pt-3 pb-3">
-                                <video autoplay controls class="mt-2">
-                                    <source src="/videos/test_real_inicio.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <div class="col-10">
-                                <img src="/img/video-footer.png" class="img-fluid">
-                            </div>
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-12 text-center">
+                    <h2 class="title my-5">TEST DE DIAGNÓSTICO</h2>
+                </div>
+                <div class="col-md-7">
+                    <div class="row justify-content-center">
+                        <div class="col-12 video text-center pt-3 pb-3">
+                            <video autoplay controls class="mt-2">
+                                <source src="/videos/test_real_inicio.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="col-11">
+                            <img src="/img/video-footer.png" class="img-fluid">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <img src="/img/register-text.png" class="img-fluid">
-                        <!-- <p>A continuación en este <br> Test de Diagnóstico vas a encontrar más de 80 reactivos con el objetivo de identificar con claridad cuales son los problemas críticos los cuales impiden que crezcas dentro de tu empresa.</p>
-                        <p>Para iniciar con el test es necesariocrear una cuenta.</p>
-                        <p><strong>"REGISTRATE PARA INICIAR"</strong></p> -->
-                        <div class="text-center my-4">
-                        @if (Route::has('login'))
-                            @auth
-                                <a href="/test" class="btn btn-primary title">Iniciar Diagnostico</a>
-                            @else
-                                <!-- <a href="{{ route('login') }}">Entrar</a> -->
-                                <a href="{{ route('register') }}" class="btn btn-primary rounded-0 btn-cut title px-4 py-2">REGISTRARTÉ</a>
-                            @endauth
-                        @endif
-                        </div>
-                        <div class="col-12 text-right">
-                            <img src="/img/medeex-blanco.png" alt="Medeex" class="logo">
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="/img/register-text.png" class="img-fluid">
+                    <!-- <p>A continuación en este <br> Test de Diagnóstico vas a encontrar más de 80 reactivos con el objetivo de identificar con claridad cuales son los problemas críticos los cuales impiden que crezcas dentro de tu empresa.</p>
+                    <p>Para iniciar con el test es necesariocrear una cuenta.</p>
+                    <p><strong>"REGISTRATE PARA INICIAR"</strong></p> -->
+                    <div class="text-center mb-5">
+                    @if (Route::has('login'))
+                        @auth
+                            <a href="/test" class="btn btn-primary title">Iniciar Diagnostico</a>
+                        @else
+                            <!-- <a href="{{ route('login') }}">Entrar</a> -->
+                            <a href="{{ route('register') }}" class="btn btn-primary rounded-0 btn-cut title px-4 py-2">REGISTRARTÉ</a>
+                        @endauth
+                    @endif
                     </div>
-                </div>  
+                </div>
+                <div class="col-12 text-right mb-5">
+                    <img src="/img/medeex-blanco.png" alt="Medeex" class="logo">
+                </div>
             </div>
         </div>
     </body>

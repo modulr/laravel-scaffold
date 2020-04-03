@@ -12734,8 +12734,12 @@ a.text-dark:focus {
 }
 
 body {
-  background-color: #011648;
   color: #fff;
+  background-color: #011648;
+  background-image: url("/img/back.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 #app {
@@ -12749,10 +12753,6 @@ body {
   -ms-flex-positive: 1;
   -webkit-box-flex: 1;
           flex-grow: 1;
-  background-image: url("/img/back.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 
 .app-header {
@@ -12864,7 +12864,7 @@ body {
 }
 
 .logo {
-  height: 80px;
+  height: 35px;
 }
 
 .btn-cut {

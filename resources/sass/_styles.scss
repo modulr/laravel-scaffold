@@ -1,6 +1,10 @@
 body {
-  background-color: #011648;
   color: #fff;
+  background-color: #011648;
+  background-image: url("/img/back.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 // app ---------------------------------------
 #app {
@@ -9,10 +13,6 @@ body {
   flex-direction: row;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  background-image: url("/img/back.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 // Header ---------------------------------------
 .app-header {
@@ -129,7 +129,7 @@ body {
 }
 
 .logo {
-  height: 80px;
+  height: 35px;
 }
 
 .btn-cut {
