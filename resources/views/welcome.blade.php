@@ -32,13 +32,16 @@
 </head>
     <body>
         <div class="container">
-            <div class="row justify-content-around">
+            <div class="row justify-content-around pb-3">
+                <div class="col-12">
+                    <img src="/img/medeex-blanco.png" alt="Medeex" class="logo mt-4">
+                </div>
                 <div class="col-12 text-center">
-                    <h2 class="title my-5">TEST DE DIAGNÓSTICO</h2>
+                    <h2 class="title mt-3 mb-5">TEST DE DIAGNÓSTICO</h2>
                 </div>
                 <div class="col-md-7">
                     <div class="row justify-content-center">
-                        <div class="col-12 video text-center pt-3 pb-3">
+                        <div class="col-12 video text-center py-3">
                             <video autoplay controls class="mt-2">
                                 <source src="/videos/test_real_inicio.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
@@ -57,16 +60,13 @@
                     <div class="text-center mb-5">
                     @if (Route::has('login'))
                         @auth
-                            <a href="/test" class="btn btn-primary title">Iniciar Diagnostico</a>
+                            <a href="/test" class="btn btn-primary rounded-0 btn-cut title px-4 py-2">Iniciar Diagnostico</a>
                         @else
                             <!-- <a href="{{ route('login') }}">Entrar</a> -->
                             <a href="{{ route('register') }}" class="btn btn-primary rounded-0 btn-cut title px-4 py-2">REGISTRARTÉ</a>
                         @endauth
                     @endif
                     </div>
-                </div>
-                <div class="col-12 text-right mb-5">
-                    <img src="/img/medeex-blanco.png" alt="Medeex" class="logo">
                 </div>
             </div>
         </div>

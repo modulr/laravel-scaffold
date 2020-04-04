@@ -3,7 +3,7 @@
         <span class="navbar-toggler-icon"></span>
     </button> -->
     <a class="navbar-brand" href="{{ url('/') }}">
-        <img class="navbar-brand" src="/img/medeex-blanco.png" height="30" alt="Medeex">
+        <img class="navbar-brand" src="/img/medeex-blanco-lg.png" height="30" alt="Medeex">
         <!-- <img class="navbar-brand-minimized" src="/img/medeex-blanco.png" height="30" alt="Medeex"> -->
     </a>
     <!-- <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">

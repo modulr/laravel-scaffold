@@ -12733,13 +12733,19 @@ a.text-dark:focus {
   }
 }
 
+html,
+body {
+  height: 100vh;
+}
+
 body {
   color: #fff;
-  background-color: #011648;
   background-image: url("/img/back.jpg");
+  background-position: center center;
   background-repeat: no-repeat;
-  background-position: center;
+  background-attachment: fixed;
   background-size: cover;
+  background-color: #011648;
 }
 
 #app {
@@ -12756,7 +12762,7 @@ body {
 }
 
 .app-header {
-  background-color: #09498c;
+  background-color: #011648;
   border-bottom: none !important;
   padding: 0;
   position: fixed;
@@ -12844,21 +12850,6 @@ body {
   bottom: 3% !important;
 }
 
-.video {
-  background-image: url("/img/video-back.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.video video {
-  width: 85%;
-}
-
-.full-height {
-  height: 100vh;
-}
-
 .title {
   font-family: "neutrondance";
 }
@@ -12870,5 +12861,41 @@ body {
 .btn-cut {
   -webkit-clip-path: polygon(5% 0%, 100% 0, 100% 80%, 95% 100%, 0 100%, 0% 20%);
           clip-path: polygon(5% 0%, 100% 0, 100% 80%, 95% 100%, 0 100%, 0% 20%);
+}
+
+.video {
+  background-image: url("/img/video-back.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.video video {
+  width: 85%;
+}
+
+.back-questions {
+  background-image: url("/img/back-questions.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.back-video-end {
+  background-image: url("/img/back-video-end.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.back-video-end video {
+  width: 85%;
+}
+
+.back-results {
+  background-image: url("/img/back-results.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 

@@ -14408,7 +14408,7 @@ Vue.toasted.register('error', function (message) {
   return message;
 }, {
   position: 'bottom-center',
-  duration: 1000
+  duration: 2000
 });
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_clip___default.a);
 Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_2_vue_multiselect___default.a);
@@ -68973,6 +68973,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69037,302 +69045,307 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-md-center" }, [
-      _c("div", { staticClass: "col-md-10 col-xl-7" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "card-header px-0 mt-2 bg-transparent border-bottom-0 clearfix"
-          },
-          [
-            _c("h4", { staticClass: "float-left pt-2" }, [
-              _vm._v("DIAGNOSTICO")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-header-actions mr-1" }, [
-              _vm.questions.length > 0
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { href: "#", disabled: _vm.submiting },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.saveQuestions($event)
-                        }
-                      }
-                    },
+  return _c("div", { staticClass: "container mb-5" }, [
+    _vm.questions.length > 0
+      ? _c("div", { staticClass: "row justify-content-center" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-md-10 back-questions d-flex align-items-center"
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "row justify-content-center flex-fill" },
+                [
+                  _c("div", { staticClass: "col-6" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "progress mt-5 mb-4 rounded-0",
+                        staticStyle: { height: "10px" }
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "progress-bar",
+                          style: "width: " + (_vm.count * 100) / 80 + "%;",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": (_vm.count * 100) / 80,
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "80"
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-11" },
                     [
-                      _c("span", { staticClass: "mr-2" }, [
-                        _vm._v("Siguiente")
-                      ]),
-                      _vm._v(" "),
-                      _vm.submiting
-                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                        : _c("i", { staticClass: "fas fa-chevron-right" })
-                    ]
+                      !_vm.loading
+                        ? _c(
+                            "form",
+                            { staticClass: "form-horizontal" },
+                            [
+                              _vm._l(_vm.questions, function(question) {
+                                return _c(
+                                  "div",
+                                  { key: question.id, staticClass: "my-2" },
+                                  [
+                                    _c("p", { staticClass: "mb-0" }, [
+                                      _vm._v(_vm._s(question.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-form-label" },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "form-check form-check-inline mr-3"
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: question.answer,
+                                                  expression: "question.answer"
+                                                }
+                                              ],
+                                              staticClass: "form-check-input",
+                                              attrs: {
+                                                id: "si" + question.id,
+                                                type: "radio",
+                                                value: "si"
+                                              },
+                                              domProps: {
+                                                checked: _vm._q(
+                                                  question.answer,
+                                                  "si"
+                                                )
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.$set(
+                                                    question,
+                                                    "answer",
+                                                    "si"
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass: "form-check-label",
+                                                attrs: {
+                                                  for: "si" + question.id
+                                                }
+                                              },
+                                              [_vm._v("Si")]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "form-check form-check-inline"
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: question.answer,
+                                                  expression: "question.answer"
+                                                }
+                                              ],
+                                              staticClass: "form-check-input",
+                                              attrs: {
+                                                id: "no" + question.id,
+                                                type: "radio",
+                                                value: "no"
+                                              },
+                                              domProps: {
+                                                checked: _vm._q(
+                                                  question.answer,
+                                                  "no"
+                                                )
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  return _vm.$set(
+                                                    question,
+                                                    "answer",
+                                                    "no"
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass: "form-check-label",
+                                                attrs: {
+                                                  for: "no" + question.id
+                                                }
+                                              },
+                                              [_vm._v("No")]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "text-center mt-3" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-primary rounded-0 btn-cut title px-4 py-2",
+                                    attrs: {
+                                      href: "#",
+                                      disabled: _vm.submiting
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.saveQuestions($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("span", { staticClass: "mr-2" }, [
+                                      _vm._v("Siguiente")
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.submiting
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _c("i", {
+                                          staticClass: "fas fa-chevron-right"
+                                        })
+                                  ]
+                                )
+                              ])
+                            ],
+                            2
+                          )
+                        : _c(
+                            "content-placeholders",
+                            { staticClass: "mb-5" },
+                            [
+                              _c("content-placeholders-heading"),
+                              _vm._v(" "),
+                              _c("content-placeholders-text")
+                            ],
+                            1
+                          )
+                    ],
+                    1
                   )
-                : _vm._e()
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "progress mb-0", staticStyle: { height: "2px" } },
-          [
-            _c("div", {
-              staticClass: "progress-bar",
-              style: "width: " + (_vm.count * 100) / 80 + "%;",
-              attrs: {
-                role: "progressbar",
-                "aria-valuenow": (_vm.count * 100) / 80,
-                "aria-valuemin": "0",
-                "aria-valuemax": "80"
-              }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body px-0" }, [
-          _vm.questions.length > 0
-            ? _c("div", [
-                !_vm.loading
-                  ? _c(
-                      "form",
-                      { staticClass: "form-horizontal" },
-                      _vm._l(_vm.questions, function(question) {
-                        return _c(
-                          "div",
-                          { key: question.id, staticClass: "my-4" },
-                          [
-                            _c("p", { staticClass: "lead" }, [
-                              _vm._v(_vm._s(question.name))
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-4 col-form-label" }, [
+                ]
+              )
+            ]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.count == 80
+      ? _c("div", { staticClass: "row" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-md-6 back-results d-flex align-items-center" },
+            [
+              _c(
+                "div",
+                { staticClass: "row justify-content-center flex-fill" },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "col-10" },
+                    _vm._l(_vm.personalities, function(personality) {
+                      return _c(
+                        "div",
+                        { key: personality.id, staticClass: "my-2 text-left" },
+                        [
+                          _c("p", { staticClass: "mb-0" }, [
+                            _vm._v(_vm._s(personality.personality.name))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "progress mb-0",
+                              staticStyle: { height: "20px" }
+                            },
+                            [
                               _c(
                                 "div",
                                 {
-                                  staticClass:
-                                    "form-check form-check-inline mr-3"
+                                  staticClass: "progress-bar",
+                                  style:
+                                    "width: " +
+                                    (personality.result * 100) / 20 +
+                                    "%;",
+                                  attrs: {
+                                    role: "progressbar",
+                                    "aria-valuenow":
+                                      "" + (personality.result * 100) / 20,
+                                    "aria-valuemin": "0",
+                                    "aria-valuemax": "20"
+                                  }
                                 },
                                 [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: question.answer,
-                                        expression: "question.answer"
-                                      }
-                                    ],
-                                    staticClass: "form-check-input",
-                                    attrs: {
-                                      id: "si" + question.id,
-                                      type: "radio",
-                                      value: "si"
-                                    },
-                                    domProps: {
-                                      checked: _vm._q(question.answer, "si")
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.$set(
-                                          question,
-                                          "answer",
-                                          "si"
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "form-check-label",
-                                      attrs: { for: "si" + question.id }
-                                    },
-                                    [_vm._v("Si")]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "form-check form-check-inline" },
-                                [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: question.answer,
-                                        expression: "question.answer"
-                                      }
-                                    ],
-                                    staticClass: "form-check-input",
-                                    attrs: {
-                                      id: "no" + question.id,
-                                      type: "radio",
-                                      value: "no"
-                                    },
-                                    domProps: {
-                                      checked: _vm._q(question.answer, "no")
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.$set(
-                                          question,
-                                          "answer",
-                                          "no"
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "form-check-label",
-                                      attrs: { for: "no" + question.id }
-                                    },
-                                    [_vm._v("No")]
+                                  _vm._v(
+                                    _vm._s(
+                                      Math.round(
+                                        (personality.result * 100) / 20
+                                      )
+                                    ) + "%"
                                   )
                                 ]
                               )
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  : _c(
-                      "div",
-                      { staticClass: "row justify-content-md-center" },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "col-md-12" },
-                          [
-                            _c(
-                              "content-placeholders",
-                              [
-                                _c("content-placeholders-heading"),
-                                _vm._v(" "),
-                                _c("content-placeholders-text")
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    ),
-                _vm._v(" "),
-                _c("div", { staticClass: "text-right border-top pt-3" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { href: "#", disabled: _vm.submiting },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.saveQuestions($event)
-                        }
-                      }
-                    },
-                    [
-                      _c("span", { staticClass: "mr-2" }, [
-                        _vm._v("Siguiente")
-                      ]),
-                      _vm._v(" "),
-                      _vm.submiting
-                        ? _c("i", { staticClass: "fas fa-spinner fa-spin" })
-                        : _c("i", { staticClass: "fas fa-chevron-right" })
-                    ]
+                            ]
+                          )
+                        ]
+                      )
+                    }),
+                    0
                   )
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.count == 80
-            ? _c(
-                "div",
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.personalities, function(personality) {
-                    return _c(
-                      "div",
-                      { key: personality.id, staticClass: "my-4" },
-                      [
-                        _c("p", { staticClass: "lead mb-2" }, [
-                          _c("span", { staticClass: "mr-2" }, [
-                            _vm._v(_vm._s(personality.personality.name))
-                          ]),
-                          _vm._v(" [ "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "small",
-                              attrs: {
-                                href: personality.personality.link,
-                                target: "_blank"
-                              }
-                            },
-                            [_vm._v("Link")]
-                          ),
-                          _vm._v(" ]")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "progress mb-0",
-                            staticStyle: { height: "30px" }
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "progress-bar",
-                                style:
-                                  "width: " +
-                                  (personality.result * 100) / 20 +
-                                  "%;",
-                                attrs: {
-                                  role: "progressbar",
-                                  "aria-valuenow":
-                                    "" + (personality.result * 100) / 20,
-                                  "aria-valuemin": "0",
-                                  "aria-valuemax": "20"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    Math.round((personality.result * 100) / 20)
-                                  ) + "%"
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
+                ]
               )
-            : _vm._e()
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _vm._v("\n      Felicidades\n    ")
+          ]),
+          _vm._v(" "),
+          _vm._m(3)
         ])
-      ])
-    ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -69340,18 +69353,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 text-center" }, [
+      _c("h2", { staticClass: "title mt-4 mb-2" }, [_vm._v("DIAGNOSTICO")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 text-center" }, [
+      _c("h2", { staticClass: "title mt-4 mb-5" }, [_vm._v("RESULTADOS")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
-      "video",
-      { attrs: { width: "100%", autoplay: "", controls: "" } },
+      "div",
+      { staticClass: "col-md-6 back-video-end text-center py-3" },
       [
-        _c("source", {
-          attrs: { src: "/videos/test_real_final.mp4", type: "video/mp4" }
-        }),
-        _vm._v(
-          "\n              Your browser does not support the video tag.\n          "
-        )
+        _c("video", { attrs: { width: "100%", autoplay: "", controls: "" } }, [
+          _c("source", {
+            attrs: { src: "/videos/test_real_final.mp4", type: "video/mp4" }
+          }),
+          _vm._v(
+            "\n        Your browser does not support the video tag.\n      "
+          )
+        ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 text-center" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-4",
+          attrs: { href: "#", target: "_blank" }
+        },
+        [_vm._v("COMENZAR AHORA")]
+      )
+    ])
   }
 ]
 render._withStripped = true

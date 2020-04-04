@@ -22,7 +22,7 @@ Vue.use(require('vue-moment'));
 Vue.use(Toasted)
 Vue.toasted.register('error', message => message, {
     position : 'bottom-center',
-    duration : 1000
+    duration : 2000
 })
 Vue.use(VueClip)
 Vue.component('multiselect', Multiselect)
