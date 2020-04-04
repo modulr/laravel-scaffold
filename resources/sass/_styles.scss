@@ -24,6 +24,9 @@ body {
   border-bottom: none !important;
   padding: 0;
   position: fixed;
+  .navbar-brand {
+    width: auto;
+  }
   .dropdown-menu {
     padding: 0;
     .dropdown-item {

@@ -12768,6 +12768,10 @@ body {
   position: fixed;
 }
 
+.app-header .navbar-brand {
+  width: auto;
+}
+
 .app-header .dropdown-menu {
   padding: 0;
 }
