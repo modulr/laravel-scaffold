@@ -12867,14 +12867,14 @@ body {
           clip-path: polygon(5% 0%, 100% 0, 100% 80%, 95% 100%, 0 100%, 0% 20%);
 }
 
-.video {
+.back-video {
   background-image: url("/img/video-back.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
-.video video {
+.back-video video {
   width: 85%;
 }
 
@@ -12885,21 +12885,21 @@ body {
   background-size: cover;
 }
 
-.back-video-end {
+.back-results {
+  background-image: url("/img/back-results.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.back-results-video {
   background-image: url("/img/back-video-end.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
-.back-video-end video {
-  width: 85%;
-}
-
-.back-results {
-  background-image: url("/img/back-results.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+.back-results-video video {
+  width: 80%;
 }
 

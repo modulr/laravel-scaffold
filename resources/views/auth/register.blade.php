@@ -4,7 +4,7 @@
 <div class="col-md-6">
     <div class="card mx-4">
         <div class="card-body p-4">
-            <h1 class="text-muted">Regístrate</h1>
+            <h1 class="text-muted">Registro</h1>
             <p class="text-muted">Crea tu cuenta</p>
 
             <form method="POST" action="{{ route('register') }}">

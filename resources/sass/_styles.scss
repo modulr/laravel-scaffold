@@ -129,7 +129,7 @@ body {
   clip-path: polygon(5% 0%, 100% 0, 100% 80%, 95% 100%, 0 100%, 0% 20%);
 }
 
-.video {
+.back-video {
   background-image: url("/img/video-back.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -138,22 +138,11 @@ body {
     width: 85%;
   }
 }
-
 .back-questions {
   background-image: url("/img/back-questions.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-}
-
-.back-video-end {
-  background-image: url("/img/back-video-end.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  video {
-    width: 85%;
-  }
 }
 .back-results {
   background-image: url("/img/back-results.png");
@@ -161,5 +150,15 @@ body {
   background-position: center;
   background-size: cover;
 }
+.back-results-video {
+  background-image: url("/img/back-video-end.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  video {
+    width: 80%;
+  }
+}
+
 
 

@@ -69272,6 +69272,8 @@ var render = function() {
       ? _c("div", { staticClass: "row" }, [
           _vm._m(1),
           _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "col-md-6 back-results d-flex align-items-center" },
@@ -69302,7 +69304,7 @@ var render = function() {
                               _c(
                                 "div",
                                 {
-                                  staticClass: "progress-bar",
+                                  staticClass: "progress-bar bg-danger",
                                   style:
                                     "width: " +
                                     (personality.result * 100) / 20 +
@@ -69337,13 +69339,9 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(2),
+          _vm._m(3),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _vm._v("\n      Felicidades\n    ")
-          ]),
-          _vm._v(" "),
-          _vm._m(3)
+          _vm._m(4)
         ])
       : _vm._e()
   ])
@@ -69371,9 +69369,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "col-md-6 back-video-end text-center py-3" },
+      { staticClass: "col-md-6 back-results-video text-center py-4" },
       [
-        _c("video", { attrs: { width: "100%", autoplay: "", controls: "" } }, [
+        _c("video", { attrs: { autoplay: "", controls: "" } }, [
           _c("source", {
             attrs: { src: "/videos/test_real_final.mp4", type: "video/mp4" }
           }),
@@ -69388,12 +69386,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 text-center" }, [
+    return _c("div", { staticClass: "col-md-7" }, [
+      _c("img", {
+        staticClass: "img-fluid mt-1",
+        attrs: { src: "/img/results-text.png" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-5 text-center" }, [
       _c(
         "a",
         {
-          staticClass: "btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-4",
-          attrs: { href: "#", target: "_blank" }
+          staticClass: "btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-5",
+          attrs: {
+            href: "https://www.i11online.com/products/medeex",
+            target: "_blank"
+          }
         },
         [_vm._v("COMENZAR AHORA")]
       )

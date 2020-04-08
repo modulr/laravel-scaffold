@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="row justify-content-center">
-                        <div class="col-12 video text-center py-3">
+                        <div class="col-12 back-video text-center py-3">
                             <video autoplay controls class="mt-2">
                                 <source src="/videos/test_real_inicio.mp4" type="video/mp4">
                                 Your browser does not support the video tag.

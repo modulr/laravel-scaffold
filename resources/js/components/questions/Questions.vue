@@ -46,29 +46,29 @@
       <div class="col-12 text-center">
         <h2 class="title mt-4 mb-5">RESULTADOS</h2>
       </div>
+      <div class="col-md-6 back-results-video text-center py-4">
+        <video autoplay controls class="">
+          <source src="/videos/test_real_final.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
       <div class="col-md-6 back-results d-flex align-items-center">
         <div class="row justify-content-center flex-fill">
           <div class="col-10">
             <div class="my-2 text-left" v-for="personality in personalities" :key="personality.id">
               <p class="mb-0">{{personality.personality.name}}</p>
               <div class="progress mb-0" style="height: 20px;">
-                <div class="progress-bar" role="progressbar" :style="`width: ${personality.result*100/20}%;`" :aria-valuenow="`${personality.result*100/20}`" aria-valuemin="0" aria-valuemax="20">{{Math.round(personality.result*100/20)}}%</div>
+                <div class="progress-bar bg-danger" role="progressbar" :style="`width: ${personality.result*100/20}%;`" :aria-valuenow="`${personality.result*100/20}`" aria-valuemin="0" aria-valuemax="20">{{Math.round(personality.result*100/20)}}%</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6 back-video-end text-center py-3">
-        <video width="100%" autoplay controls>
-          <source src="/videos/test_real_final.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+      <div class="col-md-7">
+        <img src="/img/results-text.png" class="img-fluid mt-1">
       </div>
-      <div class="col-md-6">
-        Felicidades
-      </div>
-      <div class="col-md-6 text-center">
-        <a href="#" target="_blank" class="btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-4">COMENZAR AHORA</a>
+      <div class="col-md-5 text-center">
+        <a href="https://www.i11online.com/products/medeex" target="_blank" class="btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-5">COMENZAR AHORA</a>
       </div>
     </div>
   </div>
