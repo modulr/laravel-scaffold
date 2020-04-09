@@ -69363,7 +69363,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-7" }, [
+    return _c("div", { staticClass: "col-md-6" }, [
       _c("img", {
         staticClass: "img-fluid mt-1",
         attrs: { src: "/img/results-text.png" }
@@ -69374,7 +69374,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-5 text-center" }, [
+    return _c("div", { staticClass: "col-md-6 text-center" }, [
       _c(
         "a",
         {
