@@ -12879,27 +12879,27 @@ body {
 }
 
 .back-questions {
-  background-image: url("/img/back-questions.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  border: 30px solid transparent;
+  padding: 20px;
+  -o-border-image: url("/img/back-questions.png") 40 stretch;
+     border-image: url("/img/back-questions.png") 40 stretch;
 }
 
 .back-results {
-  background-image: url("/img/back-results.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  border: 30px solid transparent;
+  padding: 15px;
+  -o-border-image: url("/img/back-results.png") 30 stretch;
+     border-image: url("/img/back-results.png") 30 stretch;
 }
 
 .back-results-video {
-  background-image: url("/img/back-video-end.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  border: 30px solid transparent;
+  padding: 5px;
+  -o-border-image: url("/img/back-results-video.png") 60 stretch;
+     border-image: url("/img/back-results-video.png") 60 stretch;
 }
 
 .back-results-video video {
-  width: 80%;
+  width: 100%;
 }
 

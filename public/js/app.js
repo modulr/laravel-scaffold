@@ -68975,12 +68975,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69060,37 +69054,36 @@ var render = function() {
                 "div",
                 { staticClass: "row justify-content-center flex-fill" },
                 [
-                  _c("div", { staticClass: "col-6" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "progress mt-5 mb-4 rounded-0",
-                        staticStyle: { height: "10px" }
-                      },
-                      [
-                        _c("div", {
-                          staticClass: "progress-bar",
-                          style: "width: " + (_vm.count * 100) / 80 + "%;",
-                          attrs: {
-                            role: "progressbar",
-                            "aria-valuenow": (_vm.count * 100) / 80,
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "80"
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-11" },
+                    { staticClass: "col-12" },
                     [
                       !_vm.loading
                         ? _c(
                             "form",
                             { staticClass: "form-horizontal" },
                             [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "progress mt-1 mb-4 rounded-0",
+                                  staticStyle: { height: "10px", width: "80%" }
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass: "progress-bar",
+                                    style:
+                                      "width: " + (_vm.count * 100) / 80 + "%;",
+                                    attrs: {
+                                      role: "progressbar",
+                                      "aria-valuenow": (_vm.count * 100) / 80,
+                                      "aria-valuemin": "0",
+                                      "aria-valuemax": "80"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
                               _vm._l(_vm.questions, function(question) {
                                 return _c(
                                   "div",
@@ -69250,7 +69243,7 @@ var render = function() {
                           )
                         : _c(
                             "content-placeholders",
-                            { staticClass: "mb-5" },
+                            { staticClass: "my-4" },
                             [
                               _c("content-placeholders-heading"),
                               _vm._v(" "),
@@ -69272,72 +69265,56 @@ var render = function() {
       ? _c("div", { staticClass: "row" }, [
           _vm._m(1),
           _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col-md-6 back-results d-flex align-items-center" },
-            [
-              _c(
+            { staticClass: "col-md-6 back-results" },
+            _vm._l(_vm.personalities, function(personality) {
+              return _c(
                 "div",
-                { staticClass: "row justify-content-center flex-fill" },
+                { key: personality.id, staticClass: "my-2 text-left" },
                 [
+                  _c("p", { staticClass: "mb-0" }, [
+                    _vm._v(_vm._s(personality.personality.name))
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-10" },
-                    _vm._l(_vm.personalities, function(personality) {
-                      return _c(
+                    {
+                      staticClass: "progress mb-0 rounded-0",
+                      staticStyle: { height: "20px" }
+                    },
+                    [
+                      _c(
                         "div",
-                        { key: personality.id, staticClass: "my-2 text-left" },
+                        {
+                          staticClass: "progress-bar bg-danger",
+                          style:
+                            "width: " + (personality.result * 100) / 20 + "%;",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow":
+                              "" + (personality.result * 100) / 20,
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "20"
+                          }
+                        },
                         [
-                          _c("p", { staticClass: "mb-0" }, [
-                            _vm._v(_vm._s(personality.personality.name))
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "progress mb-0",
-                              staticStyle: { height: "20px" }
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "progress-bar bg-danger",
-                                  style:
-                                    "width: " +
-                                    (personality.result * 100) / 20 +
-                                    "%;",
-                                  attrs: {
-                                    role: "progressbar",
-                                    "aria-valuenow":
-                                      "" + (personality.result * 100) / 20,
-                                    "aria-valuemin": "0",
-                                    "aria-valuemax": "20"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      Math.round(
-                                        (personality.result * 100) / 20
-                                      )
-                                    ) + "%"
-                                  )
-                                ]
-                              )
-                            ]
+                          _vm._v(
+                            _vm._s(
+                              Math.round((personality.result * 100) / 20)
+                            ) + "%"
                           )
                         ]
                       )
-                    }),
-                    0
+                    ]
                   )
                 ]
               )
-            ]
+            }),
+            0
           ),
+          _vm._v(" "),
+          _vm._m(2),
           _vm._v(" "),
           _vm._m(3),
           _vm._v(" "),
@@ -69352,7 +69329,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12 text-center" }, [
-      _c("h2", { staticClass: "title mt-4 mb-2" }, [_vm._v("DIAGNOSTICO")])
+      _c("h2", { staticClass: "title mt-4 mb-3" }, [_vm._v("DIAGNOSTICO")])
     ])
   },
   function() {
@@ -69360,7 +69337,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12 text-center" }, [
-      _c("h2", { staticClass: "title mt-4 mb-5" }, [_vm._v("RESULTADOS")])
+      _c("h2", { staticClass: "title mt-4 mb-4" }, [_vm._v("RESULTADOS")])
     ])
   },
   function() {
@@ -69369,7 +69346,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "col-md-6 back-results-video text-center py-4" },
+      { staticClass: "col-md-6 back-results-video text-center" },
       [
         _c("video", { attrs: { autoplay: "", controls: "" } }, [
           _c("source", {

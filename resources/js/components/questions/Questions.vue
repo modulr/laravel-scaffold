@@ -2,17 +2,15 @@
   <div class="container mb-5">
     <div class="row justify-content-center" v-if="questions.length > 0">
       <div class="col-12 text-center">
-        <h2 class="title mt-4 mb-2">DIAGNOSTICO</h2>
+        <h2 class="title mt-4 mb-3">DIAGNOSTICO</h2>
       </div>
       <div class="col-md-10 back-questions d-flex align-items-center">
         <div class="row justify-content-center flex-fill">
-          <div class="col-6">
-            <div class="progress mt-5 mb-4 rounded-0" style="height: 10px;">
-              <div class="progress-bar" role="progressbar" :style="`width: ${count*100/80}%;`" :aria-valuenow="count*100/80" aria-valuemin="0" aria-valuemax="80"></div>
-            </div>
-          </div>
-          <div class="col-11">
+          <div class="col-12">
             <form class="form-horizontal" v-if="!loading">
+              <div class="progress mt-1 mb-4 rounded-0" style="height: 10px; width:80%">
+                <div class="progress-bar" role="progressbar" :style="`width: ${count*100/80}%;`" :aria-valuenow="count*100/80" aria-valuemin="0" aria-valuemax="80"></div>
+              </div>
               <div class="my-2" v-for="question in questions" :key="question.id">
                 <p class="mb-0">{{question.name}}</p>
                 <div class="col-form-label">
@@ -34,7 +32,7 @@
                 </a>
               </div> 
             </form>
-            <content-placeholders class="mb-5" v-else>
+            <content-placeholders class="my-4" v-else>
               <content-placeholders-heading/>
               <content-placeholders-text/>
             </content-placeholders>
@@ -44,25 +42,21 @@
     </div>
     <div class="row" v-if="count == 80">
       <div class="col-12 text-center">
-        <h2 class="title mt-4 mb-5">RESULTADOS</h2>
+        <h2 class="title mt-4 mb-4">RESULTADOS</h2>
       </div>
-      <div class="col-md-6 back-results-video text-center py-4">
-        <video autoplay controls class="">
+      <div class="col-md-6 back-results">
+        <div class="my-2 text-left" v-for="personality in personalities" :key="personality.id">
+          <p class="mb-0">{{personality.personality.name}}</p>
+          <div class="progress mb-0 rounded-0" style="height: 20px;">
+            <div class="progress-bar bg-danger" role="progressbar" :style="`width: ${personality.result*100/20}%;`" :aria-valuenow="`${personality.result*100/20}`" aria-valuemin="0" aria-valuemax="20">{{Math.round(personality.result*100/20)}}%</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 back-results-video text-center">
+        <video autoplay controls>
           <source src="/videos/test_real_final.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
-      </div>
-      <div class="col-md-6 back-results d-flex align-items-center">
-        <div class="row justify-content-center flex-fill">
-          <div class="col-10">
-            <div class="my-2 text-left" v-for="personality in personalities" :key="personality.id">
-              <p class="mb-0">{{personality.personality.name}}</p>
-              <div class="progress mb-0" style="height: 20px;">
-                <div class="progress-bar bg-danger" role="progressbar" :style="`width: ${personality.result*100/20}%;`" :aria-valuenow="`${personality.result*100/20}`" aria-valuemin="0" aria-valuemax="20">{{Math.round(personality.result*100/20)}}%</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="col-md-7">
         <img src="/img/results-text.png" class="img-fluid mt-1">

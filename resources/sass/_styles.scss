@@ -139,24 +139,33 @@ body {
   }
 }
 .back-questions {
-  background-image: url("/img/back-questions.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  border: 30px solid transparent;
+  padding: 20px;
+  border-image: url("/img/back-questions.png") 40 stretch;
+  // background-image: url("/img/back-questions.png");
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
 }
 .back-results {
-  background-image: url("/img/back-results.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  border: 30px solid transparent;
+  padding: 15px;
+  border-image: url("/img/back-results.png") 30 stretch;
+  // background-image: url("/img/back-results.png");
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
 }
 .back-results-video {
-  background-image: url("/img/back-video-end.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  border: 30px solid transparent;
+  padding: 5px;
+  border-image: url("/img/back-results-video.png") 60 stretch;
+  // background-image: url("/img/back-video-end.png");
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
   video {
-    width: 80%;
+    width: 100%;
   }
 }
 
