@@ -61276,7 +61276,7 @@ var render = function() {
         staticClass: "text-secondary",
         attrs: {
           href:
-            "https://wa.me/" +
+            "https://wa.me/52" +
             this.config.phone +
             "?text=¡Hola!%20quiero%20más%20información%20sobre%20...",
           target: "_blank"
