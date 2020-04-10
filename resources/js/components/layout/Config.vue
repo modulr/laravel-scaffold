@@ -1,24 +1,23 @@
 <template lang="html">
   <div>
-    <div class="text-center mb-2">
-        <a :href="this.config.facebook" target="_blank" class="text-success mr-3">
-          <i class="fab fa-facebook-square fa-3x"></i>
-          <!-- <img src="/img/facebook.png" class="img-fluid" alt="Facebook"> -->
-        </a>
-        <a :href="this.config.instagram" target="_blank" class="text-success">
-          <i class="fab fa-instagram fa-3x"></i>
-          <!-- <img src="/img/instagram.png" class="img-fluid" alt="Instagram"> -->
-        </a>
-    </div>
-    <div class="m-5">
-        <a class="btn btn-link btn-lg btn-phone" :href="`tel:${this.config.phone}`">
+      <a :href="this.config.facebook" target="_blank" class="text-secondary mr-3">
+        <i class="fab fa-facebook-square fa-2x"></i>
+      </a>
+      <a :href="this.config.instagram" target="_blank" class="text-secondary mr-3">
+        <i class="fab fa-instagram fa-2x"></i>
+      </a>
+      <a :href="`https://wa.me/${this.config.phone}?text=¡Hola!%20quiero%20más%20información%20sobre%20...`" target="_blank" class="text-secondary">
+        <i class="fab fa-whatsapp fa-2x"></i>
+      </a>
+      <!-- <div class="mt-3">
+        <a class="btn btn-link btn-phone pl-0 text-secondary" :href="`tel:${this.config.phone}`">
             <small class="fa-stack mr-1">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
             </small>
             {{this.config.phone}}
         </a>
-    </div>
+      </div> -->
   </div>
 </template>
 

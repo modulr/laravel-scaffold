@@ -11309,6 +11309,10 @@ a:hover {
   max-width: 200px;
 }
 
+.logo-footer {
+  max-height: 50px;
+}
+
 .btn-phone {
   text-decoration: none !important;
 }
