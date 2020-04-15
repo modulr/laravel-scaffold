@@ -69379,10 +69379,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-5",
-          attrs: {
-            href: "https://www.i11online.com/products/medeex",
-            target: "_blank"
-          }
+          attrs: { href: "https://www.i11online.com/library", target: "_blank" }
         },
         [_vm._v("COMENZAR AHORA")]
       )
