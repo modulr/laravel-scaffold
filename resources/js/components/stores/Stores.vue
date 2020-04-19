@@ -3,11 +3,11 @@
     <div class="card-body pt-0 pb-5">
       <div class="row justify-content-center pt-2 pb-4">
         <div class="col-lg-7 col-md-12">
-          <h1>Tus tiendas favoritas</h1>
+          <h1>Tus lugares favoritos</h1>
         </div>
         <div class="col-lg-5 col-md-12">
           <div class="input-group mt-1 mb-1">
-            <input type="text" class="form-control border-right-0" placeholder="Buscar" v-model.trim="filters.search" @keyup.enter="filter">
+            <input type="text" class="form-control form-control-lg border-right-0" placeholder="Buscar" v-model.trim="filters.search" @keyup.enter="filter">
             <div class="input-group-prepend">
               <a href="#" class="input-group-text border-left-0" v-if="clearSearchBtn" @click.prevent="clearSearch">x</a>
               <span class="input-group-text" @click="filter">
@@ -94,9 +94,9 @@
           <span slot="no-more"></span>
         </infinite-loading> -->
       </div>
-      <div class="row" v-if='!loading && filters.pagination.total > 0'>
-        <div class="col mt-4" v-if="filters.pagination.last_page>1">
-          <nav aria-label="Page navigation">
+      <div class="row mt-4" v-if='!loading && filters.pagination.total > 0'>
+        <div class="col-md-9" v-if="filters.pagination.last_page>1">
+          <nav aria-label="Page navigation" class="scrollmenu invisible-scrollbar">
             <ul class="pagination">
               <li class="page-item" :class="{'disabled': filters.pagination.current_page <= 1}">
                 <a class="page-link" href="#" @click.prevent="changePage(filters.pagination.current_page -  1)"><i class="fas fa-angle-left"></i></a>
@@ -111,6 +111,7 @@
             </ul>
           </nav>
         </div>
+        <div class="col-md-3 text-right"><h5>{{filters.pagination.total}} resultados</h5></div>
       </div>
       <div class="no-items-found text-center mt-5" v-if="!loading && !users.length > 0">
         <i class="icon-magnifier fa-3x text-muted"></i>

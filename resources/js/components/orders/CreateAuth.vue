@@ -1,11 +1,37 @@
 <template>
   <div>
-    <div class="form-group">
-      <textarea class="form-control" rows="3" :class="{'is-invalid': errors.order}" :placeholder="placeholder"
-      v-model="newOrder.order"></textarea>
-      <small class="form-text text-white" v-if="errors.order">Dinos que te llevamos</small>
+    <div class="mb-4 text-center">
+      <a class="text-white" href="#modalCity" data-toggle="modal" data-target="#modalCity">{{config.city}}<i class="ml-2 fas fa-chevron-down"></i></a>
+      <!-- Modal -->
+      <div class="modal" id="modalCity" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Selecciona tu ciudad</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-left">
+              <div class="list-group list-group-flush">
+                <!-- <h6><a class="list-group-item disabled" tabindex="-1" aria-disabled="true">Chihuahua</a></h6> -->
+                <h5><a href="https://traeme.app" class="list-group-item list-group-item-action">Parral, Chih.</a></h5>
+                <h5><a href="https://delicias.traeme.app" class="list-group-item list-group-item-action">Delicias, Chih.</a></h5>
+                <h5><a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Durango, Dgo <small class="text-muted"> - Próximamente</small></a></h5>
+                <!-- <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Juárez <small class="text-muted"> - Próximamente</small></a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="form-group">
+      <span class="form-text text-white" v-if="errors.order">¿Que te llevamos?</span>
+      <textarea class="form-control" rows="3" :class="{'is-invalid': errors.order}" :placeholder="placeholder"
+      v-model="newOrder.order"></textarea>
+    </div>
+    <div class="form-group">
+      <span class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</span>
       <div class="input-group border-right-0">
         <div class="input-group-prepend" @click="getPosition">
           <span class="input-group-text">
@@ -15,41 +41,17 @@
         </div>
         <input type="text" class="form-control" placeholder="Dirección (calle, numero y colonia)" v-model="newOrder.address">
       </div>
-      <small class="form-text text-white" v-if="errors.address">¿A donde te lo llevamos?</small>
     </div>
     <div class="form-group" v-if="!user.cellphone">
       <input type="tel" class="form-control" :class="{'is-invalid': errors.cellphone}" v-model="newOrder.cellphone" placeholder="Escribe tu numero de celular">
       <small class="form-text text-white" v-if="errors.cellphone">{{errors.cellphone[1]}}</small>
     </div>
     <div class="mb-4">
-      <a class="btn btn-light btn-lg px-5" href="#" :disabled="submiting" @click.prevent="createOrder">
+      <a class="btn btn-block btn btn-outline-light btn-light btn-lg px-5" href="#" :disabled="submiting" @click.prevent="createOrder">
         <i class="fas fa-spinner fa-spin mr-2" v-if="submiting"></i>Pedir
       </a>
     </div>
     <rates-day></rates-day>
-    <p class="mb-1"><small>{{config.schedule}}</small></p>
-    <a class="text-white" href="#modalCity" data-toggle="modal" data-target="#modalCity">{{config.city}}</a>
-    <!-- Modal -->
-    <div class="modal" id="modalCity" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Selecciona tu ciudad</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body text-left">
-            <div class="list-group list-group-flush">
-              <a href="https://traeme.app" class="list-group-item list-group-item-action">Hidalgo del Parral</a>
-              <a href="https://delicias.traeme.app" class="list-group-item list-group-item-action">Delicias</a>
-              <!-- <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Chihuahua <small class="text-muted"> - Próximamente</small></a>
-              <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Juárez <small class="text-muted"> - Próximamente</small></a> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 

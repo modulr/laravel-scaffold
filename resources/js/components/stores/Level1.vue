@@ -1,7 +1,7 @@
 <template>
     <div class="row justify-content-center">
       <div class="col-10 pb-3 text-center mt-5 mb-4">
-        <h2 class="font-weight-bold">Sugerencias</h2>
+        <h2 class="font-weight-bold">Destacados</h2>
       </div>
       <div class="col-10 col-lg-8">
         <div class="row justify-content-center">

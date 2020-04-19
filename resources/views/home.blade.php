@@ -5,9 +5,9 @@
     <div class="row justify-content-center bg-gradient">
         <div class="col-sm-12 text-center">
             <img class="img-fluid logo mt-5 mb-3" src="/img/traeme.png" alt="Tráeme">
-            <p class="lead mt-2 mb-4">Mandados a domicilio</p>
+            <p class="lead mt-2 mb-1">Mandados a domicilio</p>
         </div>
-        <div class="col-9 col-sm-6 col-md-4 mb-4 text-center">
+        <div class="col-9 col-sm-6 col-md-4 mb-4">
             <!-- <p>¿Que te llevamos?</p> -->
             @auth
             <orders-create-auth></orders-create-auth>
@@ -27,7 +27,8 @@
         <stores-categories></stores-categories>
         <stores-sales></stores-sales>
         <!-- <stores-random></stores-random> -->
-        <stores-level1></stores-level1>
+        <stores-level1 class="mb-2"></stores-level1>
+        <h4 class="mt-5"><a href="/tiendas">Todos los lugares  <i class="ml-2 fas fa-chevron-right"></i></a></h4>
     </div>
 
     <div class="row justify-content-center bg-gradient mt-5">
@@ -68,23 +69,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center my-5">
-        <div class="col-9 col-sm-6 col-md-3 pl-4 py-4">
-            <h5 class="mb-4"><strong>Información de interés</strong></h5>
-            <p class="mb-2"><a class="text-secondary" href="/terms-of-use">Términos y condiciones</a></p>
-            <p class="mb-2"><a class="text-secondary" href="/privacy-policy">Aviso de privacidad</a></p>
-        </div>
-        <div class="col-9 col-sm-6 col-md-3 pl-4 py-4 border-left">
-            <h5 class="mb-4"><strong>Síguenos</strong></h5>
-            <config></config>
-        </div>
-        <div class="col-9 col-sm-6 col-md-3 pl-4 py-4 border-left">
-            <h5 class="mb-3 ml-2"><strong>Descarga el App</strong></h5>
-            <a target="_blank" href='https://play.google.com/store/apps/details?id=com.traeme.traemeapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-                <img alt='Disponible en Google Play' class="img-fluid logo-footer" src='https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png'/>
-            </a>
-        </div>
-    </div>
+    <config></config>
     <div class="row justify-content-center">
         <div class="col-12 text-center border-top">
             <p class="my-4">© 2020 Tráeme</p>

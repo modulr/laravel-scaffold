@@ -97,38 +97,26 @@
                   </div>
                 </div>
               </div>
-              <div class="row" v-if="item.status_id == 1">
+              <div class="row" >
                 <div class="col-12">
                   <hr>
                 </div>
-                <div class="col-12">
+                <div class="col-12 text-right" v-if="item.status_id == 1">
                   <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
                     <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Cancelar
                   </a>
                 </div>
-              </div>
-              <div class="row" v-if="item.status_id == 4">
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col-7">
-                  <div class="btn btn-outline-secondary btn-sm disabled">
-                    Cancelado
-                  </div>
-                </div>
-                <div class="col-5 text-right">
+                <div class="col-12 text-right" v-if="item.status_id == 4">
                   <a href="#" class="btn btn-outline-primary btn-sm" :disabled="submitingOpen" @click.prevent="openOrder(item, index)">
                     <i class="fas fa-spinner fa-spin" v-if="submitingOpen"></i>
                     Abrir de nuevo
                   </a>
+                  <div class="btn btn-secondary btn-sm disabled">
+                    Cancelado
+                  </div>
                 </div>
-              </div>
-              <div class="row" v-if="item.status_id == 3">
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col text-right">
+                <div class="col-12 text-right" v-if="item.status_id == 3">
                   <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="showCreateOrderModal(item)">
                     Pedir de nuevo
                   </a>

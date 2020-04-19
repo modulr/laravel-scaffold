@@ -1,5 +1,5 @@
 <template lang="html">
-  <p class="mb-0">Tarifa del dia desde <b>${{rate.rate}}</b> pesos</p>
+  <p class="mb-0 text-center">Desde <b>${{rate.rate}}</b> pesos</p>
 </template>
 
 <script>

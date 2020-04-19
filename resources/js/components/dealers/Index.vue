@@ -28,12 +28,12 @@
             </div>
           </div>
         </div>
-        <div class="col-auto">
+        <!-- <div class="col-auto">
           <select class="custom-select mb-3" v-model="selected" @change="filterStatus(selected)">
             <option value="active">Activos</option>
             <option value="all">Todos</option>
           </select>
-        </div>
+        </div> -->
         <div class="col-auto">
           <multiselect
             v-model="filters.pagination.per_page"
@@ -162,7 +162,7 @@ export default {
       users: [],
       client: {},
       clients: [],
-      selected: 'active',
+      selected: 'all',
       filters: {
         pagination: {
           from: 0,
@@ -173,8 +173,8 @@ export default {
           last_page: 0
         },
         orderBy: {
-          column: 'id',
-          direction: 'asc'
+          column: 'active',
+          direction: 'desc'
         },
         search: '',
         status: ''
@@ -184,18 +184,18 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem("filtersTableDealers")) {
-      this.filters = JSON.parse(localStorage.getItem("filtersTableDealers"))
-    } else {
-      localStorage.setItem("filtersTableDealers", this.filters);
-    }
+    // if (localStorage.getItem("filtersTableDealers")) {
+    //   this.filters = JSON.parse(localStorage.getItem("filtersTableDealers"))
+    // } else {
+    //   localStorage.setItem("filtersTableDealers", this.filters);
+    // }
     this.getUsers()
   },
   methods: {
     getUsers () {
       this.loading = true
       this.users = []
-      localStorage.setItem("filtersTableDealers", JSON.stringify(this.filters));
+      //localStorage.setItem("filtersTableDealers", JSON.stringify(this.filters));
       axios.post(`/api/dealers/filter?page=${this.filters.pagination.current_page}`, this.filters)
       .then(response => {
         this.users = response.data.data
