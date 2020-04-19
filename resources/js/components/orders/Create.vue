@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-4">
+    <div class="mb-4 text-center">
       <a class="text-white" href="#modalCity" data-toggle="modal" data-target="#modalCity">{{config.city}}<i class="ml-2 fas fa-chevron-down"></i></a>
       <!-- Modal -->
       <div class="modal" id="modalCity" tabindex="-1" role="dialog" aria-hidden="true">

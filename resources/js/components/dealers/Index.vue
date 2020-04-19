@@ -34,7 +34,7 @@
             <option value="all">Todos</option>
           </select>
         </div> -->
-        <div class="col-auto">
+        <!-- <div class="col-auto">
           <multiselect
             v-model="filters.pagination.per_page"
             :options="[25,50,100,200]"
@@ -44,7 +44,7 @@
             @select="changeSize"
             placeholder="Search">
           </multiselect>
-        </div>
+        </div> -->
       </div>
       <table class="table table-hover">
         <thead>

@@ -72623,7 +72623,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "mb-4" }, [
+      _c("div", { staticClass: "mb-4 text-center" }, [
         _c(
           "a",
           {
@@ -76563,32 +76563,7 @@ var render = function() {
                 )
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-auto" },
-            [
-              _c("multiselect", {
-                attrs: {
-                  options: [25, 50, 100, 200],
-                  searchable: false,
-                  "show-labels": false,
-                  "allow-empty": false,
-                  placeholder: "Search"
-                },
-                on: { select: _vm.changeSize },
-                model: {
-                  value: _vm.filters.pagination.per_page,
-                  callback: function($$v) {
-                    _vm.$set(_vm.filters.pagination, "per_page", $$v)
-                  },
-                  expression: "filters.pagination.per_page"
-                }
-              })
-            ],
-            1
-          )
+          ])
         ]),
         _vm._v(" "),
         _c("table", { staticClass: "table table-hover" }, [
