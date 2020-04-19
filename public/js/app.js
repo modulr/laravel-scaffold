@@ -76665,22 +76665,23 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.users, function(user) {
-              return _c(
-                "tr",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.editUser(user.id)
-                    }
-                  }
-                },
-                [
-                  _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-                    _vm._v(_vm._s(user.id))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("div", { staticClass: "media" }, [
+              return _c("tr", [
+                _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                  _vm._v(_vm._s(user.id))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "media",
+                      on: {
+                        click: function($event) {
+                          _vm.editUser(user.id)
+                        }
+                      }
+                    },
+                    [
                       _c("div", { staticClass: "avatar float-left mr-3" }, [
                         _c("img", {
                           staticClass: "img-avatar",
@@ -76715,33 +76716,33 @@ var render = function() {
                           1
                         )
                       ])
-                    ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-info",
+                      attrs: { href: "tel:" + user.cellphone }
+                    },
+                    [_vm._v(_vm._s(user.cellphone))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "d-none d-sm-table-cell" }, [
+                  _c("small", [
+                    _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LL")))
                   ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-info",
-                        attrs: { href: "tel:" + user.cellphone }
-                      },
-                      [_vm._v(_vm._s(user.cellphone))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "d-none d-sm-table-cell" }, [
-                    _c("small", [
-                      _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LL")))
-                    ]),
-                    _vm._v(" - "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LT")))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1, true)
-                ]
-              )
+                  _vm._v(" - "),
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm._f("moment")(user.created_at, "LT")))
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(1, true)
+              ])
             })
           )
         ]),

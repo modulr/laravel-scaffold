@@ -66,10 +66,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" @click="editUser(user.id)">
+          <tr v-for="user in users">
             <td class="d-none d-sm-table-cell">{{user.id}}</td>
             <td>
-              <div class="media">
+              <div class="media" @click="editUser(user.id)">
                 <div class="avatar float-left mr-3">
                   <img class="img-avatar" :src="user.avatar_url">
                   <span class="avatar-status badge-primary" v-if="user.active"></span>
