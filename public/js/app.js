@@ -83062,7 +83062,7 @@ var render = function() {
                       _c("strong", [_vm._v(_vm._s(store.name))])
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "card-text text-muted mb-2" }, [
+                    _c("p", { staticClass: "card-text text-muted mb-0" }, [
                       _vm._v(_vm._s(store.description))
                     ])
                   ])
