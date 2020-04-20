@@ -37,7 +37,7 @@
                     <td>Eduardo Torres</td>
                     <td>Eduardo Torres</td>
                     <td>Eduardo Torres</td>
-                    <td></td>
+                    <td><strong>DISPONIBLE</strong></td>
                     <td>Eduardo Torres</td>
                 </tr>
                 <tr class="table-warning">
@@ -48,7 +48,7 @@
                     <td>Ivan Trujillo</td>
                     <td>Ivan Trujillo</td>
                     <td>Ivan Trujillo</td>
-                    <td></td>
+                    <td><strong>DISPONIBLE</strong></td>
                 </tr>
                 <tr class="table-warning">
                     <th scope="row"></th>
@@ -72,7 +72,7 @@
                 </tr>
                 <tr class="table-danger">
                     <th scope="row"></th>
-                    <td>Eduardo Villanueva 6271104286</td>
+                    <td>Eduardo Villanueva 6271720559</td>
                     <td>Eduardo Villanueva</td>
                     <td>Eduardo Villanueva</td>
                     <td>Eduardo Villanueva</td>
