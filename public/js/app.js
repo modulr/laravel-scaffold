@@ -60857,6 +60857,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60993,8 +61003,16 @@ var render = function() {
             ? _c("li", { staticClass: "nav-item" }, [_vm._m(11)])
             : _vm._e(),
           _vm._v(" "),
-          _vm.user && _vm.user.hasRole["admin"]
+          _vm.user && _vm.user.hasRole["dealer"]
             ? _c("li", { staticClass: "nav-item" }, [_vm._m(12)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["dealer"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(13)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.user && _vm.user.hasRole["admin"]
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(14)])
             : _vm._e(),
           _vm._v(" "),
           _vm.user &&
@@ -61004,11 +61022,11 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.user && _vm.user.hasPermission["read-users"]
-            ? _c("li", { staticClass: "nav-item" }, [_vm._m(13)])
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(15)])
             : _vm._e(),
           _vm._v(" "),
           _vm.user && _vm.user.hasPermission["read-roles"]
-            ? _c("li", { staticClass: "nav-item" }, [_vm._m(14)])
+            ? _c("li", { staticClass: "nav-item" }, [_vm._m(16)])
             : _vm._e()
         ])
       ]),
@@ -61081,7 +61099,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("a", { staticClass: "nav-link", attrs: { href: "/calendar" } }, [
       _c("i", { staticClass: "nav-icon fas fa-calendar-alt mr-2" }),
-      _vm._v("Calendario\n                ")
+      _vm._v("Horario\n                ")
     ])
   },
   function() {
@@ -61128,6 +61146,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/dealers" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-motorcycle mr-2" }),
+      _vm._v("Repartidores\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("a", { staticClass: "nav-link", attrs: { href: "/stores" } }, [
       _c("i", { staticClass: "nav-icon fas fa-store mr-2" }),
       _vm._v("Tiendas\n                ")
@@ -61137,9 +61164,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "nav-link", attrs: { href: "/dealers" } }, [
-      _c("i", { staticClass: "nav-icon fas fa-motorcycle mr-2" }),
-      _vm._v("Repartidores\n                ")
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/calendar" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-calendar-alt mr-2" }),
+      _vm._v("Horario\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/rules" } }, [
+      _c("i", { staticClass: "nav-icon fas fa-book mr-2" }),
+      _vm._v("Reglas\n                ")
     ])
   },
   function() {
@@ -82948,6 +82984,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -82998,10 +83036,24 @@ var render = function() {
             _c("div", { staticClass: "card shadow-sm" }, [
               _c("div", { staticClass: "row no-gutters" }, [
                 _c("div", { staticClass: "col-4" }, [
-                  _c("img", {
-                    staticClass: "card-img",
-                    attrs: { src: store.avatar_url, alt: store.name }
-                  })
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.create(store)
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "card-img",
+                        attrs: { src: store.avatar_url, alt: store.name }
+                      })
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-8" }, [
@@ -83010,20 +83062,9 @@ var render = function() {
                       _c("strong", [_vm._v(_vm._s(store.name))])
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-secondary btn-sm float-right",
-                        attrs: { href: "" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.create(store)
-                          }
-                        }
-                      },
-                      [_vm._v("\n                  Pedir\n                ")]
-                    )
+                    _c("p", { staticClass: "card-text text-muted mb-2" }, [
+                      _vm._v(_vm._s(store.description))
+                    ])
                   ])
                 ])
               ])

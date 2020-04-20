@@ -39,7 +39,7 @@
               </li>
               <li class="nav-item" v-if="user && user.hasRole['dealer']">
                   <a class="nav-link" href="/calendar">
-                      <i class="nav-icon fas fa-calendar-alt mr-2"></i>Calendario
+                      <i class="nav-icon fas fa-calendar-alt mr-2"></i>Horario
                   </a>
               </li>
               <li class="nav-item" v-if="user && user.hasRole['dealer']">
@@ -64,13 +64,23 @@
                   </a>
               </li>
               <li class="nav-item" v-if="user && user.hasRole['admin']">
+                  <a class="nav-link" href="/dealers">
+                      <i class="nav-icon fas fa-motorcycle mr-2"></i>Repartidores
+                  </a>
+              </li>
+              <li class="nav-item" v-if="user && user.hasRole['admin']">
                   <a class="nav-link" href="/stores">
                       <i class="nav-icon fas fa-store mr-2"></i>Tiendas
                   </a>
               </li>
-              <li class="nav-item" v-if="user && user.hasRole['admin']">
-                  <a class="nav-link" href="/dealers">
-                      <i class="nav-icon fas fa-motorcycle mr-2"></i>Repartidores
+              <li class="nav-item" v-if="user && user.hasRole['dealer']">
+                  <a class="nav-link" href="/calendar">
+                      <i class="nav-icon fas fa-calendar-alt mr-2"></i>Horario
+                  </a>
+              </li>
+              <li class="nav-item" v-if="user && user.hasRole['dealer']">
+                  <a class="nav-link" href="/rules">
+                      <i class="nav-icon fas fa-book mr-2"></i>Reglas
                   </a>
               </li>
               <li class="nav-item" v-if="user && user.hasRole['admin']">
