@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <tr class="table-info">
-                    <th scope="row">8:00am/10:00pm</th>
+                    <th scope="row">Coordinadoras 8:00am/10:00pm</th>
                     <td>Ashley Martinez 6271036390</td>
                     <td>Ashley Martinez</td>
                     <td>Aglae Olage 6271329888</td>
@@ -31,7 +31,7 @@
                     <td>Aglae Olage</td>
                 </tr>
                 <tr class="table-warning">
-                    <th scope="row">8:00am/1:00pm</th>
+                    <th scope="row">Mañana 8:00am/1:00pm</th>
                     <td><strong>DISPONIBLE</strong></td>
                     <td>Eduardo Torres 6271114573</td>
                     <td>Eduardo Torres</td>
@@ -41,7 +41,7 @@
                     <td>Eduardo Torres</td>
                 </tr>
                 <tr class="table-warning">
-                    <th scope="row">8:00am/1:00pm</th>
+                    <th scope="row"></th>
                     <td>Ivan Trujillo 6271217227</td>
                     <td>Ivan Trujillo</td>
                     <td>Ivan Trujillo</td>
@@ -51,7 +51,7 @@
                     <td></td>
                 </tr>
                 <tr class="table-warning">
-                    <th scope="row">8:00am/1:00pm</th>
+                    <th scope="row"></th>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -61,7 +61,7 @@
                     <td>Eduardo Mares</td>
                 </tr>
                 <tr class="table-danger">
-                    <th scope="row">12:00pm/5:00pm</th>
+                    <th scope="row">Medio día 12:00pm/5:00pm</th>
                     <td>Kevin Ramirez 6271192425</td>
                     <td>Kevin Ramirez</td>
                     <td>Kevin Ramirez</td>
@@ -71,7 +71,7 @@
                     <td>Carlos Cazares</td>
                 </tr>
                 <tr class="table-danger">
-                    <th scope="row">12:00pm/5:00pm</th>
+                    <th scope="row"></th>
                     <td>Eduardo Villanueva 6271104286</td>
                     <td>Eduardo Villanueva</td>
                     <td>Eduardo Villanueva</td>
@@ -81,7 +81,7 @@
                     <td>Kevin Ramirez</td>
                 </tr>
                 <tr class="table-success">
-                    <th scope="row">5:00pm/10:00pm</th>
+                    <th scope="row">Tarde 5:00pm/10:00pm</th>
                     <td>Eduardo Mares 6275172213</td>
                     <td>Eduardo Mares</td>
                     <td>Eduardo Mares</td>
@@ -91,7 +91,7 @@
                     <td>Luis Carlos</td>
                 </tr>
                 <tr class="table-success">
-                    <th scope="row">12:00pm/5:00pm</th>
+                    <th scope="row"></th>
                     <td>Luigi Castillo 6271031150</td>
                     <td>Luigi Castillo</td>
                     <td>Luigi Castillo</td>
