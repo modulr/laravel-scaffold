@@ -38,6 +38,16 @@
                   </a>
               </li>
               <li class="nav-item" v-if="user && user.hasRole['dealer']">
+                  <a class="nav-link" href="/calendar">
+                      <i class="nav-icon fas fa-calendar-alt mr-2"></i>Calendario
+                  </a>
+              </li>
+              <li class="nav-item" v-if="user && user.hasRole['dealer']">
+                  <a class="nav-link" href="/rules">
+                      <i class="nav-icon fas fa-book mr-2"></i>Reglas
+                  </a>
+              </li>
+              <li class="nav-item" v-if="user && user.hasRole['dealer']">
                   <a class="nav-link" href="/contract">
                       <i class="nav-icon fas fa-file-signature mr-2"></i>Contrato
                   </a>

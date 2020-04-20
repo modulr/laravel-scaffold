@@ -14,7 +14,7 @@
                 <div class="col-8">
                   <div class="card-body">
                     <h5 class="card-title text-dark mb-0"><strong>{{store.name}}</strong></h5>
-                    <p class="card-text text-muted mb-2">{{store.description}}</p>
+                    <!-- <p class="card-text text-muted mb-2">{{store.description}}</p> -->
                     <a class="btn btn-secondary btn-sm float-right" href="" @click.prevent="create(store)">
                       Pedir
                     </a>
