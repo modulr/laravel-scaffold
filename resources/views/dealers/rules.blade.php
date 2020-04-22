@@ -3,8 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center py-5">
-        <div class="col-10 col-md-8">
-            <h1>TRÁEME</h1>
+        <div class="col-12 col-md-8">
             <h2 class="mb-4">Reglas</h2>
             <ul class="list-unstyled">
                 <li class="mb-3"><strong>Reglas Generales</strong>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Helpers\Upload;
 use Avatar;
@@ -164,5 +165,13 @@ class DealerController extends Controller
         $user->save();
 
         return $user;
+    }
+
+    public function schedule()
+    {
+        $data = DB::table('schedule')->get();
+        //return $data;
+        return response()
+            ->view('dealers.schedule', ['data' => $data]);
     }
 }

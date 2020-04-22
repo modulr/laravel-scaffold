@@ -38,7 +38,7 @@
                   </a>
               </li>
               <li class="nav-item" v-if="user && user.hasRole['dealer']">
-                  <a class="nav-link" href="/calendar">
+                  <a class="nav-link" href="/schedule">
                       <i class="nav-icon fas fa-calendar-alt mr-2"></i>Horario
                   </a>
               </li>
@@ -74,7 +74,7 @@
                   </a>
               </li>
               <li class="nav-item" v-if="user && user.hasRole['dealer']">
-                  <a class="nav-link" href="/calendar">
+                  <a class="nav-link" href="/schedule">
                       <i class="nav-icon fas fa-calendar-alt mr-2"></i>Horario
                   </a>
               </li>

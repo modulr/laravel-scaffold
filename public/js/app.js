@@ -61097,7 +61097,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "nav-link", attrs: { href: "/calendar" } }, [
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/schedule" } }, [
       _c("i", { staticClass: "nav-icon fas fa-calendar-alt mr-2" }),
       _vm._v("Horario\n                ")
     ])
@@ -61164,7 +61164,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "nav-link", attrs: { href: "/calendar" } }, [
+    return _c("a", { staticClass: "nav-link", attrs: { href: "/schedule" } }, [
       _c("i", { staticClass: "nav-icon fas fa-calendar-alt mr-2" }),
       _vm._v("Horario\n                ")
     ])
@@ -72569,6 +72569,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72855,47 +72858,49 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body text-left" }, [
-                _c("div", { staticClass: "list-group list-group-flush" }, [
-                  _c("div", { staticClass: "list-group list-group-flush" }, [
-                    _c("h5", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "list-group-item list-group-item-action",
-                          attrs: { href: "https://traeme.app" }
-                        },
-                        [_vm._v("Parral, Chih.")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "list-group-item list-group-item-action",
-                          attrs: { href: "https://delicias.traeme.app" }
-                        },
-                        [_vm._v("Delicias, Chih.")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "list-group-item list-group-item-action disabled",
-                          attrs: { tabindex: "-1", "aria-disabled": "true" }
-                        },
-                        [
-                          _vm._v("Durango, Dgo. "),
-                          _c("small", { staticClass: "text-muted" }, [
-                            _vm._v(" - Próximamente")
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
+                _c("ul", { staticClass: "list-group list-group-flush" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "https://traeme.app" }
+                    },
+                    [
+                      _c("h5", { staticClass: "my-1" }, [
+                        _vm._v("Parral, Chih.")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "https://delicias.traeme.app" }
+                    },
+                    [
+                      _c("h5", { staticClass: "my-1" }, [
+                        _vm._v("Delicias, Chih.")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "list-group-item list-group-item-action disabled",
+                      attrs: { tabindex: "-1", "aria-disabled": "true" }
+                    },
+                    [
+                      _c("h5", { staticClass: "my-1" }, [
+                        _vm._v("Durango, Dgo. "),
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v(" - Próximamente")
+                        ])
+                      ])
+                    ]
+                  )
                 ])
               ])
             ])
@@ -72967,6 +72972,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -73354,45 +73363,49 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body text-left" }, [
-                _c("div", { staticClass: "list-group list-group-flush" }, [
-                  _c("h5", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "list-group-item list-group-item-action",
-                        attrs: { href: "https://traeme.app" }
-                      },
-                      [_vm._v("Parral, Chih.")]
-                    )
-                  ]),
+                _c("ul", { staticClass: "list-group list-group-flush" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "https://traeme.app" }
+                    },
+                    [
+                      _c("h5", { staticClass: "my-1" }, [
+                        _vm._v("Parral, Chih.")
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("h5", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "list-group-item list-group-item-action",
-                        attrs: { href: "https://delicias.traeme.app" }
-                      },
-                      [_vm._v("Delicias, Chih.")]
-                    )
-                  ]),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "https://delicias.traeme.app" }
+                    },
+                    [
+                      _c("h5", { staticClass: "my-1" }, [
+                        _vm._v("Delicias, Chih.")
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("h5", [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "list-group-item list-group-item-action disabled",
-                        attrs: { tabindex: "-1", "aria-disabled": "true" }
-                      },
-                      [
-                        _vm._v("Durango, Dgo "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "list-group-item list-group-item-action disabled",
+                      attrs: { tabindex: "-1", "aria-disabled": "true" }
+                    },
+                    [
+                      _c("h5", { staticClass: "my-1" }, [
+                        _vm._v("Durango, Dgo. "),
                         _c("small", { staticClass: "text-muted" }, [
                           _vm._v(" - Próximamente")
                         ])
-                      ]
-                    )
-                  ])
+                      ])
+                    ]
+                  )
                 ])
               ])
             ])

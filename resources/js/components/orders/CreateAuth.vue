@@ -13,13 +13,17 @@
               </button>
             </div>
             <div class="modal-body text-left">
-              <div class="list-group list-group-flush">
-                <!-- <h6><a class="list-group-item disabled" tabindex="-1" aria-disabled="true">Chihuahua</a></h6> -->
-                <h5><a href="https://traeme.app" class="list-group-item list-group-item-action">Parral, Chih.</a></h5>
-                <h5><a href="https://delicias.traeme.app" class="list-group-item list-group-item-action">Delicias, Chih.</a></h5>
-                <h5><a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Durango, Dgo <small class="text-muted"> - Próximamente</small></a></h5>
-                <!-- <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Juárez <small class="text-muted"> - Próximamente</small></a> -->
-              </div>
+              <ul class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="https://traeme.app" >
+                  <h5 class="my-1">Parral, Chih.</h5>
+                </a>
+                <a class="list-group-item list-group-item-action" href="https://delicias.traeme.app">
+                  <h5 class="my-1">Delicias, Chih.</h5>
+                </a>
+                <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">
+                  <h5 class="my-1">Durango, Dgo. <small class="text-muted"> - Próximamente</small></h5>
+                </a>
+              </ul>
             </div>
           </div>
         </div>
