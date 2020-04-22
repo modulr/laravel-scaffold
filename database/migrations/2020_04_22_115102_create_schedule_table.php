@@ -21,7 +21,7 @@ class CreateScheduleTable extends Migration
             $table->string('wednesday')->nullable();
             $table->string('thursday')->nullable();
             $table->string('friday')->nullable();
-            $table->string('daturday')->nullable();
+            $table->string('saturday')->nullable();
             $table->string('sunday')->nullable();
             $table->timestamps();
         });
