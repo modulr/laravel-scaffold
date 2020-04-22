@@ -15,6 +15,10 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
    .browserSync('traeme.test');
 
+    if (mix.inProduction()) {
+        mix.version();
+    }
+
 
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 mix.webpackConfig({

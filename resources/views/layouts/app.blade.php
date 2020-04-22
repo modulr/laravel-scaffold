@@ -34,7 +34,7 @@
     <!-- Scripts -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu7T6uxlvBXGalDdmU5pk8a8nKb5r8krE" async defer></script>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     <script>
       window.Laravel = {!! json_encode([
@@ -72,7 +72,7 @@
     <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="app header-fixed sidebar-fixed">
     <div id="app">
