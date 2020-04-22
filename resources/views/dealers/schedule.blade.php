@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center py-5">
-        <div class="col-12 col-md-10">
+        <div class="col-12">
             <h2 class="mb-3">Horario</h2>
             <table class="table table-bordered table-responsive">
             <thead class="thead-dark">
