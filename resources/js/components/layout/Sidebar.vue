@@ -73,12 +73,12 @@
                       <i class="nav-icon fas fa-store mr-2"></i>Tiendas
                   </a>
               </li>
-              <li class="nav-item" v-if="user && user.hasRole['dealer']">
+              <li class="nav-item" v-if="user && user.hasRole['admin']">
                   <a class="nav-link" href="/schedule">
                       <i class="nav-icon fas fa-calendar-alt mr-2"></i>Horario
                   </a>
               </li>
-              <li class="nav-item" v-if="user && user.hasRole['dealer']">
+              <li class="nav-item" v-if="user && user.hasRole['admin']">
                   <a class="nav-link" href="/rules">
                       <i class="nav-icon fas fa-book mr-2"></i>Reglas
                   </a>
