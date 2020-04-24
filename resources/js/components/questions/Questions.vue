@@ -62,7 +62,7 @@
         <img src="/img/results-text.png" class="img-fluid mt-1">
       </div>
       <div class="col-md-6 text-center">
-        <a href="https://www.i11online.com/library" target="_blank" class="btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-5">COMENZAR AHORA</a>
+        <a href="https://www.i11online.com/medeex" target="_blank" class="btn btn-primary rounded-0 btn-cut title px-4 py-2 mt-5">COMENZAR AHORA</a>
       </div>
     </div>
   </div>
