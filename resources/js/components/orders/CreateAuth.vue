@@ -20,8 +20,8 @@
                 <a class="list-group-item list-group-item-action" href="https://delicias.traeme.app">
                   <h5 class="my-1">Delicias, Chih.</h5>
                 </a>
-                <a class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">
-                  <h5 class="my-1">Durango, Dgo. <small class="text-muted"> - Próximamente</small></h5>
+                <a class="list-group-item list-group-item-action" href="https://durango.traeme.app">
+                  <h5 class="my-1">Durango, Dgo.</h5>
                 </a>
               </ul>
             </div>
