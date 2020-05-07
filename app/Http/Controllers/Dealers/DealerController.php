@@ -170,8 +170,14 @@ class DealerController extends Controller
     public function schedule()
     {
         $data = DB::table('schedule')->get();
-        //return $data;
         return response()
             ->view('dealers.schedule', ['data' => $data]);
+    }
+
+    public function rules()
+    {
+        $data = DB::table('configs')->first();
+        return response()
+            ->view('dealers.rules', ['data' => $data]);
     }
 }

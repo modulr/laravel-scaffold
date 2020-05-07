@@ -2,7 +2,8 @@
 Route::group(['namespace' => 'Dealers'], function() {
     Route::middleware('auth')->group(function () {
         Route::view('/contract', 'dealers.contract')->middleware('permission:read-dealers');
-        Route::view('/rules', 'dealers.rules')->middleware('permission:read-dealers');
+        //Route::view('/rules', 'dealers.rules')->middleware('permission:read-dealers');
+        Route::get('/rules', 'DealerController@rules')->middleware('permission:read-dealers');
         //Route::view('/schedule', 'dealers.schedule')->middleware('permission:read-dealers');
         Route::get('/schedule', 'DealerController@schedule')->middleware('permission:read-dealers');
 
