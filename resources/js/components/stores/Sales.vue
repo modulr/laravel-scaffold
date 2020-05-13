@@ -5,7 +5,7 @@
     </div>
     <div class="col-10 col-lg-8">
       <div class="row justify-content-center">
-        <div class="col-12 col-md-4 px-3" v-for="store in stores">
+        <div class="col-12 col-md-4 px-3 mb-4" v-for="store in stores">
           <!-- <a href="#modalPromo" data-toggle="modal" data-target="#modalPromo"> -->
           <a href="#" @click.prevent="create(store)">
             <img :src="store.banner_url" class="rounded img-fluid" :alt="store.name">

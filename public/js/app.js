@@ -52038,7 +52038,7 @@ var render = function() {
         "div",
         { staticClass: "row justify-content-center" },
         _vm._l(_vm.stores, function(store) {
-          return _c("div", { staticClass: "col-12 col-md-4 px-3" }, [
+          return _c("div", { staticClass: "col-12 col-md-4 px-3 mb-4" }, [
             _c(
               "a",
               {
