@@ -4128,7 +4128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               var options = {
                 body: notification.message.body,
                 icon: '/icon/android-icon-192x192.png',
-                badge: '/icon/android-icon-96x196.png'
+                badge: '/icon/android-icon-96x96.png'
                 //vibrate: [100, 50, 100],
                 //image: notification.message.userAvatarUrl
               };
