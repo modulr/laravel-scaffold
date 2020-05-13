@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 //use Illuminate\Notifications\Messages\MailMessage;
-//use Illuminate\Notifications\Messages\BroadcastMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
@@ -35,7 +35,7 @@ class TakeOrder extends Notification
     public function via($notifiable)
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
-        return ['database', TelegramChannel::class];
+        return ['database', 'broadcast', TelegramChannel::class];
     }
 
     /**
@@ -71,17 +71,17 @@ class TakeOrder extends Notification
      * @param  mixed  $notifiable
      * @return BroadcastMessage
      */
-    // public function toBroadcast($notifiable)
-    // {
-    //     return new BroadcastMessage([
-    //         message => [
-                //     'title' => 'Pedido nuevo '.$order->order,
-                //     'url' => '/orders/availables',
-                //     'userName' => $order->client->name,
-                //     'userAvatarUrl' => $order->client->avatar_url,
-                // ];
-    //     ]);
-    // }
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message' => [
+                    'title' => '*¡Tu mandado fue tomado!* '.$this->order->order,
+                    'url' => '/orders',
+                    'userName' => $this->order->client->name,
+                    'userAvatarUrl' => $this->order->client->avatar_url
+                ]
+        ]);
+    }
 
     public function toTelegram($notifiable)
     {

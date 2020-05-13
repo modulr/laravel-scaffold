@@ -114,6 +114,10 @@ export default {
   },
   mounted () {
     this.addMinimizedClass()
+    Echo.private('App.User.' + this.user.id)
+      .notification((notification) => {
+          console.log(notification);
+      });
   },
   methods: {
     toogleStorage () {
