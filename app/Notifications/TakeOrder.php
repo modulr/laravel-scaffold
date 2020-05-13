@@ -35,7 +35,7 @@ class TakeOrder extends Notification
     public function via($notifiable)
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
-        return ['database', 'broadcast', TelegramChannel::class];
+        return ['broadcast'];
     }
 
     /**
@@ -75,7 +75,8 @@ class TakeOrder extends Notification
     {
         return new BroadcastMessage([
             'message' => [
-                    'title' => '¡Tu mandado fue tomado! '.$this->order->order,
+                    'title' => '¡Tu mandado fue tomado!',
+                    'body' => $this->order->order,
                     'url' => '/orders',
                     'userName' => $this->order->client->name,
                     'userAvatarUrl' => $this->order->client->avatar_url
