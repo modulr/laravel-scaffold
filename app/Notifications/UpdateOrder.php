@@ -35,7 +35,7 @@ class UpdateOrder extends Notification
     public function via($notifiable)
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
-        return ['database', TelegramChannel::class];
+        return [TelegramChannel::class];
     }
 
     /**
