@@ -35,7 +35,12 @@ class TakeOrder extends Notification
     public function via($notifiable)
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
-        return ['broadcast'];
+        if ($this->order->client_id == $this->order->created_by) {
+            return ['broadcast', TelegramChannel::class];
+        } else {
+            return [TelegramChannel::class];
+        }
+        
     }
 
     /**

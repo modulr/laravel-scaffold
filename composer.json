@@ -10,7 +10,6 @@
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.4",
         "laravel-notification-channels/telegram": "^0.0.5",
-        "laravel-notification-channels/webpush": "^5.0",
         "laravel/framework": "5.7.*",
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
