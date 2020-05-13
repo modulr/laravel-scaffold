@@ -80,7 +80,7 @@ class TakeOrder extends Notification
     {
         return new BroadcastMessage([
             'message' => [
-                    'title' => '¡Tu mandado fue tomado!',
+                    'title' => '🛵 ¡Tu mandado esta en camino!',
                     'body' => $this->order->order,
                     'url' => '/orders',
                     'userName' => $this->order->client->name,
