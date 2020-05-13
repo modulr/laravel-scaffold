@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use NotificationChannels\WebPush\HasPushSubscriptions;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +16,6 @@ use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     use Notifiable;
-    use HasPushSubscriptions;
     use SoftDeletes;
     use HasRoles;
 

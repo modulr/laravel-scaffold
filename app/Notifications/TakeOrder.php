@@ -9,8 +9,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
-use NotificationChannels\WebPush\WebPushMessage;
-use NotificationChannels\WebPush\WebPushChannel;
 
 class TakeOrder extends Notification
 {
@@ -37,7 +35,7 @@ class TakeOrder extends Notification
     public function via($notifiable)
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
-        return ['database', 'broadcast', TelegramChannel::class, WebPushChannel::class];
+        return ['database', 'broadcast', TelegramChannel::class];
     }
 
     /**
@@ -92,22 +90,4 @@ class TakeOrder extends Notification
             ->content("🖐 *¡Mandado Tomado!* \n _Mandado:_ ".$this->order->order." \n _Dirección:_ ".$this->order->address." \n _Envio:_ $".$this->order->delivery_costs." \n _Cliente:_ ".$this->order->client->name.", _Tel:_ ".$this->order->client->cellphone." \n _Repartidor:_ ".$this->order->dealer->name);
     }
 
-    public function toWebPush($notifiable, $notification)
-    {
-        return (new WebPushMessage)
-            ->title('Approved!')
-            ->icon('/approved-icon.png')
-            ->body('Your account was approved!')
-            ->action('View account', 'view_account')
-            ->options(['TTL' => 1000]);
-            // ->data(['id' => $notification->id])
-            // ->badge()
-            // ->dir()
-            // ->image()
-            // ->lang()
-            // ->renotify()
-            // ->requireInteraction()
-            // ->tag()
-            // ->vibrate()
-    }
 }
