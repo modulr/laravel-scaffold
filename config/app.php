@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         NotificationChannels\Telegram\TelegramServiceProvider::class,
+        NotificationChannels\WebPush\WebPushServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -356,6 +356,8 @@ class OrderController extends Controller
           $order->dealer_id = Auth::id();
           //$order->save();
 
+          //Auth::user()->updatePushSubscription($endpoint, $key, $token, $contentEncoding);
+
           Auth::user()->notify(new TakeOrder($order));
 
           return $order;
