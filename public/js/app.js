@@ -4019,7 +4019,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       navigator.serviceWorker.ready.then(function (registration) {
         var options = { userVisibleOnly: true };
         var vapidPublicKey = "BLEqLuSc4la5QQG0DIAwvbrHtg0cQFL-zXJvdiSyDitbbRfiDYq3ZKzbpIxhY89hYbtxpyyeCuk_vf35vx9lbb0";
-
         if (vapidPublicKey) {
           options.applicationServerKey = _this.urlBase64ToUint8Array(vapidPublicKey);
         }
