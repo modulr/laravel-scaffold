@@ -30,6 +30,7 @@ export default {
       })
     },
     updateSubscription (subscription) {
+      console.log('Received PushSubscription: ', JSON.stringify(subscription));
       const key = subscription.getKey('p256dh')
       const token = subscription.getKey('auth')
       const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0]
