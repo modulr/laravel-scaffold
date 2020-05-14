@@ -4039,12 +4039,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var key = subscription.getKey('p256dh');
       var token = subscription.getKey('auth');
       var contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
+      // const data = {
+      //   endpoint: subscription.endpoint,
+      //   publicKey: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
+      //   authToken: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null,
+      //   contentEncoding
+      // }
       var data = {
         endpoint: subscription.endpoint,
-        publicKey: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
-        authToken: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null,
+        publicKey: subscription.toJSON().keys.p256dh,
+        authToken: subscription.toJSON().keys.auth,
         contentEncoding: contentEncoding
       };
+      console.log(data);
+
       axios.post('/subscriptions', data).then(function (response) {
         console.log('Notifications subscribe successful');
       });

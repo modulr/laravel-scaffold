@@ -34,12 +34,20 @@ export default {
       const key = subscription.getKey('p256dh')
       const token = subscription.getKey('auth')
       const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0]
+      // const data = {
+      //   endpoint: subscription.endpoint,
+      //   publicKey: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
+      //   authToken: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null,
+      //   contentEncoding
+      // }
       const data = {
         endpoint: subscription.endpoint,
-        publicKey: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
-        authToken: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null,
+        publicKey: subscription.toJSON().keys.p256dh,
+        authToken: subscription.toJSON().keys.auth,
         contentEncoding
       }
+      console.log(data);
+      
       axios.post('/subscriptions', data)
         .then(response => {
           console.log('Notifications subscribe successful') 
