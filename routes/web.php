@@ -14,25 +14,28 @@
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/privacy-policy', function () {
-    return view('privacy-policy');
-});
-Route::get('/terms-of-use', function () {
-    return view('terms-of-use');
-});
-
-Auth::routes();
-Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
-
 Route::get('/home', function () {
     return redirect('/');
 });
 Route::get('/tiendas/{tag?}', function () {
     return view('stores');
 });
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+});
+Route::get('/terms-of-use', function () {
+    return view('terms-of-use');
+});
+//Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/dashboard', 'DashboardController@index');
+// Auth
+Auth::routes();
+// Auth Facebook
+Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+// Push Subscriptions
+Route::post('subscriptions', 'PushSubscriptionController@update');
+//Route::post('subscriptions/delete', 'PushSubscriptionController@destroy');
 
 require __DIR__ . '/profile/profile.php';
 require __DIR__ . '/users/users.php';

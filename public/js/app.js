@@ -3997,6 +3997,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/layout/Notifications.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.subscribe();
+  },
+
+  methods: {
+    subscribe: function subscribe() {
+      var _this = this;
+
+      navigator.serviceWorker.ready.then(function (registration) {
+        var options = { userVisibleOnly: true };
+        var vapidPublicKey = "BLEqLuSc4la5QQG0DIAwvbrHtg0cQFL-zXJvdiSyDitbbRfiDYq3ZKzbpIxhY89hYbtxpyyeCuk_vf35vx9lbb0";
+
+        if (vapidPublicKey) {
+          options.applicationServerKey = _this.urlBase64ToUint8Array(vapidPublicKey);
+        }
+        registration.pushManager.subscribe(options).then(function (subscription) {
+          _this.updateSubscription(subscription);
+        }).catch(function (error) {
+          if (Notification.permission === 'denied') {
+            console.log('Permission for Notifications was denied');
+          } else {
+            console.log('Unable to subscribe to push.', error);
+          }
+        });
+      });
+    },
+    updateSubscription: function updateSubscription(subscription) {
+      var key = subscription.getKey('p256dh');
+      var token = subscription.getKey('auth');
+      var contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
+      var data = {
+        endpoint: subscription.endpoint,
+        publicKey: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
+        authToken: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null,
+        contentEncoding: contentEncoding
+      };
+      axios.post('/subscriptions', data).then(function (response) {
+        console.log('Notifications subscribe successful');
+      });
+    },
+    urlBase64ToUint8Array: function urlBase64ToUint8Array(base64String) {
+      var padding = '='.repeat((4 - base64String.length % 4) % 4);
+      var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+
+      var rawData = window.atob(base64);
+      var outputArray = new Uint8Array(rawData.length);
+
+      for (var i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+      }
+      return outputArray;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/layout/Sidebar.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4118,26 +4186,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.addMinimizedClass();
-
-    if (this.user) {
-      Echo.private('App.User.' + this.user.id).notification(function (notification) {
-        console.log(notification);
-        Notification.requestPermission().then(function (result) {
-          if (result === "granted") {
-            navigator.serviceWorker.getRegistration().then(function (reg) {
-              var options = {
-                body: notification.message.body,
-                icon: '/icon/android-icon-192x192.png',
-                badge: '/icon/android-icon-96x96.png'
-                //vibrate: [100, 50, 100],
-                //image: notification.message.userAvatarUrl
-              };
-              reg.showNotification(notification.message.title, options);
-            });
-          }
-        });
-      });
-    }
   },
 
   methods: {
@@ -59636,6 +59684,27 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-24e935ee\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/layout/Notifications.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-24e935ee", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-24f099b6\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/profile/View.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -86947,6 +87016,7 @@ Vue.component('vue-step', __WEBPACK_IMPORTED_MODULE_6_vue_step__["a" /* default 
 // Layout
 Vue.component('sidebar', __webpack_require__("./resources/js/components/layout/Sidebar.vue"));
 Vue.component('config', __webpack_require__("./resources/js/components/layout/Config.vue"));
+Vue.component('notifications', __webpack_require__("./resources/js/components/layout/Notifications.vue"));
 
 // Dashboard
 Vue.component('users-count', __webpack_require__("./resources/js/components/dashboard/UsersCount.vue"));
@@ -87745,6 +87815,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-6a73e22c", Component.options)
   } else {
     hotAPI.reload("data-v-6a73e22c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/layout/Notifications.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/layout/Notifications.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-24e935ee\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/layout/Notifications.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/layout/Notifications.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-24e935ee", Component.options)
+  } else {
+    hotAPI.reload("data-v-24e935ee", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

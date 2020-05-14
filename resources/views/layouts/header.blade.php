@@ -12,6 +12,7 @@
     </button>
     <ul class="nav navbar-nav ml-auto mr-3">
         @auth
+        <li class="nav-item"><notifications></notifications></li>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <img class="img-avatar" src="{{Auth::user()->avatar_url}}">
