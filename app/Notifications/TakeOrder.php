@@ -38,7 +38,7 @@ class TakeOrder extends Notification
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
         if ($this->order->client_id == $this->order->created_by) {
-            return [WebPushChannel::class, TelegramChannel::class];
+            return ['broadcast', WebPushChannel::class, TelegramChannel::class];
         } else {
             return [TelegramChannel::class];
         }   

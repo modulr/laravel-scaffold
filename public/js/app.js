@@ -4034,7 +4034,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     updateSubscription: function updateSubscription(subscription) {
-      console.log('Received PushSubscription: ', JSON.stringify(subscription));
       var key = subscription.getKey('p256dh');
       var token = subscription.getKey('auth');
       var contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
