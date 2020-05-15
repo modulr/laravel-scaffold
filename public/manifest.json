@@ -6,7 +6,6 @@
   "display": "standalone",
   "start_url": "/",
   "orientation": "portrait",
-  "gcm_sender_id": "111928306488617781869",
   "prefer_related_applications": true,
   "related_applications": [
     {

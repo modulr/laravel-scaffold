@@ -10,9 +10,7 @@ self.addEventListener('push', function (e) {
         e.waitUntil(self.registration.showNotification(msg.title, {
             body: msg.body,
             icon: msg.icon,
-            badge: msg.badge,
-            options: msg.options,
-            actions: msg.actions
+            badge: msg.badge
         }));
     }
 });
