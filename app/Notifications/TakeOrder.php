@@ -38,7 +38,7 @@ class TakeOrder extends Notification
     {
         //return ['database', 'mail', 'broadcast', TelegramChannel::class];
         if ($this->order->client_id == $this->order->created_by) {
-            return ['broadcast', WebPushChannel::class, TelegramChannel::class];
+            return [WebPushChannel::class, TelegramChannel::class];
         } else {
             return [TelegramChannel::class];
         }   
@@ -77,18 +77,18 @@ class TakeOrder extends Notification
      * @param  mixed  $notifiable
      * @return BroadcastMessage
      */
-    // public function toBroadcast($notifiable)
-    // {
-    //     return new BroadcastMessage([
-    //         'message' => [
-    //                 'title' => '🛵 ¡Tu mandado esta en camino!',
-    //                 'body' => $this->order->order,
-    //                 'url' => '/orders',
-    //                 'userName' => $this->order->client->name,
-    //                 'userAvatarUrl' => $this->order->client->avatar_url
-    //             ]
-    //     ]);
-    // }
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message' => [
+                    'title' => '🛵 ¡Tu mandado esta en camino! 🛵',
+                    'body' => $this->order->order,
+                    'url' => '/orders',
+                    'userName' => $this->order->client->name,
+                    'userAvatarUrl' => $this->order->client->avatar_url
+                ]
+        ]);
+    }
 
     public function toTelegram($notifiable)
     {

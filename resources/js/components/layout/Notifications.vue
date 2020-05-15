@@ -5,7 +5,7 @@
 <script>
 export default {
   mounted () {
-    this.subscribe()    
+    this.subscribe()
   },
   methods: {
     subscribe () {

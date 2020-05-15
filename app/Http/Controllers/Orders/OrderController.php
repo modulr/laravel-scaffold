@@ -354,7 +354,7 @@ class OrderController extends Controller
         if ($order->status_id == 1) {
           $order->status_id = 2;
           $order->dealer_id = Auth::id();
-          $order->save();
+          //$order->save();
 
           $order->client->notify(new TakeOrder($order));
           //Auth::user()->notify(new TakeOrder($order));
