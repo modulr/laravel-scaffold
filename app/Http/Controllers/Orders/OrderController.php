@@ -359,25 +359,34 @@ class OrderController extends Controller
             $order->dealer_id = Auth::id();
             //$order->save();
 
+            $notification = DB::table('push_subscriptions')->where('subscribable_id', Auth::user()->id)->first();
 
             // array of notifications
             $notifications = [
                 [
                     'subscription' => Subscription::create([
-                        'endpoint' => 'https://fcm.googleapis.com/fcm/send/cQq4MrT2TbI:APA91bF-p6OwdpJa8YhBL0ETEGSTopvuKr_-BURcy4kB2hvnGRXcDoHNq1ruLtZ7-ejpo_XK6bv9DQsWiKkJ48SdUH-zMoSd9LfxzWZmo2BrBiML5pczBTr6aB_IFj08gu2K2dEZatgX',
-                        'publicKey' => 'BAe2G2PII5QHRtqzwz7hEL1NlSO8sPTvmoHI14h81jEF1+I4wyfUyh3Pk2xvknMgsOu7HJTtZhUZvA9lQNBR7cU=',
-                        'authToken' => 'a9b1DjoZWSpU3E6FF4vF6g==',
+                        'endpoint' => $notification->endpoint,
+                        'publicKey' => $notification->public_key,
+                        'authToken' => $notification->auth_token,
                     ]),
                     'payload' => 'hello !',
                 ],
-                [
-                    'subscription' => Subscription::create([
-                        'endpoint' => 'https://updates.push.services.mozilla.com/wpush/v2/gAAAAABevt_v8iqUsFldVBVHyMpTSFREU-gY0SvLB0vNnBx9pJ14cSsALzYriTrFM4AhMZvtR3PBYxwZi2ukzB-tWna1LRIkOPT0Ic-IwR2oBLjKc4lRTeH6GxBa289QGPBWVIWPmWumRS6tnLx2wIybwcQVkrk3aG7A9qaK82moq4hYnD7fhUA',
-                        'publicKey' => 'BFrc64WahtzaFbgwPUJ2OjcyYKm1x8Qyv4pDsFilNVcJhTnXgFwtyC/LV6IZn/DVRFr4d61rns4Fkv6ygK5qEcA=',
-                        'authToken' => 'qivXMEj0sSXAeb3Lg01azQ==',
-                    ]),
-                    'payload' => 'hello !',
-                ]
+                // [
+                //     'subscription' => Subscription::create([
+                //         'endpoint' => 'https://fcm.googleapis.com/fcm/send/cQq4MrT2TbI:APA91bF-p6OwdpJa8YhBL0ETEGSTopvuKr_-BURcy4kB2hvnGRXcDoHNq1ruLtZ7-ejpo_XK6bv9DQsWiKkJ48SdUH-zMoSd9LfxzWZmo2BrBiML5pczBTr6aB_IFj08gu2K2dEZatgX',
+                //         'publicKey' => 'BAe2G2PII5QHRtqzwz7hEL1NlSO8sPTvmoHI14h81jEF1+I4wyfUyh3Pk2xvknMgsOu7HJTtZhUZvA9lQNBR7cU=',
+                //         'authToken' => 'a9b1DjoZWSpU3E6FF4vF6g==',
+                //     ]),
+                //     'payload' => 'hello !',
+                // ],
+                // [
+                //     'subscription' => Subscription::create([
+                //         'endpoint' => 'https://updates.push.services.mozilla.com/wpush/v2/gAAAAABevt_v8iqUsFldVBVHyMpTSFREU-gY0SvLB0vNnBx9pJ14cSsALzYriTrFM4AhMZvtR3PBYxwZi2ukzB-tWna1LRIkOPT0Ic-IwR2oBLjKc4lRTeH6GxBa289QGPBWVIWPmWumRS6tnLx2wIybwcQVkrk3aG7A9qaK82moq4hYnD7fhUA',
+                //         'publicKey' => 'BFrc64WahtzaFbgwPUJ2OjcyYKm1x8Qyv4pDsFilNVcJhTnXgFwtyC/LV6IZn/DVRFr4d61rns4Fkv6ygK5qEcA=',
+                //         'authToken' => 'qivXMEj0sSXAeb3Lg01azQ==',
+                //     ]),
+                //     'payload' => 'hello !',
+                // ]
             ];
 
             $webPush = new WebPush();
