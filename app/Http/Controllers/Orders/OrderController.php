@@ -21,6 +21,9 @@ use App\Notifications\UntakeOrder;
 use App\Notifications\FinalizeOrder;
 use App\Notifications\CancelOrder;
 
+use Minishlink\WebPush\WebPush;
+use Minishlink\WebPush\Subscription;
+
 class OrderController extends Controller
 {
     public function filters (Request $request)
@@ -352,16 +355,71 @@ class OrderController extends Controller
         $order = Order::find($orderId);
 
         if ($order->status_id == 1) {
-          $order->status_id = 2;
-          $order->dealer_id = Auth::id();
-          //$order->save();
+            $order->status_id = 2;
+            $order->dealer_id = Auth::id();
+            //$order->save();
 
-          $order->client->notify(new TakeOrder($order));
-          //Auth::user()->notify(new TakeOrder($order));
 
-          return $order;
+            // array of notifications
+            $notifications = [
+                [
+                    'subscription' => Subscription::create([
+                        'endpoint' => 'https://fcm.googleapis.com/fcm/send/cQq4MrT2TbI:APA91bF-p6OwdpJa8YhBL0ETEGSTopvuKr_-BURcy4kB2hvnGRXcDoHNq1ruLtZ7-ejpo_XK6bv9DQsWiKkJ48SdUH-zMoSd9LfxzWZmo2BrBiML5pczBTr6aB_IFj08gu2K2dEZatgX',
+                        'publicKey' => 'BAe2G2PII5QHRtqzwz7hEL1NlSO8sPTvmoHI14h81jEF1+I4wyfUyh3Pk2xvknMgsOu7HJTtZhUZvA9lQNBR7cU=',
+                        'authToken' => 'a9b1DjoZWSpU3E6FF4vF6g==',
+                    ]),
+                    'payload' => 'hello !',
+                ],
+                [
+                    'subscription' => Subscription::create([
+                        'endpoint' => 'https://updates.push.services.mozilla.com/wpush/v2/gAAAAABevt_v8iqUsFldVBVHyMpTSFREU-gY0SvLB0vNnBx9pJ14cSsALzYriTrFM4AhMZvtR3PBYxwZi2ukzB-tWna1LRIkOPT0Ic-IwR2oBLjKc4lRTeH6GxBa289QGPBWVIWPmWumRS6tnLx2wIybwcQVkrk3aG7A9qaK82moq4hYnD7fhUA',
+                        'publicKey' => 'BFrc64WahtzaFbgwPUJ2OjcyYKm1x8Qyv4pDsFilNVcJhTnXgFwtyC/LV6IZn/DVRFr4d61rns4Fkv6ygK5qEcA=',
+                        'authToken' => 'qivXMEj0sSXAeb3Lg01azQ==',
+                    ]),
+                    'payload' => 'hello !',
+                ]
+            ];
+
+            $webPush = new WebPush();
+
+            // send multiple notifications with payload
+            foreach ($notifications as $notification) {
+                $webPush->sendNotification(
+                    $notification['subscription'],
+                    $notification['payload'] // optional (defaults null)
+                );
+            }
+
+            /**
+             * Check sent results
+             * @var MessageSentReport $report
+             */
+            foreach ($webPush->flush() as $report) {
+                $endpoint = $report->getRequest()->getUri()->__toString();
+
+                if ($report->isSuccess()) {
+                    info( "[v] Message sent successfully for subscription {$endpoint}.");
+                } else {
+                    info( "[x] Message failed to sent for subscription {$endpoint}: {$report->getReason()}");
+                }
+            }
+
+            /**
+             * send one notification and flush directly
+             * @var \Generator<MessageSentReport> $sent
+             */
+            $sent = $webPush->sendNotification(
+                $notifications[0]['subscription'],
+                $notifications[0]['payload'], // optional (defaults null)
+                true // optional (defaults false)
+            );
+
+            //$order->client->notify(new TakeOrder($order));
+            Auth::user()->notify(new TakeOrder($order));
+          
+            return $order;
         } else {
-          return response()->json(['errors' => ['taken'=> ['The order is already taken']]], 422);
+            return response()->json(['errors' => ['taken'=> ['The order is already taken']]], 422);
         }
     }
 

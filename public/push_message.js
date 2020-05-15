@@ -4,7 +4,6 @@ self.addEventListener('push', function (e) {
         //notifications aren't supported or permission not granted!
         return;
     }
-    console.log(e);
     if (e.data) {
         var msg = e.data.json();
         e.waitUntil(self.registration.showNotification(msg.title, {

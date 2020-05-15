@@ -103,10 +103,10 @@ class TakeOrder extends Notification
             ->title('🛵 ¡Tu mandado esta en camino!')
             ->icon('/icon/android-icon-192x192.png')
             ->badge('/icon/android-icon-96x96.png')
-            ->body($this->order->order);
+            ->body($this->order->order)
+            ->options(['TTL' => 1000])
+            ->data(['id' => $notification->id]);
             //->action('View account', 'view_account')
-            //->options(['TTL' => 1000]);
-            // ->data(['id' => $notification->id])
             // ->dir()
             // ->image()
             // ->lang()
