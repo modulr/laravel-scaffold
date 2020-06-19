@@ -18,6 +18,7 @@
           </div>
         </div>
         <div class="col-12 mt-3 py-1 scrollmenu invisible-scrollbar">
+          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Belleza')">Belleza</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Comida')">Comida</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Postres')">Postres</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Recibos')">Recibos</a>
@@ -25,7 +26,6 @@
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Licores')">Licores</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Paquetes')">Paquetes</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Farmacia')">Farmacia</a>
-          <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Regalos')">Regalos</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Otro')">Otro</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Tacos')">Tacos</a>
           <a href="#" class="btn btn-outline-secondary py-0 btn-pill" @click.prevent="filterByCategory('Hamburguesas')">Hamburguesas</a>

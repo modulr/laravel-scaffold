@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="row justify-content-center mb-3">
-    <div class="col-10 pb-3 text-center mt-5 mb-4">
+    <!-- <div class="col-10 pb-3 text-center mt-5 mb-4">
       <h2 class="font-weight-bold">Promociones</h2>
-    </div>
+    </div> -->
     <div class="col-10 col-lg-8">
       <div class="row justify-content-center">
         <div class="col-12 col-md-4 px-3 mb-4" v-for="store in stores">

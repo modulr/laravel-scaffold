@@ -24,11 +24,14 @@
     </div>
 
     <div class="row justify-content-center mt-5">
-        <stores-categories></stores-categories>
+        <div class="col-10 pb-3 text-center">
+            <h1 class="font-weight-bold mt-3 mb-4">Lo que quieras cuando quieras</h1>
+        </div>
         <stores-sales></stores-sales>
-        <!-- <stores-random></stores-random> -->
         <stores-level1 class="mb-2"></stores-level1>
-        <h4 class="mt-5"><a href="/tiendas">Todos los lugares  <i class="ml-2 fas fa-chevron-right"></i></a></h4>
+        <stores-categories></stores-categories>
+        <!-- <stores-random></stores-random> -->
+        <h4 class="mt-5"><a href="/tiendas">Ver más <i class="ml-2 fas fa-chevron-right"></i></a></h4>
     </div>
 
     <div class="row justify-content-center bg-gradient mt-5">

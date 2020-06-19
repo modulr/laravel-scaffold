@@ -39,8 +39,11 @@
         </li>
         @else
         <li class="nav-item">
-            <a class="btn btn-outline-primary btn-sm" href="/login" role="button">
+            <!-- <a class="btn btn-outline-primary btn-sm" href="/login" role="button">
                 Entrar
+            </a> -->
+            <a class="/login" href="/login">
+                <i class="far fa-user fa-lg"></i>
             </a>
         </li>
         @endauth
