@@ -63,6 +63,7 @@ export default {
       if (!this.submiting) {
         this.submiting = true
         this.user.email = this.email
+        this.user.cellphone = this.cellphone
         axios.post(`/api/dealers/store`, this.user)
         .then(response => {
           this.$toasted.global.error('Repartidor creado!')
@@ -90,7 +91,15 @@ export default {
       .replace(/^-+/, '') // Trim - from start of text
       .replace(/-+$/, '') // Trim - from end of text
       .concat('@traeme.app')
-    }
+    },
+    cellphone: function () {
+      return this.user.cellphone.toString().toLowerCase()
+      .replace(/\s+/g, '') // Replace spaces with -
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/^521/g, '') // Replace & with 'and'
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
+    },
   }
 }
 </script>

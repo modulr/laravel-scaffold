@@ -4,7 +4,7 @@
         <div class="row justify-content-center categories">
           <div class="col-6 col-md-3 px-2 text-center">
             <a href="/tiendas/Belleza" class="figure shadow rounded text-center p-3 my-2">
-              <img src="/img/categories/regalos.png" class="figure-img img-fluid rounded mb-2" alt="Belleza">
+              <img src="/img/categories/belleza.png" class="figure-img img-fluid rounded mb-2" alt="Belleza">
               <figcaption class="font-weight-bold text-dark">Belleza</figcaption>
             </a>
           </div>
@@ -18,18 +18,6 @@
             <a href="/tiendas/Farmacia" class="figure shadow rounded text-center p-3 my-2">
               <img src="/img/categories/farmacia.png" class="figure-img img-fluid rounded mb-2" alt="Farmacia">
               <figcaption class="font-weight-bold text-dark">Farmacia</figcaption>
-            </a>
-          </div>
-          <div class="col-6 col-md-3 px-2 text-center">
-            <a href="/tiendas/Comida" class="figure shadow rounded text-center p-3 my-2">
-              <img src="/img/categories/comida.png" class="figure-img img-fluid rounded mb-2" alt="Comida">
-              <figcaption class="font-weight-bold text-dark">Comida</figcaption>
-            </a>
-          </div>
-          <div class="col-6 col-md-3 px-2 text-center">
-            <a href="/tiendas/Postres" class="figure shadow rounded text-center p-3 my-2">
-              <img src="/img/categories/postres.png" class="figure-img img-fluid rounded mb-2" alt="Postres">
-              <figcaption class="font-weight-bold text-dark">Postres</figcaption>
             </a>
           </div>
           <div class="col-6 col-md-3 px-2 text-center">
@@ -48,6 +36,18 @@
             <a href="/tiendas/Paquetes" class="figure shadow rounded text-center p-3 my-2">
               <img src="/img/categories/paquetes.png" class="figure-img img-fluid rounded mb-2" alt="Paquetes">
               <figcaption class="font-weight-bold text-dark">Paquetes</figcaption>
+            </a>
+          </div>
+          <div class="col-6 col-md-3 px-2 text-center">
+            <a href="/tiendas/Comida" class="figure shadow rounded text-center p-3 my-2">
+              <img src="/img/categories/comida.png" class="figure-img img-fluid rounded mb-2" alt="Comida">
+              <figcaption class="font-weight-bold text-dark">Comida</figcaption>
+            </a>
+          </div>
+          <div class="col-6 col-md-3 px-2 text-center">
+            <a href="/tiendas/Postres" class="figure shadow rounded text-center p-3 my-2">
+              <img src="/img/categories/postres.png" class="figure-img img-fluid rounded mb-2" alt="Postres">
+              <figcaption class="font-weight-bold text-dark">Postres</figcaption>
             </a>
           </div>
             <!-- <a href="/tiendas" class="shadow rounded px-5 py-4 mx-2 my-3">

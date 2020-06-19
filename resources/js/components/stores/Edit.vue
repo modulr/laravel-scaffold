@@ -127,6 +127,7 @@ export default {
     return {
       user: {},
       categories: [
+        'Belleza',
         'Comida',
         'Postres',
         'Recibos',
@@ -134,7 +135,6 @@ export default {
         'Licores',
         'Paquetes',
         'Farmacia',
-        'Regalos',
         'Tacos',
         'Hamburguesas',
         'Pizza',
