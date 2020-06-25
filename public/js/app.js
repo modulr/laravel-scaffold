@@ -71268,8 +71268,6 @@ var render = function() {
           "div",
           { staticClass: "card-body px-0" },
           [
-            _c("div"),
-            _vm._v(" "),
             _vm._l(_vm.orders, function(item, index) {
               return _c("ul", { staticClass: "list-group mb-1" }, [
                 _c("li", { staticClass: "list-group-item" }, [
@@ -71448,104 +71446,107 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _vm._m(1, true),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-4" }, [
-                      _c("h5", [
-                        _vm._v(
-                          _vm._s(_vm._f("moment")(item.created_at, "MMM D"))
-                        )
-                      ])
-                    ]),
+                    _c("div", { staticClass: "col-3" }),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-8 text-right" }, [
-                      item.status_id == 1
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-outline-secondary btn-sm",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.cancelOrder(item, index)
-                                }
-                              }
-                            },
-                            [
-                              _vm.submiting
-                                ? _c("i", {
-                                    staticClass: "fas fa-spinner fa-spin"
-                                  })
-                                : _vm._e(),
-                              _vm._v(
-                                "\n                Cancelar\n              "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("h5", { staticClass: "float-left" }, [
+                        _vm._v(
+                          _vm._s(_vm._f("moment")(item.created_at, "D MMM"))
+                        )
+                      ]),
                       _vm._v(" "),
-                      item.status_id == 3
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-outline-info btn-sm",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.showCreateOrderModal(item)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                Pedir de nuevo\n              "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      item.status_id == 4
-                        ? _c("div", [
-                            _c(
+                      _c("div", { staticClass: "float-right" }, [
+                        item.status_id == 1
+                          ? _c(
                               "a",
                               {
-                                staticClass: "btn btn-outline-primary btn-sm",
-                                attrs: {
-                                  href: "#",
-                                  disabled: _vm.submitingOpen
-                                },
+                                staticClass: "btn btn-outline-secondary btn-sm",
+                                attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
-                                    _vm.openOrder(item, index)
+                                    _vm.cancelOrder(item, index)
                                   }
                                 }
                               },
                               [
-                                _vm.submitingOpen
+                                _vm.submiting
                                   ? _c("i", {
                                       staticClass: "fas fa-spinner fa-spin"
                                     })
                                   : _vm._e(),
                                 _vm._v(
-                                  "\n                  Abrir de nuevo\n                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "btn btn-secondary btn-sm disabled"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                  Cancelado\n                "
+                                  "\n                  Cancelar\n                "
                                 )
                               ]
                             )
-                          ])
-                        : _vm._e()
+                          : _vm._e(),
+                        _vm._v(" "),
+                        item.status_id == 3
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-outline-info btn-sm",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.showCreateOrderModal(item)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  Pedir de nuevo\n                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        item.status_id == 4
+                          ? _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-outline-primary btn-sm",
+                                  attrs: {
+                                    href: "#",
+                                    disabled: _vm.submitingOpen
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.openOrder(item, index)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm.submitingOpen
+                                    ? _c("i", {
+                                        staticClass: "fas fa-spinner fa-spin"
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(
+                                    "\n                    Abrir de nuevo\n                  "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-secondary btn-sm disabled"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                    Cancelado\n                  "
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e()
+                      ])
                     ])
                   ])
                 ])
