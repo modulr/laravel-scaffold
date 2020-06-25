@@ -127,7 +127,7 @@ export default {
           })
           .then((value) => {
             if (value) {
-              location.href = `/orders`
+              location.href = `/orders/${response.data.id}`
             }
           })
         })

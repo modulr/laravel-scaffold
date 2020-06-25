@@ -76,6 +76,7 @@ Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
 // Orders
 Vue.component('orders-index', require('./components/orders/Index.vue'));
+Vue.component('orders-order', require('./components/orders/Order.vue'));
 Vue.component('orders-all', require('./components/orders/All.vue'));
 Vue.component('orders-availables', require('./components/orders/Availables.vue'));
 Vue.component('orders-availables-count', require('./components/orders/AvailablesCount.vue'));

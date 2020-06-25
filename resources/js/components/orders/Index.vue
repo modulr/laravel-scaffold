@@ -4,9 +4,7 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mis mandados</h4>
         <div class="card-header-actions mr-1">
-          <a class="btn btn-primary btn-block mb-2" href="#" @click.prevent="showCreateOrderModal">
-            <i class="fa fa-plus mr-2"></i>Pedir
-          </a>
+          <a class="btn btn-primary btn-block mb-2" href="#" @click.prevent="showCreateOrderModal">Pedir</a>
         </div>
       </div>
       <div class="card-body px-0">
@@ -16,7 +14,7 @@
         <ul class="list-group mb-1" v-for="(item, index) in orders">
           <li class="list-group-item">
             <div class="row">
-              <div class="col-12">
+              <div class="col-12" @click="viewOrder(item)">
                 <small class="text-muted">
                   <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}}<span v-if="item.created_at != item.updated_at"> - {{item.updated_at | moment('LT')}}</span>
                   <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
@@ -24,14 +22,14 @@
                 <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" v-if="item.status_id!= 4"></vue-step>
                 <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
               </div>
-              <div class="col-12">
-                <div class="mb-2 text-muted">
+              <div class="col-12" @click="viewOrder(item)">
+                <p class="pre-line mb-2">{{item.order}}</p>
+                <p class="mb-3 text-muted">
                   <i class="icon-location-pin mr-1"></i>{{item.address}}
-                </div>
-                <p class="pre-line">{{item.order}}</p>
+                </p>
               </div>
               <div class="col-9">
-                <div v-if="item.status_id == 1">
+                <div v-if="item.status_id == 1" @click="viewOrder(item)">
                   <div class="media">
                     <div class="avatar float-left mr-2 text-muted">
                       <span class="fa-stack" style="font-size: 1.3em;">
@@ -51,7 +49,7 @@
                 </div>
                 <div v-else>
                   <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event" v-if="item.dealer_id"></users-view>
-                  <div v-else>
+                  <div v-else @click="viewOrder(item)">
                     <div class="media">
                       <div class="avatar float-left mr-2 text-muted">
                         <span class="fa-stack" style="font-size: 1.3em;">
@@ -69,40 +67,24 @@
                       </div>
                     </div>
                   </div>
-                  <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
                 </div>
               </div>
-              <div class="col-3 text-right">
+              <div class="col-3 text-right" @click="viewOrder(item)">
                 <h3 class="mt-2 mb-0">${{item.delivery_costs}}</h3>
               </div>
             </div>
-            <div class="row" >
+            <div class="row">
               <div class="col-12">
                 <hr>
               </div>
-              <div class="col-3">
-
+              <div class="col-6" @click="viewOrder(item)">
+                <h5>{{item.created_at | moment('D MMM')}}</h5>
               </div>
-              <div class="col-12">
-                <h5 class="float-left">{{item.created_at | moment('D MMM')}}</h5>
-                <div class="float-right">
-                  <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)" v-if="item.status_id == 1">
-                    <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-                    Cancelar
-                  </a>
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="showCreateOrderModal(item)" v-if="item.status_id == 3">
-                    Pedir de nuevo
-                  </a>
-                  <div v-if="item.status_id == 4">
-                    <a href="#" class="btn btn-outline-primary btn-sm" :disabled="submitingOpen" @click.prevent="openOrder(item, index)">
-                      <i class="fas fa-spinner fa-spin" v-if="submitingOpen"></i>
-                      Abrir de nuevo
-                    </a>
-                    <div class="btn btn-secondary btn-sm disabled">
-                      Cancelado
-                    </div>
-                  </div>
+              <div class="col-6 text-right">
+                <div class="text-danger mb-0" v-if="item.status_id == 4">
+                  Cancelado
                 </div>
+                <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
               </div>
             </div>
           </li>
@@ -143,7 +125,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="icon-location-pin"></i></span>
                 </div>
-                <input type="text" class="form-control" :class="{'is-invalid': errors.address}" v-model="newOrder.address" placeholder="Destino">
+                <input type="text" class="form-control" :class="{'is-invalid': errors.address}" v-model="newOrder.address" placeholder="Dirección">
                 <div class="invalid-feedback" v-if="errors.address">{{errors.address[0]}}</div>
               </div>
             </div>
@@ -169,10 +151,10 @@
             </div> -->
           </div>
           <div class="modal-footer">
-            <a class="btn btn-primary" href="#" :disabled="submitingCreate" @click.prevent="createOrder">
+            <a class="btn btn-block btn-primary" href="#" :disabled="submitingCreate" @click.prevent="createOrder">
               <i class="fas fa-spinner fa-spin" v-if="submitingCreate"></i>
               <i class="fas fa-check" v-else></i>
-              <span class="ml-1">Guardar</span>
+              <span class="ml-1">Pedir</span>
             </a>
           </div>
         </div>
@@ -201,24 +183,10 @@ export default {
       newOrder: {},
       errors: {},
       loading: true,
-      submiting: false,
-      submitingOpen: false,
       submitingCreate: false
     }
   },
-  mounted () {
-    //this.getOrders()
-    //this.getStatus()
-  },
   methods: {
-    // getOrders () {
-    //   this.loading = true
-    //   axios.get(`/api/orders/byClient/${this.user.id}`)
-    //   .then(response => {
-    //     this.orders = response.data
-    //     this.loading = false
-    //   })
-    // },
     loadOrders ($state) {
         this.loading = true
         var page = Number(this.pagination.current_page) + 1;
@@ -232,53 +200,8 @@ export default {
                 $state.complete();
         });
     },
-    // getStatus () {
-    //   axios.get(`/api/orders/status`)
-    //   .then(response => {
-    //     response.data.pop()
-    //     this.listStatus = response.data.map(function(i, index) {
-    //       return i.status
-    //     })
-    //   })
-    // },
-    cancelOrder (order, index) {
-      if (!this.submiting) {
-        this.submiting = true
-        swal({
-          title: "¿Estas seguro?",
-          text: "¿En verdad quieres cancelar el mandado?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
-            axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': 4})
-            .then(response => {
-              this.orders[index].status_id = response.data.status_id
-              this.orders[index].status = response.data.status
-              this.$toasted.global.error('¡Mandado cancelado!')
-              this.submiting = false
-            })
-          } else {
-            this.submiting = false
-          }
-        })
-      }
-    },
-    openOrder (order, index) {
-      if (!this.submitingOpen) {
-        this.submitingOpen = true
-        let status = 1
-        let message = '¡Mandado abierto!'
-        axios.put(`/api/orders/updateStatus/${order.id}`, {'statusId': status})
-        .then(response => {
-          this.orders[index].status_id = response.data.status_id
-          this.orders[index].status = response.data.status
-          this.$toasted.global.error(message)
-          this.submitingOpen = false
-        })
-      }
+    viewOrder (order) {
+      location.href = `/orders/${order.id}`
     },
     showCreateOrderModal (order) {
       this.errors = {}
