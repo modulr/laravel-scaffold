@@ -6405,8 +6405,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -73783,7 +73781,7 @@ var render = function() {
                         { staticClass: "col-12" },
                         [
                           _c("p", { staticClass: "text-muted" }, [
-                            _vm._v("Tiempo estimado de entrega")
+                            _vm._v("Tiempo de entrega")
                           ]),
                           _vm._v(" "),
                           _vm.order.status_id != 4
@@ -73845,15 +73843,15 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("li", { staticClass: "list-group-item mb-2" }, [
-                    _c("p", { staticClass: "text-muted" }, [_vm._v("Mandado")]),
+                    _c("p", { staticClass: "text-muted mb-0" }, [
+                      _vm._v("Mandado")
+                    ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "pre-line" }, [
                       _vm._v(_vm._s(_vm.order.order))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "list-group-item mb-2" }, [
-                    _c("p", { staticClass: "text-muted" }, [
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-muted mb-0" }, [
                       _vm._v("Dirección")
                     ]),
                     _vm._v(" "),
@@ -74032,7 +74030,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("dl", { staticClass: "row mb-0" }, [
                       _vm.order.status_id == 3
-                        ? _c("dd", { staticClass: "col-6" }, [
+                        ? _c("dd", { staticClass: "col-5" }, [
                             _vm._v("Calificar")
                           ])
                         : _vm._e(),
@@ -74040,7 +74038,7 @@ var render = function() {
                       _vm.order.status_id == 3
                         ? _c(
                             "dt",
-                            { staticClass: "col-6 text-right" },
+                            { staticClass: "col-7 text-right" },
                             [
                               _c("rate", {
                                 attrs: { length: 5 },
@@ -74062,21 +74060,19 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("dd", { staticClass: "col-6" }, [_vm._v("Fecha")]),
+                      _c("dd", { staticClass: "col-5" }, [_vm._v("Fecha")]),
                       _vm._v(" "),
-                      _c("dt", { staticClass: "col-6 text-right" }, [
+                      _c("dt", { staticClass: "col-7 text-right" }, [
                         _vm._v(
-                          _vm._s(
-                            _vm._f("moment")(_vm.order.created_at, "calendar")
-                          )
+                          _vm._s(_vm._f("moment")(_vm.order.created_at, "ll"))
                         )
                       ]),
                       _vm._v(" "),
-                      _c("dd", { staticClass: "col-6" }, [
+                      _c("dd", { staticClass: "col-5" }, [
                         _vm._v("Nº de pedido")
                       ]),
                       _vm._v(" "),
-                      _c("dt", { staticClass: "col-6 text-right" }, [
+                      _c("dt", { staticClass: "col-7 text-right" }, [
                         _vm._v(_vm._s(_vm.order.id))
                       ])
                     ])

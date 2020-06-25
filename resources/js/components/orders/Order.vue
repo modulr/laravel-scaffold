@@ -15,7 +15,7 @@
           <li class="list-group-item mb-2">
             <div class="row">
               <div class="col-12">
-                <p class="text-muted">Tiempo estimado de entrega</p>
+                <p class="text-muted">Tiempo de entrega</p>
                 <vue-step class="mb-0 pt-0" :now-step="order.status_id" :step-list="listStatus" style-type="style2" v-if="order.status_id!= 4"></vue-step>
                 <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
                 <small class="text-muted">
@@ -26,11 +26,9 @@
             </div>
           </li>
           <li class="list-group-item mb-2">
-            <p class="text-muted">Mandado</p>
+            <p class="text-muted mb-0">Mandado</p>
             <p class="pre-line">{{order.order}}</p>
-          </li>
-          <li class="list-group-item mb-2">
-            <p class="text-muted">Dirección</p>
+            <p class="text-muted mb-0">Dirección</p>
             <div class="mb-2">
               <i class="icon-location-pin mr-1"></i>{{order.address}}
             </div>
@@ -89,12 +87,12 @@
           <li class="list-group-item mb-2">
             <p class="text-muted">Más información</p>
             <dl class="row mb-0">
-              <dd class="col-6" v-if="order.status_id == 3">Calificar</dd>
-              <dt class="col-6 text-right" v-if="order.status_id == 3"><rate :length="5" v-model="order.score_client" @after-rate="scoreOrder(order)"/></dt>
-              <dd class="col-6">Fecha</dd>
-              <dt class="col-6 text-right">{{order.created_at | moment('calendar')}}</dt>
-              <dd class="col-6">Nº de pedido</dd>
-              <dt class="col-6 text-right">{{order.id}}</dt>
+              <dd class="col-5" v-if="order.status_id == 3">Calificar</dd>
+              <dt class="col-7 text-right" v-if="order.status_id == 3"><rate :length="5" v-model="order.score_client" @after-rate="scoreOrder(order)"/></dt>
+              <dd class="col-5">Fecha</dd>
+              <dt class="col-7 text-right">{{order.created_at | moment('ll')}}</dt>
+              <dd class="col-5">Nº de pedido</dd>
+              <dt class="col-7 text-right">{{order.id}}</dt>
             </dl>
           </li>
           <div class="row mb-3">
