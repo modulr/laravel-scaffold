@@ -15,7 +15,7 @@
               </div>
               <div class="col-12 text-center">
                 <h3 class="mb-0">{{user.name}}</h3>
-                <small class="text-muted">{{user.description}}</small>
+                <!-- <small class="text-muted">{{user.description}}</small> -->
                 <!-- <p class="mt-2 mb-1">
                   <a class="text-info" :href="`mailto:${user.email}`" target="_blank"><i class="far fa-envelope mr-1"></i></a>
                   {{user.email}}

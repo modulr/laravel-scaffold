@@ -26,8 +26,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta name="description" content="Lo que quieras cuando quieras ¡Nosotros te lo llevamos! Te llevamos cualquier cosa en minutos. Restaurantes, supermercado, medicamentos y mucho más. Tus tiendas favoritas están en Tráeme."/>
-    <meta name="keywords" content="traeme, mandados, domicilio, tiendas, restaurantes, supermercado, medicamentos, parral, delicias, chihuahua, durango"/>
+    <meta name="description" content="Lo que quieras cuando quieras ¡Nosotros te lo llevamos! Te llevamos cualquier cosa en minutos. Belleza, Articulos, Paquetes, Restaurantes, Supermercado, Medicamentos y mucho más. Tus tiendas favoritas están en Tráeme."/>
+    <meta name="keywords" content="traeme, mandados, domicilio, tiendas, restaurantes, supermercado, medicamentos, Hidalgo del Parral, Delicias, Juárez, Chihuahua, Durango"/>
     <meta name="author" content="Alfredo Barrón"/>
     <meta name="robots" content="index,follow"/>
 

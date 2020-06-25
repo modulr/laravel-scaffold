@@ -14,31 +14,47 @@
           <content-placeholders-text :lines="6"/>
         </content-placeholders> -->
         <div>
-          <ul class="list-group mb-1" v-for="(item, index) in orders">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-12">
-                  <p class="pre-line mb-1">{{item.order}}</p>
-                  <span class="text-muted">
-                    <i class="icon-location-pin mr-1"></i>{{item.address}}
-                  </span>
+
+        </div>
+        <ul class="list-group mb-1" v-for="(item, index) in orders">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-12">
+                <small class="text-muted">
+                  <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}}<span v-if="item.created_at != item.updated_at"> - {{item.updated_at | moment('LT')}}</span>
+                  <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
+                </small>
+                <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" v-if="item.status_id!= 4"></vue-step>
+                <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
+              </div>
+              <div class="col-12">
+                <div class="mb-2 text-muted">
+                  <i class="icon-location-pin mr-1"></i>{{item.address}}
                 </div>
-                <div class="col-12">
-                  <hr>
+                <p class="pre-line">{{item.order}}</p>
+              </div>
+              <div class="col-9">
+                <div v-if="item.status_id == 1">
+                  <div class="media">
+                    <div class="avatar float-left mr-2 text-muted">
+                      <span class="fa-stack" style="font-size: 1.3em;">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-user fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </div>
+                    <div class="media-body">
+                      <div class="text-body text-muted">
+                       <i class="fas fa-spinner fa-spin"></i> Buscando repartidor
+                      </div>
+                      <div class="small text-muted">
+                        20 minutos aproximadamente
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-12">
-                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" v-if="item.status_id!= 4"></vue-step>
-                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
-                  <small class="text-muted">
-                    <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} - {{item.updated_at | moment('LT')}}
-                    <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
-                  </small>
-                </div>
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col-8">
-                  <div v-if="item.status_id == 1">
+                <div v-else>
+                  <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event" v-if="item.dealer_id"></users-view>
+                  <div v-else>
                     <div class="media">
                       <div class="avatar float-left mr-2 text-muted">
                         <span class="fa-stack" style="font-size: 1.3em;">
@@ -48,66 +64,37 @@
                       </div>
                       <div class="media-body">
                         <div class="text-body text-muted">
-                          Buscando repartidor...
+                          Sin repartidor
                         </div>
                         <div class="small text-muted">
-                          30 minutos aproximadamente
+                          Repartidor
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div v-else>
-                    <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event" v-if="item.dealer_id"></users-view>
-                    <div v-else>
-                      <div class="media">
-                        <div class="avatar float-left mr-2 text-muted">
-                          <span class="fa-stack" style="font-size: 1.3em;">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-user fa-stack-1x fa-inverse"></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <div class="text-body text-muted">
-                            Sin repartidor
-                          </div>
-                          <div class="small text-muted">
-                            Repartidor
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
-                  </div>
-                </div>
-                <div class="col-4 text-right">
-                  <div>
-                    <small class="text-muted">
-                      Envio: <strong>${{item.delivery_costs}}</strong>
-                    </small>
-                  </div>
-                  <div>
-                    <small class="text-muted">
-                      Costo: <strong>${{item.order_cost}}</strong>
-                    </small>
-                  </div>
-                  <div>
-                    <span class="text-muted border-top">
-                      Total: <strong>${{item.delivery_costs + item.order_cost}}</strong>
-                    </span>
-                  </div>
+                  <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
                 </div>
               </div>
-              <div class="row" >
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col-12 text-right" v-if="item.status_id == 1">
-                  <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
-                    <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
-                    Cancelar
-                  </a>
-                </div>
-                <div class="col-12 text-right" v-if="item.status_id == 4">
+              <div class="col-3 text-right">
+                <h3 class="mt-2 mb-0">${{item.delivery_costs}}</h3>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-12">
+                <hr>
+              </div>
+              <div class="col-4">
+                <h5>{{item.created_at | moment('MMM D')}}</h5>
+              </div>
+              <div class="col-8 text-right">
+                <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)" v-if="item.status_id == 1">
+                  <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
+                  Cancelar
+                </a>
+                <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="showCreateOrderModal(item)" v-if="item.status_id == 3">
+                  Pedir de nuevo
+                </a>
+                <div v-if="item.status_id == 4">
                   <a href="#" class="btn btn-outline-primary btn-sm" :disabled="submitingOpen" @click.prevent="openOrder(item, index)">
                     <i class="fas fa-spinner fa-spin" v-if="submitingOpen"></i>
                     Abrir de nuevo
@@ -116,17 +103,12 @@
                     Cancelado
                   </div>
                 </div>
-                <div class="col-12 text-right" v-if="item.status_id == 3">
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="showCreateOrderModal(item)">
-                    Pedir de nuevo
-                  </a>
-                </div>
               </div>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </li>
+        </ul>
         <!-- Loading -->
-        <infinite-loading @infinite="loadOrders" ref="infiniteLoading">
+        <infinite-loading slot="append" @infinite="loadOrders" force-use-infinite-wrapper=".card-body">
           <span slot="no-results"></span>
           <span slot="no-more"></span>
         </infinite-loading>
@@ -210,7 +192,11 @@ export default {
       pagination: {
         current_page: 0
       },
-      listStatus:[],
+      listStatus:[
+        '',
+        '',
+        ''
+      ],
       userView: {},
       newOrder: {},
       errors: {},
@@ -222,7 +208,7 @@ export default {
   },
   mounted () {
     //this.getOrders()
-    this.getStatus()
+    //this.getStatus()
   },
   methods: {
     // getOrders () {
@@ -246,15 +232,15 @@ export default {
                 $state.complete();
         });
     },
-    getStatus () {
-      axios.get(`/api/orders/status`)
-      .then(response => {
-        response.data.pop()
-        this.listStatus = response.data.map(function(i, index) {
-          return i.status
-        })
-      })
-    },
+    // getStatus () {
+    //   axios.get(`/api/orders/status`)
+    //   .then(response => {
+    //     response.data.pop()
+    //     this.listStatus = response.data.map(function(i, index) {
+    //       return i.status
+    //     })
+    //   })
+    // },
     cancelOrder (order, index) {
       if (!this.submiting) {
         this.submiting = true

@@ -24,7 +24,12 @@ Vue.use(InfiniteLoading)
 import Vue2TouchEvents from 'vue2-touch-events'
 Vue.use(Vue2TouchEvents)
 
-Vue.use(require('vue-moment'))
+const moment = require('moment')
+require('moment/locale/es')
+
+Vue.use(require('vue-moment'), {
+    moment
+})
 Vue.use(Toasted)
 Vue.toasted.register('error', message => message, {
     position : 'bottom-center',

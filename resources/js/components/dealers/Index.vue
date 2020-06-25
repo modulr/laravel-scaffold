@@ -46,7 +46,8 @@
           </multiselect>
         </div> -->
       </div>
-      <table class="table table-hover">
+      <div class="table-responsive">
+        <table class="table table-hover">
         <thead>
           <tr>
             <th class="d-none d-sm-table-cell">
@@ -66,23 +67,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users">
+          <tr v-for="(user, index) in users">
             <td class="d-none d-sm-table-cell">{{user.id}}</td>
             <td>
-              <div class="media" @click="editUser(user.id)">
-                <div class="avatar float-left mr-3">
+              <div class="media">
+                <div class="avatar float-left mr-3" @click="activeToggle(user, index)">
                   <img class="img-avatar" :src="user.avatar_url">
                   <span class="avatar-status badge-primary" v-if="user.active"></span>
                 </div>
-                <div class="media-body">
+                <div class="media-body" @click="editUser(user.id)">
                   <div>{{user.name}}</div>
-                  <div class="small text-muted">
+                  <small class="small text-muted">
                     <rate :length="5" v-model="user.score" :disabled="true"/>
-                  </div>
+                  </small>
+                  <small>{{user.description}}</small>
                 </div>
               </div>
             </td>
-            <td><a class="text-info" :href="`tel:${user.cellphone}`">{{user.cellphone}}</a></td>
+            <td>
+              <a class="text-info" :href="`tel:${user.cellphone}`">{{user.cellphone}}</a> <br>
+            </td>
             <td class="d-none d-sm-table-cell">
               <small>{{user.created_at | moment("LL")}}</small> - <small class="text-muted">{{user.created_at | moment("LT")}}</small>
             </td>
@@ -92,6 +96,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
       <div class="row" v-if='!loading && filters.pagination.total > 0'>
         <div class="col">
           {{filters.pagination.from}}-{{filters.pagination.to}} of {{filters.pagination.total}}
@@ -125,6 +130,7 @@
         <content-placeholders-text/>
       </content-placeholders>
     </div>
+
     <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -219,6 +225,12 @@ export default {
     },
     editUser (userId) {
       location.href = `/dealers/${userId}/edit`
+    },
+    activeToggle (user, index) {
+      axios.post(`/api/dealers/activeToggle`, user)
+      .then(response => {
+        this.users[index].active = response.data.active
+      })
     },
     // filters
     filter() {
