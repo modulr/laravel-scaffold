@@ -4049,6 +4049,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -79375,10 +79382,49 @@ var staticRenderFns = [
                       staticClass: "carousel slide",
                       attrs: {
                         id: "carouselExampleControls",
-                        "data-ride": "carousel"
+                        "data-ride": "carousel",
+                        "data-interval": "false"
                       }
                     },
                     [
+                      _c("ol", { staticClass: "carousel-indicators" }, [
+                        _c("li", {
+                          staticClass: "active",
+                          attrs: {
+                            "data-target": "#carouselExampleControls",
+                            "data-slide-to": "0"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("li", {
+                          attrs: {
+                            "data-target": "#carouselExampleControls",
+                            "data-slide-to": "1"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("li", {
+                          attrs: {
+                            "data-target": "#carouselExampleControls",
+                            "data-slide-to": "2"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("li", {
+                          attrs: {
+                            "data-target": "#carouselExampleControls",
+                            "data-slide-to": "3"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("li", {
+                          attrs: {
+                            "data-target": "#carouselExampleControls",
+                            "data-slide-to": "4"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
                       _c("div", { staticClass: "carousel-inner" }, [
                         _c("div", { staticClass: "carousel-item active" }, [
                           _c("img", {
