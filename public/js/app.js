@@ -71885,7 +71885,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "modal-dialog modal-dialog-scrollable",
+              staticClass: "modal-dialog modal-dialog-centered",
               attrs: { role: "document" }
             },
             [
@@ -79345,7 +79345,7 @@ var staticRenderFns = [
             }
           },
           [
-            _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
               _c("div", { staticClass: "modal-content" }, [
                 _c("div", { staticClass: "modal-header" }, [
                   _c(
