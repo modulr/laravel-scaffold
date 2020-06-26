@@ -31,7 +31,7 @@
         <stores-level1 class="mb-2"></stores-level1>
         <stores-categories></stores-categories>
         <!-- <stores-random></stores-random> -->
-        <h4 class="mt-5"><a href="/tiendas">Ver más <i class="ml-2 fas fa-chevron-right"></i></a></h4>
+        <h4 class="mt-5"><a href="/tiendas">Ver más <i class="ml-2 fas fa-arrow-right"></i></a></h4>
     </div>
 
     <div class="row justify-content-center bg-gradient mt-5">

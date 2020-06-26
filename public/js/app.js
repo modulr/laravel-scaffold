@@ -4000,6 +4000,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -79122,71 +79171,79 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row justify-content-center my-5" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-9 col-sm-6 col-md-3 pl-4 py-4" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "text-secondary mr-3",
-          attrs: { href: this.config.facebook, target: "_blank" }
-        },
-        [_c("i", { staticClass: "fab fa-facebook-square fa-2x" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "text-secondary mr-3",
-          attrs: { href: this.config.instagram, target: "_blank" }
-        },
-        [_c("i", { staticClass: "fab fa-instagram fa-2x" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "text-secondary",
-          attrs: {
-            href:
-              "https://wa.me/52" +
-              this.config.phone +
-              "?text=¡Hola!%20quiero%20más%20información%20sobre%20...",
-            target: "_blank"
-          }
-        },
-        [_c("i", { staticClass: "fab fa-whatsapp fa-2x" })]
-      ),
-      _vm._v(" "),
-      _c("div", [
-        _c("h5", { staticClass: "mt-4" }, [
-          _c(
-            "a",
-            {
-              staticClass: "text-secondary",
-              attrs: { href: "tel:" + this.config.phone }
-            },
-            [
-              _vm._v(
-                "\n              " + _vm._s(this.config.phone) + "\n          "
-              )
-            ]
-          )
+    _c(
+      "div",
+      { staticClass: "col-9 col-sm-6 col-md-3 pl-4 py-4 text-center" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "text-secondary mr-3",
+            attrs: { href: this.config.facebook, target: "_blank" }
+          },
+          [_c("i", { staticClass: "fab fa-facebook-square fa-2x" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "text-secondary mr-3",
+            attrs: { href: this.config.instagram, target: "_blank" }
+          },
+          [_c("i", { staticClass: "fab fa-instagram fa-2x" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "text-secondary",
+            attrs: {
+              href:
+                "https://wa.me/52" +
+                this.config.phone +
+                "?text=¡Hola!%20quiero%20más%20información%20sobre%20...",
+              target: "_blank"
+            }
+          },
+          [_c("i", { staticClass: "fab fa-whatsapp fa-2x" })]
+        ),
+        _vm._v(" "),
+        _c("div", [
+          _c("h5", { staticClass: "mt-3" }, [
+            _c(
+              "a",
+              {
+                staticClass: "text-secondary",
+                attrs: { href: "tel:" + this.config.phone }
+              },
+              [
+                _vm._v(
+                  "\n            " + _vm._s(this.config.phone) + "\n        "
+                )
+              ]
+            )
+          ])
         ])
-      ])
-    ]),
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "col-9 col-sm-6 col-md-3 pl-4 py-4" }, [
-      _c("p", { staticClass: "mb-3" }, [
-        _c("strong", [_vm._v(_vm._s(_vm.config.schedule))])
-      ]),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3)
-    ])
+    _vm._m(1),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-9 col-sm-6 col-md-3 pl-4 py-4 text-center" },
+      [
+        _c("p", { staticClass: "mb-3" }, [
+          _c("strong", [_vm._v(_vm._s(_vm.config.schedule))])
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3)
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -79194,40 +79251,223 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-9 col-sm-6 col-md-3 pl-4 py-4" }, [
-      _c("h5", { staticClass: "mb-3 ml-2" }, [
-        _c("strong", [_vm._v("Descarga el App")])
-      ]),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          attrs: {
-            target: "_blank",
-            href:
-              "https://play.google.com/store/apps/details?id=com.traeme.traemeapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
-          }
-        },
-        [
-          _c("img", {
-            staticClass: "img-fluid logo-footer",
-            attrs: {
-              alt: "Disponible en Google Play",
-              src:
-                "https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png"
-            }
-          })
-        ]
-      )
+    return _c("h5", { staticClass: "mb-4" }, [
+      _c("strong", [_vm._v("Síguenos")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mb-4" }, [
-      _c("strong", [_vm._v("Síguenos")])
-    ])
+    return _c(
+      "div",
+      { staticClass: "col-9 col-sm-6 col-md-3 pl-4 py-4 text-center" },
+      [
+        _c("h5", { staticClass: "mb-3" }, [
+          _c("strong", [_vm._v("Descarga el App")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            attrs: {
+              target: "_blank",
+              href:
+                "https://play.google.com/store/apps/details?id=com.traeme.traemeapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+            }
+          },
+          [
+            _c("img", {
+              staticClass: "img-fluid logo-footer",
+              attrs: {
+                alt: "Disponible en Google Play",
+                src: "img/googleplay.png"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            attrs: {
+              target: "_blank",
+              href: "https://appgallery5.huawei.com/#/app/C102447831"
+            }
+          },
+          [
+            _c("img", {
+              staticClass: "img-fluid logo-footer",
+              attrs: {
+                alt: "Disponible en App Gallery",
+                src: "img/appgallery.png"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "#",
+              "data-toggle": "modal",
+              "data-target": "#exampleModal"
+            }
+          },
+          [
+            _c("img", {
+              staticClass: "img-fluid logo-footer",
+              attrs: { alt: "Disponible en App Store", src: "img/appstore.png" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c("div", { staticClass: "modal-dialog" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "exampleModalLabel" }
+                    },
+                    [_vm._v("Descarga la WebApp para IPhone")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "carousel slide",
+                      attrs: {
+                        id: "carouselExampleControls",
+                        "data-ride": "carousel"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "carousel-inner" }, [
+                        _c("div", { staticClass: "carousel-item active" }, [
+                          _c("img", {
+                            staticClass: "d-block w-100",
+                            attrs: { src: "img/appstore/1.jpg" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "carousel-item" }, [
+                          _c("img", {
+                            staticClass: "d-block w-100",
+                            attrs: { src: "img/appstore/2.jpg" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "carousel-item" }, [
+                          _c("img", {
+                            staticClass: "d-block w-100",
+                            attrs: { src: "img/appstore/3.jpg" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "carousel-item" }, [
+                          _c("img", {
+                            staticClass: "d-block w-100",
+                            attrs: { src: "img/appstore/4.jpg" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "carousel-item" }, [
+                          _c("img", {
+                            staticClass: "d-block w-100",
+                            attrs: { src: "img/appstore/5.jpg" }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "carousel-control-prev",
+                          attrs: {
+                            href: "#carouselExampleControls",
+                            role: "button",
+                            "data-slide": "prev"
+                          }
+                        },
+                        [
+                          _c("span", {
+                            staticClass: "carousel-control-prev-icon",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("Previous")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "carousel-control-next",
+                          attrs: {
+                            href: "#carouselExampleControls",
+                            role: "button",
+                            "data-slide": "next"
+                          }
+                        },
+                        [
+                          _c("span", {
+                            staticClass: "carousel-control-next-icon",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "sr-only" }, [
+                            _vm._v("Next")
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this

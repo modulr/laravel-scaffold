@@ -2,7 +2,7 @@
 
 @section('auth')
 <div class="col-md-6">
-    <div class="card mx-4">
+    <div class="card border-0 mx-4">
         <div class="card-body p-4">
             <h1>Registrarse</h1>
             <p class="text-muted">Crea tu cuenta</p>
@@ -77,10 +77,10 @@
         <div class="card-footer p-4">
             <div class="row">
                 <div class="col-12">
-                  <a class="btn btn-brand btn-facebook btn-block mb-2" href="/auth/facebook">Registrate con Facebook</a>
+                  <a class="btn btn-brand btn-facebook btn-block mb-3" href="/auth/facebook">Registrate con Facebook</a>
                 </div>
                 <div class="col-12">
-                    <a class="btn btn-outline-primary btn-block" href="{{ route('login') }}">Iniciar sesión</a>
+                    <a class="btn btn-link btn-block mb-0" href="{{ route('login') }}">Iniciar sesión</a>
                 </div>
             </div>
         </div>

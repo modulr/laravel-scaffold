@@ -3,14 +3,14 @@
 @section('auth')
 <div class="col-md-8">
     <div class="card-group">
-        <div class="card">
+        <div class="card border-0">
             <div class="card-body p-5">
                 <div class="text-center d-lg-none">
                     <a href="/">
                     <img src="svg/traeme.svg" class="mb-5" width="150" alt="Traeme">
                     </a>
                 </div>
-                <h1>Iniciar sesión</h1>
+                <h1 class="mb-0">Iniciar sesión</h1>
                 <p class="text-muted">Inicia sesion con tu cuenta</p>
 
                 <form method="POST" action="{{ route('login') }}">
@@ -69,12 +69,13 @@
             </div>
             <div class="card-footer p-4 d-lg-none">
                 <div class="col-12">
-                    <a class="btn btn-outline-primary btn-block mt-3" href="{{ route('register') }}">Registrate con tu correo</a>
+                    <h2 class="mb-2">Registrate</h2>
                     <a class="btn btn-brand btn-facebook btn-block" href="/auth/facebook">Registrate con Facebook</a>
+                    <a class="btn btn-outline-primary btn-block" href="{{ route('register') }}">Registrate con tu correo</a>
                 </div>
             </div>
         </div>
-        <div class="card text-white bg-primary py-5 d-md-down-none">
+        <div class="card border-0 text-white bg-primary py-5 d-md-down-none">
             <div class="card-body text-center">
                 <div>
                     <a href="/">
