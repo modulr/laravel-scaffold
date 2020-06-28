@@ -6484,6 +6484,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68528,7 +68533,7 @@ var render = function() {
                 },
                 [
                   _c("i", {
-                    staticClass: "fa fa-sync mr-1",
+                    staticClass: "fa fa-sync",
                     class: { "fa-spin": _vm.loading }
                   }),
                   _vm._v("Refrescar\n        ")
@@ -68802,7 +68807,8 @@ var render = function() {
                               ])
                             : _vm._e(),
                           _vm._v(" "),
-                          item.status_id == 2 && item.score_dealer == 0
+                          (item.status_id == 2 && item.score_dealer == 0) ||
+                          item.status_id == 3
                             ? _c(
                                 "div",
                                 {
@@ -68813,7 +68819,7 @@ var render = function() {
                                   _c(
                                     "span",
                                     { staticClass: "text-muted mr-4" },
-                                    [_vm._v("Calificar")]
+                                    [_vm._v("Calificación")]
                                   ),
                                   _vm._v(" "),
                                   _c("rate", {
@@ -73888,7 +73894,35 @@ var render = function() {
     "div",
     [
       _c("div", [
-        _vm._m(0),
+        _c(
+          "div",
+          { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-header-actions mr-1" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-secondary",
+                  attrs: { href: "/orders/" + _vm.order.id },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.getOrder($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-sync",
+                    class: { "fa-spin": _vm.loading }
+                  })
+                ]
+              )
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -74461,18 +74495,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
-      [
-        _c("a", { attrs: { href: "/orders" } }, [
-          _c("h4", { staticClass: "float-left pt-2 text-body" }, [
-            _c("i", { staticClass: "fas fa-arrow-left mr-3" }),
-            _vm._v(" Detalles del mandado")
-          ])
-        ])
-      ]
-    )
+    return _c("a", { attrs: { href: "/orders" } }, [
+      _c("h4", { staticClass: "float-left pt-2 text-body" }, [
+        _c("i", { staticClass: "fas fa-arrow-left mr-3" }),
+        _vm._v(" Detalles del mandado")
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -79683,10 +79711,9 @@ var render = function() {
                 },
                 [
                   _c("i", {
-                    staticClass: "fa fa-sync mr-1",
+                    staticClass: "fa fa-sync",
                     class: { "fa-spin": _vm.loading }
-                  }),
-                  _vm._v("Refrescar\n        ")
+                  })
                 ]
               )
             ])
@@ -79903,18 +79930,16 @@ var render = function() {
                                 }
                               }),
                               _vm._v(" "),
-                              item.status_id != 3
-                                ? _c("rate", {
-                                    attrs: { length: 5, disabled: true },
-                                    model: {
-                                      value: item.client.score,
-                                      callback: function($$v) {
-                                        _vm.$set(item.client, "score", $$v)
-                                      },
-                                      expression: "item.client.score"
-                                    }
-                                  })
-                                : _vm._e()
+                              _c("rate", {
+                                attrs: { length: 5, disabled: true },
+                                model: {
+                                  value: item.client.score,
+                                  callback: function($$v) {
+                                    _vm.$set(item.client, "score", $$v)
+                                  },
+                                  expression: "item.client.score"
+                                }
+                              })
                             ],
                             1
                           ),
@@ -79989,11 +80014,10 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          item.status_id == 2 || item.status_id == 4
-                            ? _c("div", { staticClass: "col-12" }, [_c("hr")])
-                            : _vm._e(),
+                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
                           _vm._v(" "),
-                          item.status_id == 2 && item.score_dealer == 0
+                          (item.status_id == 2 && item.score_dealer == 0) ||
+                          item.status_id == 3
                             ? _c(
                                 "div",
                                 {
@@ -80004,7 +80028,7 @@ var render = function() {
                                   _c(
                                     "span",
                                     { staticClass: "text-muted mr-4" },
-                                    [_vm._v("Calificar")]
+                                    [_vm._v("Calificación")]
                                   ),
                                   _vm._v(" "),
                                   _c("rate", {

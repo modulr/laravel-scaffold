@@ -3,6 +3,11 @@
     <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <a href="/orders"><h4 class="float-left pt-2 text-body"><i class="fas fa-arrow-left mr-3"></i> Detalles del mandado</h4></a>
+        <div class="card-header-actions mr-1">
+          <a class="btn btn-outline-secondary" :href="`/orders/${order.id}`" @click.prevent="getOrder">
+            <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
+          </a>
+        </div>
       </div>
       <div class="card-body px-0">
         <content-placeholders v-if="loading">

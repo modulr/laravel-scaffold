@@ -5,7 +5,7 @@
         <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
           <a class="btn btn-secondary" href="/orders/availables" @click.prevent="getOrders">
-            <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
+            <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>Refrescar
           </a>
         </div>
       </div>
@@ -78,8 +78,8 @@
                     Tomar mandado
                   </a>
                 </div>
-                <div class="col-12 d-flex justify-content-end" v-if="item.status_id == 2 && item.score_dealer == 0">
-                  <span class="text-muted mr-4">Calificar</span>
+                <div class="col-12 d-flex justify-content-end" v-if="(item.status_id == 2 && item.score_dealer == 0) || item.status_id == 3">
+                  <span class="text-muted mr-4">Calificación</span>
                   <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)"/>
                 </div>
                 <div class="col-12" v-if="item.status_id == 2 && item.score_dealer > 0">

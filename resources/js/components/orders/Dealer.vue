@@ -8,7 +8,7 @@
             <i class="fas fa-filter"></i>
           </a>
           <a class="btn btn-secondary" href="/orders/dealer" @click.prevent="getOrders">
-            <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
+            <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
           </a>
         </div>
       </div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
-                  <rate :length="5" v-model="item.client.score" :disabled="true" v-if="item.status_id != 3"/>
+                  <rate :length="5" v-model="item.client.score" :disabled="true"/>
                 </div>
                 <div class="col-4 text-right">
                   <div>
@@ -93,11 +93,11 @@
                     </span>
                   </div>
                 </div>
-                <div class="col-12" v-if="item.status_id == 2 || item.status_id == 4">
+                <div class="col-12">
                   <hr>
                 </div>
-                <div class="col-12 d-flex justify-content-end" v-if="item.status_id == 2 && item.score_dealer == 0">
-                  <span class="text-muted mr-4">Calificar</span>
+                <div class="col-12 d-flex justify-content-end" v-if="(item.status_id == 2 && item.score_dealer == 0) || item.status_id == 3">
+                  <span class="text-muted mr-4">Calificación</span>
                   <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)"/>
                 </div>
                 <div class="col-12" v-if="item.status_id == 2 && item.score_dealer > 0">
