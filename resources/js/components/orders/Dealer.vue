@@ -4,10 +4,10 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mis vueltas <small class="text-muted">${{profit}}|{{orders.length}}</small></h4>
         <div class="card-header-actions mr-1">
-          <a class="text-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
+          <a class="btn btn-outline-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
           </a>
-          <a class="btn btn-primary ml-3" href="/orders/dealer" @click.prevent="getOrders">
+          <a class="btn btn-primary" href="/orders/dealer" @click.prevent="getOrders">
             <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
           </a>
         </div>
@@ -45,31 +45,24 @@
             <li class="list-group-item">
               <div class="row">
                 <div class="col-12">
-                  <p class="pre-line mb-1">{{item.order}}</p>
-                  <div>
-                    <a class="text-muted" :href="addressGMap[index]" target="_blank">
-                      <i class="icon-location-pin mr-1"></i>{{item.address}}
-                    </a>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col-12">
-                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" v-if="item.status_id!= 4"></vue-step>
-                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
                   <small class="text-muted">
                     <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} - {{item.updated_at | moment('LT')}}
                     <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
                   </small>
+                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" v-if="item.status_id!= 4"></vue-step>
+                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
                 </div>
                 <div class="col-12">
-                  <hr>
+                  <p class="pre-line mb-1">{{item.order}}</p>
+                  <div class="mb-3">
+                    <a class="text-info" :href="addressGMap[index]" target="_blank">
+                      <i class="icon-location-pin mr-1"></i>{{item.address}}
+                    </a>
+                  </div>
                 </div>
                 <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
                   <rate :length="5" v-model="item.client.score" :disabled="true" v-if="item.status_id != 3"/>
-                  <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
                 </div>
                 <div class="col-4 text-right">
                   <div>
@@ -88,23 +81,20 @@
                     </span>
                   </div>
                 </div>
-              </div>
-              <div class="row" v-if="item.status_id == 2">
                 <div class="col-12">
                   <hr>
                 </div>
-                <div class="col-12 text-right">
-                  <a href="#" class="btn btn-outline-info btn-sm" :disabled="submiting" @click.prevent="finalizeOrder(item, index)">
+                <div class="col-12 d-flex justify-content-end" v-if="item.status_id == 2 && item.score_dealer == 0">
+                  <span class="text-muted mr-4">Calificar</span>
+                  <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)"/>
+                </div>
+                <div class="col-12" v-if="item.status_id == 2 && item.score_dealer > 0">
+                  <a href="#" class="btn btn-block btn-outline-info" :disabled="submiting" @click.prevent="finalizeOrder(item, index)">
                     <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Finalizar
                   </a>
                 </div>
-              </div>
-              <div class="row" v-if="item.status_id == 4">
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col">
+                <div class="col-12" v-if="item.status_id == 4">
                   <div class="alert alert-secondary text-center mb-0">
                     Cancelado
                   </div>
@@ -179,7 +169,7 @@ export default {
       editOrder: {},
       profit: 0,
       status: [],
-      listStatus:[],
+      listStatus:['','',''],
       userView: {},
       filtersShow: false,
       filters: {
@@ -199,7 +189,7 @@ export default {
   },
   mounted () {
     this.getOrders()
-    this.getStatus()
+    //this.getStatus()
   },
   computed: {
     addressGMap: function () {
@@ -210,6 +200,19 @@ export default {
     }
   },
   methods: {
+    // getStatus () {
+    //   if (this.status.length <= 0) {
+    //     axios.get(`/api/orders/status`)
+    //     .then(response => {
+    //       this.status = response.data
+    //       let status = response.data.slice(0)
+    //       status.pop()
+    //       this.listStatus = status.map(function(i, index) {
+    //         return i.status
+    //       })
+    //     })
+    //   }
+    // },
     getOrders () {
       this.loading = true
       axios.post(`/api/orders/byDealer/filters`, this.filters)
@@ -220,22 +223,16 @@ export default {
         this.loading = false
       })
     },
-    getStatus () {
-      if (this.status.length <= 0) {
-        axios.get(`/api/orders/status`)
-        .then(response => {
-          this.status = response.data
-          let status = response.data.slice(0)
-          status.pop()
-          this.listStatus = status.map(function(i, index) {
-            return i.status
-          })
-        })
-      }
-    },
     showFilters () {
       this.filtersShow = !this.filtersShow
       this.getStatus()
+    },
+    scoreOrder (order, index) {
+      axios.put(`/api/orders/updateScoreDealer/${order.id}`, {'scoreDealer': order.score_dealer})
+      .then(response => {
+        this.orders[index].score_dealer = response.data.score_dealer
+        this.$toasted.global.error('¡Mandado calificado!')
+      })
     },
     finalizeOrder (order, index) {
       if (!this.submiting) {
@@ -248,13 +245,6 @@ export default {
           this.submiting = false
         })
       }
-    },
-    scoreOrder (order, index) {
-      axios.put(`/api/orders/updateScoreDealer/${order.id}`, {'scoreDealer': order.score_dealer})
-      .then(response => {
-        this.orders[index].score_dealer = response.data.score_dealer
-        this.$toasted.global.error('¡Mandado calificado!')
-      })
     },
     showOrderUpdateModal (order, index) {
       //if (order.status_id == 2 && this.user.hasRole['dealer-level-2']) {

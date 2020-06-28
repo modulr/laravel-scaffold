@@ -5202,6 +5202,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5210,7 +5212,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       orders: [],
       editOrder: {},
       profit: 0,
-      listStatus: [],
+      listStatus: ['', '', ''],
       userView: {},
       loading: true,
       submiting: false,
@@ -5221,7 +5223,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     this.showAgreeModal();
     this.getOrders();
-    this.getStatus();
+    //this.getStatus()
   },
 
   computed: {
@@ -5233,25 +5235,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    getOrders: function getOrders() {
+    getStatus: function getStatus() {
       var _this = this;
+
+      axios.get('/api/orders/status').then(function (response) {
+        response.data.pop();
+        _this.listStatus = response.data.map(function (i, index) {
+          return i.status;
+        });
+      });
+    },
+    getOrders: function getOrders() {
+      var _this2 = this;
 
       this.loading = true;
       axios.get('/api/orders/availables').then(function (response) {
         //this.orders = response.data
-        _this.orders = response.data.orders;
-        _this.profit = response.data.profit;
-        _this.loading = false;
-      });
-    },
-    getStatus: function getStatus() {
-      var _this2 = this;
-
-      axios.get('/api/orders/status').then(function (response) {
-        response.data.pop();
-        _this2.listStatus = response.data.map(function (i, index) {
-          return i.status;
-        });
+        _this2.orders = response.data.orders;
+        _this2.profit = response.data.profit;
+        _this2.loading = false;
       });
     },
     takeOrder: function takeOrder(order, index) {
@@ -5290,15 +5292,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    finalizeOrder: function finalizeOrder(order, index) {
+    scoreOrder: function scoreOrder(order, index) {
       var _this4 = this;
+
+      axios.put('/api/orders/updateScoreDealer/' + order.id, { 'scoreDealer': order.score_dealer }).then(function (response) {
+        _this4.orders[index].score_dealer = response.data.score_dealer;
+        _this4.$toasted.global.error('¡Mandado calificado!');
+      });
+    },
+    finalizeOrder: function finalizeOrder(order, index) {
+      var _this5 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
-          _this4.$toasted.global.error('¡Mandado finalizado!');
-          _this4.getOrders();
-          _this4.submiting = false;
+          _this5.$toasted.global.error('¡Mandado finalizado!');
+          _this5.getOrders();
+          _this5.submiting = false;
         });
       }
     },
@@ -5312,19 +5322,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     updateOrder: function updateOrder() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (!this.submitingUpdate) {
         this.submitingUpdate = true;
         axios.put('/api/orders/update/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this5.orders[_this5.editOrder.index].delivery_costs = response.data.delivery_costs;
-          _this5.orders[_this5.editOrder.index].order_cost = response.data.order_cost;
-          _this5.submitingUpdate = false;
+          _this6.orders[_this6.editOrder.index].delivery_costs = response.data.delivery_costs;
+          _this6.orders[_this6.editOrder.index].order_cost = response.data.order_cost;
+          _this6.submitingUpdate = false;
           $('#orderUpdateModal').modal('hide');
-          _this5.$toasted.global.error('Mandado actualizado!');
+          _this6.$toasted.global.error('Mandado actualizado!');
         }).catch(function (error) {
-          _this5.errors = error.response.data.errors;
-          _this5.submitingUpdate = false;
+          _this6.errors = error.response.data.errors;
+          _this6.submitingUpdate = false;
         });
       }
     },
@@ -5895,16 +5905,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5914,7 +5914,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       editOrder: {},
       profit: 0,
       status: [],
-      listStatus: [],
+      listStatus: ['', '', ''],
       userView: {},
       filtersShow: false,
       filters: {
@@ -5930,7 +5930,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.getOrders();
-    this.getStatus();
+    //this.getStatus()
   },
 
   computed: {
@@ -5942,6 +5942,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
+    // getStatus () {
+    //   if (this.status.length <= 0) {
+    //     axios.get(`/api/orders/status`)
+    //     .then(response => {
+    //       this.status = response.data
+    //       let status = response.data.slice(0)
+    //       status.pop()
+    //       this.listStatus = status.map(function(i, index) {
+    //         return i.status
+    //       })
+    //     })
+    //   }
+    // },
     getOrders: function getOrders() {
       var _this = this;
 
@@ -5954,23 +5967,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.loading = false;
       });
     },
-    getStatus: function getStatus() {
-      var _this2 = this;
-
-      if (this.status.length <= 0) {
-        axios.get('/api/orders/status').then(function (response) {
-          _this2.status = response.data;
-          var status = response.data.slice(0);
-          status.pop();
-          _this2.listStatus = status.map(function (i, index) {
-            return i.status;
-          });
-        });
-      }
-    },
     showFilters: function showFilters() {
       this.filtersShow = !this.filtersShow;
       this.getStatus();
+    },
+    scoreOrder: function scoreOrder(order, index) {
+      var _this2 = this;
+
+      axios.put('/api/orders/updateScoreDealer/' + order.id, { 'scoreDealer': order.score_dealer }).then(function (response) {
+        _this2.orders[index].score_dealer = response.data.score_dealer;
+        _this2.$toasted.global.error('¡Mandado calificado!');
+      });
     },
     finalizeOrder: function finalizeOrder(order, index) {
       var _this3 = this;
@@ -5985,14 +5992,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    scoreOrder: function scoreOrder(order, index) {
-      var _this4 = this;
-
-      axios.put('/api/orders/updateScoreDealer/' + order.id, { 'scoreDealer': order.score_dealer }).then(function (response) {
-        _this4.orders[index].score_dealer = response.data.score_dealer;
-        _this4.$toasted.global.error('¡Mandado calificado!');
-      });
-    },
     showOrderUpdateModal: function showOrderUpdateModal(order, index) {
       //if (order.status_id == 2 && this.user.hasRole['dealer-level-2']) {
       if (order.status_id == 2) {
@@ -6003,19 +6002,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     updateOrder: function updateOrder() {
-      var _this5 = this;
+      var _this4 = this;
 
       if (!this.submitingUpdate) {
         this.submitingUpdate = true;
         axios.put('/api/orders/update/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this5.orders[_this5.editOrder.index].delivery_costs = response.data.delivery_costs;
-          _this5.orders[_this5.editOrder.index].order_cost = response.data.order_cost;
-          _this5.submitingUpdate = false;
+          _this4.orders[_this4.editOrder.index].delivery_costs = response.data.delivery_costs;
+          _this4.orders[_this4.editOrder.index].order_cost = response.data.order_cost;
+          _this4.submitingUpdate = false;
           $('#orderUpdateModal').modal('hide');
-          _this5.$toasted.global.error('Mandado actualizado!');
+          _this4.$toasted.global.error('Mandado actualizado!');
         }).catch(function (error) {
-          _this5.errors = error.response.data.errors;
-          _this5.submitingUpdate = false;
+          _this4.errors = error.response.data.errors;
+          _this4.submitingUpdate = false;
         });
       }
     }
@@ -68538,63 +68537,10 @@ var render = function() {
                     return _c("ul", { staticClass: "list-group mb-1" }, [
                       _c("li", { staticClass: "list-group-item" }, [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-12" }, [
-                            _c("p", { staticClass: "pre-line mb-1" }, [
-                              _vm._v(_vm._s(item.order))
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "text-muted",
-                                  attrs: {
-                                    href: _vm.addressGMap[index],
-                                    target: "_blank"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "icon-location-pin mr-1"
-                                  }),
-                                  _vm._v(
-                                    _vm._s(item.address) +
-                                      "\n                  "
-                                  )
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                          _vm._v(" "),
                           _c(
                             "div",
                             { staticClass: "col-12" },
                             [
-                              item.status_id != 4
-                                ? _c("vue-step", {
-                                    staticClass: "mb-0 pt-0",
-                                    attrs: {
-                                      "now-step": item.status_id,
-                                      "step-list": _vm.listStatus,
-                                      "style-type": "style2"
-                                    },
-                                    on: {
-                                      selected: function($event) {
-                                        _vm.finalizeOrder(item, index)
-                                      }
-                                    }
-                                  })
-                                : _c("vue-step", {
-                                    staticClass: "mb-0 pt-0",
-                                    attrs: {
-                                      "now-step": 0,
-                                      "step-list": _vm.listStatus,
-                                      "style-type": "style2"
-                                    }
-                                  }),
-                              _vm._v(" "),
                               _c("small", { staticClass: "text-muted" }, [
                                 _c("i", { staticClass: "far fa-clock mr-1" }),
                                 _vm._v(
@@ -68619,12 +68565,56 @@ var render = function() {
                                     )
                                   )
                                 ])
-                              ])
+                              ]),
+                              _vm._v(" "),
+                              item.status_id != 4
+                                ? _c("vue-step", {
+                                    staticClass: "mb-0 pt-0",
+                                    attrs: {
+                                      "now-step": item.status_id,
+                                      "step-list": _vm.listStatus,
+                                      "style-type": "style2"
+                                    }
+                                  })
+                                : _c("vue-step", {
+                                    staticClass: "mb-0 pt-0",
+                                    attrs: {
+                                      "now-step": 0,
+                                      "step-list": _vm.listStatus,
+                                      "style-type": "style2"
+                                    }
+                                  })
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("p", { staticClass: "pre-line mb-1" }, [
+                              _vm._v(_vm._s(item.order))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-3" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-info",
+                                  attrs: {
+                                    href: _vm.addressGMap[index],
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "icon-location-pin mr-1"
+                                  }),
+                                  _vm._v(
+                                    _vm._s(item.address) +
+                                      "\n                  "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -68727,72 +68717,108 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "col-12 text-right" },
+                            { staticClass: "dol-12" },
                             [
                               !_vm.user.active && item.status_id == 1
                                 ? _c("dealers-active", {
                                     attrs: { user: _vm.user }
                                   })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.user.active && item.status_id == 1
-                                ? _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "btn btn-outline-info btn-sm",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.takeOrder(item, index)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm.submiting
-                                        ? _c("i", {
-                                            staticClass:
-                                              "fas fa-spinner fa-spin"
-                                          })
-                                        : _vm._e(),
-                                      _vm._v(
-                                        "\n                  Tomar mandado\n                "
-                                      )
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              item.status_id == 2
-                                ? _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "btn btn-outline-info btn-sm",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.finalizeOrder(item, index)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm.submiting
-                                        ? _c("i", {
-                                            staticClass:
-                                              "fas fa-spinner fa-spin"
-                                          })
-                                        : _vm._e(),
-                                      _vm._v(
-                                        "\n                  Finalizar\n                "
-                                      )
-                                    ]
-                                  )
                                 : _vm._e()
                             ],
                             1
-                          )
+                          ),
+                          _vm._v(" "),
+                          _vm.user.active && item.status_id == 1
+                            ? _c("div", { staticClass: "col-12" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-block btn-outline-info",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.takeOrder(item, index)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm.submiting
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(
+                                      "\n                  Tomar mandado\n                "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          item.status_id == 2 && item.score_dealer == 0
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-12 d-flex justify-content-end"
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticClass: "text-muted mr-4" },
+                                    [_vm._v("Calificar")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("rate", {
+                                    attrs: { length: 5 },
+                                    on: {
+                                      "after-rate": function($event) {
+                                        _vm.scoreOrder(item, index)
+                                      }
+                                    },
+                                    model: {
+                                      value: item.score_dealer,
+                                      callback: function($$v) {
+                                        _vm.$set(item, "score_dealer", $$v)
+                                      },
+                                      expression: "item.score_dealer"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          item.status_id == 2 && item.score_dealer > 0
+                            ? _c("div", { staticClass: "col-12" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-block btn-outline-info",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.finalizeOrder(item, index)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm.submiting
+                                      ? _c("i", {
+                                          staticClass: "fas fa-spinner fa-spin"
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(
+                                      "\n                  Finalizar\n                "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       ])
                     ])
@@ -79579,7 +79605,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "text-secondary",
+                  staticClass: "btn btn-outline-secondary",
                   class: { "text-success": _vm.filtersShow },
                   attrs: { href: "#" },
                   on: {
@@ -79595,7 +79621,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary ml-3",
+                  staticClass: "btn btn-primary",
                   attrs: { href: "/orders/dealer" },
                   on: {
                     click: function($event) {
@@ -79706,58 +79732,10 @@ var render = function() {
                     return _c("ul", { staticClass: "list-group mb-1" }, [
                       _c("li", { staticClass: "list-group-item" }, [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-12" }, [
-                            _c("p", { staticClass: "pre-line mb-1" }, [
-                              _vm._v(_vm._s(item.order))
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "text-muted",
-                                  attrs: {
-                                    href: _vm.addressGMap[index],
-                                    target: "_blank"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "icon-location-pin mr-1"
-                                  }),
-                                  _vm._v(
-                                    _vm._s(item.address) +
-                                      "\n                  "
-                                  )
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                          _vm._v(" "),
                           _c(
                             "div",
                             { staticClass: "col-12" },
                             [
-                              item.status_id != 4
-                                ? _c("vue-step", {
-                                    staticClass: "mb-0 pt-0",
-                                    attrs: {
-                                      "now-step": item.status_id,
-                                      "step-list": _vm.listStatus,
-                                      "style-type": "style2"
-                                    }
-                                  })
-                                : _c("vue-step", {
-                                    staticClass: "mb-0 pt-0",
-                                    attrs: {
-                                      "now-step": 0,
-                                      "step-list": _vm.listStatus,
-                                      "style-type": "style2"
-                                    }
-                                  }),
-                              _vm._v(" "),
                               _c("small", { staticClass: "text-muted" }, [
                                 _c("i", { staticClass: "far fa-clock mr-1" }),
                                 _vm._v(
@@ -79782,12 +79760,56 @@ var render = function() {
                                     )
                                   )
                                 ])
-                              ])
+                              ]),
+                              _vm._v(" "),
+                              item.status_id != 4
+                                ? _c("vue-step", {
+                                    staticClass: "mb-0 pt-0",
+                                    attrs: {
+                                      "now-step": item.status_id,
+                                      "step-list": _vm.listStatus,
+                                      "style-type": "style2"
+                                    }
+                                  })
+                                : _c("vue-step", {
+                                    staticClass: "mb-0 pt-0",
+                                    attrs: {
+                                      "now-step": 0,
+                                      "step-list": _vm.listStatus,
+                                      "style-type": "style2"
+                                    }
+                                  })
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("p", { staticClass: "pre-line mb-1" }, [
+                              _vm._v(_vm._s(item.order))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-3" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-info",
+                                  attrs: {
+                                    href: _vm.addressGMap[index],
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "icon-location-pin mr-1"
+                                  }),
+                                  _vm._v(
+                                    _vm._s(item.address) +
+                                      "\n                  "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -79811,24 +79833,6 @@ var render = function() {
                                         _vm.$set(item.client, "score", $$v)
                                       },
                                       expression: "item.client.score"
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              item.status_id == 3
-                                ? _c("rate", {
-                                    attrs: { length: 5 },
-                                    on: {
-                                      "after-rate": function($event) {
-                                        _vm.scoreOrder(item, index)
-                                      }
-                                    },
-                                    model: {
-                                      value: item.score_dealer,
-                                      callback: function($$v) {
-                                        _vm.$set(item, "score_dealer", $$v)
-                                      },
-                                      expression: "item.score_dealer"
                                     }
                                   })
                                 : _vm._e()
@@ -79904,18 +79908,51 @@ var render = function() {
                                 ]
                               )
                             ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        item.status_id == 2
-                          ? _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-12 text-right" }, [
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                          _vm._v(" "),
+                          item.status_id == 2 && item.score_dealer == 0
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-12 d-flex justify-content-end"
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticClass: "text-muted mr-4" },
+                                    [_vm._v("Calificar")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("rate", {
+                                    attrs: { length: 5 },
+                                    on: {
+                                      "after-rate": function($event) {
+                                        _vm.scoreOrder(item, index)
+                                      }
+                                    },
+                                    model: {
+                                      value: item.score_dealer,
+                                      callback: function($$v) {
+                                        _vm.$set(item, "score_dealer", $$v)
+                                      },
+                                      expression: "item.score_dealer"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          item.status_id == 2 && item.score_dealer > 0
+                            ? _c("div", { staticClass: "col-12" }, [
                                 _c(
                                   "a",
                                   {
-                                    staticClass: "btn btn-outline-info btn-sm",
+                                    staticClass:
+                                      "btn btn-block btn-outline-info",
                                     attrs: {
                                       href: "#",
                                       disabled: _vm.submiting
@@ -79939,14 +79976,10 @@ var render = function() {
                                   ]
                                 )
                               ])
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        item.status_id == 4
-                          ? _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-12" }, [_c("hr")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col" }, [
+                            : _vm._e(),
+                          _vm._v(" "),
+                          item.status_id == 4
+                            ? _c("div", { staticClass: "col-12" }, [
                                 _c(
                                   "div",
                                   {
@@ -79960,8 +79993,8 @@ var render = function() {
                                   ]
                                 )
                               ])
-                            ])
-                          : _vm._e()
+                            : _vm._e()
+                        ])
                       ])
                     ])
                   })

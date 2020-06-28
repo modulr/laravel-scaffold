@@ -18,26 +18,20 @@
             <li class="list-group-item">
               <div class="row">
                 <div class="col-12">
-                  <p class="pre-line mb-1">{{item.order}}</p>
-                  <div>
-                    <a class="text-muted" :href="addressGMap[index]" target="_blank">
-                      <i class="icon-location-pin mr-1"></i>{{item.address}}
-                    </a>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col-12">
-                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" @selected="finalizeOrder(item, index)" v-if="item.status_id!= 4"></vue-step>
-                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
                   <small class="text-muted">
                     <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} - {{item.updated_at | moment('LT')}}
                     <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
                   </small>
+                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" v-if="item.status_id!= 4"></vue-step>
+                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
                 </div>
                 <div class="col-12">
-                  <hr>
+                  <p class="pre-line mb-1">{{item.order}}</p>
+                  <div class="mb-3">
+                    <a class="text-info" :href="addressGMap[index]" target="_blank">
+                      <i class="icon-location-pin mr-1"></i>{{item.address}}
+                    </a>
+                  </div>
                 </div>
                 <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
@@ -63,13 +57,21 @@
                 <div class="col-12">
                   <hr>
                 </div>
-                <div class="col-12 text-right">
+                <div class="dol-12">
                   <dealers-active :user="user" v-if="!user.active && item.status_id == 1"></dealers-active>
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="takeOrder(item, index)" v-if="user.active && item.status_id == 1">
+                </div>
+                <div class="col-12" v-if="user.active && item.status_id == 1">
+                  <a href="#" class="btn btn-block btn-outline-info" @click.prevent="takeOrder(item, index)">
                     <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Tomar mandado
                   </a>
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="finalizeOrder(item, index)" v-if="item.status_id == 2">
+                </div>
+                <div class="col-12 d-flex justify-content-end" v-if="item.status_id == 2 && item.score_dealer == 0">
+                  <span class="text-muted mr-4">Calificar</span>
+                  <rate :length="5" v-model="item.score_dealer" @after-rate="scoreOrder(item, index)"/>
+                </div>
+                <div class="col-12" v-if="item.status_id == 2 && item.score_dealer > 0">
+                  <a href="#" class="btn btn-block btn-outline-info" @click.prevent="finalizeOrder(item, index)">
                     <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
                     Finalizar
                   </a>
@@ -158,7 +160,7 @@ export default {
       orders: [],
       editOrder: {},
       profit: 0,
-      listStatus: [],
+      listStatus: ['','',''],
       userView: {},
       loading: true,
       submiting: false,
@@ -169,7 +171,7 @@ export default {
   mounted () {
     this.showAgreeModal()
     this.getOrders()
-    this.getStatus()
+    //this.getStatus()
   },
   computed: {
     addressGMap: function () {
@@ -180,6 +182,15 @@ export default {
     }
   },
   methods: {
+    getStatus () {
+      axios.get(`/api/orders/status`)
+      .then(response => {
+        response.data.pop()
+        this.listStatus = response.data.map(function(i, index) {
+          return i.status
+        })
+      })
+    },
     getOrders () {
       this.loading = true
       axios.get(`/api/orders/availables`)
@@ -188,15 +199,6 @@ export default {
         this.orders = response.data.orders
         this.profit = response.data.profit
         this.loading = false
-      })
-    },
-    getStatus () {
-      axios.get(`/api/orders/status`)
-      .then(response => {
-        response.data.pop()
-        this.listStatus = response.data.map(function(i, index) {
-          return i.status
-        })
       })
     },
     takeOrder (order, index) {
@@ -235,6 +237,13 @@ export default {
           this.submiting = false
         })
       }
+    },
+    scoreOrder (order, index) {
+      axios.put(`/api/orders/updateScoreDealer/${order.id}`, {'scoreDealer': order.score_dealer})
+      .then(response => {
+        this.orders[index].score_dealer = response.data.score_dealer
+        this.$toasted.global.error('¡Mandado calificado!')
+      })
     },
     finalizeOrder (order, index) {
       if (!this.submiting) {

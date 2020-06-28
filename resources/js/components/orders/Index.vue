@@ -174,11 +174,7 @@ export default {
       pagination: {
         current_page: 0
       },
-      listStatus:[
-        '',
-        '',
-        ''
-      ],
+      listStatus:['','',''],
       userView: {},
       newOrder: {},
       errors: {},
