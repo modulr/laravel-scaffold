@@ -11433,6 +11433,10 @@ a:hover {
   margin: 0 !important;
 }
 
+.v-step-warp-horizontal {
+  z-index: 0 !important;
+}
+
 .scrollmenu {
   overflow: auto;
   white-space: nowrap;

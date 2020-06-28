@@ -184,6 +184,11 @@ a:hover {
   }
 }
 
+// Step
+.v-step-warp-horizontal {
+  z-index: 0 !important;
+}
+
 // scrollbar
 .scrollmenu {
   overflow: auto;

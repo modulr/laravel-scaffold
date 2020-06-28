@@ -2,14 +2,26 @@
   <div>
     <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mandados <small class="text-muted">${{profit}}|{{orders.length}}</small></h4>
+        <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
-          <a class="btn btn-primary" href="/orders/availables" @click.prevent="getOrders">
+          <a class="btn btn-secondary" href="/orders/availables" @click.prevent="getOrders">
             <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
           </a>
         </div>
       </div>
       <div class="card-body px-0">
+        <div class="brand-card">
+          <div class="brand-card-body py-1">
+            <div>
+              <div class="text-value">${{profit}}</div>
+              <div class="text-uppercase text-muted small">Ganancias</div>
+            </div>
+            <div>
+              <div class="text-value">{{orders.length}}</div>
+              <div class="text-uppercase text-muted small">Mandados</div>
+            </div>
+          </div>
+        </div>
         <content-placeholders v-if="loading">
           <content-placeholders-text :lines="6"/>
         </content-placeholders>
@@ -182,15 +194,15 @@ export default {
     }
   },
   methods: {
-    getStatus () {
-      axios.get(`/api/orders/status`)
-      .then(response => {
-        response.data.pop()
-        this.listStatus = response.data.map(function(i, index) {
-          return i.status
-        })
-      })
-    },
+    // getStatus () {
+    //   axios.get(`/api/orders/status`)
+    //   .then(response => {
+    //     response.data.pop()
+    //     this.listStatus = response.data.map(function(i, index) {
+    //       return i.status
+    //     })
+    //   })
+    // },
     getOrders () {
       this.loading = true
       axios.get(`/api/orders/availables`)

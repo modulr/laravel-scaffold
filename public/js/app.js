@@ -5204,6 +5204,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5235,39 +5247,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    getStatus: function getStatus() {
-      var _this = this;
-
-      axios.get('/api/orders/status').then(function (response) {
-        response.data.pop();
-        _this.listStatus = response.data.map(function (i, index) {
-          return i.status;
-        });
-      });
-    },
+    // getStatus () {
+    //   axios.get(`/api/orders/status`)
+    //   .then(response => {
+    //     response.data.pop()
+    //     this.listStatus = response.data.map(function(i, index) {
+    //       return i.status
+    //     })
+    //   })
+    // },
     getOrders: function getOrders() {
-      var _this2 = this;
+      var _this = this;
 
       this.loading = true;
       axios.get('/api/orders/availables').then(function (response) {
         //this.orders = response.data
-        _this2.orders = response.data.orders;
-        _this2.profit = response.data.profit;
-        _this2.loading = false;
+        _this.orders = response.data.orders;
+        _this.profit = response.data.profit;
+        _this.loading = false;
       });
     },
     takeOrder: function takeOrder(order, index) {
-      var _this3 = this;
+      var _this2 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         axios.put('/api/orders/takeOrder/' + order.id).then(function (response) {
           order.status_id = 2;
-          _this3.orders[index].status_id = 2;
-          _this3.orders[index].dealer_id = _this3.user.id;
-          _this3.$toasted.global.error('¡Mandado tomado!');
+          _this2.orders[index].status_id = 2;
+          _this2.orders[index].dealer_id = _this2.user.id;
+          _this2.$toasted.global.error('¡Mandado tomado!');
           //location.href = `/orders/dealer`
-          _this3.submiting = false;
+          _this2.submiting = false;
         }).catch(function (error) {
           if (error.response.data.errors.finalize) {
             swal({
@@ -5284,31 +5295,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               button: "Refrescar"
             }).then(function (value) {
               if (value) {
-                _this3.getOrders();
+                _this2.getOrders();
               }
             });
           }
-          _this3.submiting = false;
+          _this2.submiting = false;
         });
       }
     },
     scoreOrder: function scoreOrder(order, index) {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.put('/api/orders/updateScoreDealer/' + order.id, { 'scoreDealer': order.score_dealer }).then(function (response) {
-        _this4.orders[index].score_dealer = response.data.score_dealer;
-        _this4.$toasted.global.error('¡Mandado calificado!');
+        _this3.orders[index].score_dealer = response.data.score_dealer;
+        _this3.$toasted.global.error('¡Mandado calificado!');
       });
     },
     finalizeOrder: function finalizeOrder(order, index) {
-      var _this5 = this;
+      var _this4 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
-          _this5.$toasted.global.error('¡Mandado finalizado!');
-          _this5.getOrders();
-          _this5.submiting = false;
+          _this4.$toasted.global.error('¡Mandado finalizado!');
+          _this4.getOrders();
+          _this4.submiting = false;
         });
       }
     },
@@ -5322,19 +5333,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     updateOrder: function updateOrder() {
-      var _this6 = this;
+      var _this5 = this;
 
       if (!this.submitingUpdate) {
         this.submitingUpdate = true;
         axios.put('/api/orders/update/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this6.orders[_this6.editOrder.index].delivery_costs = response.data.delivery_costs;
-          _this6.orders[_this6.editOrder.index].order_cost = response.data.order_cost;
-          _this6.submitingUpdate = false;
+          _this5.orders[_this5.editOrder.index].delivery_costs = response.data.delivery_costs;
+          _this5.orders[_this5.editOrder.index].order_cost = response.data.order_cost;
+          _this5.submitingUpdate = false;
           $('#orderUpdateModal').modal('hide');
-          _this6.$toasted.global.error('Mandado actualizado!');
+          _this5.$toasted.global.error('Mandado actualizado!');
         }).catch(function (error) {
-          _this6.errors = error.response.data.errors;
-          _this6.submitingUpdate = false;
+          _this5.errors = error.response.data.errors;
+          _this5.submitingUpdate = false;
         });
       }
     },
@@ -5905,6 +5916,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5942,29 +5965,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    // getStatus () {
-    //   if (this.status.length <= 0) {
-    //     axios.get(`/api/orders/status`)
-    //     .then(response => {
-    //       this.status = response.data
-    //       let status = response.data.slice(0)
-    //       status.pop()
-    //       this.listStatus = status.map(function(i, index) {
-    //         return i.status
-    //       })
-    //     })
-    //   }
-    // },
-    getOrders: function getOrders() {
+    getStatus: function getStatus() {
       var _this = this;
+
+      if (this.status.length <= 0) {
+        axios.get('/api/orders/status').then(function (response) {
+          _this.status = response.data;
+          var status = response.data.slice(0);
+          status.pop();
+          // this.listStatus = status.map(function(i, index) {
+          //   return i.status
+          // })
+        });
+      }
+    },
+    getOrders: function getOrders() {
+      var _this2 = this;
 
       this.loading = true;
       axios.post('/api/orders/byDealer/filters', this.filters)
       //axios.get(`/api/orders/byDealer/${this.user.id}`)
       .then(function (response) {
-        _this.orders = response.data.orders;
-        _this.profit = response.data.profit;
-        _this.loading = false;
+        _this2.orders = response.data.orders;
+        _this2.profit = response.data.profit;
+        _this2.loading = false;
       });
     },
     showFilters: function showFilters() {
@@ -5972,23 +5996,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getStatus();
     },
     scoreOrder: function scoreOrder(order, index) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.put('/api/orders/updateScoreDealer/' + order.id, { 'scoreDealer': order.score_dealer }).then(function (response) {
-        _this2.orders[index].score_dealer = response.data.score_dealer;
-        _this2.$toasted.global.error('¡Mandado calificado!');
+        _this3.orders[index].score_dealer = response.data.score_dealer;
+        _this3.$toasted.global.error('¡Mandado calificado!');
       });
     },
     finalizeOrder: function finalizeOrder(order, index) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (!this.submiting) {
         this.submiting = true;
         axios.put('/api/orders/updateStatus/' + order.id, { 'statusId': 3 }).then(function (response) {
-          _this3.orders[index].status_id = response.data.status_id;
-          _this3.orders[index].status = response.data.status;
-          _this3.$toasted.global.error('¡Mandado finalizado!');
-          _this3.submiting = false;
+          _this4.orders[index].status_id = response.data.status_id;
+          _this4.orders[index].status = response.data.status;
+          _this4.$toasted.global.error('¡Mandado finalizado!');
+          _this4.submiting = false;
         });
       }
     },
@@ -6002,19 +6026,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     updateOrder: function updateOrder() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (!this.submitingUpdate) {
         this.submitingUpdate = true;
         axios.put('/api/orders/update/' + this.editOrder.id, this.editOrder).then(function (response) {
-          _this4.orders[_this4.editOrder.index].delivery_costs = response.data.delivery_costs;
-          _this4.orders[_this4.editOrder.index].order_cost = response.data.order_cost;
-          _this4.submitingUpdate = false;
+          _this5.orders[_this5.editOrder.index].delivery_costs = response.data.delivery_costs;
+          _this5.orders[_this5.editOrder.index].order_cost = response.data.order_cost;
+          _this5.submitingUpdate = false;
           $('#orderUpdateModal').modal('hide');
-          _this4.$toasted.global.error('Mandado actualizado!');
+          _this5.$toasted.global.error('Mandado actualizado!');
         }).catch(function (error) {
-          _this4.errors = error.response.data.errors;
-          _this4.submitingUpdate = false;
+          _this5.errors = error.response.data.errors;
+          _this5.submitingUpdate = false;
         });
       }
     }
@@ -68487,20 +68511,13 @@ var render = function() {
           "div",
           { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
           [
-            _c("h4", { staticClass: "float-left pt-2" }, [
-              _vm._v("Mandados "),
-              _c("small", { staticClass: "text-muted" }, [
-                _vm._v(
-                  "$" + _vm._s(_vm.profit) + "|" + _vm._s(_vm.orders.length)
-                )
-              ])
-            ]),
+            _c("h4", { staticClass: "float-left pt-2" }, [_vm._v("Mandados")]),
             _vm._v(" "),
             _c("div", { staticClass: "card-header-actions mr-1" }, [
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary",
+                  staticClass: "btn btn-secondary",
                   attrs: { href: "/orders/availables" },
                   on: {
                     click: function($event) {
@@ -68525,6 +68542,34 @@ var render = function() {
           "div",
           { staticClass: "card-body px-0" },
           [
+            _c("div", { staticClass: "brand-card" }, [
+              _c("div", { staticClass: "brand-card-body py-1" }, [
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v("$" + _vm._s(_vm.profit))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Ganancias")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v(_vm._s(_vm.orders.length))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Mandados")]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
             _vm.loading
               ? _c(
                   "content-placeholders",
@@ -71826,11 +71871,22 @@ var render = function() {
                       { staticClass: "col-6 text-right" },
                       [
                         item.status_id == 4
-                          ? _c("div", { staticClass: "text-danger mb-0" }, [
-                              _vm._v(
-                                "\n                Cancelado\n              "
-                              )
-                            ])
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "text-danger mb-0",
+                                on: {
+                                  click: function($event) {
+                                    _vm.viewOrder(item)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                Cancelado\n              "
+                                )
+                              ]
+                            )
                           : _vm._e(),
                         _vm._v(" "),
                         item.status_id == 3
@@ -79593,12 +79649,7 @@ var render = function() {
           { staticClass: "card-header px-0 mt-2 bg-transparent clearfix" },
           [
             _c("h4", { staticClass: "float-left pt-2" }, [
-              _vm._v("Mis vueltas "),
-              _c("small", { staticClass: "text-muted" }, [
-                _vm._v(
-                  "$" + _vm._s(_vm.profit) + "|" + _vm._s(_vm.orders.length)
-                )
-              ])
+              _vm._v("Mis vueltas")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-header-actions mr-1" }, [
@@ -79621,7 +79672,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-primary",
+                  staticClass: "btn btn-secondary",
                   attrs: { href: "/orders/dealer" },
                   on: {
                     click: function($event) {
@@ -79646,6 +79697,34 @@ var render = function() {
           "div",
           { staticClass: "card-body px-0" },
           [
+            _c("div", { staticClass: "brand-card" }, [
+              _c("div", { staticClass: "brand-card-body py-1" }, [
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v("$" + _vm._s(_vm.profit))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Ganancias")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v(_vm._s(_vm.orders.length))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Mandados")]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
             _c(
               "div",
               {
@@ -79910,7 +79989,9 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [_c("hr")]),
+                          item.status_id == 2 || item.status_id == 4
+                            ? _c("div", { staticClass: "col-12" }, [_c("hr")])
+                            : _vm._e(),
                           _vm._v(" "),
                           item.status_id == 2 && item.score_dealer == 0
                             ? _c(
@@ -79983,12 +80064,12 @@ var render = function() {
                                 _c(
                                   "div",
                                   {
-                                    staticClass:
-                                      "alert alert-secondary text-center mb-0"
+                                    staticClass: "alert alert-warning mb-0",
+                                    attrs: { role: "alert" }
                                   },
                                   [
                                     _vm._v(
-                                      "\n                  Cancelado\n                "
+                                      "\n                  Mandado cancelado\n                "
                                     )
                                   ]
                                 )

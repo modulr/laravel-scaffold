@@ -81,7 +81,7 @@
                 <h5>{{item.created_at | moment('D MMM')}}</h5>
               </div>
               <div class="col-6 text-right">
-                <div class="text-danger mb-0" v-if="item.status_id == 4">
+                <div class="text-danger mb-0" @click="viewOrder(item)" v-if="item.status_id == 4">
                   Cancelado
                 </div>
                 <rate :length="5" v-model="item.score_client" @after-rate="scoreOrder(item, index)" v-if="item.status_id == 3"/>
