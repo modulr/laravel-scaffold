@@ -4,13 +4,13 @@
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
         <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
-          <a class="btn btn-secondary" href="/orders/availables" @click.prevent="getOrders">
+          <a class="btn btn-outline-secondary" href="/orders/availables" @click.prevent="getOrders">
             <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
           </a>
         </div>
       </div>
       <div class="card-body px-0">
-        <div class="brand-card">
+        <div class="brand-card mb-3">
           <div class="brand-card-body py-1">
             <div>
               <div class="text-value">${{profit}}</div>
@@ -97,7 +97,7 @@
       <i class="fas fa-motorcycle fa-3x text-muted"></i>
       <p class="mb-0 mt-3"><strong>No existe ningun mandado nuevo</strong></p>
       <p class="text-muted">Revisa mas tarde o da clic en el boton de abajo para refrescar la pantalla</p>
-      <a class="btn btn-secondary" href="/orders/availables" @click.prevent="getOrders">
+      <a class="btn btn-outline-secondary" href="/orders/availables" @click.prevent="getOrders">
         <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
       </a>
     </div>

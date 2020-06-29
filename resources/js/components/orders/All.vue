@@ -21,19 +21,7 @@
         </div>
       </div>
       <div class="card-body px-0">
-        <div class="brand-card">
-          <div class="brand-card-body py-1">
-            <div>
-              <div class="text-value">${{profit}}</div>
-              <div class="text-uppercase text-muted small">Ganancias</div>
-            </div>
-            <div>
-              <div class="text-value">{{orders.length}}</div>
-              <div class="text-uppercase text-muted small">Mandados</div>
-            </div>
-          </div>
-        </div>
-        <div class="mb-4" v-show="filtersShow">
+        <div class="bg-light mb-3 p-3" v-show="filtersShow">
           <div class="form-group">
             <multiselect
               v-model="filters.status"
@@ -56,7 +44,7 @@
               <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group mb-0">
             <multiselect
               v-model="filters.dealers"
               :options="dealers"
@@ -68,6 +56,18 @@
               placeholder="Filtra por Repartidor"
               :class="{'border border-danger rounded': errors.dealer}">
             </multiselect>
+          </div>
+        </div>
+        <div class="brand-card mb-3">
+          <div class="brand-card-body py-1">
+            <div>
+              <div class="text-value">${{profit}}</div>
+              <div class="text-uppercase text-muted small">Ganancias</div>
+            </div>
+            <div>
+              <div class="text-value">{{orders.length}}</div>
+              <div class="text-uppercase text-muted small">Mandados</div>
+            </div>
           </div>
         </div>
         <content-placeholders v-if="loading">
@@ -163,10 +163,10 @@
               </div>
               <div class="row" v-if="item.status_id == 3">
                 <div class="col-6">
-                  <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
+                  <rate :length="5" v-model="item.score_client" :disabled="true"/>
                 </div>
                 <div class="col-6 text-right">
-                  <rate :length="5" v-model="item.score_client" :disabled="true"/>
+                  <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
                 </div>
               </div>
               <div class="row" v-if="item.status_id == 4">

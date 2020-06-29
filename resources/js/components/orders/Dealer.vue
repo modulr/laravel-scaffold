@@ -7,25 +7,13 @@
           <a class="btn btn-outline-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
           </a>
-          <a class="btn btn-secondary" href="/orders/dealer" @click.prevent="getOrders">
+          <a class="btn btn-outline-secondary" href="/orders/dealer" @click.prevent="getOrders">
             <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
           </a>
         </div>
       </div>
       <div class="card-body px-0">
-        <div class="brand-card">
-          <div class="brand-card-body py-1">
-            <div>
-              <div class="text-value">${{profit}}</div>
-              <div class="text-uppercase text-muted small">Ganancias</div>
-            </div>
-            <div>
-              <div class="text-value">{{orders.length}}</div>
-              <div class="text-uppercase text-muted small">Mandados</div>
-            </div>
-          </div>
-        </div>
-        <div class="mb-4" v-show="filtersShow">
+        <div class="bg-light mb-3 p-3" v-show="filtersShow">
           <div class="form-group">
             <multiselect
               v-model="filters.status"
@@ -40,12 +28,24 @@
               :class="{'border border-danger rounded': errors.status}">
             </multiselect>
           </div>
-          <div class="form-group">
+          <div class="form-group mb-0">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">📅</span>
               </div>
               <input class="form-control" type="date" v-model="filters.date" @change="getOrders" placeholder="Filtra por Fecha">
+            </div>
+          </div>
+        </div>
+        <div class="brand-card mb-3">
+          <div class="brand-card-body py-1">
+            <div>
+              <div class="text-value">${{profit}}</div>
+              <div class="text-uppercase text-muted small">Ganancias</div>
+            </div>
+            <div>
+              <div class="text-value">{{orders.length}}</div>
+              <div class="text-uppercase text-muted small">Mandados</div>
             </div>
           </div>
         </div>

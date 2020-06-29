@@ -68524,7 +68524,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-secondary",
+                  staticClass: "btn btn-outline-secondary",
                   attrs: { href: "/orders/availables" },
                   on: {
                     click: function($event) {
@@ -68548,7 +68548,7 @@ var render = function() {
           "div",
           { staticClass: "card-body px-0" },
           [
-            _c("div", { staticClass: "brand-card" }, [
+            _c("div", { staticClass: "brand-card mb-3" }, [
               _c("div", { staticClass: "brand-card-body py-1" }, [
                 _c("div", [
                   _c("div", { staticClass: "text-value" }, [
@@ -68886,7 +68886,7 @@ var render = function() {
             _c(
               "a",
               {
-                staticClass: "btn btn-secondary",
+                staticClass: "btn btn-outline-secondary",
                 attrs: { href: "/orders/availables" },
                 on: {
                   click: function($event) {
@@ -74638,34 +74638,6 @@ var render = function() {
           "div",
           { staticClass: "card-body px-0" },
           [
-            _c("div", { staticClass: "brand-card" }, [
-              _c("div", { staticClass: "brand-card-body py-1" }, [
-                _c("div", [
-                  _c("div", { staticClass: "text-value" }, [
-                    _vm._v("$" + _vm._s(_vm.profit))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "text-uppercase text-muted small" },
-                    [_vm._v("Ganancias")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("div", { staticClass: "text-value" }, [
-                    _vm._v(_vm._s(_vm.orders.length))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "text-uppercase text-muted small" },
-                    [_vm._v("Mandados")]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
             _c(
               "div",
               {
@@ -74677,7 +74649,7 @@ var render = function() {
                     expression: "filtersShow"
                   }
                 ],
-                staticClass: "mb-4"
+                staticClass: "bg-light mb-3 p-3"
               },
               [
                 _c(
@@ -74740,7 +74712,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "form-group" },
+                  { staticClass: "form-group mb-0" },
                   [
                     _c("multiselect", {
                       class: {
@@ -74767,6 +74739,34 @@ var render = function() {
                 )
               ]
             ),
+            _vm._v(" "),
+            _c("div", { staticClass: "brand-card mb-3" }, [
+              _c("div", { staticClass: "brand-card-body py-1" }, [
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v("$" + _vm._s(_vm.profit))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Ganancias")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v(_vm._s(_vm.orders.length))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Mandados")]
+                  )
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _vm.loading
               ? _c(
@@ -75103,11 +75103,11 @@ var render = function() {
                                   _c("rate", {
                                     attrs: { length: 5, disabled: true },
                                     model: {
-                                      value: item.score_dealer,
+                                      value: item.score_client,
                                       callback: function($$v) {
-                                        _vm.$set(item, "score_dealer", $$v)
+                                        _vm.$set(item, "score_client", $$v)
                                       },
-                                      expression: "item.score_dealer"
+                                      expression: "item.score_client"
                                     }
                                   })
                                 ],
@@ -75121,11 +75121,11 @@ var render = function() {
                                   _c("rate", {
                                     attrs: { length: 5, disabled: true },
                                     model: {
-                                      value: item.score_client,
+                                      value: item.score_dealer,
                                       callback: function($$v) {
-                                        _vm.$set(item, "score_client", $$v)
+                                        _vm.$set(item, "score_dealer", $$v)
                                       },
-                                      expression: "item.score_client"
+                                      expression: "item.score_dealer"
                                     }
                                   })
                                 ],
@@ -79732,7 +79732,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-secondary",
+                  staticClass: "btn btn-outline-secondary",
                   attrs: { href: "/orders/dealer" },
                   on: {
                     click: function($event) {
@@ -79756,34 +79756,6 @@ var render = function() {
           "div",
           { staticClass: "card-body px-0" },
           [
-            _c("div", { staticClass: "brand-card" }, [
-              _c("div", { staticClass: "brand-card-body py-1" }, [
-                _c("div", [
-                  _c("div", { staticClass: "text-value" }, [
-                    _vm._v("$" + _vm._s(_vm.profit))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "text-uppercase text-muted small" },
-                    [_vm._v("Ganancias")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("div", { staticClass: "text-value" }, [
-                    _vm._v(_vm._s(_vm.orders.length))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "text-uppercase text-muted small" },
-                    [_vm._v("Mandados")]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
             _c(
               "div",
               {
@@ -79795,7 +79767,7 @@ var render = function() {
                     expression: "filtersShow"
                   }
                 ],
-                staticClass: "mb-4"
+                staticClass: "bg-light mb-3 p-3"
               },
               [
                 _c(
@@ -79827,7 +79799,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "form-group mb-0" }, [
                   _c("div", { staticClass: "input-group" }, [
                     _vm._m(0),
                     _vm._v(" "),
@@ -79857,6 +79829,34 @@ var render = function() {
                 ])
               ]
             ),
+            _vm._v(" "),
+            _c("div", { staticClass: "brand-card mb-3" }, [
+              _c("div", { staticClass: "brand-card-body py-1" }, [
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v("$" + _vm._s(_vm.profit))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Ganancias")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", { staticClass: "text-value" }, [
+                    _vm._v(_vm._s(_vm.orders.length))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-uppercase text-muted small" },
+                    [_vm._v("Mandados")]
+                  )
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _vm.loading
               ? _c(
@@ -81385,30 +81385,35 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "media-body" }, [
-            _c("div", { staticClass: "text-body" }, [
+            _c("div", { staticClass: "text-body text-truncate" }, [
               _vm._v(_vm._s(_vm.user.name))
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "small text-muted" },
-              [
-                _c("rate", {
-                  attrs: { length: 5, disabled: true },
-                  model: {
-                    value: _vm.user.score,
-                    callback: function($$v) {
-                      _vm.$set(_vm.user, "score", $$v)
-                    },
-                    expression: "user.score"
-                  }
-                })
-              ],
-              1
-            )
+            _c("div", { staticClass: "small text-muted" }, [
+              _vm._v("\n          " + _vm._s(_vm.role)),
+              _vm.user.level > 0
+                ? _c(
+                    "span",
+                    { staticClass: "badge badge-pill badge-primary ml-1" },
+                    [_vm._v(_vm._s(_vm.user.level))]
+                  )
+                : _vm._e()
+            ])
           ])
-        ])
-      ]
+        ]),
+        _vm._v(" "),
+        _c("rate", {
+          attrs: { length: 5, disabled: true },
+          model: {
+            value: _vm.user.score,
+            callback: function($$v) {
+              _vm.$set(_vm.user, "score", $$v)
+            },
+            expression: "user.score"
+          }
+        })
+      ],
+      1
     )
   ])
 }
