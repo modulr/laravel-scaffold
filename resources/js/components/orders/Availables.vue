@@ -68,8 +68,8 @@
                 <div class="col-12">
                   <hr>
                 </div>
-                <div class="dol-12">
-                  <dealers-active :user="user" v-if="!user.active && item.status_id == 1"></dealers-active>
+                <div class="col-12">
+                  <dealers-active class="btn btn-block" :user="user" v-if="!user.active && item.status_id == 1"></dealers-active>
                 </div>
                 <div class="col-12" v-if="user.active && item.status_id == 1">
                   <a href="#" class="btn btn-block btn-outline-info" @click.prevent="takeOrder(item, index)">

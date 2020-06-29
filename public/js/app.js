@@ -68757,10 +68757,11 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "dol-12" },
+                            { staticClass: "col-12" },
                             [
                               !_vm.user.active && item.status_id == 1
                                 ? _c("dealers-active", {
+                                    staticClass: "btn btn-block",
                                     attrs: { user: _vm.user }
                                   })
                                 : _vm._e()
@@ -81384,7 +81385,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "media-body" }, [
-            _c("div", { staticClass: "text-body text-truncate" }, [
+            _c("div", { staticClass: "text-body" }, [
               _vm._v(_vm._s(_vm.user.name))
             ]),
             _vm._v(" "),
