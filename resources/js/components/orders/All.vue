@@ -2,25 +2,37 @@
   <div>
     <div>
       <div class="card-header px-0 mt-2 bg-transparent clearfix">
-        <h4 class="float-left pt-2">Mandados <small class="text-muted">${{profit}}|{{orders.length}}</small></h4>
+        <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
-          <a class="text-secondary" href="/orders/all" @click.prevent="getOrders">
-            <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>
+          <a class="btn btn-outline-secondary" href="/orders/all" @click.prevent="getOrders">
+            <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
           </a>
-          <a class="text-secondary ml-3" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
+          <a class="btn btn-outline-secondary" :class="{'text-success': filtersShow}" href="#" @click.prevent="showFilters">
             <i class="fas fa-filter"></i>
           </a>
-          <a class="text-success ml-3" href="#" @click.prevent="showUserCreateModal">
+          <a class="btn btn-outline-success" href="#" @click.prevent="showUserCreateModal">
             <i class="fas fa-user-plus"></i>
             <span class="d-md-down-none ml-1">Crear cliente</span>
           </a>
-          <a class="btn btn-primary ml-3" href="#" @click.prevent="orderModal">
+          <a class="btn btn-primary" href="#" @click.prevent="orderModal">
             <i class="fa fa-plus"></i>
             <span class="d-md-down-none ml-1">Crear</span>
           </a>
         </div>
       </div>
       <div class="card-body px-0">
+        <div class="brand-card">
+          <div class="brand-card-body py-1">
+            <div>
+              <div class="text-value">${{profit}}</div>
+              <div class="text-uppercase text-muted small">Ganancias</div>
+            </div>
+            <div>
+              <div class="text-value">{{orders.length}}</div>
+              <div class="text-uppercase text-muted small">Mandados</div>
+            </div>
+          </div>
+        </div>
         <div class="mb-4" v-show="filtersShow">
           <div class="form-group">
             <multiselect
@@ -65,15 +77,14 @@
           <ul class="list-group mb-1" v-for="(item, index) in orders">
             <li class="list-group-item">
               <div class="row">
-                <!-- <div class="col text-right">
-                  <span class="badge badge-pill" :class="{
-                    'badge-primary': item.status_id == 1,
-                    'badge-success': item.status_id == 2,
-                    'badge-info': item.status_id == 3,
-                    'badge-secondary': item.status_id == 4 }">
-                    {{item.status.status}}
-                  </span>
-                </div> -->
+                <div class="col-12">
+                  <small class="text-muted">
+                    <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} - {{item.updated_at | moment('LT')}}
+                    <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
+                  </small>
+                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" @selected="finalizeOrder(item, index)" v-if="item.status_id!= 4"></vue-step>
+                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
+                </div>
                 <div class="col-12">
                   <p class="pre-line mb-2" @click.prevent="showOrderUpdateModal(item, index)">{{item.order}}</p>
                   <!-- <div v-if="item.origin" class="mb-1">
@@ -83,51 +94,18 @@
                       </span>
                     </a>
                   </div> -->
-                  <div>
-                    <a class="text-muted" :href="addressGMap[index]" target="_blank">
+                  <div class="mb-3">
+                    <a class="text-info" :href="addressGMap[index]" target="_blank">
                       <i class="icon-location-pin mr-1"></i>{{item.address}}
                     </a>
                   </div>
                 </div>
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col-8">
-                  <vue-step class="mb-0 pt-0" :now-step="item.status_id" :step-list="listStatus" style-type="style2" @selected="finalizeOrder(item, index)" v-if="item.status_id!= 4"></vue-step>
-                  <vue-step class="mb-0 pt-0" :now-step="0" :step-list="listStatus" style-type="style2" v-else></vue-step>
-                  <small class="text-muted">
-                    <i class="far fa-clock mr-1"></i>{{item.created_at | moment('LT')}} - {{item.updated_at | moment('LT')}}
-                    <strong class="float-right">{{ item.created_at | moment("from", item.updated_at, true) }}</strong>
-                  </small>
-                </div>
-                <div class="col-4 text-right">
-                  <div>
-                    <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                      Envio: <strong>${{item.delivery_costs}}</strong>
-                    </small>
-                  </div>
-                  <div>
-                    <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                      Costo: <strong>${{item.order_cost}}</strong>
-                    </small>
-                  </div>
-                  <div>
-                    <span class="text-muted border-top" @click.prevent="showOrderUpdateModal(item, index)">
-                      Total: <strong>${{item.delivery_costs + item.order_cost}}</strong>
-                    </span>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col">
+                <div class="col-6">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
-                  <rate :length="5" v-model="item.score_client" :disabled="true"/>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <div v-if="item.dealer_id">
                     <users-view :user="item.dealer" role="Repartidor" @viewUser="userView = $event"></users-view>
-                    <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
                   </div>
                   <div v-else>
                     <div class="media">
@@ -138,38 +116,63 @@
                         </span>
                       </div>
                       <div class="media-body">
-                        <div class="text-body text-muted">
-                          Buscando repartidor...
+                        <div class="text-body text-muted text-truncate">
+                          Sin repartidor
                         </div>
                         <div class="small text-muted">
-                          30 minutos aproximadamente
+                          Repartidor
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row" v-if="item.status_id == 1 || item.status_id == 2">
                 <div class="col-12">
                   <hr>
                 </div>
-                <div class="col text-right">
-                  <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="cancelOrder(item, index)">
+                <div class="col-4">
+                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
+                    Costo: <strong>${{item.order_cost}}</strong>
+                  </small>
+                </div>
+                <div class="col-4">
+                  <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
+                    Envio: <strong>${{item.delivery_costs}}</strong>
+                  </small>
+                </div>
+                <div class="col-4">
+                  <span class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
+                    Total: <strong>${{item.delivery_costs + item.order_cost}}</strong>
+                  </span>
+                </div>
+                <div class="col-12">
+                  <hr>
+                </div>
+              </div>
+              <div class="row" v-if="item.status_id == 1 || item.status_id == 2">
+                <div class="col-5">
+                  <a href="#" class="btn btn-block btn-outline-secondary" @click.prevent="cancelOrder(item, index)">
                     Cancelar
                   </a>
-                  <a href="#" class="btn btn-outline-info btn-sm" @click.prevent="assignModal(item, index)">
+                </div>
+                <div class="col-7">
+                  <a href="#" class="btn btn-block btn-outline-info" @click.prevent="assignModal(item, index)">
                     <span v-if="!item.dealer_id">Asignar repartidor</span>
                     <span v-else>Cambiar repartidor</span>
                   </a>
                 </div>
               </div>
+              <div class="row" v-if="item.status_id == 3">
+                <div class="col-6">
+                  <rate :length="5" v-model="item.score_dealer" :disabled="true"/>
+                </div>
+                <div class="col-6 text-right">
+                  <rate :length="5" v-model="item.score_client" :disabled="true"/>
+                </div>
+              </div>
               <div class="row" v-if="item.status_id == 4">
                 <div class="col-12">
-                  <hr>
-                </div>
-                <div class="col">
-                  <div class="alert alert-secondary text-center mb-0" @click="openOrder(item, index)">
-                    Cancelado
+                  <div role="alert" class="alert alert-warning mb-0" @click="openOrder(item, index)">
+                    Mandado cancelado, <small><u>abrir de nuevo</u></small>
                   </div>
                 </div>
               </div>
@@ -466,7 +469,7 @@ export default {
       orders: [],
       profit: 0,
       status: [],
-      listStatus: [],
+      listStatus:['','',''],
       rate: null,
       clients: [],
       dealers: [],
@@ -523,9 +526,9 @@ export default {
           this.status = response.data
           let status = response.data.slice(0)
           status.pop()
-          this.listStatus = status.map(function(i, index) {
-            return i.status
-          })
+          // this.listStatus = status.map(function(i, index) {
+          //   return i.status
+          // })
         })
       }
     },

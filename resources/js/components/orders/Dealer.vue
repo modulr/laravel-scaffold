@@ -74,17 +74,16 @@
                 </div>
                 <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
-                  <rate :length="5" v-model="item.client.score" :disabled="true"/>
                 </div>
                 <div class="col-4 text-right">
                   <div>
                     <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                      Envio: <strong>${{item.delivery_costs}}</strong>
+                      Costo: <strong>${{item.order_cost}}</strong>
                     </small>
                   </div>
                   <div>
                     <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                      Costo: <strong>${{item.order_cost}}</strong>
+                      Envio: <strong>${{item.delivery_costs}}</strong>
                     </small>
                   </div>
                   <div>

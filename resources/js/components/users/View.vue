@@ -6,9 +6,10 @@
           <img class="img-avatar" :src="user.avatar_url">
         </div>
         <div class="media-body">
-          <div class="text-body">{{user.name}}</div>
+          <div class="text-body text-truncate">{{user.name}}</div>
           <div class="small text-muted">
-            {{role}}<span class="badge badge-pill badge-primary ml-1" v-if="user.level > 0">Nivel {{user.level}}</span>
+            <rate :length="5" v-model="user.score" :disabled="true"/>
+            <!-- {{role}}<span class="badge badge-pill badge-primary ml-1" v-if="user.level > 0">Nivel {{user.level}}</span> -->
           </div>
         </div>
       </div>

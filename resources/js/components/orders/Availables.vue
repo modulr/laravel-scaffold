@@ -5,7 +5,7 @@
         <h4 class="float-left pt-2">Mandados</h4>
         <div class="card-header-actions mr-1">
           <a class="btn btn-secondary" href="/orders/availables" @click.prevent="getOrders">
-            <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>Refrescar
+            <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
           </a>
         </div>
       </div>
@@ -47,17 +47,16 @@
                 </div>
                 <div class="col-8">
                   <users-view :user="item.client" role="Cliente" @viewUser="userView = $event"></users-view>
-                  <rate :length="5" v-model="item.client.score" :disabled="true"/>
                 </div>
                 <div class="col-4 text-right">
                   <div>
                     <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                      Envio: <strong>${{item.delivery_costs}}</strong>
+                      Costo: <strong>${{item.order_cost}}</strong>
                     </small>
                   </div>
                   <div>
                     <small class="text-muted" @click.prevent="showOrderUpdateModal(item, index)">
-                      Costo: <strong>${{item.order_cost}}</strong>
+                      Envio: <strong>${{item.delivery_costs}}</strong>
                     </small>
                   </div>
                   <div>
@@ -98,8 +97,8 @@
       <i class="fas fa-motorcycle fa-3x text-muted"></i>
       <p class="mb-0 mt-3"><strong>No existe ningun mandado nuevo</strong></p>
       <p class="text-muted">Revisa mas tarde o da clic en el boton de abajo para refrescar la pantalla</p>
-      <a class="btn btn-primary" href="/orders/availables" @click.prevent="getOrders">
-        <i class="fa fa-sync mr-1" :class="{'fa-spin': loading}"></i>Refrescar
+      <a class="btn btn-secondary" href="/orders/availables" @click.prevent="getOrders">
+        <i class="fa fa-sync" :class="{'fa-spin': loading}"></i>
       </a>
     </div>
     <!-- Modal -->
