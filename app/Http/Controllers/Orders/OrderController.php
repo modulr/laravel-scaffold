@@ -357,7 +357,7 @@ class OrderController extends Controller
             $order->save();
 
             $order->client->notify(new TakeOrder($order));
-            Auth::user()->notify(new TakeOrder($order));
+            //Auth::user()->notify(new TakeOrder($order));
           
             return $order;
         } else {
