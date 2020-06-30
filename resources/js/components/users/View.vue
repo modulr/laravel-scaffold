@@ -2,11 +2,11 @@
   <div>
     <a href="#" @click.prevent="viewUser">
       <div class="media">
-        <div class="avatar float-left mr-2">
+        <div class="avatar mr-2">
           <img class="img-avatar" :src="user.avatar_url">
         </div>
         <div class="media-body">
-          <div class="text-body text-truncate">{{user.name}}</div>
+          <div class="text-body text-truncate" style="max-width: 100px;">{{user.name}}</div>
           <div class="small text-muted">
             {{role}}<span class="badge badge-pill badge-primary ml-1" v-if="user.level > 0">{{user.level}}</span>
           </div>
